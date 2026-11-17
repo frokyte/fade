@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  libgodot_macos.mm                                                     */
+/*  libfade_macos.mm                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,15 +30,15 @@
 
 #include "os_macos.h"
 
-#include "core/extension/godot_instance.h"
-#include "core/extension/libgodot.h"
+#include "core/extension/fade_instance.h"
+#include "core/extension/libfade.h"
 #include "main/main.h"
 
 static OS_MacOS *os = nullptr;
 
 static FADEInstance *instance = nullptr;
 
-GDExtensionObjectPtr libgodot_create_godot_instance(int p_argc, char *p_argv[], GDExtensionInitializationFunction p_init_func) {
+GDExtensionObjectPtr libfade_create_fade_instance(int p_argc, char *p_argv[], GDExtensionInitializationFunction p_init_func) {
 	ERR_FAIL_COND_V_MSG(instance != nullptr, nullptr, "Only one FADE Instance may be created.");
 
 	uint32_t remaining_args = p_argc - 1;
@@ -61,11 +61,11 @@ GDExtensionObjectPtr libgodot_create_godot_instance(int p_argc, char *p_argv[], 
 	}
 }
 
-void libgodot_destroy_godot_instance(GDExtensionObjectPtr p_godot_instance) {
-	FADEInstance *godot_instance = (FADEInstance *)p_godot_instance;
-	if (instance == godot_instance) {
-		godot_instance->stop();
-		memdelete(godot_instance);
+void libfade_destroy_fade_instance(GDExtensionObjectPtr p_fade_instance) {
+	FADEInstance *fade_instance = (FADEInstance *)p_fade_instance;
+	if (instance == fade_instance) {
+		fade_instance->stop();
+		memdelete(fade_instance);
 		// Note: When FADE Engine supports reinitialization, clear the instance pointer here.
 		//instance = nullptr;
 		Main::cleanup();

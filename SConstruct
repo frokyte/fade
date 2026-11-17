@@ -272,7 +272,7 @@ opts.Add(BoolVariable("werror", "Treat compiler warnings as errors", False))
 opts.Add("extra_suffix", "Custom extra suffix added to the base filename of all generated binary files", "")
 opts.Add("object_prefix", "Custom prefix added to the base filename of all generated object files", "")
 opts.Add(BoolVariable("vsproj", "Generate a Visual Studio solution", False))
-opts.Add("vsproj_name", "Name of the Visual Studio solution", "godot")
+opts.Add("vsproj_name", "Name of the Visual Studio solution", "fade")
 opts.Add("import_env_vars", "A comma-separated list of environment variables to copy from the outer environment.", "")
 opts.Add(BoolVariable("disable_exceptions", "Force disabling exception handling code", True))
 opts.Add(BoolVariable("disable_2d", "Disable 2D nodes for a smaller executable", False))
@@ -782,7 +782,7 @@ elif methods.using_clang(env):
 elif env.msvc:
     if cc_version_major == 16 and cc_version_minor < 11:
         # Ensure latest minor build of Visual Studio 2019.
-        # https://github.com/godotengine/godot/pull/94995#issuecomment-2336464574
+        # https://github.com/fadeengine/fade/pull/94995#issuecomment-2336464574
         print_error(
             "Detected Visual Studio 2019 version older than 16.11, which has bugs "
             "when compiling FADE. Use a newer VS2019 version, or VS2022+."

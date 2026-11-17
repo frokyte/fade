@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,19 +28,19 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot;
+package org.fadeengine.fade;
 
-import org.godotengine.godot.FADELib;
-import org.godotengine.godot.gl.GLSurfaceView;
-import org.godotengine.godot.gl.FADERenderer;
-import org.godotengine.godot.input.FADEInputHandler;
-import org.godotengine.godot.xr.XRMode;
-import org.godotengine.godot.xr.ovr.OvrConfigChooser;
-import org.godotengine.godot.xr.ovr.OvrContextFactory;
-import org.godotengine.godot.xr.ovr.OvrWindowSurfaceFactory;
-import org.godotengine.godot.xr.regular.RegularConfigChooser;
-import org.godotengine.godot.xr.regular.RegularContextFactory;
-import org.godotengine.godot.xr.regular.RegularFallbackConfigChooser;
+import org.fadeengine.fade.FADELib;
+import org.fadeengine.fade.gl.GLSurfaceView;
+import org.fadeengine.fade.gl.FADERenderer;
+import org.fadeengine.fade.input.FADEInputHandler;
+import org.fadeengine.fade.xr.XRMode;
+import org.fadeengine.fade.xr.ovr.OvrConfigChooser;
+import org.fadeengine.fade.xr.ovr.OvrContextFactory;
+import org.fadeengine.fade.xr.ovr.OvrWindowSurfaceFactory;
+import org.fadeengine.fade.xr.regular.RegularConfigChooser;
+import org.fadeengine.fade.xr.regular.RegularContextFactory;
+import org.fadeengine.fade.xr.regular.RegularFallbackConfigChooser;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
@@ -81,15 +81,15 @@ import java.io.InputStream;
  *   bit depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
 class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
-	private final FADE godot;
+	private final FADE fade;
 	private final FADEInputHandler inputHandler;
-	private final FADERenderer godotRenderer;
+	private final FADERenderer fadeRenderer;
 	private final SparseArray<PointerIcon> customPointerIcons = new SparseArray<>();
 	private final AccessibilityNodeProvider accessibilityNodeProvider;
 	private final long mWindowID = 0; // DisplayServerEnums::MAIN_WINDOW_ID
 
-	public FADEGLRenderView(FADE godot, FADEInputHandler inputHandler, XRMode xrMode, boolean useDebugOpengl, boolean shouldBeTranslucent) {
-		super(godot.getContext());
+	public FADEGLRenderView(FADE fade, FADEInputHandler inputHandler, XRMode xrMode, boolean useDebugOpengl, boolean shouldBeTranslucent) {
+		super(fade.getContext());
 		if (FADELib.createAccessKitAdapter(mWindowID)) {
 			accessibilityNodeProvider = new AccessibilityNodeProvider() {
 				@Override
@@ -109,9 +109,9 @@ class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
 		} else {
 			accessibilityNodeProvider = null;
 		}
-		this.godot = godot;
+		this.fade = fade;
 		this.inputHandler = inputHandler;
-		this.godotRenderer = new FADERenderer();
+		this.fadeRenderer = new FADERenderer();
 		setPointerIcon(PointerIcon.getSystemIcon(getContext(), PointerIcon.TYPE_DEFAULT));
 		init(xrMode, shouldBeTranslucent, useDebugOpengl);
 	}
@@ -157,7 +157,7 @@ class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
 		queueEvent(() -> {
 			FADELib.focusout();
 			// Pause the renderer
-			godotRenderer.onActivityPaused();
+			fadeRenderer.onActivityPaused();
 		});
 	}
 
@@ -170,7 +170,7 @@ class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
 	public void onActivityResumed() {
 		queueEvent(() -> {
 			// Resume the renderer
-			godotRenderer.onActivityResumed();
+			fadeRenderer.onActivityResumed();
 			FADELib.focusin();
 		});
 	}
@@ -226,7 +226,7 @@ class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
 	@Override
 	public boolean canCapturePointer() {
 		// Pointer capture is not supported on XR devices.
-		return !godot.isXrRuntime() && inputHandler.canCapturePointer();
+		return !fade.isXrRuntime() && inputHandler.canCapturePointer();
 	}
 
 	@Override
@@ -254,10 +254,10 @@ class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
 		try {
 			Bitmap bitmap = null;
 			if (!TextUtils.isEmpty(imagePath)) {
-				if (godot.getDirectoryAccessHandler().filesystemFileExists(imagePath)) {
+				if (fade.getDirectoryAccessHandler().filesystemFileExists(imagePath)) {
 					// Try to load the bitmap from the file system
 					bitmap = BitmapFactory.decodeFile(imagePath);
-				} else if (godot.getDirectoryAccessHandler().assetsFileExists(imagePath)) {
+				} else if (fade.getDirectoryAccessHandler().assetsFileExists(imagePath)) {
 					// Try to load the bitmap from the assets directory
 					AssetManager am = getContext().getAssets();
 					InputStream imageInputStream = am.open(imagePath);
@@ -338,6 +338,6 @@ class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
 	@Override
 	public void startRenderer() {
 		/* Set the renderer responsible for frame rendering */
-		setRenderer(godotRenderer);
+		setRenderer(fadeRenderer);
 	}
 }

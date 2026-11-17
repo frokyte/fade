@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_compositor_services_renderer.mm                                 */
+/*  fade_compositor_services_renderer.mm                                 */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_compositor_services_renderer.h"
+#import "fade_compositor_services_renderer.h"
 
-#import "godot_swift_module-Swift.gen.h"
+#import "fade_swift_module-Swift.gen.h"
 
 #include "core/math/transform_3d.h"
 #include "core/math/vector3.h"

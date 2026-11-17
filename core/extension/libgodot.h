@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  libgodot.h                                                            */
+/*  libfade.h                                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -46,7 +46,7 @@ extern "C" {
 #endif
 
 /**
- * @name libgodot_create_godot_instance
+ * @name libfade_create_fade_instance
  * @since 4.6
  *
  * Creates a new FADE instance.
@@ -57,18 +57,18 @@ extern "C" {
  *
  * @return A pointer to created \ref FADEInstance GDExtension object or nullptr if there was an error.
  */
-LIBGODOT_API GDExtensionObjectPtr libgodot_create_godot_instance(int p_argc, char *p_argv[], GDExtensionInitializationFunction p_init_func);
+LIBGODOT_API GDExtensionObjectPtr libfade_create_fade_instance(int p_argc, char *p_argv[], GDExtensionInitializationFunction p_init_func);
 
 /**
- * @name libgodot_destroy_godot_instance
+ * @name libfade_destroy_fade_instance
  * @since 4.6
  *
  * Destroys an existing FADE instance.
  *
- * @param p_godot_instance The reference to the FADEInstance object to destroy.
+ * @param p_fade_instance The reference to the FADEInstance object to destroy.
  *
  */
-LIBGODOT_API void libgodot_destroy_godot_instance(GDExtensionObjectPtr p_godot_instance);
+LIBGODOT_API void libfade_destroy_fade_instance(GDExtensionObjectPtr p_fade_instance);
 
 #ifdef __cplusplus
 }

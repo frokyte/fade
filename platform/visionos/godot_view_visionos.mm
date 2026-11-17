@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_view_visionos.mm                                                */
+/*  fade_view_visionos.mm                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "godot_view_visionos.h"
+#include "fade_view_visionos.h"
 
 #include "display_layer_visionos.h"
 
@@ -46,8 +46,8 @@ GODOT_CLANG_WARNING_POP
 
 @implementation GDTViewVisionOS
 
-- (void)godot_commonInit {
-	[super godot_commonInit];
+- (void)fade_commonInit {
+	[super fade_commonInit];
 
 	// Enable GamePad handler
 	GCEventInteraction *gamepadInteraction = [[GCEventInteraction alloc] init];

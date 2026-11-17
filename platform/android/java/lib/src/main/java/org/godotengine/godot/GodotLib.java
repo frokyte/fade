@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,15 +28,15 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot;
+package org.fadeengine.fade;
 
-import org.godotengine.godot.gl.FADERenderer;
-import org.godotengine.godot.io.directory.DirectoryAccessHandler;
-import org.godotengine.godot.io.file.FileAccessHandler;
-import org.godotengine.godot.nativeapi.FADENativeBridge;
-import org.godotengine.godot.tts.FADETTS;
-import org.godotengine.godot.utils.FADENetUtils;
-import org.godotengine.godot.variant.Callable;
+import org.fadeengine.fade.gl.FADERenderer;
+import org.fadeengine.fade.io.directory.DirectoryAccessHandler;
+import org.fadeengine.fade.io.file.FileAccessHandler;
+import org.fadeengine.fade.nativeapi.FADENativeBridge;
+import org.fadeengine.fade.tts.FADETTS;
+import org.fadeengine.fade.utils.FADENetUtils;
+import org.fadeengine.fade.variant.Callable;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -54,7 +54,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class FADELib {
 	static {
-		System.loadLibrary("godot_android");
+		System.loadLibrary("fade_android");
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class FADELib {
 	public static native boolean initialize(
 			FADENativeBridge nativeBridge,
 			AssetManager assetManager,
-			FADEIO godotIO,
+			FADEIO fadeIO,
 			FADENetUtils netUtils,
 			DirectoryAccessHandler directoryAccessHandler,
 			FileAccessHandler fileAccessHandler,
@@ -86,7 +86,7 @@ public class FADELib {
 	 * @param p_surface
 	 * @param p_width
 	 * @param p_height
-	 * @see org.godotengine.godot.gl.GLSurfaceView.Renderer#onSurfaceChanged(GL10, int, int)
+	 * @see org.fadeengine.fade.gl.GLSurfaceView.Renderer#onSurfaceChanged(GL10, int, int)
 	 */
 	public static native void resize(Surface p_surface, int p_width, int p_height);
 
@@ -103,7 +103,7 @@ public class FADELib {
 
 	/**
 	 * Invoked on the GL thread to draw the current frame.
-	 * @see org.godotengine.godot.gl.GLSurfaceView.Renderer#onDrawFrame(GL10)
+	 * @see org.fadeengine.fade.gl.GLSurfaceView.Renderer#onDrawFrame(GL10)
 	 */
 	public static native boolean step();
 

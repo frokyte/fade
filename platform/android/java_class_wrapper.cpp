@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -120,7 +120,7 @@ bool JavaClass::_call_method(JavaObject *p_instance, const StringName &p_method,
 					if (cn.begins_with("L") && cn.ends_with(";")) {
 						cn = cn.substr(1, cn.length() - 2);
 					}
-					if (cn == "org/godotengine/godot/Dictionary") {
+					if (cn == "org/fadeengine/fade/Dictionary") {
 						if (p_args[i]->get_type() != Variant::DICTIONARY) {
 							arg_expected = Variant::DICTIONARY;
 						}
@@ -901,9 +901,9 @@ bool JavaClassWrapper::_get_type_sig(JNIEnv *env, jobject obj, uint32_t &sig, St
 	} else if (str_type == "java.lang.CharSequence") {
 		t |= JavaClass::ARG_TYPE_CHARSEQUENCE;
 		strsig += "Ljava/lang/CharSequence;";
-	} else if (str_type == "org.godotengine.godot.variant.Callable") {
+	} else if (str_type == "org.fadeengine.fade.variant.Callable") {
 		t |= JavaClass::ARG_TYPE_CALLABLE;
-		strsig += "Lorg/godotengine/godot/variant/Callable;";
+		strsig += "Lorg/fadeengine/fade/variant/Callable;";
 	} else if (str_type == "java.lang.Boolean") {
 		t |= JavaClass::ARG_TYPE_BOOLEAN | JavaClass::ARG_NUMBER_CLASS_BIT;
 		strsig += "Ljava/lang/Boolean;";
@@ -1237,7 +1237,7 @@ bool JavaClass::_convert_variant_to_jvalue(JNIEnv *p_env, const Variant &p_varia
 		} break;
 		case ARG_ARRAY_BIT | ARG_TYPE_CALLABLE: {
 			Array arr = p_variant;
-			jclass cclass = jni_find_class(p_env, "org/godotengine/godot/variant/Callable");
+			jclass cclass = jni_find_class(p_env, "org/fadeengine/fade/variant/Callable");
 			jobjectArray jarr = p_env->NewObjectArray(arr.size(), cclass, nullptr);
 			p_env->DeleteLocalRef(cclass);
 			for (int j = 0; j < arr.size(); j++) {
@@ -1339,7 +1339,7 @@ bool JavaClass::_convert_object_to_variant(JNIEnv *env, jobject obj, Variant &va
 
 			if (java_class_wrapped.is_valid()) {
 				String cn = java_class_wrapped->get_java_class_name();
-				if (cn == "org.godotengine.godot.Dictionary") {
+				if (cn == "org.fadeengine.fade.Dictionary") {
 					var = _jobject_to_variant(env, obj);
 				} else {
 					Ref<JavaObject> ret = Ref<JavaObject>(memnew(JavaObject(java_class_wrapped, obj)));
@@ -1703,7 +1703,7 @@ bool JavaClass::_convert_object_to_variant(JNIEnv *env, jobject obj, Variant &va
 
 					if (java_class_wrapped.is_valid()) {
 						String cn = java_class_wrapped->get_java_class_name();
-						if (cn == "org.godotengine.godot.Dictionary") {
+						if (cn == "org.fadeengine.fade.Dictionary") {
 							ret[i] = _jobject_to_variant(env, obj);
 						} else {
 							Ref<JavaObject> java_obj_wrapped = Ref<JavaObject>(memnew(JavaObject(java_class_wrapped, obj)));
@@ -1999,7 +1999,7 @@ Ref<JavaObject> JavaClassWrapper::create_sam_callback(const String &p_sam_interf
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL_V(env, Ref<JavaObject>());
 	ERR_FAIL_NULL_V(android_runtime_class, Ref<JavaObject>());
-	ERR_FAIL_NULL_V(ARP_create_proxy_from_godot_callable, Ref<JavaObject>());
+	ERR_FAIL_NULL_V(ARP_create_proxy_from_fade_callable, Ref<JavaObject>());
 
 	Ref<JavaClass> interface_class = wrap(p_sam_interface);
 	if (interface_class.is_null()) {
@@ -2019,7 +2019,7 @@ Ref<JavaObject> JavaClassWrapper::create_sam_callback(const String &p_sam_interf
 	jobject j_callable = callable_to_jcallable(env, p_callable);
 	jstring j_interface = env->NewStringUTF(p_sam_interface.utf8().get_data());
 
-	jobject proxy = env->CallStaticObjectMethod(android_runtime_class, ARP_create_proxy_from_godot_callable, j_interface, j_callable);
+	jobject proxy = env->CallStaticObjectMethod(android_runtime_class, ARP_create_proxy_from_fade_callable, j_interface, j_callable);
 	Ref<JavaObject> result = _jobject_to_variant(env, proxy);
 
 	env->DeleteLocalRef(j_callable);
@@ -2036,7 +2036,7 @@ Ref<JavaObject> JavaClassWrapper::create_proxy(const Object *p_object, const Pac
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL_V(env, Ref<JavaObject>());
 	ERR_FAIL_NULL_V(android_runtime_class, Ref<JavaObject>());
-	ERR_FAIL_NULL_V(ARP_create_proxy_from_godot_callable, Ref<JavaObject>());
+	ERR_FAIL_NULL_V(ARP_create_proxy_from_fade_callable, Ref<JavaObject>());
 
 	for (const String &interface_name : p_interfaces) {
 		Ref<JavaClass> interface_class = wrap(interface_name);
@@ -2059,7 +2059,7 @@ Ref<JavaObject> JavaClassWrapper::create_proxy(const Object *p_object, const Pac
 		env->DeleteLocalRef(j_interface);
 	}
 
-	jobject proxy = env->CallStaticObjectMethod(android_runtime_class, ARP_create_proxy_from_godot_object_id, object_id, j_interfaces);
+	jobject proxy = env->CallStaticObjectMethod(android_runtime_class, ARP_create_proxy_from_fade_object_id, object_id, j_interfaces);
 	Ref<JavaObject> result = _jobject_to_variant(env, proxy);
 
 	env->DeleteLocalRef(j_interfaces);
@@ -2101,11 +2101,11 @@ JavaClassWrapper::JavaClassWrapper() {
 		Proxy_isProxyClass = env->GetStaticMethodID(proxy_class, "isProxyClass", "(Ljava/lang/Class;)Z");
 	}
 
-	android_runtime_class = jni_find_class(env, "org/godotengine/godot/plugin/AndroidRuntimePlugin");
+	android_runtime_class = jni_find_class(env, "org/fadeengine/fade/plugin/AndroidRuntimePlugin");
 	if (android_runtime_class) {
 		android_runtime_class = (jclass)env->NewGlobalRef(android_runtime_class);
-		ARP_create_proxy_from_godot_callable = env->GetStaticMethodID(android_runtime_class, "createProxyFromFADECallable", "(Ljava/lang/String;Lorg/godotengine/godot/variant/Callable;)Ljava/lang/Object;");
-		ARP_create_proxy_from_godot_object_id = env->GetStaticMethodID(android_runtime_class, "createProxyFromFADEObjectID", "(J[Ljava/lang/String;)Ljava/lang/Object;");
+		ARP_create_proxy_from_fade_callable = env->GetStaticMethodID(android_runtime_class, "createProxyFromFADECallable", "(Ljava/lang/String;Lorg/fadeengine/fade/variant/Callable;)Ljava/lang/Object;");
+		ARP_create_proxy_from_fade_object_id = env->GetStaticMethodID(android_runtime_class, "createProxyFromFADEObjectID", "(J[Ljava/lang/String;)Ljava/lang/Object;");
 	}
 
 	jclass bclass = jni_find_class(env, "java/lang/Class");

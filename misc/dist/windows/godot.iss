@@ -1,8 +1,8 @@
 #define MyAppName "FADE Engine"
 #define MyAppVersion "4.8"
 #define MyAppPublisher "FADE Engine contributors"
-#define MyAppURL "https://godotengine.org/"
-#define MyAppExeName "godot.exe"
+#define MyAppURL "https://fadeengine.org/"
+#define MyAppExeName "fade.exe"
 
 [Setup]
 AppId={{60D07AAA-400E-40F5-B073-A796C34D9D78}
@@ -22,9 +22,9 @@ DefaultGroupName=FADE Engine
 AllowNoIcons=yes
 UninstallDisplayIcon={app}\{#MyAppExeName}
 #ifdef App32Bit
-  OutputBaseFilename=godot-setup-x86
+  OutputBaseFilename=fade-setup-x86
 #else
-  OutputBaseFilename=godot-setup-x86_64
+  OutputBaseFilename=fade-setup-x86_64
   ArchitecturesAllowed=x64
   ArchitecturesInstallIn64BitMode=x64
 #endif

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.variant
+package org.fadeengine.fade.variant
 
 import androidx.annotation.Keep
 
@@ -40,29 +40,29 @@ class Callable private constructor(private val nativeCallablePointer: Long) {
 
 	companion object {
 		/**
-		 * Invoke method [methodName] on the FADE object specified by [godotObjectId]
+		 * Invoke method [methodName] on the FADE object specified by [fadeObjectId]
 		 */
 		@JvmStatic
-		fun call(godotObjectId: Long, methodName: String, vararg methodParameters: Any): Any? {
-			return nativeCallObject(godotObjectId, methodName, methodParameters)
+		fun call(fadeObjectId: Long, methodName: String, vararg methodParameters: Any): Any? {
+			return nativeCallObject(fadeObjectId, methodName, methodParameters)
 		}
 
 		/**
-		 * Invoke method [methodName] on the FADE object specified by [godotObjectId] during idle time.
+		 * Invoke method [methodName] on the FADE object specified by [fadeObjectId] during idle time.
 		 */
 		@JvmStatic
-		fun callDeferred(godotObjectId: Long, methodName: String, vararg methodParameters: Any) {
-			nativeCallObjectDeferred(godotObjectId, methodName, methodParameters)
+		fun callDeferred(fadeObjectId: Long, methodName: String, vararg methodParameters: Any) {
+			nativeCallObjectDeferred(fadeObjectId, methodName, methodParameters)
 		}
 
 		@JvmStatic
 		private external fun nativeCall(pointer: Long, params: Array<out Any>): Any?
 
 		@JvmStatic
-		private external fun nativeCallObject(godotObjectId: Long, methodName: String, params: Array<out Any>): Any?
+		private external fun nativeCallObject(fadeObjectId: Long, methodName: String, params: Array<out Any>): Any?
 
 		@JvmStatic
-		private external fun nativeCallObjectDeferred(godotObjectId: Long, methodName: String, params: Array<out Any>)
+		private external fun nativeCallObjectDeferred(fadeObjectId: Long, methodName: String, params: Array<out Any>)
 
 		@JvmStatic
 		private external fun releaseNativePointer(nativePointer: Long)

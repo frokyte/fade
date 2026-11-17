@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -33,11 +33,11 @@
 #if defined(VISIONOS_ENABLED)
 
 void register_visionos_api() {
-	godot_apple_embedded_plugins_initialize();
+	fade_apple_embedded_plugins_initialize();
 }
 
 void unregister_visionos_api() {
-	godot_apple_embedded_plugins_deinitialize();
+	fade_apple_embedded_plugins_deinitialize();
 }
 
 #else

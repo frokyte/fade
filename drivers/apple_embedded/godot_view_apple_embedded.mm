@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_view_apple_embedded.mm                                          */
+/*  fade_view_apple_embedded.mm                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,14 +28,14 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_view_apple_embedded.h"
+#import "fade_view_apple_embedded.h"
 
 #include "core/config/project_settings.h"
 #include "core/os/keyboard.h"
 #include "core/string/ustring.h"
 #import "drivers/apple_embedded/display_layer_apple_embedded.h"
 #import "drivers/apple_embedded/display_server_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_renderer.h"
+#import "drivers/apple_embedded/fade_view_renderer.h"
 
 #import <CoreMotion/CoreMotion.h>
 
@@ -43,7 +43,7 @@ static const int max_touches = 32;
 static const float earth_gravity = 9.80665;
 
 @interface GDTView () {
-	UITouch *godot_touches[max_touches];
+	UITouch *fade_touches[max_touches];
 	CGFloat last_edr_headroom;
 	NSTimeInterval begin_timestamp[max_touches];
 	CGPoint begin_delta[max_touches];
@@ -78,7 +78,7 @@ static const float earth_gravity = 9.80665;
 	self = [super initWithCoder:coder];
 
 	if (self) {
-		[self godot_commonInit];
+		[self fade_commonInit];
 	}
 
 	return self;
@@ -88,7 +88,7 @@ static const float earth_gravity = 9.80665;
 	self = [super initWithFrame:frame];
 
 	if (self) {
-		[self godot_commonInit];
+		[self fade_commonInit];
 	}
 
 	return self;
@@ -121,7 +121,7 @@ static const float earth_gravity = 9.80665;
 	}
 }
 
-- (void)godot_commonInit {
+- (void)fade_commonInit {
 	self.preferredFrameRate = 60;
 	self.useCADisplayLink = bool(GLOBAL_DEF("display.AppleEmbedded/use_cadisplaylink", true)) ? YES : NO;
 	self.hingeClosed = YES;
@@ -256,7 +256,7 @@ static const float earth_gravity = 9.80665;
 
 	if (self.delegate && !self.delegateDidFinishSetUp) {
 		[self layoutRenderingLayer]; // Trigger DisplayServerVisionOS::resize_window after Main::start()
-		self.delegateDidFinishSetUp = [self.delegate godotViewFinishedSetup:self];
+		self.delegateDidFinishSetUp = [self.delegate fadeViewFinishedSetup:self];
 		if (!_delegateDidFinishSetUp) {
 			return;
 		}
@@ -322,17 +322,17 @@ static const float earth_gravity = 9.80665;
 - (int)getTouchIDForTouch:(UITouch *)p_touch {
 	int first = -1;
 	for (int i = 0; i < max_touches; i++) {
-		if (first == -1 && godot_touches[i] == nullptr) {
+		if (first == -1 && fade_touches[i] == nullptr) {
 			first = i;
 			continue;
 		}
-		if (godot_touches[i] == p_touch) {
+		if (fade_touches[i] == p_touch) {
 			return i;
 		}
 	}
 
 	if (first != -1) {
-		godot_touches[first] = p_touch;
+		fade_touches[first] = p_touch;
 		return first;
 	}
 
@@ -342,11 +342,11 @@ static const float earth_gravity = 9.80665;
 - (int)removeTouch:(UITouch *)p_touch {
 	int remaining = 0;
 	for (int i = 0; i < max_touches; i++) {
-		if (godot_touches[i] == nullptr) {
+		if (fade_touches[i] == nullptr) {
 			continue;
 		}
-		if (godot_touches[i] == p_touch) {
-			godot_touches[i] = nullptr;
+		if (fade_touches[i] == p_touch) {
+			fade_touches[i] = nullptr;
 			begin_timestamp[i] = 0.0;
 			begin_delta[i] = CGPointMake(0, 0);
 			touch_count[i] = 0;
@@ -359,7 +359,7 @@ static const float earth_gravity = 9.80665;
 
 - (void)clearTouches {
 	for (int i = 0; i < max_touches; i++) {
-		godot_touches[i] = nullptr;
+		fade_touches[i] = nullptr;
 		begin_timestamp[i] = 0.0;
 		begin_delta[i] = CGPointMake(0, 0);
 		touch_count[i] = 0;

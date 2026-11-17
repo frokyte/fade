@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -37,7 +37,7 @@
 const String GODOT_PROJECT_NAME_XML_STRING = R"(<?xml version="1.0" encoding="utf-8"?>
 <!--WARNING: THIS FILE WILL BE OVERWRITTEN AT BUILD TIME-->
 <resources>
-	<string name="godot_project_name_string">%s</string>
+	<string name="fade_project_name_string">%s</string>
 </resources>
 )";
 
@@ -55,7 +55,7 @@ static const int APP_CATEGORY_VIDEO = 8;
 static const int APP_CATEGORY_UNDEFINED = 9;
 
 // Supported XR modes.
-// This should match the entries in 'platform/android/java/lib/src/main/java/org/godotengine/godot/xr/XRMode.java'
+// This should match the entries in 'platform/android/java/lib/src/main/java/org/fadeengine/fade/xr/XRMode.java'
 static const int XR_MODE_REGULAR = 0;
 static const int XR_MODE_OPENXR = 1;
 

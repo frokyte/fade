@@ -44,7 +44,7 @@ dependencies {
     implementation "androidx.documentfile:documentfile:$versions.documentfileVersion"
 
     // Check if we have an exported project AAR to be used as the app core.
-    // This is mostly used for development. See https://docs.godotengine.org/en/latest/engine_details/development/configuring_an_ide/android_studio.html#building-debugging-the-app-module
+    // This is mostly used for development. See https://docs.fadeengine.org/en/latest/engine_details/development/configuring_an_ide/android_studio.html#building-debugging-the-app-module
     String exportedProjectAARDirPath = "libs/exportedProjectAAR"
     File exportedProjectAARDir = file(exportedProjectAARDirPath)
     String[] exportedProjectAARFiles = exportedProjectAARDir.exists() ? exportedProjectAARDir.list() : null
@@ -58,11 +58,11 @@ dependencies {
 
     if (rootProject.findProject(":lib")) {
         implementation project(":lib")
-    } else if (rootProject.findProject(":godot:lib")) {
-        implementation project(":godot:lib")
+    } else if (rootProject.findProject(":fade:lib")) {
+        implementation project(":fade:lib")
     } else {
         // FADE gradle build mode. In this scenario this project is the only one around and the FADE
-        // library is available through the pre-generated godot-lib.*.aar android archive files.
+        // library is available through the pre-generated fade-lib.*.aar android archive files.
         debugImplementation fileTree(dir: 'libs/debug', include: ['**/*.jar', '**/*.aar'])
         releaseImplementation fileTree(dir: 'libs/release', include: ['**/*.jar', '**/*.aar'])
     }
@@ -128,7 +128,7 @@ android {
 
     assetPacks = [":assetPackInstallTime"]
 
-    namespace = 'com.godot.game.app'
+    namespace = 'com.fade.game.app'
 
     defaultConfig {
         // The default ignore pattern for the 'assets' directory includes hidden files and directories which are used by FADE projects.
@@ -334,7 +334,7 @@ task validateJavaVersion {
 tasks.withType( com.android.build.gradle.internal.tasks.MergeNativeLibsTask) {
     doFirst {
         externalLibNativeLibs.each { jniDir ->
-            if (jniDir.getCanonicalPath().contains("godot-openxr-") || jniDir.getCanonicalPath().contains("godotopenxr")) {
+            if (jniDir.getCanonicalPath().contains("fade-openxr-") || jniDir.getCanonicalPath().contains("fadeopenxr")) {
                 // Delete the 'libopenxr_loader.so' files from the vendors plugin so we only use the version from the
                 // openxr loader dependency.
                 File armFile = new File(jniDir, "arm64-v8a/libopenxr_loader.so")

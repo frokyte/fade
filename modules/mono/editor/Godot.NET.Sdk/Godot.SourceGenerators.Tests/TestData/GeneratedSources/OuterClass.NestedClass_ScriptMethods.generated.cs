@@ -31,13 +31,13 @@ partial class NestedClass
     {
         public static void GetFADEMethodTrampolines(global::FADE.Bridge.MethodTrampolineCollector collector)
         {
-            static godot_variant trampoline_1__Get(object godotObject, NativeVariantPtrArgs args, ref godot_variant_call_error callError)
+            static fade_variant trampoline_1__Get(object fadeObject, NativeVariantPtrArgs args, ref fade_variant_call_error callError)
             {
                 if (args.Count != 1) {
-                    callError = godot_variant_call_error.CreateInvalidArgumentCountError(expected: 1, provided: args.Count);
+                    callError = fade_variant_call_error.CreateInvalidArgumentCountError(expected: 1, provided: args.Count);
                     return default;
                 }
-                var callRet = ((global::FADE.FADEObject)godotObject).@_Get(global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName>(args[0]));
+                var callRet = ((global::FADE.FADEObject)fadeObject).@_Get(global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName>(args[0]));
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Variant>(callRet);
             }
             var aux_delegate_1__Get = trampoline_1__Get;

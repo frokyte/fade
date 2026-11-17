@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -246,7 +246,7 @@ static const String THEMED_ICON_XML_PATH = "res/mipmap-anydpi-v26/themed_icon.xm
 static const String ANDROID_SPLASH_ICON_PATH = "res/drawable/splash_icon.webp";
 static const String ANDROID_SPLASH_BRANDING_IMAGE_PATH = "res/drawable/splash_branding_image.webp";
 
-static const char *DISABLE_GODOT_SPLASH_OPTION = PNAME("splash_screen/disable_godot_boot_splash");
+static const char *DISABLE_GODOT_SPLASH_OPTION = PNAME("splash_screen/disable_fade_boot_splash");
 static const char *ANDROID_SPLASH_ICON_OPTION = PNAME("splash_screen/icon");
 static const char *ANDROID_SPLASH_BACKGROUND_COLOR_OPTION = PNAME("splash_screen/background_color");
 static const char *ANDROID_SPLASH_BRANDING_IMAGE_OPTION = PNAME("splash_screen/branding_image");
@@ -962,13 +962,13 @@ void EditorExportPlatformAndroid::_get_manifest_info(const Ref<EditorExportPrese
 	}
 
 	MetadataInfo rendering_method_metadata = {
-		"org.godotengine.rendering.method",
+		"org.fadeengine.rendering.method",
 		p_preset->get_project_setting("rendering/renderer/rendering_method.mobile")
 	};
 	r_metadata.append(rendering_method_metadata);
 
 	MetadataInfo editor_version_metadata = {
-		"org.godotengine.editor.version",
+		"org.fadeengine.editor.version",
 		String(GODOT_VERSION_FULL_CONFIG)
 	};
 	r_metadata.append(editor_version_metadata);
@@ -1765,7 +1765,7 @@ void EditorExportPlatformAndroid::_fix_resources(const Ref<EditorExportPreset> &
 
 	const String project_name = get_project_name(p_preset, p_preset->get("package/name"));
 	const Dictionary appnames = get_project_setting(p_preset, "application/config/name_localized");
-	const StringName domain_name = "godot.project_name_localization";
+	const StringName domain_name = "fade.project_name_localization";
 	Ref<TranslationDomain> domain = TranslationServer::get_singleton()->get_or_add_domain(domain_name);
 	TranslationServer::get_singleton()->load_project_translations(domain);
 
@@ -1775,9 +1775,9 @@ void EditorExportPlatformAndroid::_fix_resources(const Ref<EditorExportPreset> &
 
 		String str = _parse_string(&r_manifest[offset], string_flags & UTF8_FLAG);
 
-		if (str == "godot-project-name") {
+		if (str == "fade-project-name") {
 			str = project_name;
-		} else if (str.begins_with("godot-project-name")) {
+		} else if (str.begins_with("fade-project-name")) {
 			String lang = str.substr(str.rfind_char('-') + 1).replace_char('-', '_');
 
 			if (appnames.is_empty()) {
@@ -2602,7 +2602,7 @@ Error EditorExportPlatformAndroid::run(const Ref<EditorExportPreset> &p_preset, 
 		print_verbose(output);
 		if (err || rv != 0 || output.contains("Error: Activity not started")) {
 			// The implicit launch failed, let's try an explicit launch by specifying the component name before giving up.
-			const String component_name = get_package_name(p_preset, package_name) + "/com.godot.game.FADEAppLauncher";
+			const String component_name = get_package_name(p_preset, package_name) + "/com.fade.game.FADEAppLauncher";
 			print_line("Implicit launch failed... Trying explicit launch using", component_name);
 			args.erase(get_package_name(p_preset, package_name));
 			args.push_back("-n");
@@ -3046,9 +3046,9 @@ void EditorExportPlatformAndroid::get_command_line_flags(const Ref<EditorExportP
 	command_line_strings.push_back("--background_color");
 	command_line_strings.push_back(background_color);
 
-	bool disable_godot_splash = p_preset->get(DISABLE_GODOT_SPLASH_OPTION);
-	if (disable_godot_splash) {
-		command_line_strings.push_back("--disable_godot_splash");
+	bool disable_fade_splash = p_preset->get(DISABLE_GODOT_SPLASH_OPTION);
+	if (disable_fade_splash) {
+		command_line_strings.push_back("--disable_fade_splash");
 	}
 
 	bool debug_opengl = p_preset->get("graphics/opengl_debug");

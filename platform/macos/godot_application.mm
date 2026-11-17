@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_application.mm                                                  */
+/*  fade_application.mm                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_application.h"
+#import "fade_application.h"
 
 #import "display_server_macos.h"
-#import "godot_application_delegate.h"
+#import "fade_application_delegate.h"
 #import "os_macos.h"
 
 FADEApplication *FADEApp = nil;
@@ -52,7 +52,7 @@ FADEApplication *FADEApp = nil;
 	return self;
 }
 
-- (FADEApplicationDelegate *)godotDelegate {
+- (FADEApplicationDelegate *)fadeDelegate {
 	return (FADEApplicationDelegate *)self.delegate;
 }
 

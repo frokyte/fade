@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor.embed
+package org.fadeengine.editor.embed
 
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -46,9 +46,9 @@ import android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND
 import android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
 import android.view.WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
 import android.widget.CheckBox
-import org.godotengine.editor.FADEGame
-import org.godotengine.editor.R
-import org.godotengine.godot.editor.utils.GameMenuUtils
+import org.fadeengine.editor.FADEGame
+import org.fadeengine.editor.R
+import org.fadeengine.fade.editor.utils.GameMenuUtils
 
 /**
  * Host the FADE game from the editor when the embedded mode is enabled.
@@ -136,7 +136,7 @@ class EmbeddedFADEGame : FADEGame() {
 		setupOverlayUI()
 	}
 
-	override fun getFADEAppLayout() = R.layout.godot_embedded_game_layout
+	override fun getFADEAppLayout() = R.layout.fade_embedded_game_layout
 
 	override fun onConfigurationChanged(newConfig: Configuration) {
 		super.onConfigurationChanged(newConfig)
@@ -451,7 +451,7 @@ class EmbeddedFADEGame : FADEGame() {
 	override fun isAlwaysOnTopSupported() = isPiPModeSupported()
 
 	override fun onFullScreenUpdated(enabled: Boolean) {
-		godot?.enableImmersiveMode(enabled)
+		fade?.enableImmersiveMode(enabled)
 		isFullscreen = enabled
 
 		val layoutParams = window.attributes

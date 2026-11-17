@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -41,9 +41,9 @@
 #include "core/profiling/profiling.h"
 #import "drivers/apple/os_log_logger.h"
 #import "drivers/apple_embedded/display_server_apple_embedded.h"
-#import "drivers/apple_embedded/godot_app_delegate_service_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_controller.h"
+#import "drivers/apple_embedded/fade_app_delegate_service_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_controller.h"
 #ifdef SDL_ENABLED
 #include "drivers/sdl/joypad_sdl.h"
 #endif
@@ -67,7 +67,7 @@
 #import <QuartzCore/CAMetalLayer.h>
 
 #if defined(VULKAN_ENABLED)
-#include <drivers/vulkan/godot_vulkan.h>
+#include <drivers/vulkan/fade_vulkan.h>
 #endif // VULKAN_ENABLED
 #endif
 
@@ -443,7 +443,7 @@ String OS_AppleEmbedded::get_resource_dir() const {
 }
 
 String OS_AppleEmbedded::get_bundle_resource_dir() const {
-	NSString *str = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"godot_path"];
+	NSString *str = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"fade_path"];
 	if (!str) {
 		return OS_Unix::get_bundle_resource_dir();
 	} else {
@@ -815,7 +815,7 @@ void OS_AppleEmbedded::on_focus_out() {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_FOCUS_OUT);
 		}
 
-		[GDTAppDelegateService.viewController.godotView stopRendering];
+		[GDTAppDelegateService.viewController.fadeView stopRendering];
 
 		audio_driver_stop();
 	}
@@ -837,7 +837,7 @@ void OS_AppleEmbedded::on_focus_in() {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_FOCUS_IN);
 		}
 
-		[GDTAppDelegateService.viewController.godotView startRendering];
+		[GDTAppDelegateService.viewController.fadeView startRendering];
 
 		audio_driver_start();
 	}

@@ -20,7 +20,7 @@
 				[codeblock lang=text]
 				- Windows: %LOCALAPPDATA%\Godot\
 				- macOS: ~/Library/Caches/Godot/
-				- Linux: ~/.cache/godot/
+				- Linux: ~/.cache/fade/
 				[/codeblock]
 			</description>
 		</method>
@@ -32,7 +32,7 @@
 				[codeblock lang=text]
 				- Windows: %APPDATA%\Godot\                    (same as `get_data_dir()`)
 				- macOS: ~/Library/Application Support/Godot/  (same as `get_data_dir()`)
-				- Linux: ~/.config/godot/
+				- Linux: ~/.config/fade/
 				[/codeblock]
 			</description>
 		</method>
@@ -44,14 +44,14 @@
 				[codeblock lang=text]
 				- Windows: %APPDATA%\Godot\                    (same as `get_config_dir()`)
 				- macOS: ~/Library/Application Support/Godot/  (same as `get_config_dir()`)
-				- Linux: ~/.local/share/godot/
+				- Linux: ~/.local/share/fade/
 				[/codeblock]
 			</description>
 		</method>
 		<method name="get_project_settings_dir" qualifiers="const">
 			<return type="String" />
 			<description>
-				Returns the relative path to the editor settings for this project. This is usually [code]"res://.godot/editor"[/code]. Projects all have a unique subdirectory inside the settings path where project-specific editor settings are saved.
+				Returns the relative path to the editor settings for this project. This is usually [code]"res://.fade/editor"[/code]. Projects all have a unique subdirectory inside the settings path where project-specific editor settings are saved.
 			</description>
 		</method>
 		<method name="get_self_contained_file" qualifiers="const">
@@ -65,7 +65,7 @@
 			<description>
 				Returns [code]true[/code] if the editor is marked as self-contained, [code]false[/code] otherwise. When self-contained mode is enabled, user configuration, data and cache files are saved in an [code]editor_data/[/code] folder next to the editor binary. This makes portable usage easier and ensures the Godot editor minimizes file writes outside its own folder. Self-contained mode is not available for exported projects.
 				Self-contained mode can be enabled by creating a file named [code]._sc_[/code] or [code]_sc_[/code] in the same folder as the editor binary or macOS .app bundle while the editor is not running. See also [method get_self_contained_file].
-				[b]Note:[/b] On macOS, quarantine flag should be manually removed before using self-contained mode, see [url=https://docs.godotengine.org/en/stable/tutorials/export/running_on_macos.html]Running on macOS[/url].
+				[b]Note:[/b] On macOS, quarantine flag should be manually removed before using self-contained mode, see [url=https://docs.fadeengine.org/en/stable/tutorials/export/running_on_macos.html]Running on macOS[/url].
 				[b]Note:[/b] On macOS, placing [code]_sc_[/code] or any other file inside .app bundle will break digital signature and make it non-portable, consider placing it in the same folder as the .app bundle instead.
 				[b]Note:[/b] The Steam release of Godot uses self-contained mode by default.
 			</description>

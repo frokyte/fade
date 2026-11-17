@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.io.directory
+package org.fadeengine.fade.io.directory
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -36,10 +36,10 @@ import android.os.Build
 import android.os.storage.StorageManager
 import android.util.Log
 import android.util.SparseArray
-import org.godotengine.godot.io.StorageScope
-import org.godotengine.godot.io.directory.DirectoryAccessHandler.Companion.INVALID_DIR_ID
-import org.godotengine.godot.io.directory.DirectoryAccessHandler.Companion.STARTING_DIR_ID
-import org.godotengine.godot.io.file.FileAccessHandler
+import org.fadeengine.fade.io.StorageScope
+import org.fadeengine.fade.io.directory.DirectoryAccessHandler.Companion.INVALID_DIR_ID
+import org.fadeengine.fade.io.directory.DirectoryAccessHandler.Companion.STARTING_DIR_ID
+import org.fadeengine.fade.io.file.FileAccessHandler
 import java.io.File
 
 /**

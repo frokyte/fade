@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -340,7 +340,7 @@ TEST_CASE("[String] Contains") {
 TEST_CASE("[String] Contains case insensitive") {
 	String s = "C:\\FADE\\project\\string_test.tscn";
 	CHECK(s.containsn("FADE"));
-	CHECK(s.containsn("godot"));
+	CHECK(s.containsn("fade"));
 	CHECK(s.containsn(String("Project\\string_test")));
 	CHECK(s.containsn(String("\\string_Test.tscn")));
 
@@ -2240,18 +2240,18 @@ TEST_CASE("[String][URL] Parse URL") {
 	CHECK_URL("https://www.example.com:8080/path/to/file.html#fragment", "https://", "www.example.com", 8080, "/path/to/file.html", "fragment", Error::OK);
 
 	// Valid URLs.
-	CHECK_URL("https://godotengine.org", "https://", "godotengine.org", 0, "", "", Error::OK);
-	CHECK_URL("https://godotengine.org/", "https://", "godotengine.org", 0, "/", "", Error::OK);
-	CHECK_URL("godotengine.org/", "", "godotengine.org", 0, "/", "", Error::OK);
-	CHECK_URL("HTTPS://godotengine.org/", "https://", "godotengine.org", 0, "/", "", Error::OK);
-	CHECK_URL("https://GODOTENGINE.ORG/", "https://", "godotengine.org", 0, "/", "", Error::OK);
-	CHECK_URL("http://godotengine.org", "http://", "godotengine.org", 0, "", "", Error::OK);
-	CHECK_URL("https://godotengine.org:8080", "https://", "godotengine.org", 8080, "", "", Error::OK);
-	CHECK_URL("https://godotengine.org/blog", "https://", "godotengine.org", 0, "/blog", "", Error::OK);
-	CHECK_URL("https://godotengine.org/blog/", "https://", "godotengine.org", 0, "/blog/", "", Error::OK);
-	CHECK_URL("https://docs.godotengine.org/en/stable", "https://", "docs.godotengine.org", 0, "/en/stable", "", Error::OK);
-	CHECK_URL("https://docs.godotengine.org/en/stable/", "https://", "docs.godotengine.org", 0, "/en/stable/", "", Error::OK);
-	CHECK_URL("https://me:secret@godotengine.org", "https://", "godotengine.org", 0, "", "", Error::OK);
+	CHECK_URL("https://fadeengine.org", "https://", "fadeengine.org", 0, "", "", Error::OK);
+	CHECK_URL("https://fadeengine.org/", "https://", "fadeengine.org", 0, "/", "", Error::OK);
+	CHECK_URL("fadeengine.org/", "", "fadeengine.org", 0, "/", "", Error::OK);
+	CHECK_URL("HTTPS://fadeengine.org/", "https://", "fadeengine.org", 0, "/", "", Error::OK);
+	CHECK_URL("https://GODOTENGINE.ORG/", "https://", "fadeengine.org", 0, "/", "", Error::OK);
+	CHECK_URL("http://fadeengine.org", "http://", "fadeengine.org", 0, "", "", Error::OK);
+	CHECK_URL("https://fadeengine.org:8080", "https://", "fadeengine.org", 8080, "", "", Error::OK);
+	CHECK_URL("https://fadeengine.org/blog", "https://", "fadeengine.org", 0, "/blog", "", Error::OK);
+	CHECK_URL("https://fadeengine.org/blog/", "https://", "fadeengine.org", 0, "/blog/", "", Error::OK);
+	CHECK_URL("https://docs.fadeengine.org/en/stable", "https://", "docs.fadeengine.org", 0, "/en/stable", "", Error::OK);
+	CHECK_URL("https://docs.fadeengine.org/en/stable/", "https://", "docs.fadeengine.org", 0, "/en/stable/", "", Error::OK);
+	CHECK_URL("https://me:secret@fadeengine.org", "https://", "fadeengine.org", 0, "", "", Error::OK);
 	CHECK_URL("https://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]/ipv6", "https://", "fedc:ba98:7654:3210:fedc:ba98:7654:3210", 0, "/ipv6", "", Error::OK);
 
 	// Scheme vs Fragment.
@@ -2260,18 +2260,18 @@ TEST_CASE("[String][URL] Parse URL") {
 	// Invalid URLs.
 
 	// Invalid Scheme.
-	CHECK_URL("https_://godotengine.org", "", "https_", 0, "//godotengine.org", "", Error::ERR_INVALID_PARAMETER);
+	CHECK_URL("https_://fadeengine.org", "", "https_", 0, "//fadeengine.org", "", Error::ERR_INVALID_PARAMETER);
 
 	// Multiple ports.
-	CHECK_URL("https://godotengine.org:8080:433", "https://", "", 0, "", "", Error::ERR_INVALID_PARAMETER);
+	CHECK_URL("https://fadeengine.org:8080:433", "https://", "", 0, "", "", Error::ERR_INVALID_PARAMETER);
 	// Missing ] on literal IPv6.
 	CHECK_URL("https://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210/ipv6", "https://", "", 0, "/ipv6", "", Error::ERR_INVALID_PARAMETER);
 	// Missing host.
 	CHECK_URL("https:///blog", "https://", "", 0, "/blog", "", Error::ERR_INVALID_PARAMETER);
 	// Invalid ports.
-	CHECK_URL("https://godotengine.org:notaport", "https://", "godotengine.org", 0, "", "", Error::ERR_INVALID_PARAMETER);
-	CHECK_URL("https://godotengine.org:-8080", "https://", "godotengine.org", -8080, "", "", Error::ERR_INVALID_PARAMETER);
-	CHECK_URL("https://godotengine.org:88888", "https://", "godotengine.org", 88888, "", "", Error::ERR_INVALID_PARAMETER);
+	CHECK_URL("https://fadeengine.org:notaport", "https://", "fadeengine.org", 0, "", "", Error::ERR_INVALID_PARAMETER);
+	CHECK_URL("https://fadeengine.org:-8080", "https://", "fadeengine.org", -8080, "", "", Error::ERR_INVALID_PARAMETER);
+	CHECK_URL("https://fadeengine.org:88888", "https://", "fadeengine.org", 88888, "", "", Error::ERR_INVALID_PARAMETER);
 
 #undef CHECK_URL
 }

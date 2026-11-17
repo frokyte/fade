@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -565,8 +565,8 @@ Quaternion JoltGeneric6DOFJoint3D::get_angular_target_rotation() const {
 					static_cast<real_t>(-spring_equilibrium[AXIS_ANGULAR_Y]),
 					static_cast<real_t>(-spring_equilibrium[AXIS_ANGULAR_Z])),
 			EulerOrder::ZYX);
-	const Basis constraint_to_body_1 = to_godot(constraint->GetConstraintToBody1Matrix()).basis;
-	const Basis constraint_to_body_2 = to_godot(constraint->GetConstraintToBody2Matrix()).basis;
+	const Basis constraint_to_body_1 = to_fade(constraint->GetConstraintToBody1Matrix()).basis;
+	const Basis constraint_to_body_2 = to_fade(constraint->GetConstraintToBody2Matrix()).basis;
 
 	return (constraint_to_body_1 * target_orientation_cs * constraint_to_body_2.inverse()).get_quaternion();
 }

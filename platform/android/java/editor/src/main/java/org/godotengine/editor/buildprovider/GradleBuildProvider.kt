@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,12 +28,12 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor.buildprovider
+package org.fadeengine.editor.buildprovider
 
 import android.content.Context
-import org.godotengine.godot.BuildProvider
-import org.godotengine.godot.FADEHost
-import org.godotengine.godot.variant.Callable
+import org.fadeengine.fade.BuildProvider
+import org.fadeengine.fade.FADEHost
+import org.fadeengine.fade.variant.Callable
 
 internal class GradleBuildProvider(
 	val context: Context,
@@ -42,11 +42,11 @@ internal class GradleBuildProvider(
 
 	val gradleBuildEnvironmentClient = GradleBuildEnvironmentClient(context)
 
-	val godot get() = host.godot
+	val fade get() = host.fade
 
 	override fun buildEnvConnect(callback: Callable): Boolean {
 		return gradleBuildEnvironmentClient.connect {
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				callback.call()
 			}
 		}
@@ -68,12 +68,12 @@ internal class GradleBuildProvider(
 			return -1;
 		}
 		val outputCb: (Int, String) -> Unit = { outputType, line ->
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				outputCallback.call(outputType, line)
 			}
 		}
 		val resultCb: (Int) -> Unit = { exitCode ->
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				resultCallback.call(exitCode)
 			}
 		}
@@ -86,7 +86,7 @@ internal class GradleBuildProvider(
 
 	override fun buildEnvCleanProject(projectPath: String, buildDir: String, callback: Callable) {
 		val cb: (Int) -> Unit = { exitCode ->
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				callback.call()
 			}
 		}

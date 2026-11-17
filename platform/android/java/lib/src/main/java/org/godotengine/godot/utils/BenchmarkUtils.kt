@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,16 +30,16 @@
 
 @file:JvmName("BenchmarkUtils")
 
-package org.godotengine.godot.utils
+package org.fadeengine.fade.utils
 
 import android.os.Build
 import android.os.SystemClock
 import android.os.Trace
 import android.util.Log
-import org.godotengine.godot.BuildConfig
-import org.godotengine.godot.error.Error
-import org.godotengine.godot.io.file.FileAccessFlags
-import org.godotengine.godot.io.file.FileAccessHandler
+import org.fadeengine.fade.BuildConfig
+import org.fadeengine.fade.error.Error
+import org.fadeengine.fade.io.file.FileAccessFlags
+import org.fadeengine.fade.io.file.FileAccessHandler
 import org.json.JSONObject
 import java.nio.ByteBuffer
 import java.util.Collections

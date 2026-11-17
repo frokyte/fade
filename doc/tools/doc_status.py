@@ -239,12 +239,12 @@ class ClassStatus:
         )
 
         if self.name.startswith("Total"):
-            output["url"] = color("url", "https://docs.godotengine.org/en/latest/classes/")
+            output["url"] = color("url", "https://docs.fadeengine.org/en/latest/classes/")
             if flags["s"]:
                 output["comment"] = color("part_good", "ALL OK")
         else:
             output["url"] = color(
-                "url", f"https://docs.godotengine.org/en/latest/classes/class_{self.name.lower()}.html"
+                "url", f"https://docs.fadeengine.org/en/latest/classes/class_{self.name.lower()}.html"
             )
 
             if flags["s"] and not flags["g"] and self.is_ok():

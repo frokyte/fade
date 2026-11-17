@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_application.h                                                   */
+/*  fade_application.h                                                   */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -40,7 +40,7 @@
 
 extern "C" FADEApplication *FADEApp;
 
-@property(readonly, nonatomic) FADEApplicationDelegate *godotDelegate;
+@property(readonly, nonatomic) FADEApplicationDelegate *fadeDelegate;
 
 - (FADEApplication *)init;
 

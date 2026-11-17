@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_plugin_config.cpp                                               */
+/*  fade_plugin_config.cpp                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "godot_plugin_config.h"
+#include "fade_plugin_config.h"
 
 #ifndef DISABLE_DEPRECATED
 

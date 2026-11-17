@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  d3d12_godot_nir_bridge.h                                              */
+/*  d3d12_fade_nir_bridge.h                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -56,9 +56,9 @@ typedef struct FADENirCallbacks {
 	void (*report_bitcode_bit_offset_fn)(uint64_t p_bit_offset, void *p_data);
 } FADENirCallbacks;
 
-extern void *godot_nir_malloc(size_t p_size);
-extern void *godot_nir_realloc(void *p_block, size_t p_size);
-extern void godot_nir_free(void *p_block);
+extern void *fade_nir_malloc(size_t p_size);
+extern void *fade_nir_realloc(void *p_block, size_t p_size);
+extern void fade_nir_free(void *p_block);
 
 #ifdef __cplusplus
 }

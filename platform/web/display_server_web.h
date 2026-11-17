@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include "godot_js.h"
+#include "fade_js.h"
 
 #include "core/input/input_enums.h"
 #include "core/os/keyboard.h"
@@ -118,8 +118,8 @@ private:
 	void _mouse_update_mode();
 
 	// utilities
-	static void dom2godot_mod(Ref<InputEventWithModifiers> ev, int p_mod, Key p_keycode);
-	static const char *godot2dom_cursor(DisplayServerEnums::CursorShape p_shape);
+	static void dom2fade_mod(Ref<InputEventWithModifiers> ev, int p_mod, Key p_keycode);
+	static const char *fade2dom_cursor(DisplayServerEnums::CursorShape p_shape);
 
 	// events
 	WASM_EXPORT static void fullscreen_change_callback(int p_fullscreen);

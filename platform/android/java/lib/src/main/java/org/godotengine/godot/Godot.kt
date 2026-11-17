@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot
+package org.fadeengine.fade
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -54,25 +54,25 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import org.godotengine.godot.input.FADEEditText
-import org.godotengine.godot.input.FADEInputHandler
-import org.godotengine.godot.io.FilePicker
-import org.godotengine.godot.io.StorageScope
-import org.godotengine.godot.io.directory.DirectoryAccessHandler
-import org.godotengine.godot.io.file.FileAccessHandler
-import org.godotengine.godot.nativeapi.FADENativeBridge
-import org.godotengine.godot.plugin.AndroidRuntimePlugin
-import org.godotengine.godot.plugin.FADEPlugin
-import org.godotengine.godot.plugin.FADEPluginRegistry
-import org.godotengine.godot.tts.FADETTS
-import org.godotengine.godot.utils.FADENetUtils
-import org.godotengine.godot.utils.PermissionsUtil
-import org.godotengine.godot.utils.PermissionsUtil.requestPermission
-import org.godotengine.godot.utils.beginBenchmarkMeasure
-import org.godotengine.godot.utils.benchmarkFile
-import org.godotengine.godot.utils.endBenchmarkMeasure
-import org.godotengine.godot.utils.useBenchmark
-import org.godotengine.godot.xr.XRMode
+import org.fadeengine.fade.input.FADEEditText
+import org.fadeengine.fade.input.FADEInputHandler
+import org.fadeengine.fade.io.FilePicker
+import org.fadeengine.fade.io.StorageScope
+import org.fadeengine.fade.io.directory.DirectoryAccessHandler
+import org.fadeengine.fade.io.file.FileAccessHandler
+import org.fadeengine.fade.nativeapi.FADENativeBridge
+import org.fadeengine.fade.plugin.AndroidRuntimePlugin
+import org.fadeengine.fade.plugin.FADEPlugin
+import org.fadeengine.fade.plugin.FADEPluginRegistry
+import org.fadeengine.fade.tts.FADETTS
+import org.fadeengine.fade.utils.FADENetUtils
+import org.fadeengine.fade.utils.PermissionsUtil
+import org.fadeengine.fade.utils.PermissionsUtil.requestPermission
+import org.fadeengine.fade.utils.beginBenchmarkMeasure
+import org.fadeengine.fade.utils.benchmarkFile
+import org.fadeengine.fade.utils.endBenchmarkMeasure
+import org.fadeengine.fade.utils.useBenchmark
+import org.fadeengine.fade.xr.XRMode
 import java.util.*
 import java.util.concurrent.Callable
 import java.util.concurrent.CountDownLatch
@@ -126,7 +126,7 @@ class FADE private constructor(val context: Context) {
 		TERMINATING
 	}
 
-	private val godotNativeBridge = FADENativeBridge(this)
+	private val fadeNativeBridge = FADENativeBridge(this)
 
 	private val mSensorManager: SensorManager? by lazy { context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager }
 	private val mClipboard: ClipboardManager? by lazy { context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager }
@@ -156,7 +156,7 @@ class FADE private constructor(val context: Context) {
 	val directoryAccessHandler = DirectoryAccessHandler(context)
 	val fileAccessHandler = FileAccessHandler(context)
 	val netUtils = FADENetUtils(context)
-	val godotInputHandler = FADEInputHandler(context, this)
+	val fadeInputHandler = FADEInputHandler(context, this)
 
 	private val hasClipboardCallable = Callable {
 		mClipboard?.hasPrimaryClip() == true
@@ -295,7 +295,7 @@ class FADE private constructor(val context: Context) {
 				} else if (hasExtra && commandLine[i] == "--background_color") {
 					setWindowColor(commandLine[i + 1])
 					i++
-				} else if (commandLine[i] == "--disable_godot_splash") {
+				} else if (commandLine[i] == "--disable_fade_splash") {
 					disableFADESplash = true
 				} else if (commandLine[i] == "--benchmark") {
 					useBenchmark = true
@@ -330,7 +330,7 @@ class FADE private constructor(val context: Context) {
 			commandLine = if (newArgs.isEmpty()) { mutableListOf() } else { newArgs }
 			if (!nativeLayerInitializeCompleted) {
 				nativeLayerInitializeCompleted = FADELib.initialize(
-					godotNativeBridge,
+					fadeNativeBridge,
 					context.assets,
 					io,
 					netUtils,
@@ -571,9 +571,9 @@ class FADE private constructor(val context: Context) {
 
 			val nativeRenderer = getNativeRenderer()
 			if (nativeRenderer == "vulkan") {
-				renderView = FADEVulkanRenderView(this, godotInputHandler, shouldBeTransparent)
+				renderView = FADEVulkanRenderView(this, fadeInputHandler, shouldBeTransparent)
 			} else if (nativeRenderer == "opengl3") {
-				renderView = FADEGLRenderView(this, godotInputHandler, xrMode, useDebugOpengl, shouldBeTransparent)
+				renderView = FADEGLRenderView(this, fadeInputHandler, xrMode, useDebugOpengl, shouldBeTransparent)
 			} else {
 				throw IllegalStateException("No native renderer is available.")
 			}
@@ -700,7 +700,7 @@ class FADE private constructor(val context: Context) {
 			return
 		}
 
-		godotInputHandler.onActivityResumed()
+		fadeInputHandler.onActivityResumed()
 		renderView?.onActivityResumed()
 		registerSensorsIfNeeded()
 		for (plugin in pluginRegistry.allPlugins) {
@@ -714,19 +714,19 @@ class FADE private constructor(val context: Context) {
 		}
 
 		if (accelerometerEnabled.get() && mAccelerometer != null) {
-			mSensorManager?.registerListener(godotInputHandler, mAccelerometer, SensorManager.SENSOR_DELAY_GAME)
+			mSensorManager?.registerListener(fadeInputHandler, mAccelerometer, SensorManager.SENSOR_DELAY_GAME)
 		}
 		if (gravityEnabled.get() && mGravity != null) {
-			mSensorManager?.registerListener(godotInputHandler, mGravity, SensorManager.SENSOR_DELAY_GAME)
+			mSensorManager?.registerListener(fadeInputHandler, mGravity, SensorManager.SENSOR_DELAY_GAME)
 		}
 		if (magnetometerEnabled.get() && mMagnetometer != null) {
-			mSensorManager?.registerListener(godotInputHandler, mMagnetometer, SensorManager.SENSOR_DELAY_GAME)
+			mSensorManager?.registerListener(fadeInputHandler, mMagnetometer, SensorManager.SENSOR_DELAY_GAME)
 		}
 		if (gyroscopeEnabled.get() && mGyroscope != null) {
-			mSensorManager?.registerListener(godotInputHandler, mGyroscope, SensorManager.SENSOR_DELAY_GAME)
+			mSensorManager?.registerListener(fadeInputHandler, mGyroscope, SensorManager.SENSOR_DELAY_GAME)
 		}
 		if (deviceOrientationEnabled.get() && rotationVector != null) {
-			mSensorManager?.registerListener(godotInputHandler, rotationVector, SensorManager.SENSOR_DELAY_GAME)
+			mSensorManager?.registerListener(fadeInputHandler, rotationVector, SensorManager.SENSOR_DELAY_GAME)
 		}
 	}
 
@@ -748,9 +748,9 @@ class FADE private constructor(val context: Context) {
 			plugin.onMainPause()
 		}
 
-		godotInputHandler.onActivityPaused()
+		fadeInputHandler.onActivityPaused()
 		renderView?.onActivityPaused()
-		mSensorManager?.unregisterListener(godotInputHandler)
+		mSensorManager?.unregisterListener(fadeInputHandler)
 	}
 
 	fun onStop(host: FADEHost) {
@@ -789,7 +789,7 @@ class FADE private constructor(val context: Context) {
 	*/
 	@JvmOverloads
 	fun onConfigurationChanged(newConfig: Configuration, force: Boolean = false) {
-		godotInputHandler.onConfigurationChanged(newConfig)
+		fadeInputHandler.onConfigurationChanged(newConfig)
 
 		val newDarkMode = newConfig.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 		if (force || darkMode != newDarkMode) {
@@ -866,7 +866,7 @@ class FADE private constructor(val context: Context) {
 		val scrollDeadzoneDisabled = java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/pointing/android/disable_scroll_deadzone"))
 
 		runOnHostThread {
-			godotInputHandler.apply {
+			fadeInputHandler.apply {
 				enableRightClickEmulation(rightClickEmulataionEnabled)
 				enablePanningAndScalingGestures(panScaleEnabled)
 				setOverrideVolumeButtons(overrideVolumeButtons)
@@ -1142,7 +1142,7 @@ class FADE private constructor(val context: Context) {
 	 * Returns true if the feature for the given feature tag is supported in the currently running instance, depending
 	 * on the platform, build, etc.
 	 *
-	 * For reference, see https://docs.godotengine.org/en/stable/classes/class_os.html#class-os-method-has-feature
+	 * For reference, see https://docs.fadeengine.org/en/stable/classes/class_os.html#class-os-method-has-feature
 	 */
 	fun hasFeature(feature: String): Boolean {
 		return FADELib.hasFeature(feature)

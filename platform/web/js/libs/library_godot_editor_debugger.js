@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_editor_debugger.js                                      */
+/*  library_fade_editor_debugger.js                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -48,15 +48,15 @@ const FADEEditorDebugger = {
 		},
 	},
 
-	godot_js_editor_debugger_cb__proxy: 'sync',
-	godot_js_editor_debugger_cb__sig: 'vp',
-	godot_js_editor_debugger_cb: function (p_cb) {
+	fade_js_editor_debugger_cb__proxy: 'sync',
+	fade_js_editor_debugger_cb__sig: 'vp',
+	fade_js_editor_debugger_cb: function (p_cb) {
 		FADEEditorDebugger.session_callback = p_cb ? FADERuntime.get_func(p_cb) : null;
 	},
 
-	godot_js_editor_debugger_active__proxy: 'sync',
-	godot_js_editor_debugger_active__sig: 'i',
-	godot_js_editor_debugger_active: function () {
+	fade_js_editor_debugger_active__proxy: 'sync',
+	fade_js_editor_debugger_active__sig: 'i',
+	fade_js_editor_debugger_active: function () {
 		return FADEEditorDebugger.session_callback ? 1 : 0;
 	},
 };

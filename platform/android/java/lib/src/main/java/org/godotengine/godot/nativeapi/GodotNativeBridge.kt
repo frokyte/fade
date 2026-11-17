@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.nativeapi
+package org.fadeengine.fade.nativeapi
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.annotation.SuppressLint
@@ -47,83 +47,83 @@ import android.util.Rational
 import android.util.TypedValue
 import androidx.annotation.Keep
 import androidx.core.net.toUri
-import org.godotengine.godot.FADE
-import org.godotengine.godot.FADEActivity
-import org.godotengine.godot.R
-import org.godotengine.godot.error.Error
-import org.godotengine.godot.feature.PictureInPictureProvider
-import org.godotengine.godot.io.FilePicker
-import org.godotengine.godot.utils.DialogUtils
-import org.godotengine.godot.utils.FADENetUtils
-import org.godotengine.godot.utils.beginBenchmarkMeasure
-import org.godotengine.godot.utils.dumpBenchmark
-import org.godotengine.godot.utils.endBenchmarkMeasure
-import org.godotengine.godot.variant.Callable as FADECallable
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.FADEActivity
+import org.fadeengine.fade.R
+import org.fadeengine.fade.error.Error
+import org.fadeengine.fade.feature.PictureInPictureProvider
+import org.fadeengine.fade.io.FilePicker
+import org.fadeengine.fade.utils.DialogUtils
+import org.fadeengine.fade.utils.FADENetUtils
+import org.fadeengine.fade.utils.beginBenchmarkMeasure
+import org.fadeengine.fade.utils.dumpBenchmark
+import org.fadeengine.fade.utils.endBenchmarkMeasure
+import org.fadeengine.fade.variant.Callable as FADECallable
 
 /**
  * Holds and expose FADE apis to the native layer.
  *
- * All the methods in this class are accessed by the native code (java_godot_wrapper.h) and as such are kept private to
+ * All the methods in this class are accessed by the native code (java_fade_wrapper.h) and as such are kept private to
  * not be accessible by the rest of the java/kotlin code.
  */
 @Keep
-internal class FADENativeBridge(private val godot: FADE) {
+internal class FADENativeBridge(private val fade: FADE) {
 
 	companion object {
 		private val TAG = FADENativeBridge::class.java.simpleName
 
 	}
 
-	private val vibratorService: Vibrator? by lazy { godot.context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator }
+	private val vibratorService: Vibrator? by lazy { fade.context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator }
 
 	/**
 	 * Invoked on the render thread when the FADE setup is complete.
 	 */
 	private fun onFADESetupCompleted() {
-		godot.onFADESetupCompleted()
+		fade.onFADESetupCompleted()
 	}
 
 	/**
 	 * Invoked on the render thread when the FADE main loop has started.
 	 */
 	private fun onFADEMainLoopStarted() {
-		godot.onFADEMainLoopStarted()
+		fade.onFADEMainLoopStarted()
 	}
 
 	/**
 	 * Invoked on the render thread when the engine is about to terminate.
 	 */
-	private fun onFADETerminating() = godot.onFADETerminating()
+	private fun onFADETerminating() = fade.onFADETerminating()
 
 	/**
 	 * Invoked from the render thread to toggle the immersive mode.
 	 */
 	private fun nativeEnableImmersiveMode(enabled: Boolean) {
-		godot.runOnHostThread {
-			godot.enableImmersiveMode(enabled)
+		fade.runOnHostThread {
+			fade.enableImmersiveMode(enabled)
 		}
 	}
 
-	private fun isInImmersiveMode() = godot.isInImmersiveMode()
+	private fun isInImmersiveMode() = fade.isInImmersiveMode()
 
-	private fun isInEdgeToEdgeMode() = godot.isInEdgeToEdgeMode()
+	private fun isInEdgeToEdgeMode() = fade.isInEdgeToEdgeMode()
 
-	private fun setKeepScreenOn(enabled: Boolean) = godot.setKeepScreenOn(enabled)
+	private fun setKeepScreenOn(enabled: Boolean) = fade.setKeepScreenOn(enabled)
 
-	private fun restart() { godot.primaryHost?.onFADERestartRequested(godot) }
+	private fun restart() { fade.primaryHost?.onFADERestartRequested(fade) }
 
 	private fun alert(message: String, title: String) {
-		godot.alert(message, title)
+		fade.alert(message, title)
 	}
 
-	private fun forceQuit(instanceId: Int) = godot.forceQuit(instanceId)
+	private fun forceQuit(instanceId: Int) = fade.forceQuit(instanceId)
 
 	/**
 	 * Returns true if screen reader is active, false otherwise.
 	 */
 	@Keep
 	private fun isScreenReaderActive(): Boolean {
-		val am = godot.context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+		val am = fade.context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
 		if (am != null && am.isEnabled()) {
 			val serviceInfoList = am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN)
 			if (!serviceInfoList.isEmpty()) {
@@ -138,7 +138,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 */
 	@Keep
 	private fun isHighContrastActive(): Boolean {
-		val am = godot.context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+		val am = fade.context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA && am != null && am.isEnabled()) {
 			return am.isHighContrastTextEnabled()
 		}
@@ -150,11 +150,11 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 */
 	@Keep
 	private fun isAnimationDisabled(): Boolean {
-		val am = godot.context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+		val am = fade.context.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
 		if (am != null && am.isEnabled()) {
-			return (Global.getFloat(godot.context.getContentResolver(), Global.ANIMATOR_DURATION_SCALE, 1.0f) == 0f
-                && Global.getFloat(godot.context.getContentResolver(), Global.TRANSITION_ANIMATION_SCALE, 1.0f) == 0f
-                && Global.getFloat(godot.context.getContentResolver(), Global.WINDOW_ANIMATION_SCALE, 1.0f) == 0f)
+			return (Global.getFloat(fade.context.getContentResolver(), Global.ANIMATOR_DURATION_SCALE, 1.0f) == 0f
+                && Global.getFloat(fade.context.getContentResolver(), Global.TRANSITION_ANIMATION_SCALE, 1.0f) == 0f
+                && Global.getFloat(fade.context.getContentResolver(), Global.WINDOW_ANIMATION_SCALE, 1.0f) == 0f)
 		}
 		return false
 	}
@@ -163,16 +163,16 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 * Returns true if dark mode is supported, false otherwise.
 	 */
 	private fun isDarkModeSupported(): Boolean {
-		return godot.context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK) != Configuration.UI_MODE_NIGHT_UNDEFINED
+		return fade.context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK) != Configuration.UI_MODE_NIGHT_UNDEFINED
 	}
 
 	/**
 	 * Returns true if dark mode is supported and enabled, false otherwise.
 	 */
-	private fun isDarkMode() = godot.darkMode
+	private fun isDarkMode() = fade.darkMode
 
 	private fun showFilePicker(currentDirectory: String, filename: String, fileMode: Int, filters: Array<String>) {
-		FilePicker.showFilePicker(godot.context, godot.getActivity(), currentDirectory, filename, fileMode, filters)
+		FilePicker.showFilePicker(fade.context, fade.getActivity(), currentDirectory, filename, fileMode, filters)
 	}
 
 	/**
@@ -183,7 +183,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 * @param buttons An array of button labels to display.
 	 */
 	private fun showDialog(title: String, message: String, buttons: Array<String>) {
-		godot.getActivity()?.let { DialogUtils.showDialog(it, title, message, buttons) }
+		fade.getActivity()?.let { DialogUtils.showDialog(it, title, message, buttons) }
 	}
 
 	/**
@@ -194,34 +194,34 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 * @param existingText The existing text that will be pre-filled in the input field.
 	 */
 	private fun showInputDialog(title: String, message: String, existingText: String) {
-		godot.getActivity()?.let { DialogUtils.showInputDialog(it, title, message, existingText) }
+		fade.getActivity()?.let { DialogUtils.showInputDialog(it, title, message, existingText) }
 	}
 
 	private fun getAccentColor(): Int {
 		val value = TypedValue()
-		godot.context.theme.resolveAttribute(android.R.attr.colorAccent, value, true)
+		fade.context.theme.resolveAttribute(android.R.attr.colorAccent, value, true)
 		return value.data
 	}
 
 	private fun getBaseColor(): Int {
 		val value = TypedValue()
-		godot.context.theme.resolveAttribute(android.R.attr.colorBackground, value, true)
+		fade.context.theme.resolveAttribute(android.R.attr.colorBackground, value, true)
 		return value.data
 	}
 
-	private fun requestPermission(name: String?) = godot.requestPermission(name)
+	private fun requestPermission(name: String?) = fade.requestPermission(name)
 
-	private fun requestPermissions() = godot.requestPermissions()
+	private fun requestPermissions() = fade.requestPermissions()
 
-	private fun getGrantedPermissions() = godot.getGrantedPermissions()
+	private fun getGrantedPermissions() = fade.getGrantedPermissions()
 
 	/**
-	 * Used by the native code (java_godot_wrapper.h) to vibrate the device.
+	 * Used by the native code (java_fade_wrapper.h) to vibrate the device.
 	 * @param durationMs
 	 */
 	@SuppressLint("MissingPermission")
 	private fun vibrate(durationMs: Int, amplitude: Int) {
-		if (durationMs > 0 && godot.requestPermission("VIBRATE")) {
+		if (durationMs > 0 && fade.requestPermission("VIBRATE")) {
 			try {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 					if (amplitude <= -1) {
@@ -256,14 +256,14 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 * Internal method used to query whether the host or the registered plugins supports a given feature.
 	 *
 	 * This is invoked by the native code, and should not be confused with [hasFeature] which is the Android version of
-	 * https://docs.godotengine.org/en/stable/classes/class_os.html#class-os-method-has-feature
+	 * https://docs.fadeengine.org/en/stable/classes/class_os.html#class-os-method-has-feature
 	 */
 	private fun checkInternalFeatureSupport(feature: String): Boolean {
-		if (godot.primaryHost?.supportsFeature(feature) == true) {
+		if (fade.primaryHost?.supportsFeature(feature) == true) {
 			return true
 		}
 
-		for (plugin in godot.pluginRegistry.allPlugins) {
+		for (plugin in fade.pluginRegistry.allPlugins) {
 			if (plugin.supportsFeature(feature)) {
 				return true
 			}
@@ -276,7 +276,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 	 */
 	private fun getGDExtensionConfigFiles(): Array<String> {
 		val configFiles = mutableSetOf<String>()
-		for (plugin in godot.pluginRegistry.allPlugins) {
+		for (plugin in fade.pluginRegistry.allPlugins) {
 			configFiles.addAll(plugin.pluginGDExtensionLibrariesPaths)
 		}
 
@@ -287,32 +287,32 @@ internal class FADENativeBridge(private val godot: FADE) {
 		return FADENetUtils.getCACertificates()
 	}
 
-	private fun getActivity() = godot.getActivity()
+	private fun getActivity() = fade.getActivity()
 
-	private fun getRenderView() = godot.renderView
+	private fun getRenderView() = fade.renderView
 
-	private fun getClipboard() = godot.getClipboard()
+	private fun getClipboard() = fade.getClipboard()
 
-	private fun setClipboard(text: String) = godot.setClipboard(text)
+	private fun setClipboard(text: String) = fade.setClipboard(text)
 
-	private fun hasClipboard() = godot.hasClipboard()
+	private fun hasClipboard() = fade.hasClipboard()
 
-	private fun setWindowColor(color: String) = godot.setWindowColor(color)
+	private fun setWindowColor(color: String) = fade.setWindowColor(color)
 
 	/**
-	 * Used by the native code (java_godot_wrapper.h) to access the input fallback mapping.
+	 * Used by the native code (java_fade_wrapper.h) to access the input fallback mapping.
 	 * @return The input fallback mapping for the current XR mode.
 	 */
 	private fun getInputFallbackMapping(): String? {
-		return godot.xrMode.inputFallbackMapping
+		return fade.xrMode.inputFallbackMapping
 	}
 
 	private fun initInputDevices() {
-		godot.godotInputHandler.initInputDevices()
+		fade.fadeInputHandler.initInputDevices()
 	}
 
 	private fun createNewFADEInstance(args: Array<String>): Int {
-		return godot.primaryHost?.onNewFADEInstanceRequested(args) ?: -1
+		return fade.primaryHost?.onNewFADEInstanceRequested(args) ?: -1
 	}
 
 	private fun nativeBeginBenchmarkMeasure(scope: String, label: String) {
@@ -324,7 +324,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 	}
 
 	private fun nativeDumpBenchmark(benchmarkFile: String) {
-		dumpBenchmark(godot.fileAccessHandler, benchmarkFile)
+		dumpBenchmark(fade.fileAccessHandler, benchmarkFile)
 	}
 
 	private fun nativeSignApk(
@@ -334,41 +334,41 @@ internal class FADENativeBridge(private val godot: FADE) {
 		keystoreUser: String,
 		keystorePassword: String
 	): Int {
-		val signResult = godot.primaryHost?.signApk(inputPath, outputPath, keystorePath, keystoreUser, keystorePassword)
-			?: org.godotengine.godot.error.Error.ERR_UNAVAILABLE
+		val signResult = fade.primaryHost?.signApk(inputPath, outputPath, keystorePath, keystoreUser, keystorePassword)
+			?: org.fadeengine.fade.error.Error.ERR_UNAVAILABLE
 		return signResult.toNativeValue()
 	}
 
 	private fun nativeVerifyApk(apkPath: String): Int {
-		val verifyResult = godot.primaryHost?.verifyApk(apkPath) ?: Error.ERR_UNAVAILABLE
+		val verifyResult = fade.primaryHost?.verifyApk(apkPath) ?: Error.ERR_UNAVAILABLE
 		return verifyResult.toNativeValue()
 	}
 
 	private fun nativeOnEditorWorkspaceSelected(workspace: String) {
-		godot.primaryHost?.onEditorWorkspaceSelected(workspace)
+		fade.primaryHost?.onEditorWorkspaceSelected(workspace)
 	}
 
 	private fun nativeShowEditorGameDock() {
-		godot.primaryHost?.showEditorGameDock()
+		fade.primaryHost?.showEditorGameDock()
 	}
 
 	private fun nativeOnDistractionFreeModeChanged(enabled: Boolean) {
-		godot.primaryHost?.onDistractionFreeModeChanged(enabled)
+		fade.primaryHost?.onDistractionFreeModeChanged(enabled)
 	}
 
 	private fun nativeBuildEnvConnect(callback: FADECallable): Boolean {
 		try {
-			val buildProvider = godot.primaryHost?.buildProvider
+			val buildProvider = fade.primaryHost?.buildProvider
 			val success = buildProvider?.buildEnvConnect(callback) ?: false
 			if (!success) {
-				val activity = godot.getActivity() ?: return false
-				godot.runOnHostThread {
+				val activity = fade.getActivity() ?: return false
+				fade.runOnHostThread {
 					val builder = AlertDialog.Builder(activity)
 						.setMessage(activity.getString(R.string.gabe_connection_error_message))
 						.setTitle(activity.getString(R.string.gabe_connection_error_title))
 						.setCancelable(false)
 						.setPositiveButton(activity.getString(R.string.dialog_download)) { dialog: DialogInterface, _: Int ->
-							val intent = Intent(Intent.ACTION_VIEW, "https://godotengine.org/download/android#gabe".toUri())
+							val intent = Intent(Intent.ACTION_VIEW, "https://fadeengine.org/download/android#gabe".toUri())
 							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 							activity.startActivity(intent)
 							dialog.cancel()
@@ -389,7 +389,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 
 	private fun nativeBuildEnvDisconnect() {
 		try {
-			val buildProvider = godot.primaryHost?.buildProvider
+			val buildProvider = fade.primaryHost?.buildProvider
 			buildProvider?.buildEnvDisconnect()
 		} catch (e: Exception) {
 			Log.e(TAG, "Unable to disconnect from build environment", e)
@@ -405,7 +405,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 		resultCallback: FADECallable
 	): Int {
 		try {
-			val buildProvider = godot.primaryHost?.buildProvider
+			val buildProvider = fade.primaryHost?.buildProvider
 			return buildProvider?.buildEnvExecute(
 				buildTool,
 				arguments,
@@ -422,7 +422,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 
 	private fun nativeBuildEnvCancel(jobId: Int) {
 		try {
-			val buildProvider = godot.primaryHost?.buildProvider
+			val buildProvider = fade.primaryHost?.buildProvider
 			buildProvider?.buildEnvCancel(jobId)
 		} catch (e: Exception) {
 			Log.e(TAG, "Unable to cancel command in build environment", e)
@@ -431,7 +431,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 
 	private fun nativeBuildEnvCleanProject(projectPath: String, buildDir: String, callback: FADECallable) {
 		try {
-			val buildProvider = godot.primaryHost?.buildProvider
+			val buildProvider = fade.primaryHost?.buildProvider
 			buildProvider?.buildEnvCleanProject(projectPath, buildDir, callback)
 		} catch (e: Exception) {
 			Log.e(TAG, "Unable to clean project in build environment", e)
@@ -439,7 +439,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 	}
 
 	private fun nativeIsPiPModeSupported(): Boolean {
-		val hostActivity = godot.getActivity()
+		val hostActivity = fade.getActivity()
 		if (hostActivity is PictureInPictureProvider) {
 			return hostActivity.isPiPModeSupported()
 		}
@@ -447,7 +447,7 @@ internal class FADENativeBridge(private val godot: FADE) {
 	}
 
 	private fun nativeIsInPiPMode(): Boolean {
-		val hostActivity = godot.getActivity()
+		val hostActivity = fade.getActivity()
 		if (hostActivity is FADEActivity) {
 			return hostActivity.isInPictureInPictureMode
 		}
@@ -455,27 +455,27 @@ internal class FADENativeBridge(private val godot: FADE) {
 	}
 
 	private fun nativeEnterPiPMode() {
-		val hostActivity = godot.getActivity()
+		val hostActivity = fade.getActivity()
 		if (hostActivity is PictureInPictureProvider) {
-			godot.runOnHostThread {
+			fade.runOnHostThread {
 				hostActivity.enterPiPMode()
 			}
 		}
 	}
 
 	private fun nativeSetPiPModeAspectRatio(numerator: Int, denominator: Int) {
-		val hostActivity = godot.getActivity()
+		val hostActivity = fade.getActivity()
 		if (hostActivity is FADEActivity) {
-			godot.runOnHostThread {
+			fade.runOnHostThread {
 				hostActivity.updatePiPParams(aspectRatio = Rational(numerator, denominator))
 			}
 		}
 	}
 
 	private fun nativeSetAutoEnterPiPModeOnBackground(autoEnterPiPOnBackground: Boolean) {
-		val hostActivity = godot.getActivity()
+		val hostActivity = fade.getActivity()
 		if (hostActivity is FADEActivity) {
-			godot.runOnHostThread {
+			fade.runOnHostThread {
 				hostActivity.updatePiPParams(enableAutoEnter = autoEnterPiPOnBackground)
 			}
 		}

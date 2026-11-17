@@ -2,13 +2,13 @@ blank_issues_enabled: false
 
 contact_links:
   - name: FADE proposals
-    url: https://github.com/godotengine/godot-proposals
+    url: https://github.com/fadeengine/fade-proposals
     about: Please submit feature proposals on the FADE proposals repository, not here.
 
   - name: FADE documentation repository
-    url: https://github.com/godotengine/godot-docs
+    url: https://github.com/fadeengine/fade-docs
     about: Please report issues with documentation on the FADE documentation repository, not here.
 
   - name: FADE community channels
-    url: https://godotengine.org/community
+    url: https://fadeengine.org/community
     about: Please ask for technical support on one of the other community channels, not here.

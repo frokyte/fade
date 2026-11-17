@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,24 +28,24 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.plugin
+package org.fadeengine.fade.plugin
 
 import android.content.Intent
 import android.util.Log
 import androidx.annotation.Keep
 import androidx.core.net.toUri
 
-import org.godotengine.godot.FADE
-import org.godotengine.godot.variant.Callable
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.variant.Callable
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
 
 /**
  * Built-in FADE Android plugin used to provide access to the Android runtime capabilities.
  *
- * @see <a href="https://docs.godotengine.org/en/latest/tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.html">Integrating with Android APIs</a>
+ * @see <a href="https://docs.fadeengine.org/en/latest/tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.html">Integrating with Android APIs</a>
  */
-class AndroidRuntimePlugin(godot: FADE) : FADEPlugin(godot) {
+class AndroidRuntimePlugin(fade: FADE) : FADEPlugin(fade) {
 
 	companion object {
 		private val TAG = AndroidRuntimePlugin::class.java.simpleName
@@ -75,18 +75,18 @@ class AndroidRuntimePlugin(godot: FADE) : FADEPlugin(godot) {
 		 */
 		@JvmStatic
 		@Keep
-		private fun createProxyFromFADECallable(interfaceName: String, godotCallable: Callable): Any? {
+		private fun createProxyFromFADECallable(interfaceName: String, fadeCallable: Callable): Any? {
 			return generateProxyInstance(arrayOf(interfaceName)) { proxy, method, args ->
 				when (method.name) {
 					// We automatically handle 'toString', 'equals' and 'hashCode' to simplify the task of the caller
 					// and provide consistency.
 					"toString" -> "FADE Callable Proxy for $interfaceName"
 					"equals" -> proxy === args[0]
-					"hashCode" -> godotCallable.hashCode()
+					"hashCode" -> fadeCallable.hashCode()
 
 					// Invocation for the interface single abstract method falls here and is dispatched to the
 					// FADE [Callable].
-					else -> godotCallable.call(*(args ?: emptyArray()))
+					else -> fadeCallable.call(*(args ?: emptyArray()))
 				}
 			}
 		}
@@ -96,22 +96,22 @@ class AndroidRuntimePlugin(godot: FADE) : FADEPlugin(godot) {
 		 * its ObjectID.
 		 *
 		 * The [Proxy] instance is used to implement one or multiple interfaces with the Object represented by
-		 * [godotObjectID] serving as the delegate implementation for the interface(s) overridden methods.
+		 * [fadeObjectID] serving as the delegate implementation for the interface(s) overridden methods.
 		 */
 		@JvmStatic
 		@Keep
-		private fun createProxyFromFADEObjectID(godotObjectID: Long, interfaces: Array<String>): Any? {
+		private fun createProxyFromFADEObjectID(fadeObjectID: Long, interfaces: Array<String>): Any? {
 			return generateProxyInstance(interfaces) { proxy, method, args ->
 				when (val methodName = method.name) {
 					// We automatically handle 'toString', 'equals' and 'hashCode' to simplify the task of the caller
 					// and provide consistency.
 					"toString" -> "FADE Object Proxy for ${interfaces.joinToString(",")}"
 					"equals" -> proxy === args[0]
-					"hashCode" -> godotObjectID.hashCode()
+					"hashCode" -> fadeObjectID.hashCode()
 
 					// Invocation for the remaining interface(s) methods falls here and is dispatched to the
 					// FADE Object.
-					else -> Callable.call(godotObjectID, methodName, *(args ?: emptyArray()))
+					else -> Callable.call(fadeObjectID, methodName, *(args ?: emptyArray()))
 				}
 			}
 		}
@@ -135,16 +135,16 @@ class AndroidRuntimePlugin(godot: FADE) : FADEPlugin(godot) {
 	 * Utility method used to create [Runnable] from FADE [Callable].
 	 */
 	@UsedByFADE
-	fun createRunnableFromFADECallable(godotCallable: Callable): Runnable {
-		return Runnable { godotCallable.call() }
+	fun createRunnableFromFADECallable(fadeCallable: Callable): Runnable {
+		return Runnable { fadeCallable.call() }
 	}
 
 	/**
 	 * Utility method used to create [java.util.concurrent.Callable] from FADE [Callable].
 	 */
 	@UsedByFADE
-	fun createCallableFromFADECallable(godotCallable: Callable): java.util.concurrent.Callable<Any> {
-		return java.util.concurrent.Callable { godotCallable.call() }
+	fun createCallableFromFADECallable(fadeCallable: Callable): java.util.concurrent.Callable<Any> {
+		return java.util.concurrent.Callable { fadeCallable.call() }
 	}
 
 	/**

@@ -172,8 +172,8 @@
 	</description>
 	<tutorials>
 		<link title="GDScript basics: Dictionary">$DOCS_URL/tutorials/scripting/gdscript/gdscript_basics.html#dictionary</link>
-		<link title="3D Voxel Demo">https://godotengine.org/asset-library/asset/2755</link>
-		<link title="Operating System Testing Demo">https://godotengine.org/asset-library/asset/2789</link>
+		<link title="3D Voxel Demo">https://fadeengine.org/asset-library/asset/2755</link>
+		<link title="Operating System Testing Demo">https://fadeengine.org/asset-library/asset/2789</link>
 	</tutorials>
 	<constructors>
 		<constructor name="Dictionary">

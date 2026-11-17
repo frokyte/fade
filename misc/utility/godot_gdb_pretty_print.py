@@ -1,7 +1,7 @@
 """
 Load this file to your GDB session to enable pretty-printing of some FADE C++ types.
 
-GDB command: `source misc/utility/godot_gdb_pretty_print.py`.
+GDB command: `source misc/utility/fade_gdb_pretty_print.py`.
 
 To load these automatically in Visual Studio Code, add the source command to
 the `setupCommands` of your configuration in `launch.json`:
@@ -10,7 +10,7 @@ the `setupCommands` of your configuration in `launch.json`:
 ...
     {
         "description": "Load custom pretty-printers for FADE types.",
-        "text": "source ${workspaceFolder}/misc/utility/godot_gdb_pretty_print.py"
+        "text": "source ${workspaceFolder}/misc/utility/fade_gdb_pretty_print.py"
     }
 ]
 ```

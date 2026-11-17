@@ -74,11 +74,11 @@ android {
     buildToolsVersion versions.buildTools
     ndkVersion = versions.ndkVersion
 
-    namespace = "org.godotengine.editor"
+    namespace = "org.fadeengine.editor"
 
     defaultConfig {
         // The 'applicationId' suffix allows to install FADE 3.x(v3) and 4.x(v4) on the same device
-        applicationId "org.godotengine.editor.v4"
+        applicationId "org.fadeengine.editor.v4"
         versionCode generateVersionCode()
         versionName generateVersionName()
         minSdkVersion versions.minSdk
@@ -222,13 +222,13 @@ dependencies {
     implementation "androidx.profileinstaller:profileinstaller:1.4.1"
 
     // Android XR dependencies
-    androidImplementation "org.godotengine:godot-openxr-vendors-androidxr:$versions.openxrVendorsVersion"
+    androidImplementation "org.fadeengine:fade-openxr-vendors-androidxr:$versions.openxrVendorsVersion"
     androidImplementation "androidx.xr.scenecore:scenecore:1.0.0"
 
     // Meta dependencies
-    horizonosImplementation "org.godotengine:godot-openxr-vendors-meta:$versions.openxrVendorsVersion"
+    horizonosImplementation "org.fadeengine:fade-openxr-vendors-meta:$versions.openxrVendorsVersion"
     // Pico dependencies
-    picoosImplementation "org.godotengine:godot-openxr-vendors-pico:$versions.openxrVendorsVersion"
+    picoosImplementation "org.fadeengine:fade-openxr-vendors-pico:$versions.openxrVendorsVersion"
 
     // Android instrumented test dependencies
     androidTestImplementation "androidx.test.ext:junit:$versions.junitVersion"
@@ -245,7 +245,7 @@ dependencies {
 tasks.withType( com.android.build.gradle.internal.tasks.MergeNativeLibsTask) {
     doFirst {
         externalLibNativeLibs.each { jniDir ->
-            if (jniDir.getCanonicalPath().contains("godot-openxr-") || jniDir.getCanonicalPath().contains("godotopenxr")) {
+            if (jniDir.getCanonicalPath().contains("fade-openxr-") || jniDir.getCanonicalPath().contains("fadeopenxr")) {
                 // Delete the 'libopenxr_loader.so' files from the vendors plugin so we only use the version from the
                 // openxr loader dependency.
                 File armFile = new File(jniDir, "arm64-v8a/libopenxr_loader.so")

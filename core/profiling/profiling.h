@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -60,25 +60,25 @@ const SourceLocationData *intern_source_location(const void *p_function_ptr, con
 
 // Define tracing macros.
 #define FADEProfileFrameMark FrameMark
-#define FADEProfileZone(m_zone_name) ZoneNamedN(GD_UNIQUE_NAME(__godot_tracy_szone_), m_zone_name, true)
-#define FADEProfileZoneGroupedFirst(m_group_name, m_zone_name) ZoneNamedN(__godot_tracy_zone_##m_group_name, m_zone_name, true)
-#define FADEProfileZoneGroupedEndEarly(m_group_name, m_zone_name) __godot_tracy_zone_##m_group_name.~ScopedZone();
+#define FADEProfileZone(m_zone_name) ZoneNamedN(GD_UNIQUE_NAME(__fade_tracy_szone_), m_zone_name, true)
+#define FADEProfileZoneGroupedFirst(m_group_name, m_zone_name) ZoneNamedN(__fade_tracy_zone_##m_group_name, m_zone_name, true)
+#define FADEProfileZoneGroupedEndEarly(m_group_name, m_zone_name) __fade_tracy_zone_##m_group_name.~ScopedZone();
 #ifndef TRACY_CALLSTACK
 #define FADEProfileZoneGrouped(m_group_name, m_zone_name) \
 	FADEProfileZoneGroupedEndEarly(m_group_name, m_zone_name); \
 	static constexpr tracy::SourceLocationData TracyConcat(__tracy_source_location, TracyLine){ m_zone_name, TracyFunction, TracyFile, (uint32_t)TracyLine, 0 }; \
-	new (&__godot_tracy_zone_##m_group_name) tracy::ScopedZone(&TracyConcat(__tracy_source_location, TracyLine), true)
+	new (&__fade_tracy_zone_##m_group_name) tracy::ScopedZone(&TracyConcat(__tracy_source_location, TracyLine), true)
 #else
 #define FADEProfileZoneGrouped(m_group_name, m_zone_name) \
 	FADEProfileZoneGroupedEndEarly(m_group_name, m_zone_name); \
 	static constexpr tracy::SourceLocationData TracyConcat(__tracy_source_location, TracyLine){ m_zone_name, TracyFunction, TracyFile, (uint32_t)TracyLine, 0 }; \
-	new (&__godot_tracy_zone_##m_group_name) tracy::ScopedZone(&TracyConcat(__tracy_source_location, TracyLine), TRACY_CALLSTACK, true)
+	new (&__fade_tracy_zone_##m_group_name) tracy::ScopedZone(&TracyConcat(__tracy_source_location, TracyLine), TRACY_CALLSTACK, true)
 #endif
 
 #define FADEProfileZoneScript(m_ptr, m_file, m_function, m_name, m_line) \
-	tracy::ScopedZone __godot_tracy_script(tracy::intern_source_location(m_ptr, m_file, m_function, m_name, m_line, true))
+	tracy::ScopedZone __fade_tracy_script(tracy::intern_source_location(m_ptr, m_file, m_function, m_name, m_line, true))
 #define FADEProfileZoneScriptSystemCall(m_ptr, m_file, m_function, m_name, m_line) \
-	tracy::ScopedZone __godot_tracy_zone_system_call(tracy::intern_source_location(m_ptr, m_file, m_function, m_name, m_line, false))
+	tracy::ScopedZone __fade_tracy_zone_system_call(tracy::intern_source_location(m_ptr, m_file, m_function, m_name, m_line, false))
 
 // Memory allocation
 #ifdef GODOT_PROFILER_TRACK_MEMORY
@@ -92,8 +92,8 @@ const SourceLocationData *intern_source_location(const void *p_function_ptr, con
 #define FADEProfileFree(m_ptr)
 #endif
 
-void godot_init_profiler();
-void godot_cleanup_profiler();
+void fade_init_profiler();
+void fade_cleanup_profiler();
 
 #elif defined(GODOT_USE_PERFETTO)
 // Use the perfetto profiler.
@@ -104,15 +104,15 @@ void godot_cleanup_profiler();
 #include <perfetto.h>
 
 PERFETTO_DEFINE_CATEGORIES(
-		perfetto::Category("godot")
+		perfetto::Category("fade")
 				.SetDescription("FADE Engine Events"),
-		perfetto::Category("godot_scripting")
+		perfetto::Category("fade_scripting")
 				.SetDescription("FADE Scripting Events"), );
 
 // See PERFETTO_INTERNAL_SCOPED_EVENT_FINALIZER
 struct PerfettoGroupedEventEnder {
 	_FORCE_INLINE_ void _end_now() {
-		TRACE_EVENT_END("godot");
+		TRACE_EVENT_END("fade");
 	}
 
 	_FORCE_INLINE_ ~PerfettoGroupedEventEnder() {
@@ -122,15 +122,15 @@ struct PerfettoGroupedEventEnder {
 
 #define FADEProfileFrameMark \
 	perfetto::CounterTrack __frame_time_track = perfetto::CounterTrack("Frame time", "ms").set_unit_multiplier(1000); \
-	TRACE_COUNTER("godot", __frame_time_track, Performance::get_singleton()->get_monitor(Performance::Monitor::TIME_PROCESS));
-#define FADEProfileZone(m_zone_name) TRACE_EVENT("godot", m_zone_name);
+	TRACE_COUNTER("fade", __frame_time_track, Performance::get_singleton()->get_monitor(Performance::Monitor::TIME_PROCESS));
+#define FADEProfileZone(m_zone_name) TRACE_EVENT("fade", m_zone_name);
 #define FADEProfileZoneGroupedFirst(m_group_name, m_zone_name) \
-	TRACE_EVENT_BEGIN("godot", m_zone_name); \
-	PerfettoGroupedEventEnder __godot_perfetto_zone_##m_group_name
-#define FADEProfileZoneGroupedEndEarly(m_group_name, m_zone_name) __godot_perfetto_zone_##m_group_name.~PerfettoGroupedEventEnder()
+	TRACE_EVENT_BEGIN("fade", m_zone_name); \
+	PerfettoGroupedEventEnder __fade_perfetto_zone_##m_group_name
+#define FADEProfileZoneGroupedEndEarly(m_group_name, m_zone_name) __fade_perfetto_zone_##m_group_name.~PerfettoGroupedEventEnder()
 #define FADEProfileZoneGrouped(m_group_name, m_zone_name) \
-	__godot_perfetto_zone_##m_group_name._end_now(); \
-	TRACE_EVENT_BEGIN("godot", m_zone_name);
+	__fade_perfetto_zone_##m_group_name._end_now(); \
+	TRACE_EVENT_BEGIN("fade", m_zone_name);
 
 static thread_local HashSet<StringName> __tracing_system_call;
 
@@ -146,7 +146,7 @@ struct PerfettoScriptTracer {
 
 	PerfettoScriptTracer(const StringName &p_file, const StringName &p_function, const StringName &p_name, int p_line, bool p_system_call) : name(p_name), is_system_call(p_system_call) {
 		if (is_system_call || !__tracing_system_call.erase(name)) {
-			TRACE_EVENT_BEGIN("godot_scripting", perfetto::DynamicString(p_name.string().utf8().get_data()), "source file", p_file.string().utf8().get_data(), "line number", p_line);
+			TRACE_EVENT_BEGIN("fade_scripting", perfetto::DynamicString(p_name.string().utf8().get_data()), "source file", p_file.string().utf8().get_data(), "line number", p_line);
 			tracing = true;
 		}
 
@@ -157,7 +157,7 @@ struct PerfettoScriptTracer {
 
 	_FORCE_INLINE_ void _end_now() {
 		if (tracing) {
-			TRACE_EVENT_END("godot_scripting");
+			TRACE_EVENT_END("fade_scripting");
 		}
 	}
 
@@ -169,14 +169,14 @@ struct PerfettoScriptTracer {
 	}
 };
 
-#define FADEProfileZoneScript(m_ptr, m_file, m_function, m_name, m_line) PerfettoScriptTracer __godot_perfetto_script_tracer(m_file, m_function, m_name, m_line, false);
-#define FADEProfileZoneScriptSystemCall(m_ptr, m_file, m_function, m_name, m_line) PerfettoScriptTracer __godot_perfetto_script_system_call_tracer(m_file, m_function, m_name, m_line, true);
+#define FADEProfileZoneScript(m_ptr, m_file, m_function, m_name, m_line) PerfettoScriptTracer __fade_perfetto_script_tracer(m_file, m_function, m_name, m_line, false);
+#define FADEProfileZoneScriptSystemCall(m_ptr, m_file, m_function, m_name, m_line) PerfettoScriptTracer __fade_perfetto_script_system_call_tracer(m_file, m_function, m_name, m_line, true);
 
 #define FADEProfileAlloc(m_ptr, m_size)
 #define FADEProfileFree(m_ptr)
 
-void godot_init_profiler();
-void godot_cleanup_profiler();
+void fade_init_profiler();
+void fade_cleanup_profiler();
 
 #elif defined(GODOT_USE_INSTRUMENTS)
 
@@ -231,14 +231,14 @@ public:
 #define FADEProfileAlloc(m_ptr, m_size)
 #define FADEProfileFree(m_ptr)
 
-void godot_init_profiler();
-void godot_cleanup_profiler();
+void fade_init_profiler();
+void fade_cleanup_profiler();
 
 #else
 // No profiling; all macros are stubs.
 
-void godot_init_profiler();
-void godot_cleanup_profiler();
+void fade_init_profiler();
+void fade_cleanup_profiler();
 
 // Tell the profiling backend that a new frame has started.
 #define FADEProfileFrameMark

@@ -32,7 +32,7 @@
 # Przemyslaw Gasinski <gasinski.przemek@protonmail.ch>, 2017.
 # rafeu <duchainer@gmail.com>, 2016-2017.
 # rawida <rawida@tempinbox.com>, 2018.
-# Rémi Verschelde <akien@godotengine.org>, 2016-2022.
+# Rémi Verschelde <akien@fadeengine.org>, 2016-2022.
 # Robin Arys <robinarys@hotmail.com>, 2017.
 # Roger BR <drai_kin@hotmail.com>, 2016.
 # salty64 <cedric.arrabie@univ-pau.fr>, 2018, 2020, 2021.
@@ -167,11 +167,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FADE Engine properties\n"
-"Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
+"Report-Msgid-Bugs-To: https://github.com/fadeengine/fade\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-09-29 16:51+0000\n"
 "Last-Translator: aioshiro <aioshiro57@proton.me>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/godot-engine/godot-"
+"Language-Team: French <https://hosted.weblate.org/projects/fade-engine/fade-"
 "properties/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"

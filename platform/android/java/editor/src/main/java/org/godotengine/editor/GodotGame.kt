@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,18 +28,18 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
-import org.godotengine.editor.embed.GameMenuFragment
-import org.godotengine.godot.FADELib
-import org.godotengine.godot.editor.utils.GameMenuUtils
-import org.godotengine.godot.utils.ProcessPhoenix
-import org.godotengine.godot.xr.XRMode
-import org.godotengine.openxr.vendors.utils.*
+import org.fadeengine.editor.embed.GameMenuFragment
+import org.fadeengine.fade.FADELib
+import org.fadeengine.fade.editor.utils.GameMenuUtils
+import org.fadeengine.fade.utils.ProcessPhoenix
+import org.fadeengine.fade.xr.XRMode
+import org.fadeengine.openxr.vendors.utils.*
 
 /**
  * Drives the 'run project' window of the FADE Editor.
@@ -99,7 +99,7 @@ abstract class FADEGame : BaseFADEGame() {
 		gameMenuContainer?.isVisible = !isInPictureInPictureMode
 	}
 
-	override fun getFADEAppLayout() = R.layout.godot_game_layout
+	override fun getFADEAppLayout() = R.layout.fade_game_layout
 
 	override fun getEditorGameEmbedMode() = GameMenuUtils.GameEmbedMode.DISABLED
 

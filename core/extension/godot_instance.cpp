@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_instance.cpp                                                    */
+/*  fade_instance.cpp                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "godot_instance.h"
+#include "fade_instance.h"
 
 #include "core/extension/gdextension_manager.h"
 #include "core/object/class_db.h"
@@ -57,7 +57,7 @@ bool FADEInstance::initialize(GDExtensionInitializationFunction p_init_func) {
 	print_verbose("FADE Instance initialization");
 	GDExtensionManager *gdextension_manager = GDExtensionManager::get_singleton();
 	GDExtensionPtr<const GDExtensionInitializationFunction> ptr((const GDExtensionInitializationFunction *)&p_init_func);
-	GDExtensionManager::LoadStatus status = gdextension_manager->load_extension_from_function("libgodot://main", ptr);
+	GDExtensionManager::LoadStatus status = gdextension_manager->load_extension_from_function("libfade://main", ptr);
 	return status == GDExtensionManager::LoadStatus::LOAD_STATUS_OK;
 }
 

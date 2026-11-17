@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -36,7 +36,7 @@
 template <typename T>
 class TypedArray;
 
-// See https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-propertyhint.
+// See https://docs.fadeengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-propertyhint.
 enum PropertyHint {
 	PROPERTY_HINT_NONE,
 	PROPERTY_HINT_RANGE,
@@ -87,7 +87,7 @@ enum PropertyHint {
 	PROPERTY_HINT_MAX,
 };
 
-// See https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-propertyusageflags.
+// See https://docs.fadeengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-propertyusageflags.
 enum PropertyUsageFlags {
 	PROPERTY_USAGE_NONE = 0,
 	// 1 << 0

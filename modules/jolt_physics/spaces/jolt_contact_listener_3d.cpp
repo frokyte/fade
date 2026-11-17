@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -192,7 +192,7 @@ bool JoltContactListener3D::_try_add_contacts(const JPH::Body &p_jolt_body1, con
 	const JPH::uint contact_count = p_manifold.mRelativeContactPointsOn1.size();
 
 	manifold.shape_pair = JPH::SubShapeIDPair(p_jolt_body1.GetID(), p_manifold.mSubShapeID1, p_jolt_body2.GetID(), p_manifold.mSubShapeID2);
-	manifold.normal1 = to_godot(-p_manifold.mWorldSpaceNormal);
+	manifold.normal1 = to_fade(-p_manifold.mWorldSpaceNormal);
 	manifold.depth = p_manifold.mPenetrationDepth;
 
 	JPH::CollisionEstimationResult collision;
@@ -217,11 +217,11 @@ bool JoltContactListener3D::_try_add_contacts(const JPH::Body &p_jolt_body1, con
 		const JPH::Vec3 combined_impulse = contact_impulse + friction_impulse1 + friction_impulse2;
 
 		Contact &contact = manifold.contacts[i];
-		contact.point1 = to_godot(world_point1);
-		contact.point2 = to_godot(world_point2);
-		contact.velocity1 = to_godot(velocity1);
-		contact.velocity2 = to_godot(velocity2);
-		contact.impulse1 = to_godot(-combined_impulse);
+		contact.point1 = to_fade(world_point1);
+		contact.point2 = to_fade(world_point2);
+		contact.velocity1 = to_fade(velocity1);
+		contact.velocity2 = to_fade(velocity2);
+		contact.impulse1 = to_fade(-combined_impulse);
 	}
 
 	return true;
@@ -310,8 +310,8 @@ bool JoltContactListener3D::_try_add_debug_contacts(const JPH::Body &p_body1, co
 		const JPH::RVec3 point_on_1 = p_manifold.GetWorldSpaceContactPointOn1((JPH::uint)i);
 		const JPH::RVec3 point_on_2 = p_manifold.GetWorldSpaceContactPointOn2((JPH::uint)i);
 
-		debug_contacts.write[pair_index + 0] = to_godot(point_on_1);
-		debug_contacts.write[pair_index + 1] = to_godot(point_on_2);
+		debug_contacts.write[pair_index + 0] = to_fade(point_on_1);
+		debug_contacts.write[pair_index + 1] = to_fade(point_on_2);
 	}
 
 	return true;
@@ -355,7 +355,7 @@ bool JoltContactListener3D::_try_add_debug_contacts(const JPH::Body &p_soft_body
 		const JPH::Vec3 local_contact_point = p_manifold.GetLocalContactPoint(vertex);
 		const JPH::RVec3 contact_point = body_com_transform * local_contact_point;
 
-		debug_contacts.write[contact_index++] = to_godot(contact_point);
+		debug_contacts.write[contact_index++] = to_fade(contact_point);
 	}
 
 	return true;

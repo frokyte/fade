@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot;
+package org.fadeengine.fade;
 
-import org.godotengine.godot.error.Error;
-import org.godotengine.godot.plugin.FADEPlugin;
+import org.fadeengine.fade.error.Error;
+import org.fadeengine.fade.plugin.FADEPlugin;
 
 import android.app.Activity;
 
@@ -70,11 +70,11 @@ public interface FADEHost {
 
 	/**
 	 * Invoked on the render thread to terminate the {@link FADE} engine instance with the given id.
-	 * @param godotInstanceId id of the FADE instance to terminate. See {@code onNewFADEInstanceRequested}
+	 * @param fadeInstanceId id of the FADE instance to terminate. See {@code onNewFADEInstanceRequested}
 	 *
 	 * @return true if successful, false otherwise.
 	 */
-	default boolean onFADEForceQuit(int godotInstanceId) {
+	default boolean onFADEForceQuit(int fadeInstanceId) {
 		return false;
 	}
 
@@ -142,7 +142,7 @@ public interface FADEHost {
 	/**
 	 * Returns whether the given feature tag is supported.
 	 *
-	 * @see <a href="https://docs.godotengine.org/en/stable/tutorials/export/feature_tags.html">Feature tags</a>
+	 * @see <a href="https://docs.fadeengine.org/en/stable/tutorials/export/feature_tags.html">Feature tags</a>
 	 */
 	default boolean supportsFeature(String featureTag) {
 		return false;

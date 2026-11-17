@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -1912,7 +1912,7 @@ void TextEdit::_notification(int p_what) {
 						if (points.size() >= 2) {
 							colors.append(u.color);
 							// theme_cache.base_scale is not necessary here, as font size is already dependent on editor scale.
-							// See https://github.com/godotengine/godot/pull/119588#pullrequestreview-4618459305 for more info.
+							// See https://github.com/fadeengine/fade/pull/119588#pullrequestreview-4618459305 for more info.
 							RS::get_singleton()->canvas_item_add_polyline(text_ci, points, colors, MAX(theme_cache.font->get_underline_thickness(theme_cache.font_size), 1), true);
 						}
 					}

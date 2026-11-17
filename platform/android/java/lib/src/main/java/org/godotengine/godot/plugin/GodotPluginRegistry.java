@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.plugin;
+package org.fadeengine.fade.plugin;
 
-import org.godotengine.godot.FADE;
+import org.fadeengine.fade.FADE;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -56,11 +56,11 @@ public final class FADEPluginRegistry {
 	/**
 	 * Prefix used for version 1 of the FADE plugin, mostly compatible with FADE 3.x
 	 */
-	private static final String GODOT_PLUGIN_V1_NAME_PREFIX = "org.godotengine.plugin.v1.";
+	private static final String GODOT_PLUGIN_V1_NAME_PREFIX = "org.fadeengine.plugin.v1.";
 	/**
 	 * Prefix used for version 2 of the FADE plugin, compatible with FADE 4.2+
 	 */
-	private static final String GODOT_PLUGIN_V2_NAME_PREFIX = "org.godotengine.plugin.v2.";
+	private static final String GODOT_PLUGIN_V2_NAME_PREFIX = "org.fadeengine.plugin.v2.";
 
 	private static FADEPluginRegistry instance;
 	private final ConcurrentHashMap<String, FADEPlugin> registry;
@@ -95,15 +95,15 @@ public final class FADEPluginRegistry {
 	 * A plugin manifest entry is a '<meta-data>' tag setup as described in the {@link FADEPlugin}
 	 * documentation.
 	 *
-	 * @param godot FADE instance
+	 * @param fade FADE instance
 	 * @param runtimePlugins Set of plugins provided at runtime for registration
 	 * @return A singleton instance of {@link FADEPluginRegistry}. This ensures that only one instance
 	 * of each FADE Android plugins is available at runtime.
 	 */
-	public static FADEPluginRegistry initializePluginRegistry(FADE godot, Set<FADEPlugin> runtimePlugins) {
+	public static FADEPluginRegistry initializePluginRegistry(FADE fade, Set<FADEPlugin> runtimePlugins) {
 		if (instance == null) {
 			instance = new FADEPluginRegistry();
-			instance.loadPlugins(godot, runtimePlugins);
+			instance.loadPlugins(fade, runtimePlugins);
 		}
 
 		return instance;
@@ -123,7 +123,7 @@ public final class FADEPluginRegistry {
 		return instance;
 	}
 
-	private void loadPlugins(FADE godot, Set<FADEPlugin> runtimePlugins) {
+	private void loadPlugins(FADE fade, Set<FADEPlugin> runtimePlugins) {
 		// Register the runtime plugins
 		if (runtimePlugins != null && !runtimePlugins.isEmpty()) {
 			for (FADEPlugin plugin : runtimePlugins) {
@@ -134,7 +134,7 @@ public final class FADEPluginRegistry {
 
 		// Register the manifest plugins
 		try {
-			final Context context = godot.getContext();
+			final Context context = fade.getContext();
 			ApplicationInfo appInfo = context
 											  .getPackageManager()
 											  .getApplicationInfo(context.getPackageName(),
@@ -167,7 +167,7 @@ public final class FADEPluginRegistry {
 																	 .forName(pluginHandleClassFullName);
 							Constructor<FADEPlugin> pluginConstructor = pluginClass
 																				 .getConstructor(FADE.class);
-							FADEPlugin pluginHandle = pluginConstructor.newInstance(godot);
+							FADEPlugin pluginHandle = pluginConstructor.newInstance(fade);
 
 							// Load the plugin initializer into the registry using the plugin name as key.
 							if (!pluginName.equals(pluginHandle.getPluginName())) {

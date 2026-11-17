@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -149,7 +149,7 @@ Ref<EditorDebuggerServer> EditorDebuggerServerUDS::create(const String &p_protoc
 }
 
 Error EditorDebuggerServerUDS::start(const String &p_uri) {
-	String bind_path = p_uri.is_empty() ? String("/tmp/godot_debugger.sock") : p_uri.replace("unix://", "");
+	String bind_path = p_uri.is_empty() ? String("/tmp/fade_debugger.sock") : p_uri.replace("unix://", "");
 
 	const Error err = server->listen(bind_path);
 	if (err != OK) {

@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_emscripten.js                                           */
+/*  library_fade_emscripten.js                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -32,9 +32,9 @@ const FADEEmscripten = {
 	$FADEEmscripten__deps: ['$FADERuntime'],
 	$FADEEmscripten: {},
 
-	godot_js_emscripten_get_version__proxy: 'sync',
-	godot_js_emscripten_get_version__sig: 'p',
-	godot_js_emscripten_get_version: function () {
+	fade_js_emscripten_get_version__proxy: 'sync',
+	fade_js_emscripten_get_version__sig: 'p',
+	fade_js_emscripten_get_version: function () {
 		// WARNING: The caller needs to free the string pointer.
 		const emscriptenVersionPtr = FADERuntime.allocString('{{{ EMSCRIPTEN_VERSION }}}');
 		return emscriptenVersionPtr;

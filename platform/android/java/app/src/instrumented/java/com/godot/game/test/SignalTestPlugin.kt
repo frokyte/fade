@@ -1,11 +1,11 @@
-package com.godot.game.test
+package com.fade.game.test
 
-import org.godotengine.godot.FADE
-import org.godotengine.godot.plugin.FADEPlugin
-import org.godotengine.godot.plugin.SignalInfo
-import org.godotengine.godot.plugin.UsedByFADE
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.plugin.FADEPlugin
+import org.fadeengine.fade.plugin.SignalInfo
+import org.fadeengine.fade.plugin.UsedByFADE
 
-class SignalTestPlugin(godot: FADE) : FADEPlugin(godot) {
+class SignalTestPlugin(fade: FADE) : FADEPlugin(fade) {
 
 	companion object {
 		private val EMISSION_TEST_SIGNAL = SignalInfo("emission_test_signal")

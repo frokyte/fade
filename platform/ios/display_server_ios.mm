@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -32,9 +32,9 @@
 
 #import "device_metrics.h"
 
-#import "drivers/apple_embedded/godot_app_delegate_service_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_controller.h"
+#import "drivers/apple_embedded/fade_app_delegate_service_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_controller.h"
 
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
@@ -74,7 +74,7 @@ int DisplayServerIOS::screen_get_dpi(int p_screen) const {
 	print_line(String::utf8([string UTF8String]));
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 270100
 	if (@available(iOS 27.1, *)) {
-		if (!GDTAppDelegateService.viewController.godotView.hingeClosed) {
+		if (!GDTAppDelegateService.viewController.fadeView.hingeClosed) {
 			NSDictionary *iOSModelToDPI = [GDTDeviceMetrics dpiListInternal];
 			for (NSArray *keyArray in iOSModelToDPI) {
 				if ([keyArray containsObject:string]) {

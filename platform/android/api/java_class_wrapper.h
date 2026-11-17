@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -298,8 +298,8 @@ class JavaClassWrapper : public Object {
 	jmethodID Proxy_isProxyClass;
 
 	jclass android_runtime_class;
-	jmethodID ARP_create_proxy_from_godot_callable;
-	jmethodID ARP_create_proxy_from_godot_object_id;
+	jmethodID ARP_create_proxy_from_fade_callable;
+	jmethodID ARP_create_proxy_from_fade_object_id;
 
 	bool _is_proxy_class(JNIEnv *env, jclass p_class);
 	bool _get_type_sig(JNIEnv *env, jobject obj, uint32_t &sig, String &strsig);

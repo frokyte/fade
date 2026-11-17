@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_view_wrapper.h                                             */
+/*  java_fade_view_wrapper.h                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -35,12 +35,12 @@
 #include <android/log.h>
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/FADERenderView.java callable from C++
+// Class that makes functions in java/src/org/fadeengine/fade/FADERenderView.java callable from C++
 class FADEJavaViewWrapper {
 private:
 	jclass _cls;
 
-	jobject _godot_view;
+	jobject _fade_view;
 
 	jmethodID _can_capture_pointer = nullptr;
 	jmethodID _request_pointer_capture = nullptr;
@@ -50,7 +50,7 @@ private:
 	jmethodID _set_pointer_icon = nullptr;
 
 public:
-	FADEJavaViewWrapper(jobject godot_view);
+	FADEJavaViewWrapper(jobject fade_view);
 
 	bool can_update_pointer_icon() const;
 	bool can_capture_pointer() const;

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -34,8 +34,8 @@
 #include "editor/editor_node.h"
 
 extern "C" {
-bool godot_js_editor_debugger_active();
-void godot_js_editor_debugger_cb(void (*p_callback)(int p_id));
+bool fade_js_editor_debugger_active();
+void fade_js_editor_debugger_cb(void (*p_callback)(int p_id));
 }
 
 EditorDebuggerServerMessagePort *EditorDebuggerServerMessagePort::singleton = nullptr;
@@ -57,17 +57,17 @@ String EditorDebuggerServerMessagePort::get_uri() const {
 }
 
 Error EditorDebuggerServerMessagePort::start(const String &p_uri) {
-	godot_js_editor_debugger_cb(&_add_session);
+	fade_js_editor_debugger_cb(&_add_session);
 	return OK;
 }
 
 void EditorDebuggerServerMessagePort::stop() {
-	godot_js_editor_debugger_cb(nullptr);
+	fade_js_editor_debugger_cb(nullptr);
 	pending.clear();
 }
 
 bool EditorDebuggerServerMessagePort::is_active() const {
-	return godot_js_editor_debugger_active();
+	return fade_js_editor_debugger_active();
 }
 
 bool EditorDebuggerServerMessagePort::is_connection_available() const {

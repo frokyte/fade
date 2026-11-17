@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_view_wrapper.cpp                                           */
+/*  java_fade_view_wrapper.cpp                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,19 +28,19 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "java_godot_view_wrapper.h"
+#include "java_fade_view_wrapper.h"
 
 #include "thread_jandroid.h"
 
 #include "core/string/ustring.h"
 
-FADEJavaViewWrapper::FADEJavaViewWrapper(jobject godot_view) {
+FADEJavaViewWrapper::FADEJavaViewWrapper(jobject fade_view) {
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL(env);
 
-	_godot_view = env->NewGlobalRef(godot_view);
+	_fade_view = env->NewGlobalRef(fade_view);
 
-	_cls = (jclass)env->NewGlobalRef(env->GetObjectClass(godot_view));
+	_cls = (jclass)env->NewGlobalRef(env->GetObjectClass(fade_view));
 
 	_configure_pointer_icon = env->GetMethodID(_cls, "configurePointerIcon", "(ILjava/lang/String;FF)V");
 	_set_pointer_icon = env->GetMethodID(_cls, "setPointerIcon", "(I)V");
@@ -65,7 +65,7 @@ bool FADEJavaViewWrapper::can_capture_pointer() const {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
 
-		return env->CallBooleanMethod(_godot_view, _can_capture_pointer);
+		return env->CallBooleanMethod(_fade_view, _can_capture_pointer);
 	}
 
 	return false;
@@ -76,7 +76,7 @@ void FADEJavaViewWrapper::request_pointer_capture() {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 
-		env->CallVoidMethod(_godot_view, _request_pointer_capture);
+		env->CallVoidMethod(_fade_view, _request_pointer_capture);
 	}
 }
 
@@ -85,7 +85,7 @@ void FADEJavaViewWrapper::release_pointer_capture() {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 
-		env->CallVoidMethod(_godot_view, _release_pointer_capture);
+		env->CallVoidMethod(_fade_view, _release_pointer_capture);
 	}
 }
 
@@ -95,7 +95,7 @@ void FADEJavaViewWrapper::configure_pointer_icon(int pointer_type, const String 
 		ERR_FAIL_NULL(env);
 
 		jstring jImagePath = env->NewStringUTF(image_path.utf8().get_data());
-		env->CallVoidMethod(_godot_view, _configure_pointer_icon, pointer_type, jImagePath, p_hotspot.x, p_hotspot.y);
+		env->CallVoidMethod(_fade_view, _configure_pointer_icon, pointer_type, jImagePath, p_hotspot.x, p_hotspot.y);
 		env->DeleteLocalRef(jImagePath);
 	}
 }
@@ -105,7 +105,7 @@ void FADEJavaViewWrapper::set_pointer_icon(int pointer_type) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 
-		env->CallVoidMethod(_godot_view, _set_pointer_icon, pointer_type);
+		env->CallVoidMethod(_fade_view, _set_pointer_icon, pointer_type);
 	}
 }
 
@@ -113,6 +113,6 @@ FADEJavaViewWrapper::~FADEJavaViewWrapper() {
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL(env);
 
-	env->DeleteGlobalRef(_godot_view);
+	env->DeleteGlobalRef(_fade_view);
 	env->DeleteGlobalRef(_cls);
 }

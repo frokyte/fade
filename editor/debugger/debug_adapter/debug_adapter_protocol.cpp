@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -852,7 +852,7 @@ bool DebugAdapterProtocol::process_message(const String &p_text) {
 	Dictionary params = json.get_data();
 	bool completed = true;
 
-	// While JSON does not distinguish floats and ints, "seq" is an integer by specification. See https://github.com/godotengine/godot/issues/108288
+	// While JSON does not distinguish floats and ints, "seq" is an integer by specification. See https://github.com/fadeengine/fade/issues/108288
 	if (params.has("seq")) {
 		params["seq"] = (int)params["seq"];
 	}

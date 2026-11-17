@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -142,7 +142,7 @@ void ThemeOwner::propagate_theme_changed(Node *p_to_node, Node *p_owner_node, bo
 			// Has a theme, so we don't want to change the theme owner,
 			// but we still want to propagate in case this child has theme items
 			// it inherits from the theme this node uses.
-			// See https://github.com/godotengine/godot/issues/62844.
+			// See https://github.com/fadeengine/fade/issues/62844.
 			assign = false;
 		}
 

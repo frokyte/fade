@@ -103,10 +103,10 @@ RE_CODEOWNERS = re.compile(r"^(?P<code>[^#](?:\\ |[^\s])+) +(?P<owners>(?:[^#][^
 
 # Certain areas of the engine need explicit ownership; enforce that here.
 EXPLICIT_OWNERSHIP = {
-    re.compile(r".*(?:SConstruct|SCsub|\.(?:bat|py|sh))$"): ["@godotengine/buildsystem"],
-    re.compile(r".*/doc(?:_classes)?/.*"): ["@godotengine/documentation"],
-    re.compile(r".*/tests/.*"): ["@godotengine/tests"],
-    re.compile(r"(?:(?!\bjava\b).)*/editor/.*"): ["@godotengine/editor"],
+    re.compile(r".*(?:SConstruct|SCsub|\.(?:bat|py|sh))$"): ["@fadeengine/buildsystem"],
+    re.compile(r".*/doc(?:_classes)?/.*"): ["@fadeengine/documentation"],
+    re.compile(r".*/tests/.*"): ["@fadeengine/tests"],
+    re.compile(r"(?:(?!\bjava\b).)*/editor/.*"): ["@fadeengine/editor"],
 }
 
 

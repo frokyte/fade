@@ -3,7 +3,7 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
+/*                      https://fadeengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur.                 */
 /* Copyright (c) 2014-2022 FADE Engine contributors (cf. AUTHORS.md).   */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 import android.util.Log
-import org.godotengine.godot.FADELib
+import org.fadeengine.fade.FADELib
 
 /**
  * Provide support for running spatial container apps / games from the editor window.

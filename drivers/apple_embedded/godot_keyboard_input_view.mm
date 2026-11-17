@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_keyboard_input_view.mm                                          */
+/*  fade_keyboard_input_view.mm                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_keyboard_input_view.h"
+#import "fade_keyboard_input_view.h"
 
 #include "core/os/keyboard.h"
 #import "drivers/apple_embedded/display_server_apple_embedded.h"
@@ -47,7 +47,7 @@
 	self = [super initWithCoder:coder];
 
 	if (self) {
-		[self godot_commonInit];
+		[self fade_commonInit];
 	}
 
 	return self;
@@ -57,13 +57,13 @@
 	self = [super initWithFrame:frame textContainer:textContainer];
 
 	if (self) {
-		[self godot_commonInit];
+		[self fade_commonInit];
 	}
 
 	return self;
 }
 
-- (void)godot_commonInit {
+- (void)fade_commonInit {
 	self.hidden = YES;
 	self.delegate = self;
 

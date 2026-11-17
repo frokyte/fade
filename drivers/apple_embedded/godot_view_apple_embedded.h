@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_view_apple_embedded.h                                           */
+/*  fade_view_apple_embedded.h                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -40,7 +40,7 @@ class String;
 
 @protocol GDTViewDelegate
 
-- (BOOL)godotViewFinishedSetup:(GDTView *)view;
+- (BOOL)fadeViewFinishedSetup:(GDTView *)view;
 
 @end
 
@@ -59,7 +59,7 @@ class String;
 @property(assign, nonatomic) float preferredFrameRate;
 
 // Can be extended by subclasses
-- (void)godot_commonInit;
+- (void)fade_commonInit;
 
 // Implemented in subclasses
 - (CALayer<GDTDisplayLayer> *)initializeRenderingForDriver:(NSString *)driverName;

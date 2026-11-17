@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,12 +28,12 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot;
+package org.fadeengine.fade;
 
-import org.godotengine.godot.FADELib;
-import org.godotengine.godot.input.FADEInputHandler;
-import org.godotengine.godot.vulkan.VkRenderer;
-import org.godotengine.godot.vulkan.VkSurfaceView;
+import org.fadeengine.fade.FADELib;
+import org.fadeengine.fade.input.FADEInputHandler;
+import org.fadeengine.fade.vulkan.VkRenderer;
+import org.fadeengine.fade.vulkan.VkSurfaceView;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
@@ -56,7 +56,7 @@ import androidx.annotation.Keep;
 import java.io.InputStream;
 
 class FADEVulkanRenderView extends VkSurfaceView implements FADERenderView {
-	private final FADE godot;
+	private final FADE fade;
 	private final FADEInputHandler mInputHandler;
 	private final VkRenderer mRenderer;
 	private final SparseArray<PointerIcon> customPointerIcons = new SparseArray<>();
@@ -64,8 +64,8 @@ class FADEVulkanRenderView extends VkSurfaceView implements FADERenderView {
 	private final AccessibilityNodeProvider accessibilityNodeProvider;
 	private final long mWindowID = 0; // DisplayServerEnums::MAIN_WINDOW_ID
 
-	public FADEVulkanRenderView(FADE godot, FADEInputHandler inputHandler, boolean shouldBeTranslucent) {
-		super(godot.getContext());
+	public FADEVulkanRenderView(FADE fade, FADEInputHandler inputHandler, boolean shouldBeTranslucent) {
+		super(fade.getContext());
 		if (FADELib.createAccessKitAdapter(mWindowID)) {
 			accessibilityNodeProvider = new AccessibilityNodeProvider() {
 				@Override
@@ -85,7 +85,7 @@ class FADEVulkanRenderView extends VkSurfaceView implements FADERenderView {
 		} else {
 			accessibilityNodeProvider = null;
 		}
-		this.godot = godot;
+		this.fade = fade;
 		mInputHandler = inputHandler;
 		mRenderer = new VkRenderer();
 		setPointerIcon(PointerIcon.getSystemIcon(getContext(), PointerIcon.TYPE_DEFAULT));
@@ -206,7 +206,7 @@ class FADEVulkanRenderView extends VkSurfaceView implements FADERenderView {
 	@Override
 	public boolean canCapturePointer() {
 		// Pointer capture is not supported on XR devices.
-		return !godot.isXrRuntime() && mInputHandler.canCapturePointer();
+		return !fade.isXrRuntime() && mInputHandler.canCapturePointer();
 	}
 	@Override
 	public void requestPointerCapture() {
@@ -239,10 +239,10 @@ class FADEVulkanRenderView extends VkSurfaceView implements FADERenderView {
 		try {
 			Bitmap bitmap = null;
 			if (!TextUtils.isEmpty(imagePath)) {
-				if (godot.getDirectoryAccessHandler().filesystemFileExists(imagePath)) {
+				if (fade.getDirectoryAccessHandler().filesystemFileExists(imagePath)) {
 					// Try to load the bitmap from the file system
 					bitmap = BitmapFactory.decodeFile(imagePath);
-				} else if (godot.getDirectoryAccessHandler().assetsFileExists(imagePath)) {
+				} else if (fade.getDirectoryAccessHandler().assetsFileExists(imagePath)) {
 					// Try to load the bitmap from the assets directory
 					AssetManager am = getContext().getAssets();
 					InputStream imageInputStream = am.open(imagePath);

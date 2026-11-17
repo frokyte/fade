@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -482,9 +482,9 @@ void _load_text_editor_theme() {
 void EditorThemeManager::_populate_text_editor_styles(const Ref<EditorTheme> &p_theme, ThemeConfiguration &p_config) {
 	const String text_editor_color_theme = EDITOR_GET("text_editor/theme/color_theme");
 	const bool is_default_theme = text_editor_color_theme == "Default";
-	const bool is_godot2_theme = text_editor_color_theme == "FADE 2";
+	const bool is_fade2_theme = text_editor_color_theme == "FADE 2";
 	const bool is_custom_theme = text_editor_color_theme == "Custom";
-	if (is_default_theme || is_godot2_theme || is_custom_theme) {
+	if (is_default_theme || is_fade2_theme || is_custom_theme) {
 		HashMap<StringName, Color> colors;
 		if (is_default_theme || is_custom_theme) {
 			// Adaptive colors for comments and elements with lower relevance.
@@ -564,13 +564,13 @@ void EditorThemeManager::_populate_text_editor_styles(const Ref<EditorTheme> &p_
 				colors["text_editor/theme/highlighting/comment_markers/warning_color"] = Color(0.75, 0.39, 0.03);
 				colors["text_editor/theme/highlighting/comment_markers/notice_color"] = Color(0.24, 0.54, 0.09);
 			}
-		} else if (is_godot2_theme) {
-			colors = EditorSettings::get_godot2_text_editor_theme();
+		} else if (is_fade2_theme) {
+			colors = EditorSettings::get_fade2_text_editor_theme();
 		}
 		EditorSettings *settings = EditorSettings::get_singleton();
 		for (const KeyValue<StringName, Color> &setting : colors) {
 			settings->set_initial_value(setting.key, setting.value);
-			if (is_default_theme || is_godot2_theme) {
+			if (is_default_theme || is_fade2_theme) {
 				settings->set_manually(setting.key, setting.value);
 			}
 		}

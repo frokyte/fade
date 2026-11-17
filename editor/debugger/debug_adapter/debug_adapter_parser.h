@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -82,7 +82,7 @@ public:
 	Dictionary req_next(const Dictionary &p_params) const;
 	Dictionary req_stepIn(const Dictionary &p_params) const;
 	Dictionary req_evaluate(const Dictionary &p_params) const;
-	Dictionary req_godot_put_msg(const Dictionary &p_params) const;
+	Dictionary req_fade_put_msg(const Dictionary &p_params) const;
 
 	// Internal requests
 	Vector<String> _extract_play_arguments(const Dictionary &p_args) const;

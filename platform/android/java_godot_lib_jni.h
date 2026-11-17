@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_lib_jni.h                                                  */
+/*  java_fade_lib_jni.h                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -34,56 +34,56 @@
 #include <jni.h>
 
 // These functions can be called from within JAVA and are the means by which our JAVA implementation calls back into our C++ code.
-// See java/src/org/godotengine/godot/FADELib.java for the JAVA side of this (yes that's why we have the long names)
+// See java/src/org/fadeengine/fade/FADELib.java for the JAVA side of this (yes that's why we have the long names)
 extern "C" {
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_initialize(JNIEnv *env, jclass clazz, jobject p_godot_native_bridge, jobject p_asset_manager, jobject p_godot_io, jobject p_net_utils, jobject p_directory_access_handler, jobject p_file_access_handler, jboolean p_use_apk_expansion);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_ondestroy(JNIEnv *env, jclass clazz);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_setup(JNIEnv *env, jclass clazz, jobjectArray p_cmdline, jobject p_godot_tts);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_resize(JNIEnv *env, jclass clazz, jobject p_surface, jint p_width, jint p_height);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_newcontext(JNIEnv *env, jclass clazz, jobject p_surface);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_step(JNIEnv *env, jclass clazz);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_ttsCallback(JNIEnv *env, jclass clazz, jint event, jlong id, jint pos);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_createAccessKitAdapter(JNIEnv *env, jclass clazz, jlong p_window_id);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_freeAccessKitAdapter(JNIEnv *env, jclass clazz, jlong p_window_id);
-JNIEXPORT jobject JNICALL Java_org_godotengine_godot_FADELib_createAccessibilityNodeInfo(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_virtual_view_id);
-JNIEXPORT jobject JNICALL Java_org_godotengine_godot_FADELib_findAccessibilityFocus(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_focus_type);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_performAccessibilityAction(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_virtual_view_id, jint p_action, jobject p_arguments);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_onAccessibilityHoverEvent(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_action, jfloat p_x, jfloat p_y);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_back(JNIEnv *env, jclass clazz);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_dispatchMouseEvent(JNIEnv *env, jclass clazz, jint p_event_type, jint p_button_mask, jfloat p_x, jfloat p_y, jfloat p_delta_x, jfloat p_delta_y, jboolean p_double_click, jboolean p_source_mouse_relative, jfloat p_pressure, jfloat p_tilt_x, jfloat p_tilt_y, jboolean p_emulated);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_dispatchTouchEvent(JNIEnv *env, jclass clazz, jint ev, jint pointer, jint pointer_count, jfloatArray positions, jboolean p_double_tap, jboolean p_long_press);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_magnify(JNIEnv *env, jclass clazz, jfloat p_x, jfloat p_y, jfloat p_factor);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_pan(JNIEnv *env, jclass clazz, jfloat p_x, jfloat p_y, jfloat p_delta_x, jfloat p_delta_y);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_key(JNIEnv *env, jclass clazz, jint p_physical_keycode, jint p_unicode, jint p_key_label, jboolean p_pressed, jboolean p_echo);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_joybutton(JNIEnv *env, jclass clazz, jint p_device, jint p_button, jboolean p_pressed);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_joyaxis(JNIEnv *env, jclass clazz, jint p_device, jint p_axis, jfloat p_value);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_joyhat(JNIEnv *env, jclass clazz, jint p_device, jint p_hat_x, jint p_hat_y);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_joyconnectionchanged(JNIEnv *env, jclass clazz, jint p_device, jboolean p_connected, jstring p_name);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_accelerometer(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_gravity(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_magnetometer(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_gyroscope(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_deviceOrientation(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z, jfloat w);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_focusin(JNIEnv *env, jclass clazz);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_focusout(JNIEnv *env, jclass clazz);
-JNIEXPORT jstring JNICALL Java_org_godotengine_godot_FADELib_getGlobal(JNIEnv *env, jclass clazz, jstring path);
-JNIEXPORT jobjectArray JNICALL Java_org_godotengine_godot_FADELib_getRendererInfo(JNIEnv *env, jclass clazz, jboolean p_vulkan_requirements_met);
-JNIEXPORT jstring JNICALL Java_org_godotengine_godot_FADELib_getEditorSetting(JNIEnv *env, jclass clazz, jstring p_setting_key);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_setEditorSetting(JNIEnv *env, jclass clazz, jstring p_key, jobject p_data);
-JNIEXPORT jobject JNICALL Java_org_godotengine_godot_FADELib_getEditorProjectMetadata(JNIEnv *env, jclass clazz, jstring p_section, jstring p_key, jobject p_default_value);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_setEditorProjectMetadata(JNIEnv *env, jclass clazz, jstring p_section, jstring p_key, jobject p_data);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_setVirtualKeyboardHeight(JNIEnv *env, jclass clazz, jint p_height);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_requestPermissionResult(JNIEnv *env, jclass clazz, jstring p_permission, jboolean p_result);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_onNightModeChanged(JNIEnv *env, jclass clazz);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_hardwareKeyboardConnected(JNIEnv *env, jclass clazz, jboolean p_connected);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_filePickerCallback(JNIEnv *env, jclass clazz, jboolean p_ok, jobjectArray p_selected_paths);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_onRendererResumed(JNIEnv *env, jclass clazz);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_onRendererPaused(JNIEnv *env, jclass clazz);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_onOrientationChange(JNIEnv *env, jclass clazz, jint p_orientation);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_shouldDispatchInputToRenderThread(JNIEnv *env, jclass clazz);
-JNIEXPORT jstring JNICALL Java_org_godotengine_godot_FADELib_getProjectResourceDir(JNIEnv *env, jclass clazz);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_isEditorHint(JNIEnv *env, jclass clazz);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_isProjectManagerHint(JNIEnv *env, jclass clazz);
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_FADELib_hasFeature(JNIEnv *env, jclass clazz, jstring p_feature);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_FADELib_onPictureInPictureModeChanged(JNIEnv *env, jclass clazz, jboolean p_is_in_picture_in_picture_mode);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_initialize(JNIEnv *env, jclass clazz, jobject p_fade_native_bridge, jobject p_asset_manager, jobject p_fade_io, jobject p_net_utils, jobject p_directory_access_handler, jobject p_file_access_handler, jboolean p_use_apk_expansion);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_ondestroy(JNIEnv *env, jclass clazz);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_setup(JNIEnv *env, jclass clazz, jobjectArray p_cmdline, jobject p_fade_tts);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_resize(JNIEnv *env, jclass clazz, jobject p_surface, jint p_width, jint p_height);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_newcontext(JNIEnv *env, jclass clazz, jobject p_surface);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_step(JNIEnv *env, jclass clazz);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_ttsCallback(JNIEnv *env, jclass clazz, jint event, jlong id, jint pos);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_createAccessKitAdapter(JNIEnv *env, jclass clazz, jlong p_window_id);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_freeAccessKitAdapter(JNIEnv *env, jclass clazz, jlong p_window_id);
+JNIEXPORT jobject JNICALL Java_org_fadeengine_fade_FADELib_createAccessibilityNodeInfo(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_virtual_view_id);
+JNIEXPORT jobject JNICALL Java_org_fadeengine_fade_FADELib_findAccessibilityFocus(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_focus_type);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_performAccessibilityAction(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_virtual_view_id, jint p_action, jobject p_arguments);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_onAccessibilityHoverEvent(JNIEnv *env, jclass clazz, jlong p_window_id, jobject p_host, jint p_action, jfloat p_x, jfloat p_y);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_back(JNIEnv *env, jclass clazz);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_dispatchMouseEvent(JNIEnv *env, jclass clazz, jint p_event_type, jint p_button_mask, jfloat p_x, jfloat p_y, jfloat p_delta_x, jfloat p_delta_y, jboolean p_double_click, jboolean p_source_mouse_relative, jfloat p_pressure, jfloat p_tilt_x, jfloat p_tilt_y, jboolean p_emulated);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_dispatchTouchEvent(JNIEnv *env, jclass clazz, jint ev, jint pointer, jint pointer_count, jfloatArray positions, jboolean p_double_tap, jboolean p_long_press);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_magnify(JNIEnv *env, jclass clazz, jfloat p_x, jfloat p_y, jfloat p_factor);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_pan(JNIEnv *env, jclass clazz, jfloat p_x, jfloat p_y, jfloat p_delta_x, jfloat p_delta_y);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_key(JNIEnv *env, jclass clazz, jint p_physical_keycode, jint p_unicode, jint p_key_label, jboolean p_pressed, jboolean p_echo);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_joybutton(JNIEnv *env, jclass clazz, jint p_device, jint p_button, jboolean p_pressed);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_joyaxis(JNIEnv *env, jclass clazz, jint p_device, jint p_axis, jfloat p_value);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_joyhat(JNIEnv *env, jclass clazz, jint p_device, jint p_hat_x, jint p_hat_y);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_joyconnectionchanged(JNIEnv *env, jclass clazz, jint p_device, jboolean p_connected, jstring p_name);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_accelerometer(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_gravity(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_magnetometer(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_gyroscope(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_deviceOrientation(JNIEnv *env, jclass clazz, jfloat x, jfloat y, jfloat z, jfloat w);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_focusin(JNIEnv *env, jclass clazz);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_focusout(JNIEnv *env, jclass clazz);
+JNIEXPORT jstring JNICALL Java_org_fadeengine_fade_FADELib_getGlobal(JNIEnv *env, jclass clazz, jstring path);
+JNIEXPORT jobjectArray JNICALL Java_org_fadeengine_fade_FADELib_getRendererInfo(JNIEnv *env, jclass clazz, jboolean p_vulkan_requirements_met);
+JNIEXPORT jstring JNICALL Java_org_fadeengine_fade_FADELib_getEditorSetting(JNIEnv *env, jclass clazz, jstring p_setting_key);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_setEditorSetting(JNIEnv *env, jclass clazz, jstring p_key, jobject p_data);
+JNIEXPORT jobject JNICALL Java_org_fadeengine_fade_FADELib_getEditorProjectMetadata(JNIEnv *env, jclass clazz, jstring p_section, jstring p_key, jobject p_default_value);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_setEditorProjectMetadata(JNIEnv *env, jclass clazz, jstring p_section, jstring p_key, jobject p_data);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_setVirtualKeyboardHeight(JNIEnv *env, jclass clazz, jint p_height);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_requestPermissionResult(JNIEnv *env, jclass clazz, jstring p_permission, jboolean p_result);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_onNightModeChanged(JNIEnv *env, jclass clazz);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_hardwareKeyboardConnected(JNIEnv *env, jclass clazz, jboolean p_connected);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_filePickerCallback(JNIEnv *env, jclass clazz, jboolean p_ok, jobjectArray p_selected_paths);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_onRendererResumed(JNIEnv *env, jclass clazz);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_onRendererPaused(JNIEnv *env, jclass clazz);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_onOrientationChange(JNIEnv *env, jclass clazz, jint p_orientation);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_shouldDispatchInputToRenderThread(JNIEnv *env, jclass clazz);
+JNIEXPORT jstring JNICALL Java_org_fadeengine_fade_FADELib_getProjectResourceDir(JNIEnv *env, jclass clazz);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_isEditorHint(JNIEnv *env, jclass clazz);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_isProjectManagerHint(JNIEnv *env, jclass clazz);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_FADELib_hasFeature(JNIEnv *env, jclass clazz, jstring p_feature);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_FADELib_onPictureInPictureModeChanged(JNIEnv *env, jclass clazz, jboolean p_is_in_picture_in_picture_mode);
 }

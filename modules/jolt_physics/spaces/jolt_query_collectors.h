@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -275,7 +275,7 @@ public:
 		// this results in a problematic amount of ghost collisions with `move_and_slide`, for
 		// reasons that are still unclear as of writing this.
 		if (distance_sq > 0) {
-			const Vector3 normal = to_godot(-p_hit.mPenetrationAxis.Normalized());
+			const Vector3 normal = to_fade(-p_hit.mPenetrationAxis.Normalized());
 			if (direction.dot(normal) >= -CMP_EPSILON) {
 				return;
 			}

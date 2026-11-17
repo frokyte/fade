@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_display.js                                              */
+/*  library_fade_display.js                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -356,9 +356,9 @@ const FADEDisplay = {
 		},
 	},
 
-	godot_js_display_is_swap_ok_cancel__proxy: 'sync',
-	godot_js_display_is_swap_ok_cancel__sig: 'i',
-	godot_js_display_is_swap_ok_cancel: function () {
+	fade_js_display_is_swap_ok_cancel__proxy: 'sync',
+	fade_js_display_is_swap_ok_cancel__sig: 'i',
+	fade_js_display_is_swap_ok_cancel: function () {
 		const win = (['Windows', 'Win64', 'Win32', 'WinCE']);
 		const plat = navigator.platform || '';
 		if (win.indexOf(plat) !== -1) {
@@ -367,21 +367,21 @@ const FADEDisplay = {
 		return 0;
 	},
 
-	godot_js_tts_is_speaking__proxy: 'sync',
-	godot_js_tts_is_speaking__sig: 'i',
-	godot_js_tts_is_speaking: function () {
+	fade_js_tts_is_speaking__proxy: 'sync',
+	fade_js_tts_is_speaking__sig: 'i',
+	fade_js_tts_is_speaking: function () {
 		return window.speechSynthesis.speaking;
 	},
 
-	godot_js_tts_is_paused__proxy: 'sync',
-	godot_js_tts_is_paused__sig: 'i',
-	godot_js_tts_is_paused: function () {
+	fade_js_tts_is_paused__proxy: 'sync',
+	fade_js_tts_is_paused__sig: 'i',
+	fade_js_tts_is_paused: function () {
 		return window.speechSynthesis.paused;
 	},
 
-	godot_js_tts_get_voices__proxy: 'sync',
-	godot_js_tts_get_voices__sig: 'vi',
-	godot_js_tts_get_voices: function (p_callback) {
+	fade_js_tts_get_voices__proxy: 'sync',
+	fade_js_tts_get_voices__sig: 'vi',
+	fade_js_tts_get_voices: function (p_callback) {
 		const func = FADERuntime.get_func(p_callback);
 		try {
 			const arr = [];
@@ -397,9 +397,9 @@ const FADEDisplay = {
 		}
 	},
 
-	godot_js_tts_speak__proxy: 'sync',
-	godot_js_tts_speak__sig: 'viiiffii',
-	godot_js_tts_speak: function (p_text, p_voice, p_volume, p_pitch, p_rate, p_utterance_id, p_callback) {
+	fade_js_tts_speak__proxy: 'sync',
+	fade_js_tts_speak__sig: 'viiiffii',
+	fade_js_tts_speak: function (p_text, p_voice, p_volume, p_pitch, p_rate, p_utterance_id, p_callback) {
 		const func = FADERuntime.get_func(p_callback);
 
 		function listener_end(evt) {
@@ -440,65 +440,65 @@ const FADEDisplay = {
 		window.speechSynthesis.speak(utterance);
 	},
 
-	godot_js_tts_pause__proxy: 'sync',
-	godot_js_tts_pause__sig: 'v',
-	godot_js_tts_pause: function () {
+	fade_js_tts_pause__proxy: 'sync',
+	fade_js_tts_pause__sig: 'v',
+	fade_js_tts_pause: function () {
 		window.speechSynthesis.pause();
 	},
 
-	godot_js_tts_resume__proxy: 'sync',
-	godot_js_tts_resume__sig: 'v',
-	godot_js_tts_resume: function () {
+	fade_js_tts_resume__proxy: 'sync',
+	fade_js_tts_resume__sig: 'v',
+	fade_js_tts_resume: function () {
 		window.speechSynthesis.resume();
 	},
 
-	godot_js_tts_stop__proxy: 'sync',
-	godot_js_tts_stop__sig: 'v',
-	godot_js_tts_stop: function () {
+	fade_js_tts_stop__proxy: 'sync',
+	fade_js_tts_stop__sig: 'v',
+	fade_js_tts_stop: function () {
 		window.speechSynthesis.cancel();
 		window.speechSynthesis.resume();
 	},
 
-	godot_js_display_alert__proxy: 'sync',
-	godot_js_display_alert__sig: 'vi',
-	godot_js_display_alert: function (p_text) {
+	fade_js_display_alert__proxy: 'sync',
+	fade_js_display_alert__sig: 'vi',
+	fade_js_display_alert: function (p_text) {
 		window.alert(FADERuntime.parseString(p_text)); // eslint-disable-line no-alert
 	},
 
-	godot_js_display_screen_dpi_get__proxy: 'sync',
-	godot_js_display_screen_dpi_get__sig: 'i',
-	godot_js_display_screen_dpi_get: function () {
+	fade_js_display_screen_dpi_get__proxy: 'sync',
+	fade_js_display_screen_dpi_get__sig: 'i',
+	fade_js_display_screen_dpi_get: function () {
 		return FADEDisplay.getDPI();
 	},
 
-	godot_js_display_pixel_ratio_get__proxy: 'sync',
-	godot_js_display_pixel_ratio_get__sig: 'f',
-	godot_js_display_pixel_ratio_get: function () {
+	fade_js_display_pixel_ratio_get__proxy: 'sync',
+	fade_js_display_pixel_ratio_get__sig: 'f',
+	fade_js_display_pixel_ratio_get: function () {
 		return FADEDisplayScreen.getPixelRatio();
 	},
 
-	godot_js_display_fullscreen_request__proxy: 'sync',
-	godot_js_display_fullscreen_request__sig: 'i',
-	godot_js_display_fullscreen_request: function () {
+	fade_js_display_fullscreen_request__proxy: 'sync',
+	fade_js_display_fullscreen_request__sig: 'i',
+	fade_js_display_fullscreen_request: function () {
 		return FADEDisplayScreen.requestFullscreen();
 	},
 
-	godot_js_display_fullscreen_exit__proxy: 'sync',
-	godot_js_display_fullscreen_exit__sig: 'i',
-	godot_js_display_fullscreen_exit: function () {
+	fade_js_display_fullscreen_exit__proxy: 'sync',
+	fade_js_display_fullscreen_exit__sig: 'i',
+	fade_js_display_fullscreen_exit: function () {
 		return FADEDisplayScreen.exitFullscreen();
 	},
 
-	godot_js_display_desired_size_set__proxy: 'sync',
-	godot_js_display_desired_size_set__sig: 'vii',
-	godot_js_display_desired_size_set: function (width, height) {
+	fade_js_display_desired_size_set__proxy: 'sync',
+	fade_js_display_desired_size_set__sig: 'vii',
+	fade_js_display_desired_size_set: function (width, height) {
 		FADEDisplayScreen.desired_size = [width, height];
 		FADEDisplayScreen.updateSize();
 	},
 
-	godot_js_display_size_update__proxy: 'sync',
-	godot_js_display_size_update__sig: 'i',
-	godot_js_display_size_update: function () {
+	fade_js_display_size_update__proxy: 'sync',
+	fade_js_display_size_update__sig: 'i',
+	fade_js_display_size_update: function () {
 		const updated = FADEDisplayScreen.updateSize();
 		if (updated) {
 			FADEDisplayVK.updateSize();
@@ -506,24 +506,24 @@ const FADEDisplay = {
 		return updated;
 	},
 
-	godot_js_display_screen_size_get__proxy: 'sync',
-	godot_js_display_screen_size_get__sig: 'vii',
-	godot_js_display_screen_size_get: function (width, height) {
+	fade_js_display_screen_size_get__proxy: 'sync',
+	fade_js_display_screen_size_get__sig: 'vii',
+	fade_js_display_screen_size_get: function (width, height) {
 		const scale = FADEDisplayScreen.getPixelRatio();
 		FADERuntime.setHeapValue(width, window.screen.width * scale, 'i32');
 		FADERuntime.setHeapValue(height, window.screen.height * scale, 'i32');
 	},
 
-	godot_js_display_window_size_get__proxy: 'sync',
-	godot_js_display_window_size_get__sig: 'vii',
-	godot_js_display_window_size_get: function (p_width, p_height) {
+	fade_js_display_window_size_get__proxy: 'sync',
+	fade_js_display_window_size_get__sig: 'vii',
+	fade_js_display_window_size_get: function (p_width, p_height) {
 		FADERuntime.setHeapValue(p_width, FADEConfig.canvas.width, 'i32');
 		FADERuntime.setHeapValue(p_height, FADEConfig.canvas.height, 'i32');
 	},
 
-	godot_js_display_has_webgl__proxy: 'sync',
-	godot_js_display_has_webgl__sig: 'ii',
-	godot_js_display_has_webgl: function (p_version) {
+	fade_js_display_has_webgl__proxy: 'sync',
+	fade_js_display_has_webgl__sig: 'ii',
+	fade_js_display_has_webgl: function (p_version) {
 		if (p_version !== 1 && p_version !== 2) {
 			return false;
 		}
@@ -536,33 +536,33 @@ const FADEDisplay = {
 	/*
 	 * Canvas
 	 */
-	godot_js_display_canvas_focus__proxy: 'sync',
-	godot_js_display_canvas_focus__sig: 'v',
-	godot_js_display_canvas_focus: function () {
+	fade_js_display_canvas_focus__proxy: 'sync',
+	fade_js_display_canvas_focus__sig: 'v',
+	fade_js_display_canvas_focus: function () {
 		FADEConfig.canvas.focus();
 	},
 
-	godot_js_display_canvas_is_focused__proxy: 'sync',
-	godot_js_display_canvas_is_focused__sig: 'i',
-	godot_js_display_canvas_is_focused: function () {
+	fade_js_display_canvas_is_focused__proxy: 'sync',
+	fade_js_display_canvas_is_focused__sig: 'i',
+	fade_js_display_canvas_is_focused: function () {
 		return document.activeElement === FADEConfig.canvas;
 	},
 
 	/*
 	 * Touchscreen
 	 */
-	godot_js_display_touchscreen_is_available__proxy: 'sync',
-	godot_js_display_touchscreen_is_available__sig: 'i',
-	godot_js_display_touchscreen_is_available: function () {
+	fade_js_display_touchscreen_is_available__proxy: 'sync',
+	fade_js_display_touchscreen_is_available__sig: 'i',
+	fade_js_display_touchscreen_is_available: function () {
 		return 'ontouchstart' in window;
 	},
 
 	/*
 	 * Clipboard
 	 */
-	godot_js_display_clipboard_set__proxy: 'sync',
-	godot_js_display_clipboard_set__sig: 'ii',
-	godot_js_display_clipboard_set: function (p_text) {
+	fade_js_display_clipboard_set__proxy: 'sync',
+	fade_js_display_clipboard_set__sig: 'ii',
+	fade_js_display_clipboard_set: function (p_text) {
 		const text = FADERuntime.parseString(p_text);
 		if (!navigator.clipboard || !navigator.clipboard.writeText) {
 			return 1;
@@ -574,9 +574,9 @@ const FADEDisplay = {
 		return 0;
 	},
 
-	godot_js_display_clipboard_get__proxy: 'sync',
-	godot_js_display_clipboard_get__sig: 'ii',
-	godot_js_display_clipboard_get: function (callback) {
+	fade_js_display_clipboard_get__proxy: 'sync',
+	fade_js_display_clipboard_get__sig: 'ii',
+	fade_js_display_clipboard_get: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		try {
 			navigator.clipboard.readText().then(function (result) {
@@ -594,15 +594,15 @@ const FADEDisplay = {
 	/*
 	 * Window
 	 */
-	godot_js_display_window_title_set__proxy: 'sync',
-	godot_js_display_window_title_set__sig: 'vi',
-	godot_js_display_window_title_set: function (p_data) {
+	fade_js_display_window_title_set__proxy: 'sync',
+	fade_js_display_window_title_set__sig: 'vi',
+	fade_js_display_window_title_set: function (p_data) {
 		document.title = FADERuntime.parseString(p_data);
 	},
 
-	godot_js_display_window_icon_set__proxy: 'sync',
-	godot_js_display_window_icon_set__sig: 'vii',
-	godot_js_display_window_icon_set: function (p_ptr, p_len) {
+	fade_js_display_window_icon_set__proxy: 'sync',
+	fade_js_display_window_icon_set__sig: 'vii',
+	fade_js_display_window_icon_set: function (p_ptr, p_len) {
 		let link = document.getElementById('-gd-engine-icon');
 		const old_icon = FADEDisplay.window_icon;
 		if (p_ptr) {
@@ -629,9 +629,9 @@ const FADEDisplay = {
 	/*
 	 * Cursor
 	 */
-	godot_js_display_cursor_set_visible__proxy: 'sync',
-	godot_js_display_cursor_set_visible__sig: 'vi',
-	godot_js_display_cursor_set_visible: function (p_visible) {
+	fade_js_display_cursor_set_visible__proxy: 'sync',
+	fade_js_display_cursor_set_visible__sig: 'vi',
+	fade_js_display_cursor_set_visible: function (p_visible) {
 		const visible = p_visible !== 0;
 		if (visible === FADEDisplayCursor.visible) {
 			return;
@@ -644,21 +644,21 @@ const FADEDisplay = {
 		}
 	},
 
-	godot_js_display_cursor_is_hidden__proxy: 'sync',
-	godot_js_display_cursor_is_hidden__sig: 'i',
-	godot_js_display_cursor_is_hidden: function () {
+	fade_js_display_cursor_is_hidden__proxy: 'sync',
+	fade_js_display_cursor_is_hidden__sig: 'i',
+	fade_js_display_cursor_is_hidden: function () {
 		return !FADEDisplayCursor.visible;
 	},
 
-	godot_js_display_cursor_set_shape__proxy: 'sync',
-	godot_js_display_cursor_set_shape__sig: 'vi',
-	godot_js_display_cursor_set_shape: function (p_string) {
+	fade_js_display_cursor_set_shape__proxy: 'sync',
+	fade_js_display_cursor_set_shape__sig: 'vi',
+	fade_js_display_cursor_set_shape: function (p_string) {
 		FADEDisplayCursor.set_shape(FADERuntime.parseString(p_string));
 	},
 
-	godot_js_display_cursor_set_custom_shape__proxy: 'sync',
-	godot_js_display_cursor_set_custom_shape__sig: 'viiiii',
-	godot_js_display_cursor_set_custom_shape: function (p_shape, p_ptr, p_len, p_hotspot_x, p_hotspot_y) {
+	fade_js_display_cursor_set_custom_shape__proxy: 'sync',
+	fade_js_display_cursor_set_custom_shape__sig: 'viiiii',
+	fade_js_display_cursor_set_custom_shape: function (p_shape, p_ptr, p_len, p_hotspot_x, p_hotspot_y) {
 		const shape = FADERuntime.parseString(p_shape);
 		const old_shape = FADEDisplayCursor.cursors[shape];
 		if (p_len > 0) {
@@ -680,9 +680,9 @@ const FADEDisplay = {
 		}
 	},
 
-	godot_js_display_cursor_lock_set__proxy: 'sync',
-	godot_js_display_cursor_lock_set__sig: 'vi',
-	godot_js_display_cursor_lock_set: function (p_lock) {
+	fade_js_display_cursor_lock_set__proxy: 'sync',
+	fade_js_display_cursor_lock_set__sig: 'vi',
+	fade_js_display_cursor_lock_set: function (p_lock) {
 		if (p_lock) {
 			FADEDisplayCursor.lockPointer();
 		} else {
@@ -690,18 +690,18 @@ const FADEDisplay = {
 		}
 	},
 
-	godot_js_display_cursor_is_locked__proxy: 'sync',
-	godot_js_display_cursor_is_locked__sig: 'i',
-	godot_js_display_cursor_is_locked: function () {
+	fade_js_display_cursor_is_locked__proxy: 'sync',
+	fade_js_display_cursor_is_locked__sig: 'i',
+	fade_js_display_cursor_is_locked: function () {
 		return FADEDisplayCursor.isPointerLocked() ? 1 : 0;
 	},
 
 	/*
 	 * Listeners
 	 */
-	godot_js_display_fullscreen_cb__proxy: 'sync',
-	godot_js_display_fullscreen_cb__sig: 'vi',
-	godot_js_display_fullscreen_cb: function (callback) {
+	fade_js_display_fullscreen_cb__proxy: 'sync',
+	fade_js_display_fullscreen_cb__sig: 'vi',
+	fade_js_display_fullscreen_cb: function (callback) {
 		const canvas = FADEConfig.canvas;
 		const func = FADERuntime.get_func(callback);
 		function change_cb(evt) {
@@ -714,18 +714,18 @@ const FADEDisplay = {
 		FADEEventListeners.add(document, 'webkitfullscreenchange', change_cb, false);
 	},
 
-	godot_js_display_window_blur_cb__proxy: 'sync',
-	godot_js_display_window_blur_cb__sig: 'vi',
-	godot_js_display_window_blur_cb: function (callback) {
+	fade_js_display_window_blur_cb__proxy: 'sync',
+	fade_js_display_window_blur_cb__sig: 'vi',
+	fade_js_display_window_blur_cb: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		FADEEventListeners.add(window, 'blur', function () {
 			func();
 		}, false);
 	},
 
-	godot_js_display_notification_cb__proxy: 'sync',
-	godot_js_display_notification_cb__sig: 'viiiii',
-	godot_js_display_notification_cb: function (callback, p_enter, p_exit, p_in, p_out) {
+	fade_js_display_notification_cb__proxy: 'sync',
+	fade_js_display_notification_cb__sig: 'viiiii',
+	fade_js_display_notification_cb: function (callback, p_enter, p_exit, p_in, p_out) {
 		const canvas = FADEConfig.canvas;
 		const func = FADERuntime.get_func(callback);
 		const notif = [p_enter, p_exit, p_in, p_out];
@@ -736,9 +736,9 @@ const FADEDisplay = {
 		});
 	},
 
-	godot_js_display_setup_canvas__proxy: 'sync',
-	godot_js_display_setup_canvas__sig: 'viiii',
-	godot_js_display_setup_canvas: function (p_width, p_height, p_fullscreen, p_hidpi) {
+	fade_js_display_setup_canvas__proxy: 'sync',
+	fade_js_display_setup_canvas__sig: 'viiii',
+	fade_js_display_setup_canvas: function (p_width, p_height, p_fullscreen, p_hidpi) {
 		const canvas = FADEConfig.canvas;
 		FADEEventListeners.add(canvas, 'contextmenu', function (ev) {
 			ev.preventDefault();
@@ -771,36 +771,36 @@ const FADEDisplay = {
 	/*
 	 * Virtual Keyboard
 	 */
-	godot_js_display_vk_show__proxy: 'sync',
-	godot_js_display_vk_show__sig: 'viiii',
-	godot_js_display_vk_show: function (p_text, p_type, p_start, p_end) {
+	fade_js_display_vk_show__proxy: 'sync',
+	fade_js_display_vk_show__sig: 'viiii',
+	fade_js_display_vk_show: function (p_text, p_type, p_start, p_end) {
 		const text = FADERuntime.parseString(p_text);
 		const start = p_start > 0 ? p_start : 0;
 		const end = p_end > 0 ? p_end : start;
 		FADEDisplayVK.show(text, p_type, start, end);
 	},
 
-	godot_js_display_vk_hide__proxy: 'sync',
-	godot_js_display_vk_hide__sig: 'v',
-	godot_js_display_vk_hide: function () {
+	fade_js_display_vk_hide__proxy: 'sync',
+	fade_js_display_vk_hide__sig: 'v',
+	fade_js_display_vk_hide: function () {
 		FADEDisplayVK.hide();
 	},
 
-	godot_js_display_vk_available__proxy: 'sync',
-	godot_js_display_vk_available__sig: 'i',
-	godot_js_display_vk_available: function () {
+	fade_js_display_vk_available__proxy: 'sync',
+	fade_js_display_vk_available__sig: 'i',
+	fade_js_display_vk_available: function () {
 		return FADEDisplayVK.available();
 	},
 
-	godot_js_display_tts_available__proxy: 'sync',
-	godot_js_display_tts_available__sig: 'i',
-	godot_js_display_tts_available: function () {
+	fade_js_display_tts_available__proxy: 'sync',
+	fade_js_display_tts_available__sig: 'i',
+	fade_js_display_tts_available: function () {
 		return 'speechSynthesis' in window;
 	},
 
-	godot_js_display_vk_cb__proxy: 'sync',
-	godot_js_display_vk_cb__sig: 'vi',
-	godot_js_display_vk_cb: function (p_input_cb) {
+	fade_js_display_vk_cb__proxy: 'sync',
+	fade_js_display_vk_cb__sig: 'vi',
+	fade_js_display_vk_cb: function (p_input_cb) {
 		const input_cb = FADERuntime.get_func(p_input_cb);
 		if (FADEDisplayVK.available()) {
 			FADEDisplayVK.init(input_cb);

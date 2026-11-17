@@ -49,23 +49,23 @@ jobs:
           emcc -v
 
       - name: Restore FADE build cache
-        uses: ./.github/actions/godot-cache-restore
+        uses: ./.github/actions/fade-cache-restore
         with:
           cache-name: ${{ matrix.cache-name }}
         continue-on-error: true
 
       - name: Setup Python and SCons
-        uses: ./.github/actions/godot-deps
+        uses: ./.github/actions/fade-deps
 
       - name: Compilation
-        uses: ./.github/actions/godot-build
+        uses: ./.github/actions/fade-build
         with:
           scons-flags: ${{ env.SCONS_FLAGS }} ${{ matrix.scons-flags }}
           platform: web
           target: ${{ matrix.target }}
 
       - name: Save FADE build cache
-        uses: ./.github/actions/godot-cache-save
+        uses: ./.github/actions/fade-cache-save
         with:
           cache-name: ${{ matrix.cache-name }}
         continue-on-error: true

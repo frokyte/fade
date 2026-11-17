@@ -7,8 +7,8 @@
 
         <!-- Records the version of the FADE library -->
         <meta-data
-            android:name="org.godotengine.library.version"
-            android:value="${godotLibraryVersion}" />
+            android:name="org.fadeengine.library.version"
+            android:value="${fadeLibraryVersion}" />
 
         <activity
             android:name=".utils.ProcessPhoenix"
@@ -24,7 +24,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/godot_provider_paths" />
+                android:resource="@xml/fade_provider_paths" />
         </provider>
 
     </application>

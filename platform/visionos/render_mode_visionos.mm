@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,7 +30,7 @@
 
 #include "render_mode_visionos.h"
 
-#import "godot_app_delegate_service_visionos.h"
+#import "fade_app_delegate_service_visionos.h"
 
 #import <CompositorServices/CompositorServices.h>
 #import <Metal/Metal.h>

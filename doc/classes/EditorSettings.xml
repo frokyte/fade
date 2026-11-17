@@ -1123,7 +1123,7 @@
 		</member>
 		<member name="interface/editor/localization/editor_language" type="String" setter="" getter="">
 			The language to use for the editor interface. If set to [b]Auto[/b], the language is automatically determined based on the system locale. See also [method EditorInterface.get_editor_language].
-			Translations are provided by the community. If you spot a mistake, [url=https://contributing.godotengine.org/en/latest/development/translations.html]contribute to editor translations on Weblate![/url]
+			Translations are provided by the community. If you spot a mistake, [url=https://contributing.fadeengine.org/en/latest/development/translations.html]contribute to editor translations on Weblate![/url]
 		</member>
 		<member name="interface/editor/localization/localize_settings" type="bool" setter="" getter="">
 			If [code]true[/code], setting names in the editor are localized when possible.
@@ -1277,7 +1277,7 @@
 		<member name="interface/theme/icon_and_font_color" type="int" setter="" getter="">
 			The icon and font color scheme to use in the editor.
 			- [b]Auto[/b] determines the color scheme to use automatically based on [member interface/theme/base_color].
-			- [b]Dark[/b] makes fonts and icons dark (suitable for light themes). Icon colors are automatically converted by the editor following the set of rules defined in [url=https://github.com/godotengine/godot/blob/master/editor/themes/editor_theme_manager.cpp]this file[/url].
+			- [b]Dark[/b] makes fonts and icons dark (suitable for light themes). Icon colors are automatically converted by the editor following the set of rules defined in [url=https://github.com/fadeengine/fade/blob/master/editor/themes/editor_theme_manager.cpp]this file[/url].
 			- [b]Light[/b] makes fonts and icons light (suitable for dark themes).
 		</member>
 		<member name="interface/theme/icon_saturation" type="float" setter="" getter="">
@@ -1379,7 +1379,7 @@
 			If [code]true[/code] the language server will run in a separate thread, if [code]false[/code] it will run on the main thread.
 		</member>
 		<member name="network/tls/editor_tls_certificates" type="String" setter="" getter="">
-			The TLS certificate bundle to use for HTTP requests made within the editor (e.g. from the Asset Store tab). If left empty, the [url=https://github.com/godotengine/godot/blob/master/thirdparty/certs/ca-bundle.crt]included Mozilla certificate bundle[/url] will be used.
+			The TLS certificate bundle to use for HTTP requests made within the editor (e.g. from the Asset Store tab). If left empty, the [url=https://github.com/fadeengine/fade/blob/master/thirdparty/certs/ca-bundle.crt]included Mozilla certificate bundle[/url] will be used.
 		</member>
 		<member name="network/tls/enable_tls_v1.3" type="bool" setter="" getter="">
 			If [code]true[/code], enable TLSv1.3 negotiation.
@@ -1689,7 +1689,7 @@
 		<member name="text_editor/theme/color_theme" type="String" setter="" getter="">
 			The syntax theme to use in the script editor.
 			You can save your own syntax theme from your current settings by using [b]File &gt; Theme &gt; Save As...[/b] at the top of the script editor. The syntax theme will then be available locally in the list of color themes.
-			You can find additional syntax themes to install in the [url=https://github.com/godotengine/godot-syntax-themes]godot-syntax-themes[/url] repository.
+			You can find additional syntax themes to install in the [url=https://github.com/fadeengine/fade-syntax-themes]fade-syntax-themes[/url] repository.
 		</member>
 		<member name="text_editor/theme/highlighting/background_color" type="Color" setter="" getter="">
 			The script editor's background color. If set to a translucent color, the editor theme's base color will be visible behind.

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package com.godot.game
+package com.fade.game
 
 import android.content.ComponentName
 import android.content.Intent
@@ -37,11 +37,11 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.godot.game.app.BuildConfig
-import com.godot.game.test.FADEAppInstrumentedTestPlugin
-import org.godotengine.godot.FADE
-import org.godotengine.godot.FADEActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
-import org.godotengine.godot.plugin.FADEPluginRegistry
+import com.fade.game.app.BuildConfig
+import com.fade.game.test.FADEAppInstrumentedTestPlugin
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.FADEActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
+import org.fadeengine.fade.plugin.FADEPluginRegistry
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.collections.contentEquals
@@ -59,8 +59,8 @@ class FADEAppTest {
 	companion object {
 		private val TAG = FADEAppTest::class.java.simpleName
 
-		private const val GODOT_APP_LAUNCHER_CLASS_NAME = "com.godot.game.FADEAppLauncher"
-		private const val GODOT_APP_CLASS_NAME = "com.godot.game.FADEApp"
+		private const val GODOT_APP_LAUNCHER_CLASS_NAME = "com.fade.game.FADEAppLauncher"
+		private const val GODOT_APP_CLASS_NAME = "com.fade.game.FADEApp"
 
 		private val TEST_COMMAND_LINE_PARAMS = arrayOf("This is a test")
 		private val VULKAN_RENDERER_COMMAND_LINE_PARAMS = arrayOf("--rendering-method","mobile")
@@ -245,8 +245,8 @@ class FADEAppTest {
 			Log.d(TAG, "Waiting for the engine to terminate...")
 			testPlugin.waitForEngineTermination(5_000L)
 
-			val godot = FADE.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
-			assertTrue { godot.runStatus != FADE.RunStatus.TERMINATING }
+			val fade = FADE.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
+			assertTrue { fade.runStatus != FADE.RunStatus.TERMINATING }
 		}
 	}
 
@@ -271,8 +271,8 @@ class FADEAppTest {
 			Log.d(TAG, "Waiting for the engine to terminate...")
 			testPlugin.waitForEngineTermination(5_000L)
 
-			val godot = FADE.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
-			assertTrue { godot.runStatus == FADE.RunStatus.TERMINATING }
+			val fade = FADE.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
+			assertTrue { fade.runStatus == FADE.RunStatus.TERMINATING }
 		}
 	}
 }

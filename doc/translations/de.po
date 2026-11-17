@@ -8,7 +8,7 @@
 # artism90 <artism90@googlemail.com>, 2020.
 # HugeGameArt <hugegameartgd@gmail.com>, 2020, 2023.
 # Günther Bohn <ciscouser@gmx.de>, 2020, 2021.
-# Rémi Verschelde <akien@godotengine.org>, 2020.
+# Rémi Verschelde <akien@fadeengine.org>, 2020.
 # Julian Pritzi <julian.pritzi@gmail.com>, 2020.
 # Markus Lechner <marcus.lechner@gmail.com>, 2020.
 # lmarz <leon.marz@kabelmail.de>, 2020.
@@ -38,7 +38,7 @@
 # Jummit <jummit@web.de>, 2021, 2022.
 # Bastian <bastian.ike@gmail.com>, 2021.
 # KuhnChris <kuhnchris@kuhnchris.eu>, 2021.
-# Rémi Verschelde <remi@godotengine.org>, 2021, 2026.
+# Rémi Verschelde <remi@fadeengine.org>, 2021, 2026.
 # Antonio Noack <corperateraider@gmail.com>, 2022.
 # ‎ <artism90@googlemail.com>, 2022, 2023.
 # Coxcopi70f00b67b61542fe <hn_vogel@gmx.net>, 2022, 2024.
@@ -123,10 +123,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Godot Engine class reference\n"
-"Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
+"Report-Msgid-Bugs-To: https://github.com/fadeengine/fade\n"
 "PO-Revision-Date: 2026-11-03 16:15+0000\n"
 "Last-Translator: VfBFan <vfbfan@users.noreply.hosted.weblate.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/godot-engine/godot-"
+"Language-Team: German <https://hosted.weblate.org/projects/fade-engine/fade-"
 "class-reference/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -2473,7 +2473,7 @@ msgid ""
 "- 1.0: Linear\n"
 "- Greater than 1.0 (exclusive): Ease in\n"
 "[/codeblock]\n"
-"[url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/"
+"[url=https://raw.githubusercontent.com/fadeengine/fade-docs/master/img/"
 "ease_cheatsheet.png]ease() curve values cheatsheet[/url]\n"
 "See also [method smoothstep]. If you need to perform more advanced "
 "transitions, use [method Tween.interpolate_value]."
@@ -2492,7 +2492,7 @@ msgstr ""
 "- 1.0: Linear\n"
 "- Greater than 1.0 (exclusive): Ease in\n"
 "[/codeblock]\n"
-"[url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/"
+"[url=https://raw.githubusercontent.com/fadeengine/fade-docs/master/img/"
 "ease_cheatsheet.png]ease() curve values cheatsheet[/url]\n"
 "Siehe auch [Methode smoothstep]. Wenn Sie komplexere Übergänge durchführen "
 "möchten, verwenden Sie [method Tween.interpolate_value]."
@@ -5547,12 +5547,12 @@ msgstr ""
 msgid ""
 "Bug error, caused by an implementation issue in the method.\n"
 "[b]Note:[/b] If a built-in method returns this code, please open an issue on "
-"[url=https://github.com/godotengine/godot/issues]the GitHub Issue Tracker[/"
+"[url=https://github.com/fadeengine/fade/issues]the GitHub Issue Tracker[/"
 "url]."
 msgstr ""
 "Fehler, verursacht durch ein Implementierungsproblem in der Methode.\n"
 "[b]Hinweis:[/b] Wenn eine eingebaute Methode diesen Code zurückgibt, öffnen "
-"Sie bitte ein Problem auf [url=https://github.com/godotengine/godot/"
+"Sie bitte ein Problem auf [url=https://github.com/fadeengine/fade/"
 "issues]dem GitHub Issue Tracker[/url]."
 
 msgid ""

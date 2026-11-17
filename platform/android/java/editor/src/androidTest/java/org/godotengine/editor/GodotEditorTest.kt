@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,13 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 import android.content.ComponentName
 import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.godotengine.godot.FADEActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
+import org.fadeengine.fade.FADEActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
@@ -54,8 +54,8 @@ class FADEEditorTest {
 		private val PM_LAUNCH_COMMAND_LINE_PARAMS = arrayOf("--project-manager")
 		private val PM_VULKAN_LAUNCH_COMMAND_LINE_PARAMS = PM_LAUNCH_COMMAND_LINE_PARAMS + arrayOf("--rendering-method", "mobile")
 
-		private const val PROJECT_MANAGER_CLASS_NAME = "org.godotengine.editor.ProjectManager"
-		private const val GODOT_EDITOR_CLASS_NAME = "org.godotengine.editor.FADEEditor"
+		private const val PROJECT_MANAGER_CLASS_NAME = "org.fadeengine.editor.ProjectManager"
+		private const val GODOT_EDITOR_CLASS_NAME = "org.fadeengine.editor.FADEEditor"
 	}
 
 	/**
@@ -103,11 +103,11 @@ class FADEEditorTest {
 	 */
 	@Test
 	fun testExplicitFADEEditorLaunch() {
-		val godotEditorIntent = Intent().apply {
+		val fadeEditorIntent = Intent().apply {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_EDITOR_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<FADEEditor>(godotEditorIntent).use { scenario ->
+		ActivityScenario.launch<FADEEditor>(fadeEditorIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_EDITOR_CLASS_NAME)
 
@@ -123,11 +123,11 @@ class FADEEditorTest {
 	 */
 	@Test
 	fun testVulkanProjectManagerLaunch() {
-		val godotEditorIntent = Intent().apply {
+		val fadeEditorIntent = Intent().apply {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_EDITOR_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, PM_VULKAN_LAUNCH_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<FADEEditor>(godotEditorIntent).use { scenario ->
+		ActivityScenario.launch<FADEEditor>(fadeEditorIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_EDITOR_CLASS_NAME)
 

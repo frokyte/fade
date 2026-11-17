@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_webmidi.js                                              */
+/*  library_fade_webmidi.js                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -36,10 +36,10 @@ const FADEWebMidi = {
 		isListening: false,
 	},
 
-	godot_js_webmidi_open_midi_inputs__deps: ['$FADEWebMidi'],
-	godot_js_webmidi_open_midi_inputs__proxy: 'sync',
-	godot_js_webmidi_open_midi_inputs__sig: 'iiii',
-	godot_js_webmidi_open_midi_inputs: function (pSetInputNamesCb, pOnMidiMessageCb, pDataBuffer, dataBufferLen) {
+	fade_js_webmidi_open_midi_inputs__deps: ['$FADEWebMidi'],
+	fade_js_webmidi_open_midi_inputs__proxy: 'sync',
+	fade_js_webmidi_open_midi_inputs__sig: 'iiii',
+	fade_js_webmidi_open_midi_inputs: function (pSetInputNamesCb, pOnMidiMessageCb, pDataBuffer, dataBufferLen) {
 		if (FADEWebMidi.is_listening) {
 			return 0; // OK
 		}
@@ -79,10 +79,10 @@ const FADEWebMidi = {
 		return 0; // OK
 	},
 
-	godot_js_webmidi_close_midi_inputs__deps: ['$FADEWebMidi'],
-	godot_js_webmidi_close_midi_inputs__proxy: 'sync',
-	godot_js_webmidi_close_midi_inputs__sig: 'v',
-	godot_js_webmidi_close_midi_inputs: function () {
+	fade_js_webmidi_close_midi_inputs__deps: ['$FADEWebMidi'],
+	fade_js_webmidi_close_midi_inputs__proxy: 'sync',
+	fade_js_webmidi_close_midi_inputs__sig: 'v',
+	fade_js_webmidi_close_midi_inputs: function () {
 		for (const abortController of FADEWebMidi.abortControllers) {
 			abortController.abort();
 		}

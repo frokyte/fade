@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-	<include layout="@layout/godot_fragment_container_layout" />
+	<include layout="@layout/fade_fragment_container_layout" />
 
 	<ImageView
-		android:id="@+id/godot_spatial_container_icon"
+		android:id="@+id/fade_spatial_container_icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"

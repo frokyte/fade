@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot;
+package org.fadeengine.fade;
 
-import org.godotengine.godot.error.Error;
-import org.godotengine.godot.input.FADEEditText;
+import org.fadeengine.fade.error.Error;
+import org.fadeengine.fade.input.FADEEditText;
 
 import android.app.Activity;
 import android.content.Context;
@@ -65,7 +65,7 @@ import java.util.Locale;
 public class FADEIO {
 	private static final String TAG = FADEIO.class.getSimpleName();
 
-	private final FADE godot;
+	private final FADE fade;
 
 	private final String uniqueId;
 	FADEEditText edit;
@@ -78,9 +78,9 @@ public class FADEIO {
 	final int SCREEN_SENSOR_PORTRAIT = 5;
 	final int SCREEN_SENSOR = 6;
 
-	FADEIO(FADE godot) {
-		this.godot = godot;
-		String androidId = Settings.Secure.getString(godot.getContext().getContentResolver(),
+	FADEIO(FADE fade) {
+		this.fade = fade;
+		String androidId = Settings.Secure.getString(fade.getContext().getContentResolver(),
 				Settings.Secure.ANDROID_ID);
 		if (androidId == null) {
 			androidId = "";
@@ -90,9 +90,9 @@ public class FADEIO {
 	}
 
 	private Context getContext() {
-		Context context = godot.getActivity();
+		Context context = fade.getActivity();
 		if (context == null) {
-			context = godot.getContext();
+			context = fade.getContext();
 		}
 		return context;
 	}
@@ -198,13 +198,13 @@ public class FADEIO {
 	}
 
 	public double getScreenRefreshRate(double fallback) {
-		Activity activity = godot.getActivity();
+		Activity activity = fade.getActivity();
 
 		Display display = null;
 		if (activity != null) {
 			display = activity.getWindowManager().getDefaultDisplay();
 		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-			display = godot.getContext().getDisplay();
+			display = fade.getContext().getDisplay();
 		}
 
 		if (display != null) {
@@ -218,15 +218,15 @@ public class FADEIO {
 		int[] result = new int[4];
 
 		View topView = null;
-		if (godot.getActivity() != null) {
-			topView = godot.getActivity().getWindow().getDecorView();
-		} else if (godot.getRenderView() != null) {
-			topView = godot.getRenderView().getView();
+		if (fade.getActivity() != null) {
+			topView = fade.getActivity().getWindow().getDecorView();
+		} else if (fade.getRenderView() != null) {
+			topView = fade.getRenderView().getView();
 		}
 
 		if (topView != null) {
 			int insetTypes;
-			if (godot.isInImmersiveMode()) {
+			if (fade.isInImmersiveMode()) {
 				insetTypes = WindowInsetsCompat.Type.displayCutout();
 			} else {
 				insetTypes = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
@@ -236,7 +236,7 @@ public class FADEIO {
 				WindowInsetsCompat insetsCompat = WindowInsetsCompat.toWindowInsetsCompat(topView.getRootWindowInsets(), topView);
 				Insets insets = insetsCompat.getInsets(insetTypes);
 
-				if (godot.isInEdgeToEdgeMode() || godot.isInImmersiveMode()) {
+				if (fade.isInEdgeToEdgeMode() || fade.isInImmersiveMode()) {
 					result[0] = insets.left;
 					result[1] = insets.top;
 				} else {
@@ -258,10 +258,10 @@ public class FADEIO {
 		}
 
 		View topView = null;
-		if (godot.getActivity() != null) {
-			topView = godot.getActivity().getWindow().getDecorView();
-		} else if (godot.getRenderView() != null) {
-			topView = godot.getRenderView().getView();
+		if (fade.getActivity() != null) {
+			topView = fade.getActivity().getWindow().getDecorView();
+		} else if (fade.getRenderView() != null) {
+			topView = fade.getRenderView().getView();
 		}
 
 		if (topView == null) {
@@ -304,7 +304,7 @@ public class FADEIO {
 	}
 
 	public void setScreenOrientation(int p_orientation) {
-		final Activity activity = godot.getActivity();
+		final Activity activity = fade.getActivity();
 		if (activity == null) {
 			return;
 		}
@@ -335,7 +335,7 @@ public class FADEIO {
 	}
 
 	public int getScreenOrientation() {
-		final Activity activity = godot.getActivity();
+		final Activity activity = fade.getActivity();
 		if (activity == null) {
 			return -1;
 		}
@@ -371,13 +371,13 @@ public class FADEIO {
 	}
 
 	public int getDisplayRotation() {
-		Activity activity = godot.getActivity();
+		Activity activity = fade.getActivity();
 
 		Display display = null;
 		if (activity != null) {
 			display = activity.getWindowManager().getDefaultDisplay();
 		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-			display = godot.getContext().getDisplay();
+			display = fade.getContext().getDisplay();
 		}
 
 		if (display != null) {

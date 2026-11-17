@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot
+package org.fadeengine.fade
 
 import android.app.Activity
 import android.app.PictureInPictureParams
@@ -45,10 +45,10 @@ import androidx.activity.addCallback
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
-import org.godotengine.godot.feature.PictureInPictureProvider
-import org.godotengine.godot.utils.CommandLineFileParser
-import org.godotengine.godot.utils.PermissionsUtil
-import org.godotengine.godot.utils.ProcessPhoenix
+import org.fadeengine.fade.feature.PictureInPictureProvider
+import org.fadeengine.fade.utils.CommandLineFileParser
+import org.fadeengine.fade.utils.PermissionsUtil
+import org.fadeengine.fade.utils.ProcessPhoenix
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
@@ -90,7 +90,7 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 	/**
 	 * Interaction with the [FADE] object is delegated to the [FADEFragment] class.
 	 */
-	protected var godotFragment: FADEFragment? = null
+	protected var fadeFragment: FADEFragment? = null
 		private set
 
 	/**
@@ -148,17 +148,17 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 		setContentView(getFADEAppLayout())
 
 		// Register `OnBackPressedCallback` for the FADE fragment.
-		onBackPressedDispatcher.addCallback { godotFragment?.onBackPressed() }
+		onBackPressedDispatcher.addCallback { fadeFragment?.onBackPressed() }
 
 		handleStartIntent(intent, true)
 
-		val currentFragment = supportFragmentManager.findFragmentById(R.id.godot_fragment_container)
+		val currentFragment = supportFragmentManager.findFragmentById(R.id.fade_fragment_container)
 		if (currentFragment is FADEFragment) {
 			Log.v(TAG, "Reusing existing FADE fragment instance.")
-			godotFragment = currentFragment
+			fadeFragment = currentFragment
 		} else {
 			Log.v(TAG, "Creating new FADE fragment instance.")
-			godotFragment = initFADEInstance()
+			fadeFragment = initFADEInstance()
 
 			val transaction = supportFragmentManager.beginTransaction()
 			if (currentFragment != null) {
@@ -166,13 +166,13 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 				transaction.remove(currentFragment)
 			}
 
-			transaction.replace(R.id.godot_fragment_container, godotFragment!!)
-				.setPrimaryNavigationFragment(godotFragment)
+			transaction.replace(R.id.fade_fragment_container, fadeFragment!!)
+				.setPrimaryNavigationFragment(fadeFragment)
 				.commitNowAllowingStateLoss()
 		}
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			val gameView = findViewById<View>(R.id.godot_fragment_container)
+			val gameView = findViewById<View>(R.id.fade_fragment_container)
 			gameView?.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
 				gameView.getGlobalVisibleRect(gameViewSourceRectHint)
 			}
@@ -198,7 +198,7 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 	}
 
 	@LayoutRes
-	protected open fun getFADEAppLayout() = R.layout.godot_app_layout
+	protected open fun getFADEAppLayout() = R.layout.fade_app_layout
 
 	override fun onDestroy() {
 		Log.v(TAG, "Destroying FADEActivity $this...")
@@ -219,8 +219,8 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 	}
 
 	private fun terminateFADEInstance(instance: FADE) {
-		godotFragment?.let {
-			if (instance === it.godot) {
+		fadeFragment?.let {
+			if (instance === it.fade) {
 				Log.v(TAG, "Force quitting FADE instance")
 				ProcessPhoenix.forceQuit(this)
 			}
@@ -229,8 +229,8 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 
 	override fun onFADERestartRequested(instance: FADE) {
 		runOnUiThread {
-			godotFragment?.let {
-				if (instance === it.godot) {
+			fadeFragment?.let {
+				if (instance === it.fade) {
 					// It's very hard to properly de-initialize FADE on Android to restart the game
 					// from scratch. Therefore, we need to kill the whole app process and relaunch it.
 					//
@@ -280,13 +280,13 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 	@CallSuper
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		super.onActivityResult(requestCode, resultCode, data)
-		godotFragment?.onActivityResult(requestCode, resultCode, data)
+		fadeFragment?.onActivityResult(requestCode, resultCode, data)
 	}
 
 	@CallSuper
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-		godotFragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+		fadeFragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
 		// Logging the result of permission requests
 		if (requestCode == PermissionsUtil.REQUEST_ALL_PERMISSION_REQ_CODE || requestCode == PermissionsUtil.REQUEST_SINGLE_PERMISSION_REQ_CODE) {
@@ -303,7 +303,7 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 	}
 
 	override fun getFADE(): FADE? {
-		return godotFragment?.godot
+		return fadeFragment?.fade
 	}
 
 	/**
@@ -318,7 +318,7 @@ abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProv
 
 	override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
 		super.onPictureInPictureModeChanged(isInPictureInPictureMode)
-		godot?.onPictureInPictureModeChanged(isInPictureInPictureMode)
+		fade?.onPictureInPictureModeChanged(isInPictureInPictureMode)
 	}
 
 	/**

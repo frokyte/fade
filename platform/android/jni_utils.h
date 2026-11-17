@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -46,17 +46,17 @@ Variant _jobject_to_variant(JNIEnv *env, jobject obj, int p_depth = 0);
 Variant::Type get_jni_type(const String &p_type);
 
 /**
- * Convert a FADE Callable to a org.godotengine.godot.variant.Callable java object.
+ * Convert a FADE Callable to a org.fadeengine.fade.variant.Callable java object.
  * @param p_env JNI environment instance
  * @param p_callable Callable parameter to convert. If null or invalid type, a null jobject is returned.
- * @return org.godotengine.godot.variant.Callable jobject or null
+ * @return org.fadeengine.fade.variant.Callable jobject or null
  */
 jobject callable_to_jcallable(JNIEnv *p_env, const Variant &p_callable);
 
 /**
- * Convert a org.godotengine.godot.variant.Callable java object to a FADE Callable variant.
+ * Convert a org.fadeengine.fade.variant.Callable java object to a FADE Callable variant.
  * @param p_env JNI environment instance
- * @param p_jcallable_obj org.godotengine.godot.variant.Callable java object to convert.
+ * @param p_jcallable_obj org.fadeengine.fade.variant.Callable java object to convert.
  * @return Callable variant
  */
 Callable jcallable_to_callable(JNIEnv *p_env, jobject p_jcallable_obj);

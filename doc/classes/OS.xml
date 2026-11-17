@@ -8,7 +8,7 @@
 		[b]Note:[/b] In Godot 4, [OS] functions related to window management, clipboard, and TTS were moved to the [DisplayServer] singleton (and the [Window] class). Functions related to time were removed and are only available in the [Time] class.
 	</description>
 	<tutorials>
-		<link title="Operating System Testing Demo">https://godotengine.org/asset-library/asset/2789</link>
+		<link title="Operating System Testing Demo">https://fadeengine.org/asset-library/asset/2789</link>
 	</tutorials>
 	<methods>
 		<method name="add_logger">
@@ -190,7 +190,7 @@
 				Returns the command-line arguments passed to the engine, excluding arguments processed by the engine, such as [code]--headless[/code] and [code]--fullscreen[/code].
 				[codeblock]
 				# Godot has been executed with the following command:
-				# godot --headless --verbose --scene my_scene.tscn --custom
+				# fade --headless --verbose --scene my_scene.tscn --custom
 				OS.get_cmdline_args() # Returns ["--scene", "my_scene.tscn", "--custom"]
 				[/codeblock]
 				Command-line arguments can be written in any form, including both [code]--key value[/code] and [code]--key=value[/code] forms so they can be properly parsed, as long as custom command-line arguments do not conflict with engine arguments.
@@ -236,7 +236,7 @@
 				Returns the command-line user arguments passed to the engine. User arguments are ignored by the engine and reserved for the user. They are passed after the double dash [code]--[/code] argument. [code]++[/code] may be used when [code]--[/code] is intercepted by another program (such as [code]startx[/code]).
 				[codeblock]
 				# Godot has been executed with the following command:
-				# godot --fullscreen --custom -- --level=2 --hardcore
+				# fade --fullscreen --custom -- --level=2 --hardcore
 
 				OS.get_cmdline_args()      # Returns ["--custom"]
 				OS.get_cmdline_user_args() # Returns ["--level=2", "--hardcore"]
@@ -595,7 +595,7 @@
 				Returns the absolute directory path where user data is written (the [code]user://[/code] directory in Godot). The path depends on the project name and [member ProjectSettings.application/config/use_custom_user_dir].
 				- On Windows, this is [code]%AppData%\Godot\app_userdata\[project_name][/code], or [code]%AppData%\[custom_name][/code] if [code]use_custom_user_dir[/code] is set. [code]%AppData%[/code] expands to [code]%UserProfile%\AppData\Roaming[/code].
 				- On macOS, this is [code]~/Library/Application Support/Godot/app_userdata/[project_name][/code], or [code]~/Library/Application Support/[custom_name][/code] if [code]use_custom_user_dir[/code] is set.
-				- On Linux and BSD, this is [code]~/.local/share/godot/app_userdata/[project_name][/code], or [code]~/.local/share/[custom_name][/code] if [code]use_custom_user_dir[/code] is set.
+				- On Linux and BSD, this is [code]~/.local/share/fade/app_userdata/[project_name][/code], or [code]~/.local/share/[custom_name][/code] if [code]use_custom_user_dir[/code] is set.
 				- On Android and iOS, this is a sandboxed directory in either internal or external storage, depending on the user's configuration.
 				- On Web, this is a virtual directory managed by the browser.
 				If the project name is empty, [code][project_name][/code] falls back to [code][unnamed project][/code].
@@ -879,7 +879,7 @@
 				Requests the OS to open a resource identified by [param uri] with the most appropriate program. For example:
 				- [code]OS.shell_open("C:\\Users\\name\\Downloads")[/code] on Windows opens the file explorer at the user's Downloads folder.
 				- [code]OS.shell_open("C:/Users/name/Downloads")[/code] also works on Windows and opens the file explorer at the user's Downloads folder.
-				- [code]OS.shell_open("https://godotengine.org")[/code] opens the default web browser on the official Godot website.
+				- [code]OS.shell_open("https://fadeengine.org")[/code] opens the default web browser on the official Godot website.
 				- [code]OS.shell_open("mailto:example@example.com")[/code] opens the default email client with the "To" field set to [code]example@example.com[/code]. See [url=https://datatracker.ietf.org/doc/html/rfc2368]RFC 2368 - The mailto URL scheme[/url] for a list of fields that can be added.
 				Use [method ProjectSettings.globalize_path] to convert a [code]res://[/code] or [code]user://[/code] project path into a system path for use with this method.
 				[b]Note:[/b] Use [method String.uri_encode] to encode characters within URLs in a URL-safe, portable way. This is especially required for line breaks. Otherwise, [method shell_open] may not work correctly in a project exported to the Web platform.
@@ -964,10 +964,10 @@
 			Standard I/O device is a console. This typically occurs when Godot is run from a terminal with no redirection. This is also used for all standard I/O devices when running Godot from the editor, at least on desktop platforms.
 		</constant>
 		<constant name="STD_HANDLE_FILE" value="2" enum="StdHandleType">
-			Standard I/O device is a regular file. This typically occurs with redirection from a terminal, e.g. [code]godot &gt; stdout.txt[/code], [code]godot &lt; stdin.txt[/code] or [code]godot &gt; stdout_stderr.txt 2&gt;&amp;1[/code].
+			Standard I/O device is a regular file. This typically occurs with redirection from a terminal, e.g. [code]fade &gt; stdout.txt[/code], [code]fade &lt; stdin.txt[/code] or [code]fade &gt; stdout_stderr.txt 2&gt;&amp;1[/code].
 		</constant>
 		<constant name="STD_HANDLE_PIPE" value="3" enum="StdHandleType">
-			Standard I/O device is a FIFO/pipe. This typically occurs with pipe usage from a terminal, e.g. [code]echo "Hello" | godot[/code].
+			Standard I/O device is a FIFO/pipe. This typically occurs with pipe usage from a terminal, e.g. [code]echo "Hello" | fade[/code].
 		</constant>
 		<constant name="STD_HANDLE_UNKNOWN" value="4" enum="StdHandleType">
 			Standard I/O device type is unknown.

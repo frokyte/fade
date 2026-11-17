@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,17 +28,17 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 import android.Manifest
 import android.util.Log
 import androidx.annotation.CallSuper
-import org.godotengine.godot.FADE
-import org.godotengine.godot.FADELib
-import org.godotengine.godot.editor.utils.GameMenuUtils
-import org.godotengine.godot.utils.PermissionsUtil
-import org.godotengine.godot.utils.ProcessPhoenix
-import org.godotengine.openxr.vendors.utils.*
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.FADELib
+import org.fadeengine.fade.editor.utils.GameMenuUtils
+import org.fadeengine.fade.utils.PermissionsUtil
+import org.fadeengine.fade.utils.ProcessPhoenix
+import org.fadeengine.openxr.vendors.utils.*
 
 /**
  * Base class for the FADE play windows.
@@ -105,7 +105,7 @@ abstract class BaseFADEGame: FADEEditor() {
 	override fun supportsFeature(featureTag: String): Boolean {
 		if (HYBRID_APP_FEATURE == featureTag) {
 			// Check if hybrid is enabled.
-			return godot?.isXrRuntime == true && isHybridAppEnabled()
+			return fade?.isXrRuntime == true && isHybridAppEnabled()
 		}
 
 		return super.supportsFeature(featureTag)

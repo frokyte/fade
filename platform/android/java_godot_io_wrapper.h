@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_io_wrapper.h                                               */
+/*  java_fade_io_wrapper.h                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -36,10 +36,10 @@
 #include <android/log.h>
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/FADEIO.java callable from C++
+// Class that makes functions in java/src/org/fadeengine/fade/FADEIO.java callable from C++
 class FADEIOJavaWrapper {
 private:
-	jobject godot_io_instance;
+	jobject fade_io_instance;
 	jclass cls;
 
 	jmethodID _open_URI = nullptr;
@@ -63,7 +63,7 @@ private:
 	jmethodID _get_system_dir = nullptr;
 
 public:
-	FADEIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instance);
+	FADEIOJavaWrapper(JNIEnv *p_env, jobject p_fade_io_instance);
 	~FADEIOJavaWrapper();
 
 	jobject get_instance();

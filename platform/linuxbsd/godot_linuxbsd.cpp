@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_linuxbsd.cpp                                                    */
+/*  fade_linuxbsd.cpp                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 	setrlimit(RLIMIT_STACK, &stack_lim);
 #endif
 
-	godot_init_profiler();
+	fade_init_profiler();
 
 	OS_LinuxBSD os;
 
@@ -132,6 +132,6 @@ int main(int argc, char *argv[]) {
 	}
 	free(cwd);
 
-	godot_cleanup_profiler();
+	fade_cleanup_profiler();
 	return os.get_exit_code();
 }

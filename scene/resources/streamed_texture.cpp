@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -421,7 +421,7 @@ Error StreamedTexture2D::load(const String &p_path) {
 
 // Called when LOD settings change or after loading.
 // Part of the reason this is done is to work around a limitation in the current texture
-// system in godot.  There are no notifications when a texture is changed.  So the only way
+// system in fade.  There are no notifications when a texture is changed.  So the only way
 // for the editor to update the displayed texture after changing LOD settings is to "change"
 // the texture so just do that.
 void StreamedTexture2D::update_texture() {

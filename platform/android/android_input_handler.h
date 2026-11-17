@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -82,7 +82,7 @@ private:
 	void _set_key_modifier_state(Ref<InputEventWithModifiers> ev, Key p_keycode);
 
 	static MouseButton _button_index_from_mask(BitField<MouseButtonMask> button_mask);
-	static BitField<MouseButtonMask> _android_button_mask_to_godot_button_mask(int android_button_mask);
+	static BitField<MouseButtonMask> _android_button_mask_to_fade_button_mask(int android_button_mask);
 
 	void _wheel_button_click(BitField<MouseButtonMask> event_buttons_mask, const Ref<InputEventMouseButton> &ev, MouseButton wheel_button, float factor);
 

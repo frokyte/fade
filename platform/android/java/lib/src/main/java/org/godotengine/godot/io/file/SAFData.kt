@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.io.file
+package org.fadeengine.fade.io.file
 
 import android.content.Context
 import android.net.Uri
@@ -112,7 +112,7 @@ internal class SAFData(context: Context, private val path: String, accessFlag: F
 		}
 
 		fun rename(context: Context, from: String, to: String): Boolean {
-			// See https://github.com/godotengine/godot/pull/112215#discussion_r2479311235
+			// See https://github.com/fadeengine/fade/pull/112215#discussion_r2479311235
 			return false
 		}
 

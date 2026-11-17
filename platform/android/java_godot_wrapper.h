@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_wrapper.h                                                  */
+/*  java_fade_wrapper.h                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include "java_godot_view_wrapper.h"
+#include "java_fade_view_wrapper.h"
 
 #include "core/math/color.h"
 #include "core/templates/list.h"
@@ -39,13 +39,13 @@
 
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/FADE.kt callable from C++
+// Class that makes functions in java/src/org/fadeengine/fade/FADE.kt callable from C++
 class FADEJavaWrapper {
 private:
-	jobject godot_native_bridge;
-	jclass godot_native_bridge_class;
+	jobject fade_native_bridge;
+	jclass fade_native_bridge_class;
 
-	FADEJavaViewWrapper *godot_view = nullptr;
+	FADEJavaViewWrapper *fade_view = nullptr;
 
 	jmethodID _restart = nullptr;
 	jmethodID _finish = nullptr;
@@ -69,10 +69,10 @@ private:
 	jmethodID _init_input_devices = nullptr;
 	jmethodID _vibrate = nullptr;
 	jmethodID _get_input_fallback_mapping = nullptr;
-	jmethodID _on_godot_setup_completed = nullptr;
-	jmethodID _on_godot_main_loop_started = nullptr;
-	jmethodID _on_godot_terminating = nullptr;
-	jmethodID _create_new_godot_instance = nullptr;
+	jmethodID _on_fade_setup_completed = nullptr;
+	jmethodID _on_fade_main_loop_started = nullptr;
+	jmethodID _on_fade_terminating = nullptr;
+	jmethodID _create_new_fade_instance = nullptr;
 	jmethodID _get_render_view = nullptr;
 	jmethodID _begin_benchmark_measure = nullptr;
 	jmethodID _end_benchmark_measure = nullptr;
@@ -102,16 +102,16 @@ private:
 	jmethodID _is_animation_disabled = nullptr;
 
 public:
-	FADEJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge);
+	FADEJavaWrapper(JNIEnv *p_env, jobject p_fade_native_bridge);
 	~FADEJavaWrapper();
 
 	jobject get_activity();
 
-	FADEJavaViewWrapper *get_godot_view();
+	FADEJavaViewWrapper *get_fade_view();
 
-	void on_godot_setup_completed(JNIEnv *p_env = nullptr);
-	void on_godot_main_loop_started(JNIEnv *p_env = nullptr);
-	void on_godot_terminating(JNIEnv *p_env = nullptr);
+	void on_fade_setup_completed(JNIEnv *p_env = nullptr);
+	void on_fade_main_loop_started(JNIEnv *p_env = nullptr);
+	void on_fade_terminating(JNIEnv *p_env = nullptr);
 	void restart(JNIEnv *p_env = nullptr);
 	bool force_quit(JNIEnv *p_env = nullptr, int p_instance_id = 0);
 	void set_keep_screen_on(bool p_enabled);
@@ -136,7 +136,7 @@ public:
 	void init_input_devices();
 	void vibrate(int p_duration_ms, float p_amplitude = -1.0);
 	String get_input_fallback_mapping();
-	int create_new_godot_instance(const List<String> &args);
+	int create_new_fade_instance(const List<String> &args);
 	void begin_benchmark_measure(const String &p_context, const String &p_label);
 	void end_benchmark_measure(const String &p_context, const String &p_label);
 	void dump_benchmark(const String &benchmark_file);

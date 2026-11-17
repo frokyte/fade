@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -346,7 +346,7 @@ void ProjectListItemControl::set_unsupported_features(PackedStringArray p_featur
 			i--;
 		}
 
-		// This is actually triggered when the project.godot file's config_version
+		// This is actually triggered when the project.fade file's config_version
 		// is less than 4, so perhaps it'd be more accurate to say the engine configuration
 		// file's version is not supported...? If the config/features array includes
 		// a proper version number, it will be displayed alongside the "unknown version"
@@ -775,7 +775,7 @@ void ProjectList::save_config() {
 // Load project data from p_property_key and return it in a ProjectList::Item.
 // p_favorite is passed directly into the Item.
 ProjectList::Item ProjectList::load_project_data(const String &p_path, bool p_favorite) {
-	String conf = p_path.path_join("project.godot");
+	String conf = p_path.path_join("project.fade");
 	bool grayed = false;
 	bool missing = false;
 	bool recovery_mode = false;
@@ -806,7 +806,7 @@ ProjectList::Item ProjectList::load_project_data(const String &p_path, bool p_fa
 	String icon = cf->get_value("application", "config/icon", "");
 	if (icon.begins_with("uid://")) {
 		Error err;
-		Ref<FileAccess> file = FileAccess::open(p_path.path_join(".godot/uid_cache.bin"), FileAccess::READ, &err);
+		Ref<FileAccess> file = FileAccess::open(p_path.path_join(".fade/uid_cache.bin"), FileAccess::READ, &err);
 		if (err == OK) {
 			icon = ResourceUID::get_path_from_cache(file, icon);
 			if (icon.is_empty()) {
@@ -848,7 +848,7 @@ ProjectList::Item ProjectList::load_project_data(const String &p_path, bool p_fa
 			last_edited = *cached_time;
 		} else {
 			// The modification date marks the date the project was last edited.
-			// This is because the `project.godot` file will always be modified
+			// This is because the `project.fade` file will always be modified
 			// when editing a project (but not when running it).
 			last_edited = FileAccess::get_modified_time(conf);
 			modified_time_cache[p_path] = last_edited;
@@ -875,10 +875,10 @@ ProjectList::Item ProjectList::load_project_data(const String &p_path, bool p_fa
 			}
 			user_dir = custom_dir;
 		} else {
-			user_dir = OS::get_singleton()->get_godot_dir_name().path_join("app_userdata").path_join(appname);
+			user_dir = OS::get_singleton()->get_fade_dir_name().path_join("app_userdata").path_join(appname);
 		}
 	} else {
-		user_dir = OS::get_singleton()->get_godot_dir_name().path_join("app_userdata").path_join("[unnamed project]");
+		user_dir = OS::get_singleton()->get_fade_dir_name().path_join("app_userdata").path_join("[unnamed project]");
 	}
 
 	String recovery_mode_lock_file = OS::get_singleton()->get_user_data_dir(user_dir).path_join(".recovery_mode_lock");
@@ -1088,7 +1088,7 @@ void ProjectList::_scan_folder_recursive(const String &p_path, List<String> *r_p
 
 		if (da->current_is_dir() && n[0] != '.') {
 			_scan_folder_recursive(da->get_current_dir().path_join(n), r_projects, p_scan_active);
-		} else if (n == "project.godot") {
+		} else if (n == "project.fade") {
 			r_projects->push_back(da->get_current_dir());
 		}
 		n = da->get_next();
@@ -1696,7 +1696,7 @@ void ProjectList::_global_menu_open_project(const Variant &p_tag) {
 	int idx = (int)p_tag;
 
 	if (idx >= 0 && idx < _projects.size()) {
-		String conf = _projects[idx].path.path_join("project.godot");
+		String conf = _projects[idx].path.path_join("project.fade");
 		List<String> args;
 		args.push_back(conf);
 		OS::get_singleton()->create_instance(args);

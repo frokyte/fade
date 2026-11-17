@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -1936,7 +1936,7 @@ void AnimationMixer::_blend_apply() {
 						return;
 					}
 
-					// TODO: Once https://github.com/godotengine/godot/pull/113441 makes it in
+					// TODO: Once https://github.com/fadeengine/fade/pull/113441 makes it in
 					// Use set_bone_pose_components when loc_used, rot_used, and scale_used are all true.
 
 					if (t->loc_used) {

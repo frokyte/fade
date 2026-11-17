@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_main_macos.mm                                                   */
+/*  fade_main_macos.mm                                                   */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_application.h"
+#import "fade_application.h"
 #import "os_macos.h"
 
 #include "core/profiling/profiling.h"
@@ -39,7 +39,7 @@
 #endif
 
 __attribute__((visibility("default"))) int main(int argc, char **argv) {
-	godot_init_profiler();
+	fade_init_profiler();
 
 	// Disable AppKit state restoration (Resume). FADE windows are not restorable, but the app-level
 	// NSPersistentUIManager still runs and its first flush stalls the main thread for 10-40 ms.
@@ -144,6 +144,6 @@ __attribute__((visibility("default"))) int main(int argc, char **argv) {
 
 	memdelete(os);
 
-	godot_cleanup_profiler();
+	fade_cleanup_profiler();
 	return exit_code;
 }

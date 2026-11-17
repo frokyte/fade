@@ -329,716 +329,716 @@ partial class ExportedProperties
     {
         public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
-            static godot_variant trampoline_get_NotGenerateComplexLamdaProperty(object godotObject)
+            static fade_variant trampoline_get_NotGenerateComplexLamdaProperty(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@NotGenerateComplexLamdaProperty;
+                var ret = ((global::ExportedProperties)fadeObject).@NotGenerateComplexLamdaProperty;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_NotGenerateComplexLamdaProperty(object godotObject, in godot_variant value)
+            static void trampoline_set_NotGenerateComplexLamdaProperty(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@NotGenerateComplexLamdaProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@NotGenerateComplexLamdaProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_NotGenerateLamdaNoFieldProperty(object godotObject)
+            static fade_variant trampoline_get_NotGenerateLamdaNoFieldProperty(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@NotGenerateLamdaNoFieldProperty;
+                var ret = ((global::ExportedProperties)fadeObject).@NotGenerateLamdaNoFieldProperty;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_NotGenerateLamdaNoFieldProperty(object godotObject, in godot_variant value)
+            static void trampoline_set_NotGenerateLamdaNoFieldProperty(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@NotGenerateLamdaNoFieldProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@NotGenerateLamdaNoFieldProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_NotGenerateComplexReturnProperty(object godotObject)
+            static fade_variant trampoline_get_NotGenerateComplexReturnProperty(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@NotGenerateComplexReturnProperty;
+                var ret = ((global::ExportedProperties)fadeObject).@NotGenerateComplexReturnProperty;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_NotGenerateComplexReturnProperty(object godotObject, in godot_variant value)
+            static void trampoline_set_NotGenerateComplexReturnProperty(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@NotGenerateComplexReturnProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@NotGenerateComplexReturnProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_NotGenerateReturnsProperty(object godotObject)
+            static fade_variant trampoline_get_NotGenerateReturnsProperty(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@NotGenerateReturnsProperty;
+                var ret = ((global::ExportedProperties)fadeObject).@NotGenerateReturnsProperty;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_NotGenerateReturnsProperty(object godotObject, in godot_variant value)
+            static void trampoline_set_NotGenerateReturnsProperty(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@NotGenerateReturnsProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@NotGenerateReturnsProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_FullPropertyString(object godotObject)
+            static fade_variant trampoline_get_FullPropertyString(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@FullPropertyString;
+                var ret = ((global::ExportedProperties)fadeObject).@FullPropertyString;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_FullPropertyString(object godotObject, in godot_variant value)
+            static void trampoline_set_FullPropertyString(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@FullPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@FullPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_FullPropertyString_Complex(object godotObject)
+            static fade_variant trampoline_get_FullPropertyString_Complex(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@FullPropertyString_Complex;
+                var ret = ((global::ExportedProperties)fadeObject).@FullPropertyString_Complex;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_FullPropertyString_Complex(object godotObject, in godot_variant value)
+            static void trampoline_set_FullPropertyString_Complex(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@FullPropertyString_Complex = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@FullPropertyString_Complex = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_FullPropertyStaticImport(object godotObject)
+            static fade_variant trampoline_get_FullPropertyStaticImport(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@FullPropertyStaticImport;
+                var ret = ((global::ExportedProperties)fadeObject).@FullPropertyStaticImport;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set_FullPropertyStaticImport(object godotObject, in godot_variant value)
+            static void trampoline_set_FullPropertyStaticImport(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@FullPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@FullPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
-            static godot_variant trampoline_get_LamdaPropertyString(object godotObject)
+            static fade_variant trampoline_get_LamdaPropertyString(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@LamdaPropertyString;
+                var ret = ((global::ExportedProperties)fadeObject).@LamdaPropertyString;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_LamdaPropertyString(object godotObject, in godot_variant value)
+            static void trampoline_set_LamdaPropertyString(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@LamdaPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@LamdaPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_LambdaPropertyStaticImport(object godotObject)
+            static fade_variant trampoline_get_LambdaPropertyStaticImport(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@LambdaPropertyStaticImport;
+                var ret = ((global::ExportedProperties)fadeObject).@LambdaPropertyStaticImport;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set_LambdaPropertyStaticImport(object godotObject, in godot_variant value)
+            static void trampoline_set_LambdaPropertyStaticImport(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@LambdaPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@LambdaPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
-            static godot_variant trampoline_get_PrimaryCtorParameter(object godotObject)
+            static fade_variant trampoline_get_PrimaryCtorParameter(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PrimaryCtorParameter;
+                var ret = ((global::ExportedProperties)fadeObject).@PrimaryCtorParameter;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_PrimaryCtorParameter(object godotObject, in godot_variant value)
+            static void trampoline_set_PrimaryCtorParameter(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PrimaryCtorParameter = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@PrimaryCtorParameter = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_ConstantMath(object godotObject)
+            static fade_variant trampoline_get_ConstantMath(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@ConstantMath;
+                var ret = ((global::ExportedProperties)fadeObject).@ConstantMath;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set_ConstantMath(object godotObject, in godot_variant value)
+            static void trampoline_set_ConstantMath(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@ConstantMath = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@ConstantMath = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
-            static godot_variant trampoline_get_ConstantMathStaticImport(object godotObject)
+            static fade_variant trampoline_get_ConstantMathStaticImport(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@ConstantMathStaticImport;
+                var ret = ((global::ExportedProperties)fadeObject).@ConstantMathStaticImport;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set_ConstantMathStaticImport(object godotObject, in godot_variant value)
+            static void trampoline_set_ConstantMathStaticImport(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@ConstantMathStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@ConstantMathStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
-            static godot_variant trampoline_get_StaticStringAddition(object godotObject)
+            static fade_variant trampoline_get_StaticStringAddition(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@StaticStringAddition;
+                var ret = ((global::ExportedProperties)fadeObject).@StaticStringAddition;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_StaticStringAddition(object godotObject, in godot_variant value)
+            static void trampoline_set_StaticStringAddition(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@StaticStringAddition = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@StaticStringAddition = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_PropertyBoolean(object godotObject)
+            static fade_variant trampoline_get_PropertyBoolean(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyBoolean;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyBoolean;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<bool>(ret);
             }
-            static void trampoline_set_PropertyBoolean(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyBoolean(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyBoolean = global::FADE.NativeInterop.VariantUtils.ConvertTo<bool>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyBoolean = global::FADE.NativeInterop.VariantUtils.ConvertTo<bool>(value);
             }
-            static godot_variant trampoline_get_PropertyChar(object godotObject)
+            static fade_variant trampoline_get_PropertyChar(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyChar;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyChar;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<char>(ret);
             }
-            static void trampoline_set_PropertyChar(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyChar(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyChar = global::FADE.NativeInterop.VariantUtils.ConvertTo<char>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyChar = global::FADE.NativeInterop.VariantUtils.ConvertTo<char>(value);
             }
-            static godot_variant trampoline_get_PropertySByte(object godotObject)
+            static fade_variant trampoline_get_PropertySByte(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertySByte;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertySByte;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<sbyte>(ret);
             }
-            static void trampoline_set_PropertySByte(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertySByte(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertySByte = global::FADE.NativeInterop.VariantUtils.ConvertTo<sbyte>(value);
+                ((global::ExportedProperties)fadeObject).@PropertySByte = global::FADE.NativeInterop.VariantUtils.ConvertTo<sbyte>(value);
             }
-            static godot_variant trampoline_get_PropertyInt16(object godotObject)
+            static fade_variant trampoline_get_PropertyInt16(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyInt16;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyInt16;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<short>(ret);
             }
-            static void trampoline_set_PropertyInt16(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyInt16(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyInt16 = global::FADE.NativeInterop.VariantUtils.ConvertTo<short>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyInt16 = global::FADE.NativeInterop.VariantUtils.ConvertTo<short>(value);
             }
-            static godot_variant trampoline_get_PropertyInt32(object godotObject)
+            static fade_variant trampoline_get_PropertyInt32(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyInt32;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyInt32;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<int>(ret);
             }
-            static void trampoline_set_PropertyInt32(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyInt32(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyInt32 = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyInt32 = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
             }
-            static godot_variant trampoline_get_PropertyInt64(object godotObject)
+            static fade_variant trampoline_get_PropertyInt64(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyInt64;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyInt64;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<long>(ret);
             }
-            static void trampoline_set_PropertyInt64(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyInt64(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyInt64 = global::FADE.NativeInterop.VariantUtils.ConvertTo<long>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyInt64 = global::FADE.NativeInterop.VariantUtils.ConvertTo<long>(value);
             }
-            static godot_variant trampoline_get_PropertyByte(object godotObject)
+            static fade_variant trampoline_get_PropertyByte(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyByte;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyByte;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<byte>(ret);
             }
-            static void trampoline_set_PropertyByte(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyByte(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyByte = global::FADE.NativeInterop.VariantUtils.ConvertTo<byte>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyByte = global::FADE.NativeInterop.VariantUtils.ConvertTo<byte>(value);
             }
-            static godot_variant trampoline_get_PropertyUInt16(object godotObject)
+            static fade_variant trampoline_get_PropertyUInt16(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyUInt16;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyUInt16;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<ushort>(ret);
             }
-            static void trampoline_set_PropertyUInt16(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyUInt16(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyUInt16 = global::FADE.NativeInterop.VariantUtils.ConvertTo<ushort>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyUInt16 = global::FADE.NativeInterop.VariantUtils.ConvertTo<ushort>(value);
             }
-            static godot_variant trampoline_get_PropertyUInt32(object godotObject)
+            static fade_variant trampoline_get_PropertyUInt32(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyUInt32;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyUInt32;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<uint>(ret);
             }
-            static void trampoline_set_PropertyUInt32(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyUInt32(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyUInt32 = global::FADE.NativeInterop.VariantUtils.ConvertTo<uint>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyUInt32 = global::FADE.NativeInterop.VariantUtils.ConvertTo<uint>(value);
             }
-            static godot_variant trampoline_get_PropertyUInt64(object godotObject)
+            static fade_variant trampoline_get_PropertyUInt64(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyUInt64;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyUInt64;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<ulong>(ret);
             }
-            static void trampoline_set_PropertyUInt64(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyUInt64(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyUInt64 = global::FADE.NativeInterop.VariantUtils.ConvertTo<ulong>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyUInt64 = global::FADE.NativeInterop.VariantUtils.ConvertTo<ulong>(value);
             }
-            static godot_variant trampoline_get_PropertySingle(object godotObject)
+            static fade_variant trampoline_get_PropertySingle(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertySingle;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertySingle;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set_PropertySingle(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertySingle(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertySingle = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@PropertySingle = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
-            static godot_variant trampoline_get_PropertyDouble(object godotObject)
+            static fade_variant trampoline_get_PropertyDouble(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyDouble;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyDouble;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<double>(ret);
             }
-            static void trampoline_set_PropertyDouble(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyDouble(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyDouble = global::FADE.NativeInterop.VariantUtils.ConvertTo<double>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyDouble = global::FADE.NativeInterop.VariantUtils.ConvertTo<double>(value);
             }
-            static godot_variant trampoline_get_PropertyString(object godotObject)
+            static fade_variant trampoline_get_PropertyString(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyString;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyString;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set_PropertyString(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyString(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get_PropertyVector2(object godotObject)
+            static fade_variant trampoline_get_PropertyVector2(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector2;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector2;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector2>(ret);
             }
-            static void trampoline_set_PropertyVector2(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector2(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector2 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector2 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2>(value);
             }
-            static godot_variant trampoline_get_PropertyVector2I(object godotObject)
+            static fade_variant trampoline_get_PropertyVector2I(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector2I;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector2I;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector2I>(ret);
             }
-            static void trampoline_set_PropertyVector2I(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector2I(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector2I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2I>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector2I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2I>(value);
             }
-            static godot_variant trampoline_get_PropertyRect2(object godotObject)
+            static fade_variant trampoline_get_PropertyRect2(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyRect2;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyRect2;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rect2>(ret);
             }
-            static void trampoline_set_PropertyRect2(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyRect2(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyRect2 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rect2>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyRect2 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rect2>(value);
             }
-            static godot_variant trampoline_get_PropertyRect2I(object godotObject)
+            static fade_variant trampoline_get_PropertyRect2I(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyRect2I;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyRect2I;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rect2I>(ret);
             }
-            static void trampoline_set_PropertyRect2I(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyRect2I(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyRect2I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rect2I>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyRect2I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rect2I>(value);
             }
-            static godot_variant trampoline_get_PropertyTransform2D(object godotObject)
+            static fade_variant trampoline_get_PropertyTransform2D(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyTransform2D;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyTransform2D;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Transform2D>(ret);
             }
-            static void trampoline_set_PropertyTransform2D(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyTransform2D(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyTransform2D = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Transform2D>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyTransform2D = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Transform2D>(value);
             }
-            static godot_variant trampoline_get_PropertyVector3(object godotObject)
+            static fade_variant trampoline_get_PropertyVector3(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector3;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector3;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector3>(ret);
             }
-            static void trampoline_set_PropertyVector3(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector3(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector3 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector3 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3>(value);
             }
-            static godot_variant trampoline_get_PropertyVector3I(object godotObject)
+            static fade_variant trampoline_get_PropertyVector3I(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector3I;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector3I;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector3I>(ret);
             }
-            static void trampoline_set_PropertyVector3I(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector3I(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector3I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3I>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector3I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3I>(value);
             }
-            static godot_variant trampoline_get_PropertyBasis(object godotObject)
+            static fade_variant trampoline_get_PropertyBasis(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyBasis;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyBasis;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Basis>(ret);
             }
-            static void trampoline_set_PropertyBasis(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyBasis(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyBasis = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Basis>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyBasis = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Basis>(value);
             }
-            static godot_variant trampoline_get_PropertyQuaternion(object godotObject)
+            static fade_variant trampoline_get_PropertyQuaternion(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyQuaternion;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyQuaternion;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Quaternion>(ret);
             }
-            static void trampoline_set_PropertyQuaternion(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyQuaternion(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyQuaternion = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Quaternion>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyQuaternion = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Quaternion>(value);
             }
-            static godot_variant trampoline_get_PropertyTransform3D(object godotObject)
+            static fade_variant trampoline_get_PropertyTransform3D(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyTransform3D;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyTransform3D;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Transform3D>(ret);
             }
-            static void trampoline_set_PropertyTransform3D(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyTransform3D(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyTransform3D = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Transform3D>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyTransform3D = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Transform3D>(value);
             }
-            static godot_variant trampoline_get_PropertyVector4(object godotObject)
+            static fade_variant trampoline_get_PropertyVector4(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector4;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector4;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector4>(ret);
             }
-            static void trampoline_set_PropertyVector4(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector4(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector4 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector4>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector4 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector4>(value);
             }
-            static godot_variant trampoline_get_PropertyVector4I(object godotObject)
+            static fade_variant trampoline_get_PropertyVector4I(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector4I;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector4I;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector4I>(ret);
             }
-            static void trampoline_set_PropertyVector4I(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector4I(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector4I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector4I>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector4I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector4I>(value);
             }
-            static godot_variant trampoline_get_PropertyProjection(object godotObject)
+            static fade_variant trampoline_get_PropertyProjection(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyProjection;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyProjection;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Projection>(ret);
             }
-            static void trampoline_set_PropertyProjection(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyProjection(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyProjection = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Projection>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyProjection = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Projection>(value);
             }
-            static godot_variant trampoline_get_PropertyAabb(object godotObject)
+            static fade_variant trampoline_get_PropertyAabb(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyAabb;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyAabb;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Aabb>(ret);
             }
-            static void trampoline_set_PropertyAabb(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyAabb(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyAabb = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Aabb>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyAabb = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Aabb>(value);
             }
-            static godot_variant trampoline_get_PropertyColor(object godotObject)
+            static fade_variant trampoline_get_PropertyColor(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyColor;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyColor;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Color>(ret);
             }
-            static void trampoline_set_PropertyColor(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyColor(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyColor = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Color>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyColor = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Color>(value);
             }
-            static godot_variant trampoline_get_PropertyPlane(object godotObject)
+            static fade_variant trampoline_get_PropertyPlane(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyPlane;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyPlane;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Plane>(ret);
             }
-            static void trampoline_set_PropertyPlane(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyPlane(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyPlane = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Plane>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyPlane = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Plane>(value);
             }
-            static godot_variant trampoline_get_PropertyCallable(object godotObject)
+            static fade_variant trampoline_get_PropertyCallable(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyCallable;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyCallable;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
-            static void trampoline_set_PropertyCallable(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyCallable(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyCallable = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Callable>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyCallable = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Callable>(value);
             }
-            static godot_variant trampoline_get_PropertySignal(object godotObject)
+            static fade_variant trampoline_get_PropertySignal(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertySignal;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertySignal;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Signal>(ret);
             }
-            static void trampoline_set_PropertySignal(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertySignal(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertySignal = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Signal>(value);
+                ((global::ExportedProperties)fadeObject).@PropertySignal = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Signal>(value);
             }
-            static godot_variant trampoline_get_PropertyEnum(object godotObject)
+            static fade_variant trampoline_get_PropertyEnum(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyEnum;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyEnum;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::ExportedProperties.MyEnum>(ret);
             }
-            static void trampoline_set_PropertyEnum(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyEnum(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::ExportedProperties.MyEnum>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::ExportedProperties.MyEnum>(value);
             }
-            static godot_variant trampoline_get_PropertyFlagsEnum(object godotObject)
+            static fade_variant trampoline_get_PropertyFlagsEnum(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFlagsEnum;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFlagsEnum;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::ExportedProperties.MyFlagsEnum>(ret);
             }
-            static void trampoline_set_PropertyFlagsEnum(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFlagsEnum(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFlagsEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::ExportedProperties.MyFlagsEnum>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFlagsEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::ExportedProperties.MyFlagsEnum>(value);
             }
-            static godot_variant trampoline_get_PropertyByteArray(object godotObject)
+            static fade_variant trampoline_get_PropertyByteArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyByteArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyByteArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<byte[]>(ret);
             }
-            static void trampoline_set_PropertyByteArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyByteArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyByteArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<byte[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyByteArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<byte[]>(value);
             }
-            static godot_variant trampoline_get_PropertyInt32Array(object godotObject)
+            static fade_variant trampoline_get_PropertyInt32Array(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyInt32Array;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyInt32Array;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
             }
-            static void trampoline_set_PropertyInt32Array(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyInt32Array(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyInt32Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyInt32Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
             }
-            static godot_variant trampoline_get_PropertyInt64Array(object godotObject)
+            static fade_variant trampoline_get_PropertyInt64Array(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyInt64Array;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyInt64Array;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<long[]>(ret);
             }
-            static void trampoline_set_PropertyInt64Array(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyInt64Array(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyInt64Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<long[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyInt64Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<long[]>(value);
             }
-            static godot_variant trampoline_get_PropertySingleArray(object godotObject)
+            static fade_variant trampoline_get_PropertySingleArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertySingleArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertySingleArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float[]>(ret);
             }
-            static void trampoline_set_PropertySingleArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertySingleArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertySingleArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<float[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertySingleArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<float[]>(value);
             }
-            static godot_variant trampoline_get_PropertyDoubleArray(object godotObject)
+            static fade_variant trampoline_get_PropertyDoubleArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyDoubleArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyDoubleArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<double[]>(ret);
             }
-            static void trampoline_set_PropertyDoubleArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyDoubleArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyDoubleArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<double[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyDoubleArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<double[]>(value);
             }
-            static godot_variant trampoline_get_PropertyStringArray(object godotObject)
+            static fade_variant trampoline_get_PropertyStringArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyStringArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyStringArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string[]>(ret);
             }
-            static void trampoline_set_PropertyStringArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyStringArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyStringArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyStringArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
             }
-            static godot_variant trampoline_get_PropertyStringArrayEnum(object godotObject)
+            static fade_variant trampoline_get_PropertyStringArrayEnum(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyStringArrayEnum;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyStringArrayEnum;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string[]>(ret);
             }
-            static void trampoline_set_PropertyStringArrayEnum(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyStringArrayEnum(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyStringArrayEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyStringArrayEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
             }
-            static godot_variant trampoline_get_PropertyVector2Array(object godotObject)
+            static fade_variant trampoline_get_PropertyVector2Array(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector2Array;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector2Array;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector2[]>(ret);
             }
-            static void trampoline_set_PropertyVector2Array(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector2Array(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector2Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector2Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2[]>(value);
             }
-            static godot_variant trampoline_get_PropertyVector3Array(object godotObject)
+            static fade_variant trampoline_get_PropertyVector3Array(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVector3Array;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVector3Array;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector3[]>(ret);
             }
-            static void trampoline_set_PropertyVector3Array(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVector3Array(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVector3Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVector3Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3[]>(value);
             }
-            static godot_variant trampoline_get_PropertyColorArray(object godotObject)
+            static fade_variant trampoline_get_PropertyColorArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyColorArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyColorArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Color[]>(ret);
             }
-            static void trampoline_set_PropertyColorArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyColorArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyColorArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Color[]>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyColorArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Color[]>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEObjectOrDerivedArray(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEObjectOrDerivedArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEObjectOrDerivedArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEObjectOrDerivedArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFromSystemArrayOfFADEObject(ret);
             }
-            static void trampoline_set_PropertyFADEObjectOrDerivedArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEObjectOrDerivedArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEObjectOrDerivedArray = global::FADE.NativeInterop.VariantUtils.ConvertToSystemArrayOfFADEObject<global::FADE.FADEObject>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEObjectOrDerivedArray = global::FADE.NativeInterop.VariantUtils.ConvertToSystemArrayOfFADEObject<global::FADE.FADEObject>(value);
             }
-            static godot_variant trampoline_get_field_StringNameArray(object godotObject)
+            static fade_variant trampoline_get_field_StringNameArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@field_StringNameArray;
+                var ret = ((global::ExportedProperties)fadeObject).@field_StringNameArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.StringName[]>(ret);
             }
-            static void trampoline_set_field_StringNameArray(object godotObject, in godot_variant value)
+            static void trampoline_set_field_StringNameArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@field_StringNameArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName[]>(value);
+                ((global::ExportedProperties)fadeObject).@field_StringNameArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName[]>(value);
             }
-            static godot_variant trampoline_get_field_NodePathArray(object godotObject)
+            static fade_variant trampoline_get_field_NodePathArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@field_NodePathArray;
+                var ret = ((global::ExportedProperties)fadeObject).@field_NodePathArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.NodePath[]>(ret);
             }
-            static void trampoline_set_field_NodePathArray(object godotObject, in godot_variant value)
+            static void trampoline_set_field_NodePathArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@field_NodePathArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath[]>(value);
+                ((global::ExportedProperties)fadeObject).@field_NodePathArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath[]>(value);
             }
-            static godot_variant trampoline_get_field_RidArray(object godotObject)
+            static fade_variant trampoline_get_field_RidArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@field_RidArray;
+                var ret = ((global::ExportedProperties)fadeObject).@field_RidArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rid[]>(ret);
             }
-            static void trampoline_set_field_RidArray(object godotObject, in godot_variant value)
+            static void trampoline_set_field_RidArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@field_RidArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rid[]>(value);
+                ((global::ExportedProperties)fadeObject).@field_RidArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rid[]>(value);
             }
-            static godot_variant trampoline_get_PropertyVariant(object godotObject)
+            static fade_variant trampoline_get_PropertyVariant(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyVariant;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyVariant;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Variant>(ret);
             }
-            static void trampoline_set_PropertyVariant(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyVariant(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyVariant = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Variant>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyVariant = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Variant>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEObjectOrDerived(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEObjectOrDerived(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEObjectOrDerived;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEObjectOrDerived;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.FADEObject>(ret);
             }
-            static void trampoline_set_PropertyFADEObjectOrDerived(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEObjectOrDerived(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEObjectOrDerived = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.FADEObject>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEObjectOrDerived = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.FADEObject>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEResourceTexture(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEResourceTexture(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEResourceTexture;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEResourceTexture;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Texture>(ret);
             }
-            static void trampoline_set_PropertyFADEResourceTexture(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEResourceTexture(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEResourceTexture = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Texture>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEResourceTexture = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Texture>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEResourceTextureWithInitializer(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEResourceTextureWithInitializer(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEResourceTextureWithInitializer;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEResourceTextureWithInitializer;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Texture>(ret);
             }
-            static void trampoline_set_PropertyFADEResourceTextureWithInitializer(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEResourceTextureWithInitializer(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEResourceTextureWithInitializer = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Texture>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEResourceTextureWithInitializer = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Texture>(value);
             }
-            static godot_variant trampoline_get_PropertyStringName(object godotObject)
+            static fade_variant trampoline_get_PropertyStringName(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyStringName;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyStringName;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.StringName>(ret);
             }
-            static void trampoline_set_PropertyStringName(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyStringName(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyStringName = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyStringName = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName>(value);
             }
-            static godot_variant trampoline_get_PropertyNodePath(object godotObject)
+            static fade_variant trampoline_get_PropertyNodePath(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyNodePath;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyNodePath;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.NodePath>(ret);
             }
-            static void trampoline_set_PropertyNodePath(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyNodePath(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyNodePath = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyNodePath = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath>(value);
             }
-            static godot_variant trampoline_get_PropertyRid(object godotObject)
+            static fade_variant trampoline_get_PropertyRid(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyRid;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyRid;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rid>(ret);
             }
-            static void trampoline_set_PropertyRid(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyRid(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyRid = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rid>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyRid = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rid>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEDictionary(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEDictionary(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEDictionary;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEDictionary;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Collections.Dictionary>(ret);
             }
-            static void trampoline_set_PropertyFADEDictionary(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEDictionary(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEDictionary = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Collections.Dictionary>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEDictionary = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Collections.Dictionary>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEArray(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Collections.Array>(ret);
             }
-            static void trampoline_set_PropertyFADEArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Collections.Array>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Collections.Array>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEGenericDictionary(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEGenericDictionary(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEGenericDictionary;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEGenericDictionary;
                 return global::FADE.NativeInterop.VariantUtils.CreateFromDictionary(ret);
             }
-            static void trampoline_set_PropertyFADEGenericDictionary(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEGenericDictionary(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEGenericDictionary = global::FADE.NativeInterop.VariantUtils.ConvertToDictionary<string, bool>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEGenericDictionary = global::FADE.NativeInterop.VariantUtils.ConvertToDictionary<string, bool>(value);
             }
-            static godot_variant trampoline_get_PropertyFADEGenericArray(object godotObject)
+            static fade_variant trampoline_get_PropertyFADEGenericArray(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@PropertyFADEGenericArray;
+                var ret = ((global::ExportedProperties)fadeObject).@PropertyFADEGenericArray;
                 return global::FADE.NativeInterop.VariantUtils.CreateFromArray(ret);
             }
-            static void trampoline_set_PropertyFADEGenericArray(object godotObject, in godot_variant value)
+            static void trampoline_set_PropertyFADEGenericArray(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@PropertyFADEGenericArray = global::FADE.NativeInterop.VariantUtils.ConvertToArray<int>(value);
+                ((global::ExportedProperties)fadeObject).@PropertyFADEGenericArray = global::FADE.NativeInterop.VariantUtils.ConvertToArray<int>(value);
             }
-            static godot_variant trampoline_get_NotIgnoredProperty(object godotObject)
+            static fade_variant trampoline_get_NotIgnoredProperty(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@NotIgnoredProperty;
+                var ret = ((global::ExportedProperties)fadeObject).@NotIgnoredProperty;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<int>(ret);
             }
-            static void trampoline_set_NotIgnoredProperty(object godotObject, in godot_variant value)
+            static void trampoline_set_NotIgnoredProperty(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@NotIgnoredProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
+                ((global::ExportedProperties)fadeObject).@NotIgnoredProperty = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
             }
-            static godot_variant trampoline_get__notGeneratePropertyString(object godotObject)
+            static fade_variant trampoline_get__notGeneratePropertyString(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_notGeneratePropertyString;
+                var ret = ((global::ExportedProperties)fadeObject).@_notGeneratePropertyString;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set__notGeneratePropertyString(object godotObject, in godot_variant value)
+            static void trampoline_set__notGeneratePropertyString(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_notGeneratePropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@_notGeneratePropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get__notGeneratePropertyInt(object godotObject)
+            static fade_variant trampoline_get__notGeneratePropertyInt(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_notGeneratePropertyInt;
+                var ret = ((global::ExportedProperties)fadeObject).@_notGeneratePropertyInt;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<int>(ret);
             }
-            static void trampoline_set__notGeneratePropertyInt(object godotObject, in godot_variant value)
+            static void trampoline_set__notGeneratePropertyInt(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_notGeneratePropertyInt = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
+                ((global::ExportedProperties)fadeObject).@_notGeneratePropertyInt = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
             }
-            static godot_variant trampoline_get__fullPropertyString(object godotObject)
+            static fade_variant trampoline_get__fullPropertyString(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_fullPropertyString;
+                var ret = ((global::ExportedProperties)fadeObject).@_fullPropertyString;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set__fullPropertyString(object godotObject, in godot_variant value)
+            static void trampoline_set__fullPropertyString(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_fullPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@_fullPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get__fullPropertyStringComplex(object godotObject)
+            static fade_variant trampoline_get__fullPropertyStringComplex(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_fullPropertyStringComplex;
+                var ret = ((global::ExportedProperties)fadeObject).@_fullPropertyStringComplex;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set__fullPropertyStringComplex(object godotObject, in godot_variant value)
+            static void trampoline_set__fullPropertyStringComplex(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_fullPropertyStringComplex = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@_fullPropertyStringComplex = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get__fullPropertyStaticImport(object godotObject)
+            static fade_variant trampoline_get__fullPropertyStaticImport(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_fullPropertyStaticImport;
+                var ret = ((global::ExportedProperties)fadeObject).@_fullPropertyStaticImport;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set__fullPropertyStaticImport(object godotObject, in godot_variant value)
+            static void trampoline_set__fullPropertyStaticImport(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_fullPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@_fullPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
-            static godot_variant trampoline_get__lamdaPropertyString(object godotObject)
+            static fade_variant trampoline_get__lamdaPropertyString(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_lamdaPropertyString;
+                var ret = ((global::ExportedProperties)fadeObject).@_lamdaPropertyString;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
-            static void trampoline_set__lamdaPropertyString(object godotObject, in godot_variant value)
+            static void trampoline_set__lamdaPropertyString(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_lamdaPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedProperties)fadeObject).@_lamdaPropertyString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
-            static godot_variant trampoline_get__lambdaPropertyStaticImport(object godotObject)
+            static fade_variant trampoline_get__lambdaPropertyStaticImport(object fadeObject)
             {
-                var ret = ((global::ExportedProperties)godotObject).@_lambdaPropertyStaticImport;
+                var ret = ((global::ExportedProperties)fadeObject).@_lambdaPropertyStaticImport;
                 return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
-            static void trampoline_set__lambdaPropertyStaticImport(object godotObject, in godot_variant value)
+            static void trampoline_set__lambdaPropertyStaticImport(object fadeObject, in fade_variant value)
             {
-                ((global::ExportedProperties)godotObject).@_lambdaPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedProperties)fadeObject).@_lambdaPropertyStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
             var aux_delegate_get_NotGenerateComplexLamdaProperty = trampoline_get_NotGenerateComplexLamdaProperty;
             var aux_delegate_set_NotGenerateComplexLamdaProperty = trampoline_set_NotGenerateComplexLamdaProperty;

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -38,7 +38,7 @@
 #undef NIR_ENABLED
 #endif
 
-#include "drivers/d3d12/d3d12_godot_nir_bridge.h"
+#include "drivers/d3d12/d3d12_fade_nir_bridge.h"
 
 #define D3D12_BITCODE_OFFSETS_NUM_STAGES 3
 

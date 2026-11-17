@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,11 +28,11 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot;
+package org.fadeengine.fade;
 
-import org.godotengine.godot.error.Error;
-import org.godotengine.godot.plugin.FADEPlugin;
-import org.godotengine.godot.utils.BenchmarkUtils;
+import org.fadeengine.fade.error.Error;
+import org.fadeengine.fade.plugin.FADEPlugin;
+import org.fadeengine.fade.utils.BenchmarkUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -60,15 +60,15 @@ import java.util.Set;
 public class FADEFragment extends Fragment implements FADEHost {
 	private static final String TAG = FADEFragment.class.getSimpleName();
 
-	private FrameLayout godotContainerLayout;
+	private FrameLayout fadeContainerLayout;
 
 	@Nullable
 	private FADEHost parentHost;
-	private FADE godot;
+	private FADE fade;
 
 	@Override
 	public FADE getFADE() {
-		return godot;
+		return fade;
 	}
 
 	@Override
@@ -83,9 +83,9 @@ public class FADEFragment extends Fragment implements FADEHost {
 
 	@Override
 	public void onDetach() {
-		if (godotContainerLayout != null && godotContainerLayout.getParent() != null) {
+		if (fadeContainerLayout != null && fadeContainerLayout.getParent() != null) {
 			Log.d(TAG, "Cleaning up FADE container layout during detach.");
-			((ViewGroup)godotContainerLayout.getParent()).removeView(godotContainerLayout);
+			((ViewGroup)fadeContainerLayout.getParent()).removeView(fadeContainerLayout);
 		}
 
 		super.onDetach();
@@ -96,21 +96,21 @@ public class FADEFragment extends Fragment implements FADEHost {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		godot.onConfigurationChanged(newConfig);
+		fade.onConfigurationChanged(newConfig);
 	}
 
 	@CallSuper
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		godot.onActivityResult(requestCode, resultCode, data);
+		fade.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@CallSuper
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		godot.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		fade.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
 	@Override
@@ -119,10 +119,10 @@ public class FADEFragment extends Fragment implements FADEHost {
 		super.onCreate(icicle);
 
 		if (parentHost != null) {
-			godot = parentHost.getFADE();
+			fade = parentHost.getFADE();
 		}
-		if (godot == null) {
-			godot = FADE.getInstance(requireContext());
+		if (fade == null) {
+			fade = FADE.getInstance(requireContext());
 		}
 		performEngineInitialization();
 		BenchmarkUtils.endBenchmarkMeasure("Startup", "FADEFragment::onCreate");
@@ -130,12 +130,12 @@ public class FADEFragment extends Fragment implements FADEHost {
 
 	private void performEngineInitialization() {
 		try {
-			if (!godot.initEngine(this, getCommandLine(), getHostPlugins(godot))) {
+			if (!fade.initEngine(this, getCommandLine(), getHostPlugins(fade))) {
 				throw new IllegalStateException("Unable to initialize FADE engine");
 			}
 
-			godotContainerLayout = godot.onInitRenderView(this);
-			if (godotContainerLayout == null) {
+			fadeContainerLayout = fade.onInitRenderView(this);
+			if (fadeContainerLayout == null) {
 				throw new IllegalStateException("Unable to initialize engine render view");
 			}
 		} catch (Exception e) {
@@ -143,57 +143,57 @@ public class FADEFragment extends Fragment implements FADEHost {
 			final String errorMessage = TextUtils.isEmpty(e.getMessage())
 					? getString(R.string.error_engine_setup_message)
 					: e.getMessage();
-			godot.alert(errorMessage, getString(R.string.text_error_title), godot::destroyAndKillProcess);
+			fade.alert(errorMessage, getString(R.string.text_error_title), fade::destroyAndKillProcess);
 		}
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle icicle) {
-		if (godotContainerLayout != null && godotContainerLayout.getParent() != null) {
+		if (fadeContainerLayout != null && fadeContainerLayout.getParent() != null) {
 			Log.w(TAG, "FADE container layout already has a parent, removing it.");
-			((ViewGroup)godotContainerLayout.getParent()).removeView(godotContainerLayout);
+			((ViewGroup)fadeContainerLayout.getParent()).removeView(fadeContainerLayout);
 		}
 
-		return godotContainerLayout;
+		return fadeContainerLayout;
 	}
 
 	@Override
 	public void onDestroy() {
-		if (godotContainerLayout != null && godotContainerLayout.getParent() != null) {
+		if (fadeContainerLayout != null && fadeContainerLayout.getParent() != null) {
 			Log.w(TAG, "Removing FADE container layout from parent during destruction.");
-			((ViewGroup)godotContainerLayout.getParent()).removeView(godotContainerLayout);
+			((ViewGroup)fadeContainerLayout.getParent()).removeView(fadeContainerLayout);
 		}
 
-		godot.onDestroy(this);
+		fade.onDestroy(this);
 		super.onDestroy();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		godot.onPause(this);
+		fade.onPause(this);
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		godot.onStop(this);
+		fade.onStop(this);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		godot.onStart(this);
+		fade.onStart(this);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		godot.onResume(this);
+		fade.onResume(this);
 	}
 
 	public void onBackPressed() {
-		godot.onBackPressed();
+		fade.onBackPressed();
 	}
 
 	@CallSuper
@@ -226,8 +226,8 @@ public class FADEFragment extends Fragment implements FADEHost {
 	}
 
 	@Override
-	public boolean onFADEForceQuit(int godotInstanceId) {
-		return parentHost != null && parentHost.onFADEForceQuit(godotInstanceId);
+	public boolean onFADEForceQuit(int fadeInstanceId) {
+		return parentHost != null && parentHost.onFADEForceQuit(fadeInstanceId);
 	}
 
 	@Override

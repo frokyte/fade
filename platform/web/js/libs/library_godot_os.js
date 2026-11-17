@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_os.js                                                   */
+/*  library_fade_os.js                                                   */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -60,7 +60,7 @@ const FADEConfig = {
 		locale: 'en',
 		canvas_resize_policy: 2, // Adaptive
 		virtual_keyboard: false,
-		godot_pool_size: 4,
+		fade_pool_size: 4,
 		debug_port: null,
 		on_execute: null,
 		on_terminate_pid: null,
@@ -72,7 +72,7 @@ const FADEConfig = {
 			FADEConfig.canvas = p_opts['canvas'];
 			FADEConfig.locale = p_opts['locale'] || FADEConfig.locale;
 			FADEConfig.virtual_keyboard = p_opts['virtualKeyboard'];
-			FADEConfig.godot_pool_size = p_opts['godotPoolSize'];
+			FADEConfig.fade_pool_size = p_opts['fadePoolSize'];
 			FADEConfig.debug_port = p_opts['debugPort'];
 			FADEConfig.pid = p_opts['pid'];
 			FADEConfig.on_execute = p_opts['onExecute'];
@@ -98,21 +98,21 @@ const FADEConfig = {
 		},
 	},
 
-	godot_js_config_pid_get__proxy: 'sync',
-	godot_js_config_pid_get__sig: 'i',
-	godot_js_config_pid_get: function () {
+	fade_js_config_pid_get__proxy: 'sync',
+	fade_js_config_pid_get__sig: 'i',
+	fade_js_config_pid_get: function () {
 		return FADEConfig.pid;
 	},
 
-	godot_js_config_canvas_id_get__proxy: 'sync',
-	godot_js_config_canvas_id_get__sig: 'vii',
-	godot_js_config_canvas_id_get: function (p_ptr, p_ptr_max) {
+	fade_js_config_canvas_id_get__proxy: 'sync',
+	fade_js_config_canvas_id_get__sig: 'vii',
+	fade_js_config_canvas_id_get: function (p_ptr, p_ptr_max) {
 		FADERuntime.stringToHeap(`#${FADEConfig.canvas.id}`, p_ptr, p_ptr_max);
 	},
 
-	godot_js_config_locale_get__proxy: 'sync',
-	godot_js_config_locale_get__sig: 'vii',
-	godot_js_config_locale_get: function (p_ptr, p_ptr_max) {
+	fade_js_config_locale_get__proxy: 'sync',
+	fade_js_config_locale_get__sig: 'vii',
+	fade_js_config_locale_get: function (p_ptr, p_ptr_max) {
 		FADERuntime.stringToHeap(FADEConfig.locale, p_ptr, p_ptr_max);
 	},
 };
@@ -137,7 +137,7 @@ const FADEFS = {
 			return FADEFS._idbfs ? 1 : 0;
 		},
 
-		// Initialize godot file system, setting up persistent paths.
+		// Initialize fade file system, setting up persistent paths.
 		// Returns a promise that resolves when the FS is ready.
 		// We keep track of mount_points, so that we can properly close the IDBFS
 		// since emscripten is not doing it by itself. (emscripten GH#12516).
@@ -181,7 +181,7 @@ const FADEFS = {
 			});
 		},
 
-		// Deinit godot file system, making sure to unmount file systems, and close IDBFS(s).
+		// Deinit fade file system, making sure to unmount file systems, and close IDBFS(s).
 		deinit: function () {
 			FADEFS._mount_points.forEach(function (path) {
 				try {
@@ -282,28 +282,28 @@ const FADEOS = {
 		},
 	},
 
-	godot_js_os_finish_async__proxy: 'sync',
-	godot_js_os_finish_async__sig: 'vi',
-	godot_js_os_finish_async: function (p_callback) {
+	fade_js_os_finish_async__proxy: 'sync',
+	fade_js_os_finish_async__sig: 'vi',
+	fade_js_os_finish_async: function (p_callback) {
 		const func = FADERuntime.get_func(p_callback);
 		FADEOS.finish_async(func);
 	},
 
-	godot_js_os_request_quit_cb__proxy: 'sync',
-	godot_js_os_request_quit_cb__sig: 'vi',
-	godot_js_os_request_quit_cb: function (p_callback) {
+	fade_js_os_request_quit_cb__proxy: 'sync',
+	fade_js_os_request_quit_cb__sig: 'vi',
+	fade_js_os_request_quit_cb: function (p_callback) {
 		FADEOS.request_quit = FADERuntime.get_func(p_callback);
 	},
 
-	godot_js_os_fs_is_persistent__proxy: 'sync',
-	godot_js_os_fs_is_persistent__sig: 'i',
-	godot_js_os_fs_is_persistent: function () {
+	fade_js_os_fs_is_persistent__proxy: 'sync',
+	fade_js_os_fs_is_persistent__sig: 'i',
+	fade_js_os_fs_is_persistent: function () {
 		return FADEFS.is_persistent();
 	},
 
-	godot_js_os_fs_sync__proxy: 'sync',
-	godot_js_os_fs_sync__sig: 'vi',
-	godot_js_os_fs_sync: function (callback) {
+	fade_js_os_fs_sync__proxy: 'sync',
+	fade_js_os_fs_sync__sig: 'vi',
+	fade_js_os_fs_sync: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		FADEOS._fs_sync_promise = FADEFS.sync();
 		FADEOS._fs_sync_promise.then(function (err) {
@@ -311,9 +311,9 @@ const FADEOS = {
 		});
 	},
 
-	godot_js_os_has_feature__proxy: 'sync',
-	godot_js_os_has_feature__sig: 'ii',
-	godot_js_os_has_feature: function (p_ftr) {
+	fade_js_os_has_feature__proxy: 'sync',
+	fade_js_os_has_feature__sig: 'ii',
+	fade_js_os_has_feature: function (p_ftr) {
 		const ftr = FADERuntime.parseString(p_ftr);
 		const ua = navigator.userAgent;
 		if (ftr === 'web_macos') {
@@ -334,9 +334,9 @@ const FADEOS = {
 		return 0;
 	},
 
-	godot_js_os_execute__proxy: 'sync',
-	godot_js_os_execute__sig: 'ipp',
-	godot_js_os_execute: function (p_path, p_args) {
+	fade_js_os_execute__proxy: 'sync',
+	fade_js_os_execute__sig: 'ipp',
+	fade_js_os_execute: function (p_path, p_args) {
 		const path = FADERuntime.parseString(p_path);
 		const json_args = FADERuntime.parseString(p_args);
 		const args = JSON.parse(json_args);
@@ -346,9 +346,9 @@ const FADEOS = {
 		return -1;
 	},
 
-	godot_js_os_kill__proxy: 'sync',
-	godot_js_os_kill__sig: 'ii',
-	godot_js_os_kill: function (p_pid) {
+	fade_js_os_kill__proxy: 'sync',
+	fade_js_os_kill__sig: 'ii',
+	fade_js_os_kill: function (p_pid) {
 		if (!FADEConfig.on_terminate_pid) {
 			return -1;
 		}
@@ -356,34 +356,34 @@ const FADEOS = {
 		return 0;
 	},
 
-	godot_js_os_shell_open__proxy: 'sync',
-	godot_js_os_shell_open__sig: 'vi',
-	godot_js_os_shell_open: function (p_uri) {
+	fade_js_os_shell_open__proxy: 'sync',
+	fade_js_os_shell_open__sig: 'vi',
+	fade_js_os_shell_open: function (p_uri) {
 		window.open(FADERuntime.parseString(p_uri), '_blank');
 	},
 
-	godot_js_os_hw_concurrency_get__proxy: 'sync',
-	godot_js_os_hw_concurrency_get__sig: 'i',
-	godot_js_os_hw_concurrency_get: function () {
+	fade_js_os_hw_concurrency_get__proxy: 'sync',
+	fade_js_os_hw_concurrency_get__sig: 'i',
+	fade_js_os_hw_concurrency_get: function () {
 		// TODO FADE core needs fixing to avoid spawning too many threads (> 24).
 		const concurrency = navigator.hardwareConcurrency || 1;
 		return concurrency < 2 ? concurrency : 2;
 	},
 
-	godot_js_os_thread_pool_size_get__proxy: 'sync',
-	godot_js_os_thread_pool_size_get__sig: 'i',
-	godot_js_os_thread_pool_size_get: function () {
+	fade_js_os_thread_pool_size_get__proxy: 'sync',
+	fade_js_os_thread_pool_size_get__sig: 'i',
+	fade_js_os_thread_pool_size_get: function () {
 		if (typeof PThread === 'undefined') {
 			// Threads aren't supported, so default to `1`.
 			return 1;
 		}
 
-		return FADEConfig.godot_pool_size;
+		return FADEConfig.fade_pool_size;
 	},
 
-	godot_js_os_download_buffer__proxy: 'sync',
-	godot_js_os_download_buffer__sig: 'viiii',
-	godot_js_os_download_buffer: function (p_ptr, p_size, p_name, p_mime) {
+	fade_js_os_download_buffer__proxy: 'sync',
+	fade_js_os_download_buffer__sig: 'viiii',
+	fade_js_os_download_buffer: function (p_ptr, p_size, p_name, p_mime) {
 		const buf = FADERuntime.heapSlice(HEAP8, p_ptr, p_size);
 		const name = FADERuntime.parseString(p_name);
 		const mime = FADERuntime.parseString(p_mime);
@@ -472,9 +472,9 @@ const FADEPWA = {
 		},
 	},
 
-	godot_js_pwa_cb__proxy: 'sync',
-	godot_js_pwa_cb__sig: 'vi',
-	godot_js_pwa_cb: function (p_update_cb) {
+	fade_js_pwa_cb__proxy: 'sync',
+	fade_js_pwa_cb__sig: 'vi',
+	fade_js_pwa_cb: function (p_update_cb) {
 		if ('serviceWorker' in navigator) {
 			try {
 				const cb = FADERuntime.get_func(p_update_cb);
@@ -485,9 +485,9 @@ const FADEPWA = {
 		}
 	},
 
-	godot_js_pwa_update__proxy: 'sync',
-	godot_js_pwa_update__sig: 'i',
-	godot_js_pwa_update: function () {
+	fade_js_pwa_update__proxy: 'sync',
+	fade_js_pwa_update__sig: 'i',
+	fade_js_pwa_update: function () {
 		if ('serviceWorker' in navigator && FADEPWA.hasUpdate) {
 			try {
 				navigator.serviceWorker.getRegistration().then(function (reg) {

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.service
+package org.fadeengine.fade.service
 
 import android.content.ComponentName
 import android.content.Context
@@ -49,10 +49,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import org.godotengine.godot.FADEHost
-import org.godotengine.godot.R
-import org.godotengine.godot.service.FADEService.EngineStatus.*
-import org.godotengine.godot.service.FADEService.EngineError.*
+import org.fadeengine.fade.FADEHost
+import org.fadeengine.fade.R
+import org.fadeengine.fade.service.FADEService.EngineStatus.*
+import org.fadeengine.fade.service.FADEService.EngineError.*
 import java.lang.ref.WeakReference
 
 /**
@@ -82,7 +82,7 @@ class RemoteFADEFragment: Fragment() {
 	private var serviceBound = false
 	private var remoteGameArgs = arrayOf<String>()
 
-	private var godotHost : FADEHost? = null
+	private var fadeHost : FADEHost? = null
 
 	private val serviceConnection = object : ServiceConnection {
 		override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -228,27 +228,27 @@ class RemoteFADEFragment: Fragment() {
 		super.onAttach(context)
 		val parentActivity = activity
 		if (parentActivity is FADEHost) {
-			godotHost = parentActivity
+			fadeHost = parentActivity
 		} else {
 			val parentFragment = parentFragment
 			if (parentFragment is FADEHost) {
-				godotHost = parentFragment
+				fadeHost = parentFragment
 			}
 		}
 	}
 
 	override fun onDetach() {
 		super.onDetach()
-		godotHost = null
+		fadeHost = null
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, bundle: Bundle?): View? {
-		return inflater.inflate(R.layout.remote_godot_fragment_layout, container, false)
+		return inflater.inflate(R.layout.remote_fade_fragment_layout, container, false)
 	}
 
 	override fun onViewCreated(view: View, bundle: Bundle?) {
 		super.onViewCreated(view, bundle)
-		remoteSurface = view.findViewById(R.id.remote_godot_window_surface)
+		remoteSurface = view.findViewById(R.id.remote_fade_window_surface)
 		remoteSurface?.setZOrderOnTop(false)
 
 		initFADEEngine()

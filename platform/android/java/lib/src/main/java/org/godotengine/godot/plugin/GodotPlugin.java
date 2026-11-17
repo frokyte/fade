@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.plugin;
+package org.fadeengine.fade.plugin;
 
-import org.godotengine.godot.BuildConfig;
-import org.godotengine.godot.FADE;
+import org.fadeengine.fade.BuildConfig;
+import org.fadeengine.fade.FADE;
 
 import android.app.Activity;
 import android.content.Context;
@@ -60,10 +60,10 @@ import javax.microedition.khronos.opengles.GL10;
  * <p>
  * A FADE Android plugin is an Android library with the following requirements:
  * <p>
- * - The plugin must have a dependency on the FADE Android library: `implementation "org.godotengine:godot:<godotLibVersion>"`
+ * - The plugin must have a dependency on the FADE Android library: `implementation "org.fadeengine:fade:<fadeLibVersion>"`
  * <p>
  * - The plugin must include a <meta-data> tag in its Android manifest with the following format:
- * <meta-data android:name="org.godotengine.plugin.v2.[PluginName]" android:value="[plugin.init.ClassFullName]" />
+ * <meta-data android:name="org.fadeengine.plugin.v2.[PluginName]" android:value="[plugin.init.ClassFullName]" />
  * <p>
  * Where:
  * <p>
@@ -77,27 +77,27 @@ import javax.microedition.khronos.opengles.GL10;
  * GDExtension ('*.gdextension') config files must be located in the project 'assets' directory and
  * their paths specified by {@link FADEPlugin#getPluginGDExtensionLibrariesPaths()}.
  *
- * @see <a href="https://docs.godotengine.org/en/stable/tutorials/platform/android/index.html">Android plugins</a>
+ * @see <a href="https://docs.fadeengine.org/en/stable/tutorials/platform/android/index.html">Android plugins</a>
  */
 public abstract class FADEPlugin {
 	private static final String TAG = FADEPlugin.class.getSimpleName();
 
-	private final FADE godot;
+	private final FADE fade;
 	private final ConcurrentHashMap<String, SignalInfo> registeredSignals = new ConcurrentHashMap<>();
 
 	/**
 	 * Base constructor passing a {@link FADE} instance through which the plugin can access FADE's
 	 * APIs and lifecycle events.
 	 */
-	public FADEPlugin(FADE godot) {
-		this.godot = godot;
+	public FADEPlugin(FADE fade) {
+		this.fade = fade;
 	}
 
 	/**
 	 * Provides access to the FADE engine.
 	 */
 	protected FADE getFADE() {
-		return godot;
+		return fade;
 	}
 
 	/**
@@ -105,14 +105,14 @@ public abstract class FADEPlugin {
 	 */
 	@Nullable
 	protected Activity getActivity() {
-		return godot.getActivity();
+		return fade.getActivity();
 	}
 
 	/**
 	 * Provides access to the {@link Context}.
 	 */
 	protected Context getContext() {
-		return godot.getContext();
+		return fade.getContext();
 	}
 
 	/**
@@ -173,7 +173,7 @@ public abstract class FADEPlugin {
 
 	/**
 	 * Invoked once during the initialization process after creation of the
-	 * {@link org.godotengine.godot.FADERenderView} view.
+	 * {@link org.fadeengine.fade.FADERenderView} view.
 	 * <p>
 	 * The plugin can return a non-null {@link View} layout which will be added to the FADE view
 	 * hierarchy.
@@ -357,7 +357,7 @@ public abstract class FADEPlugin {
 	/**
 	 * Returns whether the plugin supports the given feature tag.
 	 *
-	 * @see <a href="https://docs.godotengine.org/en/stable/tutorials/export/feature_tags.html">Feature tags</a>
+	 * @see <a href="https://docs.fadeengine.org/en/stable/tutorials/export/feature_tags.html">Feature tags</a>
 	 */
 	public boolean supportsFeature(String featureTag) {
 		return false;
@@ -381,7 +381,7 @@ public abstract class FADEPlugin {
 	 * @param action the action to run on the host thread
 	 */
 	protected void runOnHostThread(Runnable action) {
-		godot.runOnHostThread(action);
+		fade.runOnHostThread(action);
 	}
 
 	/**
@@ -390,7 +390,7 @@ public abstract class FADEPlugin {
 	 * @param action the action to run on the render thread
 	 */
 	protected void runOnRenderThread(Runnable action) {
-		godot.runOnRenderThread(action);
+		fade.runOnRenderThread(action);
 	}
 
 	/**
@@ -426,12 +426,12 @@ public abstract class FADEPlugin {
 
 	/**
 	 * Emit a FADE signal.
-	 * @param godot FADE instance
+	 * @param fade FADE instance
 	 * @param pluginName Name of the FADE plugin the signal will be emitted from. The plugin must already be registered with the FADE engine.
 	 * @param signalInfo Information about the signal to emit.
 	 * @param signalArgs Arguments used to populate the emitted signal. The arguments will be validated against the given {@link SignalInfo} parameter.
 	 */
-	public static void emitSignal(FADE godot, String pluginName, SignalInfo signalInfo, final Object... signalArgs) {
+	public static void emitSignal(FADE fade, String pluginName, SignalInfo signalInfo, final Object... signalArgs) {
 		try {
 			if (signalInfo == null) {
 				throw new IllegalArgumentException("Signal must be non null.");
@@ -453,7 +453,7 @@ public abstract class FADEPlugin {
 				}
 			}
 
-			godot.runOnRenderThread(() -> nativeEmitSignal(pluginName, signalInfo.getName(), signalArgs));
+			fade.runOnRenderThread(() -> nativeEmitSignal(pluginName, signalInfo.getName(), signalArgs));
 
 		} catch (IllegalArgumentException exception) {
 			Log.w(TAG, exception);

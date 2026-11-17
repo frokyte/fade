@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_fetch.js                                                */
+/*  library_fade_fetch.js                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -61,7 +61,7 @@ const FADEFetch = {
 			obj.response = response;
 			// `body` can be null per spec (for example, in cases where the request method is HEAD).
 			// As of the time of writing, Chromium (127.0.6533.72) does not follow the spec but Firefox (131.0.3) does.
-			// See godotengine/godot#76825 for more information.
+			// See fadeengine/fade#76825 for more information.
 			// See Chromium revert (of the change to follow the spec):
 			// https://chromium.googlesource.com/chromium/src/+/135354b7bdb554cd03c913af7c90aceead03c4d4
 			obj.reader = response.body?.getReader();
@@ -134,9 +134,9 @@ const FADEFetch = {
 		},
 	},
 
-	godot_js_fetch_create__proxy: 'sync',
-	godot_js_fetch_create__sig: 'iiiiiii',
-	godot_js_fetch_create: function (p_method, p_url, p_headers, p_headers_size, p_body, p_body_size) {
+	fade_js_fetch_create__proxy: 'sync',
+	fade_js_fetch_create__sig: 'iiiiiii',
+	fade_js_fetch_create: function (p_method, p_url, p_headers, p_headers_size, p_body, p_body_size) {
 		const method = FADERuntime.parseString(p_method);
 		const url = FADERuntime.parseString(p_url);
 		const headers = FADERuntime.parseStringArray(p_headers, p_headers_size);
@@ -155,9 +155,9 @@ const FADEFetch = {
 		}), body);
 	},
 
-	godot_js_fetch_state_get__proxy: 'sync',
-	godot_js_fetch_state_get__sig: 'ii',
-	godot_js_fetch_state_get: function (p_id) {
+	fade_js_fetch_state_get__proxy: 'sync',
+	fade_js_fetch_state_get__sig: 'ii',
+	fade_js_fetch_state_get: function (p_id) {
 		const obj = IDHandler.get(p_id);
 		if (!obj) {
 			return -1;
@@ -180,9 +180,9 @@ const FADEFetch = {
 		return -1;
 	},
 
-	godot_js_fetch_http_status_get__proxy: 'sync',
-	godot_js_fetch_http_status_get__sig: 'ii',
-	godot_js_fetch_http_status_get: function (p_id) {
+	fade_js_fetch_http_status_get__proxy: 'sync',
+	fade_js_fetch_http_status_get__sig: 'ii',
+	fade_js_fetch_http_status_get: function (p_id) {
 		const obj = IDHandler.get(p_id);
 		if (!obj || !obj.response) {
 			return 0;
@@ -190,9 +190,9 @@ const FADEFetch = {
 		return obj.status;
 	},
 
-	godot_js_fetch_read_headers__proxy: 'sync',
-	godot_js_fetch_read_headers__sig: 'iiii',
-	godot_js_fetch_read_headers: function (p_id, p_parse_cb, p_ref) {
+	fade_js_fetch_read_headers__proxy: 'sync',
+	fade_js_fetch_read_headers__sig: 'iiii',
+	fade_js_fetch_read_headers: function (p_id, p_parse_cb, p_ref) {
 		const obj = IDHandler.get(p_id);
 		if (!obj || !obj.response) {
 			return 1;
@@ -208,9 +208,9 @@ const FADEFetch = {
 		return 0;
 	},
 
-	godot_js_fetch_read_chunk__proxy: 'sync',
-	godot_js_fetch_read_chunk__sig: 'iiii',
-	godot_js_fetch_read_chunk: function (p_id, p_buf, p_buf_size) {
+	fade_js_fetch_read_chunk__proxy: 'sync',
+	fade_js_fetch_read_chunk__sig: 'iiii',
+	fade_js_fetch_read_chunk: function (p_id, p_buf, p_buf_size) {
 		const obj = IDHandler.get(p_id);
 		if (!obj || !obj.response) {
 			return 0;
@@ -235,9 +235,9 @@ const FADEFetch = {
 		return p_buf_size - to_read;
 	},
 
-	godot_js_fetch_is_chunked__proxy: 'sync',
-	godot_js_fetch_is_chunked__sig: 'ii',
-	godot_js_fetch_is_chunked: function (p_id) {
+	fade_js_fetch_is_chunked__proxy: 'sync',
+	fade_js_fetch_is_chunked__sig: 'ii',
+	fade_js_fetch_is_chunked: function (p_id) {
 		const obj = IDHandler.get(p_id);
 		if (!obj || !obj.response) {
 			return -1;
@@ -245,9 +245,9 @@ const FADEFetch = {
 		return obj.chunked ? 1 : 0;
 	},
 
-	godot_js_fetch_free__proxy: 'sync',
-	godot_js_fetch_free__sig: 'vi',
-	godot_js_fetch_free: function (id) {
+	fade_js_fetch_free__proxy: 'sync',
+	fade_js_fetch_free__sig: 'vi',
+	fade_js_fetch_free: function (id) {
 		FADEFetch.free(id);
 	},
 };

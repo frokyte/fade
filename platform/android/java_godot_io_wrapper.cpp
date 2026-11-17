@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_io_wrapper.cpp                                             */
+/*  java_fade_io_wrapper.cpp                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "java_godot_io_wrapper.h"
+#include "java_fade_io_wrapper.h"
 
 #include "jni_utils.h"
 #include "thread_jandroid.h"
@@ -41,10 +41,10 @@
 // For FADEIO we call all access methods from our thread and we thus get a valid JNIEnv
 // from get_jni_env().
 
-FADEIOJavaWrapper::FADEIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instance) {
-	godot_io_instance = p_env->NewGlobalRef(p_godot_io_instance);
-	if (godot_io_instance) {
-		cls = p_env->GetObjectClass(godot_io_instance);
+FADEIOJavaWrapper::FADEIOJavaWrapper(JNIEnv *p_env, jobject p_fade_io_instance) {
+	fade_io_instance = p_env->NewGlobalRef(p_fade_io_instance);
+	if (fade_io_instance) {
+		cls = p_env->GetObjectClass(fade_io_instance);
 		if (cls) {
 			cls = (jclass)p_env->NewGlobalRef(cls);
 		} else {
@@ -79,11 +79,11 @@ FADEIOJavaWrapper::~FADEIOJavaWrapper() {
 	ERR_FAIL_NULL(env);
 
 	env->DeleteGlobalRef(cls);
-	env->DeleteGlobalRef(godot_io_instance);
+	env->DeleteGlobalRef(fade_io_instance);
 }
 
 jobject FADEIOJavaWrapper::get_instance() {
-	return godot_io_instance;
+	return fade_io_instance;
 }
 
 Error FADEIOJavaWrapper::open_uri(const String &p_uri) {
@@ -91,7 +91,7 @@ Error FADEIOJavaWrapper::open_uri(const String &p_uri) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNAVAILABLE);
 		jstring jStr = env->NewStringUTF(p_uri.utf8().get_data());
-		Error result = env->CallIntMethod(godot_io_instance, _open_URI, jStr) ? ERR_CANT_OPEN : OK;
+		Error result = env->CallIntMethod(fade_io_instance, _open_URI, jStr) ? ERR_CANT_OPEN : OK;
 		env->DeleteLocalRef(jStr);
 		return result;
 	} else {
@@ -103,7 +103,7 @@ String FADEIOJavaWrapper::get_cache_dir() {
 	if (_get_cache_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_cache_dir);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_cache_dir);
 		return jstring_to_string(s, env);
 	} else {
 		return String();
@@ -114,7 +114,7 @@ String FADEIOJavaWrapper::get_temp_dir() {
 	if (_get_temp_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_temp_dir);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_temp_dir);
 		return jstring_to_string(s, env);
 	} else {
 		return String();
@@ -125,7 +125,7 @@ String FADEIOJavaWrapper::get_user_data_dir(const String &p_user_dir) {
 	if (_get_data_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_data_dir);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_data_dir);
 		return jstring_to_string(s, env);
 	} else {
 		return String();
@@ -136,7 +136,7 @@ String FADEIOJavaWrapper::get_locale() {
 	if (_get_locale) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_locale);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_locale);
 		return jstring_to_string(s, env);
 	} else {
 		return String();
@@ -147,7 +147,7 @@ String FADEIOJavaWrapper::get_model() {
 	if (_get_model) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_model);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_model);
 		return jstring_to_string(s, env);
 	} else {
 		return String();
@@ -158,7 +158,7 @@ int FADEIOJavaWrapper::get_screen_dpi() {
 	if (_get_screen_DPI) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 160);
-		return env->CallIntMethod(godot_io_instance, _get_screen_DPI);
+		return env->CallIntMethod(fade_io_instance, _get_screen_DPI);
 	} else {
 		return 160;
 	}
@@ -168,7 +168,7 @@ float FADEIOJavaWrapper::get_scaled_density() {
 	if (_get_scaled_density) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 1.0f);
-		return env->CallFloatMethod(godot_io_instance, _get_scaled_density);
+		return env->CallFloatMethod(fade_io_instance, _get_scaled_density);
 	} else {
 		return 1.0f;
 	}
@@ -181,7 +181,7 @@ float FADEIOJavaWrapper::get_screen_refresh_rate(float fallback) {
 			ERR_PRINT("An error occurred while trying to get screen refresh rate.");
 			return fallback;
 		}
-		return (float)env->CallDoubleMethod(godot_io_instance, _get_screen_refresh_rate, (double)fallback);
+		return (float)env->CallDoubleMethod(fade_io_instance, _get_screen_refresh_rate, (double)fallback);
 	}
 	ERR_PRINT("An error occurred while trying to get the screen refresh rate.");
 	return fallback;
@@ -192,7 +192,7 @@ TypedArray<Rect2> FADEIOJavaWrapper::get_display_cutouts() {
 	ERR_FAIL_NULL_V(_get_display_cutouts, result);
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL_V(env, result);
-	jintArray returnArray = (jintArray)env->CallObjectMethod(godot_io_instance, _get_display_cutouts);
+	jintArray returnArray = (jintArray)env->CallObjectMethod(fade_io_instance, _get_display_cutouts);
 	jint arrayLength = env->GetArrayLength(returnArray);
 	jint *arrayBody = env->GetIntArrayElements(returnArray, JNI_FALSE);
 	int cutouts = arrayLength / 4;
@@ -213,7 +213,7 @@ Rect2i FADEIOJavaWrapper::get_display_safe_area() {
 	ERR_FAIL_NULL_V(_get_display_safe_area, result);
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL_V(env, result);
-	jintArray returnArray = (jintArray)env->CallObjectMethod(godot_io_instance, _get_display_safe_area);
+	jintArray returnArray = (jintArray)env->CallObjectMethod(fade_io_instance, _get_display_safe_area);
 	ERR_FAIL_COND_V(env->GetArrayLength(returnArray) != 4, result);
 	jint *arrayBody = env->GetIntArrayElements(returnArray, JNI_FALSE);
 	result = Rect2i(arrayBody[0], arrayBody[1], arrayBody[2], arrayBody[3]);
@@ -225,7 +225,7 @@ String FADEIOJavaWrapper::get_unique_id() {
 	if (_get_unique_id) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_unique_id);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_unique_id);
 		return jstring_to_string(s, env);
 	} else {
 		return String();
@@ -240,7 +240,7 @@ bool FADEIOJavaWrapper::has_hardware_keyboard() {
 	if (_has_hardware_keyboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_io_instance, _has_hardware_keyboard);
+		return env->CallBooleanMethod(fade_io_instance, _has_hardware_keyboard);
 	} else {
 		return false;
 	}
@@ -251,7 +251,7 @@ void FADEIOJavaWrapper::show_vk(const String &p_existing, int p_type, int p_max_
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 		jstring jStr = env->NewStringUTF(p_existing.utf8().get_data());
-		env->CallVoidMethod(godot_io_instance, _show_keyboard, jStr, p_type, p_max_input_length, p_cursor_start, p_cursor_end);
+		env->CallVoidMethod(fade_io_instance, _show_keyboard, jStr, p_type, p_max_input_length, p_cursor_start, p_cursor_end);
 		env->DeleteLocalRef(jStr);
 	}
 }
@@ -260,7 +260,7 @@ void FADEIOJavaWrapper::hide_vk() {
 	if (_hide_keyboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_io_instance, _hide_keyboard);
+		env->CallVoidMethod(fade_io_instance, _hide_keyboard);
 	}
 }
 
@@ -268,7 +268,7 @@ void FADEIOJavaWrapper::set_screen_orientation(int p_orient) {
 	if (_set_screen_orientation) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_io_instance, _set_screen_orientation, p_orient);
+		env->CallVoidMethod(fade_io_instance, _set_screen_orientation, p_orient);
 	}
 }
 
@@ -276,7 +276,7 @@ int FADEIOJavaWrapper::get_screen_orientation() {
 	if (_get_screen_orientation) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 0);
-		return env->CallIntMethod(godot_io_instance, _get_screen_orientation);
+		return env->CallIntMethod(fade_io_instance, _get_screen_orientation);
 	} else {
 		return 0;
 	}
@@ -286,7 +286,7 @@ String FADEIOJavaWrapper::get_system_dir(int p_dir, bool p_shared_storage) {
 	if (_get_system_dir) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String("."));
-		jstring s = (jstring)env->CallObjectMethod(godot_io_instance, _get_system_dir, p_dir, p_shared_storage);
+		jstring s = (jstring)env->CallObjectMethod(fade_io_instance, _get_system_dir, p_dir, p_shared_storage);
 		return jstring_to_string(s, env);
 	} else {
 		return String(".");
@@ -297,7 +297,7 @@ int FADEIOJavaWrapper::get_display_rotation() {
 	if (_get_display_rotation) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 0);
-		return env->CallIntMethod(godot_io_instance, _get_display_rotation);
+		return env->CallIntMethod(fade_io_instance, _get_display_rotation);
 	} else {
 		return 0;
 	}

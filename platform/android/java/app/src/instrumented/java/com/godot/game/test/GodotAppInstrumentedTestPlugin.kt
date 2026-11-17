@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,14 +28,14 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package com.godot.game.test
+package com.fade.game.test
 
 import android.util.Log
 import android.widget.Toast
-import org.godotengine.godot.FADE
-import org.godotengine.godot.plugin.FADEPlugin
-import org.godotengine.godot.plugin.UsedByFADE
-import org.godotengine.godot.plugin.SignalInfo
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.plugin.FADEPlugin
+import org.fadeengine.fade.plugin.UsedByFADE
+import org.fadeengine.fade.plugin.SignalInfo
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit
 /**
  * [FADEPlugin] used to drive instrumented tests.
  */
-class FADEAppInstrumentedTestPlugin(godot: FADE) : FADEPlugin(godot) {
+class FADEAppInstrumentedTestPlugin(fade: FADE) : FADEPlugin(fade) {
 
 	companion object {
 		private val TAG = FADEAppInstrumentedTestPlugin::class.java.simpleName

@@ -22,7 +22,7 @@
         android:hasFragileUserData="false"
         android:icon="@mipmap/icon"
         android:isGame="true"
-        android:label="@string/godot_project_name_string"
+        android:label="@string/fade_project_name_string"
         android:requestLegacyExternalStorage="false"
         tools:ignore="UnusedAttribute">
         <profileable

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.plugin
+package org.fadeengine.fade.plugin
 
-import org.godotengine.godot.variant.Callable
+import org.fadeengine.fade.variant.Callable
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -59,8 +59,8 @@ class AndroidRuntimePluginTest {
 		return proxy!!
 	}
 
-	private fun objectIDProxy(godotObjectID: Long = 0L): Any {
-		val proxy = createProxyFromFADEObjectID.invoke(null, godotObjectID, arrayOf(Runnable::class.java.name))
+	private fun objectIDProxy(fadeObjectID: Long = 0L): Any {
+		val proxy = createProxyFromFADEObjectID.invoke(null, fadeObjectID, arrayOf(Runnable::class.java.name))
 		assertNotNull(proxy)
 		return proxy!!
 	}
@@ -124,8 +124,8 @@ class AndroidRuntimePluginTest {
 
 	@Test
 	fun `Given ObjectID proxy, When hashCode is invoked, Then returns the ObjectID hashCode`() {
-		val godotObjectID = 0x1_0000_002AL
-		val proxy = objectIDProxy(godotObjectID)
-		assertEquals(godotObjectID.hashCode(), proxy.hashCode())
+		val fadeObjectID = 0x1_0000_002AL
+		val proxy = objectIDProxy(fadeObjectID)
+		assertEquals(fadeObjectID.hashCode(), proxy.hashCode())
 	}
 }

@@ -3,7 +3,7 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
+/*                      https://fadeengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur.                 */
 /* Copyright (c) 2014-2022 FADE Engine contributors (cf. AUTHORS.md).   */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 /**
  * Provide support for running spatial container apps / games from the editor window on Android XR.
@@ -39,5 +39,5 @@ abstract class FADESpatialContainerGame : BaseFADESpatialContainerGame() {
 		internal fun isSpatialContainerEnabled() = BaseFADESpatialContainerGame.isSpatialContainerEnabled()
 	}
 
-	override fun getFADEAppLayout() = R.layout.godot_spatial_container_game_layout
+	override fun getFADEAppLayout() = R.layout.fade_spatial_container_game_layout
 }

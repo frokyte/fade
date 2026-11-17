@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_app_delegate_visionos.mm                                        */
+/*  fade_app_delegate_visionos.mm                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_app_delegate_visionos.h"
+#import "fade_app_delegate_visionos.h"
 
-#include "godot_app_delegate_service_visionos.h"
+#include "fade_app_delegate_service_visionos.h"
 
 @implementation GDTAppDelegateVisionOS
 

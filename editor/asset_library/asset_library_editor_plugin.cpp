@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -129,7 +129,7 @@ void EditorAssetLibraryItem::_asset_clicked() {
 }
 
 void EditorAssetLibraryItem::_author_clicked() {
-	OS::get_singleton()->shell_open("https://store.godotengine.org/publisher/" + author_id.uri_encode() + "/");
+	OS::get_singleton()->shell_open("https://store.fadeengine.org/publisher/" + author_id.uri_encode() + "/");
 }
 
 void EditorAssetLibraryItem::_license_clicked() {
@@ -2035,15 +2035,15 @@ void EditorAssetLibrary::_http_request_completed(int p_status, int p_code, const
 				ERR_FAIL_COND(!d.has("download_url"));
 				ERR_FAIL_COND(!d.has("version"));
 				ERR_FAIL_COND(!d.has("stable"));
-				ERR_FAIL_COND(!d.has("min_godot_version"));
-				ERR_FAIL_COND(!d.has("max_godot_version"));
+				ERR_FAIL_COND(!d.has("min_fade_version"));
+				ERR_FAIL_COND(!d.has("max_fade_version"));
 				ERR_FAIL_COND(!d.has("changes_bbcode"));
 
 				bool is_compat = true;
 
 				String compat_min;
-				if (d["min_godot_version"].get_type() != Variant::NIL) {
-					Vector<String> version = String(d["min_godot_version"]).split(".", false);
+				if (d["min_fade_version"].get_type() != Variant::NIL) {
+					Vector<String> version = String(d["min_fade_version"]).split(".", false);
 					version.resize_initialized(3);
 
 					for (int j = 0; j < version.size(); j++) {
@@ -2061,13 +2061,13 @@ void EditorAssetLibrary::_http_request_completed(int p_status, int p_code, const
 							continue; // This release is for a newer version of FADE.
 						}
 
-						compat_min = d["min_godot_version"];
+						compat_min = d["min_fade_version"];
 					}
 				}
 
 				String compat_max;
-				if (d["max_godot_version"].get_type() != Variant::NIL) {
-					Vector<String> version = String(d["max_godot_version"]).split(".", false);
+				if (d["max_fade_version"].get_type() != Variant::NIL) {
+					Vector<String> version = String(d["max_fade_version"]).split(".", false);
 					version.resize_initialized(3);
 
 					for (int j = 0; j < version.size(); j++) {
@@ -2085,7 +2085,7 @@ void EditorAssetLibrary::_http_request_completed(int p_status, int p_code, const
 							continue; // This release is for an older version of FADE.
 						}
 
-						compat_max = d["max_godot_version"];
+						compat_max = d["max_fade_version"];
 					}
 				}
 

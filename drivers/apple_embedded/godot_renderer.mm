@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_renderer.mm                                                     */
+/*  fade_renderer.mm                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_renderer.h"
+#import "fade_renderer.h"
 
 #include "core/config/project_settings.h"
 #import "drivers/apple_embedded/display_server_apple_embedded.h"

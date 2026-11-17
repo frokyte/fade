@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.input;
+package org.fadeengine.fade.input;
 
-import org.godotengine.godot.*;
+import org.fadeengine.fade.*;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -247,7 +247,7 @@ public class FADEEditText extends EditText {
 			return true;
 		}
 
-		// pass event to godot in special cases
+		// pass event to fade in special cases
 		if (needHandlingInFADE(keyCode, keyEvent) && mRenderView.getInputHandler().onKeyDown(keyCode, keyEvent)) {
 			return true;
 		} else {

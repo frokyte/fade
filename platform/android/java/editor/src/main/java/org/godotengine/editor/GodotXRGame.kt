@@ -3,7 +3,7 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
+/*                      https://fadeengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur.                 */
 /* Copyright (c) 2014-2022 FADE Engine contributors (cf. AUTHORS.md).   */
@@ -28,13 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 import androidx.annotation.CallSuper
-import org.godotengine.godot.FADELib
-import org.godotengine.godot.xr.XRMode
-import org.godotengine.openxr.vendors.utils.HYBRID_APP_SPATIAL_FEATURE
-import org.godotengine.openxr.vendors.utils.isHybridAppEnabled
+import org.fadeengine.fade.FADELib
+import org.fadeengine.fade.xr.XRMode
+import org.fadeengine.openxr.vendors.utils.HYBRID_APP_SPATIAL_FEATURE
+import org.fadeengine.openxr.vendors.utils.isHybridAppEnabled
 
 /**
  * Provide support for running XR apps / games from the editor window.
@@ -57,7 +57,7 @@ open class FADEXRGame: BaseFADEGame() {
 
 	override fun getEditorWindowInfo() = XR_RUN_GAME_INFO
 
-	override fun getFADEAppLayout() = R.layout.godot_xr_game_layout
+	override fun getFADEAppLayout() = R.layout.fade_xr_game_layout
 
 	override fun getProjectPermissionsToEnable(): MutableList<String> {
 		val permissionsToEnable = super.getProjectPermissionsToEnable()

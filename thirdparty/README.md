@@ -43,11 +43,11 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-build-fixes.patch` ([GH-81197](https://github.com/godotengine/godot/pull/81197))
-- `0002-godot-fsr2-options.patch` ([GH-81197](https://github.com/godotengine/godot/pull/81197))
-- `0003-storage-format-fix.patch` ([GH-119342](https://github.com/godotengine/godot/pull/119342))
-- `0004-remove-unused-srv-binding.patch` ([GH-84976](https://github.com/godotengine/godot/pull/84976))
-- `0005-missing-force16-includes.patch` ([GH-125150](https://github.com/godotengine/godot/pull/125150))
+- `0001-build-fixes.patch` ([GH-81197](https://github.com/fadeengine/fade/pull/81197))
+- `0002-fade-fsr2-options.patch` ([GH-81197](https://github.com/fadeengine/fade/pull/81197))
+- `0003-storage-format-fix.patch` ([GH-119342](https://github.com/fadeengine/fade/pull/119342))
+- `0004-remove-unused-srv-binding.patch` ([GH-84976](https://github.com/fadeengine/fade/pull/84976))
+- `0005-missing-force16-includes.patch` ([GH-125150](https://github.com/fadeengine/fade/pull/125150))
 
 
 ## angle
@@ -88,12 +88,12 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-external-zstd-pr344.patch` ([GH-73441](https://github.com/godotengine/godot/pull/73441))
-- `0002-external-tinyexr.patch` ([GH-97582](https://github.com/godotengine/godot/pull/97582))
-- `0003-remove-tinydds-qoi.patch` ([GH-97582](https://github.com/godotengine/godot/pull/97582))
-- `0004-clang-warning-exclude.patch` ([GH-111346](https://github.com/godotengine/godot/pull/111346))
-- `0005-unused-typedef.patch` ([GH-111445](https://github.com/godotengine/godot/pull/111445))
-- `0006-explicit-includes.patch` ([GH-111767](https://github.com/godotengine/godot/pull/111767))
+- `0001-external-zstd-pr344.patch` ([GH-73441](https://github.com/fadeengine/fade/pull/73441))
+- `0002-external-tinyexr.patch` ([GH-97582](https://github.com/fadeengine/fade/pull/97582))
+- `0003-remove-tinydds-qoi.patch` ([GH-97582](https://github.com/fadeengine/fade/pull/97582))
+- `0004-clang-warning-exclude.patch` ([GH-111346](https://github.com/fadeengine/fade/pull/111346))
+- `0005-unused-typedef.patch` ([GH-111445](https://github.com/fadeengine/fade/pull/111445))
+- `0006-explicit-includes.patch` ([GH-111767](https://github.com/fadeengine/fade/pull/111767))
 
 
 ## brotli
@@ -133,8 +133,8 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-disable-exceptions.patch` ([GH-80796](https://github.com/godotengine/godot/pull/80796))
-- `0002-llvm-21-header.patch` ([GH-113857](https://github.com/godotengine/godot/pull/113857))
+- `0001-disable-exceptions.patch` ([GH-80796](https://github.com/fadeengine/fade/pull/80796))
+- `0002-llvm-21-header.patch` ([GH-113857](https://github.com/fadeengine/fade/pull/113857))
 
 
 ## cvtt
@@ -150,7 +150,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-revert-bc6h-reorg.patch` ([GH-73715](https://github.com/godotengine/godot/pull/73715))
+- `0001-revert-bc6h-reorg.patch` ([GH-73715](https://github.com/fadeengine/fade/pull/73715))
 
 
 ## d3d12ma
@@ -167,7 +167,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-mingw-support.patch` ([GH-83452](https://github.com/godotengine/godot/pull/83452))
+- `0001-mingw-support.patch` ([GH-83452](https://github.com/fadeengine/fade/pull/83452))
 
 
 ## directx_headers
@@ -184,7 +184,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-win7-8-dynamic-load.patch` ([GH-88496](https://github.com/godotengine/godot/pull/88496))
+- `0001-win7-8-dynamic-load.patch` ([GH-88496](https://github.com/fadeengine/fade/pull/88496))
 
 
 ## doctest
@@ -221,21 +221,21 @@ Files extracted from upstream source:
 
 Files extracted from upstream:
 
-- All `.cpp` files listed in `modules/raycast/godot_update_embree.py`
-- All header files in the directories listed in `modules/raycast/godot_update_embree.py`
-- All config files listed in `modules/raycast/godot_update_embree.py`
+- All `.cpp` files listed in `modules/raycast/fade_update_embree.py`
+- All header files in the directories listed in `modules/raycast/fade_update_embree.py`
+- All config files listed in `modules/raycast/fade_update_embree.py`
 - `LICENSE.txt`
 
 Patches:
 
-- `0001-disable-exceptions.patch` ([GH-48050](https://github.com/godotengine/godot/pull/48050))
-- `0002-godot-config.patch` ([GH-88783](https://github.com/godotengine/godot/pull/88783))
-- `0003-emscripten-nthreads.patch` ([GH-69799](https://github.com/godotengine/godot/pull/69799))
-- `0004-mingw-no-cpuidex.patch` ([GH-92488](https://github.com/godotengine/godot/pull/92488))
-- `0005-mingw-llvm-arm64.patch` ([GH-93364](https://github.com/godotengine/godot/pull/93364))
-- `0006-explicit-includes.patch` ([GH-111767](https://github.com/godotengine/godot/pull/111767))
+- `0001-disable-exceptions.patch` ([GH-48050](https://github.com/fadeengine/fade/pull/48050))
+- `0002-fade-config.patch` ([GH-88783](https://github.com/fadeengine/fade/pull/88783))
+- `0003-emscripten-nthreads.patch` ([GH-69799](https://github.com/fadeengine/fade/pull/69799))
+- `0004-mingw-no-cpuidex.patch` ([GH-92488](https://github.com/fadeengine/fade/pull/92488))
+- `0005-mingw-llvm-arm64.patch` ([GH-93364](https://github.com/fadeengine/fade/pull/93364))
+- `0006-explicit-includes.patch` ([GH-111767](https://github.com/fadeengine/fade/pull/111767))
 
-The `modules/raycast/godot_update_embree.py` script can be used to pull the
+The `modules/raycast/fade_update_embree.py` script can be used to pull the
 relevant files from the latest Embree release and apply patches automatically.
 
 
@@ -250,12 +250,12 @@ Files extracted from upstream source:
 - All `.c` files in the main directory (except `unix.c` and `win32.c`)
 - The `include/enet/` folder (except `unix.h` and `win32.h`)
 - `LICENSE` file
-- Added 3 files `enet_godot.cpp`, `enet/enet_godot.h`, and `enet/enet_godot_ext.h`,
+- Added 3 files `enet_fade.cpp`, `enet/enet_fade.h`, and `enet/enet_fade_ext.h`,
   providing ENet socket implementation using FADE classes, allowing IPv6 and DTLS.
 
 Patches:
 
-- `0001-godot-socket.patch` ([GH-7985](https://github.com/godotengine/godot/pull/7985))
+- `0001-fade-socket.patch` ([GH-7985](https://github.com/fadeengine/fade/pull/7985))
 
 Important: Building against a system wide ENet is possible, but will limit its
 functionality to IPv4 only and no DTLS. We recommend against it.
@@ -279,7 +279,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-remove-bc7enc.patch` ([GH-101362](https://github.com/godotengine/godot/pull/101362))
+- `0001-remove-bc7enc.patch` ([GH-101362](https://github.com/fadeengine/fade/pull/101362))
 
 
 ## fonts
@@ -384,7 +384,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-fix-warnings.patch` ([GH-111679](https://github.com/godotengine/godot/pull/111679))
+- `0001-fix-warnings.patch` ([GH-111679](https://github.com/fadeengine/fade/pull/111679))
 
 
 ## glad
@@ -411,8 +411,8 @@ to regenerate the files with a new version of the web instance.
 
 Patches:
 
-- `0001-enable-both-gl-and-gles.patch` ([GH-72831](https://github.com/godotengine/godot/pull/72831))
-- `0002-revert-egl_static-removal.patch` ([GH-107312](https://github.com/godotengine/godot/pull/107312))
+- `0001-enable-both-gl-and-gles.patch` ([GH-72831](https://github.com/fadeengine/fade/pull/72831))
+- `0002-revert-egl_static-removal.patch` ([GH-107312](https://github.com/fadeengine/fade/pull/107312))
 
 
 ## glslang
@@ -438,9 +438,9 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-apple-disable-absolute-paths.patch` ([GH-92010](https://github.com/godotengine/godot/pull/92010))
-- `0002-apple-m1-msaa-fix.patch` ([GH-116225](https://github.com/godotengine/godot/pull/116225))
-- `0003-preprocessor-token-name-memcpy.patch` ([GH-123319](https://github.com/godotengine/godot/pull/123319))
+- `0001-apple-disable-absolute-paths.patch` ([GH-92010](https://github.com/fadeengine/fade/pull/92010))
+- `0002-apple-m1-msaa-fix.patch` ([GH-116225](https://github.com/fadeengine/fade/pull/116225))
+- `0003-preprocessor-token-name-memcpy.patch` ([GH-123319](https://github.com/fadeengine/fade/pull/123319))
 
 
 ## graphite
@@ -470,7 +470,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-godot-changes.patch` ([GH-98750](https://github.com/godotengine/godot/pull/98750))
+- `0001-fade-changes.patch` ([GH-98750](https://github.com/fadeengine/fade/pull/98750))
 
 
 ## harfbuzz
@@ -503,7 +503,7 @@ Files extracted from upstream source:
 
 Files generated from upstream source:
 
-- The `icudt_godot.dat` built with the provided `godot_data.json` config file (see
+- The `icudt_fade.dat` built with the provided `fade_data.json` config file (see
   https://github.com/unicode-org/icu/blob/master/docs/userguide/icu_data/buildtool.md
   for instructions).
 
@@ -511,14 +511,14 @@ Files generated from upstream source:
   (replace `data` subfolder from the main source archive)
 2. Build ICU with default options: `./runConfigureICU {PLATFORM} && make`
 3. Reconfigure ICU with custom data config:
-   `ICU_DATA_FILTER_FILE={GODOT_SOURCE}/thirdparty/icu4c/godot_data.json ./runConfigureICU {PLATFORM} --with-data-packaging=common`
+   `ICU_DATA_FILTER_FILE={GODOT_SOURCE}/thirdparty/icu4c/fade_data.json ./runConfigureICU {PLATFORM} --with-data-packaging=common`
 4. Delete `data/out` folder and rebuild data: `cd data && rm -rf ./out && make`
-5. Copy `source/data/out/icudt{ICU_VERSION}l.dat` to the `{GODOT_SOURCE}/thirdparty/icu4c/icudt_godot.dat`
+5. Copy `source/data/out/icudt{ICU_VERSION}l.dat` to the `{GODOT_SOURCE}/thirdparty/icu4c/icudt_fade.dat`
 
 Patches:
 
-- `0001-ustr-literals.patch` ([GH-124792](https://github.com/godotengine/godot/pull/124792))
-- `0002-tuple-include.patch` ([GH-124792](https://github.com/godotengine/godot/pull/124792))
+- `0001-ustr-literals.patch` ([GH-124792](https://github.com/fadeengine/fade/pull/124792))
+- `0002-tuple-include.patch` ([GH-124792](https://github.com/fadeengine/fade/pull/124792))
 
 
 ## jolt_physics
@@ -534,7 +534,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-backport-upstream-commit-63f2f57.patch` ([GH-121974](https://github.com/godotengine/godot/pull/121974))
+- `0001-backport-upstream-commit-63f2f57.patch` ([GH-121974](https://github.com/fadeengine/fade/pull/121974))
 
 
 ## libbacktrace
@@ -557,7 +557,7 @@ Files generated from upstream source:
 
 Patches:
 
-- `0001-big-files-support.patch` ([GH-100281](https://github.com/godotengine/godot/pull/100281))
+- `0001-big-files-support.patch` ([GH-100281](https://github.com/fadeengine/fade/pull/100281))
 
 
 ## libjpeg-turbo
@@ -575,10 +575,10 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-cmake-generated-headers.patch` ([GH-104347](https://github.com/godotengine/godot/pull/104347))
+- `0001-cmake-generated-headers.patch` ([GH-104347](https://github.com/fadeengine/fade/pull/104347))
   * Compare with CMake-generated headers to bump version and added potential new config values.
-- `0002-disable-16bitlossless.patch` ([GH-104347](https://github.com/godotengine/godot/pull/104347))
-- `0003-remove-bmp-ppm-support.patch` ([GH-104347](https://github.com/godotengine/godot/pull/104347))
+- `0002-disable-16bitlossless.patch` ([GH-104347](https://github.com/fadeengine/fade/pull/104347))
+- `0003-remove-bmp-ppm-support.patch` ([GH-104347](https://github.com/fadeengine/fade/pull/104347))
 
 
 ## libktx
@@ -600,9 +600,9 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-external-basisu.patch` ([GH-76572](https://github.com/godotengine/godot/pull/76572))
-- `0002-disable-astc-block-ext.patch` ([GH-76572](https://github.com/godotengine/godot/pull/76572))
-- `0003-basisu-1.60.patch` ([GH-103968](https://github.com/godotengine/godot/pull/103968))
+- `0001-external-basisu.patch` ([GH-76572](https://github.com/fadeengine/fade/pull/76572))
+- `0002-disable-astc-block-ext.patch` ([GH-76572](https://github.com/fadeengine/fade/pull/76572))
+- `0003-basisu-1.60.patch` ([GH-103968](https://github.com/fadeengine/fade/pull/103968))
 
 
 ## libogg
@@ -671,10 +671,10 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-msvc-node-debug-rename.patch` ([GH-75769](https://github.com/godotengine/godot/pull/75769))
-- `0002-msvc-arm64-fpstrict.patch` ([GH-94655](https://github.com/godotengine/godot/pull/94655))
-- `0003-clang-cl-sse2-sse41-avx2.patch` ([GH-92316](https://github.com/godotengine/godot/pull/92316))
-- `0004-emscripten-cppdefine.patch` ([GH-122412](https://github.com/godotengine/godot/pull/122412))
+- `0001-msvc-node-debug-rename.patch` ([GH-75769](https://github.com/fadeengine/fade/pull/75769))
+- `0002-msvc-arm64-fpstrict.patch` ([GH-94655](https://github.com/fadeengine/fade/pull/94655))
+- `0003-clang-cl-sse2-sse41-avx2.patch` ([GH-92316](https://github.com/fadeengine/fade/pull/92316))
+- `0004-emscripten-cppdefine.patch` ([GH-122412](https://github.com/fadeengine/fade/pull/122412))
 
 
 ## linuxbsd_headers
@@ -695,7 +695,7 @@ File extracted from upstream source:
 
 Patches:
 
-- `0001-missing-include.patch` ([GH-120018](https://github.com/godotengine/godot/pull/120018))
+- `0001-missing-include.patch` ([GH-120018](https://github.com/fadeengine/fade/pull/120018))
 
 
 ## mbedtls
@@ -716,12 +716,12 @@ File extracted from upstream release tarball:
 
 - Relevant headers and library files via the script in `thirdparty/mbedtls/extract_mbedtls_sources.py`
 - `LICENSE` (edited to keep only the Apache 2.0 variant)
-- Added 3 headers `godot_mbedtls_config.h`, `godot_psa_config.h` and `threading_alt.h` in `thirdparty/mbedtls/godot` for build configuration
-- Added `thirdparty/mbedtls/godot/godot_mbedtls_platform.cpp` to implement some mbedTLS platform functions using FADE-native APIs
+- Added 3 headers `fade_mbedtls_config.h`, `fade_psa_config.h` and `threading_alt.h` in `thirdparty/mbedtls/fade` for build configuration
+- Added `thirdparty/mbedtls/fade/fade_mbedtls_platform.cpp` to implement some mbedTLS platform functions using FADE-native APIs
 
 Patches:
 
-- `0001-fix-msvc-light.patch` ([GH-124014](https://github.com/godotengine/godot/pull/124014))
+- `0001-fix-msvc-light.patch` ([GH-124014](https://github.com/fadeengine/fade/pull/124014))
 
 
 ## meshoptimizer
@@ -756,8 +756,8 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-add-missing-apis.patch` ([GH-114484](https://github.com/godotengine/godot/pull/114484))
-- `0002-sharedptr-nil-safe-retain-release.patch` ([GH-123439](https://github.com/godotengine/godot/pull/123439))
+- `0001-add-missing-apis.patch` ([GH-114484](https://github.com/fadeengine/fade/pull/114484))
+- `0002-sharedptr-nil-safe-retain-release.patch` ([GH-123439](https://github.com/fadeengine/fade/pull/123439))
 
 
 ## mingw-std-threads
@@ -777,9 +777,9 @@ Files extracted from upstream repository:
 
 Patches:
 
-- `0001-disable-exceptions.patch` ([GH-85039](https://github.com/godotengine/godot/pull/85039))
-- `0002-clang-std-replacements-leak.patch` ([GH-85208](https://github.com/godotengine/godot/pull/85208))
-- `0003-explicit-includes.patch` ([GH-111767](https://github.com/godotengine/godot/pull/111767))
+- `0001-disable-exceptions.patch` ([GH-85039](https://github.com/fadeengine/fade/pull/85039))
+- `0002-clang-std-replacements-leak.patch` ([GH-85208](https://github.com/fadeengine/fade/pull/85208))
+- `0003-explicit-includes.patch` ([GH-111767](https://github.com/fadeengine/fade/pull/111767))
 
 
 ## miniupnpc
@@ -800,9 +800,9 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-minixml-fix-buffer-read-overflow.patch` ([GH-124962](https://github.com/godotengine/godot/pull/124962))
-- `0002-minixml-fix-buffer-overrun-after-namespace-separator.patch` ([GH-124962](https://github.com/godotengine/godot/pull/124962))
-- `0003-minixml-fix-1-byte-out-of-bounds-read.patch` ([GH-124962](https://github.com/godotengine/godot/pull/124962))
+- `0001-minixml-fix-buffer-read-overflow.patch` ([GH-124962](https://github.com/fadeengine/fade/pull/124962))
+- `0002-minixml-fix-buffer-overrun-after-namespace-separator.patch` ([GH-124962](https://github.com/fadeengine/fade/pull/124962))
+- `0003-minixml-fix-1-byte-out-of-bounds-read.patch` ([GH-124962](https://github.com/fadeengine/fade/pull/124962))
 
 
 ## minizip
@@ -819,7 +819,7 @@ Files extracted from the upstream source:
 
 Patches:
 
-- `0001-godot-seek.patch` ([GH-10428](https://github.com/godotengine/godot/pull/10428))
+- `0001-fade-seek.patch` ([GH-10428](https://github.com/fadeengine/fade/pull/10428))
 
 
 ## misc
@@ -846,7 +846,7 @@ Collection of single-file libraries used in FADE components.
   * Version: 1.1.0 (ee2f4eaeaffeaa599342544b22e62cb2f9cea570, 2023)
   * License: MIT
   * Patches:
-    - `FastNoiseLite-0001-namespace-warnings.patch` ([GH-88526](https://github.com/godotengine/godot/pull/88526))
+    - `FastNoiseLite-0001-namespace-warnings.patch` ([GH-88526](https://github.com/fadeengine/fade/pull/88526))
 - `gamemode_client.h`
   * Upstream: https://github.com/FeralInteractive/gamemode (`lib/gamemode_client.h`)
   * Version: 1.8.2 (c54d6d4243b0dd0afcb49f2c9836d432da171a2b, 2024)
@@ -856,8 +856,8 @@ Collection of single-file libraries used in FADE components.
   * Version: git (fbb1efa61417540336cf52976d4ff4394bfa795b, 2013)
   * License: BSD-3-Clause
   * Patches:
-    - `ifaddrs-android-0001-godot-changes.patch` ([GH-24499](https://github.com/godotengine/godot/pull/24499))
-    - `ifaddrs-android-0002-complete-struct.patch` ([GH-34101](https://github.com/godotengine/godot/pull/34101))
+    - `ifaddrs-android-0001-fade-changes.patch` ([GH-24499](https://github.com/fadeengine/fade/pull/24499))
+    - `ifaddrs-android-0002-complete-struct.patch` ([GH-34101](https://github.com/fadeengine/fade/pull/34101))
 - `nvapi_minimal.h`
   * Upstream: https://download.nvidia.com/XFree86/nvapi-open-source-sdk (`R525-OpenSource.tar`),
     newer releases at https://github.com/NVIDIA/nvapi
@@ -869,8 +869,8 @@ Collection of single-file libraries used in FADE components.
   * Version: git (7561fbab5c8b982020ed212aebb0b8620c44b228, 2025)
   * License: MIT
   * Patches:
-    - `ok_color-0001-godot-changes.patch` ([GH-59786](https://github.com/godotengine/godot/pull/59786), [GH-77036](https://github.com/godotengine/godot/pull/77036))
-    - `ok_color-0002-srgb_to_okhsl_precision.patch` ([GH-104112](https://github.com/godotengine/godot/pull/104112))
+    - `ok_color-0001-fade-changes.patch` ([GH-59786](https://github.com/fadeengine/fade/pull/59786), [GH-77036](https://github.com/fadeengine/fade/pull/77036))
+    - `ok_color-0002-srgb_to_okhsl_precision.patch` ([GH-104112](https://github.com/fadeengine/fade/pull/104112))
 - `ok_color_shader.h`
   * https://www.shadertoy.com/view/7sK3D1
   * Version: 2021-09-13
@@ -887,8 +887,8 @@ Collection of single-file libraries used in FADE components.
   * Version: git (7bdffb428b2b19ad1c43aa44c714dcc104177e84, 2021)
   * License: MIT
   * Patches:
-    - `polypartition-0001-godot-types.patch` (2185c018f)
-    - `polypartition-0002-shadow-warning.patch` ([GH-66808](https://github.com/godotengine/godot/pull/66808))
+    - `polypartition-0001-fade-types.patch` (2185c018f)
+    - `polypartition-0002-shadow-warning.patch` ([GH-66808](https://github.com/fadeengine/fade/pull/66808))
 - `qoa.{c,h}`
   * Upstream: https://github.com/phoboslab/qoa
   * Version: git (1bf9bc04673df55dc554021b768006836f69d53a, 2026)
@@ -905,8 +905,8 @@ Collection of single-file libraries used in FADE components.
   * License: BSD-3-Clause
   * Modifications: License included in header.
   * Patches:
-    - `smaz-0001-write-string-warning.patch` ([GH-8572](https://github.com/godotengine/godot/pull/8572))
-    - `smaz-0002-decompress-input-bounds.patch` ([GH-124701](https://github.com/godotengine/godot/pull/124701))
+    - `smaz-0001-write-string-warning.patch` ([GH-8572](https://github.com/fadeengine/fade/pull/8572))
+    - `smaz-0002-decompress-input-bounds.patch` ([GH-124701](https://github.com/fadeengine/fade/pull/124701))
 - `smolv.{cpp,h}`
   * Upstream: https://github.com/aras-p/smol-v
   * Version: git (9dd54c379ac29fa148cb1b829bb939ba7381d8f4, 2024)
@@ -937,7 +937,7 @@ Files extracted from the upstream source:
 
 Patches:
 
-- `0001-remove-unused-save-features.patch` ([GH-113965](https://github.com/godotengine/godot/pull/113965))
+- `0001-remove-unused-save-features.patch` ([GH-113965](https://github.com/fadeengine/fade/pull/113965))
 
 
 ## offset_allocator
@@ -956,10 +956,10 @@ preserved on updates.
 
 Patches:
 
-- `0001-fix-allocation-count-tracking.patch` ([GH-121392](https://github.com/godotengine/godot/pull/121392))
-- `0002-fix-16-bit-node-indices.patch` ([GH-121392](https://github.com/godotengine/godot/pull/121392))
-- `0003-fix-maximum-allocation-size.patch` ([GH-121392](https://github.com/godotengine/godot/pull/121392))
-- `0004-add-header-guard.patch` ([GH-121392](https://github.com/godotengine/godot/pull/121392))
+- `0001-fix-allocation-count-tracking.patch` ([GH-121392](https://github.com/fadeengine/fade/pull/121392))
+- `0002-fix-16-bit-node-indices.patch` ([GH-121392](https://github.com/fadeengine/fade/pull/121392))
+- `0003-fix-maximum-allocation-size.patch` ([GH-121392](https://github.com/fadeengine/fade/pull/121392))
+- `0004-add-header-guard.patch` ([GH-121392](https://github.com/fadeengine/fade/pull/121392))
 
 
 ## openxr
@@ -994,7 +994,7 @@ Additional:
 
 Patches:
 
-- `0001-remove-try-catch.patch` ([GH-123123](https://github.com/godotengine/godot/pull/123123))
+- `0001-remove-try-catch.patch` ([GH-123123](https://github.com/fadeengine/fade/pull/123123))
 
 
 ## pcre2
@@ -1077,13 +1077,13 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-remove-unnecessary-subsystems.patch` ([GH-106218](https://github.com/godotengine/godot/pull/106218))
-- `0002-fix-libudev-dbus.patch` ([GH-108373](https://github.com/godotengine/godot/pull/108373))
-- `0003-fix-cs-environ.patch` ([GH-109283](https://github.com/godotengine/godot/pull/109283))
-- `0004-ios-accelerometer.patch` ([GH-120373](https://github.com/godotengine/godot/pull/120373))
-- `0005-ios-link.patch` ([GH-123903](https://github.com/godotengine/godot/pull/123903))
-- `0006-ios-iostream-no-prefpath.patch` ([GH-123899](https://github.com/godotengine/godot/pull/123899))
-- `0007-fix-linux-getenv-unsafe.patch` ([GH-124017](https://github.com/godotengine/godot/pull/124017))
+- `0001-remove-unnecessary-subsystems.patch` ([GH-106218](https://github.com/fadeengine/fade/pull/106218))
+- `0002-fix-libudev-dbus.patch` ([GH-108373](https://github.com/fadeengine/fade/pull/108373))
+- `0003-fix-cs-environ.patch` ([GH-109283](https://github.com/fadeengine/fade/pull/109283))
+- `0004-ios-accelerometer.patch` ([GH-120373](https://github.com/fadeengine/fade/pull/120373))
+- `0005-ios-link.patch` ([GH-123903](https://github.com/fadeengine/fade/pull/123903))
+- `0006-ios-iostream-no-prefpath.patch` ([GH-123899](https://github.com/fadeengine/fade/pull/123899))
+- `0007-fix-linux-getenv-unsafe.patch` ([GH-124017](https://github.com/fadeengine/fade/pull/124017))
 
 
 ## smaa
@@ -1142,14 +1142,14 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-zero-size-for-sc-sized-arrays.patch` ([GH-94985](https://github.com/godotengine/godot/pull/94985))
-- `0002-spirv-headers.patch` ([GH-111452](https://github.com/godotengine/godot/pull/111452))
-- `0003-findnode-id-lookup-table.patch` ([GH-121835](https://github.com/godotengine/godot/pull/121835))
+- `0001-zero-size-for-sc-sized-arrays.patch` ([GH-94985](https://github.com/fadeengine/fade/pull/94985))
+- `0002-spirv-headers.patch` ([GH-111452](https://github.com/fadeengine/fade/pull/111452))
+- `0003-findnode-id-lookup-table.patch` ([GH-121835](https://github.com/fadeengine/fade/pull/121835))
 
 
 ## swappy-frame-pacing
 
-- Upstream: https://android.googlesource.com/platform/frameworks/opt/gamesdk/ via https://github.com/godotengine/godot-swappy
+- Upstream: https://android.googlesource.com/platform/frameworks/opt/gamesdk/ via https://github.com/fadeengine/fade-swappy
 - Version: git (1198bb06b041e2df5d42cc5cf18fac81fcefa03f, 2025)
 - License: Apache 2.0
 
@@ -1173,7 +1173,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-let-delete-be-delete.patch` ([GH-116024](https://github.com/godotengine/godot/pull/116024))
+- `0001-let-delete-be-delete.patch` ([GH-116024](https://github.com/fadeengine/fade/pull/116024))
 
 
 ## tinyexr
@@ -1191,8 +1191,8 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-external-zlib.patch` ([GH-55115](https://github.com/godotengine/godot/pull/55115))
-- `0002-fix-multipart-header-stale-size.patch` ([GH-124638](https://github.com/godotengine/godot/pull/124638))
+- `0001-external-zlib.patch` ([GH-55115](https://github.com/fadeengine/fade/pull/55115))
+- `0002-fix-multipart-header-stale-size.patch` ([GH-124638](https://github.com/fadeengine/fade/pull/124638))
 
 
 ## ufbx
@@ -1220,11 +1220,11 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-bullet-namespace.patch` ([GH-27929](https://github.com/godotengine/godot/pull/27929))
-- `0002-fpermissive-fix.patch` ([GH-27929](https://github.com/godotengine/godot/pull/27929))
-- `0003-fix-musl-build.patch` ([GH-34250](https://github.com/godotengine/godot/pull/34250))
-- `0004-fix-msvc-arm-build.patch` ([GH-34331](https://github.com/godotengine/godot/pull/34331))
-- `0005-gcc13-include-fix.patch` ([GH-61310](https://github.com/godotengine/godot/pull/61310), [GH-77949](https://github.com/godotengine/godot/pull/77949))
+- `0001-bullet-namespace.patch` ([GH-27929](https://github.com/fadeengine/fade/pull/27929))
+- `0002-fpermissive-fix.patch` ([GH-27929](https://github.com/fadeengine/fade/pull/27929))
+- `0003-fix-musl-build.patch` ([GH-34250](https://github.com/fadeengine/fade/pull/34250))
+- `0004-fix-msvc-arm-build.patch` ([GH-34331](https://github.com/fadeengine/fade/pull/34331))
+- `0005-gcc13-include-fix.patch` ([GH-61310](https://github.com/fadeengine/fade/pull/61310), [GH-77949](https://github.com/fadeengine/fade/pull/77949))
 
 
 ## volk
@@ -1272,10 +1272,10 @@ Version: 3.3.0 (1d8f600fd424278486eade7ed3e877c99f0846b1, 2025)
 
 Patches:
 
-- `0001-VKEnumStringHelper-godot-vulkan.patch` ([GH-97510](https://github.com/godotengine/godot/pull/97510))
-- `0002-VMA-godot-vulkan.patch` ([GH-97510](https://github.com/godotengine/godot/pull/97510))
-- `0003-VMA-add-vmaCalculateLazilyAllocatedBytes.patch` ([GH-99257](https://github.com/godotengine/godot/pull/99257))
-- `0004-VMA-ignore-maxMemoryAllocationCount.patch` ([GH-125146](https://github.com/godotengine/godot/pull/125146))
+- `0001-VKEnumStringHelper-fade-vulkan.patch` ([GH-97510](https://github.com/fadeengine/fade/pull/97510))
+- `0002-VMA-fade-vulkan.patch` ([GH-97510](https://github.com/fadeengine/fade/pull/97510))
+- `0003-VMA-add-vmaCalculateLazilyAllocatedBytes.patch` ([GH-99257](https://github.com/fadeengine/fade/pull/99257))
+- `0004-VMA-ignore-maxMemoryAllocationCount.patch` ([GH-125146](https://github.com/fadeengine/fade/pull/125146))
 
 
 ## wayland
@@ -1371,7 +1371,7 @@ Files extracted from upstream source:
 
 Patches:
 
-- `0001-msvc-build-fix.patch` ([GH-30263](https://github.com/godotengine/godot/pull/30263))
+- `0001-msvc-build-fix.patch` ([GH-30263](https://github.com/fadeengine/fade/pull/30263))
 
 
 ## xatlas

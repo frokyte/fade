@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor
+package org.fadeengine.editor
 
 import android.Manifest
 import android.app.ActivityManager
@@ -55,25 +55,25 @@ import androidx.core.content.edit
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
 import androidx.window.layout.WindowMetricsCalculator
-import org.godotengine.editor.buildprovider.GradleBuildProvider
-import org.godotengine.editor.embed.EmbeddedFADEGame
-import org.godotengine.editor.embed.GameMenuFragment
-import org.godotengine.editor.utils.Utils
-import org.godotengine.editor.utils.signApk
-import org.godotengine.editor.utils.verifyApk
-import org.godotengine.godot.BuildProvider
-import org.godotengine.godot.FADE
-import org.godotengine.godot.FADEActivity
-import org.godotengine.godot.FADELib
-import org.godotengine.godot.editor.utils.EditorUtils
-import org.godotengine.godot.editor.utils.GameMenuUtils
-import org.godotengine.godot.editor.utils.GameMenuUtils.GameEmbedMode
-import org.godotengine.godot.editor.utils.GameMenuUtils.fetchGameEmbedMode
-import org.godotengine.godot.error.Error
-import org.godotengine.godot.utils.DialogUtils
-import org.godotengine.godot.utils.PermissionsUtil
-import org.godotengine.godot.utils.ProcessPhoenix
-import org.godotengine.openxr.vendors.utils.*
+import org.fadeengine.editor.buildprovider.GradleBuildProvider
+import org.fadeengine.editor.embed.EmbeddedFADEGame
+import org.fadeengine.editor.embed.GameMenuFragment
+import org.fadeengine.editor.utils.Utils
+import org.fadeengine.editor.utils.signApk
+import org.fadeengine.editor.utils.verifyApk
+import org.fadeengine.fade.BuildProvider
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.FADEActivity
+import org.fadeengine.fade.FADELib
+import org.fadeengine.fade.editor.utils.EditorUtils
+import org.fadeengine.fade.editor.utils.GameMenuUtils
+import org.fadeengine.fade.editor.utils.GameMenuUtils.GameEmbedMode
+import org.fadeengine.fade.editor.utils.GameMenuUtils.fetchGameEmbedMode
+import org.fadeengine.fade.error.Error
+import org.fadeengine.fade.utils.DialogUtils
+import org.fadeengine.fade.utils.PermissionsUtil
+import org.fadeengine.fade.utils.ProcessPhoenix
+import org.fadeengine.openxr.vendors.utils.*
 import java.io.File
 import kotlin.math.min
 import kotlin.text.indexOf
@@ -222,7 +222,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 
 			// Check if running in instrumentation.
 			return try {
-				Class.forName("org.godotengine.editor.FADEEditorTest")
+				Class.forName("org.fadeengine.editor.FADEEditorTest")
 				true
 			} catch (_: ClassNotFoundException) {
 				false
@@ -245,7 +245,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 	} }
 	private val embeddedGameStateLabel: TextView? by lazy { findViewById<TextView?>(R.id.embedded_game_state_label)?.apply {
 		setOnClickListener {
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				GameMenuUtils.playMainScene()
 			}
 		}
@@ -263,7 +263,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 	private var activeWorkspace: String? = null
 	private var currentOrientation = Configuration.ORIENTATION_UNDEFINED
 
-	override fun getFADEAppLayout() = R.layout.godot_editor_layout
+	override fun getFADEAppLayout() = R.layout.fade_editor_layout
 
 	internal open fun getEditorWindowInfo() = EDITOR_MAIN_INFO
 
@@ -331,7 +331,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		// Add the game menu bar.
 		setupGameMenuBar()
 
-		if (!isLargeScreen && !isNativeXRDevice(applicationContext) && godot?.isEditorHint() == true) {
+		if (!isLargeScreen && !isNativeXRDevice(applicationContext) && fade?.isEditorHint() == true) {
 			// Lock the editor screen orientation to landscape on small screens.
 			changingOrientationAllowed = true
 			requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -345,7 +345,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		// Some editor parts are hidden on small screens due to width limitations in portrait.
 		if (!isLargeScreen && currentOrientation != newConfig.orientation) {
 			currentOrientation = newConfig.orientation
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				EditorUtils.orientationChanged(currentOrientation == Configuration.ORIENTATION_PORTRAIT)
 			}
 		}
@@ -363,7 +363,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 			// Override EXTRA_NEW_LAUNCH so the editor is not restarted
 			newIntent.putExtra(EXTRA_NEW_LAUNCH, false)
 
-			godot?.runOnRenderThread {
+			fade?.runOnRenderThread {
 				// Look for the scene, XR-mode, and hybrid data arguments.
 				var scene = ""
 				var xrMode = XR_MODE_DEFAULT
@@ -505,7 +505,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 					if (shouldLoadEmptyBenchmarkProject) {
 						val projectParentDir = getExternalFilesDir(null)
 						if (projectParentDir != null) {
-							val benchmarkDir = File(projectParentDir, "godot_benchmark")
+							val benchmarkDir = File(projectParentDir, "fade_benchmark")
 							try {
 								Log.v(TAG, "Benchmark directory is $benchmarkDir")
 								if (!benchmarkDir.exists()) {
@@ -516,7 +516,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 									}
 								}
 
-								val projectMetadata = File(benchmarkDir, "project.godot")
+								val projectMetadata = File(benchmarkDir, "project.fade")
 								if (projectMetadata.createNewFile()) {
 									Log.v(TAG, "Created project metadata file: $projectMetadata")
 								}
@@ -573,7 +573,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 
 		runOnUiThread {
 			// Enable long press, panning and scaling gestures
-			godotFragment?.godot?.renderView?.inputHandler?.apply {
+			fadeFragment?.fade?.renderView?.inputHandler?.apply {
 				enableRightClickEmulation(rightClickEmulationEnabled)
 				enablePanningAndScalingGestures(panScaleEnabled)
 				setOverrideVolumeButtons(overrideVolumeButtonsEnabled)
@@ -585,7 +585,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 	private fun updateWindowAppearance() {
 		val editorWindowInfo = getEditorWindowInfo()
 		if (editorWindowInfo == EDITOR_MAIN_INFO || isRunGameInfo(editorWindowInfo)) {
-			godot?.apply {
+			fade?.apply {
 				enableImmersiveMode(isInImmersiveMode(), true)
 				enableEdgeToEdge(isInEdgeToEdgeMode(), true)
 				setSystemBarsAppearance()
@@ -607,7 +607,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		updateWindowAppearance()
 
 		if (getEditorWindowInfo() == EDITOR_MAIN_INFO &&
-			godot?.isEditorHint() == true &&
+			fade?.isEditorHint() == true &&
 			(editorMessageDispatcher.hasEditorConnection(EMBEDDED_RUN_GAME_INFO) ||
 				editorMessageDispatcher.hasEditorConnection(RUN_GAME_INFO_0) ||
 				editorMessageDispatcher.hasEditorConnection(RUN_GAME_INFO_1))) {
@@ -690,7 +690,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		}
 
 		// Project manager doesn't support embed mode.
-		if (godot?.isProjectManagerHint() == true) {
+		if (fade?.isProjectManagerHint() == true) {
 			return RUN_GAME_INFO_0
 		}
 
@@ -725,7 +725,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		// This doesn't apply to the play / game window since for that window fullscreen is
 		// controlled by the game logic.
 		val updatedArgs = if ((editorWindowInfo == EDITOR_MAIN_INFO || isRunGameInfo(editorWindowInfo)) &&
-			godot?.isInImmersiveMode() == true &&
+			fade?.isInImmersiveMode() == true &&
 			!args.contains(FULLSCREEN_ARG) &&
 			!args.contains(FULLSCREEN_ARG_SHORT)
 		) {
@@ -760,7 +760,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 			return editorWindowInfo.windowId
 		}
 
-		val sourceView = godotFragment?.view
+		val sourceView = fadeFragment?.view
 		val activityOptions = if (sourceView == null) {
 			null
 		} else {
@@ -771,8 +771,8 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 
 		val newInstance = getNewFADEInstanceIntent(editorWindowInfo, args)
 		newInstance.apply {
-			putExtra(EXTRA_EDITOR_HINT, godot?.isEditorHint() == true)
-			putExtra(EXTRA_PROJECT_MANAGER_HINT, godot?.isProjectManagerHint() == true)
+			putExtra(EXTRA_EDITOR_HINT, fade?.isEditorHint() == true)
+			putExtra(EXTRA_PROJECT_MANAGER_HINT, fade?.isProjectManagerHint() == true)
 			putExtra(EXTRA_GAME_MENU_STATE, gameMenuState)
 		}
 
@@ -800,8 +800,8 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		}
 	}
 
-	final override fun onFADEForceQuit(godotInstanceId: Int): Boolean {
-		val editorWindowInfo = getEditorWindowInfoForInstanceId(godotInstanceId) ?: return super.onFADEForceQuit(godotInstanceId)
+	final override fun onFADEForceQuit(fadeInstanceId: Int): Boolean {
+		val editorWindowInfo = getEditorWindowInfoForInstanceId(fadeInstanceId) ?: return super.onFADEForceQuit(fadeInstanceId)
 
 		if (editorWindowInfo.windowClassName == javaClass.name) {
 			Log.d(TAG, "Force quitting ${editorWindowInfo.windowClassName}")
@@ -827,7 +827,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 			}
 		}
 
-		return super.onFADEForceQuit(godotInstanceId)
+		return super.onFADEForceQuit(fadeInstanceId)
 	}
 
 	// Get the screen's density scale
@@ -854,7 +854,7 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 	/**
 	 * The FADE Android Editor sets its own orientation via its AndroidManifest
 	 */
-	protected open fun overrideOrientationRequest() = isLargeScreen || godot?.isProjectManagerHint() == true || !changingOrientationAllowed
+	protected open fun overrideOrientationRequest() = isLargeScreen || fade?.isProjectManagerHint() == true || !changingOrientationAllowed
 
 	protected open fun overrideVolumeButtons() = false
 
@@ -994,13 +994,13 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 		keystoreUser: String,
 		keystorePassword: String
 	): Error {
-		val godot = godot ?: return Error.ERR_UNCONFIGURED
-		return signApk(godot.fileAccessHandler, inputPath, outputPath, keystorePath, keystoreUser, keystorePassword)
+		val fade = fade ?: return Error.ERR_UNCONFIGURED
+		return signApk(fade.fileAccessHandler, inputPath, outputPath, keystorePath, keystoreUser, keystorePassword)
 	}
 
 	override fun verifyApk(apkPath: String): Error {
-		val godot = godot ?: return Error.ERR_UNCONFIGURED
-		return verifyApk(godot.fileAccessHandler, apkPath)
+		val fade = fade ?: return Error.ERR_UNCONFIGURED
+		return verifyApk(fade.fileAccessHandler, apkPath)
 	}
 
 	@CallSuper
@@ -1191,102 +1191,102 @@ abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListene
 
 	override fun suspendGame(suspended: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_SET_SUSPEND, suspended)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setSuspend(suspended)
 		}
 	}
 
 	override fun dispatchNextFrame() {
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.nextFrame()
 		}
 	}
 
 	override fun toggleSelectionVisibility(enabled: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_SET_SELECTION_VISIBLE, enabled)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setSelectionVisible(enabled)
 		}
 	}
 
 	override fun toggleSelectionAvoidLocked(enabled: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_SET_SELECTION_AVOID_LOCKED, enabled)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setSelectionAvoidLocked(enabled)
 		}
 	}
 
 	override fun toggleSelectionPreferGroup(enabled: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_SET_SELECTION_PREFER_GROUP, enabled)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setSelectionPreferGroup(enabled)
 		}
 	}
 
 	override fun overrideCamera(enabled: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_SET_CAMERA_OVERRIDE, enabled)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setCameraOverride(enabled)
 		}
 	}
 
 	override fun selectRuntimeNode(nodeType: GameMenuFragment.GameMenuListener.NodeType) {
 		gameMenuState.putSerializable(GAME_MENU_ACTION_SET_NODE_TYPE, nodeType)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setNodeType(nodeType.ordinal)
 		}
 	}
 
 	override fun selectRuntimeNodeSelectMode(selectMode: GameMenuFragment.GameMenuListener.SelectMode) {
 		gameMenuState.putSerializable(GAME_MENU_ACTION_SET_SELECT_MODE, selectMode)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setSelectMode(selectMode.ordinal)
 		}
 	}
 
 	override fun reset2DCamera() {
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.resetCamera2DPosition()
 		}
 	}
 
 	override fun reset3DCamera() {
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.resetCamera3DPosition()
 		}
 	}
 
 	override fun manipulateCamera(mode: GameMenuFragment.GameMenuListener.CameraMode) {
 		gameMenuState.putSerializable(GAME_MENU_ACTION_SET_CAMERA_MANIPULATE_MODE, mode)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setCameraManipulateMode(mode.ordinal)
 		}
 	}
 
 	override fun muteAudio(enabled: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_SET_DEBUG_MUTE_AUDIO, enabled)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setDebugMuteAudio(enabled)
 		}
 	}
 
 	override fun resetTimeScale() {
 		gameMenuState.putDouble(GAME_MENU_ACTION_SET_TIME_SCALE, 1.0)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.resetTimeScale()
 		}
 	}
 
 	override fun setTimeScale(scale: Double) {
 		gameMenuState.putDouble(GAME_MENU_ACTION_SET_TIME_SCALE, scale)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			GameMenuUtils.setTimeScale(scale)
 		}
 	}
 
 	override fun embedGameOnPlay(embedded: Boolean) {
 		gameMenuState.putBoolean(GAME_MENU_ACTION_EMBED_GAME_ON_PLAY, embedded)
-		godot?.runOnRenderThread {
+		fade?.runOnRenderThread {
 			val gameEmbedMode = if (embedded) GameEmbedMode.ENABLED else GameEmbedMode.DISABLED
 			GameMenuUtils.saveGameEmbedMode(gameEmbedMode)
 		}

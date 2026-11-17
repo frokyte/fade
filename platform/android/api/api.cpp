@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -43,7 +43,7 @@ static JavaClassWrapper *java_class_wrapper = nullptr;
 void register_android_api() {
 #if !defined(ANDROID_ENABLED)
 	// On Android platforms, the `java_class_wrapper` instantiation occurs in
-	// `platform/android/java_godot_lib_jni.cpp#Java_org_godotengine_godot_FADELib_setup`
+	// `platform/android/java_fade_lib_jni.cpp#Java_org_fadeengine_fade_FADELib_setup`
 	java_class_wrapper = memnew(JavaClassWrapper);
 #endif
 	GDREGISTER_CLASS(JNISingleton);

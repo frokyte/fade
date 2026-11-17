@@ -10,8 +10,8 @@ while getopts "h?sv:g:" opt; do
   h|\?)
     echo "Usage: $0 [OPTIONS...]"
     echo
-    echo "  -s script friendly file name (godot.tar.gz)"
-    echo "  -v godot version for file name (e.g. 4.0-stable)"
+    echo "  -s script friendly file name (fade.tar.gz)"
+    echo "  -v fade version for file name (e.g. 4.0-stable)"
     echo "  -g git treeish to archive (e.g. master)"
     echo
     exit 1
@@ -20,7 +20,7 @@ while getopts "h?sv:g:" opt; do
     script_friendly_name=1
     ;;
   v)
-    godot_version=$OPTARG
+    fade_version=$OPTARG
     ;;
   g)
     git_treeish=$OPTARG
@@ -35,17 +35,17 @@ else
 fi
 
 if [ ! -z "$script_friendly_name" ]; then
-  NAME=godot
+  NAME=fade
 else
-  if [ ! -z "$godot_version" ]; then
-    NAME=godot-$godot_version
+  if [ ! -z "$fade_version" ]; then
+    NAME=fade-$fade_version
   else
-    NAME=godot-$HEAD
+    NAME=fade-$HEAD
   fi
 fi
 
 CURDIR=$(pwd)
-TMPDIR=$(mktemp -d -t godot-XXXXXX)
+TMPDIR=$(mktemp -d -t fade-XXXXXX)
 
 echo "Generating tarball for revision $HEAD with folder name '$NAME'."
 echo

@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_webgl2.js                                               */
+/*  library_fade_webgl2.js                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -34,10 +34,10 @@ const FADEWebGL2 = {
 
 	// This is implemented as "glGetBufferSubData" in new emscripten versions.
 	// Since we have to support older (pre 2.0.17) emscripten versions, we add this wrapper function instead.
-	godot_webgl2_glGetBufferSubData__proxy: 'sync',
-	godot_webgl2_glGetBufferSubData__sig: 'vippp',
-	godot_webgl2_glGetBufferSubData__deps: ['$GL', 'emscripten_webgl_get_current_context'],
-	godot_webgl2_glGetBufferSubData: function (target, offset, size, data) {
+	fade_webgl2_glGetBufferSubData__proxy: 'sync',
+	fade_webgl2_glGetBufferSubData__sig: 'vippp',
+	fade_webgl2_glGetBufferSubData__deps: ['$GL', 'emscripten_webgl_get_current_context'],
+	fade_webgl2_glGetBufferSubData: function (target, offset, size, data) {
 		const gl_context_handle = _emscripten_webgl_get_current_context();
 		const gl = GL.getContext(gl_context_handle);
 		if (gl) {
@@ -45,10 +45,10 @@ const FADEWebGL2 = {
 		}
 	},
 
-	godot_webgl2_glFramebufferTextureMultiviewOVR__deps: ['emscripten_webgl_get_current_context'],
-	godot_webgl2_glFramebufferTextureMultiviewOVR__proxy: 'sync',
-	godot_webgl2_glFramebufferTextureMultiviewOVR__sig: 'viiiiii',
-	godot_webgl2_glFramebufferTextureMultiviewOVR: function (target, attachment, texture, level, base_view_index, num_views) {
+	fade_webgl2_glFramebufferTextureMultiviewOVR__deps: ['emscripten_webgl_get_current_context'],
+	fade_webgl2_glFramebufferTextureMultiviewOVR__proxy: 'sync',
+	fade_webgl2_glFramebufferTextureMultiviewOVR__sig: 'viiiiii',
+	fade_webgl2_glFramebufferTextureMultiviewOVR: function (target, attachment, texture, level, base_view_index, num_views) {
 		const context = GL.currentContext;
 		if (typeof context.multiviewExt === 'undefined') {
 			const /** OVR_multiview2 */ ext = context.GLctx.getExtension('OVR_multiview2');
@@ -62,10 +62,10 @@ const FADEWebGL2 = {
 		ext.framebufferTextureMultiviewOVR(target, attachment, GL.textures[texture], level, base_view_index, num_views);
 	},
 
-	godot_webgl2_glFramebufferTextureMultisampleMultiviewOVR__deps: ['emscripten_webgl_get_current_context'],
-	godot_webgl2_glFramebufferTextureMultisampleMultiviewOVR__proxy: 'sync',
-	godot_webgl2_glFramebufferTextureMultisampleMultiviewOVR__sig: 'viiiiiii',
-	godot_webgl2_glFramebufferTextureMultisampleMultiviewOVR: function (target, attachment, texture, level, samples, base_view_index, num_views) {
+	fade_webgl2_glFramebufferTextureMultisampleMultiviewOVR__deps: ['emscripten_webgl_get_current_context'],
+	fade_webgl2_glFramebufferTextureMultisampleMultiviewOVR__proxy: 'sync',
+	fade_webgl2_glFramebufferTextureMultisampleMultiviewOVR__sig: 'viiiiiii',
+	fade_webgl2_glFramebufferTextureMultisampleMultiviewOVR: function (target, attachment, texture, level, samples, base_view_index, num_views) {
 		const context = GL.currentContext;
 		if (typeof context.oculusMultiviewExt === 'undefined') {
 			const /** OCULUS_multiview */ ext = context.GLctx.getExtension('OCULUS_multiview');

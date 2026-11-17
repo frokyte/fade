@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,13 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.io.directory
+package org.fadeengine.fade.io.directory
 
 import android.content.Context
 import android.util.Log
-import org.godotengine.godot.FADE
-import org.godotengine.godot.io.StorageScope
-import org.godotengine.godot.io.directory.DirectoryAccessHandler.AccessType.ACCESS_RESOURCES
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.io.StorageScope
+import org.fadeengine.fade.io.directory.DirectoryAccessHandler.AccessType.ACCESS_RESOURCES
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 

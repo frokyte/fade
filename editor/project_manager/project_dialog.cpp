@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -111,7 +111,7 @@ void ProjectDialog::_validate_path() {
 	InputType target_path_input_type = PROJECT_PATH;
 
 	if (mode == MODE_IMPORT) {
-		if (path.get_file().strip_edges() == "project.godot") {
+		if (path.get_file().strip_edges() == "project.fade") {
 			path = path.get_base_dir();
 			project_path->set_text(path);
 		}
@@ -156,7 +156,7 @@ void ProjectDialog::_validate_path() {
 					continue;
 				}
 
-				if (name.get_file() == "project.godot") {
+				if (name.get_file() == "project.fade") {
 					break; // ret == UNZ_OK.
 				}
 
@@ -164,13 +164,13 @@ void ProjectDialog::_validate_path() {
 			}
 
 			if (ret == UNZ_END_OF_LIST_OF_FILE) {
-				_set_message(TTRC("Invalid \".zip\" project file; it doesn't contain a \"project.godot\" file."), MESSAGE_ERROR);
+				_set_message(TTRC("Invalid \".zip\" project file; it doesn't contain a \"project.fade\" file."), MESSAGE_ERROR);
 				unzClose(pkg);
 				return;
 			}
 
 			unzClose(pkg);
-		} else if (d->dir_exists(path) && d->file_exists(path.path_join("project.godot"))) {
+		} else if (d->dir_exists(path) && d->file_exists(path.path_join("project.fade"))) {
 			zip_path = "";
 
 			create_dir->hide();
@@ -181,7 +181,7 @@ void ProjectDialog::_validate_path() {
 			create_dir->hide();
 			install_path_container->hide();
 
-			_set_message(TTRC("Please choose a \"project.godot\", a directory with one, or a \".zip\" file."), MESSAGE_ERROR);
+			_set_message(TTRC("Please choose a \"project.fade\", a directory with one, or a \".zip\" file."), MESSAGE_ERROR);
 			return;
 		}
 	}
@@ -203,7 +203,7 @@ void ProjectDialog::_validate_path() {
 		return;
 	}
 
-	// TODO: The following 5 lines could be simplified if OS.get_user_home_dir() or SYSTEM_DIR_HOME is implemented. See: https://github.com/godotengine/godot-proposals/issues/4851.
+	// TODO: The following 5 lines could be simplified if OS.get_user_home_dir() or SYSTEM_DIR_HOME is implemented. See: https://github.com/fadeengine/fade-proposals/issues/4851.
 #ifdef WINDOWS_ENABLED
 	String home_dir = OS::get_singleton()->get_environment("USERPROFILE");
 #else
@@ -422,7 +422,7 @@ void ProjectDialog::_browse_project_path() {
 	if (mode == MODE_IMPORT) {
 		fdialog_project->set_file_mode(EditorFileDialog::FILE_MODE_OPEN_ANY);
 		fdialog_project->clear_filters();
-		fdialog_project->add_filter("project.godot", vformat("%s %s", GODOT_VERSION_NAME, TTR("Project")));
+		fdialog_project->add_filter("project.fade", vformat("%s %s", GODOT_VERSION_NAME, TTR("Project")));
 		fdialog_project->add_filter("*.zip", TTR("ZIP File"));
 	} else {
 		fdialog_project->set_file_mode(EditorFileDialog::FILE_MODE_OPEN_DIR);
@@ -604,9 +604,9 @@ void ProjectDialog::ok_pressed() {
 			initial_settings[extra_setting.key] = extra_setting.value;
 		}
 
-		Error err = ProjectSettings::get_singleton()->save_custom(path.path_join("project.godot"), initial_settings, Vector<String>(), false);
+		Error err = ProjectSettings::get_singleton()->save_custom(path.path_join("project.fade"), initial_settings, Vector<String>(), false);
 		if (err != OK) {
-			_set_message(TTRC("Couldn't create project.godot in project path."), MESSAGE_ERROR);
+			_set_message(TTRC("Couldn't create project.fade in project path."), MESSAGE_ERROR);
 			return;
 		}
 
@@ -659,7 +659,7 @@ void ProjectDialog::ok_pressed() {
 				return;
 			}
 
-			// Find the first directory with a "project.godot".
+			// Find the first directory with a "project.fade".
 			String zip_root;
 			int ret = unzGoToFirstFile(pkg);
 			while (ret == UNZ_OK) {
@@ -676,7 +676,7 @@ void ProjectDialog::ok_pressed() {
 					continue;
 				}
 
-				if (name.get_file() == "project.godot") {
+				if (name.get_file() == "project.fade") {
 					zip_root = name.get_base_dir();
 					break;
 				}
@@ -685,7 +685,7 @@ void ProjectDialog::ok_pressed() {
 			}
 
 			if (ret == UNZ_END_OF_LIST_OF_FILE) {
-				_set_message(TTRC("Invalid \".zip\" project file; it doesn't contain a \"project.godot\" file."), MESSAGE_ERROR);
+				_set_message(TTRC("Invalid \".zip\" project file; it doesn't contain a \"project.fade\" file."), MESSAGE_ERROR);
 				unzClose(pkg);
 				return;
 			}
@@ -776,19 +776,19 @@ void ProjectDialog::ok_pressed() {
 	}
 
 	if (mode == MODE_RENAME || mode == MODE_INSTALL || mode == MODE_DUPLICATE) {
-		// Load project.godot as ConfigFile to set the new name.
+		// Load project.fade as ConfigFile to set the new name.
 		ConfigFile cfg;
-		String project_godot = path.path_join("project.godot");
-		Error err = cfg.load(project_godot);
+		String project_fade = path.path_join("project.fade");
+		Error err = cfg.load(project_fade);
 		if (err != OK) {
-			dialog_error->set_text(vformat(TTR("Couldn't load project at '%s' (error %d). It may be missing or corrupted."), project_godot, err));
+			dialog_error->set_text(vformat(TTR("Couldn't load project at '%s' (error %d). It may be missing or corrupted."), project_fade, err));
 			dialog_error->popup_centered();
 			return;
 		}
 		cfg.set_value("application", "config/name", project_name->get_text().strip_edges());
-		err = cfg.save(project_godot);
+		err = cfg.save(project_fade);
 		if (err != OK) {
-			dialog_error->set_text(vformat(TTR("Couldn't save project at '%s' (error %d)."), project_godot, err));
+			dialog_error->set_text(vformat(TTR("Couldn't save project at '%s' (error %d)."), project_fade, err));
 			dialog_error->popup_centered();
 			return;
 		}

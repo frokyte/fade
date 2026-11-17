@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -43,7 +43,7 @@
 #include "editor/plugins/editor_plugin.h"
 #endif
 
-namespace godotsharp {
+namespace fadesharp {
 struct MethodTrampoline {
 	void *function_pointer;
 };
@@ -56,7 +56,7 @@ struct PropertySetterTrampoline {
 struct RaiseSignalTrampoline {
 	void *function_pointer;
 };
-} //namespace godotsharp
+} //namespace fadesharp
 
 class CSharpScript;
 class CSharpInstance;
@@ -206,8 +206,8 @@ private:
 	Vector<CSharpMethodInfo> methods;
 
 	struct PropertyTrampolines {
-		godotsharp::PropertyGetterTrampoline getter;
-		godotsharp::PropertySetterTrampoline setter;
+		fadesharp::PropertyGetterTrampoline getter;
+		fadesharp::PropertySetterTrampoline setter;
 	};
 
 	struct MethodKey {
@@ -227,14 +227,14 @@ private:
 	using SignalKey = MethodKey;
 
 	/// Only includes methods declared in this exact script, not inherited ones.
-	AHashMap<MethodKey, godotsharp::MethodTrampoline> static_method_trampolines;
+	AHashMap<MethodKey, fadesharp::MethodTrampoline> static_method_trampolines;
 
 	/// Also includes methods declared in inherited scripts.
-	AHashMap<MethodKey, godotsharp::MethodTrampoline> method_trampolines;
+	AHashMap<MethodKey, fadesharp::MethodTrampoline> method_trampolines;
 	/// Also includes properties declared in inherited scripts.
 	AHashMap<StringName, PropertyTrampolines> property_trampolines;
 	/// Also includes event signals declared in inherited scripts.
-	AHashMap<SignalKey, godotsharp::RaiseSignalTrampoline> raise_signal_trampolines;
+	AHashMap<SignalKey, fadesharp::RaiseSignalTrampoline> raise_signal_trampolines;
 	bool should_fallback_to_legacy_trampolines = true;
 
 	bool _has_method_mapping_to_proxy_include_base(const StringName &p_name) const;
@@ -267,9 +267,9 @@ private:
 	CSharpInstance *_create_instance(const Variant **p_args, int p_argcount, Object *p_owner, bool p_is_ref_counted, Callable::CallError &r_error);
 	Variant _new(const Variant **p_args, int p_argcount, Callable::CallError &r_error);
 
-	static void GD_CLR_STDCALL _try_add_method_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, godotsharp::MethodTrampoline p_trampoline, bool p_is_static);
-	static void GD_CLR_STDCALL _try_add_property_tramp(CSharpScript *p_scr, const StringName *p_name, godotsharp::PropertyGetterTrampoline p_getter_trampoline, godotsharp::PropertySetterTrampoline p_setter_trampoline);
-	static void GD_CLR_STDCALL _try_add_raise_signal_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, godotsharp::RaiseSignalTrampoline p_trampoline);
+	static void GD_CLR_STDCALL _try_add_method_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, fadesharp::MethodTrampoline p_trampoline, bool p_is_static);
+	static void GD_CLR_STDCALL _try_add_property_tramp(CSharpScript *p_scr, const StringName *p_name, fadesharp::PropertyGetterTrampoline p_getter_trampoline, fadesharp::PropertySetterTrampoline p_setter_trampoline);
+	static void GD_CLR_STDCALL _try_add_raise_signal_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, fadesharp::RaiseSignalTrampoline p_trampoline);
 
 	// Do not use unless you know what you are doing
 	static void update_script_class_info(Ref<CSharpScript> p_script);
@@ -495,7 +495,7 @@ class CSharpLanguage : public ScriptLanguage {
 	friend class GDMono;
 
 #ifdef TOOLS_ENABLED
-	EditorPlugin *godotsharp_editor = nullptr;
+	EditorPlugin *fadesharp_editor = nullptr;
 	EditorLanguage editor_language;
 
 	static void _editor_init_callback();
@@ -530,8 +530,8 @@ public:
 	}
 
 #ifdef TOOLS_ENABLED
-	_FORCE_INLINE_ EditorPlugin *get_godotsharp_editor() const {
-		return godotsharp_editor;
+	_FORCE_INLINE_ EditorPlugin *get_fadesharp_editor() const {
+		return fadesharp_editor;
 	}
 #endif
 

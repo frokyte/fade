@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  java_godot_wrapper.cpp                                                */
+/*  java_fade_wrapper.cpp                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "java_godot_wrapper.h"
+#include "java_fade_wrapper.h"
 
 #include "jni_utils.h"
 
@@ -39,138 +39,138 @@
 
 // TODO we could probably create a base class for this...
 
-FADEJavaWrapper::FADEJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge) {
-	godot_native_bridge = p_env->NewGlobalRef(p_godot_native_bridge);
+FADEJavaWrapper::FADEJavaWrapper(JNIEnv *p_env, jobject p_fade_native_bridge) {
+	fade_native_bridge = p_env->NewGlobalRef(p_fade_native_bridge);
 
 	// get info about our FADE class so we can get pointers and stuff...
-	godot_native_bridge_class = jni_find_class(p_env, "org/godotengine/godot/nativeapi/FADENativeBridge");
-	if (godot_native_bridge_class) {
-		godot_native_bridge_class = (jclass)p_env->NewGlobalRef(godot_native_bridge_class);
+	fade_native_bridge_class = jni_find_class(p_env, "org/fadeengine/fade/nativeapi/FADENativeBridge");
+	if (fade_native_bridge_class) {
+		fade_native_bridge_class = (jclass)p_env->NewGlobalRef(fade_native_bridge_class);
 	} else {
 		// this is a pretty serious fail.. bail... pointers will stay 0
 		return;
 	}
 
 	// get some FADE method pointers...
-	_restart = p_env->GetMethodID(godot_native_bridge_class, "restart", "()V");
-	_finish = p_env->GetMethodID(godot_native_bridge_class, "forceQuit", "(I)Z");
-	_set_keep_screen_on = p_env->GetMethodID(godot_native_bridge_class, "setKeepScreenOn", "(Z)V");
-	_alert = p_env->GetMethodID(godot_native_bridge_class, "alert", "(Ljava/lang/String;Ljava/lang/String;)V");
-	_is_dark_mode_supported = p_env->GetMethodID(godot_native_bridge_class, "isDarkModeSupported", "()Z");
-	_is_dark_mode = p_env->GetMethodID(godot_native_bridge_class, "isDarkMode", "()Z");
-	_get_accent_color = p_env->GetMethodID(godot_native_bridge_class, "getAccentColor", "()I");
-	_get_base_color = p_env->GetMethodID(godot_native_bridge_class, "getBaseColor", "()I");
-	_get_clipboard = p_env->GetMethodID(godot_native_bridge_class, "getClipboard", "()Ljava/lang/String;");
-	_set_clipboard = p_env->GetMethodID(godot_native_bridge_class, "setClipboard", "(Ljava/lang/String;)V");
-	_has_clipboard = p_env->GetMethodID(godot_native_bridge_class, "hasClipboard", "()Z");
-	_show_dialog = p_env->GetMethodID(godot_native_bridge_class, "showDialog", "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V");
-	_show_input_dialog = p_env->GetMethodID(godot_native_bridge_class, "showInputDialog", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
-	_show_file_picker = p_env->GetMethodID(godot_native_bridge_class, "showFilePicker", "(Ljava/lang/String;Ljava/lang/String;I[Ljava/lang/String;)V");
-	_request_permission = p_env->GetMethodID(godot_native_bridge_class, "requestPermission", "(Ljava/lang/String;)Z");
-	_request_permissions = p_env->GetMethodID(godot_native_bridge_class, "requestPermissions", "()Z");
-	_get_granted_permissions = p_env->GetMethodID(godot_native_bridge_class, "getGrantedPermissions", "()[Ljava/lang/String;");
-	_get_ca_certificates = p_env->GetMethodID(godot_native_bridge_class, "getCACertificates", "()Ljava/lang/String;");
-	_init_input_devices = p_env->GetMethodID(godot_native_bridge_class, "initInputDevices", "()V");
-	_vibrate = p_env->GetMethodID(godot_native_bridge_class, "vibrate", "(II)V");
-	_get_input_fallback_mapping = p_env->GetMethodID(godot_native_bridge_class, "getInputFallbackMapping", "()Ljava/lang/String;");
-	_on_godot_setup_completed = p_env->GetMethodID(godot_native_bridge_class, "onFADESetupCompleted", "()V");
-	_on_godot_main_loop_started = p_env->GetMethodID(godot_native_bridge_class, "onFADEMainLoopStarted", "()V");
-	_on_godot_terminating = p_env->GetMethodID(godot_native_bridge_class, "onFADETerminating", "()V");
-	_create_new_godot_instance = p_env->GetMethodID(godot_native_bridge_class, "createNewFADEInstance", "([Ljava/lang/String;)I");
-	_get_render_view = p_env->GetMethodID(godot_native_bridge_class, "getRenderView", "()Lorg/godotengine/godot/FADERenderView;");
-	_begin_benchmark_measure = p_env->GetMethodID(godot_native_bridge_class, "nativeBeginBenchmarkMeasure", "(Ljava/lang/String;Ljava/lang/String;)V");
-	_end_benchmark_measure = p_env->GetMethodID(godot_native_bridge_class, "nativeEndBenchmarkMeasure", "(Ljava/lang/String;Ljava/lang/String;)V");
-	_dump_benchmark = p_env->GetMethodID(godot_native_bridge_class, "nativeDumpBenchmark", "(Ljava/lang/String;)V");
-	_get_gdextension_list_config_file = p_env->GetMethodID(godot_native_bridge_class, "getGDExtensionConfigFiles", "()[Ljava/lang/String;");
-	_check_internal_feature_support = p_env->GetMethodID(godot_native_bridge_class, "checkInternalFeatureSupport", "(Ljava/lang/String;)Z");
-	_sign_apk = p_env->GetMethodID(godot_native_bridge_class, "nativeSignApk", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I");
-	_verify_apk = p_env->GetMethodID(godot_native_bridge_class, "nativeVerifyApk", "(Ljava/lang/String;)I");
-	_enable_immersive_mode = p_env->GetMethodID(godot_native_bridge_class, "nativeEnableImmersiveMode", "(Z)V");
-	_is_in_immersive_mode = p_env->GetMethodID(godot_native_bridge_class, "isInImmersiveMode", "()Z");
-	_set_window_color = p_env->GetMethodID(godot_native_bridge_class, "setWindowColor", "(Ljava/lang/String;)V");
-	_on_editor_workspace_selected = p_env->GetMethodID(godot_native_bridge_class, "nativeOnEditorWorkspaceSelected", "(Ljava/lang/String;)V");
-	_on_distraction_free_mode_changed = p_env->GetMethodID(godot_native_bridge_class, "nativeOnDistractionFreeModeChanged", "(Z)V");
-	_show_editor_game_dock = p_env->GetMethodID(godot_native_bridge_class, "nativeShowEditorGameDock", "()V");
-	_get_activity = p_env->GetMethodID(godot_native_bridge_class, "getActivity", "()Landroid/app/Activity;");
-	_build_env_connect = p_env->GetMethodID(godot_native_bridge_class, "nativeBuildEnvConnect", "(Lorg/godotengine/godot/variant/Callable;)Z");
-	_build_env_disconnect = p_env->GetMethodID(godot_native_bridge_class, "nativeBuildEnvDisconnect", "()V");
-	_build_env_execute = p_env->GetMethodID(godot_native_bridge_class, "nativeBuildEnvExecute", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/godotengine/godot/variant/Callable;Lorg/godotengine/godot/variant/Callable;)I");
-	_build_env_cancel = p_env->GetMethodID(godot_native_bridge_class, "nativeBuildEnvCancel", "(I)V");
-	_build_env_clean_project = p_env->GetMethodID(godot_native_bridge_class, "nativeBuildEnvCleanProject", "(Ljava/lang/String;Ljava/lang/String;Lorg/godotengine/godot/variant/Callable;)V");
-	_is_screen_reader_active = p_env->GetMethodID(godot_native_bridge_class, "isScreenReaderActive", "()Z");
-	_is_high_contrast_active = p_env->GetMethodID(godot_native_bridge_class, "isHighContrastActive", "()Z");
-	_is_animation_disabled = p_env->GetMethodID(godot_native_bridge_class, "isAnimationDisabled", "()Z");
+	_restart = p_env->GetMethodID(fade_native_bridge_class, "restart", "()V");
+	_finish = p_env->GetMethodID(fade_native_bridge_class, "forceQuit", "(I)Z");
+	_set_keep_screen_on = p_env->GetMethodID(fade_native_bridge_class, "setKeepScreenOn", "(Z)V");
+	_alert = p_env->GetMethodID(fade_native_bridge_class, "alert", "(Ljava/lang/String;Ljava/lang/String;)V");
+	_is_dark_mode_supported = p_env->GetMethodID(fade_native_bridge_class, "isDarkModeSupported", "()Z");
+	_is_dark_mode = p_env->GetMethodID(fade_native_bridge_class, "isDarkMode", "()Z");
+	_get_accent_color = p_env->GetMethodID(fade_native_bridge_class, "getAccentColor", "()I");
+	_get_base_color = p_env->GetMethodID(fade_native_bridge_class, "getBaseColor", "()I");
+	_get_clipboard = p_env->GetMethodID(fade_native_bridge_class, "getClipboard", "()Ljava/lang/String;");
+	_set_clipboard = p_env->GetMethodID(fade_native_bridge_class, "setClipboard", "(Ljava/lang/String;)V");
+	_has_clipboard = p_env->GetMethodID(fade_native_bridge_class, "hasClipboard", "()Z");
+	_show_dialog = p_env->GetMethodID(fade_native_bridge_class, "showDialog", "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V");
+	_show_input_dialog = p_env->GetMethodID(fade_native_bridge_class, "showInputDialog", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+	_show_file_picker = p_env->GetMethodID(fade_native_bridge_class, "showFilePicker", "(Ljava/lang/String;Ljava/lang/String;I[Ljava/lang/String;)V");
+	_request_permission = p_env->GetMethodID(fade_native_bridge_class, "requestPermission", "(Ljava/lang/String;)Z");
+	_request_permissions = p_env->GetMethodID(fade_native_bridge_class, "requestPermissions", "()Z");
+	_get_granted_permissions = p_env->GetMethodID(fade_native_bridge_class, "getGrantedPermissions", "()[Ljava/lang/String;");
+	_get_ca_certificates = p_env->GetMethodID(fade_native_bridge_class, "getCACertificates", "()Ljava/lang/String;");
+	_init_input_devices = p_env->GetMethodID(fade_native_bridge_class, "initInputDevices", "()V");
+	_vibrate = p_env->GetMethodID(fade_native_bridge_class, "vibrate", "(II)V");
+	_get_input_fallback_mapping = p_env->GetMethodID(fade_native_bridge_class, "getInputFallbackMapping", "()Ljava/lang/String;");
+	_on_fade_setup_completed = p_env->GetMethodID(fade_native_bridge_class, "onFADESetupCompleted", "()V");
+	_on_fade_main_loop_started = p_env->GetMethodID(fade_native_bridge_class, "onFADEMainLoopStarted", "()V");
+	_on_fade_terminating = p_env->GetMethodID(fade_native_bridge_class, "onFADETerminating", "()V");
+	_create_new_fade_instance = p_env->GetMethodID(fade_native_bridge_class, "createNewFADEInstance", "([Ljava/lang/String;)I");
+	_get_render_view = p_env->GetMethodID(fade_native_bridge_class, "getRenderView", "()Lorg/fadeengine/fade/FADERenderView;");
+	_begin_benchmark_measure = p_env->GetMethodID(fade_native_bridge_class, "nativeBeginBenchmarkMeasure", "(Ljava/lang/String;Ljava/lang/String;)V");
+	_end_benchmark_measure = p_env->GetMethodID(fade_native_bridge_class, "nativeEndBenchmarkMeasure", "(Ljava/lang/String;Ljava/lang/String;)V");
+	_dump_benchmark = p_env->GetMethodID(fade_native_bridge_class, "nativeDumpBenchmark", "(Ljava/lang/String;)V");
+	_get_gdextension_list_config_file = p_env->GetMethodID(fade_native_bridge_class, "getGDExtensionConfigFiles", "()[Ljava/lang/String;");
+	_check_internal_feature_support = p_env->GetMethodID(fade_native_bridge_class, "checkInternalFeatureSupport", "(Ljava/lang/String;)Z");
+	_sign_apk = p_env->GetMethodID(fade_native_bridge_class, "nativeSignApk", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I");
+	_verify_apk = p_env->GetMethodID(fade_native_bridge_class, "nativeVerifyApk", "(Ljava/lang/String;)I");
+	_enable_immersive_mode = p_env->GetMethodID(fade_native_bridge_class, "nativeEnableImmersiveMode", "(Z)V");
+	_is_in_immersive_mode = p_env->GetMethodID(fade_native_bridge_class, "isInImmersiveMode", "()Z");
+	_set_window_color = p_env->GetMethodID(fade_native_bridge_class, "setWindowColor", "(Ljava/lang/String;)V");
+	_on_editor_workspace_selected = p_env->GetMethodID(fade_native_bridge_class, "nativeOnEditorWorkspaceSelected", "(Ljava/lang/String;)V");
+	_on_distraction_free_mode_changed = p_env->GetMethodID(fade_native_bridge_class, "nativeOnDistractionFreeModeChanged", "(Z)V");
+	_show_editor_game_dock = p_env->GetMethodID(fade_native_bridge_class, "nativeShowEditorGameDock", "()V");
+	_get_activity = p_env->GetMethodID(fade_native_bridge_class, "getActivity", "()Landroid/app/Activity;");
+	_build_env_connect = p_env->GetMethodID(fade_native_bridge_class, "nativeBuildEnvConnect", "(Lorg/fadeengine/fade/variant/Callable;)Z");
+	_build_env_disconnect = p_env->GetMethodID(fade_native_bridge_class, "nativeBuildEnvDisconnect", "()V");
+	_build_env_execute = p_env->GetMethodID(fade_native_bridge_class, "nativeBuildEnvExecute", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/fadeengine/fade/variant/Callable;Lorg/fadeengine/fade/variant/Callable;)I");
+	_build_env_cancel = p_env->GetMethodID(fade_native_bridge_class, "nativeBuildEnvCancel", "(I)V");
+	_build_env_clean_project = p_env->GetMethodID(fade_native_bridge_class, "nativeBuildEnvCleanProject", "(Ljava/lang/String;Ljava/lang/String;Lorg/fadeengine/fade/variant/Callable;)V");
+	_is_screen_reader_active = p_env->GetMethodID(fade_native_bridge_class, "isScreenReaderActive", "()Z");
+	_is_high_contrast_active = p_env->GetMethodID(fade_native_bridge_class, "isHighContrastActive", "()Z");
+	_is_animation_disabled = p_env->GetMethodID(fade_native_bridge_class, "isAnimationDisabled", "()Z");
 
 	// PiP mode method ids.
-	_is_pip_mode_supported = p_env->GetMethodID(godot_native_bridge_class, "nativeIsPiPModeSupported", "()Z");
-	_is_in_pip_mode = p_env->GetMethodID(godot_native_bridge_class, "nativeIsInPiPMode", "()Z");
-	_enter_pip_mode = p_env->GetMethodID(godot_native_bridge_class, "nativeEnterPiPMode", "()V");
-	_set_pip_mode_aspect_ratio = p_env->GetMethodID(godot_native_bridge_class, "nativeSetPiPModeAspectRatio", "(II)V");
-	_set_auto_enter_pip_mode_on_background = p_env->GetMethodID(godot_native_bridge_class, "nativeSetAutoEnterPiPModeOnBackground", "(Z)V");
+	_is_pip_mode_supported = p_env->GetMethodID(fade_native_bridge_class, "nativeIsPiPModeSupported", "()Z");
+	_is_in_pip_mode = p_env->GetMethodID(fade_native_bridge_class, "nativeIsInPiPMode", "()Z");
+	_enter_pip_mode = p_env->GetMethodID(fade_native_bridge_class, "nativeEnterPiPMode", "()V");
+	_set_pip_mode_aspect_ratio = p_env->GetMethodID(fade_native_bridge_class, "nativeSetPiPModeAspectRatio", "(II)V");
+	_set_auto_enter_pip_mode_on_background = p_env->GetMethodID(fade_native_bridge_class, "nativeSetAutoEnterPiPModeOnBackground", "(Z)V");
 }
 
 FADEJavaWrapper::~FADEJavaWrapper() {
-	if (godot_view) {
-		delete godot_view;
+	if (fade_view) {
+		delete fade_view;
 	}
 
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL(env);
-	env->DeleteGlobalRef(godot_native_bridge);
-	env->DeleteGlobalRef(godot_native_bridge_class);
+	env->DeleteGlobalRef(fade_native_bridge);
+	env->DeleteGlobalRef(fade_native_bridge_class);
 }
 
 jobject FADEJavaWrapper::get_activity() {
 	if (_get_activity) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, nullptr);
-		jobject activity = env->CallObjectMethod(godot_native_bridge, _get_activity);
+		jobject activity = env->CallObjectMethod(fade_native_bridge, _get_activity);
 		return activity;
 	}
 	return nullptr;
 }
 
-FADEJavaViewWrapper *FADEJavaWrapper::get_godot_view() {
-	if (godot_view != nullptr) {
-		return godot_view;
+FADEJavaViewWrapper *FADEJavaWrapper::get_fade_view() {
+	if (fade_view != nullptr) {
+		return fade_view;
 	}
 	if (_get_render_view) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, nullptr);
-		jobject godot_render_view = env->CallObjectMethod(godot_native_bridge, _get_render_view);
-		if (!env->IsSameObject(godot_render_view, nullptr)) {
-			godot_view = new FADEJavaViewWrapper(godot_render_view);
+		jobject fade_render_view = env->CallObjectMethod(fade_native_bridge, _get_render_view);
+		if (!env->IsSameObject(fade_render_view, nullptr)) {
+			fade_view = new FADEJavaViewWrapper(fade_render_view);
 		}
 	}
-	return godot_view;
+	return fade_view;
 }
 
-void FADEJavaWrapper::on_godot_setup_completed(JNIEnv *p_env) {
-	if (_on_godot_setup_completed) {
+void FADEJavaWrapper::on_fade_setup_completed(JNIEnv *p_env) {
+	if (_on_fade_setup_completed) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
 		}
-		p_env->CallVoidMethod(godot_native_bridge, _on_godot_setup_completed);
+		p_env->CallVoidMethod(fade_native_bridge, _on_fade_setup_completed);
 	}
 }
 
-void FADEJavaWrapper::on_godot_main_loop_started(JNIEnv *p_env) {
-	if (_on_godot_main_loop_started) {
-		if (p_env == nullptr) {
-			p_env = get_jni_env();
-		}
-		ERR_FAIL_NULL(p_env);
-		p_env->CallVoidMethod(godot_native_bridge, _on_godot_main_loop_started);
-	}
-}
-
-void FADEJavaWrapper::on_godot_terminating(JNIEnv *p_env) {
-	if (_on_godot_terminating) {
+void FADEJavaWrapper::on_fade_main_loop_started(JNIEnv *p_env) {
+	if (_on_fade_main_loop_started) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
 		}
 		ERR_FAIL_NULL(p_env);
-		p_env->CallVoidMethod(godot_native_bridge, _on_godot_terminating);
+		p_env->CallVoidMethod(fade_native_bridge, _on_fade_main_loop_started);
+	}
+}
+
+void FADEJavaWrapper::on_fade_terminating(JNIEnv *p_env) {
+	if (_on_fade_terminating) {
+		if (p_env == nullptr) {
+			p_env = get_jni_env();
+		}
+		ERR_FAIL_NULL(p_env);
+		p_env->CallVoidMethod(fade_native_bridge, _on_fade_terminating);
 	}
 }
 
@@ -180,7 +180,7 @@ void FADEJavaWrapper::restart(JNIEnv *p_env) {
 			p_env = get_jni_env();
 		}
 		ERR_FAIL_NULL(p_env);
-		p_env->CallVoidMethod(godot_native_bridge, _restart);
+		p_env->CallVoidMethod(fade_native_bridge, _restart);
 	}
 }
 
@@ -190,7 +190,7 @@ bool FADEJavaWrapper::force_quit(JNIEnv *p_env, int p_instance_id) {
 			p_env = get_jni_env();
 		}
 		ERR_FAIL_NULL_V(p_env, false);
-		return p_env->CallBooleanMethod(godot_native_bridge, _finish, p_instance_id);
+		return p_env->CallBooleanMethod(fade_native_bridge, _finish, p_instance_id);
 	}
 	return false;
 }
@@ -199,7 +199,7 @@ void FADEJavaWrapper::set_keep_screen_on(bool p_enabled) {
 	if (_set_keep_screen_on) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _set_keep_screen_on, p_enabled);
+		env->CallVoidMethod(fade_native_bridge, _set_keep_screen_on, p_enabled);
 	}
 }
 
@@ -209,7 +209,7 @@ void FADEJavaWrapper::alert(const String &p_message, const String &p_title) {
 		ERR_FAIL_NULL(env);
 		jstring jStrMessage = env->NewStringUTF(p_message.utf8().get_data());
 		jstring jStrTitle = env->NewStringUTF(p_title.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _alert, jStrMessage, jStrTitle);
+		env->CallVoidMethod(fade_native_bridge, _alert, jStrMessage, jStrTitle);
 		env->DeleteLocalRef(jStrMessage);
 		env->DeleteLocalRef(jStrTitle);
 	}
@@ -219,7 +219,7 @@ bool FADEJavaWrapper::is_dark_mode_supported() {
 	if (_is_dark_mode_supported) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_dark_mode_supported);
+		return env->CallBooleanMethod(fade_native_bridge, _is_dark_mode_supported);
 	} else {
 		return false;
 	}
@@ -229,7 +229,7 @@ bool FADEJavaWrapper::is_dark_mode() {
 	if (_is_dark_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_dark_mode);
+		return env->CallBooleanMethod(fade_native_bridge, _is_dark_mode);
 	} else {
 		return false;
 	}
@@ -248,7 +248,7 @@ Color FADEJavaWrapper::get_accent_color() {
 	if (_get_accent_color) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, Color(0, 0, 0, 0));
-		int accent_color = env->CallIntMethod(godot_native_bridge, _get_accent_color);
+		int accent_color = env->CallIntMethod(fade_native_bridge, _get_accent_color);
 		return _argb_to_rgba(accent_color);
 	} else {
 		return Color(0, 0, 0, 0);
@@ -259,7 +259,7 @@ Color FADEJavaWrapper::get_base_color() {
 	if (_get_base_color) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, Color(0, 0, 0, 0));
-		int base_color = env->CallIntMethod(godot_native_bridge, _get_base_color);
+		int base_color = env->CallIntMethod(fade_native_bridge, _get_base_color);
 		return _argb_to_rgba(base_color);
 	} else {
 		return Color(0, 0, 0, 0);
@@ -275,7 +275,7 @@ String FADEJavaWrapper::get_clipboard() {
 	if (_get_clipboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_native_bridge, _get_clipboard);
+		jstring s = (jstring)env->CallObjectMethod(fade_native_bridge, _get_clipboard);
 		clipboard = jstring_to_string(s, env);
 		env->DeleteLocalRef(s);
 	}
@@ -287,7 +287,7 @@ String FADEJavaWrapper::get_input_fallback_mapping() {
 	if (_get_input_fallback_mapping) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring fallback_mapping = (jstring)env->CallObjectMethod(godot_native_bridge, _get_input_fallback_mapping);
+		jstring fallback_mapping = (jstring)env->CallObjectMethod(fade_native_bridge, _get_input_fallback_mapping);
 		input_fallback_mapping = jstring_to_string(fallback_mapping, env);
 		env->DeleteLocalRef(fallback_mapping);
 	}
@@ -303,7 +303,7 @@ void FADEJavaWrapper::set_clipboard(const String &p_text) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 		jstring jStr = env->NewStringUTF(p_text.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _set_clipboard, jStr);
+		env->CallVoidMethod(fade_native_bridge, _set_clipboard, jStr);
 		env->DeleteLocalRef(jStr);
 	}
 }
@@ -316,7 +316,7 @@ bool FADEJavaWrapper::has_clipboard() {
 	if (_has_clipboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _has_clipboard);
+		return env->CallBooleanMethod(fade_native_bridge, _has_clipboard);
 	} else {
 		return false;
 	}
@@ -334,7 +334,7 @@ Error FADEJavaWrapper::show_dialog(const String &p_title, const String &p_descri
 			env->SetObjectArrayElement(j_buttons, i, j_button);
 			env->DeleteLocalRef(j_button);
 		}
-		env->CallVoidMethod(godot_native_bridge, _show_dialog, j_title, j_description, j_buttons);
+		env->CallVoidMethod(fade_native_bridge, _show_dialog, j_title, j_description, j_buttons);
 		env->DeleteLocalRef(j_title);
 		env->DeleteLocalRef(j_description);
 		env->DeleteLocalRef(j_buttons);
@@ -351,7 +351,7 @@ Error FADEJavaWrapper::show_input_dialog(const String &p_title, const String &p_
 		jstring jStrTitle = env->NewStringUTF(p_title.utf8().get_data());
 		jstring jStrMessage = env->NewStringUTF(p_message.utf8().get_data());
 		jstring jStrExistingText = env->NewStringUTF(p_existing_text.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _show_input_dialog, jStrTitle, jStrMessage, jStrExistingText);
+		env->CallVoidMethod(fade_native_bridge, _show_input_dialog, jStrTitle, jStrMessage, jStrExistingText);
 		env->DeleteLocalRef(jStrTitle);
 		env->DeleteLocalRef(jStrMessage);
 		env->DeleteLocalRef(jStrExistingText);
@@ -379,7 +379,7 @@ Error FADEJavaWrapper::show_file_picker(const String &p_current_directory, const
 			env->SetObjectArrayElement(j_filters, i, j_filter);
 			env->DeleteLocalRef(j_filter);
 		}
-		env->CallVoidMethod(godot_native_bridge, _show_file_picker, j_current_directory, j_filename, j_mode, j_filters);
+		env->CallVoidMethod(fade_native_bridge, _show_file_picker, j_current_directory, j_filename, j_mode, j_filters);
 		env->DeleteLocalRef(j_current_directory);
 		env->DeleteLocalRef(j_filename);
 		env->DeleteLocalRef(j_filters);
@@ -394,7 +394,7 @@ bool FADEJavaWrapper::request_permission(const String &p_name) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
 		jstring jStrName = env->NewStringUTF(p_name.utf8().get_data());
-		bool result = env->CallBooleanMethod(godot_native_bridge, _request_permission, jStrName);
+		bool result = env->CallBooleanMethod(fade_native_bridge, _request_permission, jStrName);
 		env->DeleteLocalRef(jStrName);
 		return result;
 	} else {
@@ -406,7 +406,7 @@ bool FADEJavaWrapper::request_permissions() {
 	if (_request_permissions) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _request_permissions);
+		return env->CallBooleanMethod(fade_native_bridge, _request_permissions);
 	} else {
 		return false;
 	}
@@ -417,7 +417,7 @@ Vector<String> FADEJavaWrapper::get_granted_permissions() const {
 	if (_get_granted_permissions) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, permissions_list);
-		jobject permissions_object = env->CallObjectMethod(godot_native_bridge, _get_granted_permissions);
+		jobject permissions_object = env->CallObjectMethod(fade_native_bridge, _get_granted_permissions);
 		jobjectArray *arr = reinterpret_cast<jobjectArray *>(&permissions_object);
 
 		jsize len = env->GetArrayLength(*arr);
@@ -436,7 +436,7 @@ Vector<String> FADEJavaWrapper::get_gdextension_list_config_file() const {
 	if (_get_gdextension_list_config_file) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, config_file_list);
-		jobject config_file_list_object = env->CallObjectMethod(godot_native_bridge, _get_gdextension_list_config_file);
+		jobject config_file_list_object = env->CallObjectMethod(fade_native_bridge, _get_gdextension_list_config_file);
 		jobjectArray *arr = reinterpret_cast<jobjectArray *>(&config_file_list_object);
 
 		jsize len = env->GetArrayLength(*arr);
@@ -455,7 +455,7 @@ String FADEJavaWrapper::get_ca_certificates() const {
 	if (_get_ca_certificates) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, String());
-		jstring s = (jstring)env->CallObjectMethod(godot_native_bridge, _get_ca_certificates);
+		jstring s = (jstring)env->CallObjectMethod(fade_native_bridge, _get_ca_certificates);
 		ca_certificates = jstring_to_string(s, env);
 		env->DeleteLocalRef(s);
 	}
@@ -466,7 +466,7 @@ void FADEJavaWrapper::init_input_devices() {
 	if (_init_input_devices) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _init_input_devices);
+		env->CallVoidMethod(fade_native_bridge, _init_input_devices);
 	}
 }
 
@@ -481,12 +481,12 @@ void FADEJavaWrapper::vibrate(int p_duration_ms, float p_amplitude) {
 			j_amplitude = CLAMP(int(p_amplitude * 255), 1, 255);
 		}
 
-		env->CallVoidMethod(godot_native_bridge, _vibrate, p_duration_ms, j_amplitude);
+		env->CallVoidMethod(fade_native_bridge, _vibrate, p_duration_ms, j_amplitude);
 	}
 }
 
-int FADEJavaWrapper::create_new_godot_instance(const List<String> &args) {
-	if (_create_new_godot_instance) {
+int FADEJavaWrapper::create_new_fade_instance(const List<String> &args) {
+	if (_create_new_fade_instance) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 0);
 		jobjectArray jargs = env->NewObjectArray(args.size(), jni_find_class(env, "java/lang/String"), env->NewStringUTF(""));
@@ -496,7 +496,7 @@ int FADEJavaWrapper::create_new_godot_instance(const List<String> &args) {
 			env->SetObjectArrayElement(jargs, i, j_arg);
 			env->DeleteLocalRef(j_arg);
 		}
-		return env->CallIntMethod(godot_native_bridge, _create_new_godot_instance, jargs);
+		return env->CallIntMethod(fade_native_bridge, _create_new_fade_instance, jargs);
 	} else {
 		return 0;
 	}
@@ -508,7 +508,7 @@ void FADEJavaWrapper::begin_benchmark_measure(const String &p_context, const Str
 		ERR_FAIL_NULL(env);
 		jstring j_context = env->NewStringUTF(p_context.utf8().get_data());
 		jstring j_label = env->NewStringUTF(p_label.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _begin_benchmark_measure, j_context, j_label);
+		env->CallVoidMethod(fade_native_bridge, _begin_benchmark_measure, j_context, j_label);
 		env->DeleteLocalRef(j_context);
 		env->DeleteLocalRef(j_label);
 	}
@@ -520,7 +520,7 @@ void FADEJavaWrapper::end_benchmark_measure(const String &p_context, const Strin
 		ERR_FAIL_NULL(env);
 		jstring j_context = env->NewStringUTF(p_context.utf8().get_data());
 		jstring j_label = env->NewStringUTF(p_label.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _end_benchmark_measure, j_context, j_label);
+		env->CallVoidMethod(fade_native_bridge, _end_benchmark_measure, j_context, j_label);
 		env->DeleteLocalRef(j_context);
 		env->DeleteLocalRef(j_label);
 	}
@@ -531,7 +531,7 @@ void FADEJavaWrapper::dump_benchmark(const String &benchmark_file) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 		jstring j_benchmark_file = env->NewStringUTF(benchmark_file.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _dump_benchmark, j_benchmark_file);
+		env->CallVoidMethod(fade_native_bridge, _dump_benchmark, j_benchmark_file);
 		env->DeleteLocalRef(j_benchmark_file);
 	}
 }
@@ -540,7 +540,7 @@ bool FADEJavaWrapper::is_screen_reader_active() {
 	if (_is_screen_reader_active) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_screen_reader_active);
+		return env->CallBooleanMethod(fade_native_bridge, _is_screen_reader_active);
 	} else {
 		return false;
 	}
@@ -550,7 +550,7 @@ bool FADEJavaWrapper::is_animation_disabled() {
 	if (_is_animation_disabled) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_animation_disabled);
+		return env->CallBooleanMethod(fade_native_bridge, _is_animation_disabled);
 	} else {
 		return false;
 	}
@@ -560,7 +560,7 @@ bool FADEJavaWrapper::is_high_contrast_active() {
 	if (_is_high_contrast_active) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_high_contrast_active);
+		return env->CallBooleanMethod(fade_native_bridge, _is_high_contrast_active);
 	} else {
 		return false;
 	}
@@ -572,7 +572,7 @@ bool FADEJavaWrapper::check_internal_feature_support(const String &p_feature) co
 		ERR_FAIL_NULL_V(env, false);
 
 		jstring j_feature = env->NewStringUTF(p_feature.utf8().get_data());
-		bool result = env->CallBooleanMethod(godot_native_bridge, _check_internal_feature_support, j_feature);
+		bool result = env->CallBooleanMethod(fade_native_bridge, _check_internal_feature_support, j_feature);
 		env->DeleteLocalRef(j_feature);
 		return result;
 	} else {
@@ -591,7 +591,7 @@ Error FADEJavaWrapper::sign_apk(const String &p_input_path, const String &p_outp
 		jstring j_keystore_user = env->NewStringUTF(p_keystore_user.utf8().get_data());
 		jstring j_keystore_password = env->NewStringUTF(p_keystore_password.utf8().get_data());
 
-		int result = env->CallIntMethod(godot_native_bridge, _sign_apk, j_input_path, j_output_path, j_keystore_path, j_keystore_user, j_keystore_password);
+		int result = env->CallIntMethod(fade_native_bridge, _sign_apk, j_input_path, j_output_path, j_keystore_path, j_keystore_user, j_keystore_password);
 
 		env->DeleteLocalRef(j_input_path);
 		env->DeleteLocalRef(j_output_path);
@@ -611,7 +611,7 @@ Error FADEJavaWrapper::verify_apk(const String &p_apk_path) {
 		ERR_FAIL_NULL_V(env, ERR_UNCONFIGURED);
 
 		jstring j_apk_path = env->NewStringUTF(p_apk_path.utf8().get_data());
-		int result = env->CallIntMethod(godot_native_bridge, _verify_apk, j_apk_path);
+		int result = env->CallIntMethod(fade_native_bridge, _verify_apk, j_apk_path);
 		env->DeleteLocalRef(j_apk_path);
 		return static_cast<Error>(result);
 	} else {
@@ -623,7 +623,7 @@ void FADEJavaWrapper::enable_immersive_mode(bool p_enabled) {
 	if (_enable_immersive_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _enable_immersive_mode, p_enabled);
+		env->CallVoidMethod(fade_native_bridge, _enable_immersive_mode, p_enabled);
 	}
 }
 
@@ -631,7 +631,7 @@ bool FADEJavaWrapper::is_in_immersive_mode() {
 	if (_is_in_immersive_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_in_immersive_mode);
+		return env->CallBooleanMethod(fade_native_bridge, _is_in_immersive_mode);
 	} else {
 		return false;
 	}
@@ -643,7 +643,7 @@ void FADEJavaWrapper::set_window_color(const Color &p_color) {
 		ERR_FAIL_NULL(env);
 		String color = "#" + p_color.to_html(false);
 		jstring jStrColor = env->NewStringUTF(color.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _set_window_color, jStrColor);
+		env->CallVoidMethod(fade_native_bridge, _set_window_color, jStrColor);
 	}
 }
 
@@ -653,7 +653,7 @@ void FADEJavaWrapper::on_editor_workspace_selected(const String &p_workspace) {
 		ERR_FAIL_NULL(env);
 
 		jstring j_workspace = env->NewStringUTF(p_workspace.utf8().get_data());
-		env->CallVoidMethod(godot_native_bridge, _on_editor_workspace_selected, j_workspace);
+		env->CallVoidMethod(fade_native_bridge, _on_editor_workspace_selected, j_workspace);
 	}
 }
 
@@ -662,7 +662,7 @@ void FADEJavaWrapper::on_distraction_free_mode_changed(bool p_enabled) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 
-		env->CallVoidMethod(godot_native_bridge, _on_distraction_free_mode_changed, p_enabled);
+		env->CallVoidMethod(fade_native_bridge, _on_distraction_free_mode_changed, p_enabled);
 	}
 }
 
@@ -671,7 +671,7 @@ void FADEJavaWrapper::show_editor_game_dock() {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 
-		env->CallVoidMethod(godot_native_bridge, _show_editor_game_dock);
+		env->CallVoidMethod(fade_native_bridge, _show_editor_game_dock);
 	}
 }
 
@@ -681,7 +681,7 @@ bool FADEJavaWrapper::build_env_connect(const Callable &p_callback) {
 		ERR_FAIL_NULL_V(env, false);
 
 		jobject j_callback = callable_to_jcallable(env, p_callback);
-		jboolean result = env->CallBooleanMethod(godot_native_bridge, _build_env_connect, j_callback);
+		jboolean result = env->CallBooleanMethod(fade_native_bridge, _build_env_connect, j_callback);
 		env->DeleteLocalRef(j_callback);
 
 		return result;
@@ -695,7 +695,7 @@ void FADEJavaWrapper::build_env_disconnect() {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
 
-		env->CallVoidMethod(godot_native_bridge, _build_env_disconnect);
+		env->CallVoidMethod(fade_native_bridge, _build_env_disconnect);
 	}
 }
 
@@ -716,7 +716,7 @@ int FADEJavaWrapper::build_env_execute(const String &p_build_tool, const List<St
 		jobject j_output_callback = callable_to_jcallable(env, p_output_callback);
 		jobject j_result_callback = callable_to_jcallable(env, p_result_callback);
 
-		jint result = env->CallIntMethod(godot_native_bridge, _build_env_execute, j_build_tool, j_args, j_project_path, j_gradle_build_directory, j_output_callback, j_result_callback);
+		jint result = env->CallIntMethod(fade_native_bridge, _build_env_execute, j_build_tool, j_args, j_project_path, j_gradle_build_directory, j_output_callback, j_result_callback);
 
 		env->DeleteLocalRef(j_build_tool);
 		env->DeleteLocalRef(j_args);
@@ -735,7 +735,7 @@ void FADEJavaWrapper::build_env_cancel(int p_job_id) {
 	if (_build_env_cancel) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _build_env_cancel, p_job_id);
+		env->CallVoidMethod(fade_native_bridge, _build_env_cancel, p_job_id);
 	}
 }
 
@@ -748,7 +748,7 @@ void FADEJavaWrapper::build_env_clean_project(const String &p_project_path, cons
 		jstring j_gradle_build_directory = env->NewStringUTF(p_gradle_build_directory.utf8().get_data());
 		jobject j_callback = callable_to_jcallable(env, p_callback);
 
-		env->CallVoidMethod(godot_native_bridge, _build_env_clean_project, j_project_path, j_gradle_build_directory, j_callback);
+		env->CallVoidMethod(fade_native_bridge, _build_env_clean_project, j_project_path, j_gradle_build_directory, j_callback);
 
 		env->DeleteLocalRef(j_project_path);
 		env->DeleteLocalRef(j_gradle_build_directory);
@@ -760,7 +760,7 @@ bool FADEJavaWrapper::is_pip_mode_supported() {
 	if (_is_pip_mode_supported) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_pip_mode_supported);
+		return env->CallBooleanMethod(fade_native_bridge, _is_pip_mode_supported);
 	} else {
 		return false;
 	}
@@ -770,7 +770,7 @@ bool FADEJavaWrapper::is_in_pip_mode() {
 	if (_is_in_pip_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
-		return env->CallBooleanMethod(godot_native_bridge, _is_in_pip_mode);
+		return env->CallBooleanMethod(fade_native_bridge, _is_in_pip_mode);
 	} else {
 		return false;
 	}
@@ -780,7 +780,7 @@ void FADEJavaWrapper::enter_pip_mode() {
 	if (_enter_pip_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _enter_pip_mode);
+		env->CallVoidMethod(fade_native_bridge, _enter_pip_mode);
 	}
 }
 
@@ -788,7 +788,7 @@ void FADEJavaWrapper::set_pip_mode_aspect_ratio(int p_numerator, int p_denominat
 	if (_set_pip_mode_aspect_ratio) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _set_pip_mode_aspect_ratio, p_numerator, p_denominator);
+		env->CallVoidMethod(fade_native_bridge, _set_pip_mode_aspect_ratio, p_numerator, p_denominator);
 	}
 }
 
@@ -796,6 +796,6 @@ void FADEJavaWrapper::set_auto_enter_pip_mode_on_background(bool p_auto_enter_on
 	if (_set_auto_enter_pip_mode_on_background) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
-		env->CallVoidMethod(godot_native_bridge, _set_auto_enter_pip_mode_on_background, p_auto_enter_on_background);
+		env->CallVoidMethod(fade_native_bridge, _set_auto_enter_pip_mode_on_background, p_auto_enter_on_background);
 	}
 }

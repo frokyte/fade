@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package com.godot.game;
+package com.fade.game;
 
-import org.godotengine.godot.FADE;
-import org.godotengine.godot.FADEActivity;
+import org.fadeengine.fade.FADE;
+import org.fadeengine.fade.FADEActivity;
 
 import android.os.Bundle;
 
@@ -44,11 +44,11 @@ import androidx.core.splashscreen.SplashScreen;
  */
 public class FADEApp extends FADEActivity {
 	private final Runnable updateWindowAppearance = () -> {
-		FADE godot = getFADE();
-		if (godot != null) {
-			godot.enableImmersiveMode(godot.isInImmersiveMode(), true);
-			godot.enableEdgeToEdge(godot.isInEdgeToEdgeMode(), true);
-			godot.setSystemBarsAppearance();
+		FADE fade = getFADE();
+		if (fade != null) {
+			fade.enableImmersiveMode(fade.isInImmersiveMode(), true);
+			fade.enableEdgeToEdge(fade.isInEdgeToEdgeMode(), true);
+			fade.setSystemBarsAppearance();
 		}
 	};
 
@@ -58,9 +58,9 @@ public class FADEApp extends FADEActivity {
 		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 
-		FADE godot = getFADE();
-		if (godot != null && godot.getDisableFADESplash()) {
-			splashScreen.setKeepOnScreenCondition(() -> godot.getRunStatus() != FADE.RunStatus.STARTED);
+		FADE fade = getFADE();
+		if (fade != null && fade.getDisableFADESplash()) {
+			splashScreen.setKeepOnScreenCondition(() -> fade.getRunStatus() != FADE.RunStatus.STARTED);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class FADEApp extends FADEActivity {
 
 	@Override
 	public void onFADEForceQuit(FADE instance) {
-		if (!getPackageName().equals("com.godot.game.instrumented")) {
+		if (!getPackageName().equals("com.fade.game.instrumented")) {
 			// For instrumented builds, we disable force-quitting to allow the instrumented tests to complete
 			// successfully, otherwise they fail when the process crashes.
 			super.onFADEForceQuit(instance);

@@ -1,12 +1,12 @@
 # Protect FADE Engine Core
--keep class com.godot.** { *; }
--keep class org.godotengine.** { *; }
--keep class ** extends org.godotengine.godot.plugin.FADEPlugin { *; }
+-keep class com.fade.** { *; }
+-keep class org.fadeengine.** { *; }
+-keep class ** extends org.fadeengine.fade.plugin.FADEPlugin { *; }
 
 # Protect methods exposed to FADE via @UsedByFADE
 -keepattributes *Annotation*
 -keepclassmembers class * {
-    @org.godotengine.godot.plugin.UsedByFADE *;
+    @org.fadeengine.fade.plugin.UsedByFADE *;
 }
 
 # Protect JNI bindings

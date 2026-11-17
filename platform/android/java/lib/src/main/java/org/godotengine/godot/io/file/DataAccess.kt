@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,15 +28,15 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.io.file
+package org.fadeengine.fade.io.file
 
 import android.content.ContentResolver
 import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.core.net.toUri
-import org.godotengine.godot.error.Error
-import org.godotengine.godot.io.StorageScope
+import org.fadeengine.fade.error.Error
+import org.fadeengine.fade.io.StorageScope
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream

@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_plugin_jni.h                                                    */
+/*  fade_plugin_jni.h                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -36,8 +36,8 @@
 void unregister_plugins_singletons();
 
 extern "C" {
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegisterSingleton(JNIEnv *env, jclass clazz, jstring name, jobject obj);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegisterMethod(JNIEnv *env, jclass clazz, jstring sname, jstring name, jstring ret, jobjectArray args);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegisterSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_param_types);
-JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeEmitSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_params);
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeRegisterSingleton(JNIEnv *env, jclass clazz, jstring name, jobject obj);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeRegisterMethod(JNIEnv *env, jclass clazz, jstring sname, jstring name, jstring ret, jobjectArray args);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeRegisterSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_param_types);
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeEmitSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_params);
 }

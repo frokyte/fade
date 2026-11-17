@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -43,7 +43,7 @@
 #include "protocol/cursor_shape.gen.h"
 #include "protocol/fifo_v1.gen.h"
 #include "protocol/fractional_scale.gen.h"
-#include "protocol/godot_embedding_compositor.gen.h"
+#include "protocol/fade_embedding_compositor.gen.h"
 #include "protocol/idle_inhibit.gen.h"
 #include "protocol/linux_dmabuf_v1.gen.h"
 #include "protocol/linux_drm_syncobj_v1.gen.h"
@@ -224,11 +224,11 @@ class WaylandEmbedder {
 		Error send_wl_drm_authenticated(uint32_t wl_drm);
 		Error send_wl_drm_capabilities(uint32_t wl_drm, uint32_t capabilities);
 
-		Error send_godot_embedding_compositor_client(uint32_t godot_embedding_compositor, uint32_t client, uint32_t p_pid);
-		Error send_godot_embedded_client_disconnected(uint32_t godot_embedded_client);
-		Error send_godot_embedded_client_window_embedded(uint32_t godot_embedded_client);
-		Error send_godot_embedded_client_window_focus_in(uint32_t godot_embedded_client);
-		Error send_godot_embedded_client_window_focus_out(uint32_t godot_embedded_client);
+		Error send_fade_embedding_compositor_client(uint32_t fade_embedding_compositor, uint32_t client, uint32_t p_pid);
+		Error send_fade_embedded_client_disconnected(uint32_t fade_embedded_client);
+		Error send_fade_embedded_client_window_embedded(uint32_t fade_embedded_client);
+		Error send_fade_embedded_client_window_focus_in(uint32_t fade_embedded_client);
+		Error send_fade_embedded_client_window_focus_out(uint32_t fade_embedded_client);
 
 		Error handle_wl_drm_bind(uint32_t p_id, WaylandDrmGlobalData *p_state);
 	};
@@ -526,8 +526,8 @@ class WaylandEmbedder {
 		&wp_pointer_warp_v1_interface,
 
 		// Our custom things.
-		&godot_embedding_compositor_interface,
-		&godot_embedded_client_interface,
+		&fade_embedding_compositor_interface,
+		&fade_embedded_client_interface,
 	};
 
 	// These interfaces will not be reported to embedded clients. This includes
@@ -539,7 +539,7 @@ class WaylandEmbedder {
 			&zxdg_exporter_v1_interface,
 			&zxdg_exporter_v2_interface,
 			&xdg_toplevel_icon_manager_v1_interface,
-			&godot_embedding_compositor_interface,
+			&fade_embedding_compositor_interface,
 	});
 
 	static constexpr uint32_t INVALID_ID = 0;
@@ -574,7 +574,7 @@ class WaylandEmbedder {
 	HashMap<uint32_t, RegistryGlobalInfo> registry_globals;
 	uint32_t registry_globals_counter = 0;
 
-	uint32_t godot_embedding_compositor_name = 0;
+	uint32_t fade_embedding_compositor_name = 0;
 
 	LocalVector<uint32_t> wl_seat_names;
 

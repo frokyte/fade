@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.service
+package org.fadeengine.fade.service
 
 import android.app.Service
 import android.content.Intent
@@ -48,9 +48,9 @@ import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
-import org.godotengine.godot.FADE
-import org.godotengine.godot.FADEHost
-import org.godotengine.godot.R
+import org.fadeengine.fade.FADE
+import org.fadeengine.fade.FADEHost
+import org.fadeengine.fade.R
 import java.lang.ref.WeakReference
 
 /**
@@ -222,9 +222,9 @@ open class FADEService : Service() {
 							return
 						}
 
-						val godotContainerLayout = service.godot.containerLayout
-						if (godotContainerLayout == null) {
-							Log.e(TAG, "Invalid godot layout.. Aborting")
+						val fadeContainerLayout = service.fade.containerLayout
+						if (fadeContainerLayout == null) {
+							Log.e(TAG, "Invalid fade layout.. Aborting")
 							service.listener?.onEngineError(EngineError.SCVH_CREATION_FAILED)
 							return
 						}
@@ -238,7 +238,7 @@ open class FADEService : Service() {
 
 						Log.d(TAG, "Setting up SurfaceControlViewHost")
 						currentViewHost = SurfaceControlViewHost(service, display, hostToken).apply {
-							setView(godotContainerLayout, width, height)
+							setView(fadeContainerLayout, width, height)
 
 							Log.i(TAG, "Attached FADE engine to SurfaceControlViewHost")
 							service.listener?.onEngineStatusUpdate(
@@ -259,7 +259,7 @@ open class FADEService : Service() {
 
 	private inner class FADEServiceHost : FADEHost {
 		override fun getActivity() = null
-		override fun getFADE() = this@FADEService.godot
+		override fun getFADE() = this@FADEService.fade
 		override fun getCommandLine() = commandLineParams
 
 		override fun runOnHostThread(action: Runnable) {
@@ -271,14 +271,14 @@ open class FADEService : Service() {
 		}
 
 		override fun onFADEForceQuit(instance: FADE) {
-			if (instance === godot) {
+			if (instance === fade) {
 				Log.d(TAG, "Force quitting FADE service")
 				forceQuitService()
 			}
 		}
 
 		override fun onFADERestartRequested(instance: FADE) {
-			if (instance === godot) {
+			if (instance === fade) {
 				Log.d(TAG, "Restarting FADE service")
 				listener?.onEngineRestartRequested()
 			}
@@ -288,9 +288,9 @@ open class FADEService : Service() {
 	private val commandLineParams = ArrayList<String>()
 	private val handler = IncomingHandler(WeakReference(this))
 	private val messenger = Messenger(handler)
-	private val godotHost = FADEServiceHost()
+	private val fadeHost = FADEServiceHost()
 
-	private val godot: FADE by lazy { FADE.getInstance(applicationContext) }
+	private val fade: FADE by lazy { FADE.getInstance(applicationContext) }
 	private var listener: RemoteListener? = null
 
 	override fun onCreate() {
@@ -321,11 +321,11 @@ open class FADEService : Service() {
 		Log.d(TAG, "Performing engine initialization")
 		try {
 			// Initialize the FADE instance
-			if (!godot.initEngine(godotHost, godotHost.commandLine, godotHost.getHostPlugins(godot))) {
+			if (!fade.initEngine(fadeHost, fadeHost.commandLine, fadeHost.getHostPlugins(fade))) {
 				throw IllegalStateException("Unable to initialize FADE engine layer")
 			}
 
-			if (godot.onInitRenderView(godotHost) == null) {
+			if (fade.onInitRenderView(fadeHost) == null) {
 				throw IllegalStateException("Unable to initialize engine render view")
 			}
 			return true
@@ -337,7 +337,7 @@ open class FADEService : Service() {
 			} else {
 				e.message!!
 			}
-			godot.alert(errorMessage, getString(R.string.text_error_title)) { godot.destroyAndKillProcess() }
+			fade.alert(errorMessage, getString(R.string.text_error_title)) { fade.destroyAndKillProcess() }
 			return false
 		}
 	}
@@ -363,7 +363,7 @@ open class FADEService : Service() {
 	}
 
 	private fun initEngine(args: Array<String>?): FrameLayout? {
-		if (!godot.isInitialized()) {
+		if (!fade.isInitialized()) {
 			if (!args.isNullOrEmpty()) {
 				updateCommandLineParams(args.asList())
 			}
@@ -375,49 +375,49 @@ open class FADEService : Service() {
 				Log.i(TAG, "Engine initialization complete!")
 			}
 		}
-		val godotContainerLayout = godot.containerLayout
-		if (godotContainerLayout == null) {
+		val fadeContainerLayout = fade.containerLayout
+		if (fadeContainerLayout == null) {
 			listener?.onEngineError(EngineError.INIT_FAILED)
 		} else {
 			Log.i(TAG, "Initialized FADE engine")
 			listener?.onEngineStatusUpdate(EngineStatus.INITIALIZED)
 		}
 
-		return godotContainerLayout
+		return fadeContainerLayout
 	}
 
 	private fun startEngine() {
-		if (!godot.isInitialized()) {
+		if (!fade.isInitialized()) {
 			Log.e(TAG, "Attempting to start uninitialized FADE engine instance")
 			return
 		}
 
 		Log.d(TAG, "Starting FADE engine")
-		godot.onStart(godotHost)
-		godot.onResume(godotHost)
+		fade.onStart(fadeHost)
+		fade.onResume(fadeHost)
 
 		listener?.onEngineStatusUpdate(EngineStatus.STARTED)
 	}
 
 	private fun stopEngine() {
-		if (!godot.isInitialized()) {
+		if (!fade.isInitialized()) {
 			Log.e(TAG, "Attempting to stop uninitialized FADE engine instance")
 			return
 		}
 
 		Log.d(TAG, "Stopping FADE engine")
-		godot.onPause(godotHost)
-		godot.onStop(godotHost)
+		fade.onPause(fadeHost)
+		fade.onStop(fadeHost)
 
 		listener?.onEngineStatusUpdate(EngineStatus.STOPPED)
 	}
 
 	private fun destroyEngine() {
-		if (!godot.isInitialized()) {
+		if (!fade.isInitialized()) {
 			return
 		}
 
-		godot.onDestroy(godotHost)
+		fade.onDestroy(fadeHost)
 
 		listener?.onEngineStatusUpdate(EngineStatus.DESTROYED)
 		listener = null

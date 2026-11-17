@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_debugger.js                                             */
+/*  library_fade_debugger.js                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -83,9 +83,9 @@ const FADEDebugger = {
 		},
 	},
 
-	godot_js_debugger_post__proxy: 'sync',
-	godot_js_debugger_post__sig: 'vipi',
-	godot_js_debugger_post: function (p_id, p_ptr, p_size) {
+	fade_js_debugger_post__proxy: 'sync',
+	fade_js_debugger_post__sig: 'vipi',
+	fade_js_debugger_post: function (p_id, p_ptr, p_size) {
 		if (!p_size) {
 			return;
 		}
@@ -93,9 +93,9 @@ const FADEDebugger = {
 		FADEDebugger.post(p_id, msg);
 	},
 
-	godot_js_debugger_bind__proxy: 'sync',
-	godot_js_debugger_bind__sig: 'iipp',
-	godot_js_debugger_bind: function (p_id, p_cb, p_ref) {
+	fade_js_debugger_bind__proxy: 'sync',
+	fade_js_debugger_bind__sig: 'iipp',
+	fade_js_debugger_bind: function (p_id, p_cb, p_ref) {
 		let id = p_id;
 		if (id == -1) {
 			if (!FADEConfig.debug_port) {
@@ -115,17 +115,17 @@ const FADEDebugger = {
 		return FADEDebugger.bind(id, p_ref, cb);
 	},
 
-	godot_js_debugger_unbind__proxy: 'sync',
-	godot_js_debugger_unbind__sig: 'vi',
-	godot_js_debugger_unbind: function (p_id) {
+	fade_js_debugger_unbind__proxy: 'sync',
+	fade_js_debugger_unbind__sig: 'vi',
+	fade_js_debugger_unbind: function (p_id) {
 		FADEDebugger.unbind(p_id);
 		IDHandler.remove(p_id);
 		FADEDebugger.debug_id = -1;
 	},
 
-	godot_js_debugger_active__proxy: 'sync',
-	godot_js_debugger_active__sig: 'ii',
-	godot_js_debugger_active: function (p_id) {
+	fade_js_debugger_active__proxy: 'sync',
+	fade_js_debugger_active__sig: 'ii',
+	fade_js_debugger_active: function (p_id) {
 		const obj = IDHandler.get(p_id);
 		if (!obj) {
 			return 0;

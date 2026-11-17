@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_javascript_singleton.js                                 */
+/*  library_fade_javascript_singleton.js                                 */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -133,9 +133,9 @@ const FADEJSWrapper = {
 		},
 	},
 
-	godot_js_wrapper_interface_get__proxy: 'sync',
-	godot_js_wrapper_interface_get__sig: 'ii',
-	godot_js_wrapper_interface_get: function (p_name) {
+	fade_js_wrapper_interface_get__proxy: 'sync',
+	fade_js_wrapper_interface_get__sig: 'ii',
+	fade_js_wrapper_interface_get: function (p_name) {
 		const name = FADERuntime.parseString(p_name);
 		if (typeof (window[name]) !== 'undefined') {
 			return FADEJSWrapper.get_proxied(window[name]);
@@ -143,9 +143,9 @@ const FADEJSWrapper = {
 		return 0;
 	},
 
-	godot_js_wrapper_object_get__proxy: 'sync',
-	godot_js_wrapper_object_get__sig: 'iiii',
-	godot_js_wrapper_object_get: function (p_id, p_exchange, p_prop) {
+	fade_js_wrapper_object_get__proxy: 'sync',
+	fade_js_wrapper_object_get__sig: 'iiii',
+	fade_js_wrapper_object_get: function (p_id, p_exchange, p_prop) {
 		const obj = FADEJSWrapper.get_proxied_value(p_id);
 		if (obj === undefined) {
 			return 0;
@@ -162,9 +162,9 @@ const FADEJSWrapper = {
 		return FADEJSWrapper.js2variant(obj, p_exchange);
 	},
 
-	godot_js_wrapper_object_set__proxy: 'sync',
-	godot_js_wrapper_object_set__sig: 'viiii',
-	godot_js_wrapper_object_set: function (p_id, p_name, p_type, p_exchange) {
+	fade_js_wrapper_object_set__proxy: 'sync',
+	fade_js_wrapper_object_set__sig: 'viiii',
+	fade_js_wrapper_object_set: function (p_id, p_name, p_type, p_exchange) {
 		const obj = FADEJSWrapper.get_proxied_value(p_id);
 		if (obj === undefined) {
 			return;
@@ -177,9 +177,9 @@ const FADEJSWrapper = {
 		}
 	},
 
-	godot_js_wrapper_object_call__proxy: 'sync',
-	godot_js_wrapper_object_call__sig: 'iiiiiiiii',
-	godot_js_wrapper_object_call: function (p_id, p_method, p_args, p_argc, p_convert_callback, p_exchange, p_lock, p_free_lock_callback) {
+	fade_js_wrapper_object_call__proxy: 'sync',
+	fade_js_wrapper_object_call__sig: 'iiiiiiiii',
+	fade_js_wrapper_object_call: function (p_id, p_method, p_args, p_argc, p_convert_callback, p_exchange, p_lock, p_free_lock_callback) {
 		const obj = FADEJSWrapper.get_proxied_value(p_id);
 		if (obj === undefined) {
 			return -1;
@@ -205,18 +205,18 @@ const FADEJSWrapper = {
 		}
 	},
 
-	godot_js_wrapper_object_unref__proxy: 'sync',
-	godot_js_wrapper_object_unref__sig: 'vi',
-	godot_js_wrapper_object_unref: function (p_id) {
+	fade_js_wrapper_object_unref__proxy: 'sync',
+	fade_js_wrapper_object_unref__sig: 'vi',
+	fade_js_wrapper_object_unref: function (p_id) {
 		const proxy = IDHandler.get(p_id);
 		if (proxy !== undefined) {
 			proxy.unref();
 		}
 	},
 
-	godot_js_wrapper_create_cb__proxy: 'sync',
-	godot_js_wrapper_create_cb__sig: 'iii',
-	godot_js_wrapper_create_cb: function (p_ref, p_func) {
+	fade_js_wrapper_create_cb__proxy: 'sync',
+	fade_js_wrapper_create_cb__sig: 'iii',
+	fade_js_wrapper_create_cb: function (p_ref, p_func) {
 		const func = FADERuntime.get_func(p_func);
 		let id = 0;
 		const cb = function () {
@@ -224,7 +224,7 @@ const FADEJSWrapper = {
 				return undefined;
 			}
 			// The callback will store the returned value in this variable via
-			// "godot_js_wrapper_object_set_cb_ret" upon calling the user function.
+			// "fade_js_wrapper_object_set_cb_ret" upon calling the user function.
 			// This is safe! JavaScript is single threaded (and using it in threads is not a good idea anyway).
 			FADEJSWrapper.cb_ret = null;
 			const args = Array.from(arguments);
@@ -239,15 +239,15 @@ const FADEJSWrapper = {
 		return id;
 	},
 
-	godot_js_wrapper_object_set_cb_ret__proxy: 'sync',
-	godot_js_wrapper_object_set_cb_ret__sig: 'vii',
-	godot_js_wrapper_object_set_cb_ret: function (p_val_type, p_val_ex) {
+	fade_js_wrapper_object_set_cb_ret__proxy: 'sync',
+	fade_js_wrapper_object_set_cb_ret__sig: 'vii',
+	fade_js_wrapper_object_set_cb_ret: function (p_val_type, p_val_ex) {
 		FADEJSWrapper.cb_ret = FADEJSWrapper.variant2js(p_val_type, p_val_ex);
 	},
 
-	godot_js_wrapper_object_getvar__proxy: 'sync',
-	godot_js_wrapper_object_getvar__sig: 'iiii',
-	godot_js_wrapper_object_getvar: function (p_id, p_type, p_exchange) {
+	fade_js_wrapper_object_getvar__proxy: 'sync',
+	fade_js_wrapper_object_getvar__sig: 'iiii',
+	fade_js_wrapper_object_getvar: function (p_id, p_type, p_exchange) {
 		const obj = FADEJSWrapper.get_proxied_value(p_id);
 		if (obj === undefined) {
 			return -1;
@@ -264,9 +264,9 @@ const FADEJSWrapper = {
 		}
 	},
 
-	godot_js_wrapper_object_setvar__proxy: 'sync',
-	godot_js_wrapper_object_setvar__sig: 'iiiiii',
-	godot_js_wrapper_object_setvar: function (p_id, p_key_type, p_key_ex, p_val_type, p_val_ex) {
+	fade_js_wrapper_object_setvar__proxy: 'sync',
+	fade_js_wrapper_object_setvar__sig: 'iiiiii',
+	fade_js_wrapper_object_setvar: function (p_id, p_key_type, p_key_ex, p_val_type, p_val_ex) {
 		const obj = FADEJSWrapper.get_proxied_value(p_id);
 		if (obj === undefined) {
 			return -1;
@@ -281,9 +281,9 @@ const FADEJSWrapper = {
 		}
 	},
 
-	godot_js_wrapper_create_object__proxy: 'sync',
-	godot_js_wrapper_create_object__sig: 'iiiiiiii',
-	godot_js_wrapper_create_object: function (p_object, p_args, p_argc, p_convert_callback, p_exchange, p_lock, p_free_lock_callback) {
+	fade_js_wrapper_create_object__proxy: 'sync',
+	fade_js_wrapper_create_object__sig: 'iiiiiiii',
+	fade_js_wrapper_create_object: function (p_object, p_args, p_argc, p_convert_callback, p_exchange, p_lock, p_free_lock_callback) {
 		const name = FADERuntime.parseString(p_object);
 		if (typeof (window[name]) === 'undefined') {
 			return -1;
@@ -308,18 +308,18 @@ const FADEJSWrapper = {
 		}
 	},
 
-	godot_js_wrapper_object_is_buffer__proxy: 'sync',
-	godot_js_wrapper_object_is_buffer__sig: 'ii',
-	godot_js_wrapper_object_is_buffer: function (p_id) {
+	fade_js_wrapper_object_is_buffer__proxy: 'sync',
+	fade_js_wrapper_object_is_buffer__sig: 'ii',
+	fade_js_wrapper_object_is_buffer: function (p_id) {
 		const obj = FADEJSWrapper.get_proxied_value(p_id);
 		return FADEJSWrapper.isBuffer(obj)
 			? 1
 			: 0;
 	},
 
-	godot_js_wrapper_object_transfer_buffer__proxy: 'sync',
-	godot_js_wrapper_object_transfer_buffer__sig: 'viiii',
-	godot_js_wrapper_object_transfer_buffer: function (p_id, p_byte_arr, p_byte_arr_write, p_callback) {
+	fade_js_wrapper_object_transfer_buffer__proxy: 'sync',
+	fade_js_wrapper_object_transfer_buffer__sig: 'viiii',
+	fade_js_wrapper_object_transfer_buffer: function (p_id, p_byte_arr, p_byte_arr_write, p_callback) {
 		let obj = FADEJSWrapper.get_proxied_value(p_id);
 		if (!FADEJSWrapper.isBuffer(obj)) {
 			return;
@@ -341,9 +341,9 @@ autoAddDeps(FADEJSWrapper, '$FADEJSWrapper');
 mergeInto(LibraryManager.library, FADEJSWrapper);
 
 const FADEEval = {
-	godot_js_eval__deps: ['$FADERuntime'],
-	godot_js_eval__sig: 'iiiiiii',
-	godot_js_eval: function (p_js, p_use_global_ctx, p_union_ptr, p_byte_arr, p_byte_arr_write, p_callback) {
+	fade_js_eval__deps: ['$FADERuntime'],
+	fade_js_eval__sig: 'iiiiiii',
+	fade_js_eval: function (p_js, p_use_global_ctx, p_union_ptr, p_byte_arr, p_byte_arr_write, p_callback) {
 		const js_code = FADERuntime.parseString(p_js);
 		let eval_ret = null;
 		try {

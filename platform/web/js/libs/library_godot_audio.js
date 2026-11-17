@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_audio.js                                                */
+/*  library_fade_audio.js                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -312,7 +312,7 @@ function FADESampleDriver(audioContext, positionWorkletPath) {
 			if (audioPositionWorkletNodes.length > 0) {
 				worklet = audioPositionWorkletNodes.pop();
 			} else {
-				worklet = new AudioWorkletNode(/** @type {!AudioContext} */ (ctx), 'godot-position-reporting-processor');
+				worklet = new AudioWorkletNode(/** @type {!AudioContext} */ (ctx), 'fade-position-reporting-processor');
 			}
 			const end = loopEnd ? Math.min(loopEnd, length) : length;
 			worklet.port.onmessage = (event) => {
@@ -688,7 +688,7 @@ const _FADEAudio = {
 			FADEOS.atexit(FADEAudio.close_async);
 
 			// Initialize sample driver.
-			const path = FADEConfig.locate_file('godot.audio.position.worklet.js');
+			const path = FADEConfig.locate_file('fade.audio.position.worklet.js');
 			FADEAudio.sample_driver = FADEAudio.FADESampleDriver(ctx, path);
 
 			return ctx.destination.channelCount;
@@ -770,30 +770,30 @@ const _FADEAudio = {
 		},
 	},
 
-	godot_audio_is_available__sig: 'i',
-	godot_audio_is_available__proxy: 'sync',
-	godot_audio_is_available: function () {
+	fade_audio_is_available__sig: 'i',
+	fade_audio_is_available__proxy: 'sync',
+	fade_audio_is_available: function () {
 		if (!(window.AudioContext || window.webkitAudioContext)) {
 			return 0;
 		}
 		return 1;
 	},
 
-	godot_audio_has_worklet__proxy: 'sync',
-	godot_audio_has_worklet__sig: 'i',
-	godot_audio_has_worklet: function () {
+	fade_audio_has_worklet__proxy: 'sync',
+	fade_audio_has_worklet__sig: 'i',
+	fade_audio_has_worklet: function () {
 		return FADEAudio.ctx && FADEAudio.ctx.audioWorklet ? 1 : 0;
 	},
 
-	godot_audio_has_script_processor__proxy: 'sync',
-	godot_audio_has_script_processor__sig: 'i',
-	godot_audio_has_script_processor: function () {
+	fade_audio_has_script_processor__proxy: 'sync',
+	fade_audio_has_script_processor__sig: 'i',
+	fade_audio_has_script_processor: function () {
 		return FADEAudio.ctx && FADEAudio.ctx.createScriptProcessor ? 1 : 0;
 	},
 
-	godot_audio_init__proxy: 'sync',
-	godot_audio_init__sig: 'iiiii',
-	godot_audio_init: function (
+	fade_audio_init__proxy: 'sync',
+	fade_audio_init__sig: 'iiiii',
+	fade_audio_init: function (
 		p_mix_rate,
 		p_latency,
 		p_state_change,
@@ -812,25 +812,25 @@ const _FADEAudio = {
 		return channels;
 	},
 
-	godot_audio_resume__proxy: 'sync',
-	godot_audio_resume__sig: 'v',
-	godot_audio_resume: function () {
+	fade_audio_resume__proxy: 'sync',
+	fade_audio_resume__sig: 'v',
+	fade_audio_resume: function () {
 		if (FADEAudio.ctx && FADEAudio.ctx.state !== 'running') {
 			FADEAudio.ctx.resume();
 		}
 	},
 
-	godot_audio_input_start__proxy: 'sync',
-	godot_audio_input_start__sig: 'i',
-	godot_audio_input_start: function () {
+	fade_audio_input_start__proxy: 'sync',
+	fade_audio_input_start__sig: 'i',
+	fade_audio_input_start: function () {
 		return FADEAudio.create_input(function (input) {
 			input.connect(FADEAudio.driver.get_node());
 		});
 	},
 
-	godot_audio_input_stop__proxy: 'sync',
-	godot_audio_input_stop__sig: 'v',
-	godot_audio_input_stop: function () {
+	fade_audio_input_stop__proxy: 'sync',
+	fade_audio_input_stop__sig: 'v',
+	fade_audio_input_stop: function () {
 		if (FADEAudio.input) {
 			const tracks = FADEAudio.input['mediaStream']['getTracks']();
 			for (let i = 0; i < tracks.length; i++) {
@@ -852,18 +852,18 @@ const _FADEAudioSampleDriver = {
 	$FADEAudioSampleDriver__deps: ['$FADEAudio', '$FADERuntime'],
 	$FADEAudioSampleDriver: {},
 
-	godot_audio_sample_stream_is_registered__proxy: 'sync',
-	godot_audio_sample_stream_is_registered__sig: 'ii',
-	godot_audio_sample_stream_is_registered: function (p_id) {
+	fade_audio_sample_stream_is_registered__proxy: 'sync',
+	fade_audio_sample_stream_is_registered__sig: 'ii',
+	fade_audio_sample_stream_is_registered: function (p_id) {
 		if (!FADEAudio.sample_driver) {
 			return 0;
 		}
 		return FADEAudio.sample_driver.getStream(FADERuntime.parseString(p_id)) ? 1 : 0;
 	},
 
-	godot_audio_sample_register_stream__proxy: 'sync',
-	godot_audio_sample_register_stream__sig: 'viiiiii',
-	godot_audio_sample_register_stream: function (p_id, p_frames, p_frames_count, p_loop_mode, p_loop_begin, p_loop_end) {
+	fade_audio_sample_register_stream__proxy: 'sync',
+	fade_audio_sample_register_stream__sig: 'viiiiii',
+	fade_audio_sample_register_stream: function (p_id, p_frames, p_frames_count, p_loop_mode, p_loop_begin, p_loop_end) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -889,18 +889,18 @@ const _FADEAudioSampleDriver = {
 		FADEAudio.sample_driver.createStream(sid, audioBuffer, opts);
 	},
 
-	godot_audio_sample_unregister_stream__proxy: 'sync',
-	godot_audio_sample_unregister_stream__sig: 'vi',
-	godot_audio_sample_unregister_stream: function (p_id) {
+	fade_audio_sample_unregister_stream__proxy: 'sync',
+	fade_audio_sample_unregister_stream__sig: 'vi',
+	fade_audio_sample_unregister_stream: function (p_id) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.removeStream(FADERuntime.parseString(p_id));
 	},
 
-	godot_audio_sample_start__proxy: 'sync',
-	godot_audio_sample_start__sig: 'viiiifi',
-	godot_audio_sample_start: function (p_playback, p_stream, p_bus, p_offset, p_pitch_scale, p_volume) {
+	fade_audio_sample_start__proxy: 'sync',
+	fade_audio_sample_start__sig: 'viiiifi',
+	fade_audio_sample_start: function (p_playback, p_stream, p_bus, p_offset, p_pitch_scale, p_volume) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -917,18 +917,18 @@ const _FADEAudioSampleDriver = {
 		playback.start(p_offset);
 	},
 
-	godot_audio_sample_stop__proxy: 'sync',
-	godot_audio_sample_stop__sig: 'vi',
-	godot_audio_sample_stop: function (p_id) {
+	fade_audio_sample_stop__proxy: 'sync',
+	fade_audio_sample_stop__sig: 'vi',
+	fade_audio_sample_stop: function (p_id) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.removePlayback(FADERuntime.parseString(p_id));
 	},
 
-	godot_audio_sample_set_pause__proxy: 'sync',
-	godot_audio_sample_set_pause__sig: 'vii',
-	godot_audio_sample_set_pause: function (p_id, p_pause) {
+	fade_audio_sample_set_pause__proxy: 'sync',
+	fade_audio_sample_set_pause__sig: 'vii',
+	fade_audio_sample_set_pause: function (p_id, p_pause) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -938,18 +938,18 @@ const _FADEAudioSampleDriver = {
 		}
 	},
 
-	godot_audio_sample_is_active__proxy: 'sync',
-	godot_audio_sample_is_active__sig: 'ii',
-	godot_audio_sample_is_active: function (p_id) {
+	fade_audio_sample_is_active__proxy: 'sync',
+	fade_audio_sample_is_active__sig: 'ii',
+	fade_audio_sample_is_active: function (p_id) {
 		if (!FADEAudio.sample_driver) {
 			return 0;
 		}
 		return FADEAudio.sample_driver.getPlayback(FADERuntime.parseString(p_id)) ? 1 : 0;
 	},
 
-	godot_audio_get_sample_playback_position__proxy: 'sync',
-	godot_audio_get_sample_playback_position__sig: 'di',
-	godot_audio_get_sample_playback_position: function (p_id) {
+	fade_audio_get_sample_playback_position__proxy: 'sync',
+	fade_audio_get_sample_playback_position__sig: 'di',
+	fade_audio_get_sample_playback_position: function (p_id) {
 		if (!FADEAudio.sample_driver) {
 			return 0;
 		}
@@ -957,9 +957,9 @@ const _FADEAudioSampleDriver = {
 		return playback ? playback.getPlaybackPosition() : 0;
 	},
 
-	godot_audio_sample_update_pitch_scale__proxy: 'sync',
-	godot_audio_sample_update_pitch_scale__sig: 'vii',
-	godot_audio_sample_update_pitch_scale: function (p_id, p_pitch_scale) {
+	fade_audio_sample_update_pitch_scale__proxy: 'sync',
+	fade_audio_sample_update_pitch_scale__sig: 'vii',
+	fade_audio_sample_update_pitch_scale: function (p_id, p_pitch_scale) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -969,9 +969,9 @@ const _FADEAudioSampleDriver = {
 		}
 	},
 
-	godot_audio_sample_set_volumes_linear__proxy: 'sync',
-	godot_audio_sample_set_volumes_linear__sig: 'viiiii',
-	godot_audio_sample_set_volumes_linear: function (p_id, p_buses, p_buses_size, p_volume, p_volume_size) {
+	fade_audio_sample_set_volumes_linear__proxy: 'sync',
+	fade_audio_sample_set_volumes_linear__sig: 'viiiii',
+	fade_audio_sample_set_volumes_linear: function (p_id, p_buses, p_buses_size, p_volume, p_volume_size) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -984,45 +984,45 @@ const _FADEAudioSampleDriver = {
 		playback.setVolumes(busesIndexes, volumes);
 	},
 
-	godot_audio_sample_bus_set_count__proxy: 'sync',
-	godot_audio_sample_bus_set_count__sig: 'vi',
-	godot_audio_sample_bus_set_count: function (p_count) {
+	fade_audio_sample_bus_set_count__proxy: 'sync',
+	fade_audio_sample_bus_set_count__sig: 'vi',
+	fade_audio_sample_bus_set_count: function (p_count) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.setBusCount(p_count);
 	},
 
-	godot_audio_sample_bus_remove__proxy: 'sync',
-	godot_audio_sample_bus_remove__sig: 'vi',
-	godot_audio_sample_bus_remove: function (p_index) {
+	fade_audio_sample_bus_remove__proxy: 'sync',
+	fade_audio_sample_bus_remove__sig: 'vi',
+	fade_audio_sample_bus_remove: function (p_index) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.removeBus(p_index);
 	},
 
-	godot_audio_sample_bus_add__proxy: 'sync',
-	godot_audio_sample_bus_add__sig: 'vi',
-	godot_audio_sample_bus_add: function (p_index) {
+	fade_audio_sample_bus_add__proxy: 'sync',
+	fade_audio_sample_bus_add__sig: 'vi',
+	fade_audio_sample_bus_add: function (p_index) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.addBusAt(p_index);
 	},
 
-	godot_audio_sample_bus_move__proxy: 'sync',
-	godot_audio_sample_bus_move__sig: 'vii',
-	godot_audio_sample_bus_move: function (p_from, p_to) {
+	fade_audio_sample_bus_move__proxy: 'sync',
+	fade_audio_sample_bus_move__sig: 'vii',
+	fade_audio_sample_bus_move: function (p_from, p_to) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.moveBus(p_from, p_to);
 	},
 
-	godot_audio_sample_bus_set_send__proxy: 'sync',
-	godot_audio_sample_bus_set_send__sig: 'vii',
-	godot_audio_sample_bus_set_send: function (p_index, p_send_index) {
+	fade_audio_sample_bus_set_send__proxy: 'sync',
+	fade_audio_sample_bus_set_send__sig: 'vii',
+	fade_audio_sample_bus_set_send: function (p_index, p_send_index) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -1037,9 +1037,9 @@ const _FADEAudioSampleDriver = {
 		bus.setSend(target);
 	},
 
-	godot_audio_sample_bus_set_volume_db__proxy: 'sync',
-	godot_audio_sample_bus_set_volume_db__sig: 'vii',
-	godot_audio_sample_bus_set_volume_db: function (p_bus, p_volume_db) {
+	fade_audio_sample_bus_set_volume_db__proxy: 'sync',
+	fade_audio_sample_bus_set_volume_db__sig: 'vii',
+	fade_audio_sample_bus_set_volume_db: function (p_bus, p_volume_db) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -1050,18 +1050,18 @@ const _FADEAudioSampleDriver = {
 		bus.setVolumeDb(p_volume_db);
 	},
 
-	godot_audio_sample_bus_set_solo__proxy: 'sync',
-	godot_audio_sample_bus_set_solo__sig: 'vii',
-	godot_audio_sample_bus_set_solo: function (p_bus, p_enable) {
+	fade_audio_sample_bus_set_solo__proxy: 'sync',
+	fade_audio_sample_bus_set_solo__sig: 'vii',
+	fade_audio_sample_bus_set_solo: function (p_bus, p_enable) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		FADEAudio.sample_driver.setBusSolo(p_bus, p_enable);
 	},
 
-	godot_audio_sample_bus_set_mute__proxy: 'sync',
-	godot_audio_sample_bus_set_mute__sig: 'vii',
-	godot_audio_sample_bus_set_mute: function (p_bus, p_enable) {
+	fade_audio_sample_bus_set_mute__proxy: 'sync',
+	fade_audio_sample_bus_set_mute__sig: 'vii',
+	fade_audio_sample_bus_set_mute: function (p_bus, p_enable) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -1072,9 +1072,9 @@ const _FADEAudioSampleDriver = {
 		bus.setMute(Boolean(p_enable));
 	},
 
-	godot_audio_sample_set_finished_callback__proxy: 'sync',
-	godot_audio_sample_set_finished_callback__sig: 'vi',
-	godot_audio_sample_set_finished_callback: function (p_callback) {
+	fade_audio_sample_set_finished_callback__proxy: 'sync',
+	fade_audio_sample_set_finished_callback__sig: 'vi',
+	fade_audio_sample_set_finished_callback: function (p_callback) {
 		if (!FADEAudio.sample_driver) {
 			return;
 		}
@@ -1096,13 +1096,13 @@ const FADEAudioWorklet = {
 		ring_buffer: null,
 
 		create: function (channels) {
-			const path = FADEConfig.locate_file('godot.audio.worklet.js');
+			const path = FADEConfig.locate_file('fade.audio.worklet.js');
 			FADEAudioWorklet.promise = FADEAudio.ctx.audioWorklet
 				.addModule(path)
 				.then(function () {
 					FADEAudioWorklet.worklet = new AudioWorkletNode(
 						FADEAudio.ctx,
-						'godot-processor',
+						'fade-processor',
 						{
 							outputChannelCount: [channels],
 						}
@@ -1248,9 +1248,9 @@ const FADEAudioWorklet = {
 		},
 	},
 
-	godot_audio_worklet_create__proxy: 'sync',
-	godot_audio_worklet_create__sig: 'ii',
-	godot_audio_worklet_create: function (channels) {
+	fade_audio_worklet_create__proxy: 'sync',
+	fade_audio_worklet_create__sig: 'ii',
+	fade_audio_worklet_create: function (channels) {
 		try {
 			FADEAudioWorklet.create(channels);
 		} catch (e) {
@@ -1260,9 +1260,9 @@ const FADEAudioWorklet = {
 		return 0;
 	},
 
-	godot_audio_worklet_start__proxy: 'sync',
-	godot_audio_worklet_start__sig: 'viiiii',
-	godot_audio_worklet_start: function (
+	fade_audio_worklet_start__proxy: 'sync',
+	fade_audio_worklet_start__sig: 'viiiii',
+	fade_audio_worklet_start: function (
 		p_in_buf,
 		p_in_size,
 		p_out_buf,
@@ -1275,9 +1275,9 @@ const FADEAudioWorklet = {
 		FADEAudioWorklet.start(in_buffer, out_buffer, state);
 	},
 
-	godot_audio_worklet_start_no_threads__proxy: 'sync',
-	godot_audio_worklet_start_no_threads__sig: 'viiiiii',
-	godot_audio_worklet_start_no_threads: function (
+	fade_audio_worklet_start_no_threads__proxy: 'sync',
+	fade_audio_worklet_start_no_threads__sig: 'viiiiii',
+	fade_audio_worklet_start_no_threads: function (
 		p_out_buf,
 		p_out_size,
 		p_out_callback,
@@ -1297,8 +1297,8 @@ const FADEAudioWorklet = {
 		);
 	},
 
-	godot_audio_worklet_state_wait__sig: 'iiii',
-	godot_audio_worklet_state_wait: function (
+	fade_audio_worklet_state_wait__sig: 'iiii',
+	fade_audio_worklet_state_wait: function (
 		p_state,
 		p_idx,
 		p_expected,
@@ -1308,13 +1308,13 @@ const FADEAudioWorklet = {
 		return Atomics.load(HEAP32, (p_state >> 2) + p_idx);
 	},
 
-	godot_audio_worklet_state_add__sig: 'iiii',
-	godot_audio_worklet_state_add: function (p_state, p_idx, p_value) {
+	fade_audio_worklet_state_add__sig: 'iiii',
+	fade_audio_worklet_state_add: function (p_state, p_idx, p_value) {
 		return Atomics.add(HEAP32, (p_state >> 2) + p_idx, p_value);
 	},
 
-	godot_audio_worklet_state_get__sig: 'iii',
-	godot_audio_worklet_state_get: function (p_state, p_idx) {
+	fade_audio_worklet_state_get__sig: 'iii',
+	fade_audio_worklet_state_get: function (p_state, p_idx) {
 		return Atomics.load(HEAP32, (p_state >> 2) + p_idx);
 	},
 };
@@ -1387,9 +1387,9 @@ const FADEAudioScript = {
 		},
 	},
 
-	godot_audio_script_create__proxy: 'sync',
-	godot_audio_script_create__sig: 'iii',
-	godot_audio_script_create: function (buffer_length, channel_count) {
+	fade_audio_script_create__proxy: 'sync',
+	fade_audio_script_create__sig: 'iii',
+	fade_audio_script_create: function (buffer_length, channel_count) {
 		const buf_len = FADERuntime.getHeapValue(buffer_length, 'i32');
 		try {
 			const out_len = FADEAudioScript.create(buf_len, channel_count);
@@ -1401,9 +1401,9 @@ const FADEAudioScript = {
 		return 0;
 	},
 
-	godot_audio_script_start__proxy: 'sync',
-	godot_audio_script_start__sig: 'viiiii',
-	godot_audio_script_start: function (
+	fade_audio_script_start__proxy: 'sync',
+	fade_audio_script_start__sig: 'viiiii',
+	fade_audio_script_start: function (
 		p_in_buf,
 		p_in_size,
 		p_out_buf,

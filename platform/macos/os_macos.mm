@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -32,8 +32,8 @@
 
 #import "dir_access_macos.h"
 #import "display_server_macos.h"
-#import "godot_application.h"
-#import "godot_application_delegate.h"
+#import "fade_application.h"
+#import "fade_application_delegate.h"
 
 #ifdef TOOLS_ENABLED
 #import "display_server_macos_embedded.h"
@@ -504,7 +504,7 @@ String OS_MacOS::get_bundle_icon_name() const {
 }
 
 // Get properly capitalized engine name for system paths
-String OS_MacOS::get_godot_dir_name() const {
+String OS_MacOS::get_fade_dir_name() const {
 	return String(GODOT_VERSION_SHORT_NAME).capitalize();
 }
 
@@ -1178,7 +1178,7 @@ void OS_MacOS_NSApp::cleanup() {
 			Main::cleanup();
 		}
 	}
-	godot_cleanup_profiler();
+	fade_cleanup_profiler();
 }
 
 OS_MacOS_NSApp::OS_MacOS_NSApp(const char *p_execpath, int p_argc, char **p_argv) :

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -38,4 +38,4 @@
 #define glGetProcAddress(n) static_assert(false, "Usage of glGetProcessAddress() on the web is a bug.")
 #define eglGetProcAddress(n) static_assert(false, "Usage of eglGetProcessAddress() on the web is a bug.")
 
-#include "platform/web/godot_webgl2.h" // IWYU pragma: export.
+#include "platform/web/fade_webgl2.h" // IWYU pragma: export.

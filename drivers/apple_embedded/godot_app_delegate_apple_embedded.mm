@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_app_delegate_apple_embedded.mm                                  */
+/*  fade_app_delegate_apple_embedded.mm                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,10 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_app_delegate_apple_embedded.h"
+#import "fade_app_delegate_apple_embedded.h"
 
 #include "core/typedefs.h"
-#import "drivers/apple_embedded/godot_app_delegate_service_apple_embedded.h"
+#import "drivers/apple_embedded/fade_app_delegate_service_apple_embedded.h"
 
 @implementation GDTAppDelegate
 

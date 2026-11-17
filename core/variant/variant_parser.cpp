@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -524,7 +524,7 @@ Error VariantParser::_parse_enginecfg(Stream *p_stream, Vector<String> &r_string
 	Token token;
 	get_token(p_stream, token, r_line, r_err_str);
 	if (token.type != TK_PARENTHESIS_OPEN) {
-		r_err_str = "Expected '(' in old-style project.godot construct";
+		r_err_str = "Expected '(' in old-style project.fade construct";
 		return ERR_PARSE_ERROR;
 	}
 
@@ -534,7 +534,7 @@ Error VariantParser::_parse_enginecfg(Stream *p_stream, Vector<String> &r_string
 		char32_t c = p_stream->get_char();
 
 		if (p_stream->is_eof()) {
-			r_err_str = "Unexpected EOF while parsing old-style project.godot construct";
+			r_err_str = "Unexpected EOF while parsing old-style project.fade construct";
 			return ERR_PARSE_ERROR;
 		}
 

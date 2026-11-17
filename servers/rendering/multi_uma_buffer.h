@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -279,7 +279,7 @@ enum class MultiUmaBufferType : uint8_t {
 ///		}
 ///
 ///	After the frame is done, those extra 18 buffers will be deleted.
-/// Launching godot with --verbose will print diagnostic information.
+/// Launching fade with --verbose will print diagnostic information.
 template <uint32_t NUM_BUFFERS, uint32_t MAX_EXTRA_BUFFERS = UINT32_MAX>
 class MultiUmaBuffer : public MultiUmaBufferBase {
 	struct BufferInfo {

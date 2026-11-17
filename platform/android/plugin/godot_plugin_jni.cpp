@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_plugin_jni.cpp                                                  */
+/*  fade_plugin_jni.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "godot_plugin_jni.h"
+#include "fade_plugin_jni.h"
 
 #include "api/java_class_wrapper.h"
 #include "api/jni_singleton.h"
@@ -50,7 +50,7 @@ void unregister_plugins_singletons() {
 
 extern "C" {
 
-JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegisterSingleton(JNIEnv *env, jclass clazz, jstring name, jobject obj) {
+JNIEXPORT jboolean JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeRegisterSingleton(JNIEnv *env, jclass clazz, jstring name, jobject obj) {
 	String singname = jstring_to_string(name, env);
 
 	ERR_FAIL_COND_V(jni_singletons.has(singname), false);
@@ -67,7 +67,7 @@ JNIEXPORT jboolean JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRe
 	return true;
 }
 
-JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegisterMethod(JNIEnv *env, jclass clazz, jstring sname, jstring name, jstring ret, jobjectArray args) {
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeRegisterMethod(JNIEnv *env, jclass clazz, jstring sname, jstring name, jstring ret, jobjectArray args) {
 	String singname = jstring_to_string(sname, env);
 
 	ERR_FAIL_COND(!jni_singletons.has(singname));
@@ -89,7 +89,7 @@ JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegist
 	s->add_method(mname, types, get_jni_type(retval));
 }
 
-JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegisterSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_param_types) {
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeRegisterSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_param_types) {
 	String singleton_name = jstring_to_string(j_plugin_name, env);
 
 	ERR_FAIL_COND(!jni_singletons.has(singleton_name));
@@ -110,7 +110,7 @@ JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeRegist
 	singleton->add_signal(signal_name, types);
 }
 
-JNIEXPORT void JNICALL Java_org_godotengine_godot_plugin_FADEPlugin_nativeEmitSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_params) {
+JNIEXPORT void JNICALL Java_org_fadeengine_fade_plugin_FADEPlugin_nativeEmitSignal(JNIEnv *env, jclass clazz, jstring j_plugin_name, jstring j_signal_name, jobjectArray j_signal_params) {
 	String singleton_name = jstring_to_string(j_plugin_name, env);
 
 	ERR_FAIL_COND(!jni_singletons.has(singleton_name));

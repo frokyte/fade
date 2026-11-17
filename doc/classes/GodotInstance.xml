@@ -4,7 +4,7 @@
 		Provides access to an embedded Godot instance.
 	</brief_description>
 	<description>
-		GodotInstance represents a running Godot instance that is controlled from an outside codebase, without a perpetual main loop. It is created by the C API [code]libgodot_create_godot_instance[/code]. Only one may be created per process.
+		GodotInstance represents a running Godot instance that is controlled from an outside codebase, without a perpetual main loop. It is created by the C API [code]libfade_create_fade_instance[/code]. Only one may be created per process.
 	</description>
 	<tutorials>
 	</tutorials>

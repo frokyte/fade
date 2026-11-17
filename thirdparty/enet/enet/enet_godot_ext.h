@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  enet_godot_ext.h                                                      */
+/*  enet_fade_ext.h                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 /**
- @ *file  enet_godot_ext.h
+ @ *file  enet_fade_ext.h
  @brief ENet FADE extensions header
  */
 

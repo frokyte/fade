@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -469,7 +469,7 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	_initial_set("asset_store/show_incompatible_assets", false);
 
 	Dictionary default_urls;
-	default_urls["godotengine.org (Official)"] = "https://store.godotengine.org/api/v1";
+	default_urls["fadeengine.org (Official)"] = "https://store.fadeengine.org/api/v1";
 	_initial_set("asset_store/available_urls", default_urls, true);
 
 	/* Interface */
@@ -777,7 +777,7 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 		"text_editor/theme/highlighting/error_underline_color",
 	};
 	// These values will be overwritten by EditorThemeManager, but can still be seen in some edge cases.
-	const HashMap<StringName, Color> text_colors = get_godot2_text_editor_theme();
+	const HashMap<StringName, Color> text_colors = get_fade2_text_editor_theme();
 	for (const KeyValue<StringName, Color> &text_color : text_colors) {
 		if (basic_text_editor_settings.has(text_color.key)) {
 			EDITOR_SETTING_BASIC(Variant::COLOR, PROPERTY_HINT_NONE, text_color.key, text_color.value, "")
@@ -1126,7 +1126,7 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	_initial_set("run/window_placement/rect_custom_position", Vector2());
 	EDITOR_SETTING_BASIC(Variant::INT, PROPERTY_HINT_ENUM, "run/window_placement/screen", -5, screen_hints)
 #endif
-	// Should match the ANDROID_WINDOW_* constants in 'platform/android/java/editor/src/main/java/org/godotengine/editor/BaseFADEEditor.kt'.
+	// Should match the ANDROID_WINDOW_* constants in 'platform/android/java/editor/src/main/java/org/fadeengine/editor/BaseFADEEditor.kt'.
 	String android_window_hints = "Auto (based on screen size):0,Same as Editor:1,Side-by-side with Editor:2";
 	EDITOR_SETTING_BASIC(Variant::INT, PROPERTY_HINT_ENUM, "run/window_placement/android_window", 0, android_window_hints)
 
@@ -1931,7 +1931,7 @@ void EditorSettings::load_favorites_and_recent_dirs() {
 	FileDialog::set_recent_list(recent_dirs);
 }
 
-HashMap<StringName, Color> EditorSettings::get_godot2_text_editor_theme() {
+HashMap<StringName, Color> EditorSettings::get_fade2_text_editor_theme() {
 	// FADE 2 is only a dark theme; it doesn't have a light theme counterpart.
 	HashMap<StringName, Color> colors;
 	colors["text_editor/theme/highlighting/symbol_color"] = Color(0.73, 0.87, 1.0);
@@ -1991,7 +1991,7 @@ HashMap<StringName, Color> EditorSettings::get_godot2_text_editor_theme() {
 }
 
 bool EditorSettings::is_default_text_editor_theme(const String &p_theme_name) {
-	return p_theme_name == "default" || p_theme_name == "godot 2" || p_theme_name == "custom";
+	return p_theme_name == "default" || p_theme_name == "fade 2" || p_theme_name == "custom";
 }
 
 void EditorSettings::update_text_editor_themes_list() {

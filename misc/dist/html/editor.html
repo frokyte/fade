@@ -14,10 +14,10 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta name="msapplication-starturl" content="/latest">
 		<meta property="og:site_name" content="FADE Engine Web Editor">
-		<meta property="og:url" name="twitter:url" content="https://editor.godotengine.org/releases/stable/">
+		<meta property="og:url" name="twitter:url" content="https://editor.fadeengine.org/releases/stable/">
 		<meta property="og:title" name="twitter:title" content="Free and open source 2D and 3D game engine">
 		<meta property="og:description" name="twitter:description" content="Use the FADE Engine editor directly in your web browser, without having to install anything.">
-		<meta property="og:image" name="twitter:image" content="https://godotengine.org/assets/share-image.webp">
+		<meta property="og:image" name="twitter:image" content="https://fadeengine.org/assets/share-image.webp">
 		<meta property="og:type" content="website">
 		<meta name="twitter:card" content="summary">
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="favicon.png">
@@ -143,7 +143,7 @@ a:active {
 }
 
 /* Don't show distracting focus outlines for the main tabs' contents. */
-.godot {
+.fade {
 	outline: none;
 	color: #d0d0d0;
 	background-color: #1b1b1b;
@@ -166,7 +166,7 @@ a:active {
 
 #tab-editor iframe:focus-visible,
 #tab-game iframe:focus-visible,
-#godot-canvas:focus-visible {
+#fade-canvas:focus-visible {
 	outline: none;
 	border: none;
 	box-shadow: none;
@@ -312,7 +312,7 @@ a:active {
 					</p>
 					<p>
 						For a more optimal experience, <a
-							href="https://godotengine.org/download/"
+							href="https://fadeengine.org/download/"
 							target="_blank"
 							rel="noopener"
 						>download</a> the native FADE Editor.
@@ -320,7 +320,7 @@ a:active {
 					<p>
 						Refer to the
 						<a
-							href="https://docs.godotengine.org/en/stable/tutorials/editor/using_the_web_editor.html"
+							href="https://docs.fadeengine.org/en/stable/tutorials/editor/using_the_web_editor.html"
 							target="_blank"
 							rel="noopener"
 						>Web editor documentation</a> for usage instructions and limitations.
@@ -335,7 +335,7 @@ a:active {
 					<p>
 						If you are self-hosting the web editor, refer to
 						<a
-							href="https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html"
+							href="https://docs.fadeengine.org/en/stable/tutorials/export/exporting_for_web.html"
 							target="_blank"
 							rel="noopener"
 						>Exporting for the Web</a> for more information.
@@ -374,7 +374,7 @@ a:active {
 					<br>
 					<button class="btn" onclick="clearPersistence()" style="margin-bottom: 1.5rem">Clear Persistent Data</button>
 					<br>
-					<a href="https://docs.godotengine.org/en/stable/tutorials/editor/using_the_web_editor.html">Web editor documentation</a>
+					<a href="https://docs.fadeengine.org/en/stable/tutorials/editor/using_the_web_editor.html">Web editor documentation</a>
 				</div>
 			</div>
 			<div id="tab-editor" style="display: none;">
@@ -397,7 +397,7 @@ a:active {
 					<div></div>
 					<div></div>
 				</div>
-				<div id="status-notice" class="godot" style="display: none;"></div>
+				<div id="status-notice" class="fade" style="display: none;"></div>
 			</div>
 		</div>
 		<script>
@@ -470,7 +470,7 @@ function closeWelcomeModal() { // eslint-disable-line no-unused-vars
 	}
 }
 		</script>
-		<script src="godot.editor.js"></script>
+		<script src="fade.editor.js"></script>
 		<script>
 const fileSizes = ___GODOT_EDITOR_FILESIZES___;
 
@@ -637,7 +637,7 @@ function LoadStatus(document) {
 			iframe.contentDocument.body.appendChild(iframe.contentDocument.importNode(tabStatus, true));
 			loadStatus = new LoadStatus(iframe.contentDocument);
 		};
-		const state = new EngineIFrame('godot.editor', document.getElementById(`${name}-iframe`), iframeOnload);
+		const state = new EngineIFrame('fade.editor', document.getElementById(`${name}-iframe`), iframeOnload);
 		state.progress = [0, 0];
 		state.active = false;
 		state.updateStatus = function () {
@@ -821,7 +821,7 @@ function LoadStatus(document) {
 		};
 		const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 		// We need at least 6 free threads from the pool to start the editor.
-		// At least 4 more will be reserved for the godot thread pool (3 is the bare minimum with the multithreaded variant of the servers).
+		// At least 4 more will be reserved for the fade thread pool (3 is the bare minimum with the multithreaded variant of the servers).
 		const concurrency = clamp(navigator.hardwareConcurrency ?? 1, 12, 24);
 		const pid = Math.round(Math.random() * (1 << 30));
 		const editorConfig = {
@@ -832,7 +832,7 @@ function LoadStatus(document) {
 			'args': editorArgs,
 			'emscriptenPoolSize': concurrency,
 			'persistentDrops': editorArgs.findIndex((v) => v == '--project-manager') !== -1,
-			'godotPoolSize': Math.floor(concurrency / 3), // Ensures at least 4 threads for the pool (see above).
+			'fadePoolSize': Math.floor(concurrency / 3), // Ensures at least 4 threads for the pool (see above).
 			'fileSizes': fileSizes,
 		};
 		gameState.reset();

@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_view_controller.h                                               */
+/*  fade_view_controller.h                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -37,7 +37,7 @@
 
 @interface GDTViewController : UIViewController
 
-@property(nonatomic, readonly, strong) GDTView *godotView;
+@property(nonatomic, readonly, strong) GDTView *fadeView;
 @property(nonatomic, readonly, strong) GDTKeyboardInputView *keyboardView;
 
 #ifdef IOS_ENABLED

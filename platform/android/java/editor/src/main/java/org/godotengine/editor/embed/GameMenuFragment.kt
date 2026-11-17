@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor.embed
+package org.fadeengine.editor.embed
 
 import android.content.Context
 import android.os.Build
@@ -45,12 +45,12 @@ import android.widget.RadioButton
 import androidx.core.content.edit
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import org.godotengine.editor.BaseFADEEditor
-import org.godotengine.editor.BaseFADEEditor.Companion.SNACKBAR_SHOW_DURATION_MS
-import org.godotengine.editor.R
-import org.godotengine.editor.utils.Utils
-import org.godotengine.godot.feature.PictureInPictureProvider
-import org.godotengine.godot.utils.DialogUtils
+import org.fadeengine.editor.BaseFADEEditor
+import org.fadeengine.editor.BaseFADEEditor.Companion.SNACKBAR_SHOW_DURATION_MS
+import org.fadeengine.editor.R
+import org.fadeengine.editor.utils.Utils
+import org.fadeengine.fade.feature.PictureInPictureProvider
+import org.fadeengine.fade.utils.DialogUtils
 
 /**
  * Implements the game menu interface for the Android editor.

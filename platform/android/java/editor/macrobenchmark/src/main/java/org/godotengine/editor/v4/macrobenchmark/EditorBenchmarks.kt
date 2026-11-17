@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 
-package org.godotengine.editor.v4.macrobenchmark
+package org.fadeengine.editor.v4.macrobenchmark
 
 import android.Manifest
 import android.util.Log
@@ -60,7 +60,7 @@ class EditorBenchmarks {
 	companion object {
 		private val TAG = EditorBenchmarks::class.java.simpleName
 
-		private const val PACKAGE_NAME = "org.godotengine.editor.v4.benchmark"
+		private const val PACKAGE_NAME = "org.fadeengine.editor.v4.benchmark"
 		private const val ITERATION_COUNT = 5
 		private const val EXTRA_LOAD_EMPTY_BENCHMARK_PROJECT = "load_empty_benchmark_project"
 		private const val EXTRA_BENCHMARK_RENDERING_METHOD = "benchmark_rendering_method"

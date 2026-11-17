@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,11 +28,11 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.godot.gl;
+package org.fadeengine.fade.gl;
 
-import org.godotengine.godot.FADELib;
-import org.godotengine.godot.plugin.FADEPlugin;
-import org.godotengine.godot.plugin.FADEPluginRegistry;
+import org.fadeengine.fade.FADELib;
+import org.fadeengine.fade.plugin.FADEPlugin;
+import org.fadeengine.fade.plugin.FADEPluginRegistry;
 
 import android.util.Log;
 

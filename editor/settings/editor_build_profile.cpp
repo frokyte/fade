@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -73,9 +73,9 @@ const char *EditorBuildProfile::build_option_identifiers[BUILD_OPTION_MAX] = {
 	"metal",
 	"opengl3",
 	"disable_physics_2d",
-	"module_godot_physics_2d_enabled",
+	"module_fade_physics_2d_enabled",
 	"disable_physics_3d",
-	"module_godot_physics_3d_enabled",
+	"module_fade_physics_3d_enabled",
 	"module_jolt_physics_enabled",
 	"module_text_server_fb_enabled",
 	"module_text_server_adv_enabled",
@@ -732,10 +732,10 @@ EditorBuildProfile::EditorBuildProfile() {
 	};
 	build_option_settings.insert(BUILD_OPTION_OPENGL, settings_opengl);
 
-	HashMap<String, LocalVector<Variant>> settings_phy_godot_3d = {
+	HashMap<String, LocalVector<Variant>> settings_phy_fade_3d = {
 		{ "physics/3d/physics_engine", { "DEFAULT", PhysicsServer3DManager::GODOT_PHYSICS_3D_NAME } },
 	};
-	build_option_settings.insert(BUILD_OPTION_PHYSICS_GODOT_3D, settings_phy_godot_3d);
+	build_option_settings.insert(BUILD_OPTION_PHYSICS_GODOT_3D, settings_phy_fade_3d);
 
 	HashMap<String, LocalVector<Variant>> settings_jolt = {
 		{ "physics/3d/physics_engine", { PhysicsServer3DManager::JOLT_PHYSICS_NAME } },

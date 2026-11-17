@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.godotengine.godot.gl;
+package org.fadeengine.fade.gl;
 
 import android.content.Context;
 import android.opengl.EGL14;

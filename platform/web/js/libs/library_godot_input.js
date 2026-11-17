@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  library_godot_input.js                                                */
+/*  library_fade_input.js                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -305,7 +305,7 @@ mergeInto(LibraryManager.library, FADEInputGamepads);
  * Drag and drop helper.
  * This is pretty big, but basically detect dropped files on FADEConfig.canvas,
  * process them one by one (recursively for directories), and copies them to
- * the temporary FS path '/tmp/drop-[random]/' so it can be emitted as a godot
+ * the temporary FS path '/tmp/drop-[random]/' so it can be emitted as a fade
  * event (that requires a string array of paths).
  *
  * NOTE: The temporary files are removed after the callback. This means that
@@ -483,9 +483,9 @@ const FADEInput = {
 	/*
 	 * Mouse API
 	 */
-	godot_js_input_mouse_move_cb__proxy: 'sync',
-	godot_js_input_mouse_move_cb__sig: 'vi',
-	godot_js_input_mouse_move_cb: function (callback) {
+	fade_js_input_mouse_move_cb__proxy: 'sync',
+	fade_js_input_mouse_move_cb__sig: 'vi',
+	fade_js_input_mouse_move_cb: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		const canvas = FADEConfig.canvas;
 		function move_cb(evt) {
@@ -502,9 +502,9 @@ const FADEInput = {
 		FADEEventListeners.add(window, 'pointermove', move_cb, false);
 	},
 
-	godot_js_input_mouse_wheel_cb__proxy: 'sync',
-	godot_js_input_mouse_wheel_cb__sig: 'vi',
-	godot_js_input_mouse_wheel_cb: function (callback) {
+	fade_js_input_mouse_wheel_cb__proxy: 'sync',
+	fade_js_input_mouse_wheel_cb__sig: 'vi',
+	fade_js_input_mouse_wheel_cb: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		function wheel_cb(evt) {
 			if (func(evt.deltaMode, evt.deltaX ?? 0, evt.deltaY ?? 0)) {
@@ -514,9 +514,9 @@ const FADEInput = {
 		FADEEventListeners.add(FADEConfig.canvas, 'wheel', wheel_cb, false);
 	},
 
-	godot_js_input_mouse_button_cb__proxy: 'sync',
-	godot_js_input_mouse_button_cb__sig: 'vi',
-	godot_js_input_mouse_button_cb: function (callback) {
+	fade_js_input_mouse_button_cb__proxy: 'sync',
+	fade_js_input_mouse_button_cb__sig: 'vi',
+	fade_js_input_mouse_button_cb: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		const canvas = FADEConfig.canvas;
 		function button_cb(p_pressed, evt) {
@@ -539,9 +539,9 @@ const FADEInput = {
 	/*
 	 * Touch API
 	 */
-	godot_js_input_touch_cb__proxy: 'sync',
-	godot_js_input_touch_cb__sig: 'viii',
-	godot_js_input_touch_cb: function (callback, ids, coords) {
+	fade_js_input_touch_cb__proxy: 'sync',
+	fade_js_input_touch_cb__sig: 'viii',
+	fade_js_input_touch_cb: function (callback, ids, coords) {
 		const func = FADERuntime.get_func(callback);
 		const canvas = FADEConfig.canvas;
 		function touch_cb(type, evt) {
@@ -573,9 +573,9 @@ const FADEInput = {
 	/*
 	 * Key API
 	 */
-	godot_js_input_key_cb__proxy: 'sync',
-	godot_js_input_key_cb__sig: 'viii',
-	godot_js_input_key_cb: function (pCallback, pCodePtr, pKeyPtr) {
+	fade_js_input_key_cb__proxy: 'sync',
+	fade_js_input_key_cb__sig: 'viii',
+	fade_js_input_key_cb: function (pCallback, pCodePtr, pKeyPtr) {
 		FADEInput.inputKeyCallback = FADERuntime.get_func(pCallback);
 		FADEInput.setInputKeyData = (pCode, pKey) => {
 			FADERuntime.stringToHeap(pCode, pCodePtr, 32);
@@ -588,58 +588,58 @@ const FADEInput = {
 	/*
 	 * IME API
 	 */
-	godot_js_set_ime_active__proxy: 'sync',
-	godot_js_set_ime_active__sig: 'vi',
-	godot_js_set_ime_active: function (p_active) {
+	fade_js_set_ime_active__proxy: 'sync',
+	fade_js_set_ime_active__sig: 'vi',
+	fade_js_set_ime_active: function (p_active) {
 		FADEIME.ime_active(p_active);
 	},
 
-	godot_js_set_ime_position__proxy: 'sync',
-	godot_js_set_ime_position__sig: 'vii',
-	godot_js_set_ime_position: function (p_x, p_y) {
+	fade_js_set_ime_position__proxy: 'sync',
+	fade_js_set_ime_position__sig: 'vii',
+	fade_js_set_ime_position: function (p_x, p_y) {
 		FADEIME.ime_position(p_x, p_y);
 	},
 
-	godot_js_set_ime_cb__proxy: 'sync',
-	godot_js_set_ime_cb__sig: 'viiii',
-	godot_js_set_ime_cb: function (p_ime_cb, p_key_cb, code, key) {
+	fade_js_set_ime_cb__proxy: 'sync',
+	fade_js_set_ime_cb__sig: 'viiii',
+	fade_js_set_ime_cb: function (p_ime_cb, p_key_cb, code, key) {
 		const ime_cb = FADERuntime.get_func(p_ime_cb);
 		const key_cb = FADERuntime.get_func(p_key_cb);
 		FADEIME.init(ime_cb, key_cb, code, key);
 	},
 
-	godot_js_is_ime_focused__proxy: 'sync',
-	godot_js_is_ime_focused__sig: 'i',
-	godot_js_is_ime_focused: function () {
+	fade_js_is_ime_focused__proxy: 'sync',
+	fade_js_is_ime_focused__sig: 'i',
+	fade_js_is_ime_focused: function () {
 		return FADEIME.active;
 	},
 
 	/*
 	 * Gamepad API
 	 */
-	godot_js_input_gamepad_cb__proxy: 'sync',
-	godot_js_input_gamepad_cb__sig: 'vi',
-	godot_js_input_gamepad_cb: function (change_cb) {
+	fade_js_input_gamepad_cb__proxy: 'sync',
+	fade_js_input_gamepad_cb__sig: 'vi',
+	fade_js_input_gamepad_cb: function (change_cb) {
 		const onchange = FADERuntime.get_func(change_cb);
 		FADEInputGamepads.init(onchange);
 	},
 
-	godot_js_input_gamepad_sample_count__proxy: 'sync',
-	godot_js_input_gamepad_sample_count__sig: 'i',
-	godot_js_input_gamepad_sample_count: function () {
+	fade_js_input_gamepad_sample_count__proxy: 'sync',
+	fade_js_input_gamepad_sample_count__sig: 'i',
+	fade_js_input_gamepad_sample_count: function () {
 		return FADEInputGamepads.get_samples().length;
 	},
 
-	godot_js_input_gamepad_sample__proxy: 'sync',
-	godot_js_input_gamepad_sample__sig: 'i',
-	godot_js_input_gamepad_sample: function () {
+	fade_js_input_gamepad_sample__proxy: 'sync',
+	fade_js_input_gamepad_sample__sig: 'i',
+	fade_js_input_gamepad_sample: function () {
 		FADEInputGamepads.sample();
 		return 0;
 	},
 
-	godot_js_input_gamepad_sample_get__proxy: 'sync',
-	godot_js_input_gamepad_sample_get__sig: 'iiiiiii',
-	godot_js_input_gamepad_sample_get: function (p_index, r_btns, r_btns_num, r_axes, r_axes_num, r_standard) {
+	fade_js_input_gamepad_sample_get__proxy: 'sync',
+	fade_js_input_gamepad_sample_get__sig: 'iiiiiii',
+	fade_js_input_gamepad_sample_get: function (p_index, r_btns, r_btns_num, r_axes, r_axes_num, r_standard) {
 		const sample = FADEInputGamepads.get_sample(p_index);
 		if (!sample || !sample.connected) {
 			return 1;
@@ -664,9 +664,9 @@ const FADEInput = {
 	/*
 	 * Drag/Drop API
 	 */
-	godot_js_input_drop_files_cb__proxy: 'sync',
-	godot_js_input_drop_files_cb__sig: 'vi',
-	godot_js_input_drop_files_cb: function (callback) {
+	fade_js_input_drop_files_cb__proxy: 'sync',
+	fade_js_input_drop_files_cb__sig: 'vi',
+	fade_js_input_drop_files_cb: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		const dropFiles = function (files) {
 			const args = files || [];
@@ -687,9 +687,9 @@ const FADEInput = {
 	},
 
 	/* Paste API */
-	godot_js_input_paste_cb__proxy: 'sync',
-	godot_js_input_paste_cb__sig: 'vi',
-	godot_js_input_paste_cb: function (callback) {
+	fade_js_input_paste_cb__proxy: 'sync',
+	fade_js_input_paste_cb__sig: 'vi',
+	fade_js_input_paste_cb: function (callback) {
 		const func = FADERuntime.get_func(callback);
 		FADEEventListeners.add(window, 'paste', function (evt) {
 			const text = evt.clipboardData.getData('text');
@@ -699,9 +699,9 @@ const FADEInput = {
 		}, false);
 	},
 
-	godot_js_input_vibrate_handheld__proxy: 'sync',
-	godot_js_input_vibrate_handheld__sig: 'vi',
-	godot_js_input_vibrate_handheld: function (p_duration_ms) {
+	fade_js_input_vibrate_handheld__proxy: 'sync',
+	fade_js_input_vibrate_handheld__sig: 'vi',
+	fade_js_input_vibrate_handheld: function (p_duration_ms) {
 		if (typeof navigator.vibrate !== 'function') {
 			FADERuntime.print('This browser does not support vibration.');
 		} else {

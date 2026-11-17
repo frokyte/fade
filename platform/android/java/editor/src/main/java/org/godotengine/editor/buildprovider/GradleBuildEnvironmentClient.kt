@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-package org.godotengine.editor.buildprovider
+package org.fadeengine.editor.buildprovider
 
 import android.content.ComponentName
 import android.content.Context
@@ -110,8 +110,8 @@ internal class GradleBuildEnvironmentClient(private val context: Context) {
 		}
 		connecting = true;
 
-		val intent = Intent("org.godotengine.action.BUILD_PROVIDER").apply {
-			setPackage("org.godotengine.godot_gradle_build_environment")
+		val intent = Intent("org.fadeengine.action.BUILD_PROVIDER").apply {
+			setPackage("org.fadeengine.fade_gradle_build_environment")
 		}
 		val info = context.packageManager.resolveService(intent, 0)
 		if (info == null) {

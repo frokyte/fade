@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_windows.cpp                                                     */
+/*  fade_windows.cpp                                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -66,7 +66,7 @@ char *wc_to_utf8(const wchar_t *wc) {
 }
 
 int widechar_main(int argc, wchar_t **argv) {
-	godot_init_profiler();
+	fade_init_profiler();
 
 	// Prevent Windows from replacing the window with a "ghost" when the main
 	// thread briefly stalls (e.g. during editor startup or focus transitions).
@@ -113,7 +113,7 @@ int widechar_main(int argc, wchar_t **argv) {
 	}
 	delete[] argv_utf8;
 
-	godot_cleanup_profiler();
+	fade_cleanup_profiler();
 	return os.get_exit_code();
 }
 
@@ -152,9 +152,9 @@ int main(int argc, char **argv) {
 #endif
 }
 
-HINSTANCE godot_hinstance = nullptr;
+HINSTANCE fade_hinstance = nullptr;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	godot_hinstance = hInstance;
+	fade_hinstance = hInstance;
 	return main(0, nullptr);
 }

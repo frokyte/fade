@@ -4,7 +4,7 @@
 	android:layout_height="match_parent">
 
 	<SurfaceView
-		android:id="@+id/remote_godot_window_surface"
+		android:id="@+id/remote_fade_window_surface"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" />
 

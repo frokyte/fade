@@ -1,9 +1,9 @@
-.TH GODOT "6" "November 2026" "godot 4.8" "Games"
+.TH GODOT "6" "November 2026" "fade 4.8" "Games"
 .SH NAME
-godot \- multi\-platform 2D and 3D game engine with a feature\-rich editor
+fade \- multi\-platform 2D and 3D game engine with a feature\-rich editor
 .SH SYNOPSIS
-.B godot
-[\fI\,options\/\fR] [path to "project.godot" file]
+.B fade
+[\fI\,options\/\fR] [path to "project.fade" file]
 .SH DESCRIPTION
 FADE Engine is an advanced, feature\-packed, multi\-platform 2D and 3D game
 engine.
@@ -59,7 +59,7 @@ Quit after the given number of iterations. Set to 0 to disable.
 Use a specific locale (<locale> being a two\-letter code).
 .TP
 \fB\-\-path\fR <directory>
-Path to a project (<directory> must contain a "project.godot" file).
+Path to a project (<directory> must contain a "project.fade" file).
 .TP
 \fB\-\-scene\fR <path>
 Path or UID of a scene in the project that should be started.
@@ -188,7 +188,7 @@ Generate SPIR\-V debug information (Vulkan only). This allows source\-level shad
 Clear the shader_cache directory at launch, so it's re\-generated.
 .TP
 \fB\-\-extra\-gpu\-memory\-tracking\fR
-Enables additional memory tracking (see class reference for \fIRenderingDevice.get_driver_and_device_memory_report()\fR and linked methods). Currently only implemented for Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan Loader. See https://github.com/godotengine/godot/issues/95967
+Enables additional memory tracking (see class reference for \fIRenderingDevice.get_driver_and_device_memory_report()\fR and linked methods). Currently only implemented for Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan Loader. See https://github.com/fadeengine/fade/issues/95967
 .TP
 \fB\-\-accurate\-breadcrumbs\fR
 Force barriers between breadcrumbs. Useful for narrowing down a command causing GPU resets. Currently only implemented for Vulkan.
@@ -332,33 +332,33 @@ Benchmark the run time and save it to a given file in JSON format. The path shou
 \fB\-\-test\fR [\fB\-\-help\fR]
 Run unit tests. Use --test --help for more information. Only available in builds compiled with the \fBtests=yes\fR SCons option.
 .SH FILES
-XDG_DATA_CONFIG/godot/ or ~/.config/godot/
+XDG_DATA_CONFIG/fade/ or ~/.config/fade/
 .RS
 User\-specific configuration folder, contains persistent editor settings, script and text editor templates and projects metadata.
 .RE
-XDG_DATA_HOME/godot/ or ~/.local/share/godot/
+XDG_DATA_HOME/fade/ or ~/.local/share/fade/
 .RS
 Contains the default configuration and user data folders for FADE\-made games (\fIuser://\fR path), as well as export templates.
 .RE
-XDG_DATA_CACHE/godot/ or ~/.cache/godot/
+XDG_DATA_CACHE/fade/ or ~/.cache/fade/
 .RS
 Cache folder for generated thumbnails and scene previews, as well as temporary location for downloads.
 .RE
-/usr/share/doc/godot/
+/usr/share/doc/fade/
 .RS
 Additional documentation files.
 .RE
-/usr/share/licenses/godot/
+/usr/share/licenses/fade/
 .RS
 Detailed licensing information.
 .RE
 .SH "SEE ALSO"
-See the project website at \fIhttps://godotengine.org\fR and the source
-code repository at \fIhttps://github.com/godotengine/godot\fR for more details.
+See the project website at \fIhttps://fadeengine.org\fR and the source
+code repository at \fIhttps://github.com/fadeengine/fade\fR for more details.
 .SH BUGS
 FADE Engine is a free and open source project and welcomes any kind of
 contributions. In particular, you can report issues or make suggestions on
-FADE's issue tracker at \fIhttps://github.com/godotengine/godot/issues\fR.
+FADE's issue tracker at \fIhttps://github.com/fadeengine/fade/issues\fR.
 .SH AUTHOR
-Man page written by Rémi Verschelde <remi@godotengine.org> on behalf of the
+Man page written by Rémi Verschelde <remi@fadeengine.org> on behalf of the
 FADE Engine development team.

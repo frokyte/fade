@@ -1,9 +1,9 @@
 /**************************************************************************/
-/*  godot_view_controller.mm                                              */
+/*  fade_view_controller.mm                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -28,13 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#import "godot_view_controller.h"
+#import "fade_view_controller.h"
 
 #include "core/config/project_settings.h"
 #import "drivers/apple_embedded/display_server_apple_embedded.h"
-#import "drivers/apple_embedded/godot_keyboard_input_view.h"
-#import "drivers/apple_embedded/godot_view_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_renderer.h"
+#import "drivers/apple_embedded/fade_keyboard_input_view.h"
+#import "drivers/apple_embedded/fade_view_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_renderer.h"
 #import "drivers/apple_embedded/key_mapping_apple_embedded.h"
 #import "drivers/apple_embedded/os_apple_embedded.h"
 #include "servers/camera/camera_server.h"
@@ -48,13 +48,13 @@
 @property(strong, nonatomic) GDTViewRenderer *renderer;
 @property(strong, nonatomic) GDTKeyboardInputView *keyboardView;
 
-@property(strong, nonatomic) UIView *godotLoadingOverlay;
+@property(strong, nonatomic) UIView *fadeLoadingOverlay;
 
 @end
 
 @implementation GDTViewController
 
-- (GDTView *)godotView {
+- (GDTView *)fadeView {
 	return (GDTView *)self.view;
 }
 
@@ -135,7 +135,7 @@
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 
 	if (self) {
-		[self godot_commonInit];
+		[self fade_commonInit];
 	}
 
 	return self;
@@ -145,13 +145,13 @@
 	self = [super initWithCoder:coder];
 
 	if (self) {
-		[self godot_commonInit];
+		[self fade_commonInit];
 	}
 
 	return self;
 }
 
-- (void)godot_commonInit {
+- (void)fade_commonInit {
 	// Initialize view controller values.
 }
 
@@ -171,14 +171,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.godotView startRendering];
+	[self.fadeView startRendering];
 #ifdef IOS_ENABLED
 	[self propagateUIPreferencesToRootViewController];
 #endif
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-	[self.godotView stopRendering];
+	[self.fadeView stopRendering];
 	[super viewDidDisappear:animated];
 }
 
@@ -212,17 +212,17 @@
 	UIStoryboard *launchStoryboard = [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
 
 	UIViewController *controller = [launchStoryboard instantiateInitialViewController];
-	self.godotLoadingOverlay = controller.view;
-	self.godotLoadingOverlay.frame = self.view.bounds;
-	self.godotLoadingOverlay.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	self.fadeLoadingOverlay = controller.view;
+	self.fadeLoadingOverlay.frame = self.view.bounds;
+	self.fadeLoadingOverlay.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-	[self.view addSubview:self.godotLoadingOverlay];
+	[self.view addSubview:self.fadeLoadingOverlay];
 #endif
 }
 
-- (BOOL)godotViewFinishedSetup:(GDTView *)view {
-	[self.godotLoadingOverlay removeFromSuperview];
-	self.godotLoadingOverlay = nil;
+- (BOOL)fadeViewFinishedSetup:(GDTView *)view {
+	[self.fadeLoadingOverlay removeFromSuperview];
+	self.fadeLoadingOverlay = nil;
 
 #if defined(VISIONOS_ENABLED)
 	UIInterfaceOrientation orientation = self.view.window.windowScene.effectiveGeometry.interfaceOrientation;
@@ -245,9 +245,9 @@
 
 	self.renderer = nil;
 
-	if (self.godotLoadingOverlay) {
-		[self.godotLoadingOverlay removeFromSuperview];
-		self.godotLoadingOverlay = nil;
+	if (self.fadeLoadingOverlay) {
+		[self.fadeLoadingOverlay removeFromSuperview];
+		self.fadeLoadingOverlay = nil;
 	}
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self];

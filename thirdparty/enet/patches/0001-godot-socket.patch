@@ -16,7 +16,7 @@ index 3001018763..ccd8382c23 100644
  #include "enet/unix.h"
  #endif
 +#endif
-+#include "enet/enet_godot.h"
++#include "enet/enet_fade.h"
  
  #include "enet/types.h"
  #include "enet/protocol.h"
@@ -38,7 +38,7 @@ index 3001018763..ccd8382c23 100644
     
  extern size_t enet_protocol_command_size (enet_uint8);
  
-+#include "enet/enet_godot_ext.h"
++#include "enet/enet_fade_ext.h"
 +
  #ifdef __cplusplus
  }
