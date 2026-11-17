@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -39,13 +39,13 @@
 
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/Godot.kt callable from C++
-class GodotJavaWrapper {
+// Class that makes functions in java/src/org/godotengine/godot/FADE.kt callable from C++
+class FADEJavaWrapper {
 private:
 	jobject godot_native_bridge;
 	jclass godot_native_bridge_class;
 
-	GodotJavaViewWrapper *godot_view = nullptr;
+	FADEJavaViewWrapper *godot_view = nullptr;
 
 	jmethodID _restart = nullptr;
 	jmethodID _finish = nullptr;
@@ -102,12 +102,12 @@ private:
 	jmethodID _is_animation_disabled = nullptr;
 
 public:
-	GodotJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge);
-	~GodotJavaWrapper();
+	FADEJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge);
+	~FADEJavaWrapper();
 
 	jobject get_activity();
 
-	GodotJavaViewWrapper *get_godot_view();
+	FADEJavaViewWrapper *get_godot_view();
 
 	void on_godot_setup_completed(JNIEnv *p_env = nullptr);
 	void on_godot_main_loop_started(JNIEnv *p_env = nullptr);

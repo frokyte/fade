@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-public partial class MixedReadOnlyWriteOnly : GodotObject
+public partial class MixedReadOnlyWriteOnly : FADEObject
 {
     public readonly string ReadOnlyField = "foo";
     public string ReadOnlyAutoProperty { get; } = "foo";

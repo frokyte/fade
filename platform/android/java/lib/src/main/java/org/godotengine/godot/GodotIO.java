@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotIO.java                                                          */
+/*  FADEIO.java                                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 package org.godotengine.godot;
 
 import org.godotengine.godot.error.Error;
-import org.godotengine.godot.input.GodotEditText;
+import org.godotengine.godot.input.FADEEditText;
 
 import android.app.Activity;
 import android.content.Context;
@@ -62,13 +62,13 @@ import java.util.Locale;
 
 // Wrapper for native library
 
-public class GodotIO {
-	private static final String TAG = GodotIO.class.getSimpleName();
+public class FADEIO {
+	private static final String TAG = FADEIO.class.getSimpleName();
 
-	private final Godot godot;
+	private final FADE godot;
 
 	private final String uniqueId;
-	GodotEditText edit;
+	FADEEditText edit;
 
 	final int SCREEN_LANDSCAPE = 0;
 	final int SCREEN_PORTRAIT = 1;
@@ -78,7 +78,7 @@ public class GodotIO {
 	final int SCREEN_SENSOR_PORTRAIT = 5;
 	final int SCREEN_SENSOR = 6;
 
-	GodotIO(Godot godot) {
+	FADEIO(FADE godot) {
 		this.godot = godot;
 		String androidId = Settings.Secure.getString(godot.getContext().getContentResolver(),
 				Settings.Secure.ANDROID_ID);
@@ -294,7 +294,7 @@ public class GodotIO {
 
 	public void showKeyboard(String p_existing_text, int p_type, int p_max_input_length, int p_cursor_start, int p_cursor_end) {
 		if (edit != null) {
-			edit.showKeyboard(p_existing_text, GodotEditText.VirtualKeyboardType.values()[p_type], p_max_input_length, p_cursor_start, p_cursor_end);
+			edit.showKeyboard(p_existing_text, FADEEditText.VirtualKeyboardType.values()[p_type], p_max_input_length, p_cursor_start, p_cursor_end);
 		}
 	}
 
@@ -393,7 +393,7 @@ public class GodotIO {
 		return 0;
 	}
 
-	public void setEdit(GodotEditText _edit) {
+	public void setEdit(FADEEditText _edit) {
 		edit = _edit;
 	}
 

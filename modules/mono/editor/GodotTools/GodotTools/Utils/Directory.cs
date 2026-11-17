@@ -1,7 +1,7 @@
 using System.IO;
-using Godot;
+using FADE;
 
-namespace GodotTools.Utils
+namespace FADETools.Utils
 {
     public static class Directory
     {

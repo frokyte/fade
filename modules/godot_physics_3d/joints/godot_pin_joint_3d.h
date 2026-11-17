@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 #pragma once
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 #include "../godot_joint_3d.h"
@@ -52,14 +52,14 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-class GodotPinJoint3D : public GodotJoint3D {
+class FADEPinJoint3D : public FADEJoint3D {
 	union {
 		struct {
-			GodotBody3D *A;
-			GodotBody3D *B;
+			FADEBody3D *A;
+			FADEBody3D *B;
 		};
 
-		GodotBody3D *_arr[2] = {};
+		FADEBody3D *_arr[2] = {};
 	};
 
 	real_t m_tau = 0.3; //bias
@@ -67,7 +67,7 @@ class GodotPinJoint3D : public GodotJoint3D {
 	real_t m_impulseClamp = 0.0;
 	real_t m_appliedImpulse = 0.0;
 
-	GodotJacobianEntry3D m_jac[3] = {}; //3 orthogonal linear constraints
+	FADEJacobianEntry3D m_jac[3] = {}; //3 orthogonal linear constraints
 
 	Vector3 m_pivotInA;
 	Vector3 m_pivotInB;
@@ -87,6 +87,6 @@ public:
 	Vector3 get_position_a() { return m_pivotInA; }
 	Vector3 get_position_b() { return m_pivotInB; }
 
-	GodotPinJoint3D(GodotBody3D *p_body_a, const Vector3 &p_pos_a, GodotBody3D *p_body_b, const Vector3 &p_pos_b);
-	~GodotPinJoint3D();
+	FADEPinJoint3D(FADEBody3D *p_body_a, const Vector3 &p_pos_a, FADEBody3D *p_body_b, const Vector3 &p_pos_b);
+	~FADEPinJoint3D();
 };

@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.CompilerServices;
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
-namespace GodotTools.Internals
+namespace FADETools.Internals
 {
     public class EditorProgress : IDisposable
     {

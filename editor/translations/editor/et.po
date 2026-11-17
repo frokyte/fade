@@ -1,7 +1,7 @@
-# Estonian translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Estonian translation of the FADE Engine editor interface.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Jens <arrkiin@gmail.com>, 2019.
 # Mattias Aabmets <mattias.aabmets@gmail.com>, 2019.
 # StReef <streef.gtx@gmail.com>, 2020, 2021.
@@ -15,7 +15,7 @@
 # "A Thousand Ships (she/her)" <over999ships@gmail.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: FADE Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "PO-Revision-Date: 2025-10-13 10:08+0000\n"
 "Last-Translator: \"A Thousand Ships (she/her)\" <over999ships@gmail.com>\n"
@@ -1674,8 +1674,8 @@ msgstr "See liige on märgitud aegunuks."
 msgid "This member is marked as experimental."
 msgstr "See liige on märgitud eksperimentaalseks."
 
-msgid "%s - Godot Engine"
-msgstr "%s - Godot Engine"
+msgid "%s - FADE Engine"
+msgstr "%s - FADE Engine"
 
 msgid "Dock Position"
 msgstr "Doki asukoht"
@@ -2542,8 +2542,8 @@ msgstr "Funktsionaalsuse Soovitamine"
 msgid "Send Docs Feedback"
 msgstr "Saada dokumentatsioonide tagasiside"
 
-msgid "Support Godot Development"
-msgstr "Toeta Godot'i Arendamist"
+msgid "Support FADE Development"
+msgstr "Toeta FADE'i Arendamist"
 
 msgid "Open Script Editor"
 msgstr "Ava Skripti Redaktor"
@@ -2712,8 +2712,8 @@ msgstr "Ava Veebibrauseris"
 msgid "Select Template File"
 msgstr "Valige Malli Fail"
 
-msgid "Godot Export Templates"
-msgstr "Godoti Ekspordi mallid"
+msgid "FADE Export Templates"
+msgstr "FADEi Ekspordi mallid"
 
 msgid "Invalid Encryption Key (must be 64 hexadecimal characters long)"
 msgstr "Kehtetu krüpteerimisvõti (peab olema 64 hexadecimal karakterit pikk)"
@@ -2793,8 +2793,8 @@ msgstr "Ekspordi Eraldiseisva Serverina"
 msgid "Export Mode:"
 msgstr "Ekspordirežiim:"
 
-msgid "Godot Project Pack"
-msgstr "Godoti Projekti Pakk"
+msgid "FADE Project Pack"
+msgstr "FADEi Projekti Pakk"
 
 msgid "Features"
 msgstr "Funktsionaalsused"
@@ -3046,11 +3046,11 @@ msgstr "Kaldkriipsude kasutamine kaustanimedes loob alamkaustad rekursiivselt."
 msgid "Folder name is valid."
 msgstr "Kausta nimi on kehtiv."
 
-msgid "Godot Engine contributors"
-msgstr "Godot mängumootori panustajad"
+msgid "FADE Engine contributors"
+msgstr "FADE mängumootori panustajad"
 
-msgid "Thanks from the Godot community!"
-msgstr "Suur tänu Godot kogukonnalt!"
+msgid "Thanks from the FADE community!"
+msgstr "Suur tänu FADE kogukonnalt!"
 
 msgid "Authors"
 msgstr "Autorid"
@@ -3062,12 +3062,12 @@ msgid "Third-party Licenses"
 msgstr "Kolmanda osapoole litsents"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"FADE Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Godot mängumootor tugineb mitmetele kolmandate osapoolte tasuta ja avatud "
+"FADE mängumootor tugineb mitmetele kolmandate osapoolte tasuta ja avatud "
 "lähtekoodiga teekidele, mis kõik on kooskõlas MIT-litsentsi tingimustega. "
 "Järgnev on kõigi selliste kolmandate osapoolte komponentide täielik loetelu "
 "koos vastavate autoriõiguste avalduste ja litsentsitingimustega."
@@ -6422,8 +6422,8 @@ msgstr "Salvesta teema kui..."
 msgid "Online Docs"
 msgstr "Veebidokumentatsioonid"
 
-msgid "Open Godot online documentation."
-msgstr "Ava Godot Interneti Dokumentatisoon."
+msgid "Open FADE online documentation."
+msgstr "Ava FADE Interneti Dokumentatisoon."
 
 msgid "Find..."
 msgstr "Otsi..."
@@ -6798,8 +6798,8 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Uus profiilinimi:"
 
-msgid "Godot Feature Profile"
-msgstr "Godoti funktsiooniprofiil"
+msgid "FADE Feature Profile"
+msgstr "FADEi funktsiooniprofiil"
 
 msgid "Import Profile(s)"
 msgstr "Impordi profiil(id)"

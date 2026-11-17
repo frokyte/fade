@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial struct OuterClass
 {
@@ -9,11 +9,11 @@ partial class NestedClass
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.RefCounted.PropertyName {
+    public new class PropertyName : global::FADE.RefCounted.PropertyName {
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotPropertyTrampolines(global::Godot.Bridge.PropertyTrampolineCollector collector)
+        public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
         }
     }

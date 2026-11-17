@@ -20,7 +20,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Godot"
+rootProject.name = "FADE"
 
 // App modules
 include ':app'
@@ -35,6 +35,6 @@ project(':fusedDepsLib').projectDir = file("app/fusedDepsLib")
 include ':editor'
 include ':editor:macrobenchmark'
 
-// Godot Android library modules
+// FADE Android library modules
 include ':lib'
 include ':nativeSrcsConfigs'

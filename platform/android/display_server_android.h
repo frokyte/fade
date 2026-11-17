@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -46,7 +46,7 @@ class DisplayServerAndroid : public DisplayServer {
 	String rendering_driver;
 
 	// https://developer.android.com/reference/android/view/PointerIcon
-	// mapping between Godot's cursor shape to Android's'
+	// mapping between FADE's cursor shape to Android's'
 	int android_cursors[DisplayServerEnums::CURSOR_MAX] = {
 		1000, //DisplayServerEnums::CURSOR_ARROW
 		1008, //DisplayServerEnums::CURSOR_IBEAM

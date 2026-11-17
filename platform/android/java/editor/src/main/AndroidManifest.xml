@@ -48,7 +48,7 @@
         android:icon="@mipmap/themed_icon"
         android:label="${editorAppName}${editorBuildSuffix}"
         android:requestLegacyExternalStorage="true"
-        android:theme="@style/GodotEditorSplashScreenTheme"
+        android:theme="@style/FADEEditorSplashScreenTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <profileable
             android:shell="true"
@@ -56,7 +56,7 @@
             tools:targetApi="29" />
 
         <activity
-            android:name=".GodotEditor"
+            android:name=".FADEEditor"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/themed_icon"
@@ -94,7 +94,7 @@
             android:name=".ProjectManager"
             android:exported="true"
             android:icon="@mipmap/themed_icon"
-            android:targetActivity=".GodotEditor">
+            android:targetActivity=".FADEEditor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -112,16 +112,16 @@
             </intent-filter>
         </activity-alias>
         <activity
-            android:name=".GodotGame0"
+            android:name=".FADEGame0"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/ic_play_window"
             android:label="@string/godot_game_activity_name"
             android:launchMode="singleTask"
-            android:process=":GodotGame0"
+            android:process=":FADEGame0"
             android:taskAffinity=":game0"
             android:autoRemoveFromRecents="true"
-            android:theme="@style/GodotGameTheme"
+            android:theme="@style/FADEGameTheme"
             android:supportsPictureInPicture="true"
             android:screenOrientation="userLandscape">
             <layout
@@ -129,16 +129,16 @@
                 android:defaultHeight="@dimen/editor_default_window_height" />
         </activity>
         <activity
-            android:name=".GodotGame1"
+            android:name=".FADEGame1"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/ic_play_window"
             android:label="@string/godot_game_activity_name"
             android:launchMode="singleTask"
-            android:process=":GodotGame1"
+            android:process=":FADEGame1"
             android:taskAffinity=":game1"
             android:autoRemoveFromRecents="true"
-            android:theme="@style/GodotGameTheme"
+            android:theme="@style/FADEGameTheme"
             android:supportsPictureInPicture="true"
             android:screenOrientation="userLandscape">
             <layout
@@ -146,21 +146,21 @@
                 android:defaultHeight="@dimen/editor_default_window_height" />
         </activity>
         <activity
-            android:name=".embed.EmbeddedGodotGame"
+            android:name=".embed.EmbeddedFADEGame"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/ic_play_window"
             android:label="@string/godot_game_activity_name"
-            android:theme="@style/GodotEmbeddedGameTheme"
+            android:theme="@style/FADEEmbeddedGameTheme"
             android:taskAffinity=":embed"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:process=":EmbeddedGodotGame"
+            android:process=":EmbeddedFADEGame"
             android:supportsPictureInPicture="true" />
         <activity
-            android:name=".GodotXRGame"
+            android:name=".FADEXRGame"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
-            android:process=":GodotXRGame"
+            android:process=":FADEXRGame"
             android:launchMode="singleTask"
             android:taskAffinity=":xr"
             android:icon="@mipmap/ic_play_window"
@@ -172,9 +172,9 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 
         <activity
-            android:name=".GodotSpatialContainerGame0"
+            android:name=".FADESpatialContainerGame0"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
-            android:process=":GodotSpatialContainerGame0"
+            android:process=":FADESpatialContainerGame0"
             android:icon="@mipmap/ic_play_window"
             android:label="@string/godot_game_activity_name"
             android:exported="false"
@@ -187,9 +187,9 @@
             <property android:name="org.khronos.openxr.PROPERTY_ACTIVITY_HINT_XR_SPATIAL_CONTAINER_INITIAL_BOUNDS_MODE" android:value="XR_SPATIAL_CONTAINER_INITIAL_BOUNDS_MODE_UNDEFINED" />
         </activity>
         <activity
-            android:name=".GodotSpatialContainerGame1"
+            android:name=".FADESpatialContainerGame1"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
-            android:process=":GodotSpatialContainerGame1"
+            android:process=":FADESpatialContainerGame1"
             android:icon="@mipmap/ic_play_window"
             android:label="@string/godot_game_activity_name"
             android:exported="false"
@@ -210,8 +210,8 @@
         manager and editor windows.
          -->
         <meta-data
-            android:name="org.godotengine.plugin.v2.GodotOpenXR"
-            android:value="org.godotengine.openxr.vendors.GodotOpenXR"
+            android:name="org.godotengine.plugin.v2.FADEOpenXR"
+            android:value="org.godotengine.openxr.vendors.FADEOpenXR"
             tools:node="remove" />
     </application>
 

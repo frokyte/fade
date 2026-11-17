@@ -2,11 +2,11 @@ using System.IO;
 using System.Reflection;
 using Microsoft.CodeAnalysis.Testing;
 
-namespace Godot.SourceGenerators.Tests;
+namespace FADE.SourceGenerators.Tests;
 
 public static class Constants
 {
-    public static Assembly GodotSharpAssembly => typeof(GodotObject).Assembly;
+    public static Assembly FADESharpAssembly => typeof(FADEObject).Assembly;
 
     // Can't find what needs updating to be able to access ReferenceAssemblies.Net.Net100, so we're making our own one.
     public static ReferenceAssemblies Net100 => new ReferenceAssemblies(

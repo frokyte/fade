@@ -1,8 +1,8 @@
-using Godot;
+using FADE;
 
 namespace @namespace
 {
-    partial class @class : GodotObject
+    partial class @class : FADEObject
     {
     }
 }

@@ -1,7 +1,7 @@
-using Godot;
-using static GodotTools.Internals.Globals;
+using FADE;
+using static FADETools.Internals.Globals;
 
-namespace GodotTools.Build
+namespace FADETools.Build
 {
     public partial class BuildOutputView : HBoxContainer
     {

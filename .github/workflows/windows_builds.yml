@@ -61,7 +61,7 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Restore Godot build cache
+      - name: Restore FADE build cache
         uses: ./.github/actions/godot-cache-restore
         with:
           cache-name: ${{ matrix.cache-name }}
@@ -111,7 +111,7 @@ jobs:
           platform: windows
           target: ${{ matrix.target }}
 
-      - name: Save Godot build cache
+      - name: Save FADE build cache
         uses: ./.github/actions/godot-cache-save
         with:
           cache-name: ${{ matrix.cache-name }}

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -458,7 +458,7 @@ void GraphEdit::_update_scroll_offset() {
 	set_block_minimum_size_adjust(false);
 	awaiting_scroll_offset_update = false;
 
-	// In Godot, signals on value change are avoided by convention.
+	// In FADE, signals on value change are avoided by convention.
 	if (!setting_scroll_offset) {
 		emit_signal(SNAME("scroll_offset_changed"), get_scroll_offset());
 	}

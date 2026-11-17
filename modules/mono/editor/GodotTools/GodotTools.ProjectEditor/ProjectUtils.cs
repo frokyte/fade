@@ -7,7 +7,7 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Locator;
 using NuGet.Frameworks;
 
-namespace GodotTools.ProjectEditor
+namespace FADETools.ProjectEditor
 {
     public sealed class MSBuildProject
     {
@@ -25,8 +25,8 @@ namespace GodotTools.ProjectEditor
 
     public static partial class ProjectUtils
     {
-        [GeneratedRegex(@"\s*'\$\(GodotTargetPlatform\)'\s*==\s*'(?<platform>[A-z]+)'\s*", RegexOptions.IgnoreCase)]
-        private static partial Regex GodotTargetPlatformConditionRegex();
+        [GeneratedRegex(@"\s*'\$\(FADETargetPlatform\)'\s*==\s*'(?<platform>[A-z]+)'\s*", RegexOptions.IgnoreCase)]
+        private static partial Regex FADETargetPlatformConditionRegex();
 
         private static readonly string[] _platformNames =
         {
@@ -64,7 +64,7 @@ namespace GodotTools.ProjectEditor
             // Migrate to MSBuild project Sdks style if using the old style.
             MigrateToProjectSdksStyle(project, projectName);
 
-            EnsureGodotSdkIsUpToDate(project);
+            EnsureFADESdkIsUpToDate(project);
             EnsureTargetFrameworkMatchesMinimumRequirement(project);
         }
 
@@ -80,10 +80,10 @@ namespace GodotTools.ProjectEditor
             project.HasUnsavedChanges = true;
         }
 
-        public static void EnsureGodotSdkIsUpToDate(MSBuildProject project)
+        public static void EnsureFADESdkIsUpToDate(MSBuildProject project)
         {
             var root = project.Root;
-            string godotSdkAttrValue = ProjectGenerator.GodotSdkAttrValue;
+            string godotSdkAttrValue = ProjectGenerator.FADESdkAttrValue;
 
             if (!string.IsNullOrEmpty(root.Sdk) &&
                 root.Sdk.Trim().Equals(godotSdkAttrValue, StringComparison.OrdinalIgnoreCase))
@@ -96,7 +96,7 @@ namespace GodotTools.ProjectEditor
         private static void EnsureTargetFrameworkMatchesMinimumRequirement(MSBuildProject project)
         {
             var root = project.Root;
-            string minTfmValue = ProjectGenerator.GodotMinimumRequiredTfm;
+            string minTfmValue = ProjectGenerator.FADEMinimumRequiredTfm;
             var minTfmVersion = NuGetFramework.Parse(minTfmValue).Version;
 
             ProjectPropertyGroupElement? mainPropertyGroup = null;
@@ -109,7 +109,7 @@ namespace GodotTools.ProjectEditor
                 bool groupHasCondition = !string.IsNullOrEmpty(propertyGroup.Condition);
 
                 // Check if the property group should be excluded from checking for 'TargetFramework' properties.
-                if (groupHasCondition && !ConditionMatchesGodotPlatform(propertyGroup.Condition))
+                if (groupHasCondition && !ConditionMatchesFADEPlatform(propertyGroup.Condition))
                 {
                     continue;
                 }
@@ -132,7 +132,7 @@ namespace GodotTools.ProjectEditor
                     bool propertyHasCondition = !string.IsNullOrEmpty(property.Condition);
 
                     // Check if the property should be excluded.
-                    if (propertyHasCondition && !ConditionMatchesGodotPlatform(property.Condition))
+                    if (propertyHasCondition && !ConditionMatchesFADEPlatform(property.Condition))
                     {
                         continue;
                     }
@@ -186,7 +186,7 @@ namespace GodotTools.ProjectEditor
             foreach (var property in propertiesToChange)
             {
                 // If the main 'TargetFramework' property targets a version newer than
-                // the minimum required by Godot, we don't want to remove the conditional
+                // the minimum required by FADE, we don't want to remove the conditional
                 // 'TargetFramework' properties, only upgrade them to the new minimum.
                 // Otherwise, it can be removed.
                 if (mainTfmVersion > minTfmVersion)
@@ -208,11 +208,11 @@ namespace GodotTools.ProjectEditor
                 project.HasUnsavedChanges = true;
             }
 
-            static bool ConditionMatchesGodotPlatform(string condition)
+            static bool ConditionMatchesFADEPlatform(string condition)
             {
-                // Check if the condition is checking the 'GodotTargetPlatform' for one of the
-                // Godot platforms with built-in support in the Godot.NET.Sdk.
-                var match = GodotTargetPlatformConditionRegex().Match(condition);
+                // Check if the condition is checking the 'FADETargetPlatform' for one of the
+                // FADE platforms with built-in support in the FADE.NET.Sdk.
+                var match = FADETargetPlatformConditionRegex().Match(condition);
                 if (match.Success)
                 {
                     string platform = match.Groups["platform"].Value;

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -33,8 +33,8 @@ package org.godotengine.godot.vulkan
 
 import android.util.Log
 import android.view.Surface
-import org.godotengine.godot.GodotLib
-import org.godotengine.godot.plugin.GodotPluginRegistry
+import org.godotengine.godot.FADELib
+import org.godotengine.godot.plugin.FADEPluginRegistry
 
 /**
  * Responsible to setting up and driving the Vulkan rendering logic.
@@ -55,7 +55,7 @@ internal class VkRenderer {
 		private val TAG = VkRenderer::class.java.simpleName
 	}
 
-	private val pluginRegistry: GodotPluginRegistry = GodotPluginRegistry.getPluginRegistry()
+	private val pluginRegistry: FADEPluginRegistry = FADEPluginRegistry.getPluginRegistry()
 
 	internal var initialized = false
 		private set
@@ -77,7 +77,7 @@ internal class VkRenderer {
 	 * Called when the surface is created and signals the beginning of rendering.
 	 */
 	fun onVkSurfaceCreated(surface: Surface) {
-		GodotLib.newcontext(surface)
+		FADELib.newcontext(surface)
 
 		for (plugin in pluginRegistry.getAllPlugins()) {
 			plugin.onVkSurfaceCreated(surface)
@@ -88,7 +88,7 @@ internal class VkRenderer {
 	 * Called after the surface is created and whenever its size changes.
 	 */
 	fun onVkSurfaceChanged(surface: Surface, width: Int, height: Int) {
-		GodotLib.resize(surface, width, height)
+		FADELib.resize(surface, width, height)
 
 		for (plugin in pluginRegistry.getAllPlugins()) {
 			plugin.onVkSurfaceChanged(surface, width, height)
@@ -99,7 +99,7 @@ internal class VkRenderer {
 	 * Called to draw the current frame.
 	 */
 	fun onVkDrawFrame() {
-		GodotLib.step()
+		FADELib.step()
 		for (plugin in pluginRegistry.getAllPlugins()) {
 			plugin.onVkDrawFrame()
 		}
@@ -111,7 +111,7 @@ internal class VkRenderer {
 	fun onVkResume() {
 		Log.v(TAG, "Renderer resumed")
 		rendererResumed = true
-		GodotLib.onRendererResumed()
+		FADELib.onRendererResumed()
 	}
 
 	/**
@@ -120,14 +120,14 @@ internal class VkRenderer {
 	fun onVkPause() {
 		Log.v(TAG, "Renderer paused")
 		rendererResumed = false
-		GodotLib.onRendererPaused()
+		FADELib.onRendererPaused()
 	}
 
 	/**
 	 * Invoked when the render thread is in the process of shutting down.
 	 */
 	fun onRenderThreadExiting() {
-		Log.v(TAG, "Destroying Godot Engine")
-		GodotLib.ondestroy()
+		Log.v(TAG, "Destroying FADE Engine")
+		FADELib.ondestroy()
 	}
 }

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,25 +34,25 @@
 
 #include "core/templates/local_vector.h"
 
-class GodotStep3D {
+class FADEStep3D {
 	uint64_t _step = 1;
 
 	int iterations = 0;
 	real_t delta = 0.0;
 
-	LocalVector<LocalVector<GodotBody3D *>> body_islands;
-	LocalVector<LocalVector<GodotConstraint3D *>> constraint_islands;
-	LocalVector<GodotConstraint3D *> all_constraints;
+	LocalVector<LocalVector<FADEBody3D *>> body_islands;
+	LocalVector<LocalVector<FADEConstraint3D *>> constraint_islands;
+	LocalVector<FADEConstraint3D *> all_constraints;
 
-	void _populate_island(GodotBody3D *p_body, LocalVector<GodotBody3D *> &p_body_island, LocalVector<GodotConstraint3D *> &p_constraint_island);
-	void _populate_island_soft_body(GodotSoftBody3D *p_soft_body, LocalVector<GodotBody3D *> &p_body_island, LocalVector<GodotConstraint3D *> &p_constraint_island);
+	void _populate_island(FADEBody3D *p_body, LocalVector<FADEBody3D *> &p_body_island, LocalVector<FADEConstraint3D *> &p_constraint_island);
+	void _populate_island_soft_body(FADESoftBody3D *p_soft_body, LocalVector<FADEBody3D *> &p_body_island, LocalVector<FADEConstraint3D *> &p_constraint_island);
 	void _setup_constraint(uint32_t p_constraint_index, void *p_userdata = nullptr);
-	void _pre_solve_island(LocalVector<GodotConstraint3D *> &p_constraint_island) const;
+	void _pre_solve_island(LocalVector<FADEConstraint3D *> &p_constraint_island) const;
 	void _solve_island(uint32_t p_island_index, void *p_userdata = nullptr);
-	void _check_suspend(const LocalVector<GodotBody3D *> &p_body_island) const;
+	void _check_suspend(const LocalVector<FADEBody3D *> &p_body_island) const;
 
 public:
-	void step(GodotSpace3D *p_space, real_t p_delta);
-	GodotStep3D();
-	~GodotStep3D();
+	void step(FADESpace3D *p_space, real_t p_delta);
+	FADEStep3D();
+	~FADEStep3D();
 };

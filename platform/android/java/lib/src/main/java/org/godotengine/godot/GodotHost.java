@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotHost.java                                                        */
+/*  FADEHost.java                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 package org.godotengine.godot;
 
 import org.godotengine.godot.error.Error;
-import org.godotengine.godot.plugin.GodotPlugin;
+import org.godotengine.godot.plugin.FADEPlugin;
 
 import android.app.Activity;
 
@@ -43,74 +43,74 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Denotate a component (e.g: Activity, Fragment) that hosts the {@link Godot} engine.
+ * Denotate a component (e.g: Activity, Fragment) that hosts the {@link FADE} engine.
  */
-public interface GodotHost {
+public interface FADEHost {
 	/**
-	 * Provides a set of command line parameters to setup the {@link Godot} engine.
+	 * Provides a set of command line parameters to setup the {@link FADE} engine.
 	 */
 	default List<String> getCommandLine() {
 		return Collections.emptyList();
 	}
 
 	/**
-	 * Invoked on the render thread when setup of the {@link Godot} engine is complete.
+	 * Invoked on the render thread when setup of the {@link FADE} engine is complete.
 	 */
-	default void onGodotSetupCompleted() {}
+	default void onFADESetupCompleted() {}
 
 	/**
-	 * Invoked on the render thread when the {@link Godot} engine main loop has started.
+	 * Invoked on the render thread when the {@link FADE} engine main loop has started.
 	 */
-	default void onGodotMainLoopStarted() {}
+	default void onFADEMainLoopStarted() {}
 
 	/**
-	 * Invoked on the render thread to terminate the given {@link Godot} engine instance.
+	 * Invoked on the render thread to terminate the given {@link FADE} engine instance.
 	 */
-	default void onGodotForceQuit(Godot instance) {}
+	default void onFADEForceQuit(FADE instance) {}
 
 	/**
-	 * Invoked on the render thread to terminate the {@link Godot} engine instance with the given id.
-	 * @param godotInstanceId id of the Godot instance to terminate. See {@code onNewGodotInstanceRequested}
+	 * Invoked on the render thread to terminate the {@link FADE} engine instance with the given id.
+	 * @param godotInstanceId id of the FADE instance to terminate. See {@code onNewFADEInstanceRequested}
 	 *
 	 * @return true if successful, false otherwise.
 	 */
-	default boolean onGodotForceQuit(int godotInstanceId) {
+	default boolean onFADEForceQuit(int godotInstanceId) {
 		return false;
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot instance wants to be restarted. It's up to the host
+	 * Invoked on the render thread when the FADE instance wants to be restarted. It's up to the host
 	 * to perform the appropriate action(s).
 	 */
-	default void onGodotRestartRequested(Godot instance) {}
+	default void onFADERestartRequested(FADE instance) {}
 
 	/**
-	 * Invoked on the render thread when a new Godot instance is requested. It's up to the host to
+	 * Invoked on the render thread when a new FADE instance is requested. It's up to the host to
 	 * perform the appropriate action(s).
 	 *
 	 * @param args Arguments used to initialize the new instance.
 	 *
-	 * @return the id of the new instance. See {@code onGodotForceQuit}
+	 * @return the id of the new instance. See {@code onFADEForceQuit}
 	 */
-	default int onNewGodotInstanceRequested(String[] args) {
+	default int onNewFADEInstanceRequested(String[] args) {
 		return -1;
 	}
 
 	/**
-	 * Provide access to the Activity hosting the {@link Godot} engine if any.
+	 * Provide access to the Activity hosting the {@link FADE} engine if any.
 	 */
 	@Nullable
 	Activity getActivity();
 
 	/**
-	 * Provide access to the hosted {@link Godot} engine.
+	 * Provide access to the hosted {@link FADE} engine.
 	 */
-	Godot getGodot();
+	FADE getFADE();
 
 	/**
-	 * Returns a set of {@link GodotPlugin} to be registered with the hosted {@link Godot} engine.
+	 * Returns a set of {@link FADEPlugin} to be registered with the hosted {@link FADE} engine.
 	 */
-	default Set<GodotPlugin> getHostPlugins(Godot engine) {
+	default Set<FADEPlugin> getHostPlugins(FADE engine) {
 		return Collections.emptySet();
 	}
 

@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotAppTest.kt                                                       */
+/*  FADEAppTest.kt                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -38,10 +38,10 @@ import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.godot.game.app.BuildConfig
-import com.godot.game.test.GodotAppInstrumentedTestPlugin
-import org.godotengine.godot.Godot
-import org.godotengine.godot.GodotActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
-import org.godotengine.godot.plugin.GodotPluginRegistry
+import com.godot.game.test.FADEAppInstrumentedTestPlugin
+import org.godotengine.godot.FADE
+import org.godotengine.godot.FADEActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
+import org.godotengine.godot.plugin.FADEPluginRegistry
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.collections.contentEquals
@@ -51,38 +51,38 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * This instrumented test will launch the `instrumented` version of GodotApp and run a set of tests against it.
+ * This instrumented test will launch the `instrumented` version of FADEApp and run a set of tests against it.
  */
 @RunWith(AndroidJUnit4::class)
-class GodotAppTest {
+class FADEAppTest {
 
 	companion object {
-		private val TAG = GodotAppTest::class.java.simpleName
+		private val TAG = FADEAppTest::class.java.simpleName
 
-		private const val GODOT_APP_LAUNCHER_CLASS_NAME = "com.godot.game.GodotAppLauncher"
-		private const val GODOT_APP_CLASS_NAME = "com.godot.game.GodotApp"
+		private const val GODOT_APP_LAUNCHER_CLASS_NAME = "com.godot.game.FADEAppLauncher"
+		private const val GODOT_APP_CLASS_NAME = "com.godot.game.FADEApp"
 
 		private val TEST_COMMAND_LINE_PARAMS = arrayOf("This is a test")
 		private val VULKAN_RENDERER_COMMAND_LINE_PARAMS = arrayOf("--rendering-method","mobile")
 	}
 
-	private fun getTestPlugin(): GodotAppInstrumentedTestPlugin? {
-		return GodotPluginRegistry.getPluginRegistry()
-			.getPlugin("GodotAppInstrumentedTestPlugin") as GodotAppInstrumentedTestPlugin?
+	private fun getTestPlugin(): FADEAppInstrumentedTestPlugin? {
+		return FADEPluginRegistry.getPluginRegistry()
+			.getPlugin("FADEAppInstrumentedTestPlugin") as FADEAppInstrumentedTestPlugin?
 	}
 
 	/**
-	 * Runs the JavaClassWrapper tests via the GodotAppInstrumentedTestPlugin.
+	 * Runs the JavaClassWrapper tests via the FADEAppInstrumentedTestPlugin.
 	 */
 	@Test
 	fun runJavaClassWrapperTests() {
-		ActivityScenario.launch(GodotApp::class.java).use { scenario ->
+		ActivityScenario.launch(FADEApp::class.java).use { scenario ->
 			scenario.onActivity { activity ->
 				val testPlugin = getTestPlugin()
 				assertNotNull(testPlugin)
 
-				Log.d(TAG, "Waiting for the Godot main loop to start...")
-				testPlugin.waitForGodotMainLoopStarted()
+				Log.d(TAG, "Waiting for the FADE main loop to start...")
+				testPlugin.waitForFADEMainLoopStarted()
 
 				Log.d(TAG, "Running JavaClassWrapper tests...")
 				val result = testPlugin.runJavaClassWrapperTests()
@@ -99,13 +99,13 @@ class GodotAppTest {
 	 */
 	@Test
 	fun runFileAccessTests() {
-		ActivityScenario.launch(GodotApp::class.java).use { scenario ->
+		ActivityScenario.launch(FADEApp::class.java).use { scenario ->
 			scenario.onActivity { activity ->
 				val testPlugin = getTestPlugin()
 				assertNotNull(testPlugin)
 
-				Log.d(TAG, "Waiting for the Godot main loop to start...")
-				testPlugin.waitForGodotMainLoopStarted()
+				Log.d(TAG, "Waiting for the FADE main loop to start...")
+				testPlugin.waitForFADEMainLoopStarted()
 
 				Log.d(TAG, "Running FileAccess tests...")
 				val result = testPlugin.runFileAccessTests()
@@ -121,13 +121,13 @@ class GodotAppTest {
 	 */
 	@Test
 	fun runPluginSignalTests() {
-		ActivityScenario.launch(GodotApp::class.java).use { scenario ->
+		ActivityScenario.launch(FADEApp::class.java).use { scenario ->
 			scenario.onActivity { activity ->
 				val testPlugin = getTestPlugin()
 				assertNotNull(testPlugin)
 
-				Log.d(TAG, "Waiting for the Godot main loop to start...")
-				testPlugin.waitForGodotMainLoopStarted()
+				Log.d(TAG, "Waiting for the FADE main loop to start...")
+				testPlugin.waitForFADEMainLoopStarted()
 
 				Log.d(TAG, "Running Android plugin signal tests...")
 				val result = testPlugin.runPluginSignalTests()
@@ -139,17 +139,17 @@ class GodotAppTest {
 	}
 
 	/**
-	 * Test implicit launch of the Godot app, and validates this resolves to the `GodotAppLauncher` activity alias.
+	 * Test implicit launch of the FADE app, and validates this resolves to the `FADEAppLauncher` activity alias.
 	 */
 	@Test
-	fun testImplicitGodotAppLauncherLaunch() {
+	fun testImplicitFADEAppLauncherLaunch() {
 		val implicitLaunchIntent = Intent().apply {
 			setPackage(BuildConfig.APPLICATION_ID)
 			action = Intent.ACTION_MAIN
 			addCategory(Intent.CATEGORY_LAUNCHER)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotApp>(implicitLaunchIntent).use { scenario ->
+		ActivityScenario.launch<FADEApp>(implicitLaunchIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_APP_LAUNCHER_CLASS_NAME)
 
@@ -160,15 +160,15 @@ class GodotAppTest {
 	}
 
 	/**
-	 * Test explicit launch of the Godot app via its activity-alias launcher, and validates it resolves properly.
+	 * Test explicit launch of the FADE app via its activity-alias launcher, and validates it resolves properly.
 	 */
 	@Test
-	fun testExplicitGodotAppLauncherLaunch() {
+	fun testExplicitFADEAppLauncherLaunch() {
 		val explicitIntent = Intent().apply {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_APP_LAUNCHER_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotApp>(explicitIntent).use { scenario ->
+		ActivityScenario.launch<FADEApp>(explicitIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_APP_LAUNCHER_CLASS_NAME)
 
@@ -179,15 +179,15 @@ class GodotAppTest {
 	}
 
 	/**
-	 * Test explicit launch of the `GodotApp` activity.
+	 * Test explicit launch of the `FADEApp` activity.
 	 */
 	@Test
-	fun testExplicitGodotAppLaunch() {
+	fun testExplicitFADEAppLaunch() {
 		val explicitIntent = Intent().apply {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_APP_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotApp>(explicitIntent).use { scenario ->
+		ActivityScenario.launch<FADEApp>(explicitIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_APP_CLASS_NAME)
 
@@ -202,17 +202,17 @@ class GodotAppTest {
 	 * Test that launching using the Vulkan renderer doesn't crash the app.
 	 */
 	@Test
-	fun testVulkanGodotAppLaunch() {
+	fun testVulkanFADEAppLaunch() {
 		val appIntent = Intent().apply {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_APP_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, VULKAN_RENDERER_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotApp>(appIntent).use { scenario ->
+		ActivityScenario.launch<FADEApp>(appIntent).use { scenario ->
 			val testPlugin = getTestPlugin()
 			assertNotNull(testPlugin)
 
-			Log.d(TAG, "Waiting for the Godot main loop to start...")
-			testPlugin.waitForGodotMainLoopStarted()
+			Log.d(TAG, "Waiting for the FADE main loop to start...")
+			testPlugin.waitForFADEMainLoopStarted()
 
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_APP_CLASS_NAME)
@@ -229,12 +229,12 @@ class GodotAppTest {
 	 */
 	@Test
 	fun testGameNotQuittingOnBackPress() {
-		ActivityScenario.launch(GodotApp::class.java).use { scenario ->
+		ActivityScenario.launch(FADEApp::class.java).use { scenario ->
 			val testPlugin = getTestPlugin()
 			assertNotNull(testPlugin)
 
-			Log.d(TAG, "Waiting for the Godot main loop to start...")
-			testPlugin.waitForGodotMainLoopStarted()
+			Log.d(TAG, "Waiting for the FADE main loop to start...")
+			testPlugin.waitForFADEMainLoopStarted()
 
 			// Disable 'quit_on_go_back'.
 			testPlugin.updateQuitOnGoBack(false)
@@ -245,8 +245,8 @@ class GodotAppTest {
 			Log.d(TAG, "Waiting for the engine to terminate...")
 			testPlugin.waitForEngineTermination(5_000L)
 
-			val godot = Godot.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
-			assertTrue { godot.runStatus != Godot.RunStatus.TERMINATING }
+			val godot = FADE.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
+			assertTrue { godot.runStatus != FADE.RunStatus.TERMINATING }
 		}
 	}
 
@@ -255,12 +255,12 @@ class GodotAppTest {
 	 */
 	@Test
 	fun testGameQuittingOnBackPress() {
-		ActivityScenario.launch(GodotApp::class.java).use { scenario ->
+		ActivityScenario.launch(FADEApp::class.java).use { scenario ->
 			val testPlugin = getTestPlugin()
 			assertNotNull(testPlugin)
 
-			Log.d(TAG, "Waiting for the Godot main loop to start...")
-			testPlugin.waitForGodotMainLoopStarted()
+			Log.d(TAG, "Waiting for the FADE main loop to start...")
+			testPlugin.waitForFADEMainLoopStarted()
 
 			// Enable 'quit_on_go_back'.
 			testPlugin.updateQuitOnGoBack(true)
@@ -271,8 +271,8 @@ class GodotAppTest {
 			Log.d(TAG, "Waiting for the engine to terminate...")
 			testPlugin.waitForEngineTermination(5_000L)
 
-			val godot = Godot.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
-			assertTrue { godot.runStatus == Godot.RunStatus.TERMINATING }
+			val godot = FADE.getInstance(InstrumentationRegistry.getInstrumentation().targetContext)
+			assertTrue { godot.runStatus == FADE.RunStatus.TERMINATING }
 		}
 	}
 }

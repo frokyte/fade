@@ -256,7 +256,7 @@ def write_doc(file, doc, indent=""):
 
 def make_deprecated_message(data):
     parts = [
-        f"Deprecated in Godot {data['since']}.",
+        f"Deprecated in FADE {data['since']}.",
         data["message"] if "message" in data else "",
         f"Use `{data['replace_with']}` instead." if "replace_with" in data else "",
     ]

@@ -1,13 +1,13 @@
-# LANGUAGE translation of the Godot Engine editor properties.
-# Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md).
+# LANGUAGE translation of the FADE Engine editor properties.
+# Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md).
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 #
 # BoneNI <bounkirdni@gmail.com>, 2026.
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor properties\n"
+"Project-Id-Version: FADE Engine editor properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "PO-Revision-Date: 2026-08-10 14:28+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
@@ -3885,8 +3885,8 @@ msgstr "ຕິດຕາມ Call Stacks ສະເໝີ"
 msgid "Always Track Local Variables"
 msgstr "ຕິດຕາມຕົວປ່ຽນທ້ອງຖິ່ນສະເໝີ"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "ຄຳແນະນຳການປ່ຽນຊື່ໃນ Godot 4"
+msgid "Renamed in FADE 4 Hint"
+msgstr "ຄຳແນະນຳການປ່ຽນຊື່ໃນ FADE 4"
 
 msgid "Unassigned Variable"
 msgstr "ຕົວປ່ຽນທີ່ຍັງບໍ່ໄດ້ກຳນົດຄ່າ"
@@ -4284,11 +4284,11 @@ msgstr "ແສງ"
 msgid "Visible"
 msgstr "ສະແດງໃຫ້ເຫັນ"
 
-msgid "glTF to Godot Expression"
-msgstr "ນິພົດຈາກ glTF ໄປຫາ Godot"
+msgid "glTF to FADE Expression"
+msgstr "ນິພົດຈາກ glTF ໄປຫາ FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "ນິພົດຈາກ Godot ໄປຫາ glTF"
+msgid "FADE to glTF Expression"
+msgstr "ນິພົດຈາກ FADE ໄປຫາ glTF"
 
 msgid "Node Paths"
 msgstr "ເສັ້ນທາງໂນດ"
@@ -4308,8 +4308,8 @@ msgstr "ຂໍ້ຕໍ່ (Joints)"
 msgid "Roots"
 msgstr "ຮາກ"
 
-msgid "Godot Bone Node"
-msgstr "ໂນດກະດູກຂອງ Godot"
+msgid "FADE Bone Node"
+msgstr "ໂນດກະດູກຂອງ FADE"
 
 msgid "Skin Root"
 msgstr "ຮາກຂອງສະກິນ"
@@ -4320,8 +4320,8 @@ msgstr "ຂໍ້ຕໍ່ດັ້ງເດີມ"
 msgid "Non Joints"
 msgstr "ທີ່ບໍ່ແມ່ນຂໍ້ຕໍ່"
 
-msgid "Godot Skin"
-msgstr "ສະກິນຂອງ Godot"
+msgid "FADE Skin"
+msgstr "ສະກິນຂອງ FADE"
 
 msgid "Src Image"
 msgstr "ຮູບພາບຕົ້ນສະບັບ"
@@ -5358,8 +5358,8 @@ msgstr "ໂຮສດີບັກທາງໄກຜ່ານ Wi-Fi"
 msgid "Splash Screen"
 msgstr "ໜ້າຈໍສະແດງໂລໂກ້ (Splash Screen)"
 
-msgid "Disable Godot Boot Splash"
-msgstr "ປິດການສະແດງໂລໂກ້ຕອນເລີ່ມຕົ້ນຂອງ Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "ປິດການສະແດງໂລໂກ້ຕອນເລີ່ມຕົ້ນຂອງ FADE"
 
 msgid "Background Color"
 msgstr "ສີພື້ນຫຼັງ"
@@ -5913,8 +5913,8 @@ msgstr "ໄອຄອນ 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "ຂະໜາດ Emscripten Pool"
 
-msgid "Godot Pool Size"
-msgstr "ຂະໜາດ Godot Pool"
+msgid "FADE Pool Size"
+msgstr "ຂະໜາດ FADE Pool"
 
 msgid "Windows"
 msgstr "Windows"

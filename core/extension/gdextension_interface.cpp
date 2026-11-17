@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -240,7 +240,7 @@ GDExtensionInterfaceFunctionPtr gdextension_get_proc_address(const char *p_name)
 }
 
 #ifndef DISABLE_DEPRECATED
-static void gdextension_get_godot_version(GDExtensionGodotVersion *r_godot_version) {
+static void gdextension_get_godot_version(GDExtensionFADEVersion *r_godot_version) {
 	r_godot_version->major = GODOT_VERSION_MAJOR;
 	r_godot_version->minor = GODOT_VERSION_MINOR;
 	r_godot_version->patch = GODOT_VERSION_PATCH;
@@ -248,7 +248,7 @@ static void gdextension_get_godot_version(GDExtensionGodotVersion *r_godot_versi
 }
 #endif
 
-static void gdextension_get_godot_version2(GDExtensionGodotVersion2 *r_godot_version) {
+static void gdextension_get_godot_version2(GDExtensionFADEVersion2 *r_godot_version) {
 	r_godot_version->major = GODOT_VERSION_MAJOR;
 	r_godot_version->minor = GODOT_VERSION_MINOR;
 	r_godot_version->patch = GODOT_VERSION_PATCH;

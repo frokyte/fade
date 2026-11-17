@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,23 +35,23 @@ import android.util.Log
 import androidx.annotation.Keep
 import androidx.core.net.toUri
 
-import org.godotengine.godot.Godot
+import org.godotengine.godot.FADE
 import org.godotengine.godot.variant.Callable
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
 
 /**
- * Built-in Godot Android plugin used to provide access to the Android runtime capabilities.
+ * Built-in FADE Android plugin used to provide access to the Android runtime capabilities.
  *
  * @see <a href="https://docs.godotengine.org/en/latest/tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.html">Integrating with Android APIs</a>
  */
-class AndroidRuntimePlugin(godot: Godot) : GodotPlugin(godot) {
+class AndroidRuntimePlugin(godot: FADE) : FADEPlugin(godot) {
 
 	companion object {
 		private val TAG = AndroidRuntimePlugin::class.java.simpleName
 
 		/**
-		 * Helper method used to generate Godot Proxy instances.
+		 * Helper method used to generate FADE Proxy instances.
 		 */
 		@JvmStatic
 		@Keep
@@ -62,37 +62,37 @@ class AndroidRuntimePlugin(godot: Godot) : GodotPlugin(godot) {
 				val proxy = Proxy.newProxyInstance(invocationHandler.javaClass.classLoader, interfaceClasses, invocationHandler)
 				return proxy
 			} catch (e: Exception) {
-				Log.w(TAG, "Error generating Godot proxy for interfaces ${interfaces.joinToString(",")}", e)
+				Log.w(TAG, "Error generating FADE proxy for interfaces ${interfaces.joinToString(",")}", e)
 			}
 			return null
 		}
 
 		/**
-		 * Utility method used to create [java.lang.reflect.Proxy] instance wrapping a given Godot [Callable].
+		 * Utility method used to create [java.lang.reflect.Proxy] instance wrapping a given FADE [Callable].
 		 *
 		 * The [Proxy] instance is used to implement one SAM interface with the [Callable] serving as the delegate
 		 * implementation for the SAM interface overridden methods.
 		 */
 		@JvmStatic
 		@Keep
-		private fun createProxyFromGodotCallable(interfaceName: String, godotCallable: Callable): Any? {
+		private fun createProxyFromFADECallable(interfaceName: String, godotCallable: Callable): Any? {
 			return generateProxyInstance(arrayOf(interfaceName)) { proxy, method, args ->
 				when (method.name) {
 					// We automatically handle 'toString', 'equals' and 'hashCode' to simplify the task of the caller
 					// and provide consistency.
-					"toString" -> "Godot Callable Proxy for $interfaceName"
+					"toString" -> "FADE Callable Proxy for $interfaceName"
 					"equals" -> proxy === args[0]
 					"hashCode" -> godotCallable.hashCode()
 
 					// Invocation for the interface single abstract method falls here and is dispatched to the
-					// Godot [Callable].
+					// FADE [Callable].
 					else -> godotCallable.call(*(args ?: emptyArray()))
 				}
 			}
 		}
 
 		/**
-		 * Utility method used to create [java.lang.reflect.Proxy] instance wrapping a given Godot Object represented by
+		 * Utility method used to create [java.lang.reflect.Proxy] instance wrapping a given FADE Object represented by
 		 * its ObjectID.
 		 *
 		 * The [Proxy] instance is used to implement one or multiple interfaces with the Object represented by
@@ -100,17 +100,17 @@ class AndroidRuntimePlugin(godot: Godot) : GodotPlugin(godot) {
 		 */
 		@JvmStatic
 		@Keep
-		private fun createProxyFromGodotObjectID(godotObjectID: Long, interfaces: Array<String>): Any? {
+		private fun createProxyFromFADEObjectID(godotObjectID: Long, interfaces: Array<String>): Any? {
 			return generateProxyInstance(interfaces) { proxy, method, args ->
 				when (val methodName = method.name) {
 					// We automatically handle 'toString', 'equals' and 'hashCode' to simplify the task of the caller
 					// and provide consistency.
-					"toString" -> "Godot Object Proxy for ${interfaces.joinToString(",")}"
+					"toString" -> "FADE Object Proxy for ${interfaces.joinToString(",")}"
 					"equals" -> proxy === args[0]
 					"hashCode" -> godotObjectID.hashCode()
 
 					// Invocation for the remaining interface(s) methods falls here and is dispatched to the
-					// Godot Object.
+					// FADE Object.
 					else -> Callable.call(godotObjectID, methodName, *(args ?: emptyArray()))
 				}
 			}
@@ -122,35 +122,35 @@ class AndroidRuntimePlugin(godot: Godot) : GodotPlugin(godot) {
 	/**
 	 * Provides access to the application [android.content.Context] to GDScript
 	 */
-	@UsedByGodot
+	@UsedByFADE
 	fun getApplicationContext() = activity?.applicationContext
 
 	/**
 	 * Provides access to the host [android.app.Activity] to GDScript
 	 */
-	@UsedByGodot
+	@UsedByFADE
 	public override fun getActivity() = super.getActivity()
 
 	/**
-	 * Utility method used to create [Runnable] from Godot [Callable].
+	 * Utility method used to create [Runnable] from FADE [Callable].
 	 */
-	@UsedByGodot
-	fun createRunnableFromGodotCallable(godotCallable: Callable): Runnable {
+	@UsedByFADE
+	fun createRunnableFromFADECallable(godotCallable: Callable): Runnable {
 		return Runnable { godotCallable.call() }
 	}
 
 	/**
-	 * Utility method used to create [java.util.concurrent.Callable] from Godot [Callable].
+	 * Utility method used to create [java.util.concurrent.Callable] from FADE [Callable].
 	 */
-	@UsedByGodot
-	fun createCallableFromGodotCallable(godotCallable: Callable): java.util.concurrent.Callable<Any> {
+	@UsedByFADE
+	fun createCallableFromFADECallable(godotCallable: Callable): java.util.concurrent.Callable<Any> {
 		return java.util.concurrent.Callable { godotCallable.call() }
 	}
 
 	/**
 	 * Helper method to take/release persistable URI permission.
 	 */
-	@UsedByGodot
+	@UsedByFADE
 	fun updatePersistableUriPermission(uriString: String, persist: Boolean): Boolean {
 		try {
 			val uri = uriString.toUri()

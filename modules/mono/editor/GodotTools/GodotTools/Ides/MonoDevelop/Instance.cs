@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
-using GodotTools.Internals;
-using GodotTools.Utils;
+using FADETools.Internals;
+using FADETools.Utils;
 
-namespace GodotTools.Ides.MonoDevelop
+namespace FADETools.Ides.MonoDevelop
 {
     public class Instance : IDisposable
     {

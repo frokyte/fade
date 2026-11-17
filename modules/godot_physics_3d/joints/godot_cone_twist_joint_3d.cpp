@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 /*
@@ -51,8 +51,8 @@ Written by: Marcus Hennix
 
 #include "godot_cone_twist_joint_3d.h"
 
-GodotConeTwistJoint3D::GodotConeTwistJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &rbAFrame, const Transform3D &rbBFrame) :
-		GodotJoint3D(_arr, 2) {
+FADEConeTwistJoint3D::FADEConeTwistJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Transform3D &rbAFrame, const Transform3D &rbBFrame) :
+		FADEJoint3D(_arr, 2) {
 	A = rbA;
 	B = rbB;
 
@@ -63,7 +63,7 @@ GodotConeTwistJoint3D::GodotConeTwistJoint3D(GodotBody3D *rbA, GodotBody3D *rbB,
 	B->add_constraint(this, 1);
 }
 
-bool GodotConeTwistJoint3D::setup(real_t p_timestep) {
+bool FADEConeTwistJoint3D::setup(real_t p_timestep) {
 	dynamic_A = (A->get_mode() > PS3DE::BODY_MODE_KINEMATIC);
 	dynamic_B = (B->get_mode() > PS3DE::BODY_MODE_KINEMATIC);
 
@@ -98,7 +98,7 @@ bool GodotConeTwistJoint3D::setup(real_t p_timestep) {
 		for (int i = 0; i < 3; i++) {
 			memnew_placement(
 					&m_jac[i],
-					GodotJacobianEntry3D(
+					FADEJacobianEntry3D(
 							A->get_principal_inertia_axes().transposed(),
 							B->get_principal_inertia_axes().transposed(),
 							pivotAInW - A->get_transform().origin - A->get_center_of_mass(),
@@ -196,7 +196,7 @@ bool GodotConeTwistJoint3D::setup(real_t p_timestep) {
 	return true;
 }
 
-void GodotConeTwistJoint3D::solve(real_t p_timestep) {
+void FADEConeTwistJoint3D::solve(real_t p_timestep) {
 	Vector3 pivotAInW = A->get_transform().xform(m_rbAFrame.origin);
 	Vector3 pivotBInW = B->get_transform().xform(m_rbBFrame.origin);
 
@@ -278,7 +278,7 @@ void GodotConeTwistJoint3D::solve(real_t p_timestep) {
 	}
 }
 
-void GodotConeTwistJoint3D::set_param(PS3DE::ConeTwistJointParam p_param, real_t p_value) {
+void FADEConeTwistJoint3D::set_param(PS3DE::ConeTwistJointParam p_param, real_t p_value) {
 	switch (p_param) {
 		case PS3DE::CONE_TWIST_JOINT_SWING_SPAN: {
 			m_swingSpan1 = p_value;
@@ -301,7 +301,7 @@ void GodotConeTwistJoint3D::set_param(PS3DE::ConeTwistJointParam p_param, real_t
 	}
 }
 
-real_t GodotConeTwistJoint3D::get_param(PS3DE::ConeTwistJointParam p_param) const {
+real_t FADEConeTwistJoint3D::get_param(PS3DE::ConeTwistJointParam p_param) const {
 	switch (p_param) {
 		case PS3DE::CONE_TWIST_JOINT_SWING_SPAN: {
 			return m_swingSpan1;

@@ -7,10 +7,10 @@ using System.Net.Sockets;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GodotTools.IdeMessaging.Requests;
-using GodotTools.IdeMessaging.Utils;
+using FADETools.IdeMessaging.Requests;
+using FADETools.IdeMessaging.Utils;
 
-namespace GodotTools.IdeMessaging
+namespace FADETools.IdeMessaging
 {
     // ReSharper disable once UnusedType.Global
     public sealed class Client : IDisposable
@@ -21,10 +21,10 @@ namespace GodotTools.IdeMessaging
 
         private string MetaFilePath { get; }
         private DateTime? metaFileModifiedTime;
-        private GodotIdeMetadata godotIdeMetadata;
+        private FADEIdeMetadata godotIdeMetadata;
         private readonly FileSystemWatcher fsWatcher;
 
-        public string GodotEditorExecutablePath => godotIdeMetadata.EditorExecutablePath;
+        public string FADEEditorExecutablePath => godotIdeMetadata.EditorExecutablePath;
 
         private readonly IMessageHandler messageHandler;
 
@@ -139,9 +139,9 @@ namespace GodotTools.IdeMessaging
                 }
             }
 
-            MetaFilePath = Path.Combine(projectMetadataDir, GodotIdeMetadata.DefaultFileName);
+            MetaFilePath = Path.Combine(projectMetadataDir, FADEIdeMetadata.DefaultFileName);
 
-            fsWatcher = new FileSystemWatcher(projectMetadataDir, GodotIdeMetadata.DefaultFileName);
+            fsWatcher = new FileSystemWatcher(projectMetadataDir, FADEIdeMetadata.DefaultFileName);
         }
 
         private async void OnMetaFileChanged(object sender, FileSystemEventArgs e)
@@ -212,7 +212,7 @@ namespace GodotTools.IdeMessaging
             }
         }
 
-        private GodotIdeMetadata? ReadMetadataFile()
+        private FADEIdeMetadata? ReadMetadataFile()
         {
             using (var fileStream = new FileStream(MetaFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var reader = new StreamReader(fileStream))
@@ -230,7 +230,7 @@ namespace GodotTools.IdeMessaging
                 if (!int.TryParse(portStr, out int port))
                     return null;
 
-                return new GodotIdeMetadata(port, editorExecutablePath);
+                return new FADEIdeMetadata(port, editorExecutablePath);
             }
         }
 
@@ -282,18 +282,18 @@ namespace GodotTools.IdeMessaging
 
             try
             {
-                logger.LogInfo("Connecting to Godot Ide Server");
+                logger.LogInfo("Connecting to FADE Ide Server");
 
                 await tcpClient.ConnectAsync(IPAddress.Loopback, godotIdeMetadata.Port);
 
-                logger.LogInfo("Connection open with Godot Ide Server");
+                logger.LogInfo("Connection open with FADE Ide Server");
 
                 await AcceptClient(tcpClient);
             }
             catch (SocketException e)
             {
                 if (e.SocketErrorCode == SocketError.ConnectionRefused)
-                    logger.LogError("The connection to the Godot Ide Server was refused");
+                    logger.LogError("The connection to the FADE Ide Server was refused");
                 else
                     throw;
             }
@@ -317,7 +317,7 @@ namespace GodotTools.IdeMessaging
 
                 if (!File.Exists(MetaFilePath))
                 {
-                    logger.LogInfo("There is no Godot Ide Server running");
+                    logger.LogInfo("There is no FADE Ide Server running");
                     return;
                 }
 
@@ -330,7 +330,7 @@ namespace GodotTools.IdeMessaging
                 }
                 else
                 {
-                    logger.LogError("Failed to read Godot Ide metadata file");
+                    logger.LogError("Failed to read FADE Ide metadata file");
                 }
             }
         }
@@ -340,7 +340,7 @@ namespace GodotTools.IdeMessaging
         {
             if (!IsConnected)
             {
-                logger.LogError("Cannot write request. Not connected to the Godot Ide Server.");
+                logger.LogError("Cannot write request. Not connected to the FADE Ide Server.");
                 return null;
             }
 
@@ -353,7 +353,7 @@ namespace GodotTools.IdeMessaging
         {
             if (!IsConnected)
             {
-                logger.LogError("Cannot write request. Not connected to the Godot Ide Server.");
+                logger.LogError("Cannot write request. Not connected to the FADE Ide Server.");
                 return null;
             }
 

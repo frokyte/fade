@@ -26,7 +26,7 @@
             android:value="XR_BOUNDARY_TYPE_NO_RECOMMENDATION" />
 
         <activity
-            android:name=".GodotXRGame"
+            android:name=".FADEXRGame"
             android:exported="false"
             tools:node="merge">
             <intent-filter>
@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".GodotSpatialContainerGame0"
+            android:name=".FADESpatialContainerGame0"
             android:exported="false"
             tools:node="merge">
             <intent-filter>
@@ -53,7 +53,7 @@
                 android:value="XR_ACTIVITY_START_MODE_FULL_SPACE_MANAGED" />
         </activity>
         <activity
-            android:name=".GodotSpatialContainerGame1"
+            android:name=".FADESpatialContainerGame1"
             android:exported="false"
             tools:node="merge">
             <intent-filter>

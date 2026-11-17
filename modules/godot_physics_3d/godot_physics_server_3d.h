@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -38,10 +38,10 @@
 #include "core/templates/rid_owner.h"
 #include "servers/physics_3d/physics_server_3d.h"
 
-class GodotPhysicsServer3D : public PhysicsServer3D {
-	GDCLASS(GodotPhysicsServer3D, PhysicsServer3D);
+class FADEPhysicsServer3D : public PhysicsServer3D {
+	GDCLASS(FADEPhysicsServer3D, PhysicsServer3D);
 
-	friend class GodotPhysicsDirectSpaceState3D;
+	friend class FADEPhysicsDirectSpaceState3D;
 	bool active = true;
 
 	int island_count = 0;
@@ -52,22 +52,22 @@ class GodotPhysicsServer3D : public PhysicsServer3D {
 	bool doing_sync = false;
 	bool flushing_queries = false;
 
-	GodotStep3D *stepper = nullptr;
-	HashSet<GodotSpace3D *> active_spaces;
+	FADEStep3D *stepper = nullptr;
+	HashSet<FADESpace3D *> active_spaces;
 
-	mutable RID_PtrOwner<GodotShape3D, true> shape_owner;
-	mutable RID_PtrOwner<GodotSpace3D, true> space_owner;
-	mutable RID_PtrOwner<GodotArea3D, true> area_owner;
-	mutable RID_PtrOwner<GodotBody3D, true> body_owner{ 65536, 1048576 };
-	mutable RID_PtrOwner<GodotSoftBody3D, true> soft_body_owner;
-	mutable RID_PtrOwner<GodotJoint3D, true> joint_owner;
+	mutable RID_PtrOwner<FADEShape3D, true> shape_owner;
+	mutable RID_PtrOwner<FADESpace3D, true> space_owner;
+	mutable RID_PtrOwner<FADEArea3D, true> area_owner;
+	mutable RID_PtrOwner<FADEBody3D, true> body_owner{ 65536, 1048576 };
+	mutable RID_PtrOwner<FADESoftBody3D, true> soft_body_owner;
+	mutable RID_PtrOwner<FADEJoint3D, true> joint_owner;
 
 	//void _clear_query(QuerySW *p_query);
-	friend class GodotCollisionObject3D;
-	SelfList<GodotCollisionObject3D>::List pending_shape_update_list;
+	friend class FADECollisionObject3D;
+	SelfList<FADECollisionObject3D>::List pending_shape_update_list;
 	void _update_shapes();
 
-	static GodotPhysicsServer3D *godot_singleton;
+	static FADEPhysicsServer3D *godot_singleton;
 
 public:
 	struct CollCbkData {
@@ -388,6 +388,6 @@ public:
 
 	int get_process_info(PS3DE::ProcessInfo p_info) override;
 
-	GodotPhysicsServer3D(bool p_using_threads = false);
-	~GodotPhysicsServer3D() {}
+	FADEPhysicsServer3D(bool p_using_threads = false);
+	~FADEPhysicsServer3D() {}
 };

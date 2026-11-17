@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,9 +35,9 @@
 #include "godot_constraint_3d.h"
 #include "godot_soft_body_3d.h"
 
-class GodotAreaPair3D : public GodotConstraint3D {
-	GodotBody3D *body = nullptr;
-	GodotArea3D *area = nullptr;
+class FADEAreaPair3D : public FADEConstraint3D {
+	FADEBody3D *body = nullptr;
+	FADEArea3D *area = nullptr;
 	int body_shape;
 	int area_shape;
 	bool colliding = false;
@@ -50,13 +50,13 @@ public:
 	virtual bool pre_solve(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotAreaPair3D(GodotBody3D *p_body, int p_body_shape, GodotArea3D *p_area, int p_area_shape);
-	~GodotAreaPair3D();
+	FADEAreaPair3D(FADEBody3D *p_body, int p_body_shape, FADEArea3D *p_area, int p_area_shape);
+	~FADEAreaPair3D();
 };
 
-class GodotArea2Pair3D : public GodotConstraint3D {
-	GodotArea3D *area_a = nullptr;
-	GodotArea3D *area_b = nullptr;
+class FADEArea2Pair3D : public FADEConstraint3D {
+	FADEArea3D *area_a = nullptr;
+	FADEArea3D *area_b = nullptr;
 	int shape_a;
 	int shape_b;
 	bool colliding_a = false;
@@ -71,13 +71,13 @@ public:
 	virtual bool pre_solve(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotArea2Pair3D(GodotArea3D *p_area_a, int p_shape_a, GodotArea3D *p_area_b, int p_shape_b);
-	~GodotArea2Pair3D();
+	FADEArea2Pair3D(FADEArea3D *p_area_a, int p_shape_a, FADEArea3D *p_area_b, int p_shape_b);
+	~FADEArea2Pair3D();
 };
 
-class GodotAreaSoftBodyPair3D : public GodotConstraint3D {
-	GodotSoftBody3D *soft_body = nullptr;
-	GodotArea3D *area = nullptr;
+class FADEAreaSoftBodyPair3D : public FADEConstraint3D {
+	FADESoftBody3D *soft_body = nullptr;
+	FADEArea3D *area = nullptr;
 	int soft_body_shape;
 	int area_shape;
 	bool colliding = false;
@@ -90,6 +90,6 @@ public:
 	virtual bool pre_solve(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotAreaSoftBodyPair3D(GodotSoftBody3D *p_sof_body, int p_soft_body_shape, GodotArea3D *p_area, int p_area_shape);
-	~GodotAreaSoftBodyPair3D();
+	FADEAreaSoftBodyPair3D(FADESoftBody3D *p_sof_body, int p_soft_body_shape, FADEArea3D *p_area, int p_area_shape);
+	~FADEAreaSoftBodyPair3D();
 };

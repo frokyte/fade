@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -475,7 +475,7 @@ void call_get_argument_type_info(int p_arg, PropertyInfo &r_info) {
 
 #ifdef DEBUG_ENABLED
 template <typename Q>
-void call_get_argument_metadata_helper(int p_arg, int &r_index, GodotTypeInfo::Metadata &r_metadata) {
+void call_get_argument_metadata_helper(int p_arg, int &r_index, FADETypeInfo::Metadata &r_metadata) {
 	if (p_arg == r_index) {
 		r_metadata = GetTypeInfo<Q>::METADATA;
 	}
@@ -483,8 +483,8 @@ void call_get_argument_metadata_helper(int p_arg, int &r_index, GodotTypeInfo::M
 }
 
 template <typename... P>
-GodotTypeInfo::Metadata call_get_argument_metadata(int p_arg) {
-	GodotTypeInfo::Metadata md = GodotTypeInfo::METADATA_NONE;
+FADETypeInfo::Metadata call_get_argument_metadata(int p_arg) {
+	FADETypeInfo::Metadata md = FADETypeInfo::METADATA_NONE;
 
 	int index = 0;
 	// I think rocket science is simpler than modern C++.

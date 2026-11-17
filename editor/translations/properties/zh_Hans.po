@@ -1,7 +1,7 @@
-# Chinese (Simplified Han script) translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Chinese (Simplified Han script) translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # 360119124 <360119124@qq.com>, 2018.
 # 柠檬杀手 <lemonkiller@gmail.com>, 2018, 2020.
 # 纯洁的坏蛋 <tqj.zyy@gmail.com>, 2016.
@@ -104,7 +104,7 @@
 # Guangxin Zhao <as3ert@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Chinese (Simplified) (Godot Engine)\n"
+"Project-Id-Version: Chinese (Simplified) (FADE Engine)\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: 2018-01-20 12:15+0200\n"
 "PO-Revision-Date: 2026-10-19 08:59+0000\n"
@@ -3983,8 +3983,8 @@ msgstr "始终跟踪调用堆栈"
 msgid "Always Track Local Variables"
 msgstr "始终跟踪局部变量"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "提示已在 Godot 4 中被重命名"
+msgid "Renamed in FADE 4 Hint"
+msgstr "提示已在 FADE 4 中被重命名"
 
 msgid "Unassigned Variable"
 msgstr "未赋值变量"
@@ -4382,11 +4382,11 @@ msgstr "灯光"
 msgid "Visible"
 msgstr "可见"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF 至 Godot 表达式"
+msgid "glTF to FADE Expression"
+msgstr "glTF 至 FADE 表达式"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot 至 glTF 表达式"
+msgid "FADE to glTF Expression"
+msgstr "FADE 至 glTF 表达式"
 
 msgid "Node Paths"
 msgstr "节点路径"
@@ -4406,8 +4406,8 @@ msgstr "关节"
 msgid "Roots"
 msgstr "根"
 
-msgid "Godot Bone Node"
-msgstr "Godot 骨骼节点"
+msgid "FADE Bone Node"
+msgstr "FADE 骨骼节点"
 
 msgid "Skin Root"
 msgstr "蒙皮根"
@@ -4418,8 +4418,8 @@ msgstr "原关节"
 msgid "Non Joints"
 msgstr "非关节"
 
-msgid "Godot Skin"
-msgstr "Godot 蒙皮"
+msgid "FADE Skin"
+msgstr "FADE 蒙皮"
 
 msgid "Src Image"
 msgstr "来源图像"
@@ -5456,8 +5456,8 @@ msgstr "Wi-Fi 远程调试主机"
 msgid "Splash Screen"
 msgstr "启动画面"
 
-msgid "Disable Godot Boot Splash"
-msgstr "禁用 Godot 启动画面"
+msgid "Disable FADE Boot Splash"
+msgstr "禁用 FADE 启动画面"
 
 msgid "Background Color"
 msgstr "背景色"
@@ -6011,8 +6011,8 @@ msgstr "图标 512×512"
 msgid "Emscripten Pool Size"
 msgstr "Emscripten 池大小"
 
-msgid "Godot Pool Size"
-msgstr "Godot 池大小"
+msgid "FADE Pool Size"
+msgstr "FADE 池大小"
 
 msgid "Windows"
 msgstr "Windows"

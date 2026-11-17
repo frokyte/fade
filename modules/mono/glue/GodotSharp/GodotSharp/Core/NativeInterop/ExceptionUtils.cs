@@ -6,7 +6,7 @@ using System.Text;
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace FADE.NativeInterop
 {
     internal static class ExceptionUtils
     {
@@ -148,7 +148,7 @@ namespace Godot.NativeInterop
         {
             if (error.Error != godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_OK)
             {
-                using godot_variant instanceVariant = VariantUtils.CreateFromGodotObjectPtr(instance);
+                using godot_variant instanceVariant = VariantUtils.CreateFromFADEObjectPtr(instance);
                 string where = GetCallErrorWhere(ref error, method, &instanceVariant, args, argCount);
                 string errorText = GetCallErrorMessage(error, where, args);
                 GD.PushError(errorText);
@@ -175,8 +175,8 @@ namespace Godot.NativeInterop
             string? methodstr = null;
             string basestr = GetVariantTypeName(instance);
 
-            if (method == GodotObject.MethodName.Call ||
-                (basestr == "Godot.TreeItem" && method == TreeItem.MethodName.CallRecursive))
+            if (method == FADEObject.MethodName.Call ||
+                (basestr == "FADE.TreeItem" && method == TreeItem.MethodName.CallRecursive))
             {
                 if (argCount >= 1)
                 {
@@ -243,12 +243,12 @@ namespace Godot.NativeInterop
         {
             if (variant->Type == Variant.Type.Object)
             {
-                GodotObject obj = VariantUtils.ConvertToGodotObject(*variant);
+                FADEObject obj = VariantUtils.ConvertToFADEObject(*variant);
                 if (obj == null)
                 {
                     return "null instance";
                 }
-                else if (!GodotObject.IsInstanceValid(obj))
+                else if (!FADEObject.IsInstanceValid(obj))
                 {
                     return "previously freed";
                 }

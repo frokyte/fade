@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 #pragma once
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 /*
@@ -52,11 +52,11 @@ subject to the following restrictions:
 #include "core/math/basis.h"
 #include "core/math/vector3.h"
 
-class GodotJacobianEntry3D {
+class FADEJacobianEntry3D {
 public:
-	GodotJacobianEntry3D() {}
+	FADEJacobianEntry3D() {}
 	//constraint between two different rigidbodies
-	GodotJacobianEntry3D(
+	FADEJacobianEntry3D(
 			const Basis &world2A,
 			const Basis &world2B,
 			const Vector3 &rel_pos1, const Vector3 &rel_pos2,
@@ -76,7 +76,7 @@ public:
 	}
 
 	//angular constraint between two different rigidbodies
-	GodotJacobianEntry3D(const Vector3 &jointAxis,
+	FADEJacobianEntry3D(const Vector3 &jointAxis,
 			const Basis &world2A,
 			const Basis &world2B,
 			const Vector3 &inertiaInvA,
@@ -92,7 +92,7 @@ public:
 	}
 
 	//angular constraint between two different rigidbodies
-	GodotJacobianEntry3D(const Vector3 &axisInA,
+	FADEJacobianEntry3D(const Vector3 &axisInA,
 			const Vector3 &axisInB,
 			const Vector3 &inertiaInvA,
 			const Vector3 &inertiaInvB) :
@@ -107,7 +107,7 @@ public:
 	}
 
 	//constraint on one rigidbody
-	GodotJacobianEntry3D(
+	FADEJacobianEntry3D(
 			const Basis &world2A,
 			const Vector3 &rel_pos1, const Vector3 &rel_pos2,
 			const Vector3 &jointAxis,
@@ -126,16 +126,16 @@ public:
 	real_t getDiagonal() const { return m_Adiag; }
 
 	// for two constraints on the same rigidbody (for example vehicle friction)
-	real_t getNonDiagonal(const GodotJacobianEntry3D &jacB, const real_t massInvA) const {
-		const GodotJacobianEntry3D &jacA = *this;
+	real_t getNonDiagonal(const FADEJacobianEntry3D &jacB, const real_t massInvA) const {
+		const FADEJacobianEntry3D &jacA = *this;
 		real_t lin = massInvA * jacA.m_linearJointAxis.dot(jacB.m_linearJointAxis);
 		real_t ang = jacA.m_0MinvJt.dot(jacB.m_aJ);
 		return lin + ang;
 	}
 
 	// for two constraints on sharing two same rigidbodies (for example two contact points between two rigidbodies)
-	real_t getNonDiagonal(const GodotJacobianEntry3D &jacB, const real_t massInvA, const real_t massInvB) const {
-		const GodotJacobianEntry3D &jacA = *this;
+	real_t getNonDiagonal(const FADEJacobianEntry3D &jacB, const real_t massInvA, const real_t massInvB) const {
+		const FADEJacobianEntry3D &jacA = *this;
 		Vector3 lin = jacA.m_linearJointAxis * jacB.m_linearJointAxis;
 		Vector3 ang0 = jacA.m_0MinvJt * jacB.m_aJ;
 		Vector3 ang1 = jacA.m_1MinvJt * jacB.m_bJ;

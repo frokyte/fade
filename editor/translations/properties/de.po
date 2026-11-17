@@ -1,7 +1,7 @@
-# German translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# German translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Alexander Mahr <alex.mahr@gmail.com>, 2016, 2019.
 # Andreas Esau <andreasesau@gmail.com>, 2016.
 # Andreas Haas <liu.gam3@gmail.com>, 2016.
@@ -131,7 +131,7 @@
 # Mika Kreis <atten0007@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-11-03 16:15+0000\n"
@@ -3884,8 +3884,8 @@ msgstr "Immer Call Stacks verfolgen"
 msgid "Always Track Local Variables"
 msgstr "Immer lokale Variablen verfolgen"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "In Godot 4 Hint umbenannt"
+msgid "Renamed in FADE 4 Hint"
+msgstr "In FADE 4 Hint umbenannt"
 
 msgid "Unassigned Variable"
 msgstr "Nicht zugewiesene Variable"
@@ -4256,11 +4256,11 @@ msgstr "Licht"
 msgid "Visible"
 msgstr "Sichtbar"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF zu Godot Expression"
+msgid "glTF to FADE Expression"
+msgstr "glTF zu FADE Expression"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot zu glTF Expression"
+msgid "FADE to glTF Expression"
+msgstr "FADE zu glTF Expression"
 
 msgid "Node Paths"
 msgstr "Node-Pfade"
@@ -4280,8 +4280,8 @@ msgstr "Gelenke"
 msgid "Roots"
 msgstr "Wurzeln"
 
-msgid "Godot Bone Node"
-msgstr "Godot Knochen-Node"
+msgid "FADE Bone Node"
+msgstr "FADE Knochen-Node"
 
 msgid "Skin Root"
 msgstr "Skin-Wurzel"
@@ -4292,8 +4292,8 @@ msgstr "Gelenkoriginal"
 msgid "Non Joints"
 msgstr "Nicht-Gelenke"
 
-msgid "Godot Skin"
-msgstr "Godot-Skin"
+msgid "FADE Skin"
+msgstr "FADE-Skin"
 
 msgid "Src Image"
 msgstr "Quellbild"
@@ -5201,8 +5201,8 @@ msgstr "WLAN-Remote-Debug-Host"
 msgid "Splash Screen"
 msgstr "Startbildschirm"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Godot-Startbildschirm deaktivieren"
+msgid "Disable FADE Boot Splash"
+msgstr "FADE-Startbildschirm deaktivieren"
 
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
@@ -5756,8 +5756,8 @@ msgstr "Icon 512×512"
 msgid "Emscripten Pool Size"
 msgstr "Emscripten-Poolgröße"
 
-msgid "Godot Pool Size"
-msgstr "Godot-Poolgröße"
+msgid "FADE Pool Size"
+msgstr "FADE-Poolgröße"
 
 msgid "Windows"
 msgstr "Fenster"

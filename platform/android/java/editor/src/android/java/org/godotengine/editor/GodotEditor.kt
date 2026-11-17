@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotEditor.kt                                                        */
+/*  FADEEditor.kt                                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -53,14 +53,14 @@ import java.util.LinkedList
 import java.util.function.Consumer
 
 /**
- * Primary window of the Godot Editor.
+ * Primary window of the FADE Editor.
  *
  * This is the implementation of the editor used when running on Android devices.
  */
-open class GodotEditor : BaseGodotEditor() {
+open class FADEEditor : BaseFADEEditor() {
 
 	companion object {
-		private val TAG = GodotEditor::class.java.simpleName
+		private val TAG = FADEEditor::class.java.simpleName
 
 		private val DEFAULT_ACTIVITY_PANEL_PIXEL_DIMENSIONS = IntSize2d(250, 250)
 		private val MAIN_WINDOW_PANEL_MIN_SIZE = FloatSize3d(0.45f, 0.25f, 0.0f)
@@ -132,7 +132,7 @@ open class GodotEditor : BaseGodotEditor() {
 
 			val mainPanelWidth = scene.mainPanelEntity.size.width
 			val mainPanelHeight = scene.mainPanelEntity.size.height
-			val spatialContainerBounds = BaseGodotSpatialContainerGame.getSpatialContainerBounds()
+			val spatialContainerBounds = BaseFADESpatialContainerGame.getSpatialContainerBounds()
 
 			val translationX = if (editorWindowInfo == SPATIAL_CONTAINER_RUN_GAME_INFO_0) {
 				// The first spatial container is positioned to the right of the main panel.
@@ -146,7 +146,7 @@ open class GodotEditor : BaseGodotEditor() {
 			val activityPanel = ActivityPanelEntity.create(
 				session!!,
 				DEFAULT_ACTIVITY_PANEL_PIXEL_DIMENSIONS,
-				"Godot Spatial Container Panel for $newInstance",
+				"FADE Spatial Container Panel for $newInstance",
 				Pose(Vector3(translationX, translationY, 0.25f), Quaternion.Identity),
 				scene.activitySpace
 			)

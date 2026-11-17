@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 using Microsoft.VisualStudio.SolutionPersistence;
 using Microsoft.VisualStudio.SolutionPersistence.Serializer;
 
-namespace GodotTools.Internals
+namespace FADETools.Internals
 {
-    public static class GodotSharpDirs
+    public static class FADESharpDirs
     {
         public static string ResMetadataDir
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_ResMetadataDir(out godot_string dest);
+                Internal.godot_icall_FADESharpDirs_ResMetadataDir(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -26,7 +26,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_MonoUserDir(out godot_string dest);
+                Internal.godot_icall_FADESharpDirs_MonoUserDir(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -36,7 +36,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_BuildLogsDirs(out godot_string dest);
+                Internal.godot_icall_FADESharpDirs_BuildLogsDirs(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -46,7 +46,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_DataEditorToolsDir(out godot_string dest);
+                Internal.godot_icall_FADESharpDirs_DataEditorToolsDir(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -57,7 +57,7 @@ namespace GodotTools.Internals
         {
             get
             {
-                Internal.godot_icall_GodotSharpDirs_CSharpProjectName(out godot_string dest);
+                Internal.godot_icall_FADESharpDirs_CSharpProjectName(out godot_string dest);
                 using (dest)
                     return Marshaling.ConvertStringToManaged(dest);
             }
@@ -117,7 +117,7 @@ namespace GodotTools.Internals
 
                 foreach (var project in solution.SolutionProjects)
                 {
-                    // Convert '\' path separators on Windows to '/' to match Godot's Unix style separators
+                    // Convert '\' path separators on Windows to '/' to match FADE's Unix style separators
                     var absoluteProjectFilePath = Path.GetFullPath(project.FilePath, solutionDirectory).Replace('\\', '/');
 
                     if (string.Equals(absoluteProjectFilePath, _projectCsProjPath, StringComparison.Ordinal))

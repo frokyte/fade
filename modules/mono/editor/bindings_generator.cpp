@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -88,9 +88,9 @@ StringBuilder &operator<<(StringBuilder &r_sb, const char *p_cstring) {
 #define CS_METHOD_CALL "Call"
 #define CS_PROPERTY_SINGLETON "Singleton"
 #define CS_SINGLETON_INSTANCE_SUFFIX "Instance"
-#define CS_METHOD_INVOKE_GODOT_CLASS_METHOD "InvokeGodotClassMethod"
-#define CS_METHOD_HAS_GODOT_CLASS_METHOD "HasGodotClassMethod"
-#define CS_METHOD_HAS_GODOT_CLASS_SIGNAL "HasGodotClassSignal"
+#define CS_METHOD_INVOKE_GODOT_CLASS_METHOD "InvokeFADEClassMethod"
+#define CS_METHOD_HAS_GODOT_CLASS_METHOD "HasFADEClassMethod"
+#define CS_METHOD_HAS_GODOT_CLASS_SIGNAL "HasFADEClassSignal"
 
 #define CS_STATIC_FIELD_NATIVE_CTOR "NativeCtor"
 #define CS_STATIC_FIELD_METHOD_BIND_PREFIX "MethodBind"
@@ -327,7 +327,7 @@ String BindingsGenerator::bbcode_to_text(const String &p_bbcode, const TypeInter
 #endif
 				);
 			} else if (tag == "Variant") {
-				output.append("'Godot.Variant'");
+				output.append("'FADE.Variant'");
 			} else if (tag == "String") {
 				output.append("string");
 			} else if (tag == "Nil") {
@@ -646,7 +646,7 @@ String BindingsGenerator::bbcode_to_xml(const String &p_bbcode, const TypeInterf
 #endif
 								  "\"/>");
 			} else if (tag == "Variant") {
-				xml_output.append("<see cref=\"Godot.Variant\"/>");
+				xml_output.append("<see cref=\"FADE.Variant\"/>");
 			} else if (tag == "String") {
 				xml_output.append("<see cref=\"string\"/>");
 			} else if (tag == "Nil") {
@@ -834,7 +834,7 @@ void BindingsGenerator::_append_text_method(StringBuilder &p_output, const TypeI
 	} else if (!p_target_itype || !p_target_itype->is_object_type) {
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve method reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve method reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from method reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -902,7 +902,7 @@ void BindingsGenerator::_append_text_member(StringBuilder &p_output, const TypeI
 	} else if (!p_target_itype || !p_target_itype->is_object_type) {
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve member reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve member reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from member reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -941,7 +941,7 @@ void BindingsGenerator::_append_text_signal(StringBuilder &p_output, const TypeI
 	if (!p_target_itype || !p_target_itype->is_object_type) {
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve signal reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve signal reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from signal reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -1004,7 +1004,7 @@ void BindingsGenerator::_append_text_constant(StringBuilder &p_output, const Typ
 
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve constant reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve constant reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from constant reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -1116,7 +1116,7 @@ void BindingsGenerator::_append_xml_method(StringBuilder &p_xml_output, const Ty
 	} else if (!p_target_itype || !p_target_itype->is_object_type) {
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve method reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve method reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from method reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -1189,7 +1189,7 @@ void BindingsGenerator::_append_xml_member(StringBuilder &p_xml_output, const Ty
 	} else if (!p_target_itype || !p_target_itype->is_object_type) {
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve member reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve member reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from member reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -1231,7 +1231,7 @@ void BindingsGenerator::_append_xml_signal(StringBuilder &p_xml_output, const Ty
 	if (!p_target_itype || !p_target_itype->is_object_type) {
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve signal reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve signal reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from signal reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -1301,7 +1301,7 @@ void BindingsGenerator::_append_xml_constant(StringBuilder &p_xml_output, const 
 
 		if (OS::get_singleton()->is_stdout_verbose()) {
 			if (p_target_itype) {
-				OS::get_singleton()->print("Cannot resolve constant reference for non-GodotObject type in documentation: %s\n", p_link_target.utf8().get_data());
+				OS::get_singleton()->print("Cannot resolve constant reference for non-FADEObject type in documentation: %s\n", p_link_target.utf8().get_data());
 			} else {
 				OS::get_singleton()->print("Cannot resolve type from constant reference in documentation: %s\n", p_link_target.utf8().get_data());
 			}
@@ -1762,10 +1762,10 @@ Error BindingsGenerator::generate_cs_core_project(const String &p_proj_dir) {
 
 	da->change_dir(p_proj_dir);
 	da->make_dir("Generated");
-	da->make_dir("Generated/GodotObjects");
+	da->make_dir("Generated/FADEObjects");
 
 	String base_gen_dir = Path::join(p_proj_dir, "Generated");
-	String godot_objects_gen_dir = Path::join(base_gen_dir, "GodotObjects");
+	String godot_objects_gen_dir = Path::join(base_gen_dir, "FADEObjects");
 
 	Vector<String> compile_items;
 
@@ -1821,9 +1821,9 @@ Error BindingsGenerator::generate_cs_core_project(const String &p_proj_dir) {
 										 "\n");
 		cs_built_in_ctors_content.append("internal static class " BINDINGS_CLASS_CONSTRUCTOR "\n{");
 
-		cs_built_in_ctors_content.append(MEMBER_BEGIN "internal static readonly Dictionary<string, Func<IntPtr, GodotObject>> " BINDINGS_CLASS_CONSTRUCTOR_DICTIONARY ";\n");
+		cs_built_in_ctors_content.append(MEMBER_BEGIN "internal static readonly Dictionary<string, Func<IntPtr, FADEObject>> " BINDINGS_CLASS_CONSTRUCTOR_DICTIONARY ";\n");
 
-		cs_built_in_ctors_content.append(MEMBER_BEGIN "public static GodotObject Invoke(string nativeTypeNameStr, IntPtr nativeObjectPtr)\n");
+		cs_built_in_ctors_content.append(MEMBER_BEGIN "public static FADEObject Invoke(string nativeTypeNameStr, IntPtr nativeObjectPtr)\n");
 		cs_built_in_ctors_content.append(INDENT1 OPEN_BLOCK);
 		cs_built_in_ctors_content.append(INDENT2 "if (!" BINDINGS_CLASS_CONSTRUCTOR_DICTIONARY ".TryGetValue(nativeTypeNameStr, out var constructor))\n");
 		cs_built_in_ctors_content.append(INDENT3 "throw new InvalidOperationException(\"Wrapper class not found for type: \" + nativeTypeNameStr);\n");
@@ -1877,7 +1877,7 @@ Error BindingsGenerator::generate_cs_core_project(const String &p_proj_dir) {
 	cs_icalls_content.append("using System;\n"
 							 "using System.Diagnostics.CodeAnalysis;\n"
 							 "using System.Runtime.InteropServices;\n"
-							 "using Godot.NativeInterop;\n"
+							 "using FADE.NativeInterop;\n"
 							 "\n");
 	cs_icalls_content.append("[SuppressMessage(\"ReSharper\", \"InconsistentNaming\")]\n");
 	cs_icalls_content.append("[SuppressMessage(\"ReSharper\", \"RedundantUnsafeContext\")]\n");
@@ -1939,10 +1939,10 @@ Error BindingsGenerator::generate_cs_editor_project(const String &p_proj_dir) {
 
 	da->change_dir(p_proj_dir);
 	da->make_dir("Generated");
-	da->make_dir("Generated/GodotObjects");
+	da->make_dir("Generated/FADEObjects");
 
 	String base_gen_dir = Path::join(p_proj_dir, "Generated");
-	String godot_objects_gen_dir = Path::join(base_gen_dir, "GodotObjects");
+	String godot_objects_gen_dir = Path::join(base_gen_dir, "FADEObjects");
 
 	Vector<String> compile_items;
 
@@ -2022,7 +2022,7 @@ Error BindingsGenerator::generate_cs_editor_project(const String &p_proj_dir) {
 	cs_icalls_content.append("using System;\n"
 							 "using System.Diagnostics.CodeAnalysis;\n"
 							 "using System.Runtime.InteropServices;\n"
-							 "using Godot.NativeInterop;\n"
+							 "using FADE.NativeInterop;\n"
 							 "\n");
 	cs_icalls_content.append("[SuppressMessage(\"ReSharper\", \"InconsistentNaming\")]\n");
 	cs_icalls_content.append("[SuppressMessage(\"ReSharper\", \"RedundantUnsafeContext\")]\n");
@@ -2088,7 +2088,7 @@ Error BindingsGenerator::generate_cs_api(const String &p_output_dir) {
 
 	Error proj_err;
 
-	// Generate GodotSharp source files
+	// Generate FADESharp source files
 
 	String core_proj_dir = output_dir.path_join(CORE_API_ASSEMBLY_NAME);
 
@@ -2098,7 +2098,7 @@ Error BindingsGenerator::generate_cs_api(const String &p_output_dir) {
 		return proj_err;
 	}
 
-	// Generate GodotSharpEditor source files
+	// Generate FADESharpEditor source files
 
 	String editor_proj_dir = output_dir.path_join(EDITOR_API_ASSEMBLY_NAME);
 
@@ -2108,7 +2108,7 @@ Error BindingsGenerator::generate_cs_api(const String &p_output_dir) {
 		return proj_err;
 	}
 
-	_log("The Godot API sources were successfully generated\n");
+	_log("The FADE API sources were successfully generated\n");
 
 	return OK;
 }
@@ -2126,7 +2126,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 	bool is_derived_type = itype.base_name != StringName();
 
 	if (!is_derived_type) {
-		// Some GodotObject assertions
+		// Some FADEObject assertions
 		CRASH_COND(itype.cname != name_cache.type_Object);
 		CRASH_COND(!itype.is_instantiable);
 		CRASH_COND(itype.api_type != ClassDB::API_CORE);
@@ -2143,7 +2143,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 	output.append("using System;\n"); // IntPtr
 	output.append("using System.ComponentModel;\n"); // EditorBrowsable
 	output.append("using System.Diagnostics;\n"); // DebuggerBrowsable
-	output.append("using Godot.NativeInterop;\n");
+	output.append("using FADE.NativeInterop;\n");
 
 	output.append("\n#nullable disable\n");
 
@@ -2172,11 +2172,11 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 		output.append("\")]\n");
 	}
 
-	// We generate a `GodotClassName` attribute if the engine class name is not the same as the
+	// We generate a `FADEClassName` attribute if the engine class name is not the same as the
 	// generated C# class name. This allows introspection code to find the name associated with
 	// the class. If the attribute is not present, the C# class name can be used instead.
 	if (itype.name != itype.proxy_name) {
-		output << "[GodotClassName(\"" << itype.name << "\")]\n";
+		output << "[FADEClassName(\"" << itype.name << "\")]\n";
 	}
 
 	output.append("public ");
@@ -2322,7 +2322,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			StringName instance_name = itype.name + CS_SINGLETON_INSTANCE_SUFFIX;
 			instance_type_name = obj_types.has(instance_name)
 					? obj_types[instance_name].proxy_name
-					: "GodotObject";
+					: "FADEObject";
 		} else {
 			instance_type_name = itype.proxy_name;
 		}
@@ -2335,8 +2335,8 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 	}
 
 	if (!itype.is_singleton) {
-		// IMPORTANT: We also generate the static fields for GodotObject instead of declaring
-		// them manually in the `GodotObject.base.cs` partial class declaration, because they're
+		// IMPORTANT: We also generate the static fields for FADEObject instead of declaring
+		// them manually in the `FADEObject.base.cs` partial class declaration, because they're
 		// required by other static fields in this generated partial class declaration.
 		// Static fields are initialized in order of declaration, but when they're in different
 		// partial class declarations then it becomes harder to tell (Rider warns about this).
@@ -2439,13 +2439,13 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 				   << " = \"" << isignal.proxy_name << "\";\n";
 		}
 
-		// TODO: Only generate HasGodotClassMethod and InvokeGodotClassMethod if there's any method
+		// TODO: Only generate HasFADEClassMethod and InvokeFADEClassMethod if there's any method
 
-		// Generate InvokeGodotClassMethod
+		// Generate InvokeFADEClassMethod
 
 		output << MEMBER_BEGIN "/// <summary>\n"
 			   << INDENT1 "/// Invokes the method with the given name, using the given arguments.\n"
-			   << INDENT1 "/// This method is used by Godot to invoke methods from the engine side.\n"
+			   << INDENT1 "/// This method is used by FADE to invoke methods from the engine side.\n"
 			   << INDENT1 "/// Do not call or override this method.\n"
 			   << INDENT1 "/// </summary>\n"
 			   << INDENT1 "/// <param name=\"method\">Name of the method to invoke.</param>\n"
@@ -2465,7 +2465,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 				continue;
 			}
 
-			// We also call HasGodotClassMethod to ensure the method is overridden and avoid calling
+			// We also call HasFADEClassMethod to ensure the method is overridden and avoid calling
 			// the stub implementation. This solution adds some extra overhead to calls, but it's
 			// much simpler than other solutions. This won't be a problem once we move to function
 			// pointers of generated wrappers for each method, as lookup will only happen once.
@@ -2536,11 +2536,11 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 
 		output << "#pragma warning restore CS0618\n";
 
-		// Generate HasGodotClassMethod
+		// Generate HasFADEClassMethod
 
 		output << MEMBER_BEGIN "/// <summary>\n"
 			   << INDENT1 "/// Check if the type contains a method with the given name.\n"
-			   << INDENT1 "/// This method is used by Godot to check if a method exists before invoking it.\n"
+			   << INDENT1 "/// This method is used by FADE to check if a method exists before invoking it.\n"
 			   << INDENT1 "/// Do not call or override this method.\n"
 			   << INDENT1 "/// </summary>\n"
 			   << INDENT1 "/// <param name=\"method\">Name of the method to check for.</param>\n";
@@ -2554,7 +2554,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 				continue;
 			}
 
-			// We check for native names (snake_case). If we detect one, we call HasGodotClassMethod
+			// We check for native names (snake_case). If we detect one, we call HasFADEClassMethod
 			// again, but this time with the respective proxy name (PascalCase). It's the job of
 			// user derived classes to override the method and check for those. Our C# source
 			// generators take care of generating those override methods.
@@ -2575,11 +2575,11 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 
 		output << INDENT1 "}\n";
 
-		// Generate HasGodotClassSignal
+		// Generate HasFADEClassSignal
 
 		output << MEMBER_BEGIN "/// <summary>\n"
 			   << INDENT1 "/// Check if the type contains a signal with the given name.\n"
-			   << INDENT1 "/// This method is used by Godot to check if a signal exists before raising it.\n"
+			   << INDENT1 "/// This method is used by FADE to check if a signal exists before raising it.\n"
 			   << INDENT1 "/// Do not call or override this method.\n"
 			   << INDENT1 "/// </summary>\n"
 			   << INDENT1 "/// <param name=\"signal\">Name of the signal to check for.</param>\n";
@@ -2589,7 +2589,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			   << INDENT1 "{\n";
 
 		for (const SignalInterface &isignal : itype.signals_) {
-			// We check for native names (snake_case). If we detect one, we call HasGodotClassSignal
+			// We check for native names (snake_case). If we detect one, we call HasFADEClassSignal
 			// again, but this time with the respective proxy name (PascalCase). It's the job of
 			// user derived classes to override the method and check for those. Our C# source
 			// generators take care of generating those override methods.
@@ -3037,9 +3037,9 @@ Error BindingsGenerator::_generate_cs_method(const BindingsGenerator::TypeInterf
 					 << INDENT1 "private static readonly IntPtr " << method_bind_field << " = ";
 
 			if (p_itype.is_singleton) {
-				// Singletons are static classes. They don't derive GodotObject,
+				// Singletons are static classes. They don't derive FADEObject,
 				// so we need to specify the type to call the static method.
-				p_output << "GodotObject.";
+				p_output << "FADEObject.";
 			}
 
 			p_output << ICALL_CLASSDB_GET_METHOD_WITH_COMPATIBILITY "(" BINDINGS_NATIVE_NAME_FIELD ", MethodName."
@@ -3102,7 +3102,7 @@ Error BindingsGenerator::_generate_cs_method(const BindingsGenerator::TypeInterf
 		p_output.append(arguments_sig + ")\n" OPEN_BLOCK_L1);
 
 		if (p_imethod.is_virtual) {
-			// Godot virtual method must be overridden, therefore we return a default value by default.
+			// FADE virtual method must be overridden, therefore we return a default value by default.
 
 			if (return_type->cname == name_cache.type_void) {
 				p_output.append(CLOSE_BLOCK_L1);
@@ -3114,7 +3114,7 @@ Error BindingsGenerator::_generate_cs_method(const BindingsGenerator::TypeInterf
 		}
 
 		if (p_imethod.requires_object_call) {
-			// Fallback to Godot's object.Call(string, params)
+			// Fallback to FADE's object.Call(string, params)
 
 			p_output.append(INDENT2 CS_METHOD_CALL "(");
 			p_output.append("MethodName." + p_imethod.proxy_name);
@@ -3420,7 +3420,7 @@ Error BindingsGenerator::_generate_cs_native_calls(const InternalCall &p_icall, 
 				String c_in_vararg = arg_type->c_in_vararg;
 
 				if (arg_type->is_object_type) {
-					c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromGodotObjectPtr(%1);\n";
+					c_in_vararg = "%5using godot_variant %1_in = VariantUtils.CreateFromFADEObjectPtr(%1);\n";
 				}
 
 				ERR_FAIL_COND_V_MSG(c_in_vararg.is_empty(), ERR_BUG,
@@ -3694,7 +3694,7 @@ const String BindingsGenerator::_get_generic_type_parameters(const TypeInterface
 	return params;
 }
 
-StringName BindingsGenerator::_get_type_name_from_meta(Variant::Type p_type, GodotTypeInfo::Metadata p_meta) {
+StringName BindingsGenerator::_get_type_name_from_meta(Variant::Type p_type, FADETypeInfo::Metadata p_meta) {
 	if (p_type == Variant::INT) {
 		return _get_int_type_name_from_meta(p_meta);
 	} else if (p_type == Variant::FLOAT) {
@@ -3704,36 +3704,36 @@ StringName BindingsGenerator::_get_type_name_from_meta(Variant::Type p_type, God
 	}
 }
 
-StringName BindingsGenerator::_get_int_type_name_from_meta(GodotTypeInfo::Metadata p_meta) {
+StringName BindingsGenerator::_get_int_type_name_from_meta(FADETypeInfo::Metadata p_meta) {
 	switch (p_meta) {
-		case GodotTypeInfo::METADATA_INT_IS_INT8:
+		case FADETypeInfo::METADATA_INT_IS_INT8:
 			return "sbyte";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_INT16:
+		case FADETypeInfo::METADATA_INT_IS_INT16:
 			return "short";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_INT32:
+		case FADETypeInfo::METADATA_INT_IS_INT32:
 			return "int";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_INT64:
+		case FADETypeInfo::METADATA_INT_IS_INT64:
 			return "long";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_UINT8:
+		case FADETypeInfo::METADATA_INT_IS_UINT8:
 			return "byte";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_UINT16:
+		case FADETypeInfo::METADATA_INT_IS_UINT16:
 			return "ushort";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_UINT32:
+		case FADETypeInfo::METADATA_INT_IS_UINT32:
 			return "uint";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_UINT64:
+		case FADETypeInfo::METADATA_INT_IS_UINT64:
 			return "ulong";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_CHAR16:
+		case FADETypeInfo::METADATA_INT_IS_CHAR16:
 			return "char";
 			break;
-		case GodotTypeInfo::METADATA_INT_IS_CHAR32:
+		case FADETypeInfo::METADATA_INT_IS_CHAR32:
 			// To prevent breaking compatibility, C# bindings need to keep using `long`.
 			return "long";
 		default:
@@ -3742,12 +3742,12 @@ StringName BindingsGenerator::_get_int_type_name_from_meta(GodotTypeInfo::Metada
 	}
 }
 
-StringName BindingsGenerator::_get_float_type_name_from_meta(GodotTypeInfo::Metadata p_meta) {
+StringName BindingsGenerator::_get_float_type_name_from_meta(FADETypeInfo::Metadata p_meta) {
 	switch (p_meta) {
-		case GodotTypeInfo::METADATA_REAL_IS_FLOAT:
+		case FADETypeInfo::METADATA_REAL_IS_FLOAT:
 			return "float";
 			break;
-		case GodotTypeInfo::METADATA_REAL_IS_DOUBLE:
+		case FADETypeInfo::METADATA_REAL_IS_DOUBLE:
 			return "double";
 			break;
 		default:
@@ -3919,14 +3919,14 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 
 		itype.cs_type = itype.proxy_name;
 
-		itype.cs_in_expr = "GodotObject." CS_STATIC_METHOD_GETINSTANCE "(%0)";
+		itype.cs_in_expr = "FADEObject." CS_STATIC_METHOD_GETINSTANCE "(%0)";
 
 		itype.cs_out = "%5%4 (%2)%0(%1);";
 
 		itype.c_arg_in = "&%s";
 		itype.c_type = "IntPtr";
 		itype.c_type_in = itype.c_type;
-		itype.c_type_out = "GodotObject";
+		itype.c_type_out = "FADEObject";
 
 		// Populate properties
 
@@ -4066,7 +4066,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 
 				// A virtual method without the virtual flag. This is a special case.
 
-				// There is no method bind, so let's fallback to Godot's object.Call(string, params)
+				// There is no method bind, so let's fallback to FADE's object.Call(string, params)
 				imethod.requires_object_call = true;
 
 				// The method Object.free is registered as a virtual method, but without the virtual flag.
@@ -4107,7 +4107,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 			} else if (return_info.type == Variant::NIL) {
 				imethod.return_type.cname = name_cache.type_void;
 			} else {
-				imethod.return_type.cname = _get_type_name_from_meta(return_info.type, m ? m->get_argument_meta(-1) : (GodotTypeInfo::Metadata)method_info.return_val_metadata);
+				imethod.return_type.cname = _get_type_name_from_meta(return_info.type, m ? m->get_argument_meta(-1) : (FADETypeInfo::Metadata)method_info.return_val_metadata);
 			}
 
 			for (int64_t idx = 0; idx < method_info.arguments.size(); ++idx) {
@@ -4136,7 +4136,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 				} else if (arginfo.type == Variant::NIL) {
 					iarg.type.cname = name_cache.type_Variant;
 				} else {
-					iarg.type.cname = _get_type_name_from_meta(arginfo.type, m ? m->get_argument_meta(idx) : (GodotTypeInfo::Metadata)method_info.get_argument_meta(idx));
+					iarg.type.cname = _get_type_name_from_meta(arginfo.type, m ? m->get_argument_meta(idx) : (FADETypeInfo::Metadata)method_info.get_argument_meta(idx));
 				}
 
 				iarg.name = escape_csharp_keyword(snake_to_camel_case(iarg.name));
@@ -4287,7 +4287,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 				} else if (arginfo.type == Variant::NIL) {
 					iarg.type.cname = name_cache.type_Variant;
 				} else {
-					iarg.type.cname = _get_type_name_from_meta(arginfo.type, (GodotTypeInfo::Metadata)method_info.get_argument_meta(idx));
+					iarg.type.cname = _get_type_name_from_meta(arginfo.type, (FADETypeInfo::Metadata)method_info.get_argument_meta(idx));
 				}
 
 				iarg.name = escape_csharp_keyword(snake_to_camel_case(iarg.name));
@@ -4757,7 +4757,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 
 	// bool
 	itype = TypeInterface::create_value_type(String("bool"));
-	itype.cs_in_expr = "%0.ToGodotBool()";
+	itype.cs_in_expr = "%0.ToFADEBool()";
 	itype.cs_out = "%5%4 %0(%1).ToBool();";
 	itype.c_type = "godot_bool";
 	itype.c_type_in = itype.c_type;
@@ -5014,7 +5014,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.name = "Array_@generic";
 	itype.cname = itype.name;
 	itype.cs_out = "%5%4 new %2(%0(%1));";
-	// For generic Godot collections, Variant.From<T>/As<T> is slower, so we need this special case
+	// For generic FADE collections, Variant.From<T>/As<T> is slower, so we need this special case
 	itype.cs_variant_to_managed = "VariantUtils.ConvertToArray(%0)";
 	itype.cs_managed_to_variant = "VariantUtils.CreateFromArray(%0)";
 	builtin_types.insert(itype.cname, itype);
@@ -5041,7 +5041,7 @@ void BindingsGenerator::_populate_builtin_type_interfaces() {
 	itype.name = "Dictionary_@generic";
 	itype.cname = itype.name;
 	itype.cs_out = "%5%4 new %2(%0(%1));";
-	// For generic Godot collections, Variant.From<T>/As<T> is slower, so we need this special case
+	// For generic FADE collections, Variant.From<T>/As<T> is slower, so we need this special case
 	itype.cs_variant_to_managed = "VariantUtils.ConvertToDictionary(%0)";
 	itype.cs_managed_to_variant = "VariantUtils.CreateFromDictionary(%0)";
 	builtin_types.insert(itype.cname, itype);

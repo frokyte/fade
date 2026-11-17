@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,8 +36,8 @@
 #include <android/log.h>
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/GodotIO.java callable from C++
-class GodotIOJavaWrapper {
+// Class that makes functions in java/src/org/godotengine/godot/FADEIO.java callable from C++
+class FADEIOJavaWrapper {
 private:
 	jobject godot_io_instance;
 	jclass cls;
@@ -63,8 +63,8 @@ private:
 	jmethodID _get_system_dir = nullptr;
 
 public:
-	GodotIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instance);
-	~GodotIOJavaWrapper();
+	FADEIOJavaWrapper(JNIEnv *p_env, jobject p_godot_io_instance);
+	~FADEIOJavaWrapper();
 
 	jobject get_instance();
 

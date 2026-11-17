@@ -1,13 +1,13 @@
-name: Godot hash compatibility test
-description: Check if methods with given hashes used by the older GDExtensions still can be loaded with given Godot version.
+name: FADEhash compatibility test
+description: Check if methods with given hashes used by the older GDExtensions still can be loaded with given FADEversion.
 
 inputs:
   bin:
-    description: Path to the Godot binary.
+    description: Path to the FADEbinary.
     required: true
     type: string
   reftags:
-    description: Reference tags of Godot versions to check (comma separated).
+    description: Reference tags of FADEversions to check (comma separated).
     required: true
     type: string
 

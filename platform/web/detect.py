@@ -40,7 +40,7 @@ def get_opts():
 
     return [
         ("initial_memory", "Initial WASM memory (in MiB)", 32),
-        # Matches default values from before Emscripten 3.1.27. New defaults are too low for Godot.
+        # Matches default values from before Emscripten 3.1.27. New defaults are too low for FADE.
         ("stack_size", "WASM stack size (in KiB)", 5120),
         ("default_pthread_stack_size", "WASM pthread default stack size (in KiB)", 2048),
         EnumVariable(
@@ -115,10 +115,10 @@ def configure(env: "SConsEnvironment"):
 
     # Minimum emscripten requirements.
     if cc_semver < (6, 0, 1):
-        print_error("Godot requires Emscripten 6.0.1+. Detected: {}.{}.{}".format(*cc_semver))
+        print_error("FADE requires Emscripten 6.0.1+. Detected: {}.{}.{}".format(*cc_semver))
         sys.exit(255)
     if env["dlink_enabled"] and env["threads"] and cc_semver < (6, 0, 12):
-        print_error("Godot with dlink+threads requires Emscripten 6.0.12+. Detected: {}.{}.{}".format(*cc_semver))
+        print_error("FADE with dlink+threads requires Emscripten 6.0.12+. Detected: {}.{}.{}".format(*cc_semver))
         sys.exit(255)
 
     env.Append(LIBEMITTER=[library_emitter])

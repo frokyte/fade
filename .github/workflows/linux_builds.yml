@@ -139,7 +139,7 @@ jobs:
           sudo rm -rf /usr/local/lib/android
           echo "Disk usage after:" && df -h
 
-      - name: Restore Godot build cache
+      - name: Restore FADE build cache
         uses: ./.github/actions/godot-cache-restore
         with:
           cache-name: ${{ matrix.cache-name }}
@@ -207,7 +207,7 @@ jobs:
           scons-flags: target=template_debug dev_build=yes verbose=yes
           godot-cpp-branch: ${{ env.GODOT_CPP_BRANCH }}
 
-      - name: Save Godot build cache
+      - name: Save FADE build cache
         uses: ./.github/actions/godot-cache-save
         with:
           cache-name: ${{ matrix.cache-name }}
@@ -246,7 +246,7 @@ jobs:
       - name: .NET source generators tests
         if: matrix.build-mono
         run: |
-          dotnet test modules/mono/editor/Godot.NET.Sdk/Godot.SourceGenerators.Tests
+          dotnet test modules/mono/editor/FADE.NET.Sdk/FADE.SourceGenerators.Tests
 
       # Check class reference
       - name: Check for class reference updates
@@ -271,7 +271,7 @@ jobs:
           reftags: "4.5-stable,4.4-stable"
 
       # Download and run the test project
-      - name: Test Godot project
+      - name: Test FADE project
         uses: ./.github/actions/godot-project-test
         if: matrix.proj-test
         with:

@@ -1,8 +1,8 @@
-using Godot;
+using FADE;
 
 public partial class GenericClass<T>
 {
-	public partial class NestedClass : GodotObject
+	public partial class NestedClass : FADEObject
 	{
 
 	}

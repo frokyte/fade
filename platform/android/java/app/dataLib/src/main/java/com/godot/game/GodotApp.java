@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotApp.java                                                         */
+/*  FADEApp.java                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,8 +30,8 @@
 
 package com.godot.game;
 
-import org.godotengine.godot.Godot;
-import org.godotengine.godot.GodotActivity;
+import org.godotengine.godot.FADE;
+import org.godotengine.godot.FADEActivity;
 
 import android.os.Bundle;
 
@@ -39,12 +39,12 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.splashscreen.SplashScreen;
 
 /**
- * Template activity for Godot Android builds.
+ * Template activity for FADE Android builds.
  * Feel free to extend and modify this class for your custom logic.
  */
-public class GodotApp extends GodotActivity {
+public class FADEApp extends FADEActivity {
 	private final Runnable updateWindowAppearance = () -> {
-		Godot godot = getGodot();
+		FADE godot = getFADE();
 		if (godot != null) {
 			godot.enableImmersiveMode(godot.isInImmersiveMode(), true);
 			godot.enableEdgeToEdge(godot.isInEdgeToEdgeMode(), true);
@@ -58,9 +58,9 @@ public class GodotApp extends GodotActivity {
 		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 
-		Godot godot = getGodot();
-		if (godot != null && godot.getDisableGodotSplash()) {
-			splashScreen.setKeepOnScreenCondition(() -> godot.getRunStatus() != Godot.RunStatus.STARTED);
+		FADE godot = getFADE();
+		if (godot != null && godot.getDisableFADESplash()) {
+			splashScreen.setKeepOnScreenCondition(() -> godot.getRunStatus() != FADE.RunStatus.STARTED);
 		}
 	}
 
@@ -71,17 +71,17 @@ public class GodotApp extends GodotActivity {
 	}
 
 	@Override
-	public void onGodotMainLoopStarted() {
-		super.onGodotMainLoopStarted();
+	public void onFADEMainLoopStarted() {
+		super.onFADEMainLoopStarted();
 		runOnUiThread(updateWindowAppearance);
 	}
 
 	@Override
-	public void onGodotForceQuit(Godot instance) {
+	public void onFADEForceQuit(FADE instance) {
 		if (!getPackageName().equals("com.godot.game.instrumented")) {
 			// For instrumented builds, we disable force-quitting to allow the instrumented tests to complete
 			// successfully, otherwise they fail when the process crashes.
-			super.onGodotForceQuit(instance);
+			super.onFADEForceQuit(instance);
 		}
 	}
 

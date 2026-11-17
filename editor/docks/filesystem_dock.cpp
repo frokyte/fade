@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -2353,7 +2353,7 @@ void FileSystemDock::_file_option(int p_option, const Vector<String> &p_selected
 				if (ClassDB::is_parent_class(resource_type, "Script") || extension == "tres" || extension == "tscn") {
 					external_program = EDITOR_GET("text_editor/external/exec_path");
 				} else if (extension == "res" || extension == "scn") {
-					// Binary resources have no meaningful editor outside Godot, so just fallback to something default.
+					// Binary resources have no meaningful editor outside FADE, so just fallback to something default.
 				} else if (resource_type == "CompressedTexture2D" || resource_type == "StreamedTexture2D" || resource_type == "Image") {
 					if (extension == "svg" || extension == "svgz") {
 						external_program = EDITOR_GET("filesystem/external_programs/vector_image_editor");

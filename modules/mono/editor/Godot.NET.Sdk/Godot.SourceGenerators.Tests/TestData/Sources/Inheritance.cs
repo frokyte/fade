@@ -1,5 +1,5 @@
 using System;
-using Godot;
+using FADE;
 
 public partial class InheritanceBase : Node
 {

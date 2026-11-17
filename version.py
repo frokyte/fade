@@ -1,7 +1,7 @@
-short_name = "godot"
-name = "Godot Engine"
-major = 4
-minor = 8
+short_name = "fade"
+name = "FADE Engine"
+major = 1
+minor = 0
 patch = 0
 status = "beta"
 module_config = ""

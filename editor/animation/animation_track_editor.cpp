@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -2127,7 +2127,7 @@ AnimationTimelineEdit::AnimationTimelineEdit() {
 
 // To make the editor order makima next to cubic, mapping Animation::InterpolationType
 // since the enum cannot be reordered without breaking the serialized values.
-// TODO: Change this when the enum is reordered in Godot 5.
+// TODO: Change this when the enum is reordered in FADE 5.
 static const Animation::InterpolationType INTERP_EDITOR_TO_ANIM[] = {
 	Animation::INTERPOLATION_NEAREST,
 	Animation::INTERPOLATION_LINEAR,
@@ -3041,7 +3041,7 @@ String AnimationTrackEdit::get_tooltip(const Point2 &p_pos) const {
 							handle_mode = TTR("Mirrored", "Bezier Handle Mode");
 						} break;
 						default: {
-							// Unknown modes may occur when editing a file from a newer version of Godot.
+							// Unknown modes may occur when editing a file from a newer version of FADE.
 							handle_mode = itos(hm);
 						} break;
 					}

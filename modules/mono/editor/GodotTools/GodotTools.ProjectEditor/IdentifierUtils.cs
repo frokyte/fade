@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace GodotTools.ProjectEditor
+namespace FADETools.ProjectEditor
 {
     public static class IdentifierUtils
     {

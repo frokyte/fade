@@ -1,4 +1,4 @@
-using Godot;
+using FADE;
 
 public class MustBeVariantGD0302
 {

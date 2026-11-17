@@ -10,8 +10,8 @@ androidFusedLibrary {
 dependencies {
     include project(":dataLib")
 
-    // Godot user plugins remote dependencies
-    String[] remoteDeps = getGodotPluginsRemoteBinaries()
+    // FADE user plugins remote dependencies
+    String[] remoteDeps = getFADEPluginsRemoteBinaries()
     if (remoteDeps != null && remoteDeps.size() > 0) {
         def platformPattern = /^\s*(platform|enforcedPlatform)\s*\(\s*['"]*(\S+)['"]*\s*\)$/
         for (String dep : remoteDeps) {

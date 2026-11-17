@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,8 +35,8 @@
 #include "core/os/main_loop.h"
 #include "drivers/unix/os_unix.h"
 
-class GodotJavaWrapper;
-class GodotIOJavaWrapper;
+class FADEJavaWrapper;
+class FADEIOJavaWrapper;
 
 struct ANativeWindow;
 
@@ -79,8 +79,8 @@ private:
 	mutable HashSet<String> font_names;
 	mutable bool font_config_loaded = false;
 
-	GodotJavaWrapper *godot_java = nullptr;
-	GodotIOJavaWrapper *godot_io_java = nullptr;
+	FADEJavaWrapper *godot_java = nullptr;
+	FADEIOJavaWrapper *godot_io_java = nullptr;
 
 	void _load_system_font_config() const;
 	String get_system_property(const char *key) const;
@@ -106,8 +106,8 @@ public:
 	virtual void finalize() override;
 
 	static OS_Android *get_singleton();
-	GodotJavaWrapper *get_godot_java();
-	GodotIOJavaWrapper *get_godot_io_java();
+	FADEJavaWrapper *get_godot_java();
+	FADEIOJavaWrapper *get_godot_io_java();
 
 	virtual bool request_permission(const String &p_name) override;
 	virtual bool request_permissions() override;
@@ -179,7 +179,7 @@ public:
 	virtual void load_platform_gdextensions() const override;
 
 	virtual bool _check_internal_feature_support(const String &p_feature) override;
-	OS_Android(GodotJavaWrapper *p_godot_java, GodotIOJavaWrapper *p_godot_io_java, bool p_use_apk_expansion);
+	OS_Android(FADEJavaWrapper *p_godot_java, FADEIOJavaWrapper *p_godot_io_java, bool p_use_apk_expansion);
 	~OS_Android();
 
 private:

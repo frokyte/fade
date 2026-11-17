@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Godot.SourceGenerators.Tests;
+namespace FADE.SourceGenerators.Tests;
 
 public class ScriptMethodsGeneratorTests
 {

@@ -183,7 +183,7 @@ opts.Add(
         "lto", "Link-time optimization (production builds)", "none", ["none", "auto", "thin", "full"], ignorecase=2
     )
 )
-opts.Add(BoolVariable("production", "Set defaults to build Godot for use in production", False))
+opts.Add(BoolVariable("production", "Set defaults to build FADE for use in production", False))
 opts.Add(BoolVariable("threads", "Enable threading support", True))
 
 # Components
@@ -418,7 +418,7 @@ if env["platform"] in compatibility_platform_aliases:
     alias = env["platform"]
     platform = compatibility_platform_aliases[alias]
     print_warning(
-        f'Platform "{alias}" has been renamed to "{platform}" in Godot 4. Building for platform "{platform}".'
+        f'Platform "{alias}" has been renamed to "{platform}" in FADE 4. Building for platform "{platform}".'
     )
     env["platform"] = platform
 
@@ -752,7 +752,7 @@ if cc_version_major == -1:
 elif methods.using_gcc(env):
     if cc_version_major < 11:
         print_error(
-            f'Detected GCC version {cc_version_major} while Godot requires GCC 11 or newer. Use a newer GCC version, or Clang 9 or newer by passing "use_llvm=yes" to the SCons command line.'
+            f'Detected GCC version {cc_version_major} while FADE requires GCC 11 or newer. Use a newer GCC version, or Clang 9 or newer by passing "use_llvm=yes" to the SCons command line.'
         )
         Exit(255)
     if cc_version_metadata1 == "win32":
@@ -766,13 +766,13 @@ elif methods.using_clang(env):
     if methods.is_apple_clang(env):
         if cc_version_major < 16:
             print_error(
-                f"Detected Apple Clang version {cc_version_major} while Godot requires Apple Clang 16 (Xcode 16) or newer."
+                f"Detected Apple Clang version {cc_version_major} while FADE requires Apple Clang 16 (Xcode 16) or newer."
             )
             Exit(255)
     else:
         if cc_version_major < 9:
             print_error(
-                f"Detected Clang version {cc_version_major} while Godot requires Clang 9 or newer. Use a newer Clang version, or GCC 11 or newer."
+                f"Detected Clang version {cc_version_major} while FADE requires Clang 9 or newer. Use a newer Clang version, or GCC 11 or newer."
             )
             Exit(255)
         elif env["debug_paths_relative"] and cc_version_major < 10:
@@ -785,12 +785,12 @@ elif env.msvc:
         # https://github.com/godotengine/godot/pull/94995#issuecomment-2336464574
         print_error(
             "Detected Visual Studio 2019 version older than 16.11, which has bugs "
-            "when compiling Godot. Use a newer VS2019 version, or VS2022+."
+            "when compiling FADE. Use a newer VS2019 version, or VS2022+."
         )
         Exit(255)
     elif cc_version_major < 16:
         print_error(
-            "Detected Visual Studio 2017 or earlier, which is unsupported in Godot. "
+            "Detected Visual Studio 2017 or earlier, which is unsupported in FADE. "
             "Supported versions are Visual Studio 2019 and later."
         )
         Exit(255)
@@ -933,7 +933,7 @@ else:
     # Allow use of `__cplusplus` macro to determine C++ standard universally.
     env.Prepend(CXXFLAGS=["/Zc:__cplusplus"])
 
-# Disable exception handling. Godot doesn't use exceptions anywhere, and this
+# Disable exception handling. FADE doesn't use exceptions anywhere, and this
 # saves around 20% of binary size and very significant build time (GH-80513).
 if env["disable_exceptions"]:
     if env.msvc:

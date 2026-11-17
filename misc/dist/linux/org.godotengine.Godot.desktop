@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Godot Engine
+Name=FADE Engine
 GenericName=Libre game engine
 GenericName[el]=Ελεύθερη μηχανή παιχνιδιού
 GenericName[fr]=Moteur de jeu libre
@@ -25,4 +25,4 @@ Terminal=false
 Type=Application
 MimeType=application/x-godot-project;
 Categories=Development;IDE;
-StartupWMClass=Godot
+StartupWMClass=FADE

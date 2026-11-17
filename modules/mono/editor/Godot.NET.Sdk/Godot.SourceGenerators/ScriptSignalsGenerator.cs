@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
     [Generator]
     public class ScriptSignalsGenerator : ISourceGenerator
@@ -16,7 +16,7 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptSignals"))
+            if (context.IsFADESourceGeneratorDisabled("ScriptSignals"))
                 return;
 
             INamedTypeSymbol[] godotClasses = context
@@ -24,7 +24,7 @@ namespace Godot.SourceGenerators
                 .SelectMany(tree =>
                     tree.GetRoot().DescendantNodes()
                         .OfType<ClassDeclarationSyntax>()
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectFADEScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -51,14 +51,14 @@ namespace Godot.SourceGenerators
 
                 foreach (var godotClass in godotClasses)
                 {
-                    VisitGodotScriptClass(context, typeCache, godotClass);
+                    VisitFADEScriptClass(context, typeCache, godotClass);
                 }
             }
         }
 
         internal static string SignalDelegateSuffix = "EventHandler";
 
-        private static void VisitGodotScriptClass(
+        private static void VisitFADEScriptClass(
             GeneratorExecutionContext context,
             MarshalUtils.TypeCache typeCache,
             INamedTypeSymbol symbol
@@ -77,8 +77,8 @@ namespace Godot.SourceGenerators
 
             var source = new StringBuilder();
 
-            source.Append("using Godot;\n");
-            source.Append("using Godot.NativeInterop;\n");
+            source.Append("using FADE;\n");
+            source.Append("using FADE.NativeInterop;\n");
             source.Append("\n");
 
             if (hasNamespace)
@@ -119,9 +119,9 @@ namespace Godot.SourceGenerators
                 .Cast<INamedTypeSymbol>()
                 .Where(namedTypeSymbol => namedTypeSymbol.TypeKind == TypeKind.Delegate)
                 .Where(s => s.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotSignalAttribute() ?? false));
+                    .Any(a => a.AttributeClass?.IsFADESignalAttribute() ?? false));
 
-            List<GodotSignalDelegateData> godotSignalDelegates = new();
+            List<FADESignalDelegateData> godotSignalDelegates = new();
 
             foreach (var signalDelegateSymbol in signalDelegateSymbols)
             {
@@ -139,7 +139,7 @@ namespace Godot.SourceGenerators
                 signalName = signalName.Substring(0, signalName.Length - SignalDelegateSuffix.Length);
 
                 var invokeMethodData = signalDelegateSymbol
-                    .DelegateInvokeMethod?.HasGodotCompatibleSignature(typeCache);
+                    .DelegateInvokeMethod?.HasFADECompatibleSignature(typeCache);
 
                 if (invokeMethodData == null)
                 {
@@ -208,7 +208,7 @@ namespace Godot.SourceGenerators
                     .Append("' signal.\n")
                     .Append("        /// </summary>\n");
 
-                source.Append("        public new static readonly global::Godot.StringName @");
+                source.Append("        public new static readonly global::FADE.StringName @");
                 source.Append(signalName);
                 source.Append(" = \"");
                 source.Append(signalName);
@@ -217,15 +217,15 @@ namespace Godot.SourceGenerators
 
             source.Append("    }\n"); // end of class SignalName
 
-            // Generate GetGodotSignalList
+            // Generate GetFADESignalList
 
             if (godotSignalDelegates.Count > 0)
             {
-                const string ListType = "global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo>";
+                const string ListType = "global::System.Collections.Generic.List<global::FADE.Bridge.MethodInfo>";
 
                 source.Append("    /// <summary>\n")
                     .Append("    /// Get the signal information for all the signals declared in this class.\n")
-                    .Append("    /// This method is used by Godot to register the available signals in the editor.\n")
+                    .Append("    /// This method is used by FADE to register the available signals in the editor.\n")
                     .Append("    /// Do not call this method.\n")
                     .Append("    /// </summary>\n");
 
@@ -234,7 +234,7 @@ namespace Godot.SourceGenerators
 
                 source.Append("    internal new static ")
                     .Append(ListType)
-                    .Append(" GetGodotSignalList()\n    {\n");
+                    .Append(" GetFADESignalList()\n    {\n");
 
                 source.Append("        var signals = new ")
                     .Append(ListType)
@@ -252,15 +252,15 @@ namespace Godot.SourceGenerators
                 source.Append("    }\n");
             }
 
-            // Generate GetGodotRaiseSignalTrampolines
+            // Generate GetFADERaiseSignalTrampolines
 
             {
                 source.Append("    ").Append(symbol.IsSealed ? "" : "protected ")
-                    .Append("internal new static partial class GodotInternal\n    {\n");
+                    .Append("internal new static partial class FADEInternal\n    {\n");
 
-                const string CollectorType = "global::Godot.Bridge.RaiseSignalTrampolineCollector";
+                const string CollectorType = "global::FADE.Bridge.RaiseSignalTrampolineCollector";
 
-                source.Append("        public static void GetGodotRaiseSignalTrampolines(")
+                source.Append("        public static void GetFADERaiseSignalTrampolines(")
                     .Append(CollectorType).Append(" collector)\n        {\n");
 
                 foreach (var signal in godotSignalDelegates)
@@ -271,7 +271,7 @@ namespace Godot.SourceGenerators
 
                 source.Append("        }\n");
 
-                source.Append("    }\n"); // partial class GodotInternal
+                source.Append("    }\n"); // partial class FADEInternal
             }
 
             source.Append("#pragma warning restore CS0109\n");
@@ -382,7 +382,7 @@ namespace Godot.SourceGenerators
 
             AppendPropertyInfo(source, methodInfo.ReturnVal);
 
-            source.Append(", flags: (global::Godot.MethodFlags)")
+            source.Append(", flags: (global::FADE.MethodFlags)")
                 .Append((int)methodInfo.Flags)
                 .Append(", arguments: ");
 
@@ -410,21 +410,21 @@ namespace Godot.SourceGenerators
 
         private static void AppendPropertyInfo(StringBuilder source, PropertyInfo propertyInfo)
         {
-            source.Append("new(type: (global::Godot.Variant.Type)")
+            source.Append("new(type: (global::FADE.Variant.Type)")
                 .Append((int)propertyInfo.Type)
                 .Append(", name: \"")
                 .Append(propertyInfo.Name)
-                .Append("\", hint: (global::Godot.PropertyHint)")
+                .Append("\", hint: (global::FADE.PropertyHint)")
                 .Append((int)propertyInfo.Hint)
                 .Append(", hintString: \"")
                 .Append(propertyInfo.HintString)
-                .Append("\", usage: (global::Godot.PropertyUsageFlags)")
+                .Append("\", usage: (global::FADE.PropertyUsageFlags)")
                 .Append((int)propertyInfo.Usage)
                 .Append(", exported: ")
                 .Append(propertyInfo.Exported ? "true" : "false");
             if (propertyInfo.ClassName != null)
             {
-                source.Append(", className: new global::Godot.StringName(\"")
+                source.Append(", className: new global::FADE.StringName(\"")
                     .Append(propertyInfo.ClassName)
                     .Append("\")");
             }
@@ -432,7 +432,7 @@ namespace Godot.SourceGenerators
             source.Append(")");
         }
 
-        private static MethodInfo DetermineMethodInfo(GodotSignalDelegateData signalDelegateData)
+        private static MethodInfo DetermineMethodInfo(FADESignalDelegateData signalDelegateData)
         {
             var invokeMethodData = signalDelegateData.InvokeMethodData;
 
@@ -493,7 +493,7 @@ namespace Godot.SourceGenerators
                 PropertyHint.None, string.Empty, propUsage, className, exported: false);
         }
 
-        private static void AppendRaiseSignalTrampoline(StringBuilder source, GodotSignalDelegateData signal)
+        private static void AppendRaiseSignalTrampoline(StringBuilder source, FADESignalDelegateData signal)
         {
             string signalName = signal.Name;
             int parameterCount = signal.InvokeMethodData.ParamTypes.Length;
@@ -519,7 +519,7 @@ namespace Godot.SourceGenerators
 
         private static void GenerateRaiseSignalTrampoline(
             INamedTypeSymbol classSymbol,
-            GodotSignalDelegateData signal,
+            FADESignalDelegateData signal,
             StringBuilder source
         )
         {

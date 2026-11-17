@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -39,12 +39,12 @@ import org.junit.Test
 
 class AndroidRuntimePluginTest {
 
-	private val createProxyFromGodotCallable = AndroidRuntimePlugin::class.java
-		.getDeclaredMethod("createProxyFromGodotCallable", String::class.java, Callable::class.java)
+	private val createProxyFromFADECallable = AndroidRuntimePlugin::class.java
+		.getDeclaredMethod("createProxyFromFADECallable", String::class.java, Callable::class.java)
 		.apply { isAccessible = true }
 
-	private val createProxyFromGodotObjectID = AndroidRuntimePlugin::class.java
-		.getDeclaredMethod("createProxyFromGodotObjectID", Long::class.javaPrimitiveType, Array<String>::class.java)
+	private val createProxyFromFADEObjectID = AndroidRuntimePlugin::class.java
+		.getDeclaredMethod("createProxyFromFADEObjectID", Long::class.javaPrimitiveType, Array<String>::class.java)
 		.apply { isAccessible = true }
 
 	private fun newCallable(): Callable {
@@ -54,13 +54,13 @@ class AndroidRuntimePluginTest {
 	}
 
 	private fun callableProxy(): Any {
-		val proxy = createProxyFromGodotCallable.invoke(null, Runnable::class.java.name, newCallable())
+		val proxy = createProxyFromFADECallable.invoke(null, Runnable::class.java.name, newCallable())
 		assertNotNull(proxy)
 		return proxy!!
 	}
 
 	private fun objectIDProxy(godotObjectID: Long = 0L): Any {
-		val proxy = createProxyFromGodotObjectID.invoke(null, godotObjectID, arrayOf(Runnable::class.java.name))
+		val proxy = createProxyFromFADEObjectID.invoke(null, godotObjectID, arrayOf(Runnable::class.java.name))
 		assertNotNull(proxy)
 		return proxy!!
 	}
@@ -106,19 +106,19 @@ class AndroidRuntimePluginTest {
 	@Test
 	fun `Given Callable proxy, When toString is invoked, Then returns the documented label`() {
 		val proxy = callableProxy()
-		assertEquals("Godot Callable Proxy for ${Runnable::class.java.name}", proxy.toString())
+		assertEquals("FADE Callable Proxy for ${Runnable::class.java.name}", proxy.toString())
 	}
 
 	@Test
 	fun `Given ObjectID proxy, When toString is invoked, Then returns the documented label`() {
 		val proxy = objectIDProxy()
-		assertEquals("Godot Object Proxy for ${Runnable::class.java.name}", proxy.toString())
+		assertEquals("FADE Object Proxy for ${Runnable::class.java.name}", proxy.toString())
 	}
 
 	@Test
 	fun `Given Callable proxy, When hashCode is invoked, Then returns the Callable hashCode`() {
 		val callable = newCallable()
-		val proxy = createProxyFromGodotCallable.invoke(null, Runnable::class.java.name, callable)!!
+		val proxy = createProxyFromFADECallable.invoke(null, Runnable::class.java.name, callable)!!
 		assertEquals(callable.hashCode(), proxy.hashCode())
 	}
 

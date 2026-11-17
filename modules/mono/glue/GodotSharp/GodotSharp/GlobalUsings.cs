@@ -6,38 +6,38 @@ global using real_t = System.Single;
 
 global using unsafe MethodTrampolineDelegate = delegate* managed<
     /* godotObject: */ object,
-    /* args: */ Godot.NativeInterop.NativeVariantPtrArgs,
-    /* callError: */ ref Godot.NativeInterop.godot_variant_call_error,
-    /* return (value): */ Godot.NativeInterop.godot_variant>;
+    /* args: */ FADE.NativeInterop.NativeVariantPtrArgs,
+    /* callError: */ ref FADE.NativeInterop.godot_variant_call_error,
+    /* return (value): */ FADE.NativeInterop.godot_variant>;
 global using unsafe PropertyGetterTrampolineDelegate = delegate* managed<
     /* godotObject: */ object,
-    /* return (value): */ Godot.NativeInterop.godot_variant>;
+    /* return (value): */ FADE.NativeInterop.godot_variant>;
 global using unsafe PropertySetterTrampolineDelegate = delegate* managed<
     /* godotObject: */ object,
-    /* value: */ in Godot.NativeInterop.godot_variant,
+    /* value: */ in FADE.NativeInterop.godot_variant,
     /* return: */ void>;
 global using unsafe RaiseSignalTrampolineDelegate = delegate* managed<
     /* godotObject: */ object,
-    /* args: */ Godot.NativeInterop.NativeVariantPtrArgs,
-    /* callError: */ ref Godot.NativeInterop.godot_variant_call_error,
+    /* args: */ FADE.NativeInterop.NativeVariantPtrArgs,
+    /* callError: */ ref FADE.NativeInterop.godot_variant_call_error,
     /* return */ void>;
 
 global using unsafe TryAddMethodTrampolineDelegate = delegate* unmanaged<
     /* scriptPtr: */ System.IntPtr,
-    /* name: */ Godot.NativeInterop.godot_string_name*,
+    /* name: */ FADE.NativeInterop.godot_string_name*,
     /* argCount: */ int,
     /* trampolineDelegate: */ void*,
-    /* isStatic: */ Godot.NativeInterop.godot_bool,
+    /* isStatic: */ FADE.NativeInterop.godot_bool,
     /* return */ void>;
 global using unsafe TryAddPropertyTrampolineDelegate = delegate* unmanaged<
     /* scriptPtr: */ System.IntPtr,
-    /* name: */ Godot.NativeInterop.godot_string_name*,
+    /* name: */ FADE.NativeInterop.godot_string_name*,
     /* getterTrampolineDelegate: */ void*,
     /* setterTrampolineDelegate: */ void*,
     /* return */ void>;
 global using unsafe TryAddRaiseSignalTrampolineDelegate = delegate* unmanaged<
     /* scriptPtr: */ System.IntPtr,
-    /* name: */ Godot.NativeInterop.godot_string_name*,
+    /* name: */ FADE.NativeInterop.godot_string_name*,
     /* argCount: */ int,
     /* trampolineDelegate: */ void*,
     /* return */ void>;

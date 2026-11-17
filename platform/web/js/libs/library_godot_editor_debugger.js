@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,38 +28,38 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-const GodotEditorDebugger = {
-	$GodotEditorDebugger__postset: [
-		'Module["add_debugger_session"] = GodotEditorDebugger.addSession;',
+const FADEEditorDebugger = {
+	$FADEEditorDebugger__postset: [
+		'Module["add_debugger_session"] = FADEEditorDebugger.addSession;',
 	].join(''),
-	$GodotEditorDebugger__deps: ['$GodotDebugger', '$GodotRuntime', '$IDHandler'],
-	$GodotEditorDebugger: {
+	$FADEEditorDebugger__deps: ['$FADEDebugger', '$FADERuntime', '$IDHandler'],
+	$FADEEditorDebugger: {
 		session_callback: null,
 		addSession: function (port) {
-			if (!GodotEditorDebugger.session_callback) {
-				GodotRuntime.error('Editor debugger not bound.');
+			if (!FADEEditorDebugger.session_callback) {
+				FADERuntime.error('Editor debugger not bound.');
 				return;
 			}
 			const id = IDHandler.add({
 				port: port,
 				active: true,
 			});
-			GodotEditorDebugger.session_callback(id);
+			FADEEditorDebugger.session_callback(id);
 		},
 	},
 
 	godot_js_editor_debugger_cb__proxy: 'sync',
 	godot_js_editor_debugger_cb__sig: 'vp',
 	godot_js_editor_debugger_cb: function (p_cb) {
-		GodotEditorDebugger.session_callback = p_cb ? GodotRuntime.get_func(p_cb) : null;
+		FADEEditorDebugger.session_callback = p_cb ? FADERuntime.get_func(p_cb) : null;
 	},
 
 	godot_js_editor_debugger_active__proxy: 'sync',
 	godot_js_editor_debugger_active__sig: 'i',
 	godot_js_editor_debugger_active: function () {
-		return GodotEditorDebugger.session_callback ? 1 : 0;
+		return FADEEditorDebugger.session_callback ? 1 : 0;
 	},
 };
 
-autoAddDeps(GodotEditorDebugger, '$GodotEditorDebugger');
-mergeInto(LibraryManager.library, GodotEditorDebugger);
+autoAddDeps(FADEEditorDebugger, '$FADEEditorDebugger');
+mergeInto(LibraryManager.library, FADEEditorDebugger);

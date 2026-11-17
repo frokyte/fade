@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,8 +35,8 @@
 #include <android/log.h>
 #include <jni.h>
 
-// Class that makes functions in java/src/org/godotengine/godot/GodotRenderView.java callable from C++
-class GodotJavaViewWrapper {
+// Class that makes functions in java/src/org/godotengine/godot/FADERenderView.java callable from C++
+class FADEJavaViewWrapper {
 private:
 	jclass _cls;
 
@@ -50,7 +50,7 @@ private:
 	jmethodID _set_pointer_icon = nullptr;
 
 public:
-	GodotJavaViewWrapper(jobject godot_view);
+	FADEJavaViewWrapper(jobject godot_view);
 
 	bool can_update_pointer_icon() const;
 	bool can_capture_pointer() const;
@@ -61,5 +61,5 @@ public:
 	void configure_pointer_icon(int pointer_type, const String &image_path, const Vector2 &p_hotspot);
 	void set_pointer_icon(int pointer_type);
 
-	~GodotJavaViewWrapper();
+	~FADEJavaViewWrapper();
 };

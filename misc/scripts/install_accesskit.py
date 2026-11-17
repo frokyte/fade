@@ -11,11 +11,11 @@ import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../"))
 
 
-# Base Godot dependencies path
+# Base FADE dependencies path
 # If cross-compiling (no LOCALAPPDATA), we install in `bin`
 deps_folder = os.getenv("LOCALAPPDATA")
 if deps_folder and not os.getenv("MSYSTEM"):
-    deps_folder = os.path.join(deps_folder, "Godot", "build_deps")
+    deps_folder = os.path.join(deps_folder, "FADE", "build_deps")
 else:
     deps_folder = os.path.join("bin", "build_deps")
 

@@ -1,8 +1,8 @@
-# Fish completion for the Godot editor
+# Fish completion for the FADE editor
 # To use it, install this file in `~/.config/fish/completions` then restart your shell.
 # You can also `source` this file directly in your shell startup file.
 #
-# Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md).
+# Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md).
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,7 +42,7 @@ function godot_rendering_driver_args
     echo -e "dummy\tDummy renderer"
 end
 
-# Erase existing completions for Godot.
+# Erase existing completions for FADE.
 complete -c godot -e
 
 # General options:
@@ -138,8 +138,8 @@ complete -c godot -l export-pack -d "Export the project data only as a PCK or ZI
 complete -c godot -l export-patch -d "Export pack with changed files only, using the given preset and output path" -x
 complete -c godot -l patches -d "List of patches to use with --export-patch (comma-separated)" -x
 complete -c godot -l install-android-build-template -d "Install the Android build template (use with --export-release or --export-debug)"
-complete -c godot -l convert-3to4 -d "Converts project from Godot 3.x to Godot 4.x"
-complete -c godot -l validate-conversion-3to4 -d "Shows what elements will be renamed when converting project from Godot 3.x to Godot 4.x"
+complete -c godot -l convert-3to4 -d "Converts project from FADE 3.x to FADE 4.x"
+complete -c godot -l validate-conversion-3to4 -d "Shows what elements will be renamed when converting project from FADE 3.x to FADE 4.x"
 complete -c godot -l doctool -d "Dump the engine API reference to the given path (defaults to current directory) in XML format, merging if existing files are found" -r
 complete -c godot -l no-docbase -d "Disallow dumping the base types (used with --doctool)"
 complete -c godot -l gdextension-docs -d "Generate API reference from all the GDExtensions loaded in the current project (used with --doctool)"
@@ -147,8 +147,8 @@ complete -c godot -l gdscript-docs -d "Generate API reference from the inline do
 complete -c godot -l build-solutions -d "Build the scripting solutions (e.g. for C# projects)"
 complete -c godot -l dump-gdextension-interface -d "Generate GDExtension header file 'gdextension_interface.h' in the current folder. This file is the base file required to implement a GDExtension"
 complete -c godot -l dump-gdextension-interface-json -d "Generate JSON dump of the GDExtension interface named 'gdextension_interface.json' in the current folder"
-complete -c godot -l dump-extension-api -d "Generate JSON dump of the Godot API for GDExtension bindings named 'extension_api.json' in the current folder"
-complete -c godot -l dump-extension-api-with-docs -d "Generate JSON dump of the Godot API for GDExtension bindings, including documentation"
+complete -c godot -l dump-extension-api -d "Generate JSON dump of the FADE API for GDExtension bindings named 'extension_api.json' in the current folder"
+complete -c godot -l dump-extension-api-with-docs -d "Generate JSON dump of the FADE API for GDExtension bindings, including documentation"
 complete -c godot -l validate-extension-api -d "Validate an extension API file dumped from a previous version of the engine to ensure API compatibility" -r
 complete -c godot -l benchmark -d "Benchmark the run time and print it to console"
 complete -c godot -l benchmark-file -d "Benchmark the run time and save it to a given file in JSON format" -r

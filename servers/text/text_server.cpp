@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -2402,7 +2402,7 @@ TextServer::TextServer() {
 	GLOBAL_DEF(PropertyInfo(Variant::INT, "gui/theme/lcd_subpixel_layout", PROPERTY_HINT_ENUM, "Disabled,Horizontal RGB,Horizontal BGR,Vertical RGB,Vertical BGR"), 1);
 
 #ifndef DISABLE_DEPRECATED
-	// Compatibility with Godot versions before 4.8 where MSDF glyph shapes were incorrectly scaled up.
+	// Compatibility with FADE versions before 4.8 where MSDF glyph shapes were incorrectly scaled up.
 	GLOBAL_DEF_RST("gui/fonts/compatibility/msdf_legacy_scaling", false);
 #endif
 

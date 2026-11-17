@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Godot.NativeInterop;
+using FADE.NativeInterop;
 
 #nullable enable
 
-namespace Godot
+namespace FADE
 {
     /// <summary>
     /// StringNames are immutable strings designed for general-purpose representation of unique names.

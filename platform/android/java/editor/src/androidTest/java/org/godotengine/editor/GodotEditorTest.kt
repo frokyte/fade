@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotEditorTest.kt                                                    */
+/*  FADEEditorTest.kt                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,7 +34,7 @@ import android.content.ComponentName
 import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.godotengine.godot.GodotActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
+import org.godotengine.godot.FADEActivity.Companion.EXTRA_COMMAND_LINE_PARAMS
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
@@ -43,19 +43,19 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Instrumented test for the Godot editor.
+ * Instrumented test for the FADE editor.
  */
 @RunWith(AndroidJUnit4::class)
-class GodotEditorTest {
+class FADEEditorTest {
 	companion object {
-		private val TAG = GodotEditorTest::class.simpleName
+		private val TAG = FADEEditorTest::class.simpleName
 
 		private val TEST_COMMAND_LINE_PARAMS = arrayOf("This is a test")
 		private val PM_LAUNCH_COMMAND_LINE_PARAMS = arrayOf("--project-manager")
 		private val PM_VULKAN_LAUNCH_COMMAND_LINE_PARAMS = PM_LAUNCH_COMMAND_LINE_PARAMS + arrayOf("--rendering-method", "mobile")
 
 		private const val PROJECT_MANAGER_CLASS_NAME = "org.godotengine.editor.ProjectManager"
-		private const val GODOT_EDITOR_CLASS_NAME = "org.godotengine.editor.GodotEditor"
+		private const val GODOT_EDITOR_CLASS_NAME = "org.godotengine.editor.FADEEditor"
 	}
 
 	/**
@@ -69,7 +69,7 @@ class GodotEditorTest {
 			addCategory(Intent.CATEGORY_LAUNCHER)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotEditor>(implicitLaunchIntent).use { scenario ->
+		ActivityScenario.launch<FADEEditor>(implicitLaunchIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, PROJECT_MANAGER_CLASS_NAME)
 
@@ -88,7 +88,7 @@ class GodotEditorTest {
 			component = ComponentName(BuildConfig.APPLICATION_ID, PROJECT_MANAGER_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotEditor>(explicitProjectManagerIntent).use { scenario ->
+		ActivityScenario.launch<FADEEditor>(explicitProjectManagerIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, PROJECT_MANAGER_CLASS_NAME)
 
@@ -99,15 +99,15 @@ class GodotEditorTest {
 	}
 
 	/**
-	 * Explicitly launch the `GodotEditor` activity.
+	 * Explicitly launch the `FADEEditor` activity.
 	 */
 	@Test
-	fun testExplicitGodotEditorLaunch() {
+	fun testExplicitFADEEditorLaunch() {
 		val godotEditorIntent = Intent().apply {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_EDITOR_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, TEST_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotEditor>(godotEditorIntent).use { scenario ->
+		ActivityScenario.launch<FADEEditor>(godotEditorIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_EDITOR_CLASS_NAME)
 
@@ -127,7 +127,7 @@ class GodotEditorTest {
 			component = ComponentName(BuildConfig.APPLICATION_ID, GODOT_EDITOR_CLASS_NAME)
 			putExtra(EXTRA_COMMAND_LINE_PARAMS, PM_VULKAN_LAUNCH_COMMAND_LINE_PARAMS)
 		}
-		ActivityScenario.launch<GodotEditor>(godotEditorIntent).use { scenario ->
+		ActivityScenario.launch<FADEEditor>(godotEditorIntent).use { scenario ->
 			scenario.onActivity { activity ->
 				assertEquals(activity.intent.component?.className, GODOT_EDITOR_CLASS_NAME)
 

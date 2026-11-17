@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -390,7 +390,7 @@ void ResourceImporterTexture::_save_ctex(const Ref<Image> &p_image, const String
 	Ref<FileAccess> f = FileAccess::open(p_to_path, FileAccess::WRITE);
 	ERR_FAIL_COND(f.is_null());
 
-	// Godot Streamable Texture 2D.
+	// FADE Streamable Texture 2D.
 	f->store_8('G');
 	f->store_8('S');
 	f->store_8('T');

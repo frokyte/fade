@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -52,10 +52,10 @@ const IDHandler = {
 autoAddDeps(IDHandler, '$IDHandler');
 mergeInto(LibraryManager.library, IDHandler);
 
-const GodotConfig = {
-	$GodotConfig__postset: 'Module["initConfig"] = GodotConfig.init_config;',
-	$GodotConfig__deps: ['$GodotRuntime'],
-	$GodotConfig: {
+const FADEConfig = {
+	$FADEConfig__postset: 'Module["initConfig"] = FADEConfig.init_config;',
+	$FADEConfig__deps: ['$FADERuntime'],
+	$FADEConfig: {
 		canvas: null,
 		locale: 'en',
 		canvas_resize_policy: 2, // Adaptive
@@ -68,18 +68,18 @@ const GodotConfig = {
 		pid: 0,
 
 		init_config: function (p_opts) {
-			GodotConfig.canvas_resize_policy = p_opts['canvasResizePolicy'];
-			GodotConfig.canvas = p_opts['canvas'];
-			GodotConfig.locale = p_opts['locale'] || GodotConfig.locale;
-			GodotConfig.virtual_keyboard = p_opts['virtualKeyboard'];
-			GodotConfig.godot_pool_size = p_opts['godotPoolSize'];
-			GodotConfig.debug_port = p_opts['debugPort'];
-			GodotConfig.pid = p_opts['pid'];
-			GodotConfig.on_execute = p_opts['onExecute'];
-			GodotConfig.on_terminate_pid = p_opts['onTerminatePID'];
-			GodotConfig.on_exit = p_opts['onExit'];
+			FADEConfig.canvas_resize_policy = p_opts['canvasResizePolicy'];
+			FADEConfig.canvas = p_opts['canvas'];
+			FADEConfig.locale = p_opts['locale'] || FADEConfig.locale;
+			FADEConfig.virtual_keyboard = p_opts['virtualKeyboard'];
+			FADEConfig.godot_pool_size = p_opts['godotPoolSize'];
+			FADEConfig.debug_port = p_opts['debugPort'];
+			FADEConfig.pid = p_opts['pid'];
+			FADEConfig.on_execute = p_opts['onExecute'];
+			FADEConfig.on_terminate_pid = p_opts['onTerminatePID'];
+			FADEConfig.on_exit = p_opts['onExit'];
 			if (p_opts['focusCanvas']) {
-				GodotConfig.canvas.focus();
+				FADEConfig.canvas.focus();
 			}
 		},
 
@@ -88,45 +88,45 @@ const GodotConfig = {
 		},
 
 		clear: function () {
-			GodotConfig.canvas = null;
-			GodotConfig.locale = 'en';
-			GodotConfig.canvas_resize_policy = 2;
-			GodotConfig.virtual_keyboard = false;
-			GodotConfig.debug_port = null;
-			GodotConfig.on_execute = null;
-			GodotConfig.on_exit = null;
+			FADEConfig.canvas = null;
+			FADEConfig.locale = 'en';
+			FADEConfig.canvas_resize_policy = 2;
+			FADEConfig.virtual_keyboard = false;
+			FADEConfig.debug_port = null;
+			FADEConfig.on_execute = null;
+			FADEConfig.on_exit = null;
 		},
 	},
 
 	godot_js_config_pid_get__proxy: 'sync',
 	godot_js_config_pid_get__sig: 'i',
 	godot_js_config_pid_get: function () {
-		return GodotConfig.pid;
+		return FADEConfig.pid;
 	},
 
 	godot_js_config_canvas_id_get__proxy: 'sync',
 	godot_js_config_canvas_id_get__sig: 'vii',
 	godot_js_config_canvas_id_get: function (p_ptr, p_ptr_max) {
-		GodotRuntime.stringToHeap(`#${GodotConfig.canvas.id}`, p_ptr, p_ptr_max);
+		FADERuntime.stringToHeap(`#${FADEConfig.canvas.id}`, p_ptr, p_ptr_max);
 	},
 
 	godot_js_config_locale_get__proxy: 'sync',
 	godot_js_config_locale_get__sig: 'vii',
 	godot_js_config_locale_get: function (p_ptr, p_ptr_max) {
-		GodotRuntime.stringToHeap(GodotConfig.locale, p_ptr, p_ptr_max);
+		FADERuntime.stringToHeap(FADEConfig.locale, p_ptr, p_ptr_max);
 	},
 };
 
-autoAddDeps(GodotConfig, '$GodotConfig');
-mergeInto(LibraryManager.library, GodotConfig);
+autoAddDeps(FADEConfig, '$FADEConfig');
+mergeInto(LibraryManager.library, FADEConfig);
 
-const GodotFS = {
-	$GodotFS__deps: ['$FS', '$IDBFS', '$GodotRuntime'],
-	$GodotFS__postset: [
-		'Module["initFS"] = GodotFS.init;',
-		'Module["copyToFS"] = GodotFS.copy_to_fs;',
+const FADEFS = {
+	$FADEFS__deps: ['$FS', '$IDBFS', '$FADERuntime'],
+	$FADEFS__postset: [
+		'Module["initFS"] = FADEFS.init;',
+		'Module["copyToFS"] = FADEFS.copy_to_fs;',
 	].join(''),
-	$GodotFS: {
+	$FADEFS: {
 		// ERRNO_CODES works every odd version of emscripten, but this will break too eventually.
 		ENOENT: 44,
 		_idbfs: false,
@@ -134,7 +134,7 @@ const GodotFS = {
 		_mount_points: [],
 
 		is_persistent: function () {
-			return GodotFS._idbfs ? 1 : 0;
+			return FADEFS._idbfs ? 1 : 0;
 		},
 
 		// Initialize godot file system, setting up persistent paths.
@@ -142,39 +142,39 @@ const GodotFS = {
 		// We keep track of mount_points, so that we can properly close the IDBFS
 		// since emscripten is not doing it by itself. (emscripten GH#12516).
 		init: function (persistentPaths) {
-			GodotFS._idbfs = false;
+			FADEFS._idbfs = false;
 			if (!Array.isArray(persistentPaths)) {
 				return Promise.reject(new Error('Persistent paths must be an array'));
 			}
 			if (!persistentPaths.length) {
 				return Promise.resolve();
 			}
-			GodotFS._mount_points = persistentPaths.slice();
+			FADEFS._mount_points = persistentPaths.slice();
 
 			function createRecursive(dir) {
 				try {
 					FS.stat(dir);
 				} catch (e) {
-					if (e.errno !== GodotFS.ENOENT) {
+					if (e.errno !== FADEFS.ENOENT) {
 						// Let mkdirTree throw in case, we cannot trust the above check.
-						GodotRuntime.error(e);
+						FADERuntime.error(e);
 					}
 					FS.mkdirTree(dir);
 				}
 			}
 
-			GodotFS._mount_points.forEach(function (path) {
+			FADEFS._mount_points.forEach(function (path) {
 				createRecursive(path);
 				FS.mount(IDBFS, {}, path);
 			});
 			return new Promise(function (resolve, reject) {
 				FS.syncfs(true, function (err) {
 					if (err) {
-						GodotFS._mount_points = [];
-						GodotFS._idbfs = false;
-						GodotRuntime.print(`IndexedDB not available: ${err.message}`);
+						FADEFS._mount_points = [];
+						FADEFS._idbfs = false;
+						FADERuntime.print(`IndexedDB not available: ${err.message}`);
 					} else {
-						GodotFS._idbfs = true;
+						FADEFS._idbfs = true;
 					}
 					resolve(err);
 				});
@@ -183,34 +183,34 @@ const GodotFS = {
 
 		// Deinit godot file system, making sure to unmount file systems, and close IDBFS(s).
 		deinit: function () {
-			GodotFS._mount_points.forEach(function (path) {
+			FADEFS._mount_points.forEach(function (path) {
 				try {
 					FS.unmount(path);
 				} catch (e) {
-					GodotRuntime.print('Already unmounted', e);
+					FADERuntime.print('Already unmounted', e);
 				}
-				if (GodotFS._idbfs && IDBFS.dbs[path]) {
+				if (FADEFS._idbfs && IDBFS.dbs[path]) {
 					IDBFS.dbs[path].close();
 					delete IDBFS.dbs[path];
 				}
 			});
-			GodotFS._mount_points = [];
-			GodotFS._idbfs = false;
-			GodotFS._syncing = false;
+			FADEFS._mount_points = [];
+			FADEFS._idbfs = false;
+			FADEFS._syncing = false;
 		},
 
 		sync: function () {
-			if (GodotFS._syncing) {
-				GodotRuntime.error('Already syncing!');
+			if (FADEFS._syncing) {
+				FADERuntime.error('Already syncing!');
 				return Promise.resolve();
 			}
-			GodotFS._syncing = true;
+			FADEFS._syncing = true;
 			return new Promise(function (resolve, reject) {
 				FS.syncfs(false, function (error) {
 					if (error) {
-						GodotRuntime.error(`Failed to save IDB file system: ${error.message}`);
+						FADERuntime.error(`Failed to save IDB file system: ${error.message}`);
 					}
-					GodotFS._syncing = false;
+					FADEFS._syncing = false;
 					resolve(error);
 				});
 			});
@@ -226,9 +226,9 @@ const GodotFS = {
 			try {
 				FS.stat(dir);
 			} catch (e) {
-				if (e.errno !== GodotFS.ENOENT) {
+				if (e.errno !== FADEFS.ENOENT) {
 					// Let mkdirTree throw in case, we cannot trust the above check.
-					GodotRuntime.error(e);
+					FADERuntime.error(e);
 				}
 				FS.mkdirTree(dir);
 			}
@@ -236,43 +236,43 @@ const GodotFS = {
 		},
 	},
 };
-mergeInto(LibraryManager.library, GodotFS);
+mergeInto(LibraryManager.library, FADEFS);
 
-const GodotOS = {
-	$GodotOS__deps: ['$GodotRuntime', '$GodotConfig', '$GodotFS'],
-	$GodotOS__postset: [
-		'Module["request_quit"] = function() { GodotOS.request_quit() };',
+const FADEOS = {
+	$FADEOS__deps: ['$FADERuntime', '$FADEConfig', '$FADEFS'],
+	$FADEOS__postset: [
+		'Module["request_quit"] = function() { FADEOS.request_quit() };',
 		'Module["force_quit"] = function(code) { _emscripten_force_exit(code ?? 1) };',
-		'Module["onExit"] = GodotOS.cleanup;',
-		'GodotOS._fs_sync_promise = Promise.resolve();',
+		'Module["onExit"] = FADEOS.cleanup;',
+		'FADEOS._fs_sync_promise = Promise.resolve();',
 	].join(''),
-	$GodotOS: {
+	$FADEOS: {
 		request_quit: function () {},
 		_async_cbs: [],
 		_fs_sync_promise: null,
 
 		atexit: function (p_promise_cb) {
-			GodotOS._async_cbs.push(p_promise_cb);
+			FADEOS._async_cbs.push(p_promise_cb);
 		},
 
 		cleanup: function (exit_code) {
-			const cb = GodotConfig.on_exit;
-			GodotFS.deinit();
-			GodotConfig.clear();
+			const cb = FADEConfig.on_exit;
+			FADEFS.deinit();
+			FADEConfig.clear();
 			if (cb) {
 				cb(exit_code);
 			}
 		},
 
 		finish_async: function (callback) {
-			GodotOS._fs_sync_promise.then(function (err) {
+			FADEOS._fs_sync_promise.then(function (err) {
 				const promises = [];
-				GodotOS._async_cbs.forEach(function (cb) {
+				FADEOS._async_cbs.forEach(function (cb) {
 					promises.push(new Promise(cb));
 				});
 				return Promise.all(promises);
 			}).then(function () {
-				return GodotFS.sync(); // Final FS sync.
+				return FADEFS.sync(); // Final FS sync.
 			}).then(function (err) {
 				// Always deferred.
 				setTimeout(function () {
@@ -285,28 +285,28 @@ const GodotOS = {
 	godot_js_os_finish_async__proxy: 'sync',
 	godot_js_os_finish_async__sig: 'vi',
 	godot_js_os_finish_async: function (p_callback) {
-		const func = GodotRuntime.get_func(p_callback);
-		GodotOS.finish_async(func);
+		const func = FADERuntime.get_func(p_callback);
+		FADEOS.finish_async(func);
 	},
 
 	godot_js_os_request_quit_cb__proxy: 'sync',
 	godot_js_os_request_quit_cb__sig: 'vi',
 	godot_js_os_request_quit_cb: function (p_callback) {
-		GodotOS.request_quit = GodotRuntime.get_func(p_callback);
+		FADEOS.request_quit = FADERuntime.get_func(p_callback);
 	},
 
 	godot_js_os_fs_is_persistent__proxy: 'sync',
 	godot_js_os_fs_is_persistent__sig: 'i',
 	godot_js_os_fs_is_persistent: function () {
-		return GodotFS.is_persistent();
+		return FADEFS.is_persistent();
 	},
 
 	godot_js_os_fs_sync__proxy: 'sync',
 	godot_js_os_fs_sync__sig: 'vi',
 	godot_js_os_fs_sync: function (callback) {
-		const func = GodotRuntime.get_func(callback);
-		GodotOS._fs_sync_promise = GodotFS.sync();
-		GodotOS._fs_sync_promise.then(function (err) {
+		const func = FADERuntime.get_func(callback);
+		FADEOS._fs_sync_promise = FADEFS.sync();
+		FADEOS._fs_sync_promise.then(function (err) {
 			func();
 		});
 	},
@@ -314,7 +314,7 @@ const GodotOS = {
 	godot_js_os_has_feature__proxy: 'sync',
 	godot_js_os_has_feature__sig: 'ii',
 	godot_js_os_has_feature: function (p_ftr) {
-		const ftr = GodotRuntime.parseString(p_ftr);
+		const ftr = FADERuntime.parseString(p_ftr);
 		const ua = navigator.userAgent;
 		if (ftr === 'web_macos') {
 			return (ua.indexOf('Mac') !== -1) ? 1 : 0;
@@ -337,11 +337,11 @@ const GodotOS = {
 	godot_js_os_execute__proxy: 'sync',
 	godot_js_os_execute__sig: 'ipp',
 	godot_js_os_execute: function (p_path, p_args) {
-		const path = GodotRuntime.parseString(p_path);
-		const json_args = GodotRuntime.parseString(p_args);
+		const path = FADERuntime.parseString(p_path);
+		const json_args = FADERuntime.parseString(p_args);
 		const args = JSON.parse(json_args);
-		if (GodotConfig.on_execute) {
-			return GodotConfig.on_execute(path, args) ?? 0;
+		if (FADEConfig.on_execute) {
+			return FADEConfig.on_execute(path, args) ?? 0;
 		}
 		return -1;
 	},
@@ -349,23 +349,23 @@ const GodotOS = {
 	godot_js_os_kill__proxy: 'sync',
 	godot_js_os_kill__sig: 'ii',
 	godot_js_os_kill: function (p_pid) {
-		if (!GodotConfig.on_terminate_pid) {
+		if (!FADEConfig.on_terminate_pid) {
 			return -1;
 		}
-		GodotConfig.on_terminate_pid(p_pid);
+		FADEConfig.on_terminate_pid(p_pid);
 		return 0;
 	},
 
 	godot_js_os_shell_open__proxy: 'sync',
 	godot_js_os_shell_open__sig: 'vi',
 	godot_js_os_shell_open: function (p_uri) {
-		window.open(GodotRuntime.parseString(p_uri), '_blank');
+		window.open(FADERuntime.parseString(p_uri), '_blank');
 	},
 
 	godot_js_os_hw_concurrency_get__proxy: 'sync',
 	godot_js_os_hw_concurrency_get__sig: 'i',
 	godot_js_os_hw_concurrency_get: function () {
-		// TODO Godot core needs fixing to avoid spawning too many threads (> 24).
+		// TODO FADE core needs fixing to avoid spawning too many threads (> 24).
 		const concurrency = navigator.hardwareConcurrency || 1;
 		return concurrency < 2 ? concurrency : 2;
 	},
@@ -378,15 +378,15 @@ const GodotOS = {
 			return 1;
 		}
 
-		return GodotConfig.godot_pool_size;
+		return FADEConfig.godot_pool_size;
 	},
 
 	godot_js_os_download_buffer__proxy: 'sync',
 	godot_js_os_download_buffer__sig: 'viiii',
 	godot_js_os_download_buffer: function (p_ptr, p_size, p_name, p_mime) {
-		const buf = GodotRuntime.heapSlice(HEAP8, p_ptr, p_size);
-		const name = GodotRuntime.parseString(p_name);
-		const mime = GodotRuntime.parseString(p_mime);
+		const buf = FADERuntime.heapSlice(HEAP8, p_ptr, p_size);
+		const name = FADERuntime.parseString(p_name);
+		const mime = FADERuntime.parseString(p_mime);
 		const blob = new Blob([buf], { type: mime });
 		const url = window.URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -400,27 +400,27 @@ const GodotOS = {
 	},
 };
 
-autoAddDeps(GodotOS, '$GodotOS');
-mergeInto(LibraryManager.library, GodotOS);
+autoAddDeps(FADEOS, '$FADEOS');
+mergeInto(LibraryManager.library, FADEOS);
 
 /*
- * Godot event listeners.
+ * FADE event listeners.
  * Keeps track of registered event listeners so it can remove them on shutdown.
  */
-const GodotEventListeners = {
-	$GodotEventListeners__deps: ['$GodotOS'],
-	$GodotEventListeners__postset: 'GodotOS.atexit(function(resolve, reject) { GodotEventListeners.clear(); resolve(); });',
-	$GodotEventListeners: {
+const FADEEventListeners = {
+	$FADEEventListeners__deps: ['$FADEOS'],
+	$FADEEventListeners__postset: 'FADEOS.atexit(function(resolve, reject) { FADEEventListeners.clear(); resolve(); });',
+	$FADEEventListeners: {
 		handlers: [],
 
 		has: function (target, event, method, capture) {
-			return GodotEventListeners.handlers.findIndex(function (e) {
+			return FADEEventListeners.handlers.findIndex(function (e) {
 				return e.target === target && e.event === event && e.method === method && e.capture === capture;
 			}) !== -1;
 		},
 
 		add: function (target, event, method, capture) {
-			if (GodotEventListeners.has(target, event, method, capture)) {
+			if (FADEEventListeners.has(target, event, method, capture)) {
 				return;
 			}
 			function Handler(p_target, p_event, p_method, p_capture) {
@@ -429,24 +429,24 @@ const GodotEventListeners = {
 				this.method = p_method;
 				this.capture = p_capture;
 			}
-			GodotEventListeners.handlers.push(new Handler(target, event, method, capture));
+			FADEEventListeners.handlers.push(new Handler(target, event, method, capture));
 			target.addEventListener(event, method, capture);
 		},
 
 		clear: function () {
-			GodotEventListeners.handlers.forEach(function (h) {
+			FADEEventListeners.handlers.forEach(function (h) {
 				h.target.removeEventListener(h.event, h.method, h.capture);
 			});
-			GodotEventListeners.handlers.length = 0;
+			FADEEventListeners.handlers.length = 0;
 		},
 	},
 };
-mergeInto(LibraryManager.library, GodotEventListeners);
+mergeInto(LibraryManager.library, FADEEventListeners);
 
-const GodotPWA = {
+const FADEPWA = {
 
-	$GodotPWA__deps: ['$GodotRuntime', '$GodotEventListeners'],
-	$GodotPWA: {
+	$FADEPWA__deps: ['$FADERuntime', '$FADEEventListeners'],
+	$FADEPWA: {
 		hasUpdate: false,
 
 		updateState: function (cb, reg) {
@@ -457,14 +457,14 @@ const GodotPWA = {
 				return;
 			}
 			if (reg.waiting) {
-				GodotPWA.hasUpdate = true;
+				FADEPWA.hasUpdate = true;
 				cb();
 			}
-			GodotEventListeners.add(reg, 'updatefound', function () {
+			FADEEventListeners.add(reg, 'updatefound', function () {
 				const installing = reg.installing;
-				GodotEventListeners.add(installing, 'statechange', function () {
+				FADEEventListeners.add(installing, 'statechange', function () {
 					if (installing.state === 'installed') {
-						GodotPWA.hasUpdate = true;
+						FADEPWA.hasUpdate = true;
 						cb();
 					}
 				});
@@ -477,10 +477,10 @@ const GodotPWA = {
 	godot_js_pwa_cb: function (p_update_cb) {
 		if ('serviceWorker' in navigator) {
 			try {
-				const cb = GodotRuntime.get_func(p_update_cb);
-				navigator.serviceWorker.getRegistration().then(GodotPWA.updateState.bind(null, cb));
+				const cb = FADERuntime.get_func(p_update_cb);
+				navigator.serviceWorker.getRegistration().then(FADEPWA.updateState.bind(null, cb));
 			} catch (e) {
-				GodotRuntime.error('Failed to assign PWA callback', e);
+				FADERuntime.error('Failed to assign PWA callback', e);
 			}
 		}
 	},
@@ -488,7 +488,7 @@ const GodotPWA = {
 	godot_js_pwa_update__proxy: 'sync',
 	godot_js_pwa_update__sig: 'i',
 	godot_js_pwa_update: function () {
-		if ('serviceWorker' in navigator && GodotPWA.hasUpdate) {
+		if ('serviceWorker' in navigator && FADEPWA.hasUpdate) {
 			try {
 				navigator.serviceWorker.getRegistration().then(function (reg) {
 					if (!reg || !reg.waiting) {
@@ -497,7 +497,7 @@ const GodotPWA = {
 					reg.waiting.postMessage('update');
 				});
 			} catch (e) {
-				GodotRuntime.error(e);
+				FADERuntime.error(e);
 				return 1;
 			}
 			return 0;
@@ -506,5 +506,5 @@ const GodotPWA = {
 	},
 };
 
-autoAddDeps(GodotPWA, '$GodotPWA');
-mergeInto(LibraryManager.library, GodotPWA);
+autoAddDeps(FADEPWA, '$FADEPWA');
+mergeInto(LibraryManager.library, FADEPWA);

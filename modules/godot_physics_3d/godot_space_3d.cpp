@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -40,29 +40,29 @@
 #define TEST_MOTION_MARGIN_MIN_VALUE 0.0001
 #define TEST_MOTION_MIN_CONTACT_DEPTH_FACTOR 0.05
 
-_FORCE_INLINE_ static bool _can_collide_with(GodotCollisionObject3D *p_object, uint32_t p_collision_mask, bool p_collide_with_bodies, bool p_collide_with_areas) {
+_FORCE_INLINE_ static bool _can_collide_with(FADECollisionObject3D *p_object, uint32_t p_collision_mask, bool p_collide_with_bodies, bool p_collide_with_areas) {
 	if (!(p_object->get_collision_layer() & p_collision_mask)) {
 		return false;
 	}
 
-	if (p_object->get_type() == GodotCollisionObject3D::TYPE_AREA && !p_collide_with_areas) {
+	if (p_object->get_type() == FADECollisionObject3D::TYPE_AREA && !p_collide_with_areas) {
 		return false;
 	}
 
-	if (p_object->get_type() == GodotCollisionObject3D::TYPE_BODY && !p_collide_with_bodies) {
+	if (p_object->get_type() == FADECollisionObject3D::TYPE_BODY && !p_collide_with_bodies) {
 		return false;
 	}
 
-	if (p_object->get_type() == GodotCollisionObject3D::TYPE_SOFT_BODY && !p_collide_with_bodies) {
+	if (p_object->get_type() == FADECollisionObject3D::TYPE_SOFT_BODY && !p_collide_with_bodies) {
 		return false;
 	}
 
 	return true;
 }
 
-int GodotPhysicsDirectSpaceState3D::intersect_point(const PS3DT::PointParameters &p_parameters, PS3DT::ShapeResult *r_results, int p_result_max) {
+int FADEPhysicsDirectSpaceState3D::intersect_point(const PS3DT::PointParameters &p_parameters, PS3DT::ShapeResult *r_results, int p_result_max) {
 	ERR_FAIL_COND_V(space->locked, false);
-	int amount = space->broadphase->cull_point(p_parameters.position, space->intersection_query_results, GodotSpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
+	int amount = space->broadphase->cull_point(p_parameters.position, space->intersection_query_results, FADESpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
 	int cc = 0;
 
 	//Transform3D ai = p_xform.affine_inverse();
@@ -82,7 +82,7 @@ int GodotPhysicsDirectSpaceState3D::intersect_point(const PS3DT::PointParameters
 			continue;
 		}
 
-		const GodotCollisionObject3D *col_obj = space->intersection_query_results[i];
+		const FADECollisionObject3D *col_obj = space->intersection_query_results[i];
 		int shape_idx = space->intersection_query_subindex_results[i];
 
 		Transform3D inv_xform = col_obj->get_transform() * col_obj->get_shape_transform(shape_idx);
@@ -102,7 +102,7 @@ int GodotPhysicsDirectSpaceState3D::intersect_point(const PS3DT::PointParameters
 	return cc;
 }
 
-bool GodotPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p_parameters, PS3DT::RayResult &r_result) {
+bool FADEPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p_parameters, PS3DT::RayResult &r_result) {
 	ERR_FAIL_COND_V(space->locked, false);
 
 	Vector3 begin, end;
@@ -111,7 +111,7 @@ bool GodotPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p
 	end = p_parameters.to;
 	normal = (end - begin).normalized();
 
-	int amount = space->broadphase->cull_segment(begin, end, space->intersection_query_results, GodotSpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
+	int amount = space->broadphase->cull_segment(begin, end, space->intersection_query_results, FADESpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
 
 	//todo, create another array that references results, compute AABBs and check closest point to ray origin, sort, and stop evaluating results when beyond first collision
 
@@ -119,7 +119,7 @@ bool GodotPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p
 	Vector3 res_point, res_normal;
 	int res_face_index = -1;
 	int res_shape = -1;
-	const GodotCollisionObject3D *res_obj = nullptr;
+	const FADECollisionObject3D *res_obj = nullptr;
 	real_t min_d = 1e10;
 
 	for (int i = 0; i < amount; i++) {
@@ -135,7 +135,7 @@ bool GodotPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p
 			continue;
 		}
 
-		const GodotCollisionObject3D *col_obj = space->intersection_query_results[i];
+		const FADECollisionObject3D *col_obj = space->intersection_query_results[i];
 
 		int shape_idx = space->intersection_query_subindex_results[i];
 		Transform3D inv_xform = col_obj->get_shape_inv_transform(shape_idx) * col_obj->get_inv_transform();
@@ -143,7 +143,7 @@ bool GodotPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p
 		Vector3 local_from = inv_xform.xform(begin);
 		Vector3 local_to = inv_xform.xform(end);
 
-		const GodotShape3D *shape = col_obj->get_shape(shape_idx);
+		const FADEShape3D *shape = col_obj->get_shape(shape_idx);
 
 		Vector3 shape_point, shape_normal;
 		int shape_face_index = -1;
@@ -197,17 +197,17 @@ bool GodotPhysicsDirectSpaceState3D::intersect_ray(const PS3DT::RayParameters &p
 	return true;
 }
 
-int GodotPhysicsDirectSpaceState3D::intersect_shape(const PS3DT::ShapeParameters &p_parameters, PS3DT::ShapeResult *r_results, int p_result_max) {
+int FADEPhysicsDirectSpaceState3D::intersect_shape(const PS3DT::ShapeParameters &p_parameters, PS3DT::ShapeResult *r_results, int p_result_max) {
 	if (p_result_max <= 0) {
 		return 0;
 	}
 
-	GodotShape3D *shape = GodotPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
+	FADEShape3D *shape = FADEPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
 	ERR_FAIL_NULL_V(shape, 0);
 
 	AABB aabb = p_parameters.transform.xform(shape->get_aabb());
 
-	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, GodotSpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
+	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, FADESpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
 
 	int cc = 0;
 
@@ -228,10 +228,10 @@ int GodotPhysicsDirectSpaceState3D::intersect_shape(const PS3DT::ShapeParameters
 			continue;
 		}
 
-		const GodotCollisionObject3D *col_obj = space->intersection_query_results[i];
+		const FADECollisionObject3D *col_obj = space->intersection_query_results[i];
 		int shape_idx = space->intersection_query_subindex_results[i];
 
-		if (!GodotCollisionSolver3D::solve_static(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), nullptr, nullptr, nullptr, p_parameters.margin, 0)) {
+		if (!FADECollisionSolver3D::solve_static(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), nullptr, nullptr, nullptr, p_parameters.margin, 0)) {
 			continue;
 		}
 
@@ -247,21 +247,21 @@ int GodotPhysicsDirectSpaceState3D::intersect_shape(const PS3DT::ShapeParameters
 	return cc;
 }
 
-bool GodotPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p_parameters, real_t &p_closest_safe, real_t &p_closest_unsafe, PS3DT::ShapeRestInfo *r_info) {
-	GodotShape3D *shape = GodotPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
+bool FADEPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p_parameters, real_t &p_closest_safe, real_t &p_closest_unsafe, PS3DT::ShapeRestInfo *r_info) {
+	FADEShape3D *shape = FADEPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
 	ERR_FAIL_NULL_V(shape, false);
 
 	AABB aabb = p_parameters.transform.xform(shape->get_aabb());
 	aabb = aabb.merge(AABB(aabb.position + p_parameters.motion, aabb.size)); //motion
 	aabb = aabb.grow(p_parameters.margin);
 
-	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, GodotSpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
+	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, FADESpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
 
 	real_t best_safe = 1;
 	real_t best_unsafe = 1;
 
 	Transform3D xform_inv = p_parameters.transform.affine_inverse();
-	GodotMotionShape3D mshape;
+	FADEMotionShape3D mshape;
 	mshape.shape = shape;
 	mshape.motion = xform_inv.basis.xform(p_parameters.motion);
 
@@ -280,7 +280,7 @@ bool GodotPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p
 			continue; //ignore excluded
 		}
 
-		const GodotCollisionObject3D *col_obj = space->intersection_query_results[i];
+		const FADECollisionObject3D *col_obj = space->intersection_query_results[i];
 		int shape_idx = space->intersection_query_subindex_results[i];
 
 		Vector3 point_A, point_B;
@@ -288,14 +288,14 @@ bool GodotPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p
 
 		Transform3D col_obj_xform = col_obj->get_transform() * col_obj->get_shape_transform(shape_idx);
 		//test initial overlap, does it collide if going all the way?
-		if (GodotCollisionSolver3D::solve_distance(&mshape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, aabb, &sep_axis)) {
+		if (FADECollisionSolver3D::solve_distance(&mshape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, aabb, &sep_axis)) {
 			continue;
 		}
 
 		//test initial overlap, ignore objects it's inside of.
 		sep_axis = motion_normal;
 
-		if (!GodotCollisionSolver3D::solve_distance(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, aabb, &sep_axis)) {
+		if (!FADECollisionSolver3D::solve_distance(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, aabb, &sep_axis)) {
 			continue;
 		}
 
@@ -310,7 +310,7 @@ bool GodotPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p
 
 			Vector3 lA, lB;
 			Vector3 sep = motion_normal; //important optimization for this to work fast enough
-			bool collided = !GodotCollisionSolver3D::solve_distance(&mshape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj_xform, lA, lB, aabb, &sep);
+			bool collided = !FADECollisionSolver3D::solve_distance(&mshape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj_xform, lA, lB, aabb, &sep);
 
 			if (collided) {
 				hi = fraction;
@@ -352,8 +352,8 @@ bool GodotPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p
 			r_info->point = closest_B;
 			r_info->normal = (closest_A - closest_B).normalized();
 			best_first = false;
-			if (col_obj->get_type() == GodotCollisionObject3D::TYPE_BODY) {
-				const GodotBody3D *body = static_cast<const GodotBody3D *>(col_obj);
+			if (col_obj->get_type() == FADECollisionObject3D::TYPE_BODY) {
+				const FADEBody3D *body = static_cast<const FADEBody3D *>(col_obj);
 				Vector3 rel_vec = closest_B - (body->get_transform().origin + body->get_center_of_mass());
 				r_info->linear_velocity = body->get_linear_velocity() + (body->get_angular_velocity()).cross(rel_vec);
 			}
@@ -366,36 +366,36 @@ bool GodotPhysicsDirectSpaceState3D::cast_motion(const PS3DT::ShapeParameters &p
 	return true;
 }
 
-bool GodotPhysicsDirectSpaceState3D::collide_shape(const PS3DT::ShapeParameters &p_parameters, Vector3 *r_results, int p_result_max, int &r_result_count) {
+bool FADEPhysicsDirectSpaceState3D::collide_shape(const PS3DT::ShapeParameters &p_parameters, Vector3 *r_results, int p_result_max, int &r_result_count) {
 	if (p_result_max <= 0) {
 		return false;
 	}
 
-	GodotShape3D *shape = GodotPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
+	FADEShape3D *shape = FADEPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
 	ERR_FAIL_NULL_V(shape, false);
 
 	AABB aabb = p_parameters.transform.xform(shape->get_aabb());
 	aabb = aabb.grow(p_parameters.margin);
 
-	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, GodotSpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
+	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, FADESpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
 
 	bool collided = false;
 	r_result_count = 0;
 
-	GodotPhysicsServer3D::CollCbkData cbk;
+	FADEPhysicsServer3D::CollCbkData cbk;
 	cbk.max = p_result_max;
 	cbk.amount = 0;
 	cbk.ptr = r_results;
-	GodotCollisionSolver3D::CallbackResult cbkres = GodotPhysicsServer3D::_shape_col_cbk;
+	FADECollisionSolver3D::CallbackResult cbkres = FADEPhysicsServer3D::_shape_col_cbk;
 
-	GodotPhysicsServer3D::CollCbkData *cbkptr = &cbk;
+	FADEPhysicsServer3D::CollCbkData *cbkptr = &cbk;
 
 	for (int i = 0; i < amount; i++) {
 		if (!_can_collide_with(space->intersection_query_results[i], p_parameters.collision_mask, p_parameters.collide_with_bodies, p_parameters.collide_with_areas)) {
 			continue;
 		}
 
-		const GodotCollisionObject3D *col_obj = space->intersection_query_results[i];
+		const FADECollisionObject3D *col_obj = space->intersection_query_results[i];
 
 		if (p_parameters.exclude.has(col_obj->get_self())) {
 			continue;
@@ -403,7 +403,7 @@ bool GodotPhysicsDirectSpaceState3D::collide_shape(const PS3DT::ShapeParameters 
 
 		int shape_idx = space->intersection_query_subindex_results[i];
 
-		if (GodotCollisionSolver3D::solve_static(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), cbkres, cbkptr, nullptr, p_parameters.margin)) {
+		if (FADECollisionSolver3D::solve_static(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), cbkres, cbkptr, nullptr, p_parameters.margin)) {
 			collided = true;
 		}
 	}
@@ -414,7 +414,7 @@ bool GodotPhysicsDirectSpaceState3D::collide_shape(const PS3DT::ShapeParameters 
 }
 
 struct _RestResultData {
-	const GodotCollisionObject3D *object = nullptr;
+	const FADECollisionObject3D *object = nullptr;
 	int local_shape = 0;
 	int shape = 0;
 	Vector3 contact;
@@ -423,7 +423,7 @@ struct _RestResultData {
 };
 
 struct _RestCallbackData {
-	const GodotCollisionObject3D *object = nullptr;
+	const FADECollisionObject3D *object = nullptr;
 	int local_shape = 0;
 	int shape = 0;
 
@@ -496,8 +496,8 @@ static void _rest_cbk_result(const Vector3 &p_point_A, int p_index_A, const Vect
 	rd->best_result.local_shape = rd->local_shape;
 }
 
-bool GodotPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_parameters, PS3DT::ShapeRestInfo *r_info) {
-	GodotShape3D *shape = GodotPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
+bool FADEPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_parameters, PS3DT::ShapeRestInfo *r_info) {
+	FADEShape3D *shape = FADEPhysicsServer3D::godot_singleton->shape_owner.get_or_null(p_parameters.shape_rid);
 	ERR_FAIL_NULL_V(shape, false);
 
 	real_t margin = MAX(p_parameters.margin, TEST_MOTION_MARGIN_MIN_VALUE);
@@ -505,7 +505,7 @@ bool GodotPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_p
 	AABB aabb = p_parameters.transform.xform(shape->get_aabb());
 	aabb = aabb.grow(margin);
 
-	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, GodotSpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
+	int amount = space->broadphase->cull_aabb(aabb, space->intersection_query_results, FADESpace3D::INTERSECTION_QUERY_MAX, space->intersection_query_subindex_results);
 
 	_RestCallbackData rcd;
 
@@ -519,7 +519,7 @@ bool GodotPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_p
 			continue;
 		}
 
-		const GodotCollisionObject3D *col_obj = space->intersection_query_results[i];
+		const FADECollisionObject3D *col_obj = space->intersection_query_results[i];
 
 		if (p_parameters.exclude.has(col_obj->get_self())) {
 			continue;
@@ -529,7 +529,7 @@ bool GodotPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_p
 
 		rcd.object = col_obj;
 		rcd.shape = shape_idx;
-		bool sc = GodotCollisionSolver3D::solve_static(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), _rest_cbk_result, &rcd, nullptr, margin);
+		bool sc = FADECollisionSolver3D::solve_static(shape, p_parameters.transform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), _rest_cbk_result, &rcd, nullptr, margin);
 		if (!sc) {
 			continue;
 		}
@@ -544,8 +544,8 @@ bool GodotPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_p
 	r_info->normal = rcd.best_result.normal;
 	r_info->point = rcd.best_result.contact;
 	r_info->rid = rcd.best_result.object->get_self();
-	if (rcd.best_result.object->get_type() == GodotCollisionObject3D::TYPE_BODY) {
-		const GodotBody3D *body = static_cast<const GodotBody3D *>(rcd.best_result.object);
+	if (rcd.best_result.object->get_type() == FADECollisionObject3D::TYPE_BODY) {
+		const FADEBody3D *body = static_cast<const FADEBody3D *>(rcd.best_result.object);
 		Vector3 rel_vec = rcd.best_result.contact - (body->get_transform().origin + body->get_center_of_mass());
 		r_info->linear_velocity = body->get_linear_velocity() + (body->get_angular_velocity()).cross(rel_vec);
 
@@ -556,10 +556,10 @@ bool GodotPhysicsDirectSpaceState3D::rest_info(const PS3DT::ShapeParameters &p_p
 	return true;
 }
 
-Vector3 GodotPhysicsDirectSpaceState3D::get_closest_point_to_object_volume(RID p_object, const Vector3 p_point) const {
-	GodotCollisionObject3D *obj = GodotPhysicsServer3D::godot_singleton->area_owner.get_or_null(p_object);
+Vector3 FADEPhysicsDirectSpaceState3D::get_closest_point_to_object_volume(RID p_object, const Vector3 p_point) const {
+	FADECollisionObject3D *obj = FADEPhysicsServer3D::godot_singleton->area_owner.get_or_null(p_object);
 	if (!obj) {
-		obj = GodotPhysicsServer3D::godot_singleton->body_owner.get_or_null(p_object);
+		obj = FADEPhysicsServer3D::godot_singleton->body_owner.get_or_null(p_object);
 	}
 	ERR_FAIL_NULL_V(obj, Vector3());
 
@@ -576,7 +576,7 @@ Vector3 GodotPhysicsDirectSpaceState3D::get_closest_point_to_object_volume(RID p
 		}
 
 		Transform3D shape_xform = obj->get_transform() * obj->get_shape_transform(i);
-		GodotShape3D *shape = obj->get_shape(i);
+		FADEShape3D *shape = obj->get_shape(i);
 
 		Vector3 point = shape->get_closest_point_to(shape_xform.affine_inverse().xform(p_point));
 		point = shape_xform.xform(point);
@@ -596,13 +596,13 @@ Vector3 GodotPhysicsDirectSpaceState3D::get_closest_point_to_object_volume(RID p
 	}
 }
 
-GodotPhysicsDirectSpaceState3D::GodotPhysicsDirectSpaceState3D() {
+FADEPhysicsDirectSpaceState3D::FADEPhysicsDirectSpaceState3D() {
 	space = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int GodotSpace3D::_cull_aabb_for_body(GodotBody3D *p_body, const AABB &p_aabb) {
+int FADESpace3D::_cull_aabb_for_body(FADEBody3D *p_body, const AABB &p_aabb) {
 	int amount = broadphase->cull_aabb(p_aabb, intersection_query_results, INTERSECTION_QUERY_MAX, intersection_query_subindex_results);
 
 	for (int i = 0; i < amount; i++) {
@@ -610,13 +610,13 @@ int GodotSpace3D::_cull_aabb_for_body(GodotBody3D *p_body, const AABB &p_aabb) {
 
 		if (intersection_query_results[i] == p_body) {
 			keep = false;
-		} else if (intersection_query_results[i]->get_type() == GodotCollisionObject3D::TYPE_AREA) {
+		} else if (intersection_query_results[i]->get_type() == FADECollisionObject3D::TYPE_AREA) {
 			keep = false;
-		} else if (intersection_query_results[i]->get_type() == GodotCollisionObject3D::TYPE_SOFT_BODY) {
+		} else if (intersection_query_results[i]->get_type() == FADECollisionObject3D::TYPE_SOFT_BODY) {
 			keep = false;
-		} else if (!p_body->collides_with(static_cast<GodotBody3D *>(intersection_query_results[i]))) {
+		} else if (!p_body->collides_with(static_cast<FADEBody3D *>(intersection_query_results[i]))) {
 			keep = false;
-		} else if (static_cast<GodotBody3D *>(intersection_query_results[i])->has_exception(p_body->get_self()) || p_body->has_exception(intersection_query_results[i]->get_self())) {
+		} else if (static_cast<FADEBody3D *>(intersection_query_results[i])->has_exception(p_body->get_self()) || p_body->has_exception(intersection_query_results[i]->get_self())) {
 			keep = false;
 		}
 
@@ -634,7 +634,7 @@ int GodotSpace3D::_cull_aabb_for_body(GodotBody3D *p_body, const AABB &p_aabb) {
 	return amount;
 }
 
-bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionParameters &p_parameters, PS3DT::MotionResult *r_result) {
+bool FADESpace3D::test_body_motion(FADEBody3D *p_body, const PS3DT::MotionParameters &p_parameters, PS3DT::MotionResult *r_result) {
 	//give me back regular physics engine logic
 	//this is madness
 	//and most people using this function will think
@@ -696,13 +696,13 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 		real_t priorities[max_results];
 
 		do {
-			GodotPhysicsServer3D::CollCbkData cbk;
+			FADEPhysicsServer3D::CollCbkData cbk;
 			cbk.max = max_results;
 			cbk.amount = 0;
 			cbk.ptr = sr;
 
-			GodotPhysicsServer3D::CollCbkData *cbkptr = &cbk;
-			GodotCollisionSolver3D::CallbackResult cbkres = GodotPhysicsServer3D::_shape_col_cbk;
+			FADEPhysicsServer3D::CollCbkData *cbkptr = &cbk;
+			FADECollisionSolver3D::CallbackResult cbkres = FADEPhysicsServer3D::_shape_col_cbk;
 			int priority_amount = 0;
 
 			bool collided = false;
@@ -715,10 +715,10 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 				}
 
 				Transform3D body_shape_xform = body_transform * p_body->get_shape_transform(j);
-				GodotShape3D *body_shape = p_body->get_shape(j);
+				FADEShape3D *body_shape = p_body->get_shape(j);
 
 				for (int i = 0; i < amount; i++) {
-					const GodotCollisionObject3D *col_obj = intersection_query_results[i];
+					const FADECollisionObject3D *col_obj = intersection_query_results[i];
 					if (p_parameters.exclude_bodies.has(col_obj->get_self())) {
 						continue;
 					}
@@ -728,7 +728,7 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 
 					int shape_idx = intersection_query_subindex_results[i];
 
-					if (GodotCollisionSolver3D::solve_static(body_shape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), cbkres, cbkptr, nullptr, margin)) {
+					if (FADECollisionSolver3D::solve_static(body_shape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), cbkres, cbkptr, nullptr, margin)) {
 						collided = cbk.amount > 0;
 					}
 					while (cbk.amount > priority_amount) {
@@ -798,13 +798,13 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 				continue;
 			}
 
-			GodotShape3D *body_shape = p_body->get_shape(j);
+			FADEShape3D *body_shape = p_body->get_shape(j);
 
 			// Colliding separation rays allows to properly snap to the ground,
 			// otherwise it's not needed in regular motion.
 			if (!p_parameters.collide_separation_ray && (body_shape->get_type() == PS3DE::SHAPE_SEPARATION_RAY)) {
 				// When slide on slope is on, separation ray shape acts like a regular shape.
-				if (!static_cast<GodotSeparationRayShape3D *>(body_shape)->get_slide_on_slope()) {
+				if (!static_cast<FADESeparationRayShape3D *>(body_shape)->get_slide_on_slope()) {
 					continue;
 				}
 			}
@@ -812,7 +812,7 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 			Transform3D body_shape_xform = body_transform * p_body->get_shape_transform(j);
 
 			Transform3D body_shape_xform_inv = body_shape_xform.affine_inverse();
-			GodotMotionShape3D mshape;
+			FADEMotionShape3D mshape;
 			mshape.shape = body_shape;
 			mshape.motion = body_shape_xform_inv.basis.xform(p_parameters.motion);
 
@@ -822,7 +822,7 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 			real_t best_unsafe = 1;
 
 			for (int i = 0; i < amount; i++) {
-				const GodotCollisionObject3D *col_obj = intersection_query_results[i];
+				const FADECollisionObject3D *col_obj = intersection_query_results[i];
 				if (p_parameters.exclude_bodies.has(col_obj->get_self())) {
 					continue;
 				}
@@ -838,12 +838,12 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 
 				Transform3D col_obj_xform = col_obj->get_transform() * col_obj->get_shape_transform(shape_idx);
 				//test initial overlap, does it collide if going all the way?
-				if (GodotCollisionSolver3D::solve_distance(&mshape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, motion_aabb, &sep_axis)) {
+				if (FADECollisionSolver3D::solve_distance(&mshape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, motion_aabb, &sep_axis)) {
 					continue;
 				}
 				sep_axis = motion_normal;
 
-				if (!GodotCollisionSolver3D::solve_distance(body_shape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, motion_aabb, &sep_axis)) {
+				if (!FADECollisionSolver3D::solve_distance(body_shape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj_xform, point_A, point_B, motion_aabb, &sep_axis)) {
 					stuck = true;
 					break;
 				}
@@ -859,7 +859,7 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 
 					Vector3 lA, lB;
 					Vector3 sep = motion_normal; //important optimization for this to work fast enough
-					bool collided = !GodotCollisionSolver3D::solve_distance(&mshape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj_xform, lA, lB, motion_aabb, &sep);
+					bool collided = !FADECollisionSolver3D::solve_distance(&mshape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj_xform, lA, lB, motion_aabb, &sep);
 
 					if (collided) {
 						hi = fraction;
@@ -942,10 +942,10 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 			}
 
 			Transform3D body_shape_xform = ugt * p_body->get_shape_transform(j);
-			GodotShape3D *body_shape = p_body->get_shape(j);
+			FADEShape3D *body_shape = p_body->get_shape(j);
 
 			for (int i = 0; i < amount; i++) {
-				const GodotCollisionObject3D *col_obj = intersection_query_results[i];
+				const FADECollisionObject3D *col_obj = intersection_query_results[i];
 				if (p_parameters.exclude_bodies.has(col_obj->get_self())) {
 					continue;
 				}
@@ -958,7 +958,7 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 				rcd.object = col_obj;
 				rcd.shape = shape_idx;
 				rcd.local_shape = j;
-				bool sc = GodotCollisionSolver3D::solve_static(body_shape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), _rest_cbk_result, &rcd, nullptr, margin);
+				bool sc = FADECollisionSolver3D::solve_static(body_shape, body_shape_xform, col_obj->get_shape(shape_idx), col_obj->get_transform() * col_obj->get_shape_transform(shape_idx), _rest_cbk_result, &rcd, nullptr, margin);
 				if (!sc) {
 					continue;
 				}
@@ -980,7 +980,7 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 					collision.position = result.contact;
 					collision.depth = result.len;
 
-					const GodotBody3D *body = static_cast<const GodotBody3D *>(result.object);
+					const FADEBody3D *body = static_cast<const FADEBody3D *>(result.object);
 
 					Vector3 rel_vec = result.contact - (body->get_transform().origin + body->get_center_of_mass());
 					collision.collider_velocity = body->get_linear_velocity() + (body->get_angular_velocity()).cross(rel_vec);
@@ -1016,40 +1016,40 @@ bool GodotSpace3D::test_body_motion(GodotBody3D *p_body, const PS3DT::MotionPara
 }
 
 // Assumes a valid collision pair, this should have been checked beforehand in the BVH or octree.
-void *GodotSpace3D::_broadphase_pair(GodotCollisionObject3D *A, int p_subindex_A, GodotCollisionObject3D *B, int p_subindex_B, void *p_self) {
-	GodotCollisionObject3D::Type type_A = A->get_type();
-	GodotCollisionObject3D::Type type_B = B->get_type();
+void *FADESpace3D::_broadphase_pair(FADECollisionObject3D *A, int p_subindex_A, FADECollisionObject3D *B, int p_subindex_B, void *p_self) {
+	FADECollisionObject3D::Type type_A = A->get_type();
+	FADECollisionObject3D::Type type_B = B->get_type();
 	if (type_A > type_B) {
 		SWAP(A, B);
 		SWAP(p_subindex_A, p_subindex_B);
 		SWAP(type_A, type_B);
 	}
 
-	GodotSpace3D *self = static_cast<GodotSpace3D *>(p_self);
+	FADESpace3D *self = static_cast<FADESpace3D *>(p_self);
 
 	self->collision_pairs++;
 
-	if (type_A == GodotCollisionObject3D::TYPE_AREA) {
-		GodotArea3D *area = static_cast<GodotArea3D *>(A);
-		if (type_B == GodotCollisionObject3D::TYPE_AREA) {
-			GodotArea3D *area_b = static_cast<GodotArea3D *>(B);
-			GodotArea2Pair3D *area2_pair = memnew(GodotArea2Pair3D(area_b, p_subindex_B, area, p_subindex_A));
+	if (type_A == FADECollisionObject3D::TYPE_AREA) {
+		FADEArea3D *area = static_cast<FADEArea3D *>(A);
+		if (type_B == FADECollisionObject3D::TYPE_AREA) {
+			FADEArea3D *area_b = static_cast<FADEArea3D *>(B);
+			FADEArea2Pair3D *area2_pair = memnew(FADEArea2Pair3D(area_b, p_subindex_B, area, p_subindex_A));
 			return area2_pair;
-		} else if (type_B == GodotCollisionObject3D::TYPE_SOFT_BODY) {
-			GodotSoftBody3D *softbody = static_cast<GodotSoftBody3D *>(B);
-			GodotAreaSoftBodyPair3D *soft_area_pair = memnew(GodotAreaSoftBodyPair3D(softbody, p_subindex_B, area, p_subindex_A));
+		} else if (type_B == FADECollisionObject3D::TYPE_SOFT_BODY) {
+			FADESoftBody3D *softbody = static_cast<FADESoftBody3D *>(B);
+			FADEAreaSoftBodyPair3D *soft_area_pair = memnew(FADEAreaSoftBodyPair3D(softbody, p_subindex_B, area, p_subindex_A));
 			return soft_area_pair;
 		} else {
-			GodotBody3D *body = static_cast<GodotBody3D *>(B);
-			GodotAreaPair3D *area_pair = memnew(GodotAreaPair3D(body, p_subindex_B, area, p_subindex_A));
+			FADEBody3D *body = static_cast<FADEBody3D *>(B);
+			FADEAreaPair3D *area_pair = memnew(FADEAreaPair3D(body, p_subindex_B, area, p_subindex_A));
 			return area_pair;
 		}
-	} else if (type_A == GodotCollisionObject3D::TYPE_BODY) {
-		if (type_B == GodotCollisionObject3D::TYPE_SOFT_BODY) {
-			GodotBodySoftBodyPair3D *soft_pair = memnew(GodotBodySoftBodyPair3D(static_cast<GodotBody3D *>(A), p_subindex_A, static_cast<GodotSoftBody3D *>(B)));
+	} else if (type_A == FADECollisionObject3D::TYPE_BODY) {
+		if (type_B == FADECollisionObject3D::TYPE_SOFT_BODY) {
+			FADEBodySoftBodyPair3D *soft_pair = memnew(FADEBodySoftBodyPair3D(static_cast<FADEBody3D *>(A), p_subindex_A, static_cast<FADESoftBody3D *>(B)));
 			return soft_pair;
 		} else {
-			GodotBodyPair3D *b = memnew(GodotBodyPair3D(static_cast<GodotBody3D *>(A), p_subindex_A, static_cast<GodotBody3D *>(B), p_subindex_B));
+			FADEBodyPair3D *b = memnew(FADEBodyPair3D(static_cast<FADEBody3D *>(A), p_subindex_A, static_cast<FADEBody3D *>(B), p_subindex_B));
 			return b;
 		}
 	} else {
@@ -1059,110 +1059,110 @@ void *GodotSpace3D::_broadphase_pair(GodotCollisionObject3D *A, int p_subindex_A
 	return nullptr;
 }
 
-void GodotSpace3D::_broadphase_unpair(GodotCollisionObject3D *A, int p_subindex_A, GodotCollisionObject3D *B, int p_subindex_B, void *p_data, void *p_self) {
+void FADESpace3D::_broadphase_unpair(FADECollisionObject3D *A, int p_subindex_A, FADECollisionObject3D *B, int p_subindex_B, void *p_data, void *p_self) {
 	if (!p_data) {
 		return;
 	}
 
-	GodotSpace3D *self = static_cast<GodotSpace3D *>(p_self);
+	FADESpace3D *self = static_cast<FADESpace3D *>(p_self);
 	self->collision_pairs--;
-	GodotConstraint3D *c = static_cast<GodotConstraint3D *>(p_data);
+	FADEConstraint3D *c = static_cast<FADEConstraint3D *>(p_data);
 	memdelete(c);
 }
 
-const SelfList<GodotBody3D>::List &GodotSpace3D::get_active_body_list() const {
+const SelfList<FADEBody3D>::List &FADESpace3D::get_active_body_list() const {
 	return active_list;
 }
 
-void GodotSpace3D::body_add_to_active_list(SelfList<GodotBody3D> *p_body) {
+void FADESpace3D::body_add_to_active_list(SelfList<FADEBody3D> *p_body) {
 	active_list.add(p_body);
 }
 
-void GodotSpace3D::body_remove_from_active_list(SelfList<GodotBody3D> *p_body) {
+void FADESpace3D::body_remove_from_active_list(SelfList<FADEBody3D> *p_body) {
 	active_list.remove(p_body);
 }
 
-void GodotSpace3D::body_add_to_mass_properties_update_list(SelfList<GodotBody3D> *p_body) {
+void FADESpace3D::body_add_to_mass_properties_update_list(SelfList<FADEBody3D> *p_body) {
 	mass_properties_update_list.add(p_body);
 }
 
-void GodotSpace3D::body_remove_from_mass_properties_update_list(SelfList<GodotBody3D> *p_body) {
+void FADESpace3D::body_remove_from_mass_properties_update_list(SelfList<FADEBody3D> *p_body) {
 	mass_properties_update_list.remove(p_body);
 }
 
-GodotBroadPhase3D *GodotSpace3D::get_broadphase() {
+FADEBroadPhase3D *FADESpace3D::get_broadphase() {
 	return broadphase;
 }
 
-void GodotSpace3D::add_object(GodotCollisionObject3D *p_object) {
+void FADESpace3D::add_object(FADECollisionObject3D *p_object) {
 	ERR_FAIL_COND(objects.has(p_object));
 	objects.insert(p_object);
 }
 
-void GodotSpace3D::remove_object(GodotCollisionObject3D *p_object) {
+void FADESpace3D::remove_object(FADECollisionObject3D *p_object) {
 	ERR_FAIL_COND(!objects.has(p_object));
 	objects.erase(p_object);
 }
 
-const HashSet<GodotCollisionObject3D *> &GodotSpace3D::get_objects() const {
+const HashSet<FADECollisionObject3D *> &FADESpace3D::get_objects() const {
 	return objects;
 }
 
-void GodotSpace3D::body_add_to_state_query_list(SelfList<GodotBody3D> *p_body) {
+void FADESpace3D::body_add_to_state_query_list(SelfList<FADEBody3D> *p_body) {
 	state_query_list.add(p_body);
 }
 
-void GodotSpace3D::body_remove_from_state_query_list(SelfList<GodotBody3D> *p_body) {
+void FADESpace3D::body_remove_from_state_query_list(SelfList<FADEBody3D> *p_body) {
 	state_query_list.remove(p_body);
 }
 
-void GodotSpace3D::area_add_to_monitor_query_list(SelfList<GodotArea3D> *p_area) {
+void FADESpace3D::area_add_to_monitor_query_list(SelfList<FADEArea3D> *p_area) {
 	monitor_query_list.add(p_area);
 }
 
-void GodotSpace3D::area_remove_from_monitor_query_list(SelfList<GodotArea3D> *p_area) {
+void FADESpace3D::area_remove_from_monitor_query_list(SelfList<FADEArea3D> *p_area) {
 	monitor_query_list.remove(p_area);
 }
 
-void GodotSpace3D::area_add_to_moved_list(SelfList<GodotArea3D> *p_area) {
+void FADESpace3D::area_add_to_moved_list(SelfList<FADEArea3D> *p_area) {
 	area_moved_list.add(p_area);
 }
 
-void GodotSpace3D::area_remove_from_moved_list(SelfList<GodotArea3D> *p_area) {
+void FADESpace3D::area_remove_from_moved_list(SelfList<FADEArea3D> *p_area) {
 	area_moved_list.remove(p_area);
 }
 
-const SelfList<GodotArea3D>::List &GodotSpace3D::get_moved_area_list() const {
+const SelfList<FADEArea3D>::List &FADESpace3D::get_moved_area_list() const {
 	return area_moved_list;
 }
 
-const SelfList<GodotSoftBody3D>::List &GodotSpace3D::get_active_soft_body_list() const {
+const SelfList<FADESoftBody3D>::List &FADESpace3D::get_active_soft_body_list() const {
 	return active_soft_body_list;
 }
 
-void GodotSpace3D::soft_body_add_to_active_list(SelfList<GodotSoftBody3D> *p_soft_body) {
+void FADESpace3D::soft_body_add_to_active_list(SelfList<FADESoftBody3D> *p_soft_body) {
 	active_soft_body_list.add(p_soft_body);
 }
 
-void GodotSpace3D::soft_body_remove_from_active_list(SelfList<GodotSoftBody3D> *p_soft_body) {
+void FADESpace3D::soft_body_remove_from_active_list(SelfList<FADESoftBody3D> *p_soft_body) {
 	active_soft_body_list.remove(p_soft_body);
 }
 
-void GodotSpace3D::call_queries() {
+void FADESpace3D::call_queries() {
 	while (state_query_list.first()) {
-		GodotBody3D *b = state_query_list.first()->self();
+		FADEBody3D *b = state_query_list.first()->self();
 		state_query_list.remove(state_query_list.first());
 		b->call_queries();
 	}
 
 	while (monitor_query_list.first()) {
-		GodotArea3D *a = monitor_query_list.first()->self();
+		FADEArea3D *a = monitor_query_list.first()->self();
 		monitor_query_list.remove(monitor_query_list.first());
 		a->call_queries();
 	}
 }
 
-void GodotSpace3D::setup() {
+void FADESpace3D::setup() {
 	contact_debug_count = 0;
 	while (mass_properties_update_list.first()) {
 		mass_properties_update_list.first()->self()->update_mass_properties();
@@ -1170,11 +1170,11 @@ void GodotSpace3D::setup() {
 	}
 }
 
-void GodotSpace3D::update() {
+void FADESpace3D::update() {
 	broadphase->update();
 }
 
-void GodotSpace3D::set_param(PS3DE::SpaceParameter p_param, real_t p_value) {
+void FADESpace3D::set_param(PS3DE::SpaceParameter p_param, real_t p_value) {
 	switch (p_param) {
 		case PS3DE::SPACE_PARAM_CONTACT_RECYCLE_RADIUS:
 			contact_recycle_radius = p_value;
@@ -1203,7 +1203,7 @@ void GodotSpace3D::set_param(PS3DE::SpaceParameter p_param, real_t p_value) {
 	}
 }
 
-real_t GodotSpace3D::get_param(PS3DE::SpaceParameter p_param) const {
+real_t FADESpace3D::get_param(PS3DE::SpaceParameter p_param) const {
 	switch (p_param) {
 		case PS3DE::SPACE_PARAM_CONTACT_RECYCLE_RADIUS:
 			return contact_recycle_radius;
@@ -1225,23 +1225,23 @@ real_t GodotSpace3D::get_param(PS3DE::SpaceParameter p_param) const {
 	return 0;
 }
 
-void GodotSpace3D::lock() {
+void FADESpace3D::lock() {
 	locked = true;
 }
 
-void GodotSpace3D::unlock() {
+void FADESpace3D::unlock() {
 	locked = false;
 }
 
-bool GodotSpace3D::is_locked() const {
+bool FADESpace3D::is_locked() const {
 	return locked;
 }
 
-GodotPhysicsDirectSpaceState3D *GodotSpace3D::get_direct_state() {
+FADEPhysicsDirectSpaceState3D *FADESpace3D::get_direct_state() {
 	return direct_access;
 }
 
-GodotSpace3D::GodotSpace3D() {
+FADESpace3D::FADESpace3D() {
 	body_linear_velocity_sleep_threshold = GLOBAL_GET("physics/3d/sleep_threshold_linear");
 	body_angular_velocity_sleep_threshold = GLOBAL_GET("physics/3d/sleep_threshold_angular");
 	body_time_to_sleep = GLOBAL_GET("physics/3d/time_before_sleep");
@@ -1251,15 +1251,15 @@ GodotSpace3D::GodotSpace3D() {
 	contact_max_allowed_penetration = GLOBAL_GET("physics/3d/solver/contact_max_allowed_penetration");
 	contact_bias = GLOBAL_GET("physics/3d/solver/default_contact_bias");
 
-	broadphase = GodotBroadPhase3D::create_func();
+	broadphase = FADEBroadPhase3D::create_func();
 	broadphase->set_pair_callback(_broadphase_pair, this);
 	broadphase->set_unpair_callback(_broadphase_unpair, this);
 
-	direct_access = memnew(GodotPhysicsDirectSpaceState3D);
+	direct_access = memnew(FADEPhysicsDirectSpaceState3D);
 	direct_access->space = this;
 }
 
-GodotSpace3D::~GodotSpace3D() {
+FADESpace3D::~FADESpace3D() {
 	memdelete(broadphase);
 	memdelete(direct_access);
 }

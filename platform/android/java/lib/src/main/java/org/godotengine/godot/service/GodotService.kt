@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotService.kt                                                       */
+/*  FADEService.kt                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -48,24 +48,24 @@ import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
-import org.godotengine.godot.Godot
-import org.godotengine.godot.GodotHost
+import org.godotengine.godot.FADE
+import org.godotengine.godot.FADEHost
 import org.godotengine.godot.R
 import java.lang.ref.WeakReference
 
 /**
- * Specialized [Service] implementation able to host a Godot engine instance.
+ * Specialized [Service] implementation able to host a FADE engine instance.
  *
  * When used remotely (from another process), this component lacks access to an [android.app.Activity]
- * instance, and as such it does not have full access to the set of Godot UI capabilities.
+ * instance, and as such it does not have full access to the set of FADE UI capabilities.
  *
- * Limitations: As of version 4.5, use of vulkan + swappy causes [GodotService] to crash as swappy requires an Activity
- * context. So [GodotService] should be used with OpenGL or with Vulkan with swappy disabled.
+ * Limitations: As of version 4.5, use of vulkan + swappy causes [FADEService] to crash as swappy requires an Activity
+ * context. So [FADEService] should be used with OpenGL or with Vulkan with swappy disabled.
  */
-open class GodotService : Service() {
+open class FADEService : Service() {
 
 	companion object {
-		private val TAG = GodotService::class.java.simpleName
+		private val TAG = FADEService::class.java.simpleName
 
 		const val EXTRA_MSG_PAYLOAD = "extraMsgPayload"
 
@@ -161,7 +161,7 @@ open class GodotService : Service() {
 	/**
 	 * Handler of incoming messages from remote clients.
 	 */
-	private class IncomingHandler(private val serviceRef: WeakReference<GodotService>) : Handler() {
+	private class IncomingHandler(private val serviceRef: WeakReference<FADEService>) : Handler() {
 
 		var viewHost: SurfaceControlViewHost? = null
 
@@ -207,7 +207,7 @@ open class GodotService : Service() {
 
 						var currentViewHost = viewHost
 						if (currentViewHost != null) {
-							Log.i(TAG, "Attached Godot engine to SurfaceControlViewHost")
+							Log.i(TAG, "Attached FADE engine to SurfaceControlViewHost")
 							service.listener?.onEngineStatusUpdate(
 								EngineStatus.SCVH_CREATED,
 								bundleOf(KEY_SURFACE_PACKAGE to currentViewHost.surfacePackage)
@@ -240,7 +240,7 @@ open class GodotService : Service() {
 						currentViewHost = SurfaceControlViewHost(service, display, hostToken).apply {
 							setView(godotContainerLayout, width, height)
 
-							Log.i(TAG, "Attached Godot engine to SurfaceControlViewHost")
+							Log.i(TAG, "Attached FADE engine to SurfaceControlViewHost")
 							service.listener?.onEngineStatusUpdate(
 								EngineStatus.SCVH_CREATED,
 								bundleOf(KEY_SURFACE_PACKAGE to surfacePackage)
@@ -257,9 +257,9 @@ open class GodotService : Service() {
 		}
 	}
 
-	private inner class GodotServiceHost : GodotHost {
+	private inner class FADEServiceHost : FADEHost {
 		override fun getActivity() = null
-		override fun getGodot() = this@GodotService.godot
+		override fun getFADE() = this@FADEService.godot
 		override fun getCommandLine() = commandLineParams
 
 		override fun runOnHostThread(action: Runnable) {
@@ -270,16 +270,16 @@ open class GodotService : Service() {
 			}
 		}
 
-		override fun onGodotForceQuit(instance: Godot) {
+		override fun onFADEForceQuit(instance: FADE) {
 			if (instance === godot) {
-				Log.d(TAG, "Force quitting Godot service")
+				Log.d(TAG, "Force quitting FADE service")
 				forceQuitService()
 			}
 		}
 
-		override fun onGodotRestartRequested(instance: Godot) {
+		override fun onFADERestartRequested(instance: FADE) {
 			if (instance === godot) {
-				Log.d(TAG, "Restarting Godot service")
+				Log.d(TAG, "Restarting FADE service")
 				listener?.onEngineRestartRequested()
 			}
 		}
@@ -288,9 +288,9 @@ open class GodotService : Service() {
 	private val commandLineParams = ArrayList<String>()
 	private val handler = IncomingHandler(WeakReference(this))
 	private val messenger = Messenger(handler)
-	private val godotHost = GodotServiceHost()
+	private val godotHost = FADEServiceHost()
 
-	private val godot: Godot by lazy { Godot.getInstance(applicationContext) }
+	private val godot: FADE by lazy { FADE.getInstance(applicationContext) }
 	private var listener: RemoteListener? = null
 
 	override fun onCreate() {
@@ -320,9 +320,9 @@ open class GodotService : Service() {
 	private fun performEngineInitialization(): Boolean {
 		Log.d(TAG, "Performing engine initialization")
 		try {
-			// Initialize the Godot instance
+			// Initialize the FADE instance
 			if (!godot.initEngine(godotHost, godotHost.commandLine, godotHost.getHostPlugins(godot))) {
-				throw IllegalStateException("Unable to initialize Godot engine layer")
+				throw IllegalStateException("Unable to initialize FADE engine layer")
 			}
 
 			if (godot.onInitRenderView(godotHost) == null) {
@@ -369,7 +369,7 @@ open class GodotService : Service() {
 			}
 
 			if (!performEngineInitialization()) {
-				Log.e(TAG, "Unable to initialize Godot engine")
+				Log.e(TAG, "Unable to initialize FADE engine")
 				return null
 			} else {
 				Log.i(TAG, "Engine initialization complete!")
@@ -379,7 +379,7 @@ open class GodotService : Service() {
 		if (godotContainerLayout == null) {
 			listener?.onEngineError(EngineError.INIT_FAILED)
 		} else {
-			Log.i(TAG, "Initialized Godot engine")
+			Log.i(TAG, "Initialized FADE engine")
 			listener?.onEngineStatusUpdate(EngineStatus.INITIALIZED)
 		}
 
@@ -388,11 +388,11 @@ open class GodotService : Service() {
 
 	private fun startEngine() {
 		if (!godot.isInitialized()) {
-			Log.e(TAG, "Attempting to start uninitialized Godot engine instance")
+			Log.e(TAG, "Attempting to start uninitialized FADE engine instance")
 			return
 		}
 
-		Log.d(TAG, "Starting Godot engine")
+		Log.d(TAG, "Starting FADE engine")
 		godot.onStart(godotHost)
 		godot.onResume(godotHost)
 
@@ -401,11 +401,11 @@ open class GodotService : Service() {
 
 	private fun stopEngine() {
 		if (!godot.isInitialized()) {
-			Log.e(TAG, "Attempting to stop uninitialized Godot engine instance")
+			Log.e(TAG, "Attempting to stop uninitialized FADE engine instance")
 			return
 		}
 
-		Log.d(TAG, "Stopping Godot engine")
+		Log.d(TAG, "Stopping FADE engine")
 		godot.onPause(godotHost)
 		godot.onStop(godotHost)
 

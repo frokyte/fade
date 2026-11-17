@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class AllReadOnly
 {
@@ -7,47 +7,47 @@ partial class AllReadOnly
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.GodotObject.PropertyName {
+    public new class PropertyName : global::FADE.FADEObject.PropertyName {
         /// <summary>
         /// Cached name for the 'ReadOnlyAutoProperty' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @ReadOnlyAutoProperty = "ReadOnlyAutoProperty";
+        public new static readonly global::FADE.StringName @ReadOnlyAutoProperty = "ReadOnlyAutoProperty";
         /// <summary>
         /// Cached name for the 'ReadOnlyProperty' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @ReadOnlyProperty = "ReadOnlyProperty";
+        public new static readonly global::FADE.StringName @ReadOnlyProperty = "ReadOnlyProperty";
         /// <summary>
         /// Cached name for the 'InitOnlyAutoProperty' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @InitOnlyAutoProperty = "InitOnlyAutoProperty";
+        public new static readonly global::FADE.StringName @InitOnlyAutoProperty = "InitOnlyAutoProperty";
         /// <summary>
         /// Cached name for the 'ReadOnlyField' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @ReadOnlyField = "ReadOnlyField";
+        public new static readonly global::FADE.StringName @ReadOnlyField = "ReadOnlyField";
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotPropertyTrampolines(global::Godot.Bridge.PropertyTrampolineCollector collector)
+        public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
             static godot_variant trampoline_get_ReadOnlyAutoProperty(object godotObject)
             {
                 var ret = ((global::AllReadOnly)godotObject).@ReadOnlyAutoProperty;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
             static godot_variant trampoline_get_ReadOnlyProperty(object godotObject)
             {
                 var ret = ((global::AllReadOnly)godotObject).@ReadOnlyProperty;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
             static godot_variant trampoline_get_InitOnlyAutoProperty(object godotObject)
             {
                 var ret = ((global::AllReadOnly)godotObject).@InitOnlyAutoProperty;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
             static godot_variant trampoline_get_ReadOnlyField(object godotObject)
             {
                 var ret = ((global::AllReadOnly)godotObject).@ReadOnlyField;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
             var aux_delegate_get_ReadOnlyAutoProperty = trampoline_get_ReadOnlyAutoProperty;
             collector.TryAdd(PropertyName.@ReadOnlyAutoProperty, new(aux_delegate_get_ReadOnlyAutoProperty.Method.MethodHandle.GetFunctionPointer()), new(global::System.IntPtr.Zero));
@@ -61,17 +61,17 @@ partial class AllReadOnly
     }
     /// <summary>
     /// Get the property information for all the properties declared in this class.
-    /// This method is used by Godot to register the available properties in the editor.
+    /// This method is used by FADE to register the available properties in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo> GetGodotPropertyList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo> GetFADEPropertyList()
     {
-        var properties = new global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>();
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@ReadOnlyField, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@ReadOnlyAutoProperty, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@ReadOnlyProperty, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@InitOnlyAutoProperty, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
+        var properties = new global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo>();
+        properties.Add(new(type: (global::FADE.Variant.Type)4, name: PropertyName.@ReadOnlyField, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::FADE.Variant.Type)4, name: PropertyName.@ReadOnlyAutoProperty, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::FADE.Variant.Type)4, name: PropertyName.@ReadOnlyProperty, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::FADE.Variant.Type)4, name: PropertyName.@InitOnlyAutoProperty, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
         return properties;
     }
 #pragma warning restore CS0109

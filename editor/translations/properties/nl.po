@@ -1,7 +1,7 @@
-# Dutch translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Dutch translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # aelspire <aelspire@gmail.com>, 2017.
 # Aram Nap <xyphex.aram@gmail.com>, 2017.
 # Arjan219 <arjannugteren1@gmail.com>, 2017-2018, 2020.
@@ -80,7 +80,7 @@
 # Luka van der Plas <lukavdplas@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-11-10 04:56+0000\n"
@@ -3063,8 +3063,8 @@ msgstr "Call Stacks Altijd Bijhouden"
 msgid "Always Track Local Variables"
 msgstr "Lokale Variabelen Altijd Bijhouden"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Hernoemd in Godot 4 Hint"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Hernoemd in FADE 4 Hint"
 
 msgid "Unassigned Variable"
 msgstr "Niet-toegewezen Variabele"
@@ -3294,11 +3294,11 @@ msgstr "Licht"
 msgid "Visible"
 msgstr "Zichtbaar"
 
-msgid "glTF to Godot Expression"
-msgstr "GlTF naar Godot-expressie"
+msgid "glTF to FADE Expression"
+msgstr "GlTF naar FADE-expressie"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot naar glTF-expressie"
+msgid "FADE to glTF Expression"
+msgstr "FADE naar glTF-expressie"
 
 msgid "Node Paths"
 msgstr "Knooppaden"
@@ -3765,8 +3765,8 @@ msgstr "ADB Afsluiten bij Verlaten"
 msgid "Use Wi-Fi for Remote Debug"
 msgstr "Wi-Fi Gebruiken voor Debuggen op Afstand"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Godot Opstartscherm Uitzetten"
+msgid "Disable FADE Boot Splash"
+msgstr "FADE Opstartscherm Uitzetten"
 
 msgid "Background Color"
 msgstr "Achtergrondkleur"

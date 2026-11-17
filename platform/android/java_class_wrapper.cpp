@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -411,7 +411,7 @@ bool JavaClass::_call_method(JavaObject *p_instance, const StringName &p_method,
 }
 
 bool JavaClass::_get(const StringName &p_name, Variant &r_ret) const {
-	// Godot properties take precedence.
+	// FADE properties take precedence.
 	if (RefCounted::_get(p_name, r_ret)) {
 		return true;
 	}
@@ -420,7 +420,7 @@ bool JavaClass::_get(const StringName &p_name, Variant &r_ret) const {
 }
 
 bool JavaClass::_set(const StringName &p_name, const Variant &p_property) {
-	// Godot properties take precedence.
+	// FADE properties take precedence.
 	if (RefCounted::_set(p_name, p_property)) {
 		return true;
 	}
@@ -631,7 +631,7 @@ bool JavaClass::_set_field(jobject p_instance, const StringName &p_name, const V
 }
 
 Variant JavaClass::callp(const StringName &p_method, const Variant **p_args, int p_argcount, Callable::CallError &r_error) {
-	// Godot methods take precedence.
+	// FADE methods take precedence.
 	Variant ret = RefCounted::callp(p_method, p_args, p_argcount, r_error);
 	if (r_error.error == Callable::CallError::CALL_OK) {
 		return ret;
@@ -757,7 +757,7 @@ JavaClass::~JavaClass() {
 /////////////////////
 
 Variant JavaObject::callp(const StringName &p_method, const Variant **p_args, int p_argcount, Callable::CallError &r_error) {
-	// Godot methods take precedence.
+	// FADE methods take precedence.
 	Variant ret = RefCounted::callp(p_method, p_args, p_argcount, r_error);
 	if (r_error.error == Callable::CallError::CALL_OK) {
 		return ret;
@@ -782,7 +782,7 @@ Ref<JavaClass> JavaObject::get_java_class() const {
 }
 
 bool JavaObject::_get(const StringName &p_name, Variant &r_ret) const {
-	// Godot properties take precedence.
+	// FADE properties take precedence.
 	if (RefCounted::_get(p_name, r_ret)) {
 		return true;
 	}
@@ -795,7 +795,7 @@ bool JavaObject::_get(const StringName &p_name, Variant &r_ret) const {
 }
 
 bool JavaObject::_set(const StringName &p_name, const Variant &p_property) {
-	// Godot properties take precedence.
+	// FADE properties take precedence.
 	if (RefCounted::_set(p_name, p_property)) {
 		return true;
 	}
@@ -2104,8 +2104,8 @@ JavaClassWrapper::JavaClassWrapper() {
 	android_runtime_class = jni_find_class(env, "org/godotengine/godot/plugin/AndroidRuntimePlugin");
 	if (android_runtime_class) {
 		android_runtime_class = (jclass)env->NewGlobalRef(android_runtime_class);
-		ARP_create_proxy_from_godot_callable = env->GetStaticMethodID(android_runtime_class, "createProxyFromGodotCallable", "(Ljava/lang/String;Lorg/godotengine/godot/variant/Callable;)Ljava/lang/Object;");
-		ARP_create_proxy_from_godot_object_id = env->GetStaticMethodID(android_runtime_class, "createProxyFromGodotObjectID", "(J[Ljava/lang/String;)Ljava/lang/Object;");
+		ARP_create_proxy_from_godot_callable = env->GetStaticMethodID(android_runtime_class, "createProxyFromFADECallable", "(Ljava/lang/String;Lorg/godotengine/godot/variant/Callable;)Ljava/lang/Object;");
+		ARP_create_proxy_from_godot_object_id = env->GetStaticMethodID(android_runtime_class, "createProxyFromFADEObjectID", "(J[Ljava/lang/String;)Ljava/lang/Object;");
 	}
 
 	jclass bclass = jni_find_class(env, "java/lang/Class");

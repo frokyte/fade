@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  FullScreenGodotApp.java                                               */
+/*  FullScreenFADEApp.java                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,9 +31,9 @@
 package org.godotengine.godot;
 
 /**
- * Base abstract activity for Android apps intending to use Godot as the primary screen.
+ * Base abstract activity for Android apps intending to use FADE as the primary screen.
  *
- * @deprecated Use {@link GodotActivity}
+ * @deprecated Use {@link FADEActivity}
  */
 @Deprecated
-public abstract class FullScreenGodotApp extends GodotActivity {}
+public abstract class FullScreenFADEApp extends FADEActivity {}

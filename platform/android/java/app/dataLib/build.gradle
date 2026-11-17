@@ -12,7 +12,7 @@ dependencies {
     } else if (rootProject.findProject(":godot:lib")) {
         compileOnly project(":godot:lib")
     } else {
-        // Godot gradle build mode. In this scenario this project is the only one around and the Godot
+        // FADE gradle build mode. In this scenario this project is the only one around and the FADE
         // library is available through the pre-generated godot-lib.*.aar android archive files.
         debugCompileOnly fileTree(dir: '../libs/debug', include: ['**/*.jar', '**/*.aar'])
         releaseCompileOnly fileTree(dir: '../libs/release', include: ['**/*.jar', '**/*.aar'])
@@ -24,7 +24,7 @@ android {
     compileSdk = versions.compileSdk
 
     defaultConfig {
-        // The default ignore pattern for the 'assets' directory includes hidden files and directories which are used by Godot projects.
+        // The default ignore pattern for the 'assets' directory includes hidden files and directories which are used by FADE projects.
         aaptOptions {
             ignoreAssetsPattern = "!.svn:!.git:!.gitignore:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
         }

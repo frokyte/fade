@@ -1,11 +1,11 @@
 package com.godot.game.test
 
-import org.godotengine.godot.Godot
-import org.godotengine.godot.plugin.GodotPlugin
+import org.godotengine.godot.FADE
+import org.godotengine.godot.plugin.FADEPlugin
 import org.godotengine.godot.plugin.SignalInfo
-import org.godotengine.godot.plugin.UsedByGodot
+import org.godotengine.godot.plugin.UsedByFADE
 
-class SignalTestPlugin(godot: Godot) : GodotPlugin(godot) {
+class SignalTestPlugin(godot: FADE) : FADEPlugin(godot) {
 
 	companion object {
 		private val EMISSION_TEST_SIGNAL = SignalInfo("emission_test_signal")
@@ -21,12 +21,12 @@ class SignalTestPlugin(godot: Godot) : GodotPlugin(godot) {
 		)
 	}
 
-	@UsedByGodot
+	@UsedByFADE
 	fun triggerTestSignal1() {
 		emitSignal(EMISSION_TEST_SIGNAL)
 	}
 
-	@UsedByGodot
+	@UsedByFADE
 	fun triggerLaunchTestSignal() {
 		emitSignal(LAUNCH_TESTS_SIGNAL, true, "second message")
 	}

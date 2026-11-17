@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,7 +35,7 @@
 #import "key_mapping_macos.h"
 #import "native_menu_macos.h"
 
-@implementation GodotMenuDelegate
+@implementation FADEMenuDelegate
 
 - (void)doNothing:(id)sender {
 }
@@ -63,7 +63,7 @@
 
 - (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item {
 	if (item) {
-		GodotMenuItem *value = [item representedObject];
+		FADEMenuItem *value = [item representedObject];
 		if (value && value->hover_callback.is_valid()) {
 			// If custom callback is set, use it.
 			Variant ret;
@@ -87,7 +87,7 @@
 			NSUInteger item_modifiers = [menu_item keyEquivalentModifierMask];
 
 			if (ev_modifiers == item_modifiers) {
-				GodotMenuItem *value = [menu_item representedObject];
+				FADEMenuItem *value = [menu_item representedObject];
 				if (value) {
 					if (value->key_callback.is_valid()) {
 						// If custom callback is set, use it.

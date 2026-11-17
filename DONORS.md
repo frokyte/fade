@@ -1,14 +1,14 @@
-# Donors to the Godot Engine project
+# Donors to the FADE Engine project
 
-Godot Engine is a non-profit project developed by a community of voluntary
+FADE Engine is a non-profit project developed by a community of voluntary
 contributors, as well as occasional paid contributors thanks to the financial
 support of generous donors.
 
 The ways to donate to the project, as well as details on how the funds are
-used, are described on [Godot's website](https://fund.godotengine.org).
+used, are described on [FADE's website](https://fund.godotengine.org).
 
 The following is a list of the current monthly donors, who will have their
-generous deed immortalized in the next stable release of Godot Engine.
+generous deed immortalized in the next stable release of FADE Engine.
 
 ## Patrons
 
@@ -78,7 +78,7 @@ generous deed immortalized in the next stable release of Godot Engine.
     Space Kraken Studios <https://www.spacekraken.studio/>
     Tiago Magalhães <https://azerkail.github.io/>
     TrampolineTales <https://TrampolineTales.com/>
-    Ziva.sh - Godot AI Agent <https://ziva.sh>
+    Ziva.sh - FADE AI Agent <https://ziva.sh>
     And 1 anonymous donor
 
 ## Platinum members

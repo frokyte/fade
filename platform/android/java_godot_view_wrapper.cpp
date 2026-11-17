@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,7 +34,7 @@
 
 #include "core/string/ustring.h"
 
-GodotJavaViewWrapper::GodotJavaViewWrapper(jobject godot_view) {
+FADEJavaViewWrapper::FADEJavaViewWrapper(jobject godot_view) {
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL(env);
 
@@ -54,13 +54,13 @@ GodotJavaViewWrapper::GodotJavaViewWrapper(jobject godot_view) {
 	_can_capture_pointer = env->GetMethodID(_cls, "canCapturePointer", "()Z");
 }
 
-bool GodotJavaViewWrapper::can_update_pointer_icon() const {
+bool FADEJavaViewWrapper::can_update_pointer_icon() const {
 	return _configure_pointer_icon != nullptr && _set_pointer_icon != nullptr;
 }
 
-bool GodotJavaViewWrapper::can_capture_pointer() const {
+bool FADEJavaViewWrapper::can_capture_pointer() const {
 	// We can capture the pointer if the other jni capture method ids are initialized,
-	// and GodotView#canCapturePointer() returns true.
+	// and FADEView#canCapturePointer() returns true.
 	if (_request_pointer_capture != nullptr && _release_pointer_capture != nullptr && _can_capture_pointer != nullptr) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -71,7 +71,7 @@ bool GodotJavaViewWrapper::can_capture_pointer() const {
 	return false;
 }
 
-void GodotJavaViewWrapper::request_pointer_capture() {
+void FADEJavaViewWrapper::request_pointer_capture() {
 	if (_request_pointer_capture != nullptr) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -80,7 +80,7 @@ void GodotJavaViewWrapper::request_pointer_capture() {
 	}
 }
 
-void GodotJavaViewWrapper::release_pointer_capture() {
+void FADEJavaViewWrapper::release_pointer_capture() {
 	if (_release_pointer_capture != nullptr) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -89,7 +89,7 @@ void GodotJavaViewWrapper::release_pointer_capture() {
 	}
 }
 
-void GodotJavaViewWrapper::configure_pointer_icon(int pointer_type, const String &image_path, const Vector2 &p_hotspot) {
+void FADEJavaViewWrapper::configure_pointer_icon(int pointer_type, const String &image_path, const Vector2 &p_hotspot) {
 	if (_configure_pointer_icon != nullptr) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -100,7 +100,7 @@ void GodotJavaViewWrapper::configure_pointer_icon(int pointer_type, const String
 	}
 }
 
-void GodotJavaViewWrapper::set_pointer_icon(int pointer_type) {
+void FADEJavaViewWrapper::set_pointer_icon(int pointer_type) {
 	if (_set_pointer_icon != nullptr) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -109,7 +109,7 @@ void GodotJavaViewWrapper::set_pointer_icon(int pointer_type) {
 	}
 }
 
-GodotJavaViewWrapper::~GodotJavaViewWrapper() {
+FADEJavaViewWrapper::~FADEJavaViewWrapper() {
 	JNIEnv *env = get_jni_env();
 	ERR_FAIL_NULL(env);
 

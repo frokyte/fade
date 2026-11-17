@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
     [Generator]
     public class ScriptSerializationGenerator : ISourceGenerator
@@ -16,7 +16,7 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptSerialization"))
+            if (context.IsFADESourceGeneratorDisabled("ScriptSerialization"))
                 return;
 
             INamedTypeSymbol[] godotClasses = context
@@ -24,7 +24,7 @@ namespace Godot.SourceGenerators
                 .SelectMany(tree =>
                     tree.GetRoot().DescendantNodes()
                         .OfType<ClassDeclarationSyntax>()
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectFADEScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -51,12 +51,12 @@ namespace Godot.SourceGenerators
 
                 foreach (var godotClass in godotClasses)
                 {
-                    VisitGodotScriptClass(context, typeCache, godotClass);
+                    VisitFADEScriptClass(context, typeCache, godotClass);
                 }
             }
         }
 
-        private static void VisitGodotScriptClass(
+        private static void VisitFADEScriptClass(
             GeneratorExecutionContext context,
             MarshalUtils.TypeCache typeCache,
             INamedTypeSymbol symbol
@@ -75,8 +75,8 @@ namespace Godot.SourceGenerators
 
             var source = new StringBuilder();
 
-            source.Append("using Godot;\n");
-            source.Append("using Godot.NativeInterop;\n");
+            source.Append("using FADE;\n");
+            source.Append("using FADE.NativeInterop;\n");
             source.Append("\n");
 
             if (hasNamespace)
@@ -112,7 +112,7 @@ namespace Godot.SourceGenerators
 
             var members = symbol.GetMembers()
                 .Where(m => !m.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotIgnoreMemberAttribute() ?? false));
+                    .Any(a => a.AttributeClass?.IsFADEIgnoreMemberAttribute() ?? false));
 
             var propertySymbols = members
                 .Where(s => !s.IsStatic && s.Kind == SymbolKind.Property)
@@ -123,15 +123,15 @@ namespace Godot.SourceGenerators
                 .Where(s => !s.IsStatic && s.Kind == SymbolKind.Field && !s.IsImplicitlyDeclared)
                 .Cast<IFieldSymbol>();
 
-            // TODO: We should still restore read-only properties after reloading assembly. Two possible ways: reflection or turn RestoreGodotObjectData into a constructor overload.
-            // Ignore properties without a getter, without a setter or with an init-only setter. Godot properties must be both readable and writable.
+            // TODO: We should still restore read-only properties after reloading assembly. Two possible ways: reflection or turn RestoreFADEObjectData into a constructor overload.
+            // Ignore properties without a getter, without a setter or with an init-only setter. FADE properties must be both readable and writable.
             var godotClassProperties = propertySymbols
                 .Where(property => !(property.IsReadOnly || property.IsWriteOnly) && property.SetMethodOrBaseSetMethod() is { IsInitOnly: false })
-                .WhereIsGodotCompatibleType(typeCache)
+                .WhereIsFADECompatibleType(typeCache)
                 .ToArray();
             var godotClassFields = fieldSymbols
                 .Where(property => !property.IsReadOnly)
-                .WhereIsGodotCompatibleType(typeCache)
+                .WhereIsFADECompatibleType(typeCache)
                 .ToArray();
 
             var signalDelegateSymbols = members
@@ -139,9 +139,9 @@ namespace Godot.SourceGenerators
                 .Cast<INamedTypeSymbol>()
                 .Where(namedTypeSymbol => namedTypeSymbol.TypeKind == TypeKind.Delegate)
                 .Where(s => s.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotSignalAttribute() ?? false));
+                    .Any(a => a.AttributeClass?.IsFADESignalAttribute() ?? false));
 
-            List<GodotSignalDelegateData> godotSignalDelegates = new();
+            List<FADESignalDelegateData> godotSignalDelegates = new();
 
             foreach (var signalDelegateSymbol in signalDelegateSymbols)
             {
@@ -153,7 +153,7 @@ namespace Godot.SourceGenerators
                     signalName.Length - ScriptSignalsGenerator.SignalDelegateSuffix.Length);
 
                 var invokeMethodData = signalDelegateSymbol
-                    .DelegateInvokeMethod?.HasGodotCompatibleSignature(typeCache);
+                    .DelegateInvokeMethod?.HasFADECompatibleSignature(typeCache);
 
                 if (invokeMethodData == null)
                     continue;
@@ -164,8 +164,8 @@ namespace Godot.SourceGenerators
             source.Append("    /// <inheritdoc/>\n");
             source.Append("    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n");
             source.Append(
-                "    protected override void SaveGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)\n    {\n");
-            source.Append("        base.SaveGodotObjectData(info);\n");
+                "    protected override void SaveFADEObjectData(global::FADE.Bridge.FADESerializationInfo info)\n    {\n");
+            source.Append("        base.SaveFADEObjectData(info);\n");
 
             // Save properties
 
@@ -213,8 +213,8 @@ namespace Godot.SourceGenerators
             source.Append("    /// <inheritdoc/>\n");
             source.Append("    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n");
             source.Append(
-                "    protected override void RestoreGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)\n    {\n");
-            source.Append("        base.RestoreGodotObjectData(info);\n");
+                "    protected override void RestoreFADEObjectData(global::FADE.Bridge.FADESerializationInfo info)\n    {\n");
+            source.Append("        base.RestoreFADEObjectData(info);\n");
 
             // Restore properties
 

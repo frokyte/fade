@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-public partial class Foo : GodotObject
+public partial class Foo : FADEObject
 {
 }
 

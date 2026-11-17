@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -908,7 +908,7 @@ _FORCE_INLINE_ TextServerAdvanced::FontTexturePosition TextServerAdvanced::find_
 #ifdef MODULE_MSDFGEN_ENABLED
 
 // FreeType outline coordinates are 26.6 fixed point, so one pixel is 64 units.
-// Godot versions before 4.8 used an incorrect divisor of 60, which can be
+// FADE versions before 4.8 used an incorrect divisor of 60, which can be
 // restored via the `gui/fonts/compatibility/msdf_legacy_scaling` project setting.
 static double ft_units_per_pixel = 64.0;
 

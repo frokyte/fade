@@ -1,4 +1,4 @@
-using Godot;
+using FADE;
 namespace NamespaceA {
 
 [ScriptPathAttribute("res://SameName.cs")]

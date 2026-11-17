@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -46,7 +46,7 @@
 
 #import <QuartzCore/CAMetalLayer.h>
 
-@interface GodotContentLayerDelegate : NSObject <CALayerDelegate> {
+@interface FADEContentLayerDelegate : NSObject <CALayerDelegate> {
 	DisplayServerEnums::WindowID window_id;
 	bool need_redraw;
 }
@@ -58,7 +58,7 @@
 
 GODOT_CLANG_WARNING_PUSH_AND_IGNORE("-Wdeprecated-declarations") // OpenGL is deprecated in macOS 10.14.
 
-@interface GodotContentView : RootView <NSTextInputClient> {
+@interface FADEContentView : RootView <NSTextInputClient> {
 	DisplayServerEnums::WindowID window_id;
 	NSTrackingArea *tracking_area;
 	NSMutableAttributedString *marked_text;

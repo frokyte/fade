@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -235,7 +235,7 @@ bool EditorExportPlatformPC::_copy_debugsymbols(Ref<DirAccess> &p_da, const Stri
 
 	String sym_path = p_symbols_path + ".debugsymbols";
 	String zip_path = p_symbols_path + ".debugsymbols.zip";
-	String zip_path_full = p_symbols_path.get_base_dir().simplify_path().path_join(vformat("Godot_v%s-%s_debugsymbols_%s", GODOT_VERSION_NUMBER, GODOT_VERSION_STATUS, p_symbols_path.get_file())) + ".zip";
+	String zip_path_full = p_symbols_path.get_base_dir().simplify_path().path_join(vformat("FADE_v%s-%s_debugsymbols_%s", GODOT_VERSION_NUMBER, GODOT_VERSION_STATUS, p_symbols_path.get_file())) + ".zip";
 
 	if (FileAccess::exists(sym_path)) {
 		r_err = p_da->copy(sym_path, p_path + ".debugsymbols");

@@ -1,7 +1,7 @@
-namespace Godot.SourceGenerators.Sample;
+namespace FADE.SourceGenerators.Sample;
 
 [GlobalClass]
-public partial class CustomGlobalClass : GodotObject
+public partial class CustomGlobalClass : FADEObject
 {
 }
 

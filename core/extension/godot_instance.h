@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -33,8 +33,8 @@
 #include "core/extension/gdextension_interface.gen.h"
 #include "core/object/object.h"
 
-class GodotInstance : public Object {
-	GDCLASS(GodotInstance, Object);
+class FADEInstance : public Object {
+	GDCLASS(FADEInstance, Object);
 
 	bool started = false;
 
@@ -42,8 +42,8 @@ protected:
 	static void _bind_methods();
 
 public:
-	GodotInstance();
-	~GodotInstance();
+	FADEInstance();
+	~FADEInstance();
 
 	bool initialize(GDExtensionInitializationFunction p_init_func);
 

@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class GenericClass<T>
 {
@@ -9,11 +9,11 @@ partial class NestedClass
     /// <summary>
     /// Cached StringNames for the methods contained in this class, for fast lookup.
     /// </summary>
-    public new class MethodName : global::Godot.GodotObject.MethodName {
+    public new class MethodName : global::FADE.FADEObject.MethodName {
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotMethodTrampolines(global::Godot.Bridge.MethodTrampolineCollector collector)
+        public static void GetFADEMethodTrampolines(global::FADE.Bridge.MethodTrampolineCollector collector)
         {
         }
     }

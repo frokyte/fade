@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -154,7 +154,7 @@ void Shape3D::_validate_property(PropertyInfo &p_property) const {
 	}
 
 	if (p_property.name == "margin" && GLOBAL_GET(PhysicsServer3DManager::setting_property_name) == PhysicsServer3DManager::GODOT_PHYSICS_3D_NAME) {
-		// This property is not used by GodotPhysics3D. Hide it from the editor to avoid confusion.
+		// This property is not used by FADEPhysics3D. Hide it from the editor to avoid confusion.
 		// Third-party physics engines may make use of this property, so we leave it visible for those.
 		p_property.usage = PROPERTY_USAGE_STORAGE;
 	}

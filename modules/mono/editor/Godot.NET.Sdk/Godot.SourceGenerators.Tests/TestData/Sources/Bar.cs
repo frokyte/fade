@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-public partial class Bar : GodotObject
+public partial class Bar : FADEObject
 {
 }
 
@@ -9,6 +9,6 @@ public partial class Foo
 {
 }
 
-public partial class NotSameNameAsFile : GodotObject
+public partial class NotSameNameAsFile : FADEObject
 {
 }

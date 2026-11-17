@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  Godot.kt                                                              */
+/*  FADE.kt                                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -54,18 +54,18 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import org.godotengine.godot.input.GodotEditText
-import org.godotengine.godot.input.GodotInputHandler
+import org.godotengine.godot.input.FADEEditText
+import org.godotengine.godot.input.FADEInputHandler
 import org.godotengine.godot.io.FilePicker
 import org.godotengine.godot.io.StorageScope
 import org.godotengine.godot.io.directory.DirectoryAccessHandler
 import org.godotengine.godot.io.file.FileAccessHandler
-import org.godotengine.godot.nativeapi.GodotNativeBridge
+import org.godotengine.godot.nativeapi.FADENativeBridge
 import org.godotengine.godot.plugin.AndroidRuntimePlugin
-import org.godotengine.godot.plugin.GodotPlugin
-import org.godotengine.godot.plugin.GodotPluginRegistry
-import org.godotengine.godot.tts.GodotTTS
-import org.godotengine.godot.utils.GodotNetUtils
+import org.godotengine.godot.plugin.FADEPlugin
+import org.godotengine.godot.plugin.FADEPluginRegistry
+import org.godotengine.godot.tts.FADETTS
+import org.godotengine.godot.utils.FADENetUtils
 import org.godotengine.godot.utils.PermissionsUtil
 import org.godotengine.godot.utils.PermissionsUtil.requestPermission
 import org.godotengine.godot.utils.beginBenchmarkMeasure
@@ -86,17 +86,17 @@ import java.util.concurrent.atomic.AtomicReference
  * Can be hosted by [Activity], [androidx.fragment.app.Fragment] or [android.app.Service] android components, so long
  * as its lifecycle methods are properly invoked.
  */
-class Godot private constructor(val context: Context) {
+class FADE private constructor(val context: Context) {
 
 	companion object {
-		private val TAG = Godot::class.java.simpleName
+		private val TAG = FADE::class.java.simpleName
 
-		@Volatile private var INSTANCE: Godot? = null
+		@Volatile private var INSTANCE: FADE? = null
 
 		@JvmStatic
-		fun getInstance(context: Context): Godot {
+		fun getInstance(context: Context): FADE {
 			return INSTANCE ?: synchronized(this) {
-				INSTANCE ?: Godot(context.applicationContext).also { INSTANCE = it }
+				INSTANCE ?: FADE(context.applicationContext).also { INSTANCE = it }
 			}
 		}
 
@@ -126,11 +126,11 @@ class Godot private constructor(val context: Context) {
 		TERMINATING
 	}
 
-	private val godotNativeBridge = GodotNativeBridge(this)
+	private val godotNativeBridge = FADENativeBridge(this)
 
 	private val mSensorManager: SensorManager? by lazy { context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager }
 	private val mClipboard: ClipboardManager? by lazy { context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager }
-	internal val pluginRegistry: GodotPluginRegistry by lazy { GodotPluginRegistry.getPluginRegistry() }
+	internal val pluginRegistry: FADEPluginRegistry by lazy { FADEPluginRegistry.getPluginRegistry() }
 
 	private val accelerometerEnabled = AtomicBoolean(false)
 	private val mAccelerometer: Sensor? by lazy { mSensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) }
@@ -152,11 +152,11 @@ class Godot private constructor(val context: Context) {
 
 	val isXrRuntime: Boolean by lazy { hasFeature("xr_runtime") }
 
-	val tts = GodotTTS(context)
+	val tts = FADETTS(context)
 	val directoryAccessHandler = DirectoryAccessHandler(context)
 	val fileAccessHandler = FileAccessHandler(context)
-	val netUtils = GodotNetUtils(context)
-	val godotInputHandler = GodotInputHandler(context, this)
+	val netUtils = FADENetUtils(context)
+	val godotInputHandler = FADEInputHandler(context, this)
 
 	private val hasClipboardCallable = Callable {
 		mClipboard?.hasPrimaryClip() == true
@@ -174,12 +174,12 @@ class Godot private constructor(val context: Context) {
 	private val runOnTerminate = AtomicReference<Runnable>()
 
 	/**
-	 * Tracks whether [GodotLib.initialize] was completed successfully.
+	 * Tracks whether [FADELib.initialize] was completed successfully.
 	 */
 	private var nativeLayerInitializeCompleted = false
 
 	/**
-	 * Tracks whether [GodotLib.setup] was completed successfully.
+	 * Tracks whether [FADELib.setup] was completed successfully.
 	 */
 	private var nativeLayerSetupCompleted = false
 
@@ -187,7 +187,7 @@ class Godot private constructor(val context: Context) {
 	 * Tracks whether [onInitRenderView] was completed successfully.
 	 */
 	private var renderViewInitialized = false
-	internal var primaryHost: GodotHost? = null
+	internal var primaryHost: FADEHost? = null
 
 	/**
 	 * Tracks whether we're in the RESUMED lifecycle state.
@@ -202,7 +202,7 @@ class Godot private constructor(val context: Context) {
 	val runStatus: RunStatus
 		get() = _runStatus.get()
 
-	val io = GodotIO(this)
+	val io = FADEIO(this)
 
 	private var commandLine : MutableList<String> = ArrayList<String>()
 	internal var xrMode = XRMode.REGULAR
@@ -213,11 +213,11 @@ class Godot private constructor(val context: Context) {
 	private var backgroundColor: Int = Color.BLACK
 	private var orientation = Configuration.ORIENTATION_UNDEFINED
 	private var isImeAnimating = false
-	var disableGodotSplash = false
+	var disableFADESplash = false
 		private set
 
 	internal var containerLayout: FrameLayout? = null
-	var renderView: GodotRenderView? = null
+	var renderView: FADERenderView? = null
 
 	/**
 	 * Returns true if the native engine has been initialized through [initEngine], false otherwise.
@@ -235,13 +235,13 @@ class Godot private constructor(val context: Context) {
 	fun getActivity() = primaryHost?.activity
 
 	/**
-	 * Start initialization of the Godot engine.
+	 * Start initialization of the FADE engine.
 	 *
 	 * This must be followed by [onInitRenderView] to complete initialization of the engine.
 	 *
 	 * @return false if initialization of the native layer fails, true otherwise.
 	 */
-	fun initEngine(host: GodotHost?, commandLineParams: List<String>, hostPlugins: Set<GodotPlugin> = Collections.emptySet()): Boolean {
+	fun initEngine(host: FADEHost?, commandLineParams: List<String>, hostPlugins: Set<FADEPlugin> = Collections.emptySet()): Boolean {
 		if (isNativeInitialized()) {
 			Log.d(TAG, "Engine already initialized")
 			return true
@@ -251,15 +251,15 @@ class Godot private constructor(val context: Context) {
 		darkMode = (config.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 		orientation = config.orientation
 
-		beginBenchmarkMeasure("Startup", "Godot::initEngine")
+		beginBenchmarkMeasure("Startup", "FADE::initEngine")
 		try {
 			this.primaryHost = host
 			commandLine.addAll(commandLineParams)
 
-			Log.v(TAG, "Initializing Godot plugin registry")
-			val runtimePlugins = mutableSetOf<GodotPlugin>(AndroidRuntimePlugin(this))
+			Log.v(TAG, "Initializing FADE plugin registry")
+			val runtimePlugins = mutableSetOf<FADEPlugin>(AndroidRuntimePlugin(this))
 			runtimePlugins.addAll(hostPlugins)
-			GodotPluginRegistry.initializePluginRegistry(this, runtimePlugins)
+			FADEPluginRegistry.initializePluginRegistry(this, runtimePlugins)
 
 			// Let the plugins take a peek at the command line params and provide their own params if desired.
 			val originalCommandLineParams = Collections.unmodifiableList(commandLineParams)
@@ -296,7 +296,7 @@ class Godot private constructor(val context: Context) {
 					setWindowColor(commandLine[i + 1])
 					i++
 				} else if (commandLine[i] == "--disable_godot_splash") {
-					disableGodotSplash = true
+					disableFADESplash = true
 				} else if (commandLine[i] == "--benchmark") {
 					useBenchmark = true
 					newArgs.add(commandLine[i])
@@ -329,7 +329,7 @@ class Godot private constructor(val context: Context) {
 
 			commandLine = if (newArgs.isEmpty()) { mutableListOf() } else { newArgs }
 			if (!nativeLayerInitializeCompleted) {
-				nativeLayerInitializeCompleted = GodotLib.initialize(
+				nativeLayerInitializeCompleted = FADELib.initialize(
 					godotNativeBridge,
 					context.assets,
 					io,
@@ -338,20 +338,20 @@ class Godot private constructor(val context: Context) {
 					fileAccessHandler,
 					useApkExpansion,
 				)
-				Log.v(TAG, "Godot native layer initialization completed: $nativeLayerInitializeCompleted")
+				Log.v(TAG, "FADE native layer initialization completed: $nativeLayerInitializeCompleted")
 			}
 
 			if (nativeLayerInitializeCompleted && !nativeLayerSetupCompleted) {
 				Log.v(TAG, "Setting up native layer with params: $commandLine")
-				nativeLayerSetupCompleted = GodotLib.setup(commandLine.toTypedArray(), tts)
+				nativeLayerSetupCompleted = FADELib.setup(commandLine.toTypedArray(), tts)
 				if (!nativeLayerSetupCompleted) {
-					throw IllegalStateException("Unable to setup the Godot engine! Aborting...")
+					throw IllegalStateException("Unable to setup the FADE engine! Aborting...")
 				} else {
-					Log.v(TAG, "Godot native layer setup completed")
+					Log.v(TAG, "FADE native layer setup completed")
 				}
 			}
 		} finally {
-			endBenchmarkMeasure("Startup", "Godot::initEngine")
+			endBenchmarkMeasure("Startup", "FADE::initEngine")
 		}
 		return isNativeInitialized()
 	}
@@ -363,7 +363,7 @@ class Godot private constructor(val context: Context) {
 	 */
 	@JvmOverloads
 	fun enableEdgeToEdge(enabled: Boolean, override: Boolean = false) {
-		// Note: If modifying edge-to-edge or immersive mode logic, ensure to test with GodotIO.getDisplaySafeArea()
+		// Note: If modifying edge-to-edge or immersive mode logic, ensure to test with FADEIO.getDisplaySafeArea()
 		// to confirm there are no regressions in safe area calculation.
 		val window = getActivity()?.window ?: return
 
@@ -428,7 +428,7 @@ class Godot private constructor(val context: Context) {
 		val imeBottom = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
 
 		if (isImeVisible && !isImeAnimating) {
-			GodotLib.setVirtualKeyboardHeight(imeBottom)
+			FADELib.setVirtualKeyboardHeight(imeBottom)
 		}
 	}
 
@@ -438,7 +438,7 @@ class Godot private constructor(val context: Context) {
 	 */
 	@JvmOverloads
 	fun enableImmersiveMode(enabled: Boolean, override: Boolean = false) {
-		// Note: If modifying edge-to-edge or immersive mode logic, ensure to test with GodotIO.getDisplaySafeArea()
+		// Note: If modifying edge-to-edge or immersive mode logic, ensure to test with FADEIO.getDisplaySafeArea()
 		// to confirm there are no regressions in safe area calculation.
 		val activity = getActivity() ?: return
 		val window = activity.window ?: return
@@ -516,20 +516,20 @@ class Godot private constructor(val context: Context) {
 	 *
 	 * This must be preceded by [initEngine] to properly initialize the engine.
 	 *
-	 * @param host The [GodotHost] that's initializing the render views
-	 * @param providedContainerLayout Optional argument; if provided, this is reused to host the Godot's render views
+	 * @param host The [FADEHost] that's initializing the render views
+	 * @param providedContainerLayout Optional argument; if provided, this is reused to host the FADE's render views
 	 *
-	 * @return A [FrameLayout] instance containing Godot's render views if initialization is successful, null otherwise.
+	 * @return A [FrameLayout] instance containing FADE's render views if initialization is successful, null otherwise.
 	 *
 	 * @throws IllegalStateException if [initEngine] has not been called
 	 */
 	@JvmOverloads
-	fun onInitRenderView(host: GodotHost, providedContainerLayout: FrameLayout = FrameLayout(context)): FrameLayout? {
+	fun onInitRenderView(host: FADEHost, providedContainerLayout: FrameLayout = FrameLayout(context)): FrameLayout? {
 		if (!isNativeInitialized()) {
 			throw IllegalStateException("initEngine(...) must be invoked successfully prior to initializing the render view")
 		}
 
-		beginBenchmarkMeasure("Startup", "Godot::onInitRenderView")
+		beginBenchmarkMeasure("Startup", "FADE::onInitRenderView")
 		Log.v(TAG, "OnInitRenderView: $host")
 		try {
 			this.primaryHost = host
@@ -550,14 +550,14 @@ class Godot private constructor(val context: Context) {
 			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
 			containerLayout?.layoutParams = layoutParams
 
-			// GodotEditText layout
-			val editText = GodotEditText(context)
+			// FADEEditText layout
+			val editText = FADEEditText(context)
 			editText.layoutParams =
 					ViewGroup.LayoutParams(
 							ViewGroup.LayoutParams.MATCH_PARENT,
 							context.resources.getDimension(R.dimen.text_edit_height).toInt()
 					)
-			// Prevent GodotEditText from showing on splash screen on devices with Android 14 or newer.
+			// Prevent FADEEditText from showing on splash screen on devices with Android 14 or newer.
 			editText.setBackgroundColor(Color.TRANSPARENT)
 			// ...add to FrameLayout
 			containerLayout?.addView(editText)
@@ -566,14 +566,14 @@ class Godot private constructor(val context: Context) {
 			val shouldBeTransparent =
 				!isProjectManagerHint() &&
 					!isEditorHint() &&
-					java.lang.Boolean.parseBoolean(GodotLib.getGlobal("display/window/per_pixel_transparency/allowed"))
+					java.lang.Boolean.parseBoolean(FADELib.getGlobal("display/window/per_pixel_transparency/allowed"))
 			Log.d(TAG, "Render view should be transparent: $shouldBeTransparent")
 
 			val nativeRenderer = getNativeRenderer()
 			if (nativeRenderer == "vulkan") {
-				renderView = GodotVulkanRenderView(this, godotInputHandler, shouldBeTransparent)
+				renderView = FADEVulkanRenderView(this, godotInputHandler, shouldBeTransparent)
 			} else if (nativeRenderer == "opengl3") {
-				renderView = GodotGLRenderView(this, godotInputHandler, xrMode, useDebugOpengl, shouldBeTransparent)
+				renderView = FADEGLRenderView(this, godotInputHandler, xrMode, useDebugOpengl, shouldBeTransparent)
 			} else {
 				throw IllegalStateException("No native renderer is available.")
 			}
@@ -633,7 +633,7 @@ class Godot private constructor(val context: Context) {
 						// Linear interpolation between start and end values.
 						val keyboardHeight = startBottom * (1.0f - interpolatedFraction) + endBottom * interpolatedFraction
 						val finalHeight = maxOf(keyboardHeight.toInt() - topView.rootView.paddingBottom, 0)
-						GodotLib.setVirtualKeyboardHeight(finalHeight)
+						FADELib.setVirtualKeyboardHeight(finalHeight)
 					}
 					return windowInsets
 				}
@@ -653,12 +653,12 @@ class Godot private constructor(val context: Context) {
 				for (plugin in pluginRegistry.allPlugins) {
 					// Plugins should be registered early so they are available as soon as the app starts.
 					// Otherwise, a delay in registration may make them unavailable during _init() of the main script or an autoload.
-					plugin.onRegisterPluginWithGodotNative()
+					plugin.onRegisterPluginWithFADENative()
 				}
-				setKeepScreenOn(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("display/window/energy_saving/keep_screen_on")))
+				setKeepScreenOn(java.lang.Boolean.parseBoolean(FADELib.getGlobal("display/window/energy_saving/keep_screen_on")))
 			}
 
-			// Include the returned non-null views in the Godot view hierarchy.
+			// Include the returned non-null views in the FADE view hierarchy.
 			for (plugin in pluginRegistry.allPlugins) {
 				val pluginView = plugin.onMainCreate(activity)
 				if (pluginView != null) {
@@ -676,12 +676,12 @@ class Godot private constructor(val context: Context) {
 				containerLayout = null
 			}
 
-			endBenchmarkMeasure("Startup", "Godot::onInitRenderView")
+			endBenchmarkMeasure("Startup", "FADE::onInitRenderView")
 		}
 		return containerLayout
 	}
 
-	fun onStart(host: GodotHost) {
+	fun onStart(host: FADEHost) {
 		Log.v(TAG, "OnStart: $host")
 		if (host != primaryHost) {
 			return
@@ -693,7 +693,7 @@ class Godot private constructor(val context: Context) {
 		}
 	}
 
-	fun onResume(host: GodotHost) {
+	fun onResume(host: FADEHost) {
 		Log.v(TAG, "OnResume: $host")
 		resumed = true
 		if (host != primaryHost) {
@@ -733,11 +733,11 @@ class Godot private constructor(val context: Context) {
 	internal fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
 		Log.v(TAG, "onPictureInPictureModeChanged: $isInPictureInPictureMode")
 		runOnRenderThread {
-			GodotLib.onPictureInPictureModeChanged(isInPictureInPictureMode)
+			FADELib.onPictureInPictureModeChanged(isInPictureInPictureMode)
 		}
 	}
 
-	fun onPause(host: GodotHost) {
+	fun onPause(host: FADEHost) {
 		Log.v(TAG, "OnPause: $host")
 		resumed = false
 		if (host != primaryHost) {
@@ -753,7 +753,7 @@ class Godot private constructor(val context: Context) {
 		mSensorManager?.unregisterListener(godotInputHandler)
 	}
 
-	fun onStop(host: GodotHost) {
+	fun onStop(host: FADEHost) {
 		Log.v(TAG, "OnStop: $host")
 		if (host != primaryHost) {
 			return
@@ -765,7 +765,7 @@ class Godot private constructor(val context: Context) {
 		renderView?.onActivityStopped()
 	}
 
-	fun onDestroy(primaryHost: GodotHost) {
+	fun onDestroy(primaryHost: FADEHost) {
 		if (this.primaryHost != primaryHost) {
 			return
 		}
@@ -777,7 +777,7 @@ class Godot private constructor(val context: Context) {
 
 		if (renderView?.blockingExitRenderer(EXIT_RENDERER_TIMEOUT_IN_MS) != true) {
 			Log.w(TAG, "Unable to exit the renderer within $EXIT_RENDERER_TIMEOUT_IN_MS ms... Force quitting the process.")
-			onGodotTerminating()
+			onFADETerminating()
 			forceQuit(0)
 		}
 
@@ -795,14 +795,14 @@ class Godot private constructor(val context: Context) {
 		if (force || darkMode != newDarkMode) {
 			darkMode = newDarkMode
 			runOnRenderThread {
-				GodotLib.onNightModeChanged()
+				FADELib.onNightModeChanged()
 			}
 		}
 
 		if (force || orientation != newConfig.orientation) {
 			orientation = newConfig.orientation
 			runOnRenderThread {
-				GodotLib.onOrientationChange(orientation)
+				FADELib.onOrientationChange(orientation)
 			}
 
 			if (isEditorBuild() && !isInImmersiveMode()) {
@@ -844,7 +844,7 @@ class Godot private constructor(val context: Context) {
 		}
 		runOnRenderThread {
 			for (i in permissions.indices) {
-				GodotLib.requestPermissionResult(
+				FADELib.requestPermissionResult(
 					permissions[i],
 					grantResults[i] == PackageManager.PERMISSION_GRANTED
 				)
@@ -853,17 +853,17 @@ class Godot private constructor(val context: Context) {
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot setup is complete.
+	 * Invoked on the render thread when the FADE setup is complete.
 	 */
-	internal fun onGodotSetupCompleted() {
-		Log.v(TAG, "OnGodotSetupCompleted")
+	internal fun onFADESetupCompleted() {
+		Log.v(TAG, "OnFADESetupCompleted")
 
-		// These properties are defined after Godot setup completion, so we retrieve them here.
-		val rightClickEmulataionEnabled = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/enable_long_press_as_right_click"))
-		val panScaleEnabled = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/enable_pan_and_scale_gestures"))
-		val rotaryInputAxisValue = GodotLib.getGlobal("input_devices/pointing/android/rotary_input_scroll_axis")
-		val overrideVolumeButtons = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/override_volume_buttons"))
-		val scrollDeadzoneDisabled = java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/pointing/android/disable_scroll_deadzone"))
+		// These properties are defined after FADE setup completion, so we retrieve them here.
+		val rightClickEmulataionEnabled = java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/pointing/android/enable_long_press_as_right_click"))
+		val panScaleEnabled = java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/pointing/android/enable_pan_and_scale_gestures"))
+		val rotaryInputAxisValue = FADELib.getGlobal("input_devices/pointing/android/rotary_input_scroll_axis")
+		val overrideVolumeButtons = java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/pointing/android/override_volume_buttons"))
+		val scrollDeadzoneDisabled = java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/pointing/android/disable_scroll_deadzone"))
 
 		runOnHostThread {
 			godotInputHandler.apply {
@@ -880,23 +880,23 @@ class Godot private constructor(val context: Context) {
 		}
 
 		for (plugin in pluginRegistry.allPlugins) {
-			plugin.onGodotSetupCompleted()
+			plugin.onFADESetupCompleted()
 		}
-		primaryHost?.onGodotSetupCompleted()
+		primaryHost?.onFADESetupCompleted()
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot main loop has started.
+	 * Invoked on the render thread when the FADE main loop has started.
 	 */
-	internal fun onGodotMainLoopStarted() {
-		Log.v(TAG, "OnGodotMainLoopStarted")
+	internal fun onFADEMainLoopStarted() {
+		Log.v(TAG, "OnFADEMainLoopStarted")
 		_runStatus.set(RunStatus.STARTED)
 
-		accelerometerEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_accelerometer")))
-		gravityEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_gravity")))
-		gyroscopeEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_gyroscope")))
-		magnetometerEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_magnetometer")))
-		deviceOrientationEnabled.set(java.lang.Boolean.parseBoolean(GodotLib.getGlobal("input_devices/sensors/enable_device_orientation")))
+		accelerometerEnabled.set(java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/sensors/enable_accelerometer")))
+		gravityEnabled.set(java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/sensors/enable_gravity")))
+		gyroscopeEnabled.set(java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/sensors/enable_gyroscope")))
+		magnetometerEnabled.set(java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/sensors/enable_magnetometer")))
+		deviceOrientationEnabled.set(java.lang.Boolean.parseBoolean(FADELib.getGlobal("input_devices/sensors/enable_device_orientation")))
 
 		runOnHostThread {
 			// Used to report 'Time to full display' metrics.
@@ -908,20 +908,20 @@ class Godot private constructor(val context: Context) {
 		}
 
 		for (plugin in pluginRegistry.allPlugins) {
-			plugin.onGodotMainLoopStarted()
+			plugin.onFADEMainLoopStarted()
 		}
-		primaryHost?.onGodotMainLoopStarted()
+		primaryHost?.onFADEMainLoopStarted()
 	}
 
 	/**
 	 * Invoked on the render thread when the engine is about to terminate.
 	 */
-	internal fun onGodotTerminating() {
-		Log.v(TAG, "OnGodotTerminating")
+	internal fun onFADETerminating() {
+		Log.v(TAG, "OnFADETerminating")
 		_runStatus.set(RunStatus.TERMINATING)
 
 		for (plugin in pluginRegistry.allPlugins) {
-			plugin.onGodotTerminating()
+			plugin.onFADETerminating()
 		}
 		runOnTerminate.get()?.run()
 	}
@@ -1000,7 +1000,7 @@ class Godot private constructor(val context: Context) {
 	 * Returns the native rendering driver.
 	 */
 	private fun getNativeRenderer(): String {
-		val rendererInfo = GodotLib.getRendererInfo(meetsVulkanRequirements(context.packageManager))
+		val rendererInfo = FADELib.getRendererInfo(meetsVulkanRequirements(context.packageManager))
 		val renderingDriverChosen = rendererInfo[0]
 		val renderingDriverOriginal = rendererInfo[1]
 		val renderingMethod = rendererInfo[2]
@@ -1073,7 +1073,7 @@ class Godot private constructor(val context: Context) {
 	}
 
 	/**
-	 * Destroys the Godot Engine and kill the process it's running in.
+	 * Destroys the FADE Engine and kill the process it's running in.
 	 */
 	@JvmOverloads
 	fun destroyAndKillProcess(destroyRunnable: Runnable? = null) {
@@ -1098,10 +1098,10 @@ class Godot private constructor(val context: Context) {
 	internal fun forceQuit(instanceId: Int): Boolean {
 		primaryHost?.let {
 			if (instanceId == 0) {
-				it.onGodotForceQuit(this)
+				it.onFADEForceQuit(this)
 				return true
 			} else {
-				return it.onGodotForceQuit(instanceId)
+				return it.onFADEForceQuit(instanceId)
 			}
 		}
 		return false
@@ -1112,7 +1112,7 @@ class Godot private constructor(val context: Context) {
 			Log.v(TAG, "Invoking onMainBackPressed for plugin ${plugin.pluginName}")
 			plugin.onMainBackPressed()
 		}
-		runOnRenderThread { GodotLib.back() }
+		runOnRenderThread { FADELib.back() }
 	}
 
 	fun requestPermission(name: String?): Boolean {
@@ -1129,14 +1129,14 @@ class Godot private constructor(val context: Context) {
 	}
 
 	/**
-	 * Returns true if this is the Godot editor.
+	 * Returns true if this is the FADE editor.
 	 */
-	fun isEditorHint() = isEditorBuild() && GodotLib.isEditorHint()
+	fun isEditorHint() = isEditorBuild() && FADELib.isEditorHint()
 
 	/**
-	 * Returns true if this is the Godot project manager.
+	 * Returns true if this is the FADE project manager.
 	 */
-	fun isProjectManagerHint() = isEditorBuild() && GodotLib.isProjectManagerHint()
+	fun isProjectManagerHint() = isEditorBuild() && FADELib.isProjectManagerHint()
 
 	/**
 	 * Returns true if the feature for the given feature tag is supported in the currently running instance, depending
@@ -1145,6 +1145,6 @@ class Godot private constructor(val context: Context) {
 	 * For reference, see https://docs.godotengine.org/en/stable/classes/class_os.html#class-os-method-has-feature
 	 */
 	fun hasFeature(feature: String): Boolean {
-		return GodotLib.hasFeature(feature)
+		return FADELib.hasFeature(feature)
 	}
 }

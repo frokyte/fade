@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -166,11 +166,11 @@ OS_Android *OS_Android::get_singleton() {
 	return static_cast<OS_Android *>(OS::get_singleton());
 }
 
-GodotJavaWrapper *OS_Android::get_godot_java() {
+FADEJavaWrapper *OS_Android::get_godot_java() {
 	return godot_java;
 }
 
-GodotIOJavaWrapper *OS_Android::get_godot_io_java() {
+FADEIOJavaWrapper *OS_Android::get_godot_io_java() {
 	return godot_io_java;
 }
 
@@ -380,8 +380,8 @@ void OS_Android::main_loop_begin() {
 }
 
 bool OS_Android::main_loop_iterate(bool *r_should_swap_buffers) {
-	GodotProfileFrameMark;
-	GodotProfileZone("OS_Android::main_loop_iterate");
+	FADEProfileFrameMark;
+	FADEProfileZone("OS_Android::main_loop_iterate");
 	if (!main_loop) {
 		return false;
 	}
@@ -928,7 +928,7 @@ bool OS_Android::_check_internal_feature_support(const String &p_feature) {
 	return false;
 }
 
-OS_Android::OS_Android(GodotJavaWrapper *p_godot_java, GodotIOJavaWrapper *p_godot_io_java, bool p_use_apk_expansion) {
+OS_Android::OS_Android(FADEJavaWrapper *p_godot_java, FADEIOJavaWrapper *p_godot_io_java, bool p_use_apk_expansion) {
 	display_size.width = DEFAULT_WINDOW_WIDTH;
 	display_size.height = DEFAULT_WINDOW_HEIGHT;
 

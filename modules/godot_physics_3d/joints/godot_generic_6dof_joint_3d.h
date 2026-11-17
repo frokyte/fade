@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 #pragma once
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 #include "../godot_joint_3d.h"
@@ -56,13 +56,13 @@ subject to the following restrictions:
 
 /*
 2007-09-09
-GodotGeneric6DOFJoint3D Refactored by Francisco Le?n
+FADEGeneric6DOFJoint3D Refactored by Francisco Le?n
 email: projectileman@yahoo.com
 http://gimpact.sf.net
 */
 
 //! Rotation Limit structure for generic joints
-class GodotG6DOFRotationalLimitMotor3D {
+class FADEG6DOFRotationalLimitMotor3D {
 public:
 	//! limit_parameters
 	//!@{
@@ -87,7 +87,7 @@ public:
 	real_t m_accumulatedImpulse = 0.0;
 	//!@}
 
-	GodotG6DOFRotationalLimitMotor3D() {}
+	FADEG6DOFRotationalLimitMotor3D() {}
 
 	bool isLimited() {
 		return (m_loLimit < m_hiLimit);
@@ -102,10 +102,10 @@ public:
 	int testLimitValue(real_t test_value);
 
 	// Apply the correction impulses for two bodies.
-	real_t solveAngularLimits(real_t timeStep, Vector3 &axis, real_t jacDiagABInv, GodotBody3D *body0, GodotBody3D *body1, bool p_body0_dynamic, bool p_body1_dynamic);
+	real_t solveAngularLimits(real_t timeStep, Vector3 &axis, real_t jacDiagABInv, FADEBody3D *body0, FADEBody3D *body1, bool p_body0_dynamic, bool p_body1_dynamic);
 };
 
-class GodotG6DOFTranslationalLimitMotor3D {
+class FADEG6DOFTranslationalLimitMotor3D {
 public:
 	Vector3 m_lowerLimit = Vector3(0.0, 0.0, 0.0); //!< the constraint lower limits
 	Vector3 m_upperLimit = Vector3(0.0, 0.0, 0.0); //!< the constraint upper limits
@@ -132,23 +132,23 @@ public:
 	real_t solveLinearAxis(
 			real_t timeStep,
 			real_t jacDiagABInv,
-			GodotBody3D *body1, const Vector3 &pointInA,
-			GodotBody3D *body2, const Vector3 &pointInB,
+			FADEBody3D *body1, const Vector3 &pointInA,
+			FADEBody3D *body2, const Vector3 &pointInB,
 			bool p_body1_dynamic, bool p_body2_dynamic,
 			int limit_index,
 			const Vector3 &axis_normal_on_a,
 			const Vector3 &anchorPos);
 };
 
-class GodotGeneric6DOFJoint3D : public GodotJoint3D {
+class FADEGeneric6DOFJoint3D : public FADEJoint3D {
 protected:
 	union {
 		struct {
-			GodotBody3D *A;
-			GodotBody3D *B;
+			FADEBody3D *A;
+			FADEBody3D *B;
 		};
 
-		GodotBody3D *_arr[2] = { nullptr, nullptr };
+		FADEBody3D *_arr[2] = { nullptr, nullptr };
 	};
 
 	//! relative_frames
@@ -159,19 +159,19 @@ protected:
 
 	//! Jacobians
 	//!@{
-	GodotJacobianEntry3D m_jacLinear[3]; //!< 3 orthogonal linear constraints
-	GodotJacobianEntry3D m_jacAng[3]; //!< 3 orthogonal angular constraints
+	FADEJacobianEntry3D m_jacLinear[3]; //!< 3 orthogonal linear constraints
+	FADEJacobianEntry3D m_jacAng[3]; //!< 3 orthogonal angular constraints
 	//!@}
 
 	//! Linear_Limit_parameters
 	//!@{
-	GodotG6DOFTranslationalLimitMotor3D m_linearLimits;
+	FADEG6DOFTranslationalLimitMotor3D m_linearLimits;
 	real_t m_linearDriveForceLimit[3] = { FLT_MAX, FLT_MAX, FLT_MAX };
 	//!@}
 
 	//! hinge_parameters
 	//!@{
-	GodotG6DOFRotationalLimitMotor3D m_angularLimits[3];
+	FADEG6DOFRotationalLimitMotor3D m_angularLimits[3];
 	real_t m_angularDriveTorqueLimit[3] = { FLT_MAX, FLT_MAX, FLT_MAX };
 	//!@}
 
@@ -190,20 +190,20 @@ protected:
 
 	//!@}
 
-	GodotGeneric6DOFJoint3D(const GodotGeneric6DOFJoint3D &) = delete;
-	void operator=(const GodotGeneric6DOFJoint3D &) = delete;
+	FADEGeneric6DOFJoint3D(const FADEGeneric6DOFJoint3D &) = delete;
+	void operator=(const FADEGeneric6DOFJoint3D &) = delete;
 
 	void buildLinearJacobian(
-			GodotJacobianEntry3D &jacLinear, const Vector3 &normalWorld,
+			FADEJacobianEntry3D &jacLinear, const Vector3 &normalWorld,
 			const Vector3 &pivotAInW, const Vector3 &pivotBInW);
 
-	void buildAngularJacobian(GodotJacobianEntry3D &jacAngular, const Vector3 &jointAxisW);
+	void buildAngularJacobian(FADEJacobianEntry3D &jacAngular, const Vector3 &jointAxisW);
 
 	//! calcs the euler angles between the two bodies.
 	void calculateAngleInfo();
 
 public:
-	GodotGeneric6DOFJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB, bool useLinearReferenceFrameA);
+	FADEGeneric6DOFJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB, bool useLinearReferenceFrameA);
 
 	virtual PS3DE::JointType get_type() const override { return PS3DE::JOINT_TYPE_6DOF; }
 
@@ -272,12 +272,12 @@ public:
 	}
 
 	// Retrieves the angular limit information.
-	GodotG6DOFRotationalLimitMotor3D *getRotationalLimitMotor(int index) {
+	FADEG6DOFRotationalLimitMotor3D *getRotationalLimitMotor(int index) {
 		return &m_angularLimits[index];
 	}
 
 	// Retrieves the limit information.
-	GodotG6DOFTranslationalLimitMotor3D *getTranslationalLimitMotor() {
+	FADEG6DOFTranslationalLimitMotor3D *getTranslationalLimitMotor() {
 		return &m_linearLimits;
 	}
 
@@ -306,10 +306,10 @@ public:
 		return m_angularLimits[limitIndex - 3].isLimited();
 	}
 
-	const GodotBody3D *getRigidBodyA() const {
+	const FADEBody3D *getRigidBodyA() const {
 		return A;
 	}
-	const GodotBody3D *getRigidBodyB() const {
+	const FADEBody3D *getRigidBodyB() const {
 		return B;
 	}
 

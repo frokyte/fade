@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,16 +34,16 @@
 
 // JNIEnv is only valid within the thread it belongs to, in a multi threading environment
 // we can't cache it.
-// For Godot we call most access methods from our thread and we thus get a valid JNIEnv
+// For FADE we call most access methods from our thread and we thus get a valid JNIEnv
 // from get_jni_env(). For one or two we expect to pass the environment
 
 // TODO we could probably create a base class for this...
 
-GodotJavaWrapper::GodotJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge) {
+FADEJavaWrapper::FADEJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge) {
 	godot_native_bridge = p_env->NewGlobalRef(p_godot_native_bridge);
 
-	// get info about our Godot class so we can get pointers and stuff...
-	godot_native_bridge_class = jni_find_class(p_env, "org/godotengine/godot/nativeapi/GodotNativeBridge");
+	// get info about our FADE class so we can get pointers and stuff...
+	godot_native_bridge_class = jni_find_class(p_env, "org/godotengine/godot/nativeapi/FADENativeBridge");
 	if (godot_native_bridge_class) {
 		godot_native_bridge_class = (jclass)p_env->NewGlobalRef(godot_native_bridge_class);
 	} else {
@@ -51,7 +51,7 @@ GodotJavaWrapper::GodotJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge)
 		return;
 	}
 
-	// get some Godot method pointers...
+	// get some FADE method pointers...
 	_restart = p_env->GetMethodID(godot_native_bridge_class, "restart", "()V");
 	_finish = p_env->GetMethodID(godot_native_bridge_class, "forceQuit", "(I)Z");
 	_set_keep_screen_on = p_env->GetMethodID(godot_native_bridge_class, "setKeepScreenOn", "(Z)V");
@@ -73,11 +73,11 @@ GodotJavaWrapper::GodotJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge)
 	_init_input_devices = p_env->GetMethodID(godot_native_bridge_class, "initInputDevices", "()V");
 	_vibrate = p_env->GetMethodID(godot_native_bridge_class, "vibrate", "(II)V");
 	_get_input_fallback_mapping = p_env->GetMethodID(godot_native_bridge_class, "getInputFallbackMapping", "()Ljava/lang/String;");
-	_on_godot_setup_completed = p_env->GetMethodID(godot_native_bridge_class, "onGodotSetupCompleted", "()V");
-	_on_godot_main_loop_started = p_env->GetMethodID(godot_native_bridge_class, "onGodotMainLoopStarted", "()V");
-	_on_godot_terminating = p_env->GetMethodID(godot_native_bridge_class, "onGodotTerminating", "()V");
-	_create_new_godot_instance = p_env->GetMethodID(godot_native_bridge_class, "createNewGodotInstance", "([Ljava/lang/String;)I");
-	_get_render_view = p_env->GetMethodID(godot_native_bridge_class, "getRenderView", "()Lorg/godotengine/godot/GodotRenderView;");
+	_on_godot_setup_completed = p_env->GetMethodID(godot_native_bridge_class, "onFADESetupCompleted", "()V");
+	_on_godot_main_loop_started = p_env->GetMethodID(godot_native_bridge_class, "onFADEMainLoopStarted", "()V");
+	_on_godot_terminating = p_env->GetMethodID(godot_native_bridge_class, "onFADETerminating", "()V");
+	_create_new_godot_instance = p_env->GetMethodID(godot_native_bridge_class, "createNewFADEInstance", "([Ljava/lang/String;)I");
+	_get_render_view = p_env->GetMethodID(godot_native_bridge_class, "getRenderView", "()Lorg/godotengine/godot/FADERenderView;");
 	_begin_benchmark_measure = p_env->GetMethodID(godot_native_bridge_class, "nativeBeginBenchmarkMeasure", "(Ljava/lang/String;Ljava/lang/String;)V");
 	_end_benchmark_measure = p_env->GetMethodID(godot_native_bridge_class, "nativeEndBenchmarkMeasure", "(Ljava/lang/String;Ljava/lang/String;)V");
 	_dump_benchmark = p_env->GetMethodID(godot_native_bridge_class, "nativeDumpBenchmark", "(Ljava/lang/String;)V");
@@ -109,7 +109,7 @@ GodotJavaWrapper::GodotJavaWrapper(JNIEnv *p_env, jobject p_godot_native_bridge)
 	_set_auto_enter_pip_mode_on_background = p_env->GetMethodID(godot_native_bridge_class, "nativeSetAutoEnterPiPModeOnBackground", "(Z)V");
 }
 
-GodotJavaWrapper::~GodotJavaWrapper() {
+FADEJavaWrapper::~FADEJavaWrapper() {
 	if (godot_view) {
 		delete godot_view;
 	}
@@ -120,7 +120,7 @@ GodotJavaWrapper::~GodotJavaWrapper() {
 	env->DeleteGlobalRef(godot_native_bridge_class);
 }
 
-jobject GodotJavaWrapper::get_activity() {
+jobject FADEJavaWrapper::get_activity() {
 	if (_get_activity) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, nullptr);
@@ -130,7 +130,7 @@ jobject GodotJavaWrapper::get_activity() {
 	return nullptr;
 }
 
-GodotJavaViewWrapper *GodotJavaWrapper::get_godot_view() {
+FADEJavaViewWrapper *FADEJavaWrapper::get_godot_view() {
 	if (godot_view != nullptr) {
 		return godot_view;
 	}
@@ -139,13 +139,13 @@ GodotJavaViewWrapper *GodotJavaWrapper::get_godot_view() {
 		ERR_FAIL_NULL_V(env, nullptr);
 		jobject godot_render_view = env->CallObjectMethod(godot_native_bridge, _get_render_view);
 		if (!env->IsSameObject(godot_render_view, nullptr)) {
-			godot_view = new GodotJavaViewWrapper(godot_render_view);
+			godot_view = new FADEJavaViewWrapper(godot_render_view);
 		}
 	}
 	return godot_view;
 }
 
-void GodotJavaWrapper::on_godot_setup_completed(JNIEnv *p_env) {
+void FADEJavaWrapper::on_godot_setup_completed(JNIEnv *p_env) {
 	if (_on_godot_setup_completed) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
@@ -154,7 +154,7 @@ void GodotJavaWrapper::on_godot_setup_completed(JNIEnv *p_env) {
 	}
 }
 
-void GodotJavaWrapper::on_godot_main_loop_started(JNIEnv *p_env) {
+void FADEJavaWrapper::on_godot_main_loop_started(JNIEnv *p_env) {
 	if (_on_godot_main_loop_started) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
@@ -164,7 +164,7 @@ void GodotJavaWrapper::on_godot_main_loop_started(JNIEnv *p_env) {
 	}
 }
 
-void GodotJavaWrapper::on_godot_terminating(JNIEnv *p_env) {
+void FADEJavaWrapper::on_godot_terminating(JNIEnv *p_env) {
 	if (_on_godot_terminating) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
@@ -174,7 +174,7 @@ void GodotJavaWrapper::on_godot_terminating(JNIEnv *p_env) {
 	}
 }
 
-void GodotJavaWrapper::restart(JNIEnv *p_env) {
+void FADEJavaWrapper::restart(JNIEnv *p_env) {
 	if (_restart) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
@@ -184,7 +184,7 @@ void GodotJavaWrapper::restart(JNIEnv *p_env) {
 	}
 }
 
-bool GodotJavaWrapper::force_quit(JNIEnv *p_env, int p_instance_id) {
+bool FADEJavaWrapper::force_quit(JNIEnv *p_env, int p_instance_id) {
 	if (_finish) {
 		if (p_env == nullptr) {
 			p_env = get_jni_env();
@@ -195,7 +195,7 @@ bool GodotJavaWrapper::force_quit(JNIEnv *p_env, int p_instance_id) {
 	return false;
 }
 
-void GodotJavaWrapper::set_keep_screen_on(bool p_enabled) {
+void FADEJavaWrapper::set_keep_screen_on(bool p_enabled) {
 	if (_set_keep_screen_on) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -203,7 +203,7 @@ void GodotJavaWrapper::set_keep_screen_on(bool p_enabled) {
 	}
 }
 
-void GodotJavaWrapper::alert(const String &p_message, const String &p_title) {
+void FADEJavaWrapper::alert(const String &p_message, const String &p_title) {
 	if (_alert) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -215,7 +215,7 @@ void GodotJavaWrapper::alert(const String &p_message, const String &p_title) {
 	}
 }
 
-bool GodotJavaWrapper::is_dark_mode_supported() {
+bool FADEJavaWrapper::is_dark_mode_supported() {
 	if (_is_dark_mode_supported) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -225,7 +225,7 @@ bool GodotJavaWrapper::is_dark_mode_supported() {
 	}
 }
 
-bool GodotJavaWrapper::is_dark_mode() {
+bool FADEJavaWrapper::is_dark_mode() {
 	if (_is_dark_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -244,7 +244,7 @@ static Color _argb_to_rgba(int p_color) {
 	return Color(red / 255.0f, green / 255.0f, blue / 255.0f, alpha / 255.0f);
 }
 
-Color GodotJavaWrapper::get_accent_color() {
+Color FADEJavaWrapper::get_accent_color() {
 	if (_get_accent_color) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, Color(0, 0, 0, 0));
@@ -255,7 +255,7 @@ Color GodotJavaWrapper::get_accent_color() {
 	}
 }
 
-Color GodotJavaWrapper::get_base_color() {
+Color FADEJavaWrapper::get_base_color() {
 	if (_get_base_color) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, Color(0, 0, 0, 0));
@@ -266,11 +266,11 @@ Color GodotJavaWrapper::get_base_color() {
 	}
 }
 
-bool GodotJavaWrapper::has_get_clipboard() {
+bool FADEJavaWrapper::has_get_clipboard() {
 	return _get_clipboard != nullptr;
 }
 
-String GodotJavaWrapper::get_clipboard() {
+String FADEJavaWrapper::get_clipboard() {
 	String clipboard;
 	if (_get_clipboard) {
 		JNIEnv *env = get_jni_env();
@@ -282,7 +282,7 @@ String GodotJavaWrapper::get_clipboard() {
 	return clipboard;
 }
 
-String GodotJavaWrapper::get_input_fallback_mapping() {
+String FADEJavaWrapper::get_input_fallback_mapping() {
 	String input_fallback_mapping;
 	if (_get_input_fallback_mapping) {
 		JNIEnv *env = get_jni_env();
@@ -294,11 +294,11 @@ String GodotJavaWrapper::get_input_fallback_mapping() {
 	return input_fallback_mapping;
 }
 
-bool GodotJavaWrapper::has_set_clipboard() {
+bool FADEJavaWrapper::has_set_clipboard() {
 	return _set_clipboard != nullptr;
 }
 
-void GodotJavaWrapper::set_clipboard(const String &p_text) {
+void FADEJavaWrapper::set_clipboard(const String &p_text) {
 	if (_set_clipboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -308,11 +308,11 @@ void GodotJavaWrapper::set_clipboard(const String &p_text) {
 	}
 }
 
-bool GodotJavaWrapper::has_has_clipboard() {
+bool FADEJavaWrapper::has_has_clipboard() {
 	return _has_clipboard != nullptr;
 }
 
-bool GodotJavaWrapper::has_clipboard() {
+bool FADEJavaWrapper::has_clipboard() {
 	if (_has_clipboard) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -322,7 +322,7 @@ bool GodotJavaWrapper::has_clipboard() {
 	}
 }
 
-Error GodotJavaWrapper::show_dialog(const String &p_title, const String &p_description, const Vector<String> &p_buttons) {
+Error FADEJavaWrapper::show_dialog(const String &p_title, const String &p_description, const Vector<String> &p_buttons) {
 	if (_show_input_dialog) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNCONFIGURED);
@@ -344,7 +344,7 @@ Error GodotJavaWrapper::show_dialog(const String &p_title, const String &p_descr
 	}
 }
 
-Error GodotJavaWrapper::show_input_dialog(const String &p_title, const String &p_message, const String &p_existing_text) {
+Error FADEJavaWrapper::show_input_dialog(const String &p_title, const String &p_message, const String &p_existing_text) {
 	if (_show_input_dialog) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNCONFIGURED);
@@ -361,7 +361,7 @@ Error GodotJavaWrapper::show_input_dialog(const String &p_title, const String &p
 	}
 }
 
-Error GodotJavaWrapper::show_file_picker(const String &p_current_directory, const String &p_filename, int p_mode, const Vector<String> &p_filters) {
+Error FADEJavaWrapper::show_file_picker(const String &p_current_directory, const String &p_filename, int p_mode, const Vector<String> &p_filters) {
 	if (_show_file_picker) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNCONFIGURED);
@@ -389,7 +389,7 @@ Error GodotJavaWrapper::show_file_picker(const String &p_current_directory, cons
 	}
 }
 
-bool GodotJavaWrapper::request_permission(const String &p_name) {
+bool FADEJavaWrapper::request_permission(const String &p_name) {
 	if (_request_permission) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -402,7 +402,7 @@ bool GodotJavaWrapper::request_permission(const String &p_name) {
 	}
 }
 
-bool GodotJavaWrapper::request_permissions() {
+bool FADEJavaWrapper::request_permissions() {
 	if (_request_permissions) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -412,7 +412,7 @@ bool GodotJavaWrapper::request_permissions() {
 	}
 }
 
-Vector<String> GodotJavaWrapper::get_granted_permissions() const {
+Vector<String> FADEJavaWrapper::get_granted_permissions() const {
 	Vector<String> permissions_list;
 	if (_get_granted_permissions) {
 		JNIEnv *env = get_jni_env();
@@ -431,7 +431,7 @@ Vector<String> GodotJavaWrapper::get_granted_permissions() const {
 	return permissions_list;
 }
 
-Vector<String> GodotJavaWrapper::get_gdextension_list_config_file() const {
+Vector<String> FADEJavaWrapper::get_gdextension_list_config_file() const {
 	Vector<String> config_file_list;
 	if (_get_gdextension_list_config_file) {
 		JNIEnv *env = get_jni_env();
@@ -450,7 +450,7 @@ Vector<String> GodotJavaWrapper::get_gdextension_list_config_file() const {
 	return config_file_list;
 }
 
-String GodotJavaWrapper::get_ca_certificates() const {
+String FADEJavaWrapper::get_ca_certificates() const {
 	String ca_certificates;
 	if (_get_ca_certificates) {
 		JNIEnv *env = get_jni_env();
@@ -462,7 +462,7 @@ String GodotJavaWrapper::get_ca_certificates() const {
 	return ca_certificates;
 }
 
-void GodotJavaWrapper::init_input_devices() {
+void FADEJavaWrapper::init_input_devices() {
 	if (_init_input_devices) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -470,7 +470,7 @@ void GodotJavaWrapper::init_input_devices() {
 	}
 }
 
-void GodotJavaWrapper::vibrate(int p_duration_ms, float p_amplitude) {
+void FADEJavaWrapper::vibrate(int p_duration_ms, float p_amplitude) {
 	if (_vibrate) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -485,7 +485,7 @@ void GodotJavaWrapper::vibrate(int p_duration_ms, float p_amplitude) {
 	}
 }
 
-int GodotJavaWrapper::create_new_godot_instance(const List<String> &args) {
+int FADEJavaWrapper::create_new_godot_instance(const List<String> &args) {
 	if (_create_new_godot_instance) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, 0);
@@ -502,7 +502,7 @@ int GodotJavaWrapper::create_new_godot_instance(const List<String> &args) {
 	}
 }
 
-void GodotJavaWrapper::begin_benchmark_measure(const String &p_context, const String &p_label) {
+void FADEJavaWrapper::begin_benchmark_measure(const String &p_context, const String &p_label) {
 	if (_begin_benchmark_measure) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -514,7 +514,7 @@ void GodotJavaWrapper::begin_benchmark_measure(const String &p_context, const St
 	}
 }
 
-void GodotJavaWrapper::end_benchmark_measure(const String &p_context, const String &p_label) {
+void FADEJavaWrapper::end_benchmark_measure(const String &p_context, const String &p_label) {
 	if (_end_benchmark_measure) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -526,7 +526,7 @@ void GodotJavaWrapper::end_benchmark_measure(const String &p_context, const Stri
 	}
 }
 
-void GodotJavaWrapper::dump_benchmark(const String &benchmark_file) {
+void FADEJavaWrapper::dump_benchmark(const String &benchmark_file) {
 	if (_dump_benchmark) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -536,7 +536,7 @@ void GodotJavaWrapper::dump_benchmark(const String &benchmark_file) {
 	}
 }
 
-bool GodotJavaWrapper::is_screen_reader_active() {
+bool FADEJavaWrapper::is_screen_reader_active() {
 	if (_is_screen_reader_active) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -546,7 +546,7 @@ bool GodotJavaWrapper::is_screen_reader_active() {
 	}
 }
 
-bool GodotJavaWrapper::is_animation_disabled() {
+bool FADEJavaWrapper::is_animation_disabled() {
 	if (_is_animation_disabled) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -556,7 +556,7 @@ bool GodotJavaWrapper::is_animation_disabled() {
 	}
 }
 
-bool GodotJavaWrapper::is_high_contrast_active() {
+bool FADEJavaWrapper::is_high_contrast_active() {
 	if (_is_high_contrast_active) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -566,7 +566,7 @@ bool GodotJavaWrapper::is_high_contrast_active() {
 	}
 }
 
-bool GodotJavaWrapper::check_internal_feature_support(const String &p_feature) const {
+bool FADEJavaWrapper::check_internal_feature_support(const String &p_feature) const {
 	if (_check_internal_feature_support) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -580,7 +580,7 @@ bool GodotJavaWrapper::check_internal_feature_support(const String &p_feature) c
 	}
 }
 
-Error GodotJavaWrapper::sign_apk(const String &p_input_path, const String &p_output_path, const String &p_keystore_path, const String &p_keystore_user, const String &p_keystore_password) {
+Error FADEJavaWrapper::sign_apk(const String &p_input_path, const String &p_output_path, const String &p_keystore_path, const String &p_keystore_user, const String &p_keystore_password) {
 	if (_sign_apk) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNCONFIGURED);
@@ -605,7 +605,7 @@ Error GodotJavaWrapper::sign_apk(const String &p_input_path, const String &p_out
 	}
 }
 
-Error GodotJavaWrapper::verify_apk(const String &p_apk_path) {
+Error FADEJavaWrapper::verify_apk(const String &p_apk_path) {
 	if (_verify_apk) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, ERR_UNCONFIGURED);
@@ -619,7 +619,7 @@ Error GodotJavaWrapper::verify_apk(const String &p_apk_path) {
 	}
 }
 
-void GodotJavaWrapper::enable_immersive_mode(bool p_enabled) {
+void FADEJavaWrapper::enable_immersive_mode(bool p_enabled) {
 	if (_enable_immersive_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -627,7 +627,7 @@ void GodotJavaWrapper::enable_immersive_mode(bool p_enabled) {
 	}
 }
 
-bool GodotJavaWrapper::is_in_immersive_mode() {
+bool FADEJavaWrapper::is_in_immersive_mode() {
 	if (_is_in_immersive_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -637,7 +637,7 @@ bool GodotJavaWrapper::is_in_immersive_mode() {
 	}
 }
 
-void GodotJavaWrapper::set_window_color(const Color &p_color) {
+void FADEJavaWrapper::set_window_color(const Color &p_color) {
 	if (_set_window_color) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -647,7 +647,7 @@ void GodotJavaWrapper::set_window_color(const Color &p_color) {
 	}
 }
 
-void GodotJavaWrapper::on_editor_workspace_selected(const String &p_workspace) {
+void FADEJavaWrapper::on_editor_workspace_selected(const String &p_workspace) {
 	if (_on_editor_workspace_selected) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -657,7 +657,7 @@ void GodotJavaWrapper::on_editor_workspace_selected(const String &p_workspace) {
 	}
 }
 
-void GodotJavaWrapper::on_distraction_free_mode_changed(bool p_enabled) {
+void FADEJavaWrapper::on_distraction_free_mode_changed(bool p_enabled) {
 	if (_on_distraction_free_mode_changed) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -666,7 +666,7 @@ void GodotJavaWrapper::on_distraction_free_mode_changed(bool p_enabled) {
 	}
 }
 
-void GodotJavaWrapper::show_editor_game_dock() {
+void FADEJavaWrapper::show_editor_game_dock() {
 	if (_show_editor_game_dock) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -675,7 +675,7 @@ void GodotJavaWrapper::show_editor_game_dock() {
 	}
 }
 
-bool GodotJavaWrapper::build_env_connect(const Callable &p_callback) {
+bool FADEJavaWrapper::build_env_connect(const Callable &p_callback) {
 	if (_build_env_connect) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -690,7 +690,7 @@ bool GodotJavaWrapper::build_env_connect(const Callable &p_callback) {
 	return false;
 }
 
-void GodotJavaWrapper::build_env_disconnect() {
+void FADEJavaWrapper::build_env_disconnect() {
 	if (_build_env_disconnect) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -699,7 +699,7 @@ void GodotJavaWrapper::build_env_disconnect() {
 	}
 }
 
-int GodotJavaWrapper::build_env_execute(const String &p_build_tool, const List<String> &p_arguments, const String &p_project_path, const String &p_gradle_build_directory, const Callable &p_output_callback, const Callable &p_result_callback) {
+int FADEJavaWrapper::build_env_execute(const String &p_build_tool, const List<String> &p_arguments, const String &p_project_path, const String &p_gradle_build_directory, const Callable &p_output_callback, const Callable &p_result_callback) {
 	if (_build_env_execute) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, -1);
@@ -731,7 +731,7 @@ int GodotJavaWrapper::build_env_execute(const String &p_build_tool, const List<S
 	return -1;
 }
 
-void GodotJavaWrapper::build_env_cancel(int p_job_id) {
+void FADEJavaWrapper::build_env_cancel(int p_job_id) {
 	if (_build_env_cancel) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -739,7 +739,7 @@ void GodotJavaWrapper::build_env_cancel(int p_job_id) {
 	}
 }
 
-void GodotJavaWrapper::build_env_clean_project(const String &p_project_path, const String &p_gradle_build_directory, const Callable &p_callback) {
+void FADEJavaWrapper::build_env_clean_project(const String &p_project_path, const String &p_gradle_build_directory, const Callable &p_callback) {
 	if (_build_env_clean_project) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -756,7 +756,7 @@ void GodotJavaWrapper::build_env_clean_project(const String &p_project_path, con
 	}
 }
 
-bool GodotJavaWrapper::is_pip_mode_supported() {
+bool FADEJavaWrapper::is_pip_mode_supported() {
 	if (_is_pip_mode_supported) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -766,7 +766,7 @@ bool GodotJavaWrapper::is_pip_mode_supported() {
 	}
 }
 
-bool GodotJavaWrapper::is_in_pip_mode() {
+bool FADEJavaWrapper::is_in_pip_mode() {
 	if (_is_in_pip_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL_V(env, false);
@@ -776,7 +776,7 @@ bool GodotJavaWrapper::is_in_pip_mode() {
 	}
 }
 
-void GodotJavaWrapper::enter_pip_mode() {
+void FADEJavaWrapper::enter_pip_mode() {
 	if (_enter_pip_mode) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -784,7 +784,7 @@ void GodotJavaWrapper::enter_pip_mode() {
 	}
 }
 
-void GodotJavaWrapper::set_pip_mode_aspect_ratio(int p_numerator, int p_denominator) {
+void FADEJavaWrapper::set_pip_mode_aspect_ratio(int p_numerator, int p_denominator) {
 	if (_set_pip_mode_aspect_ratio) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);
@@ -792,7 +792,7 @@ void GodotJavaWrapper::set_pip_mode_aspect_ratio(int p_numerator, int p_denomina
 	}
 }
 
-void GodotJavaWrapper::set_auto_enter_pip_mode_on_background(bool p_auto_enter_on_background) {
+void FADEJavaWrapper::set_auto_enter_pip_mode_on_background(bool p_auto_enter_on_background) {
 	if (_set_auto_enter_pip_mode_on_background) {
 		JNIEnv *env = get_jni_env();
 		ERR_FAIL_NULL(env);

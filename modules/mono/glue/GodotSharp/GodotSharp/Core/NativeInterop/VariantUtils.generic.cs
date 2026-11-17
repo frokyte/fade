@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Godot.NativeInterop;
+namespace FADE.NativeInterop;
 
 #nullable enable
 
@@ -180,11 +180,11 @@ public partial class VariantUtils
         if (typeof(T) == typeof(Rid))
             return CreateFromRid(UnsafeAs<Rid>(from));
 
-        if (typeof(T) == typeof(Godot.Collections.Dictionary))
-            return CreateFromDictionary(UnsafeAs<Godot.Collections.Dictionary>(from));
+        if (typeof(T) == typeof(FADE.Collections.Dictionary))
+            return CreateFromDictionary(UnsafeAs<FADE.Collections.Dictionary>(from));
 
-        if (typeof(T) == typeof(Godot.Collections.Array))
-            return CreateFromArray(UnsafeAs<Godot.Collections.Array>(from));
+        if (typeof(T) == typeof(FADE.Collections.Array))
+            return CreateFromArray(UnsafeAs<FADE.Collections.Array>(from));
 
         if (typeof(T) == typeof(Variant))
             return NativeFuncs.godotsharp_variant_new_copy((godot_variant)UnsafeAs<Variant>(from).NativeVar);
@@ -193,8 +193,8 @@ public partial class VariantUtils
 
         // `typeof(X).IsAssignableFrom(typeof(T))` is optimized away
 
-        if (typeof(GodotObject).IsAssignableFrom(typeof(T)))
-            return CreateFromGodotObject(UnsafeAs<GodotObject>(from));
+        if (typeof(FADEObject).IsAssignableFrom(typeof(T)))
+            return CreateFromFADEObject(UnsafeAs<FADEObject>(from));
 
         // `typeof(T).IsEnum` is optimized away
 
@@ -381,10 +381,10 @@ public partial class VariantUtils
         if (typeof(T) == typeof(Rid))
             return UnsafeAsT(ConvertToRid(variant));
 
-        if (typeof(T) == typeof(Godot.Collections.Dictionary))
+        if (typeof(T) == typeof(FADE.Collections.Dictionary))
             return UnsafeAsT(ConvertToDictionary(variant));
 
-        if (typeof(T) == typeof(Godot.Collections.Array))
+        if (typeof(T) == typeof(FADE.Collections.Array))
             return UnsafeAsT(ConvertToArray(variant));
 
         if (typeof(T) == typeof(Variant))
@@ -394,8 +394,8 @@ public partial class VariantUtils
 
         // `typeof(X).IsAssignableFrom(typeof(T))` is optimized away
 
-        if (typeof(GodotObject).IsAssignableFrom(typeof(T)))
-            return (T)(object)ConvertToGodotObject(variant);
+        if (typeof(FADEObject).IsAssignableFrom(typeof(T)))
+            return (T)(object)ConvertToFADEObject(variant);
 
         // `typeof(T).IsEnum` is optimized away
 

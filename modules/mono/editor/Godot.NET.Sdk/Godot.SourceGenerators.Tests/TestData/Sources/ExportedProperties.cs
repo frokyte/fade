@@ -1,8 +1,8 @@
-using Godot;
+using FADE;
 using System;
-using static Godot.Mathf;
+using static FADE.Mathf;
 
-public partial class ExportedProperties(string primaryCtorParameter) : GodotObject
+public partial class ExportedProperties(string primaryCtorParameter) : FADEObject
 {
     // Do not generate default value
     private String _notGeneratePropertyString = new string("not generate");
@@ -145,7 +145,7 @@ public partial class ExportedProperties(string primaryCtorParameter) : GodotObje
     [Export] private Double PropertyDouble { get; set; } = 10;
     [Export] private String PropertyString { get; set; } = "foo";
 
-    // Godot structs
+    // FADE structs
     [Export] private Vector2 PropertyVector2 { get; set; } = new(10f, 10f);
     [Export] private Vector2I PropertyVector2I { get; set; } = Vector2I.Up;
     [Export] private Rect2 PropertyRect2 { get; set; } = new(new Vector2(10f, 10f), new Vector2(10f, 10f));
@@ -196,7 +196,7 @@ public partial class ExportedProperties(string primaryCtorParameter) : GodotObje
     [Export] private Vector2[] PropertyVector2Array { get; set; } = { Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right };
     [Export] private Vector3[] PropertyVector3Array { get; set; } = { Vector3.Up, Vector3.Down, Vector3.Left, Vector3.Right };
     [Export] private Color[] PropertyColorArray { get; set; } = { Colors.Aqua, Colors.Aquamarine, Colors.Azure, Colors.Beige };
-    [Export] private GodotObject[] PropertyGodotObjectOrDerivedArray { get; set; } = { null };
+    [Export] private FADEObject[] PropertyFADEObjectOrDerivedArray { get; set; } = { null };
     [Export] private StringName[] field_StringNameArray { get; set; } = { "foo", "bar" };
     [Export] private NodePath[] field_NodePathArray { get; set; } = { "foo", "bar" };
     [Export] private Rid[] field_RidArray { get; set; } = { default, default, default };
@@ -205,24 +205,24 @@ public partial class ExportedProperties(string primaryCtorParameter) : GodotObje
     [Export] private Variant PropertyVariant { get; set; } = "foo";
 
     // Classes
-    [Export] private GodotObject PropertyGodotObjectOrDerived { get; set; }
-    [Export] private Godot.Texture PropertyGodotResourceTexture { get; set; }
-    [Export] private Godot.Texture PropertyGodotResourceTextureWithInitializer { get; set; } = new() { ResourceName = "" };
+    [Export] private FADEObject PropertyFADEObjectOrDerived { get; set; }
+    [Export] private FADE.Texture PropertyFADEResourceTexture { get; set; }
+    [Export] private FADE.Texture PropertyFADEResourceTextureWithInitializer { get; set; } = new() { ResourceName = "" };
     [Export] private StringName PropertyStringName { get; set; } = new StringName("foo");
     [Export] private NodePath PropertyNodePath { get; set; } = new NodePath("foo");
     [Export] private Rid PropertyRid { get; set; }
 
     [Export]
-    private Godot.Collections.Dictionary PropertyGodotDictionary { get; set; } = new() { { "foo", 10 }, { Vector2.Up, Colors.Chocolate } };
+    private FADE.Collections.Dictionary PropertyFADEDictionary { get; set; } = new() { { "foo", 10 }, { Vector2.Up, Colors.Chocolate } };
 
     [Export]
-    private Godot.Collections.Array PropertyGodotArray { get; set; } = new() { "foo", 10, Vector2.Up, Colors.Chocolate };
+    private FADE.Collections.Array PropertyFADEArray { get; set; } = new() { "foo", 10, Vector2.Up, Colors.Chocolate };
 
     [Export]
-    private Godot.Collections.Dictionary<string, bool> PropertyGodotGenericDictionary { get; set; } = new() { { "foo", true }, { "bar", false } };
+    private FADE.Collections.Dictionary<string, bool> PropertyFADEGenericDictionary { get; set; } = new() { { "foo", true }, { "bar", false } };
 
     [Export]
-    private Godot.Collections.Array<int> PropertyGodotGenericArray { get; set; } = new() { 0, 1, 2, 3, 4, 5, 6 };
+    private FADE.Collections.Array<int> PropertyFADEGenericArray { get; set; } = new() { 0, 1, 2, 3, 4, 5, 6 };
 
     public int NotIgnoredProperty { get; set; }
 

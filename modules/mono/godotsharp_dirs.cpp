@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -51,7 +51,7 @@
 #endif
 #endif
 
-namespace GodotSharpDirs {
+namespace FADESharpDirs {
 
 String _get_expected_build_config() {
 #ifdef TOOLS_ENABLED
@@ -101,7 +101,7 @@ String _get_mono_user_dir() {
 }
 
 #if !TOOLS_ENABLED
-// This should be the equivalent of GodotTools.Utils.OS.PlatformNameMap.
+// This should be the equivalent of FADETools.Utils.OS.PlatformNameMap.
 static const char *platform_name_map[][2] = {
 	{ "Windows", "windows" },
 	{ "macOS", "macos" },
@@ -130,7 +130,7 @@ String _get_platform_name() {
 }
 #endif
 
-class _GodotSharpDirs {
+class _FADESharpDirs {
 public:
 	String res_metadata_dir;
 	String res_temp_assemblies_dir;
@@ -143,7 +143,7 @@ public:
 #endif
 
 private:
-	_GodotSharpDirs() {
+	_FADESharpDirs() {
 		String res_data_dir = ProjectSettings::get_singleton()->get_project_data_path().path_join("mono");
 		res_metadata_dir = res_data_dir.path_join("metadata");
 
@@ -162,16 +162,16 @@ private:
 #endif
 
 #ifdef TOOLS_ENABLED
-		String data_dir_root = exe_dir.path_join("GodotSharp");
+		String data_dir_root = exe_dir.path_join("FADESharp");
 		data_editor_tools_dir = data_dir_root.path_join("Tools");
 		String api_assemblies_base_dir = data_dir_root.path_join("Api");
 		build_logs_dir = mono_user_dir.path_join("build_logs");
 #ifdef MACOS_ENABLED
 		if (!DirAccess::exists(data_editor_tools_dir)) {
-			data_editor_tools_dir = res_dir.path_join("GodotSharp").path_join("Tools");
+			data_editor_tools_dir = res_dir.path_join("FADESharp").path_join("Tools");
 		}
 		if (!DirAccess::exists(api_assemblies_base_dir)) {
-			api_assemblies_base_dir = res_dir.path_join("GodotSharp").path_join("Api");
+			api_assemblies_base_dir = res_dir.path_join("FADESharp").path_join("Api");
 		}
 #endif
 		api_assemblies_dir = api_assemblies_base_dir.path_join(GDMono::get_expected_api_build_config());
@@ -234,36 +234,36 @@ private:
 	}
 
 public:
-	static _GodotSharpDirs &get_singleton() {
-		static _GodotSharpDirs singleton;
+	static _FADESharpDirs &get_singleton() {
+		static _FADESharpDirs singleton;
 		return singleton;
 	}
 };
 
 String get_res_metadata_dir() {
-	return _GodotSharpDirs::get_singleton().res_metadata_dir;
+	return _FADESharpDirs::get_singleton().res_metadata_dir;
 }
 
 String get_res_temp_assemblies_dir() {
-	return _GodotSharpDirs::get_singleton().res_temp_assemblies_dir;
+	return _FADESharpDirs::get_singleton().res_temp_assemblies_dir;
 }
 
 String get_api_assemblies_dir() {
-	return _GodotSharpDirs::get_singleton().api_assemblies_dir;
+	return _FADESharpDirs::get_singleton().api_assemblies_dir;
 }
 
 String get_mono_user_dir() {
-	return _GodotSharpDirs::get_singleton().mono_user_dir;
+	return _FADESharpDirs::get_singleton().mono_user_dir;
 }
 
 #ifdef TOOLS_ENABLED
 String get_build_logs_dir() {
-	return _GodotSharpDirs::get_singleton().build_logs_dir;
+	return _FADESharpDirs::get_singleton().build_logs_dir;
 }
 
 String get_data_editor_tools_dir() {
-	return _GodotSharpDirs::get_singleton().data_editor_tools_dir;
+	return _FADESharpDirs::get_singleton().data_editor_tools_dir;
 }
 #endif
 
-} // namespace GodotSharpDirs
+} // namespace FADESharpDirs

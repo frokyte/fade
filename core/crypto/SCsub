@@ -92,7 +92,7 @@ if not has_module:
     env_thirdparty.Depends(thirdparty_obj, configs)
     env.core_sources += thirdparty_obj
 
-# Godot source files
+# FADE source files
 core_obj = []
 
 env_crypto.add_source_files(core_obj, "*.cpp")

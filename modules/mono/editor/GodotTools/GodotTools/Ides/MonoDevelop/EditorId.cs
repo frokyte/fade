@@ -1,4 +1,4 @@
-namespace GodotTools.Ides.MonoDevelop
+namespace FADETools.Ides.MonoDevelop
 {
     public enum EditorId
     {

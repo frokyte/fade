@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -33,14 +33,14 @@ package org.godotengine.godot.variant
 import androidx.annotation.Keep
 
 /**
- * Android version of a Godot built-in Callable type representing a method or a standalone function.
+ * Android version of a FADE built-in Callable type representing a method or a standalone function.
  */
 @Keep
 class Callable private constructor(private val nativeCallablePointer: Long) {
 
 	companion object {
 		/**
-		 * Invoke method [methodName] on the Godot object specified by [godotObjectId]
+		 * Invoke method [methodName] on the FADE object specified by [godotObjectId]
 		 */
 		@JvmStatic
 		fun call(godotObjectId: Long, methodName: String, vararg methodParameters: Any): Any? {
@@ -48,7 +48,7 @@ class Callable private constructor(private val nativeCallablePointer: Long) {
 		}
 
 		/**
-		 * Invoke method [methodName] on the Godot object specified by [godotObjectId] during idle time.
+		 * Invoke method [methodName] on the FADE object specified by [godotObjectId] during idle time.
 		 */
 		@JvmStatic
 		fun callDeferred(godotObjectId: Long, methodName: String, vararg methodParameters: Any) {

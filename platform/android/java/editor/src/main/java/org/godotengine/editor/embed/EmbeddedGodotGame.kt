@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  EmbeddedGodotGame.kt                                                  */
+/*  EmbeddedFADEGame.kt                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -46,17 +46,17 @@ import android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND
 import android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
 import android.view.WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
 import android.widget.CheckBox
-import org.godotengine.editor.GodotGame
+import org.godotengine.editor.FADEGame
 import org.godotengine.editor.R
 import org.godotengine.godot.editor.utils.GameMenuUtils
 
 /**
- * Host the Godot game from the editor when the embedded mode is enabled.
+ * Host the FADE game from the editor when the embedded mode is enabled.
  */
-class EmbeddedGodotGame : GodotGame() {
+class EmbeddedFADEGame : FADEGame() {
 
 	companion object {
-		private val TAG = EmbeddedGodotGame::class.java.simpleName
+		private val TAG = EmbeddedFADEGame::class.java.simpleName
 
 		private const val PREFS_NAME = "embedded_game_window_prefs"
 		private const val KEY_X = "embedded_window_x"
@@ -136,7 +136,7 @@ class EmbeddedGodotGame : GodotGame() {
 		setupOverlayUI()
 	}
 
-	override fun getGodotAppLayout() = R.layout.godot_embedded_game_layout
+	override fun getFADEAppLayout() = R.layout.godot_embedded_game_layout
 
 	override fun onConfigurationChanged(newConfig: Configuration) {
 		super.onConfigurationChanged(newConfig)

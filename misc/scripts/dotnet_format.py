@@ -20,7 +20,7 @@ for path in [
         f.write("<Project />")
 
 # Avoid importing GeneratedIncludes.props.
-os.environ["GodotSkipGenerated"] = "true"
+os.environ["FADESkipGenerated"] = "true"
 
 # Match all the input files to their respective C# project.
 projects = {

@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Godot.SourceGenerators.Tests;
+namespace FADE.SourceGenerators.Tests;
 
 public class GlobalClassAnalyzerTests
 {
     [Fact]
-    public async Task GlobalClassMustDeriveFromGodotObjectTest()
+    public async Task GlobalClassMustDeriveFromFADEObjectTest()
     {
         const string GlobalClassGD0401 = "GlobalClass.GD0401.cs";
         await CSharpAnalyzerVerifier<GlobalClassAnalyzer>.Verify(GlobalClassGD0401);

@@ -38,8 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\glue\GodotSharp\GodotSharp\GodotSharp.csproj" />
-    <ProjectReference Include="..\Godot.SourceGenerators\Godot.SourceGenerators.csproj" />
+    <ProjectReference Include="..\..\..\glue\FADESharp\FADESharp\FADESharp.csproj" />
+    <ProjectReference Include="..\FADE.SourceGenerators\FADE.SourceGenerators.csproj" />
   </ItemGroup>
 
   <ItemGroup>

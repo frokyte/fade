@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotRenderer.java                                                    */
+/*  FADERenderer.java                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,9 +30,9 @@
 
 package org.godotengine.godot.gl;
 
-import org.godotengine.godot.GodotLib;
-import org.godotengine.godot.plugin.GodotPlugin;
-import org.godotengine.godot.plugin.GodotPluginRegistry;
+import org.godotengine.godot.FADELib;
+import org.godotengine.godot.plugin.FADEPlugin;
+import org.godotengine.godot.plugin.FADEPluginRegistry;
 
 import android.util.Log;
 
@@ -40,26 +40,26 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * Godot's GL renderer implementation.
+ * FADE's GL renderer implementation.
  */
-public class GodotRenderer implements GLSurfaceView.Renderer {
-	private final String TAG = GodotRenderer.class.getSimpleName();
+public class FADERenderer implements GLSurfaceView.Renderer {
+	private final String TAG = FADERenderer.class.getSimpleName();
 
-	private final GodotPluginRegistry pluginRegistry;
+	private final FADEPluginRegistry pluginRegistry;
 	private boolean activityJustResumed = false;
 
-	public GodotRenderer() {
-		this.pluginRegistry = GodotPluginRegistry.getPluginRegistry();
+	public FADERenderer() {
+		this.pluginRegistry = FADEPluginRegistry.getPluginRegistry();
 	}
 
 	public boolean onDrawFrame(GL10 gl) {
 		if (activityJustResumed) {
-			GodotLib.onRendererResumed();
+			FADELib.onRendererResumed();
 			activityJustResumed = false;
 		}
 
-		boolean swapBuffers = GodotLib.step();
-		for (GodotPlugin plugin : pluginRegistry.getAllPlugins()) {
+		boolean swapBuffers = FADELib.step();
+		for (FADEPlugin plugin : pluginRegistry.getAllPlugins()) {
 			plugin.onGLDrawFrame(gl);
 		}
 
@@ -68,31 +68,31 @@ public class GodotRenderer implements GLSurfaceView.Renderer {
 
 	@Override
 	public void onRenderThreadExiting() {
-		Log.d(TAG, "Destroying Godot Engine");
-		GodotLib.ondestroy();
+		Log.d(TAG, "Destroying FADE Engine");
+		FADELib.ondestroy();
 	}
 
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
-		GodotLib.resize(null, width, height);
-		for (GodotPlugin plugin : pluginRegistry.getAllPlugins()) {
+		FADELib.resize(null, width, height);
+		for (FADEPlugin plugin : pluginRegistry.getAllPlugins()) {
 			plugin.onGLSurfaceChanged(gl, width, height);
 		}
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		GodotLib.newcontext(null);
-		for (GodotPlugin plugin : pluginRegistry.getAllPlugins()) {
+		FADELib.newcontext(null);
+		for (FADEPlugin plugin : pluginRegistry.getAllPlugins()) {
 			plugin.onGLSurfaceCreated(gl, config);
 		}
 	}
 
 	public void onActivityResumed() {
-		// We defer invoking GodotLib.onRendererResumed() until the first draw frame call.
+		// We defer invoking FADELib.onRendererResumed() until the first draw frame call.
 		// This ensures we have a valid GL context and surface when we do so.
 		activityJustResumed = true;
 	}
 
 	public void onActivityPaused() {
-		GodotLib.onRendererPaused();
+		FADELib.onRendererPaused();
 	}
 }

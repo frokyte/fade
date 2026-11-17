@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotActivity.kt                                                      */
+/*  FADEActivity.kt                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -53,15 +53,15 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 /**
- * Base abstract activity for Android apps intending to use Godot as the primary screen.
+ * Base abstract activity for Android apps intending to use FADE as the primary screen.
  *
- * This is also a reference implementation for how to set up and use the [GodotFragment] fragment
+ * This is also a reference implementation for how to set up and use the [FADEFragment] fragment
  * within an Android app.
  */
-abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPictureProvider {
+abstract class FADEActivity : FragmentActivity(), FADEHost, PictureInPictureProvider {
 
 	companion object {
-		private val TAG = GodotActivity::class.java.simpleName
+		private val TAG = FADEActivity::class.java.simpleName
 
 		@JvmStatic
 		val EXTRA_COMMAND_LINE_PARAMS = "command_line_params"
@@ -69,7 +69,7 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 		@JvmStatic
 		protected val EXTRA_NEW_LAUNCH = "new_launch_requested"
 
-		// This window must not match those in BaseGodotEditor.RUN_GAME_INFO etc
+		// This window must not match those in BaseFADEEditor.RUN_GAME_INFO etc
 		@JvmStatic
 		private val DEFAULT_WINDOW_ID = 664
 	}
@@ -88,9 +88,9 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 	private val maxPiPRatio = Rational(239, 100)
 
 	/**
-	 * Interaction with the [Godot] object is delegated to the [GodotFragment] class.
+	 * Interaction with the [FADE] object is delegated to the [FADEFragment] class.
 	 */
-	protected var godotFragment: GodotFragment? = null
+	protected var godotFragment: FADEFragment? = null
 		private set
 
 	/**
@@ -145,20 +145,20 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 
 		super.onCreate(savedInstanceState)
 
-		setContentView(getGodotAppLayout())
+		setContentView(getFADEAppLayout())
 
-		// Register `OnBackPressedCallback` for the Godot fragment.
+		// Register `OnBackPressedCallback` for the FADE fragment.
 		onBackPressedDispatcher.addCallback { godotFragment?.onBackPressed() }
 
 		handleStartIntent(intent, true)
 
 		val currentFragment = supportFragmentManager.findFragmentById(R.id.godot_fragment_container)
-		if (currentFragment is GodotFragment) {
-			Log.v(TAG, "Reusing existing Godot fragment instance.")
+		if (currentFragment is FADEFragment) {
+			Log.v(TAG, "Reusing existing FADE fragment instance.")
 			godotFragment = currentFragment
 		} else {
-			Log.v(TAG, "Creating new Godot fragment instance.")
-			godotFragment = initGodotInstance()
+			Log.v(TAG, "Creating new FADE fragment instance.")
+			godotFragment = initFADEInstance()
 
 			val transaction = supportFragmentManager.beginTransaction()
 			if (currentFragment != null) {
@@ -179,7 +179,7 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 		}
 	}
 
-	override fun onNewGodotInstanceRequested(args: Array<String>): Int {
+	override fun onNewFADEInstanceRequested(args: Array<String>): Int {
 		Log.d(TAG, "Restarting with parameters ${args.contentToString()}")
 		val intent = Intent()
 			.setComponent(ComponentName(this, javaClass.name))
@@ -192,16 +192,16 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 
 	protected fun triggerRebirth(bundle: Bundle?, intent: Intent) {
 		// Launch a new activity
-		Godot.getInstance(applicationContext).destroyAndKillProcess {
+		FADE.getInstance(applicationContext).destroyAndKillProcess {
 			ProcessPhoenix.triggerRebirth(this, bundle, intent)
 		}
 	}
 
 	@LayoutRes
-	protected open fun getGodotAppLayout() = R.layout.godot_app_layout
+	protected open fun getFADEAppLayout() = R.layout.godot_app_layout
 
 	override fun onDestroy() {
-		Log.v(TAG, "Destroying GodotActivity $this...")
+		Log.v(TAG, "Destroying FADEActivity $this...")
 		super.onDestroy()
 	}
 
@@ -214,43 +214,43 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 		}
 	}
 
-	override fun onGodotForceQuit(instance: Godot) {
-		runOnUiThread { terminateGodotInstance(instance) }
+	override fun onFADEForceQuit(instance: FADE) {
+		runOnUiThread { terminateFADEInstance(instance) }
 	}
 
-	private fun terminateGodotInstance(instance: Godot) {
+	private fun terminateFADEInstance(instance: FADE) {
 		godotFragment?.let {
 			if (instance === it.godot) {
-				Log.v(TAG, "Force quitting Godot instance")
+				Log.v(TAG, "Force quitting FADE instance")
 				ProcessPhoenix.forceQuit(this)
 			}
 		}
 	}
 
-	override fun onGodotRestartRequested(instance: Godot) {
+	override fun onFADERestartRequested(instance: FADE) {
 		runOnUiThread {
 			godotFragment?.let {
 				if (instance === it.godot) {
-					// It's very hard to properly de-initialize Godot on Android to restart the game
+					// It's very hard to properly de-initialize FADE on Android to restart the game
 					// from scratch. Therefore, we need to kill the whole app process and relaunch it.
 					//
 					// Restarting only the activity, wouldn't be enough unless it did proper cleanup (including
 					// releasing and reloading native libs or resetting their state somehow and clearing static data).
-					Log.v(TAG, "Restarting Godot instance...")
+					Log.v(TAG, "Restarting FADE instance...")
 					ProcessPhoenix.triggerRebirth(this)
 				}
 			}
 		}
 	}
 
-	override fun onGodotSetupCompleted() {
-		super.onGodotSetupCompleted()
+	override fun onFADESetupCompleted() {
+		super.onFADESetupCompleted()
 
 		if (isPiPEnabled()) {
 			try {
 				// Update the aspect ratio for picture-in-picture mode.
-				val viewportWidth = Integer.parseInt(GodotLib.getGlobal("display/window/size/viewport_width"))
-				val viewportHeight = Integer.parseInt(GodotLib.getGlobal("display/window/size/viewport_height"))
+				val viewportWidth = Integer.parseInt(FADELib.getGlobal("display/window/size/viewport_width"))
+				val viewportHeight = Integer.parseInt(FADELib.getGlobal("display/window/size/viewport_height"))
 				pipAspectRatio.set(Rational(viewportWidth, viewportHeight))
 			} catch (e: NumberFormatException) {
 				Log.w(TAG, "Unable to parse viewport dimensions.", e)
@@ -302,15 +302,15 @@ abstract class GodotActivity : FragmentActivity(), GodotHost, PictureInPicturePr
 		return this
 	}
 
-	override fun getGodot(): Godot? {
+	override fun getFADE(): FADE? {
 		return godotFragment?.godot
 	}
 
 	/**
-	 * Used to initialize the Godot fragment instance in [onCreate].
+	 * Used to initialize the FADE fragment instance in [onCreate].
 	 */
-	protected open fun initGodotInstance(): GodotFragment {
-		return GodotFragment()
+	protected open fun initFADEInstance(): FADEFragment {
+		return FADEFragment()
 	}
 
 	@CallSuper

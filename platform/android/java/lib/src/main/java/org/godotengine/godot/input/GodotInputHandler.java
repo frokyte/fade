@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotInputHandler.java                                                */
+/*  FADEInputHandler.java                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -32,9 +32,9 @@ package org.godotengine.godot.input;
 
 import static org.godotengine.godot.utils.GLUtils.DEBUG;
 
-import org.godotengine.godot.Godot;
-import org.godotengine.godot.GodotLib;
-import org.godotengine.godot.GodotRenderView;
+import org.godotengine.godot.FADE;
+import org.godotengine.godot.FADELib;
+import org.godotengine.godot.FADERenderView;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -66,10 +66,10 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Handles input related events for the {@link GodotRenderView} view.
+ * Handles input related events for the {@link FADERenderView} view.
  */
-public class GodotInputHandler implements InputManager.InputDeviceListener, SensorEventListener {
-	private static final String TAG = GodotInputHandler.class.getSimpleName();
+public class FADEInputHandler implements InputManager.InputDeviceListener, SensorEventListener {
+	private static final String TAG = FADEInputHandler.class.getSimpleName();
 
 	private static final int ROTARY_INPUT_VERTICAL_AXIS = 1;
 	private static final int ROTARY_INPUT_HORIZONTAL_AXIS = 0;
@@ -88,13 +88,13 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 	private final SparseArray<Joystick> mJoysticksDevices = new SparseArray<>(4);
 	private final HashSet<Integer> mHardwareKeyboardIds = new HashSet<>();
 
-	private final Godot godot;
+	private final FADE godot;
 	private final InputManager mInputManager;
 	private final DisplayManager mDisplayManager;
 	private final WindowManager windowManager;
 	final GestureDetector gestureDetector;
 	final ScaleGestureDetector scaleGestureDetector;
-	private final GodotGestureHandler godotGestureHandler;
+	private final FADEGestureHandler godotGestureHandler;
 
 	/**
 	 * Used to decide whether mouse capture can be enabled.
@@ -120,7 +120,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		}
 	};
 
-	public GodotInputHandler(Context context, Godot godot) {
+	public FADEInputHandler(Context context, FADE godot) {
 		this.godot = godot;
 		mInputManager = (InputManager)context.getSystemService(Context.INPUT_SERVICE);
 		mInputManager.registerInputDeviceListener(this, null);
@@ -128,7 +128,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		mDisplayManager = (DisplayManager)context.getSystemService(Context.DISPLAY_SERVICE);
 		windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 
-		this.godotGestureHandler = new GodotGestureHandler(this);
+		this.godotGestureHandler = new FADEGestureHandler(this);
 		this.gestureDetector = new GestureDetector(context, godotGestureHandler);
 		this.gestureDetector.setIsLongpressEnabled(true);
 
@@ -177,7 +177,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 	 * Perform haptic feedback on the render view.
 	 */
 	void performHapticFeedback() {
-		GodotRenderView view = godot.getRenderView();
+		FADERenderView view = godot.getRenderView();
 		if (view != null) {
 			view.getView().performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 		}
@@ -198,7 +198,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 	 * dispatched from the UI thread.
 	 */
 	private boolean shouldDispatchInputToRenderThread() {
-		return GodotLib.shouldDispatchInputToRenderThread();
+		return FADELib.shouldDispatchInputToRenderThread();
 	}
 
 	/**
@@ -242,7 +242,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 			// Check if the device exists
 			final int deviceId = event.getDeviceId();
 			if (mJoystickIds.indexOfKey(deviceId) >= 0) {
-				final int button = getGodotButton(keyCode);
+				final int button = getFADEButton(keyCode);
 				final int godotJoyId = mJoystickIds.get(deviceId);
 				handleJoystickButtonEvent(godotJoyId, button, false);
 			}
@@ -271,7 +271,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 				return true;
 
 			if (mJoystickIds.indexOfKey(deviceId) >= 0) {
-				final int button = getGodotButton(keyCode);
+				final int button = getFADEButton(keyCode);
 				final int godotJoyId = mJoystickIds.get(deviceId);
 				handleJoystickButtonEvent(godotJoyId, button, true);
 			}
@@ -303,7 +303,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 			return true;
 		}
 
-		// Drag events are handled by the [GodotGestureHandler]
+		// Drag events are handled by the [FADEGestureHandler]
 		if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
 			return true;
 		}
@@ -333,7 +333,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 					final float value = event.getAxisValue(axis);
 					/*
 					  As all axes are polled for each event, only fire an axis event if the value has actually changed.
-					  Prevents flooding Godot with repeated events.
+					  Prevents flooding FADE with repeated events.
 					 */
 					if (joystick.axesValues.indexOfKey(axis) < 0 || (float)joystick.axesValues.get(axis) != value) {
 						// save value to prevent repeats
@@ -459,7 +459,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		Collections.sort(joystick.axes);
 		for (int idx = 0; idx < joystick.axes.size(); idx++) {
 			//Helps with creating new joypad mappings.
-			Log.i(TAG, " - Mapping Android axis " + joystick.axes.get(idx) + " to Godot axis " + idx);
+			Log.i(TAG, " - Mapping Android axis " + joystick.axes.get(idx) + " to FADE axis " + idx);
 		}
 		mJoysticksDevices.put(deviceId, joystick);
 
@@ -486,7 +486,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		onInputDeviceAdded(deviceId);
 	}
 
-	public static int getGodotButton(int keyCode) {
+	public static int getFADEButton(int keyCode) {
 		int button;
 		switch (keyCode) {
 			case KeyEvent.KEYCODE_BUTTON_A: // Android A is SNES B
@@ -874,7 +874,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 			// orientation), so both platforms report the same orientation for
 			// the same physical pose regardless of auto-rotate.
 
-			// Pass to JNI as (x, y, z, w) matching Godot's Quaternion constructor order.
+			// Pass to JNI as (x, y, z, w) matching FADE's Quaternion constructor order.
 			runnable.setOrientationEvent(orientationQuaternion[1], orientationQuaternion[2], orientationQuaternion[3], orientationQuaternion[0]);
 			godot.runOnRenderThread(runnable);
 			return;
@@ -930,7 +930,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 				newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO;
 		if (hasHardwareKeyboardConfig != newHardwareKeyboardConfig) {
 			hasHardwareKeyboardConfig = newHardwareKeyboardConfig;
-			GodotLib.hardwareKeyboardConnected(hasHardwareKeyboard());
+			FADELib.hardwareKeyboardConnected(hasHardwareKeyboard());
 		}
 	}
 

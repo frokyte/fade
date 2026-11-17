@@ -1,14 +1,14 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Godot;
-using GodotTools.IdeMessaging;
-using GodotTools.IdeMessaging.Requests;
-using GodotTools.Internals;
+using FADE;
+using FADETools.IdeMessaging;
+using FADETools.IdeMessaging.Requests;
+using FADETools.Internals;
 
-namespace GodotTools.Ides
+namespace FADETools.Ides
 {
-    public sealed partial class GodotIdeManager : Node, ISerializationListener
+    public sealed partial class FADEIdeManager : Node, ISerializationListener
     {
         private MessagingServer? _messagingServer;
 
@@ -22,7 +22,7 @@ namespace GodotTools.Ides
 
             _messagingServer?.Dispose();
             _messagingServer = new MessagingServer(OS.GetExecutablePath(),
-                ProjectSettings.GlobalizePath(GodotSharpDirs.ResMetadataDir), new GodotLogger());
+                ProjectSettings.GlobalizePath(FADESharpDirs.ResMetadataDir), new FADELogger());
 
             _ = _messagingServer.Listen();
 
@@ -82,7 +82,7 @@ namespace GodotTools.Ides
         public async Task<EditorPick?> LaunchIdeAsync(int millisecondsTimeout = 10000)
         {
             var editorSettings = EditorInterface.Singleton.GetEditorSettings();
-            var editorId = editorSettings.GetSetting(GodotSharpEditor.Settings.ExternalEditor).As<ExternalEditorId>();
+            var editorId = editorSettings.GetSetting(FADESharpEditor.Settings.ExternalEditor).As<ExternalEditorId>();
             string editorIdentity = GetExternalEditorIdentity(editorId);
 
             var runningServer = GetRunningOrNewServer();
@@ -132,7 +132,7 @@ namespace GodotTools.Ides
 
                     try
                     {
-                        var instance = GetMonoDevelopInstance(GodotSharpDirs.ProjectSlnPath);
+                        var instance = GetMonoDevelopInstance(FADESharpDirs.ProjectSlnPath);
 
                         if (instance.IsRunning && !GetRunningOrNewServer().IsAnyConnected(editorIdentity))
                         {
@@ -174,13 +174,13 @@ namespace GodotTools.Ides
             }
 
             public bool IsAnyConnected() =>
-                GodotSharpEditor.Instance.GodotIdeManager.GetRunningOrNewServer().IsAnyConnected(_identity);
+                FADESharpEditor.Instance.FADEIdeManager.GetRunningOrNewServer().IsAnyConnected(_identity);
 
             private void SendRequest<TResponse>(Request request)
                 where TResponse : Response, new()
             {
                 // Logs an error if no client is connected with the specified identity
-                GodotSharpEditor.Instance.GodotIdeManager
+                FADESharpEditor.Instance.FADEIdeManager
                     .GetRunningOrNewServer()
                     .BroadcastRequest<TResponse>(_identity, request);
             }
@@ -203,7 +203,7 @@ namespace GodotTools.Ides
 
         public EditorPick PickEditor(ExternalEditorId editorId) => new EditorPick(GetExternalEditorIdentity(editorId));
 
-        private class GodotLogger : ILogger
+        private class FADELogger : ILogger
         {
             public void LogDebug(string message)
             {

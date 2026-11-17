@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
-namespace GodotTools.IdeMessaging
+namespace FADETools.IdeMessaging
 {
     public class ClientHandshake : IHandshake
     {

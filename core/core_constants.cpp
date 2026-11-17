@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -70,7 +70,7 @@ static HashMap<StringName, int> _global_constants_map;
 static HashMap<StringName, Vector<_CoreConstant>> _global_enums;
 
 _NO_INLINE_ static void bind_constant(const char *p_qualified_name, const char *p_name, int64_t p_value, bool p_ignore_value_in_docs, bool p_is_bitfield) {
-	StringName enum_name = p_qualified_name ? GodotTypeInfo::Internal::enum_qualified_name_to_class_info_name(p_qualified_name) : String();
+	StringName enum_name = p_qualified_name ? FADETypeInfo::Internal::enum_qualified_name_to_class_info_name(p_qualified_name) : String();
 
 #ifdef DEBUG_ENABLED
 	_global_constants.push_back(_CoreConstant(enum_name, p_name, p_value, p_ignore_value_in_docs, p_is_bitfield));

@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name="com.godot.game.GodotApp"
+            android:name="com.godot.game.FADEApp"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:excludeFromRecents="false"
             android:exported="false"
@@ -12,15 +12,15 @@
             android:resizeableActivity="false"
             android:screenOrientation="landscape"
             android:supportsPictureInPicture="true"
-            android:theme="@style/GodotAppSplashTheme"
+            android:theme="@style/FADEAppSplashTheme"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="UnusedAttribute"
             tools:replace="android:screenOrientation,android:excludeFromRecents,android:resizeableActivity" />
 
         <activity-alias
-            android:name="com.godot.game.GodotAppLauncher"
+            android:name="com.godot.game.FADEAppLauncher"
             android:exported="true"
-            android:targetActivity="com.godot.game.GodotApp">
+            android:targetActivity="com.godot.game.FADEApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

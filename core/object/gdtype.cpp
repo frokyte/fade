@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -140,7 +140,7 @@ void GDType::bind_integer_constant(const StringName &p_enum, const StringName &p
 }
 
 void GDType::bind_integer_constant_raw(const char *p_enum_qualified_name, const char *p_name, int64_t p_constant, bool p_is_bitfield) {
-	String enum_name = GodotTypeInfo::Internal::enum_qualified_name_to_class_info_name(p_enum_qualified_name);
+	String enum_name = FADETypeInfo::Internal::enum_qualified_name_to_class_info_name(p_enum_qualified_name);
 	String value_name = String(p_name).get_slice("::", 1);
 	bind_integer_constant(enum_name, value_name, p_constant, p_is_bitfield);
 }

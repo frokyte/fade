@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,16 +35,16 @@
 
 struct TTSUtterance;
 
-class GodotMediaEndedEventHandler;
-class GodotMediaFailedEventHandler;
-class GodotMediaMarkerReachedEventHandler;
-class GodotMediaCueEventHandler;
+class FADEMediaEndedEventHandler;
+class FADEMediaFailedEventHandler;
+class FADEMediaMarkerReachedEventHandler;
+class FADEMediaCueEventHandler;
 
 class TTSDriverOneCore : public TTSDriver {
-	friend class GodotMediaEndedEventHandler;
-	friend class GodotMediaFailedEventHandler;
-	friend class GodotMediaMarkerReachedEventHandler;
-	friend class GodotMediaCueEventHandler;
+	friend class FADEMediaEndedEventHandler;
+	friend class FADEMediaFailedEventHandler;
+	friend class FADEMediaMarkerReachedEventHandler;
+	friend class FADEMediaCueEventHandler;
 
 	List<TTSUtterance> queue;
 

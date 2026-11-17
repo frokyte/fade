@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -37,7 +37,7 @@
 #include "servers/xr/xr_controller_tracker.h"
 
 #ifdef __OBJC__
-#define Key GodotKey
+#define Key FADEKey
 #import <CoreHaptics/CoreHaptics.h>
 #import <GameController/GameController.h>
 #undef Key

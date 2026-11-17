@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -34,26 +34,26 @@
 #import "godot_application_delegate.h"
 #import "os_macos.h"
 
-GodotApplication *GodotApp = nil;
+FADEApplication *FADEApp = nil;
 
-@interface GodotApplication ()
+@interface FADEApplication ()
 - (void)forceUnbundledWindowActivationHackStep1;
 - (void)forceUnbundledWindowActivationHackStep2;
 - (void)forceUnbundledWindowActivationHackStep3;
 @end
 
-@implementation GodotApplication
+@implementation FADEApplication
 
-- (GodotApplication *)init {
+- (FADEApplication *)init {
 	self = [super init];
 
-	GodotApp = self;
+	FADEApp = self;
 
 	return self;
 }
 
-- (GodotApplicationDelegate *)godotDelegate {
-	return (GodotApplicationDelegate *)self.delegate;
+- (FADEApplicationDelegate *)godotDelegate {
+	return (FADEApplicationDelegate *)self.delegate;
 }
 
 - (void)activateApplication {

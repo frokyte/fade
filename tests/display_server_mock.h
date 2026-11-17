@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -61,7 +61,7 @@ public:
 	String get_name() const override { return "mock"; }
 
 	// You can simulate DisplayServer-events by calling this function.
-	// The events will be delivered to Godot's Input-system.
+	// The events will be delivered to FADE's Input-system.
 	// Mouse-events (Button & Motion) will additionally update the DisplayServer's mouse position.
 	// For Mouse motion events, the `relative`-property is set based on the distance to the previous mouse position.
 	void simulate_event(Ref<InputEvent> p_event);

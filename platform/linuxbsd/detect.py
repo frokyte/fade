@@ -32,7 +32,7 @@ def get_opts():
     # Dependencies folder.
     deps_folder = os.getenv("LOCALAPPDATA")
     if deps_folder:
-        deps_folder = os.path.join(deps_folder, "Godot", "build_deps")
+        deps_folder = os.path.join(deps_folder, "FADE", "build_deps")
     else:
         # Cross-compiling, the deps install script puts things in `bin`.
         # Getting an absolute path to it is a bit hacky in Python.
@@ -49,7 +49,7 @@ def get_opts():
         EnumVariable("linker", "Linker program", "default", ["default", "bfd", "gold", "lld", "mold"], ignorecase=2),
         BoolVariable("use_llvm", "Use the LLVM compiler", False),
         BoolVariable("use_static_cpp", "Link libgcc and libstdc++ statically for better portability", True),
-        BoolVariable("use_coverage", "Test Godot coverage", False),
+        BoolVariable("use_coverage", "Test FADE coverage", False),
         BoolVariable("use_ubsan", "Use LLVM/GCC compiler undefined behavior sanitizer (UBSAN)", False),
         BoolVariable("use_asan", "Use LLVM/GCC compiler address sanitizer (ASAN)", False),
         BoolVariable("use_lsan", "Use LLVM/GCC compiler leak sanitizer (LSAN)", False),
@@ -281,7 +281,7 @@ def configure(env: "SConsEnvironment"):
     if not env["builtin_enet"]:
         env.ParseConfig("pkg-config libenet --cflags --libs")
         print_warning(
-            "System-provided ENet has its functionality limited to IPv4 only and no DTLS support, unless patched for Godot."
+            "System-provided ENet has its functionality limited to IPv4 only and no DTLS support, unless patched for FADE."
         )
 
     if not env["builtin_zstd"]:

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -38,14 +38,14 @@
 #include "servers/physics_3d/physics_server_3d_manager.h"
 #include "servers/physics_3d/physics_server_3d_wrap_mt.h"
 
-static PhysicsServer3D *_createGodotPhysics3DCallback() {
+static PhysicsServer3D *_createFADEPhysics3DCallback() {
 #ifdef THREADS_ENABLED
 	bool using_threads = GLOBAL_GET("physics/3d/run_on_separate_thread");
 #else
 	bool using_threads = false;
 #endif
 
-	PhysicsServer3D *physics_server_3d = memnew(GodotPhysicsServer3D(using_threads));
+	PhysicsServer3D *physics_server_3d = memnew(FADEPhysicsServer3D(using_threads));
 
 	return memnew(PhysicsServer3DWrapMT(physics_server_3d, using_threads));
 }
@@ -54,7 +54,7 @@ void initialize_godot_physics_3d_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SERVERS) {
 		return;
 	}
-	PhysicsServer3DManager::get_singleton()->register_server(PhysicsServer3DManager::GODOT_PHYSICS_3D_NAME, callable_mp_static(_createGodotPhysics3DCallback));
+	PhysicsServer3DManager::get_singleton()->register_server(PhysicsServer3DManager::GODOT_PHYSICS_3D_NAME, callable_mp_static(_createFADEPhysics3DCallback));
 	PhysicsServer3DManager::get_singleton()->set_default_server(PhysicsServer3DManager::GODOT_PHYSICS_3D_NAME);
 }
 

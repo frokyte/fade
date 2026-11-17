@@ -1,22 +1,22 @@
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
-    public static class GodotClasses
+    public static class FADEClasses
     {
-        public const string GodotObject = "Godot.GodotObject";
-        public const string Node = "Godot.Node";
-        public const string Callable = "Godot.Callable";
-        public const string AssemblyHasScriptsAttr = "Godot.AssemblyHasScriptsAttribute";
-        public const string ExportAttr = "Godot.ExportAttribute";
-        public const string ExportCategoryAttr = "Godot.ExportCategoryAttribute";
-        public const string ExportGroupAttr = "Godot.ExportGroupAttribute";
-        public const string ExportSubgroupAttr = "Godot.ExportSubgroupAttribute";
-        public const string ExportToolButtonAttr = "Godot.ExportToolButtonAttribute";
-        public const string IgnoreMemberAttr = "Godot.IgnoreMemberAttribute";
-        public const string SignalAttr = "Godot.SignalAttribute";
-        public const string MustBeVariantAttr = "Godot.MustBeVariantAttribute";
-        public const string GodotClassNameAttr = "Godot.GodotClassNameAttribute";
-        public const string GlobalClassAttr = "Godot.GlobalClassAttribute";
-        public const string ToolAttr = "Godot.ToolAttribute";
+        public const string FADEObject = "FADE.FADEObject";
+        public const string Node = "FADE.Node";
+        public const string Callable = "FADE.Callable";
+        public const string AssemblyHasScriptsAttr = "FADE.AssemblyHasScriptsAttribute";
+        public const string ExportAttr = "FADE.ExportAttribute";
+        public const string ExportCategoryAttr = "FADE.ExportCategoryAttribute";
+        public const string ExportGroupAttr = "FADE.ExportGroupAttribute";
+        public const string ExportSubgroupAttr = "FADE.ExportSubgroupAttribute";
+        public const string ExportToolButtonAttr = "FADE.ExportToolButtonAttribute";
+        public const string IgnoreMemberAttr = "FADE.IgnoreMemberAttribute";
+        public const string SignalAttr = "FADE.SignalAttribute";
+        public const string MustBeVariantAttr = "FADE.MustBeVariantAttribute";
+        public const string FADEClassNameAttr = "FADE.FADEClassNameAttribute";
+        public const string GlobalClassAttr = "FADE.GlobalClassAttribute";
+        public const string ToolAttr = "FADE.ToolAttribute";
         public const string SystemFlagsAttr = "System.FlagsAttribute";
     }
 }

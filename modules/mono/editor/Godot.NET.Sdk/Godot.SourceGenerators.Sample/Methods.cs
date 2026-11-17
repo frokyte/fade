@@ -1,9 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Godot.SourceGenerators.Sample;
+namespace FADE.SourceGenerators.Sample;
 
 [SuppressMessage("ReSharper", "RedundantNameQualifier")]
-public partial class Methods : GodotObject
+public partial class Methods : FADEObject
 {
     private void MethodWithOverload()
     {

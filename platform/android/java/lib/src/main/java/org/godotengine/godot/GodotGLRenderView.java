@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotGLRenderView.java                                                */
+/*  FADEGLRenderView.java                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,10 +30,10 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.GodotLib;
+import org.godotengine.godot.FADELib;
 import org.godotengine.godot.gl.GLSurfaceView;
-import org.godotengine.godot.gl.GodotRenderer;
-import org.godotengine.godot.input.GodotInputHandler;
+import org.godotengine.godot.gl.FADERenderer;
+import org.godotengine.godot.input.FADEInputHandler;
 import org.godotengine.godot.xr.XRMode;
 import org.godotengine.godot.xr.ovr.OvrConfigChooser;
 import org.godotengine.godot.xr.ovr.OvrContextFactory;
@@ -80,29 +80,29 @@ import java.io.InputStream;
  *   that matches it exactly (with regards to red/green/blue/alpha channels
  *   bit depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
-class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
-	private final Godot godot;
-	private final GodotInputHandler inputHandler;
-	private final GodotRenderer godotRenderer;
+class FADEGLRenderView extends GLSurfaceView implements FADERenderView {
+	private final FADE godot;
+	private final FADEInputHandler inputHandler;
+	private final FADERenderer godotRenderer;
 	private final SparseArray<PointerIcon> customPointerIcons = new SparseArray<>();
 	private final AccessibilityNodeProvider accessibilityNodeProvider;
 	private final long mWindowID = 0; // DisplayServerEnums::MAIN_WINDOW_ID
 
-	public GodotGLRenderView(Godot godot, GodotInputHandler inputHandler, XRMode xrMode, boolean useDebugOpengl, boolean shouldBeTranslucent) {
+	public FADEGLRenderView(FADE godot, FADEInputHandler inputHandler, XRMode xrMode, boolean useDebugOpengl, boolean shouldBeTranslucent) {
 		super(godot.getContext());
-		if (GodotLib.createAccessKitAdapter(mWindowID)) {
+		if (FADELib.createAccessKitAdapter(mWindowID)) {
 			accessibilityNodeProvider = new AccessibilityNodeProvider() {
 				@Override
 				public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
-					return GodotLib.createAccessibilityNodeInfo(mWindowID, getView(), virtualViewId);
+					return FADELib.createAccessibilityNodeInfo(mWindowID, getView(), virtualViewId);
 				}
 				@Override
 				public AccessibilityNodeInfo findFocus(int focusType) {
-					return GodotLib.findAccessibilityFocus(mWindowID, getView(), focusType);
+					return FADELib.findAccessibilityFocus(mWindowID, getView(), focusType);
 				}
 				@Override
 				public boolean performAction(int virtualViewId, int action, Bundle arguments) {
-					return GodotLib.performAccessibilityAction(mWindowID, getView(), virtualViewId, action, arguments);
+					return FADELib.performAccessibilityAction(mWindowID, getView(), virtualViewId, action, arguments);
 				}
 			};
 			setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
@@ -111,7 +111,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 		}
 		this.godot = godot;
 		this.inputHandler = inputHandler;
-		this.godotRenderer = new GodotRenderer();
+		this.godotRenderer = new FADERenderer();
 		setPointerIcon(PointerIcon.getSystemIcon(getContext(), PointerIcon.TYPE_DEFAULT));
 		init(xrMode, shouldBeTranslucent, useDebugOpengl);
 	}
@@ -119,7 +119,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 	@Override
 	public boolean onHoverEvent(MotionEvent event) {
 		boolean handled = inputHandler.onGenericMotionEvent(event) || super.onHoverEvent(event);
-		if (accessibilityNodeProvider != null && GodotLib.onAccessibilityHoverEvent(mWindowID, this, event.getAction(), event.getX(), event.getY())) {
+		if (accessibilityNodeProvider != null && FADELib.onAccessibilityHoverEvent(mWindowID, this, event.getAction(), event.getX(), event.getY())) {
 			handled = true;
 		}
 		return handled;
@@ -136,7 +136,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 	@Override
 	protected void finalize() throws Throwable {
 		try {
-			GodotLib.freeAccessKitAdapter(mWindowID);
+			FADELib.freeAccessKitAdapter(mWindowID);
 		} finally {
 			super.finalize();
 		}
@@ -155,7 +155,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 	@Override
 	public void onActivityPaused() {
 		queueEvent(() -> {
-			GodotLib.focusout();
+			FADELib.focusout();
 			// Pause the renderer
 			godotRenderer.onActivityPaused();
 		});
@@ -171,7 +171,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 		queueEvent(() -> {
 			// Resume the renderer
 			godotRenderer.onActivityResumed();
-			GodotLib.focusin();
+			FADELib.focusin();
 		});
 	}
 
@@ -186,7 +186,7 @@ class GodotGLRenderView extends GLSurfaceView implements GodotRenderView {
 	}
 
 	@Override
-	public GodotInputHandler getInputHandler() {
+	public FADEInputHandler getInputHandler() {
 		return inputHandler;
 	}
 

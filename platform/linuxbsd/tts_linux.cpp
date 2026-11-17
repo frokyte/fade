@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -61,11 +61,11 @@ void TTS_Linux::speech_init_thread_func(void *p_userdata) {
 			CharString class_str;
 			String config_name = GLOBAL_GET("application/config/name");
 			if (config_name.length() == 0) {
-				class_str = "Godot_Engine";
+				class_str = "FADE_Engine";
 			} else {
 				class_str = config_name.utf8();
 			}
-			tts->synth = spd_open(class_str.get_data(), "Godot_Engine_Speech_API", "Godot_Engine", SPD_MODE_THREADED);
+			tts->synth = spd_open(class_str.get_data(), "FADE_Engine_Speech_API", "FADE_Engine", SPD_MODE_THREADED);
 			if (tts->synth) {
 				tts->synth->callback_end = &speech_event_callback;
 				tts->synth->callback_cancel = &speech_event_callback;

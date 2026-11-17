@@ -29,7 +29,7 @@ def get_opts():
     # Dependencies folder.
     deps_folder = os.getenv("LOCALAPPDATA")
     if deps_folder:
-        deps_folder = os.path.join(deps_folder, "Godot", "build_deps")
+        deps_folder = os.path.join(deps_folder, "FADE", "build_deps")
     else:
         # Cross-compiling, the deps install script puts things in `bin`.
         # Getting an absolute path to it is a bit hacky in Python.
@@ -238,7 +238,7 @@ def configure(env: "SConsEnvironment"):
     if not has_swappy:
         print_warning(
             f"Swappy Frame Pacing not detected! It is strongly recommended you run `python {os.path.join('misc', 'scripts', 'install_swappy_android.py')}` to download and install Swappy before compiling.\n"
-            + "Without Swappy, Godot apps on Android will inevitably suffer stutter and struggle to keep a consistent framerate. Although Swappy cannot guarantee your app will be stutter-free, not having Swappy will guarantee there will be stutter even on the best phones and the most simple of scenes."
+            + "Without Swappy, FADE apps on Android will inevitably suffer stutter and struggle to keep a consistent framerate. Although Swappy cannot guarantee your app will be stutter-free, not having Swappy will guarantee there will be stutter even on the best phones and the most simple of scenes."
         )
         if env["swappy"]:
             print_error("Use build option `swappy=no` to ignore missing Swappy dependency and build without it.")

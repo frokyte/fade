@@ -1,5 +1,5 @@
 """
-Load this file to your GDB session to enable pretty-printing of some Godot C++ types.
+Load this file to your GDB session to enable pretty-printing of some FADE C++ types.
 
 GDB command: `source misc/utility/godot_gdb_pretty_print.py`.
 
@@ -9,7 +9,7 @@ the `setupCommands` of your configuration in `launch.json`:
 "setupCommands": [
 ...
     {
-        "description": "Load custom pretty-printers for Godot types.",
+        "description": "Load custom pretty-printers for FADE types.",
         "text": "source ${workspaceFolder}/misc/utility/godot_gdb_pretty_print.py"
     }
 ]
@@ -28,8 +28,8 @@ import gdb  # type: ignore
 import gdb.printing  # type: ignore
 
 
-# Printer for Godot StringName variables.
-class GodotStringNamePrinter:
+# Printer for FADE StringName variables.
+class FADEStringNamePrinter:
     def __init__(self, value):
         self.value = value
 
@@ -45,8 +45,8 @@ class GodotStringNamePrinter:
         return "string"
 
 
-# Printer for Godot String variables.
-class GodotStringPrinter:
+# Printer for FADE String variables.
+class FADEStringPrinter:
     def __init__(self, value):
         self.value = value
 
@@ -76,8 +76,8 @@ class GodotStringPrinter:
         return "string"
 
 
-# Printer for Godot Vector variables.
-class GodotVectorPrinter:
+# Printer for FADE Vector variables.
+class FADEVectorPrinter:
     def __init__(self, value):
         self.value = value
 
@@ -128,8 +128,8 @@ class GodotVectorPrinter:
 VECTOR_REGEX = re.compile("^Vector<.*$")
 
 
-# Printer for Godot LocalVector variables.
-class GodotLocalVectorPrinter:
+# Printer for FADE LocalVector variables.
+class FADELocalVectorPrinter:
     def __init__(self, value):
         self.value = value
 
@@ -158,17 +158,17 @@ LOCAL_VECTOR_REGEX = re.compile("^LocalVector<.*$")
 # Tries to find a pretty printer for a debugger value.
 def lookup_pretty_printer(value):
     if value.type.name == "StringName":
-        return GodotStringNamePrinter(value)
+        return FADEStringNamePrinter(value)
 
     if value.type.name == "String":
-        return GodotStringPrinter(value)
+        return FADEStringPrinter(value)
 
     if value.type.name:
         if VECTOR_REGEX.match(value.type.name):
-            return GodotVectorPrinter(value)
+            return FADEVectorPrinter(value)
 
         if LOCAL_VECTOR_REGEX.match(value.type.name):
-            return GodotLocalVectorPrinter(value)
+            return FADELocalVectorPrinter(value)
 
     return None
 

@@ -185,7 +185,7 @@ if env["builtin_mbedtls"]:
     env.modules_sources += thirdparty_obj
 
 
-# Godot source files
+# FADE source files
 
 module_obj = []
 

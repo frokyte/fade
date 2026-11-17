@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,7 +36,7 @@ import org.junit.runners.Parameterized
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 
-// Godot saves command line params in the `assets/_cl_` file on exporting an apk.  By default,
+// FADE saves command line params in the `assets/_cl_` file on exporting an apk.  By default,
 // without any other commands specified in `command_line/extra_args` in Export window, the content
 // of that _cl_ file consists of only the `--xr_mode_regular` and `--use_immersive` flags.
 // The `CL_` prefix here refers to that file

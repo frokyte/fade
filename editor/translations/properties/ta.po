@@ -1,13 +1,13 @@
-# Tamil translation of the Godot Engine editor properties.
-# Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md).
+# Tamil translation of the FADE Engine editor properties.
+# Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md).
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 #
 # தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024, 2025.
 # தமிழ்நேரம் <tamilneram247@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor properties\n"
+"Project-Id-Version: FADE Engine editor properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "PO-Revision-Date: 2026-03-16 05:10+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
@@ -3759,7 +3759,7 @@ msgstr "அழைப்பு அடுக்குகளை எப்போத�
 msgid "Always Track Local Variables"
 msgstr "உள்ளக மாறிகள் எப்போதும் கண்காணிக்கவும்"
 
-msgid "Renamed in Godot 4 Hint"
+msgid "Renamed in FADE 4 Hint"
 msgstr "கோடோட் 4 குறிப்பில் மறுபெயரிடப்பட்டது"
 
 msgid "Unassigned Variable"
@@ -4152,10 +4152,10 @@ msgstr "ஒளி"
 msgid "Visible"
 msgstr "தெரியும்"
 
-msgid "glTF to Godot Expression"
+msgid "glTF to FADE Expression"
 msgstr "கோடோட் வெளிப்பாட்டிற்கு gltf"
 
-msgid "Godot to glTF Expression"
+msgid "FADE to glTF Expression"
 msgstr "Gltf வெளிப்பாட்டிற்கு கோடோட்"
 
 msgid "Node Paths"
@@ -4176,7 +4176,7 @@ msgstr "மூட்டுகள்"
 msgid "Roots"
 msgstr "வேர்கள்"
 
-msgid "Godot Bone Node"
+msgid "FADE Bone Node"
 msgstr "கோடோட் எலும்பு முனை"
 
 msgid "Skin Root"
@@ -4188,7 +4188,7 @@ msgstr "மூட்டுகள் அசல்"
 msgid "Non Joints"
 msgstr "அல்லாத மூட்டுகள்"
 
-msgid "Godot Skin"
+msgid "FADE Skin"
 msgstr "கோடோட் தோல்"
 
 msgid "Src Image"
@@ -5754,7 +5754,7 @@ msgstr "படவுரு 512 ஃச் 512"
 msgid "Emscripten Pool Size"
 msgstr "Mescripten பூல் அளவு"
 
-msgid "Godot Pool Size"
+msgid "FADE Pool Size"
 msgstr "கோடோட் பூல் அளவு"
 
 msgid "Windows"

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -51,8 +51,8 @@ GODOT_GCC_WARNING_IGNORE("-Wstrict-aliasing")
 GODOT_CLANG_WARNING_PUSH
 GODOT_CLANG_WARNING_IGNORE("-Wnon-virtual-dtor")
 
-class GodotMediaEndedEventHandler : public ROTypedEventHandler_MediaPlayer_IInspectable {
-	TYPED_EVENT_HANDLER_CLASS(GodotMediaEndedEventHandler, ROTypedEventHandler_MediaPlayer_IInspectable)
+class FADEMediaEndedEventHandler : public ROTypedEventHandler_MediaPlayer_IInspectable {
+	TYPED_EVENT_HANDLER_CLASS(FADEMediaEndedEventHandler, ROTypedEventHandler_MediaPlayer_IInspectable)
 
 	HRESULT STDMETHODCALLTYPE Invoke(ROMediaPlayer *p_sender, IInspectable *p_args) {
 		ERR_FAIL_NULL_V(TTSDriverOneCore::singleton, E_ABORT);
@@ -61,8 +61,8 @@ class GodotMediaEndedEventHandler : public ROTypedEventHandler_MediaPlayer_IInsp
 	}
 };
 
-class GodotMediaFailedEventHandler : public ROTypedEventHandler_MediaPlayer_MediaPlayerFailedEventArgs {
-	TYPED_EVENT_HANDLER_CLASS(GodotMediaFailedEventHandler, ROTypedEventHandler_MediaPlayer_MediaPlayerFailedEventArgs)
+class FADEMediaFailedEventHandler : public ROTypedEventHandler_MediaPlayer_MediaPlayerFailedEventArgs {
+	TYPED_EVENT_HANDLER_CLASS(FADEMediaFailedEventHandler, ROTypedEventHandler_MediaPlayer_MediaPlayerFailedEventArgs)
 
 	HRESULT STDMETHODCALLTYPE Invoke(ROMediaPlayer *p_sender, ROMediaPlayerFailedEventArgs *p_args) {
 		ERR_FAIL_NULL_V(TTSDriverOneCore::singleton, E_ABORT);
@@ -71,8 +71,8 @@ class GodotMediaFailedEventHandler : public ROTypedEventHandler_MediaPlayer_Medi
 	}
 };
 
-class GodotMediaMarkerReachedEventHandler : public ROTypedEventHandler_MediaPlayer_PlaybackMediaMarkerReachedEventArgs {
-	TYPED_EVENT_HANDLER_CLASS(GodotMediaMarkerReachedEventHandler, ROTypedEventHandler_MediaPlayer_PlaybackMediaMarkerReachedEventArgs)
+class FADEMediaMarkerReachedEventHandler : public ROTypedEventHandler_MediaPlayer_PlaybackMediaMarkerReachedEventArgs {
+	TYPED_EVENT_HANDLER_CLASS(FADEMediaMarkerReachedEventHandler, ROTypedEventHandler_MediaPlayer_PlaybackMediaMarkerReachedEventArgs)
 
 	HRESULT STDMETHODCALLTYPE Invoke(ROMediaPlayer *p_sender, ROPlaybackMediaMarkerReachedEventArgs *p_args) {
 		ERR_FAIL_NULL_V(TTSDriverOneCore::singleton, E_ABORT);
@@ -104,8 +104,8 @@ class GodotMediaMarkerReachedEventHandler : public ROTypedEventHandler_MediaPlay
 /* TimedMetadataTrack events                                              */
 /**************************************************************************/
 
-class GodotMediaCueEventHandler : public ROTypedEventHandler_TimedMetadataTrack_MediaCueEventArgs {
-	TYPED_EVENT_HANDLER_CLASS(GodotMediaCueEventHandler, ROTypedEventHandler_TimedMetadataTrack_MediaCueEventArgs)
+class FADEMediaCueEventHandler : public ROTypedEventHandler_TimedMetadataTrack_MediaCueEventArgs {
+	TYPED_EVENT_HANDLER_CLASS(FADEMediaCueEventHandler, ROTypedEventHandler_TimedMetadataTrack_MediaCueEventArgs)
 
 	HRESULT STDMETHODCALLTYPE Invoke(ROTimedMetadataTrack *p_sender, ROMediaCueEventArgs *p_args) {
 		ERR_FAIL_NULL_V(TTSDriverOneCore::singleton, E_ABORT);
@@ -276,10 +276,10 @@ void TTSDriverOneCore::process_events() {
 		ERR_FAIL_COND(FAILED(media_fact->ActivateInstance((IInspectable **)media_ii.GetAddressOf())));
 		ERR_FAIL_COND(FAILED(media_ii.As(&media)));
 
-		GodotMediaEndedEventHandler *handler_end = new GodotMediaEndedEventHandler();
+		FADEMediaEndedEventHandler *handler_end = new FADEMediaEndedEventHandler();
 		ERR_FAIL_COND(FAILED(handler_end->QueryInterface(IID_PPV_ARGS(&handler_e))));
 		ERR_FAIL_COND(FAILED(media->add_MediaEnded(handler_e.Get(), &token_e)));
-		GodotMediaFailedEventHandler *handler_fail = new GodotMediaFailedEventHandler();
+		FADEMediaFailedEventHandler *handler_fail = new FADEMediaFailedEventHandler();
 		ERR_FAIL_COND(FAILED(handler_fail->QueryInterface(IID_PPV_ARGS(&handler_f))));
 		ERR_FAIL_COND(FAILED(media->add_MediaFailed(handler_f.Get(), &token_f)));
 
@@ -325,7 +325,7 @@ void TTSDriverOneCore::process_events() {
 				if ((ROTimedMetadataKind)track_kind == ROTimedMetadataKind::Speech) {
 					ROEventToken token_c;
 					ComPtr<ROTypedEventHandler_TimedMetadataTrack_MediaCueEventArgs> handler_c;
-					GodotMediaCueEventHandler *handler_cue = new GodotMediaCueEventHandler();
+					FADEMediaCueEventHandler *handler_cue = new FADEMediaCueEventHandler();
 					ERR_CONTINUE(FAILED(handler_cue->QueryInterface(IID_PPV_ARGS(&handler_c))));
 					ERR_CONTINUE(FAILED(track->add_CueEntered(handler_c.Get(), &token_c)));
 					ERR_CONTINUE(FAILED(list->SetPresentationMode(i, (int32_t)RoTimedMetadataTrackPresentationMode::ApplicationPresented)));
@@ -336,7 +336,7 @@ void TTSDriverOneCore::process_events() {
 		} else {
 			ERR_FAIL_COND(FAILED(player_source->put_Source(source.Get())));
 
-			GodotMediaMarkerReachedEventHandler *handler_marker = new GodotMediaMarkerReachedEventHandler();
+			FADEMediaMarkerReachedEventHandler *handler_marker = new FADEMediaMarkerReachedEventHandler();
 			ERR_FAIL_COND(FAILED(handler_marker->QueryInterface(IID_PPV_ARGS(&handler_s))));
 			ERR_FAIL_COND(FAILED(media->add_PlaybackMediaMarkerReached(handler_s.Get(), &token_s)));
 		}

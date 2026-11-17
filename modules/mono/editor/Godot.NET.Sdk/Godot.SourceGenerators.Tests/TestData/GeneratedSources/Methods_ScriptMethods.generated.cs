@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class Methods
 {
@@ -7,29 +7,29 @@ partial class Methods
     /// <summary>
     /// Cached StringNames for the methods contained in this class, for fast lookup.
     /// </summary>
-    public new class MethodName : global::Godot.GodotObject.MethodName {
+    public new class MethodName : global::FADE.FADEObject.MethodName {
         /// <summary>
         /// Cached name for the 'MethodWithOverload' method.
         /// </summary>
-        public new static readonly global::Godot.StringName @MethodWithOverload = "MethodWithOverload";
+        public new static readonly global::FADE.StringName @MethodWithOverload = "MethodWithOverload";
     }
     /// <summary>
     /// Get the method information for all the methods declared in this class.
-    /// This method is used by Godot to register the available methods in the editor.
+    /// This method is used by FADE to register the available methods in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo> GetGodotMethodList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.MethodInfo> GetFADEMethodList()
     {
-        var methods = new global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo>(3);
-        methods.Add(new(name: MethodName.@MethodWithOverload, returnVal: new(type: (global::Godot.Variant.Type)0, name: "", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false), flags: (global::Godot.MethodFlags)1, arguments: null, defaultArguments: null));
-        methods.Add(new(name: MethodName.@MethodWithOverload, returnVal: new(type: (global::Godot.Variant.Type)0, name: "", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false), flags: (global::Godot.MethodFlags)1, arguments: new() { new(type: (global::Godot.Variant.Type)2, name: "a", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false),  }, defaultArguments: null));
-        methods.Add(new(name: MethodName.@MethodWithOverload, returnVal: new(type: (global::Godot.Variant.Type)0, name: "", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false), flags: (global::Godot.MethodFlags)1, arguments: new() { new(type: (global::Godot.Variant.Type)2, name: "a", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false), new(type: (global::Godot.Variant.Type)2, name: "b", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false),  }, defaultArguments: null));
+        var methods = new global::System.Collections.Generic.List<global::FADE.Bridge.MethodInfo>(3);
+        methods.Add(new(name: MethodName.@MethodWithOverload, returnVal: new(type: (global::FADE.Variant.Type)0, name: "", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false), flags: (global::FADE.MethodFlags)1, arguments: null, defaultArguments: null));
+        methods.Add(new(name: MethodName.@MethodWithOverload, returnVal: new(type: (global::FADE.Variant.Type)0, name: "", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false), flags: (global::FADE.MethodFlags)1, arguments: new() { new(type: (global::FADE.Variant.Type)2, name: "a", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false),  }, defaultArguments: null));
+        methods.Add(new(name: MethodName.@MethodWithOverload, returnVal: new(type: (global::FADE.Variant.Type)0, name: "", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false), flags: (global::FADE.MethodFlags)1, arguments: new() { new(type: (global::FADE.Variant.Type)2, name: "a", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false), new(type: (global::FADE.Variant.Type)2, name: "b", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false),  }, defaultArguments: null));
         return methods;
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotMethodTrampolines(global::Godot.Bridge.MethodTrampolineCollector collector)
+        public static void GetFADEMethodTrampolines(global::FADE.Bridge.MethodTrampolineCollector collector)
         {
             static godot_variant trampoline_0_MethodWithOverload(object godotObject, NativeVariantPtrArgs args, ref godot_variant_call_error callError)
             {
@@ -48,7 +48,7 @@ partial class Methods
                     callError = godot_variant_call_error.CreateInvalidArgumentCountError(expected: 1, provided: args.Count);
                     return default;
                 }
-                ((global::Methods)godotObject).@MethodWithOverload(global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(args[0]));
+                ((global::Methods)godotObject).@MethodWithOverload(global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(args[0]));
                 return default;
             }
             var aux_delegate_1_MethodWithOverload = trampoline_1_MethodWithOverload;
@@ -59,7 +59,7 @@ partial class Methods
                     callError = godot_variant_call_error.CreateInvalidArgumentCountError(expected: 2, provided: args.Count);
                     return default;
                 }
-                ((global::Methods)godotObject).@MethodWithOverload(global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(args[0]), global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(args[1]));
+                ((global::Methods)godotObject).@MethodWithOverload(global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(args[0]), global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(args[1]));
                 return default;
             }
             var aux_delegate_2_MethodWithOverload = trampoline_2_MethodWithOverload;

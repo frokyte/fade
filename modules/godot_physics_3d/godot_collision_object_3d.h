@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -41,9 +41,9 @@
 #define MAX_OBJECT_DISTANCE_X2 (MAX_OBJECT_DISTANCE * MAX_OBJECT_DISTANCE)
 #endif
 
-class GodotSpace3D;
+class FADESpace3D;
 
-class GodotCollisionObject3D : public GodotShapeOwner3D {
+class FADECollisionObject3D : public FADEShapeOwner3D {
 public:
 	enum Type {
 		TYPE_AREA,
@@ -62,20 +62,20 @@ private:
 	struct Shape {
 		Transform3D xform;
 		Transform3D xform_inv;
-		GodotBroadPhase3D::ID bpid;
+		FADEBroadPhase3D::ID bpid;
 		AABB aabb_cache; //for rayqueries
 		real_t area_cache = 0.0;
-		GodotShape3D *shape = nullptr;
+		FADEShape3D *shape = nullptr;
 		bool disabled = false;
 	};
 
 	Vector<Shape> shapes;
-	GodotSpace3D *space = nullptr;
+	FADESpace3D *space = nullptr;
 	Transform3D transform;
 	Transform3D inv_transform;
 	bool _static = true;
 
-	SelfList<GodotCollisionObject3D> pending_shape_update_list;
+	SelfList<FADECollisionObject3D> pending_shape_update_list;
 
 	void _update_shapes();
 
@@ -98,11 +98,11 @@ protected:
 	void _set_static(bool p_static);
 
 	virtual void _shapes_changed() = 0;
-	void _set_space(GodotSpace3D *p_space);
+	void _set_space(FADESpace3D *p_space);
 
 	bool ray_pickable = true;
 
-	GodotCollisionObject3D(Type p_type);
+	FADECollisionObject3D(Type p_type);
 
 public:
 	_FORCE_INLINE_ void set_self(const RID &p_self) { self = p_self; }
@@ -114,11 +114,11 @@ public:
 	void _shape_changed() override;
 
 	_FORCE_INLINE_ Type get_type() const { return type; }
-	void add_shape(GodotShape3D *p_shape, const Transform3D &p_transform = Transform3D(), bool p_disabled = false);
-	void set_shape(int p_index, GodotShape3D *p_shape);
+	void add_shape(FADEShape3D *p_shape, const Transform3D &p_transform = Transform3D(), bool p_disabled = false);
+	void set_shape(int p_index, FADEShape3D *p_shape);
 	void set_shape_transform(int p_index, const Transform3D &p_transform);
 	_FORCE_INLINE_ int get_shape_count() const { return shapes.size(); }
-	_FORCE_INLINE_ GodotShape3D *get_shape(int p_index) const {
+	_FORCE_INLINE_ FADEShape3D *get_shape(int p_index) const {
 		CRASH_BAD_INDEX(p_index, shapes.size());
 		return shapes[p_index].shape;
 	}
@@ -141,7 +141,7 @@ public:
 
 	_FORCE_INLINE_ const Transform3D &get_transform() const { return transform; }
 	_FORCE_INLINE_ const Transform3D &get_inv_transform() const { return inv_transform; }
-	_FORCE_INLINE_ GodotSpace3D *get_space() const { return space; }
+	_FORCE_INLINE_ FADESpace3D *get_space() const { return space; }
 
 	_FORCE_INLINE_ void set_ray_pickable(bool p_enable) { ray_pickable = p_enable; }
 	_FORCE_INLINE_ bool is_ray_pickable() const { return ray_pickable; }
@@ -171,20 +171,20 @@ public:
 	}
 	_FORCE_INLINE_ real_t get_collision_priority() const { return collision_priority; }
 
-	_FORCE_INLINE_ bool collides_with(GodotCollisionObject3D *p_other) const {
+	_FORCE_INLINE_ bool collides_with(FADECollisionObject3D *p_other) const {
 		return p_other->collision_layer & collision_mask;
 	}
 
-	_FORCE_INLINE_ bool interacts_with(const GodotCollisionObject3D *p_other) const {
+	_FORCE_INLINE_ bool interacts_with(const FADECollisionObject3D *p_other) const {
 		return collision_layer & p_other->collision_mask || p_other->collision_layer & collision_mask;
 	}
 
-	void remove_shape(GodotShape3D *p_shape) override;
+	void remove_shape(FADEShape3D *p_shape) override;
 	void remove_shape(int p_index);
 
-	virtual void set_space(GodotSpace3D *p_space) = 0;
+	virtual void set_space(FADESpace3D *p_space) = 0;
 
 	_FORCE_INLINE_ bool is_static() const { return _static; }
 
-	virtual ~GodotCollisionObject3D() {}
+	virtual ~FADECollisionObject3D() {}
 };

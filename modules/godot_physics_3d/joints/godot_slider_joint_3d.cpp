@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 /*
@@ -57,8 +57,8 @@ April 04, 2008
 
 //-----------------------------------------------------------------------------
 
-GodotSliderJoint3D::GodotSliderJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB) :
-		GodotJoint3D(_arr, 2),
+FADESliderJoint3D::FADESliderJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB) :
+		FADEJoint3D(_arr, 2),
 		m_frameInA(frameInA),
 		m_frameInB(frameInB) {
 	A = rbA;
@@ -70,7 +70,7 @@ GodotSliderJoint3D::GodotSliderJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const
 
 //-----------------------------------------------------------------------------
 
-bool GodotSliderJoint3D::setup(real_t p_step) {
+bool FADESliderJoint3D::setup(real_t p_step) {
 	dynamic_A = (A->get_mode() > PS3DE::BODY_MODE_KINEMATIC);
 	dynamic_B = (B->get_mode() > PS3DE::BODY_MODE_KINEMATIC);
 
@@ -95,7 +95,7 @@ bool GodotSliderJoint3D::setup(real_t p_step) {
 		normalWorld = m_calculatedTransformA.basis.get_column(i);
 		memnew_placement(
 				&m_jacLin[i],
-				GodotJacobianEntry3D(
+				FADEJacobianEntry3D(
 						A->get_principal_inertia_axes().transposed(),
 						B->get_principal_inertia_axes().transposed(),
 						m_relPosA - A->get_center_of_mass(),
@@ -114,7 +114,7 @@ bool GodotSliderJoint3D::setup(real_t p_step) {
 		normalWorld = m_calculatedTransformA.basis.get_column(i);
 		memnew_placement(
 				&m_jacAng[i],
-				GodotJacobianEntry3D(
+				FADEJacobianEntry3D(
 						normalWorld,
 						A->get_principal_inertia_axes().transposed(),
 						B->get_principal_inertia_axes().transposed(),
@@ -133,7 +133,7 @@ bool GodotSliderJoint3D::setup(real_t p_step) {
 
 //-----------------------------------------------------------------------------
 
-void GodotSliderJoint3D::solve(real_t p_step) {
+void FADESliderJoint3D::solve(real_t p_step) {
 	int i;
 	// linear
 	Vector3 velA = A->get_velocity_in_local_point(m_relPosA);
@@ -273,7 +273,7 @@ void GodotSliderJoint3D::solve(real_t p_step) {
 
 //-----------------------------------------------------------------------------
 
-void GodotSliderJoint3D::calculateTransforms() {
+void FADESliderJoint3D::calculateTransforms() {
 	m_calculatedTransformA = A->get_transform() * m_frameInA;
 	m_calculatedTransformB = B->get_transform() * m_frameInB;
 	m_realPivotAInW = m_calculatedTransformA.origin;
@@ -292,7 +292,7 @@ void GodotSliderJoint3D::calculateTransforms() {
 
 //-----------------------------------------------------------------------------
 
-void GodotSliderJoint3D::testLinLimits() {
+void FADESliderJoint3D::testLinLimits() {
 	m_solveLinLim = false;
 	m_linPos = m_depth[0];
 	if (m_lowerLinLimit <= m_upperLinLimit) {
@@ -312,7 +312,7 @@ void GodotSliderJoint3D::testLinLimits() {
 
 //-----------------------------------------------------------------------------
 
-void GodotSliderJoint3D::testAngLimits() {
+void FADESliderJoint3D::testAngLimits() {
 	m_angDepth = real_t(0.);
 	m_solveAngLim = false;
 	if (m_lowerAngLimit <= m_upperAngLimit) {
@@ -332,7 +332,7 @@ void GodotSliderJoint3D::testAngLimits() {
 
 //-----------------------------------------------------------------------------
 
-Vector3 GodotSliderJoint3D::getAncorInA() {
+Vector3 FADESliderJoint3D::getAncorInA() {
 	Vector3 ancorInA;
 	ancorInA = m_realPivotAInW + (m_lowerLinLimit + m_upperLinLimit) * real_t(0.5) * m_sliderAxis;
 	ancorInA = A->get_transform().inverse().xform(ancorInA);
@@ -341,13 +341,13 @@ Vector3 GodotSliderJoint3D::getAncorInA() {
 
 //-----------------------------------------------------------------------------
 
-Vector3 GodotSliderJoint3D::getAncorInB() {
+Vector3 FADESliderJoint3D::getAncorInB() {
 	Vector3 ancorInB;
 	ancorInB = m_frameInB.origin;
 	return ancorInB;
 }
 
-void GodotSliderJoint3D::set_param(PS3DE::SliderJointParam p_param, real_t p_value) {
+void FADESliderJoint3D::set_param(PS3DE::SliderJointParam p_param, real_t p_value) {
 	switch (p_param) {
 		case PS3DE::SLIDER_JOINT_LINEAR_LIMIT_UPPER:
 			m_upperLinLimit = p_value;
@@ -422,7 +422,7 @@ void GodotSliderJoint3D::set_param(PS3DE::SliderJointParam p_param, real_t p_val
 	}
 }
 
-real_t GodotSliderJoint3D::get_param(PS3DE::SliderJointParam p_param) const {
+real_t FADESliderJoint3D::get_param(PS3DE::SliderJointParam p_param) const {
 	switch (p_param) {
 		case PS3DE::SLIDER_JOINT_LINEAR_LIMIT_UPPER:
 			return m_upperLinLimit;

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -66,7 +66,7 @@ void StreamedTexture2D::_requested_normal(void *p_ud) {
 }
 
 void StreamedTexture2D::texture_reload(uint8_t p_mip_level) {
-	GodotProfileZone("StreamedTexture2D::texture_reload");
+	FADEProfileZone("StreamedTexture2D::texture_reload");
 
 	ERR_FAIL_COND(texture.is_null());
 	ERR_FAIL_COND(path_to_file.is_empty());
@@ -129,7 +129,7 @@ Error StreamedTexture2D::_parse_header(const String &p_path, StreamedTextureFile
 	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ);
 	ERR_FAIL_COND_V_MSG(f.is_null(), ERR_CANT_OPEN, vformat("Unable to open file: %s.", p_path));
 
-	// Check for Godot Streamed Texture Format header (ie, GSTF).
+	// Check for FADE Streamed Texture Format header (ie, GSTF).
 	uint8_t header[4];
 	f->get_buffer(header, 4);
 	if (header[0] != 'G' || header[1] != 'S' || header[2] != 'T' || header[3] != 'F') {
@@ -269,7 +269,7 @@ Error StreamedTexture2D::_save_data(const String &p_path, const Ref<Image> &p_im
 	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::WRITE);
 	ERR_FAIL_COND_V_MSG(f.is_null(), ERR_CANT_CREATE, vformat("Unable to create file: %s.", p_path));
 
-	// Write Godot Streamed Texture Format header (ie, GSTF).
+	// Write FADE Streamed Texture Format header (ie, GSTF).
 	f->store_8('G');
 	f->store_8('S');
 	f->store_8('T');

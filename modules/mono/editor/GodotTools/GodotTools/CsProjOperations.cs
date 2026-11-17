@@ -1,8 +1,8 @@
-using Godot;
+using FADE;
 using System;
-using GodotTools.ProjectEditor;
+using FADETools.ProjectEditor;
 
-namespace GodotTools
+namespace FADETools
 {
     public static class CsProjOperations
     {

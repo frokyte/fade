@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators;
+namespace FADE.SourceGenerators;
 
 [Generator]
 public class TrampolineCollectorDispatchGenerator : ISourceGenerator
@@ -20,7 +20,7 @@ public class TrampolineCollectorDispatchGenerator : ISourceGenerator
             .SelectMany(tree =>
                 tree.GetRoot().DescendantNodes()
                     .OfType<ClassDeclarationSyntax>()
-                    .SelectGodotScriptClasses(context.Compilation)
+                    .SelectFADEScriptClasses(context.Compilation)
                     // Report and skip non-partial classes
                     .Where(x =>
                     {
@@ -45,12 +45,12 @@ public class TrampolineCollectorDispatchGenerator : ISourceGenerator
         {
             foreach (var godotClass in godotClasses)
             {
-                VisitGodotScriptClass(context, godotClass);
+                VisitFADEScriptClass(context, godotClass);
             }
         }
     }
 
-    private static void VisitGodotScriptClass(
+    private static void VisitFADEScriptClass(
         GeneratorExecutionContext context,
         INamedTypeSymbol symbol
     )
@@ -68,8 +68,8 @@ public class TrampolineCollectorDispatchGenerator : ISourceGenerator
 
         var source = new StringBuilder();
 
-        source.Append("using Godot;\n");
-        source.Append("using Godot.NativeInterop;\n");
+        source.Append("using FADE;\n");
+        source.Append("using FADE.NativeInterop;\n");
         source.Append("\n");
 
         if (hasNamespace)
@@ -107,65 +107,65 @@ public class TrampolineCollectorDispatchGenerator : ISourceGenerator
             .Append(" // Disable warning about new protected member declared in sealed type\n");
 
         source.Append("    ").Append(symbol.IsSealed ? "" : "protected ")
-            .Append("internal new static partial class GodotInternal\n    {\n");
+            .Append("internal new static partial class FADEInternal\n    {\n");
 
-        const string CollectorType = "global::Godot.Bridge.TrampolineCollectors";
-        const string OptionsType = "global::Godot.Bridge.TrampolineCollectionOptions";
+        const string CollectorType = "global::FADE.Bridge.TrampolineCollectors";
+        const string OptionsType = "global::FADE.Bridge.TrampolineCollectionOptions";
 
         source.Append("        /// <summary>\n")
-            .Append("        /// Collects the trampolines for all the members visible to Godot.\n")
+            .Append("        /// Collects the trampolines for all the members visible to FADE.\n")
             .Append(
-                "        /// This method is used by Godot to collect the trampolines to call this class's members from the native side.\n")
+                "        /// This method is used by FADE to collect the trampolines to call this class's members from the native side.\n")
             .Append("        /// Do not call this method.\n")
             .Append("        /// </summary>\n");
 
         source
-            .Append("        public static void GetGodotClassTrampolines(")
+            .Append("        public static void GetFADEClassTrampolines(")
             .Append(CollectorType).Append(" collectors, ").Append(OptionsType).Append(" options)\n        {\n");
 
-        if (!context.IsGodotSourceGeneratorDisabled("ScriptMethods"))
+        if (!context.IsFADESourceGeneratorDisabled("ScriptMethods"))
         {
-            source.Append("            ").Append(symbol.FullQualifiedNameIncludeGlobal()).Append(".GodotInternal")
-                .Append(".GetGodotMethodTrampolines(collectors.MethodTrampolineCollector);\n");
+            source.Append("            ").Append(symbol.FullQualifiedNameIncludeGlobal()).Append(".FADEInternal")
+                .Append(".GetFADEMethodTrampolines(collectors.MethodTrampolineCollector);\n");
         }
 
-        if (!context.IsGodotSourceGeneratorDisabled("ScriptProperties"))
+        if (!context.IsFADESourceGeneratorDisabled("ScriptProperties"))
         {
-            source.Append("            ").Append(symbol.FullQualifiedNameIncludeGlobal()).Append(".GodotInternal")
-                .Append(".GetGodotPropertyTrampolines(collectors.PropertyTrampolineCollector);\n");
+            source.Append("            ").Append(symbol.FullQualifiedNameIncludeGlobal()).Append(".FADEInternal")
+                .Append(".GetFADEPropertyTrampolines(collectors.PropertyTrampolineCollector);\n");
         }
 
-        if (!context.IsGodotSourceGeneratorDisabled("ScriptSignals"))
+        if (!context.IsFADESourceGeneratorDisabled("ScriptSignals"))
         {
-            source.Append("            ").Append(symbol.FullQualifiedNameIncludeGlobal()).Append(".GodotInternal")
-                .Append(".GetGodotRaiseSignalTrampolines(collectors.RaiseSignalTrampolineCollector);\n");
+            source.Append("            ").Append(symbol.FullQualifiedNameIncludeGlobal()).Append(".FADEInternal")
+                .Append(".GetFADERaiseSignalTrampolines(collectors.RaiseSignalTrampolineCollector);\n");
         }
 
-        var usableBaseType = symbol.GetClosestBaseTypeDeclaringGodotInternalMethod("GetGodotClassTrampolines");
+        var usableBaseType = symbol.GetClosestBaseTypeDeclaringFADEInternalMethod("GetFADEClassTrampolines");
 
         if (usableBaseType != null)
         {
             source
                 .Append("            if (options.IncludeAncestors) {\n")
                 .Append("                ").Append(usableBaseType.FullQualifiedNameIncludeGlobal())
-                .Append(".GodotInternal.GetGodotClassTrampolines(collectors, options);\n")
+                .Append(".FADEInternal.GetFADEClassTrampolines(collectors, options);\n")
                 .Append("            }\n");
         }
 
 
         source.Append("        }\n");
 
-        source.Append("    }\n"); // partial class GodotInternal
+        source.Append("    }\n"); // partial class FADEInternal
 
-        // Generate GetGodotClassGodotInternalType
-        // When GodotSharp calls `GetNestedType("GodotInternal")`, that method returns a generic type definition,
+        // Generate GetFADEClassFADEInternalType
+        // When FADESharp calls `GetNestedType("FADEInternal")`, that method returns a generic type definition,
         // even though we're calling it on a constructed generic type. This is an AOT-compatible workaround.
         // This workaround should no longer be needed once assemblies and generated code are trim-compatible.
         if (symbol.IsGenericType)
         {
             source.Append("#pragma warning disable CS0109 // Disable warning about redundant 'new' keyword\n");
-            source.Append("    private new static global::System.Type GetGodotClassGodotInternalType()\n    {\n");
-            source.Append("        return typeof(GodotInternal);\n");
+            source.Append("    private new static global::System.Type GetFADEClassFADEInternalType()\n    {\n");
+            source.Append("        return typeof(FADEInternal);\n");
             source.Append("    }\n");
             source.Append("#pragma warning restore CS0109\n");
         }

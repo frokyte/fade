@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,10 +36,10 @@
 
 static OS_MacOS *os = nullptr;
 
-static GodotInstance *instance = nullptr;
+static FADEInstance *instance = nullptr;
 
 GDExtensionObjectPtr libgodot_create_godot_instance(int p_argc, char *p_argv[], GDExtensionInitializationFunction p_init_func) {
-	ERR_FAIL_COND_V_MSG(instance != nullptr, nullptr, "Only one Godot Instance may be created.");
+	ERR_FAIL_COND_V_MSG(instance != nullptr, nullptr, "Only one FADE Instance may be created.");
 
 	uint32_t remaining_args = p_argc - 1;
 	os = new OS_MacOS_NSApp(p_argv[0], remaining_args, remaining_args > 0 ? &p_argv[1] : nullptr);
@@ -50,7 +50,7 @@ GDExtensionObjectPtr libgodot_create_godot_instance(int p_argc, char *p_argv[], 
 			return nullptr;
 		}
 
-		instance = memnew(GodotInstance);
+		instance = memnew(FADEInstance);
 		if (!instance->initialize(p_init_func)) {
 			memdelete(instance);
 			instance = nullptr;
@@ -62,11 +62,11 @@ GDExtensionObjectPtr libgodot_create_godot_instance(int p_argc, char *p_argv[], 
 }
 
 void libgodot_destroy_godot_instance(GDExtensionObjectPtr p_godot_instance) {
-	GodotInstance *godot_instance = (GodotInstance *)p_godot_instance;
+	FADEInstance *godot_instance = (FADEInstance *)p_godot_instance;
 	if (instance == godot_instance) {
 		godot_instance->stop();
 		memdelete(godot_instance);
-		// Note: When Godot Engine supports reinitialization, clear the instance pointer here.
+		// Note: When FADE Engine supports reinitialization, clear the instance pointer here.
 		//instance = nullptr;
 		Main::cleanup();
 	}

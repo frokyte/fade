@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -306,10 +306,10 @@ String _get_activity_tag(const Ref<EditorExportPlatform> &p_export_platform, con
 		}
 	}
 
-	// Update the GodotApp activity tag.
+	// Update the FADEApp activity tag.
 	String orientation = _get_android_orientation_label(DisplayServerEnums::ScreenOrientation(int(p_export_platform->get_project_setting(p_preset, "display/window/handheld/orientation"))));
 	String manifest_activity_text = vformat(
-			"        <activity android:name=\"com.godot.game.GodotApp\" "
+			"        <activity android:name=\"com.godot.game.FADEApp\" "
 			"tools:replace=\"android:screenOrientation,android:excludeFromRecents,android:resizeableActivity\" "
 			"tools:node=\"mergeOnlyAttributes\" "
 			"android:configChanges=\"layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment\" "
@@ -319,7 +319,7 @@ String _get_activity_tag(const Ref<EditorExportPlatform> &p_export_platform, con
 			"android:screenOrientation=\"%s\" "
 			"android:resizeableActivity=\"%s\" "
 			"android:supportsPictureInPicture=\"true\" "
-			"android:theme=\"@style/GodotAppSplashTheme\" "
+			"android:theme=\"@style/FADEAppSplashTheme\" "
 			"android:windowSoftInputMode=\"adjustResize\" >\n",
 			bool_to_string(p_preset->get("package/exclude_from_recents")),
 			orientation,
@@ -332,11 +332,11 @@ String _get_activity_tag(const Ref<EditorExportPlatform> &p_export_platform, con
 
 	manifest_activity_text += "        </activity>\n";
 
-	// Update the GodotAppLauncher activity tag.
+	// Update the FADEAppLauncher activity tag.
 	manifest_activity_text += "        <activity-alias\n"
 							  "            tools:node=\"mergeOnlyAttributes\"\n"
-							  "            android:name=\"com.godot.game.GodotAppLauncher\"\n"
-							  "            android:targetActivity=\"com.godot.game.GodotApp\"\n"
+							  "            android:name=\"com.godot.game.FADEAppLauncher\"\n"
+							  "            android:targetActivity=\"com.godot.game.FADEApp\"\n"
 							  "            android:exported=\"true\">\n";
 
 	manifest_activity_text += "            <intent-filter>\n"
@@ -360,7 +360,7 @@ String _get_activity_tag(const Ref<EditorExportPlatform> &p_export_platform, con
 
 	manifest_activity_text += "            </intent-filter>\n";
 
-	// Hybrid categories should only go to the actual 'GodotApp' activity.
+	// Hybrid categories should only go to the actual 'FADEApp' activity.
 	Ref<RegEx> activity_alias_content_to_remove_regex = RegEx::create_from_string(R"delim(<category\s+android:name\s*=\s*"org.godotengine.xr.hybrid.(SPATIAL|IMMERSIVE|PANEL)"\s*\/>)delim");
 	String updated_export_plugins_activity_alias_element_contents = activity_alias_content_to_remove_regex->sub(export_plugins_activity_element_contents, "", true);
 	manifest_activity_text += updated_export_plugins_activity_alias_element_contents;

@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class ScriptBoilerplate
 {
@@ -7,37 +7,37 @@ partial class ScriptBoilerplate
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.Node.PropertyName {
+    public new class PropertyName : global::FADE.Node.PropertyName {
         /// <summary>
         /// Cached name for the '_nodePath' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_nodePath = "_nodePath";
+        public new static readonly global::FADE.StringName @_nodePath = "_nodePath";
         /// <summary>
         /// Cached name for the '_velocity' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_velocity = "_velocity";
+        public new static readonly global::FADE.StringName @_velocity = "_velocity";
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotPropertyTrampolines(global::Godot.Bridge.PropertyTrampolineCollector collector)
+        public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
             static godot_variant trampoline_get__nodePath(object godotObject)
             {
                 var ret = ((global::ScriptBoilerplate)godotObject).@_nodePath;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.NodePath>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.NodePath>(ret);
             }
             static void trampoline_set__nodePath(object godotObject, in godot_variant value)
             {
-                ((global::ScriptBoilerplate)godotObject).@_nodePath = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.NodePath>(value);
+                ((global::ScriptBoilerplate)godotObject).@_nodePath = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath>(value);
             }
             static godot_variant trampoline_get__velocity(object godotObject)
             {
                 var ret = ((global::ScriptBoilerplate)godotObject).@_velocity;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<int>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<int>(ret);
             }
             static void trampoline_set__velocity(object godotObject, in godot_variant value)
             {
-                ((global::ScriptBoilerplate)godotObject).@_velocity = global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(value);
+                ((global::ScriptBoilerplate)godotObject).@_velocity = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
             }
             var aux_delegate_get__nodePath = trampoline_get__nodePath;
             var aux_delegate_set__nodePath = trampoline_set__nodePath;
@@ -49,15 +49,15 @@ partial class ScriptBoilerplate
     }
     /// <summary>
     /// Get the property information for all the properties declared in this class.
-    /// This method is used by Godot to register the available properties in the editor.
+    /// This method is used by FADE to register the available properties in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo> GetGodotPropertyList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo> GetFADEPropertyList()
     {
-        var properties = new global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>();
-        properties.Add(new(type: (global::Godot.Variant.Type)22, name: PropertyName.@_nodePath, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_velocity, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
+        var properties = new global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo>();
+        properties.Add(new(type: (global::FADE.Variant.Type)22, name: PropertyName.@_nodePath, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_velocity, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
         return properties;
     }
 #pragma warning restore CS0109

@@ -1,5 +1,5 @@
-using Godot;
-using Godot.Collections;
+using FADE;
+using FADE.Collections;
 
 public partial class ExportDiagnostics_GD0108 : Node
 {

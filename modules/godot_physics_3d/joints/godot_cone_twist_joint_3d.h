@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,12 +31,12 @@
 #pragma once
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 /*
 Bullet Continuous Collision Detection and Physics Library
-GodotConeTwistJoint3D is Copyright (c) 2007 Starbreeze Studios
+FADEConeTwistJoint3D is Copyright (c) 2007 Starbreeze Studios
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -54,22 +54,22 @@ Written by: Marcus Hennix
 #include "../godot_joint_3d.h"
 #include "godot_jacobian_entry_3d.h"
 
-// GodotConeTwistJoint3D can be used to simulate ragdoll joints (upper arm, leg etc).
-class GodotConeTwistJoint3D : public GodotJoint3D {
+// FADEConeTwistJoint3D can be used to simulate ragdoll joints (upper arm, leg etc).
+class FADEConeTwistJoint3D : public FADEJoint3D {
 #ifdef IN_PARALLELL_SOLVER
 public:
 #endif
 
 	union {
 		struct {
-			GodotBody3D *A;
-			GodotBody3D *B;
+			FADEBody3D *A;
+			FADEBody3D *B;
 		};
 
-		GodotBody3D *_arr[2] = { nullptr, nullptr };
+		FADEBody3D *_arr[2] = { nullptr, nullptr };
 	};
 
-	GodotJacobianEntry3D m_jac[3] = {}; //3 orthogonal linear constraints
+	FADEJacobianEntry3D m_jac[3] = {}; //3 orthogonal linear constraints
 
 	real_t m_appliedImpulse = 0.0;
 	Transform3D m_rbAFrame;
@@ -106,7 +106,7 @@ public:
 	virtual bool setup(real_t p_step) override;
 	virtual void solve(real_t p_step) override;
 
-	GodotConeTwistJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &rbAFrame, const Transform3D &rbBFrame);
+	FADEConeTwistJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Transform3D &rbAFrame, const Transform3D &rbBFrame);
 
 	void setAngularOnly(bool angularOnly) {
 		m_angularOnly = angularOnly;

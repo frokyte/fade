@@ -7,10 +7,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GodotTools.IdeMessaging.Requests;
-using GodotTools.IdeMessaging.Utils;
+using FADETools.IdeMessaging.Requests;
+using FADETools.IdeMessaging.Utils;
 
-namespace GodotTools.IdeMessaging
+namespace FADETools.IdeMessaging
 {
     public sealed class Peer : IDisposable
     {
@@ -32,8 +32,8 @@ namespace GodotTools.IdeMessaging
         /// </summary>
         public static readonly int ProtocolVersionRevision = Assembly.GetAssembly(typeof(Peer)).GetName().Version.Revision;
 
-        public const string ClientHandshakeName = "GodotIdeClient";
-        public const string ServerHandshakeName = "GodotIdeServer";
+        public const string ClientHandshakeName = "FADEIdeClient";
+        public const string ServerHandshakeName = "FADEIdeServer";
 
         private const int ClientWriteTimeout = 8000;
 

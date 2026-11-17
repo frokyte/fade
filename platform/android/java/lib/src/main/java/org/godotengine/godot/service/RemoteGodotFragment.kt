@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  RemoteGodotFragment.kt                                                */
+/*  RemoteFADEFragment.kt                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -49,29 +49,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import org.godotengine.godot.GodotHost
+import org.godotengine.godot.FADEHost
 import org.godotengine.godot.R
-import org.godotengine.godot.service.GodotService.EngineStatus.*
-import org.godotengine.godot.service.GodotService.EngineError.*
+import org.godotengine.godot.service.FADEService.EngineStatus.*
+import org.godotengine.godot.service.FADEService.EngineError.*
 import java.lang.ref.WeakReference
 
 /**
- * Godot [Fragment] component showcasing how to drive rendering from another process using a [GodotService] instance.
+ * FADE [Fragment] component showcasing how to drive rendering from another process using a [FADEService] instance.
  */
 @RequiresApi(Build.VERSION_CODES.R)
-class RemoteGodotFragment: Fragment() {
+class RemoteFADEFragment: Fragment() {
 
 	companion object {
-		internal val TAG = RemoteGodotFragment::class.java.simpleName
+		internal val TAG = RemoteFADEFragment::class.java.simpleName
 	}
 
 	/**
 	 * Target we publish for receiving messages from the service.
 	 */
-	private val messengerForReply = Messenger(IncomingHandler(WeakReference<RemoteGodotFragment>(this)))
+	private val messengerForReply = Messenger(IncomingHandler(WeakReference<RemoteFADEFragment>(this)))
 
 	/**
-	 * Messenger for sending messages to the [GodotService] implementation.
+	 * Messenger for sending messages to the [FADEService] implementation.
 	 */
 	private var serviceMessenger: Messenger? = null
 
@@ -82,15 +82,15 @@ class RemoteGodotFragment: Fragment() {
 	private var serviceBound = false
 	private var remoteGameArgs = arrayOf<String>()
 
-	private var godotHost : GodotHost? = null
+	private var godotHost : FADEHost? = null
 
 	private val serviceConnection = object : ServiceConnection {
 		override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
 			Log.d(TAG, "Connected to service $name")
 			serviceMessenger = Messenger(service)
 
-			// Initialize the Godot engine
-			initGodotEngine()
+			// Initialize the FADE engine
+			initFADEEngine()
 		}
 
 		override fun onServiceDisconnected(name: ComponentName?) {
@@ -100,9 +100,9 @@ class RemoteGodotFragment: Fragment() {
 	}
 
 	/**
-	 * Handler of incoming messages from [GodotService] implementations.
+	 * Handler of incoming messages from [FADEService] implementations.
 	 */
-	private class IncomingHandler(private val fragmentRef: WeakReference<RemoteGodotFragment>) : Handler() {
+	private class IncomingHandler(private val fragmentRef: WeakReference<RemoteFADEFragment>) : Handler() {
 
 		override fun handleMessage(msg: Message) {
 			val fragment = fragmentRef.get() ?: return
@@ -111,10 +111,10 @@ class RemoteGodotFragment: Fragment() {
 				Log.d(TAG, "HandleMessage: $msg")
 
 				when (msg.what) {
-					GodotService.MSG_ENGINE_STATUS_UPDATE -> {
+					FADEService.MSG_ENGINE_STATUS_UPDATE -> {
 						try {
-							val engineStatus = GodotService.EngineStatus.valueOf(
-								msg.data.getString(GodotService.KEY_ENGINE_STATUS, "")
+							val engineStatus = FADEService.EngineStatus.valueOf(
+								msg.data.getString(FADEService.KEY_ENGINE_STATUS, "")
 							)
 							Log.d(TAG, "Received engine status $engineStatus")
 
@@ -126,12 +126,12 @@ class RemoteGodotFragment: Fragment() {
 										Log.i(TAG, "Creating SurfaceControlViewHost...")
 										fragment.remoteSurface?.let {
 											fragment.serviceMessenger?.send(Message.obtain().apply {
-												what = GodotService.MSG_WRAP_ENGINE_WITH_SCVH
+												what = FADEService.MSG_WRAP_ENGINE_WITH_SCVH
 												data.apply {
-													putBinder(GodotService.KEY_HOST_TOKEN, it.hostToken)
-													putInt(GodotService.KEY_DISPLAY_ID, it.display.displayId)
-													putInt(GodotService.KEY_WIDTH, it.width)
-													putInt(GodotService.KEY_HEIGHT, it.height)
+													putBinder(FADEService.KEY_HOST_TOKEN, it.hostToken)
+													putInt(FADEService.KEY_DISPLAY_ID, it.display.displayId)
+													putInt(FADEService.KEY_WIDTH, it.width)
+													putInt(FADEService.KEY_HEIGHT, it.height)
 												}
 												replyTo = fragment.messengerForReply
 											})
@@ -158,13 +158,13 @@ class RemoteGodotFragment: Fragment() {
 									Log.d(TAG, "SurfaceControlViewHost created!")
 
 									val surfacePackage = msg.data.getParcelable<SurfaceControlViewHost.SurfacePackage>(
-										GodotService.KEY_SURFACE_PACKAGE)
+										FADEService.KEY_SURFACE_PACKAGE)
 									if (surfacePackage == null) {
-										Log.e(TAG, "Unable to retrieve surface package from GodotService")
+										Log.e(TAG, "Unable to retrieve surface package from FADEService")
 									} else {
 										fragment.remoteSurface?.setChildSurfacePackage(surfacePackage)
 										fragment.engineInitialized = true
-										fragment.startGodotEngine()
+										fragment.startFADEEngine()
 									}
 								}
 							}
@@ -173,10 +173,10 @@ class RemoteGodotFragment: Fragment() {
 						}
 					}
 
-					GodotService.MSG_ENGINE_ERROR -> {
+					FADEService.MSG_ENGINE_ERROR -> {
 						try {
-							val engineError = GodotService.EngineError.valueOf(
-								msg.data.getString(GodotService.KEY_ENGINE_ERROR, "")
+							val engineError = FADEService.EngineError.valueOf(
+								msg.data.getString(FADEService.KEY_ENGINE_ERROR, "")
 							)
 							Log.d(TAG, "Received engine error $engineError")
 
@@ -199,7 +199,7 @@ class RemoteGodotFragment: Fragment() {
 						}
 					}
 
-					GodotService.MSG_ENGINE_RESTART_REQUESTED -> {
+					FADEService.MSG_ENGINE_RESTART_REQUESTED -> {
 						Log.d(TAG, "Engine restart requested")
 						// Validate the engine is actually running
 						if (!fragment.serviceBound || !fragment.engineInitialized) {
@@ -227,11 +227,11 @@ class RemoteGodotFragment: Fragment() {
 	override fun onAttach(context: Context) {
 		super.onAttach(context)
 		val parentActivity = activity
-		if (parentActivity is GodotHost) {
+		if (parentActivity is FADEHost) {
 			godotHost = parentActivity
 		} else {
 			val parentFragment = parentFragment
-			if (parentFragment is GodotHost) {
+			if (parentFragment is FADEHost) {
 				godotHost = parentFragment
 			}
 		}
@@ -251,7 +251,7 @@ class RemoteGodotFragment: Fragment() {
 		remoteSurface = view.findViewById(R.id.remote_godot_window_surface)
 		remoteSurface?.setZOrderOnTop(false)
 
-		initGodotEngine()
+		initFADEEngine()
 	}
 
 	fun startRemoteGame(args: Array<String>) {
@@ -259,7 +259,7 @@ class RemoteGodotFragment: Fragment() {
 		remoteSurface?.setZOrderOnTop(true)
 		remoteGameArgs = args
 		context?.bindService(
-			Intent(context, GodotService::class.java),
+			Intent(context, FADEService::class.java),
 			serviceConnection,
 			Context.BIND_AUTO_CREATE
 		)
@@ -274,7 +274,7 @@ class RemoteGodotFragment: Fragment() {
 		if (serviceBound) {
 			if (destroyEngine) {
 				serviceMessenger?.send(Message.obtain().apply {
-					what = GodotService.MSG_DESTROY_ENGINE
+					what = FADEService.MSG_DESTROY_ENGINE
 					replyTo = messengerForReply
 				})
 			}
@@ -283,62 +283,62 @@ class RemoteGodotFragment: Fragment() {
 		}
 	}
 
-	private fun initGodotEngine() {
+	private fun initFADEEngine() {
 		if (!serviceBound) {
 			return
 		}
 
 		try {
 			serviceMessenger?.send(Message.obtain().apply {
-				what = GodotService.MSG_INIT_ENGINE
+				what = FADEService.MSG_INIT_ENGINE
 				data.apply {
-					putStringArray(GodotService.KEY_COMMAND_LINE_PARAMETERS, remoteGameArgs)
+					putStringArray(FADEService.KEY_COMMAND_LINE_PARAMETERS, remoteGameArgs)
 				}
 				replyTo = messengerForReply
 			})
 		} catch (e: RemoteException) {
-			Log.e(TAG, "Unable to initialize Godot engine", e)
+			Log.e(TAG, "Unable to initialize FADE engine", e)
 		}
 	}
 
-	private fun startGodotEngine() {
+	private fun startFADEEngine() {
 		if (!serviceBound || !engineInitialized || !fragmentStarted) {
 			return
 		}
 		try {
 			serviceMessenger?.send(Message.obtain().apply {
-				what = GodotService.MSG_START_ENGINE
+				what = FADEService.MSG_START_ENGINE
 				replyTo = messengerForReply
 			})
 		} catch (e: RemoteException) {
-			Log.e(TAG, "Unable to start Godot engine", e)
+			Log.e(TAG, "Unable to start FADE engine", e)
 		}
 	}
 
-	private fun stopGodotEngine() {
+	private fun stopFADEEngine() {
 		if (!serviceBound || !engineInitialized || fragmentStarted) {
 			return
 		}
 		try {
 			serviceMessenger?.send(Message.obtain().apply {
-				what = GodotService.MSG_STOP_ENGINE
+				what = FADEService.MSG_STOP_ENGINE
 				replyTo = messengerForReply
 			})
 		} catch (e: RemoteException) {
-			Log.e(TAG, "Unable to stop Godot engine", e)
+			Log.e(TAG, "Unable to stop FADE engine", e)
 		}
 	}
 
 	override fun onStart() {
 		super.onStart()
 		fragmentStarted = true
-		startGodotEngine()
+		startFADEEngine()
 	}
 
 	override fun onStop() {
 		super.onStop()
 		fragmentStarted = false
-		stopGodotEngine()
+		stopFADEEngine()
 	}
 
 	override fun onDestroy() {

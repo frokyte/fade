@@ -1,7 +1,7 @@
-# Turkish translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Turkish translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Aprın Çor Tigin <kabusturk38@gmail.com>, 2016-2017.
 # Aykut YILDIRIM <aykutyildirim@windowslive.com>, 2018.
 # Ceyhun Can Ulker <ceyhuncanu@gmail.com>, 2016.
@@ -109,7 +109,7 @@
 # Efe Yılmaz <iceburn322@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-07-11 11:02+0000\n"
@@ -3637,8 +3637,8 @@ msgstr "GDScript"
 msgid "Max Call Stack"
 msgstr "En Fazla Çağrı Yığını"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Godot 4 İpucu'nda yeniden adlandırıldı"
+msgid "Renamed in FADE 4 Hint"
+msgstr "FADE 4 İpucu'nda yeniden adlandırıldı"
 
 msgid "Unassigned Variable"
 msgstr "Atanmamış Değişken"
@@ -3913,11 +3913,11 @@ msgstr "Işık"
 msgid "Visible"
 msgstr "Görünür"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF'den Godot İfadesi'ne"
+msgid "glTF to FADE Expression"
+msgstr "glTF'den FADE İfadesi'ne"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot'dan glTF İfadesi'ne"
+msgid "FADE to glTF Expression"
+msgstr "FADE'dan glTF İfadesi'ne"
 
 msgid "Node Paths"
 msgstr "Düğüm Yolları"
@@ -3937,8 +3937,8 @@ msgstr "Eklemler"
 msgid "Roots"
 msgstr "Kökler"
 
-msgid "Godot Bone Node"
-msgstr "Godot Kemik Düğümü"
+msgid "FADE Bone Node"
+msgstr "FADE Kemik Düğümü"
 
 msgid "Skin Root"
 msgstr "Deri Kökü"
@@ -3949,8 +3949,8 @@ msgstr "Eklemler Asıl"
 msgid "Non Joints"
 msgstr "Eklem Olmayanlar"
 
-msgid "Godot Skin"
-msgstr "Godot Kaplaması"
+msgid "FADE Skin"
+msgstr "FADE Kaplaması"
 
 msgid "Src Image"
 msgstr "Kaynak Resim"

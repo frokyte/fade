@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -65,9 +65,9 @@ void cleanup_logs() {
 TEST_CASE("[Logger][RotatedFileLogger] Creates the first log file and logs on it") {
 	initialize_logs();
 
-	String waiting_for_godot = "Waiting for Godot";
+	String waiting_for_godot = "Waiting for FADE";
 	RotatedFileLogger logger("user://logs/godot.log");
-	logger.logf("%s", "Waiting for Godot");
+	logger.logf("%s", "Waiting for FADE");
 
 	Error err = Error::OK;
 	Ref<FileAccess> log = FileAccess::open("user://logs/godot.log", FileAccess::READ, &err);
@@ -101,7 +101,7 @@ TEST_CASE("[Logger][RotatedFileLogger] Rotates logs files") {
 
 	const int number_of_files = 3;
 	for (int i = 0; i < number_of_files; i++) {
-		String waiting_for_godot = "Waiting for Godot " + itos(i);
+		String waiting_for_godot = "Waiting for FADE " + itos(i);
 		RotatedFileLogger logger("user://logs/godot.log", number_of_files);
 		logger.logf("%s", waiting_for_godot.ascii().get_data());
 		all_waiting_for_godot.push_back(waiting_for_godot);
@@ -125,7 +125,7 @@ TEST_CASE("[Logger][RotatedFileLogger] Rotates logs files") {
 	OS::get_singleton()->delay_usec(sleep_duration);
 
 	// This time the oldest log must be removed and godot.log updated.
-	String new_waiting_for_godot = "Waiting for Godot " + itos(number_of_files);
+	String new_waiting_for_godot = "Waiting for FADE " + itos(number_of_files);
 	all_waiting_for_godot = all_waiting_for_godot.slice(1, all_waiting_for_godot.size());
 	all_waiting_for_godot.push_back(new_waiting_for_godot);
 	RotatedFileLogger logger("user://logs/godot.log", number_of_files);
@@ -152,9 +152,9 @@ TEST_CASE("[Logger][CompositeLogger] Logs the same into multiple loggers") {
 	all_loggers.push_back(memnew(RotatedFileLogger("user://logs/godot_logger_1.log", 1)));
 	all_loggers.push_back(memnew(RotatedFileLogger("user://logs/godot_logger_2.log", 1)));
 
-	String waiting_for_godot = "Waiting for Godot";
+	String waiting_for_godot = "Waiting for FADE";
 	CompositeLogger logger(all_loggers);
-	logger.logf("%s", "Waiting for Godot");
+	logger.logf("%s", "Waiting for FADE");
 
 	Error err = Error::OK;
 	Ref<FileAccess> log = FileAccess::open("user://logs/godot_logger_1.log", FileAccess::READ, &err);

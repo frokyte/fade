@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotRenderView.java                                                  */
+/*  FADERenderView.java                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,15 +30,15 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.input.GodotInputHandler;
+import org.godotengine.godot.input.FADEInputHandler;
 
 import android.view.SurfaceView;
 
-public interface GodotRenderView {
+public interface FADERenderView {
 	SurfaceView getView();
 
 	/**
-	 * Starts the thread that will drive Godot's rendering.
+	 * Starts the thread that will drive FADE's rendering.
 	 */
 	void startRenderer();
 
@@ -57,7 +57,7 @@ public interface GodotRenderView {
 
 	boolean blockingExitRenderer(long blockingTimeInMs);
 
-	GodotInputHandler getInputHandler();
+	FADEInputHandler getInputHandler();
 
 	void configurePointerIcon(int pointerType, String imagePath, float hotSpotX, float hotSpotY);
 

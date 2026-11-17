@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-public partial class Generic<T> : GodotObject
+public partial class Generic<T> : FADEObject
 {
     private int _field;
 }

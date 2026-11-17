@@ -1,4 +1,4 @@
-namespace GodotTools.IdeMessaging
+namespace FADETools.IdeMessaging
 {
     public class Message
     {

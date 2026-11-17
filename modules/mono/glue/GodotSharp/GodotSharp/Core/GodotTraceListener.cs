@@ -1,8 +1,8 @@
 using System.Diagnostics;
 
-namespace Godot
+namespace FADE
 {
-    internal class GodotTraceListener : TraceListener
+    internal class FADETraceListener : TraceListener
     {
         public override void Write(string message)
         {

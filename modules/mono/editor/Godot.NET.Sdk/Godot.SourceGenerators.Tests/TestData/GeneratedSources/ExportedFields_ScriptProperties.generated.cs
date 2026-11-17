@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class ExportedFields
 {
@@ -7,830 +7,830 @@ partial class ExportedFields
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.GodotObject.PropertyName {
+    public new class PropertyName : global::FADE.FADEObject.PropertyName {
         /// <summary>
         /// Cached name for the '_fieldBoolean' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldBoolean = "_fieldBoolean";
+        public new static readonly global::FADE.StringName @_fieldBoolean = "_fieldBoolean";
         /// <summary>
         /// Cached name for the '_fieldChar' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldChar = "_fieldChar";
+        public new static readonly global::FADE.StringName @_fieldChar = "_fieldChar";
         /// <summary>
         /// Cached name for the '_fieldSByte' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldSByte = "_fieldSByte";
+        public new static readonly global::FADE.StringName @_fieldSByte = "_fieldSByte";
         /// <summary>
         /// Cached name for the '_fieldInt16' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldInt16 = "_fieldInt16";
+        public new static readonly global::FADE.StringName @_fieldInt16 = "_fieldInt16";
         /// <summary>
         /// Cached name for the '_fieldInt32' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldInt32 = "_fieldInt32";
+        public new static readonly global::FADE.StringName @_fieldInt32 = "_fieldInt32";
         /// <summary>
         /// Cached name for the '_fieldInt64' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldInt64 = "_fieldInt64";
+        public new static readonly global::FADE.StringName @_fieldInt64 = "_fieldInt64";
         /// <summary>
         /// Cached name for the '_fieldByte' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldByte = "_fieldByte";
+        public new static readonly global::FADE.StringName @_fieldByte = "_fieldByte";
         /// <summary>
         /// Cached name for the '_fieldUInt16' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldUInt16 = "_fieldUInt16";
+        public new static readonly global::FADE.StringName @_fieldUInt16 = "_fieldUInt16";
         /// <summary>
         /// Cached name for the '_fieldUInt32' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldUInt32 = "_fieldUInt32";
+        public new static readonly global::FADE.StringName @_fieldUInt32 = "_fieldUInt32";
         /// <summary>
         /// Cached name for the '_fieldUInt64' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldUInt64 = "_fieldUInt64";
+        public new static readonly global::FADE.StringName @_fieldUInt64 = "_fieldUInt64";
         /// <summary>
         /// Cached name for the '_fieldSingle' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldSingle = "_fieldSingle";
+        public new static readonly global::FADE.StringName @_fieldSingle = "_fieldSingle";
         /// <summary>
         /// Cached name for the '_fieldDouble' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldDouble = "_fieldDouble";
+        public new static readonly global::FADE.StringName @_fieldDouble = "_fieldDouble";
         /// <summary>
         /// Cached name for the '_fieldString' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldString = "_fieldString";
+        public new static readonly global::FADE.StringName @_fieldString = "_fieldString";
         /// <summary>
         /// Cached name for the '_fieldStaticImport' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldStaticImport = "_fieldStaticImport";
+        public new static readonly global::FADE.StringName @_fieldStaticImport = "_fieldStaticImport";
         /// <summary>
         /// Cached name for the '_fieldVector2' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector2 = "_fieldVector2";
+        public new static readonly global::FADE.StringName @_fieldVector2 = "_fieldVector2";
         /// <summary>
         /// Cached name for the '_fieldVector2I' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector2I = "_fieldVector2I";
+        public new static readonly global::FADE.StringName @_fieldVector2I = "_fieldVector2I";
         /// <summary>
         /// Cached name for the '_fieldRect2' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldRect2 = "_fieldRect2";
+        public new static readonly global::FADE.StringName @_fieldRect2 = "_fieldRect2";
         /// <summary>
         /// Cached name for the '_fieldRect2I' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldRect2I = "_fieldRect2I";
+        public new static readonly global::FADE.StringName @_fieldRect2I = "_fieldRect2I";
         /// <summary>
         /// Cached name for the '_fieldTransform2D' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldTransform2D = "_fieldTransform2D";
+        public new static readonly global::FADE.StringName @_fieldTransform2D = "_fieldTransform2D";
         /// <summary>
         /// Cached name for the '_fieldVector3' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector3 = "_fieldVector3";
+        public new static readonly global::FADE.StringName @_fieldVector3 = "_fieldVector3";
         /// <summary>
         /// Cached name for the '_fieldVector3I' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector3I = "_fieldVector3I";
+        public new static readonly global::FADE.StringName @_fieldVector3I = "_fieldVector3I";
         /// <summary>
         /// Cached name for the '_fieldBasis' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldBasis = "_fieldBasis";
+        public new static readonly global::FADE.StringName @_fieldBasis = "_fieldBasis";
         /// <summary>
         /// Cached name for the '_fieldQuaternion' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldQuaternion = "_fieldQuaternion";
+        public new static readonly global::FADE.StringName @_fieldQuaternion = "_fieldQuaternion";
         /// <summary>
         /// Cached name for the '_fieldTransform3D' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldTransform3D = "_fieldTransform3D";
+        public new static readonly global::FADE.StringName @_fieldTransform3D = "_fieldTransform3D";
         /// <summary>
         /// Cached name for the '_fieldVector4' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector4 = "_fieldVector4";
+        public new static readonly global::FADE.StringName @_fieldVector4 = "_fieldVector4";
         /// <summary>
         /// Cached name for the '_fieldVector4I' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector4I = "_fieldVector4I";
+        public new static readonly global::FADE.StringName @_fieldVector4I = "_fieldVector4I";
         /// <summary>
         /// Cached name for the '_fieldProjection' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldProjection = "_fieldProjection";
+        public new static readonly global::FADE.StringName @_fieldProjection = "_fieldProjection";
         /// <summary>
         /// Cached name for the '_fieldAabb' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldAabb = "_fieldAabb";
+        public new static readonly global::FADE.StringName @_fieldAabb = "_fieldAabb";
         /// <summary>
         /// Cached name for the '_fieldColor' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldColor = "_fieldColor";
+        public new static readonly global::FADE.StringName @_fieldColor = "_fieldColor";
         /// <summary>
         /// Cached name for the '_fieldPlane' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldPlane = "_fieldPlane";
+        public new static readonly global::FADE.StringName @_fieldPlane = "_fieldPlane";
         /// <summary>
         /// Cached name for the '_fieldCallable' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldCallable = "_fieldCallable";
+        public new static readonly global::FADE.StringName @_fieldCallable = "_fieldCallable";
         /// <summary>
         /// Cached name for the '_fieldSignal' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldSignal = "_fieldSignal";
+        public new static readonly global::FADE.StringName @_fieldSignal = "_fieldSignal";
         /// <summary>
         /// Cached name for the '_fieldEnum' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldEnum = "_fieldEnum";
+        public new static readonly global::FADE.StringName @_fieldEnum = "_fieldEnum";
         /// <summary>
         /// Cached name for the '_fieldFlagsEnum' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldFlagsEnum = "_fieldFlagsEnum";
+        public new static readonly global::FADE.StringName @_fieldFlagsEnum = "_fieldFlagsEnum";
         /// <summary>
         /// Cached name for the '_fieldByteArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldByteArray = "_fieldByteArray";
+        public new static readonly global::FADE.StringName @_fieldByteArray = "_fieldByteArray";
         /// <summary>
         /// Cached name for the '_fieldInt32Array' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldInt32Array = "_fieldInt32Array";
+        public new static readonly global::FADE.StringName @_fieldInt32Array = "_fieldInt32Array";
         /// <summary>
         /// Cached name for the '_fieldInt64Array' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldInt64Array = "_fieldInt64Array";
+        public new static readonly global::FADE.StringName @_fieldInt64Array = "_fieldInt64Array";
         /// <summary>
         /// Cached name for the '_fieldSingleArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldSingleArray = "_fieldSingleArray";
+        public new static readonly global::FADE.StringName @_fieldSingleArray = "_fieldSingleArray";
         /// <summary>
         /// Cached name for the '_fieldDoubleArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldDoubleArray = "_fieldDoubleArray";
+        public new static readonly global::FADE.StringName @_fieldDoubleArray = "_fieldDoubleArray";
         /// <summary>
         /// Cached name for the '_fieldStringArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldStringArray = "_fieldStringArray";
+        public new static readonly global::FADE.StringName @_fieldStringArray = "_fieldStringArray";
         /// <summary>
         /// Cached name for the '_fieldStringArrayEnum' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldStringArrayEnum = "_fieldStringArrayEnum";
+        public new static readonly global::FADE.StringName @_fieldStringArrayEnum = "_fieldStringArrayEnum";
         /// <summary>
         /// Cached name for the '_fieldVector2Array' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector2Array = "_fieldVector2Array";
+        public new static readonly global::FADE.StringName @_fieldVector2Array = "_fieldVector2Array";
         /// <summary>
         /// Cached name for the '_fieldVector3Array' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVector3Array = "_fieldVector3Array";
+        public new static readonly global::FADE.StringName @_fieldVector3Array = "_fieldVector3Array";
         /// <summary>
         /// Cached name for the '_fieldColorArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldColorArray = "_fieldColorArray";
+        public new static readonly global::FADE.StringName @_fieldColorArray = "_fieldColorArray";
         /// <summary>
-        /// Cached name for the '_fieldGodotObjectOrDerivedArray' field.
+        /// Cached name for the '_fieldFADEObjectOrDerivedArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotObjectOrDerivedArray = "_fieldGodotObjectOrDerivedArray";
+        public new static readonly global::FADE.StringName @_fieldFADEObjectOrDerivedArray = "_fieldFADEObjectOrDerivedArray";
         /// <summary>
         /// Cached name for the '_fieldStringNameArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldStringNameArray = "_fieldStringNameArray";
+        public new static readonly global::FADE.StringName @_fieldStringNameArray = "_fieldStringNameArray";
         /// <summary>
         /// Cached name for the '_fieldNodePathArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldNodePathArray = "_fieldNodePathArray";
+        public new static readonly global::FADE.StringName @_fieldNodePathArray = "_fieldNodePathArray";
         /// <summary>
         /// Cached name for the '_fieldRidArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldRidArray = "_fieldRidArray";
+        public new static readonly global::FADE.StringName @_fieldRidArray = "_fieldRidArray";
         /// <summary>
         /// Cached name for the '_fieldEmptyInt32Array' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldEmptyInt32Array = "_fieldEmptyInt32Array";
+        public new static readonly global::FADE.StringName @_fieldEmptyInt32Array = "_fieldEmptyInt32Array";
         /// <summary>
         /// Cached name for the '_fieldArrayFromList' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldArrayFromList = "_fieldArrayFromList";
+        public new static readonly global::FADE.StringName @_fieldArrayFromList = "_fieldArrayFromList";
         /// <summary>
         /// Cached name for the '_fieldVariant' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldVariant = "_fieldVariant";
+        public new static readonly global::FADE.StringName @_fieldVariant = "_fieldVariant";
         /// <summary>
-        /// Cached name for the '_fieldGodotObjectOrDerived' field.
+        /// Cached name for the '_fieldFADEObjectOrDerived' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotObjectOrDerived = "_fieldGodotObjectOrDerived";
+        public new static readonly global::FADE.StringName @_fieldFADEObjectOrDerived = "_fieldFADEObjectOrDerived";
         /// <summary>
-        /// Cached name for the '_fieldGodotResourceTexture' field.
+        /// Cached name for the '_fieldFADEResourceTexture' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotResourceTexture = "_fieldGodotResourceTexture";
+        public new static readonly global::FADE.StringName @_fieldFADEResourceTexture = "_fieldFADEResourceTexture";
         /// <summary>
-        /// Cached name for the '_fieldGodotResourceTextureWithInitializer' field.
+        /// Cached name for the '_fieldFADEResourceTextureWithInitializer' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotResourceTextureWithInitializer = "_fieldGodotResourceTextureWithInitializer";
+        public new static readonly global::FADE.StringName @_fieldFADEResourceTextureWithInitializer = "_fieldFADEResourceTextureWithInitializer";
         /// <summary>
         /// Cached name for the '_fieldStringName' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldStringName = "_fieldStringName";
+        public new static readonly global::FADE.StringName @_fieldStringName = "_fieldStringName";
         /// <summary>
         /// Cached name for the '_fieldNodePath' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldNodePath = "_fieldNodePath";
+        public new static readonly global::FADE.StringName @_fieldNodePath = "_fieldNodePath";
         /// <summary>
         /// Cached name for the '_fieldRid' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldRid = "_fieldRid";
+        public new static readonly global::FADE.StringName @_fieldRid = "_fieldRid";
         /// <summary>
-        /// Cached name for the '_fieldGodotDictionary' field.
+        /// Cached name for the '_fieldFADEDictionary' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotDictionary = "_fieldGodotDictionary";
+        public new static readonly global::FADE.StringName @_fieldFADEDictionary = "_fieldFADEDictionary";
         /// <summary>
-        /// Cached name for the '_fieldGodotArray' field.
+        /// Cached name for the '_fieldFADEArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotArray = "_fieldGodotArray";
+        public new static readonly global::FADE.StringName @_fieldFADEArray = "_fieldFADEArray";
         /// <summary>
-        /// Cached name for the '_fieldGodotGenericDictionary' field.
+        /// Cached name for the '_fieldFADEGenericDictionary' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotGenericDictionary = "_fieldGodotGenericDictionary";
+        public new static readonly global::FADE.StringName @_fieldFADEGenericDictionary = "_fieldFADEGenericDictionary";
         /// <summary>
-        /// Cached name for the '_fieldGodotGenericArray' field.
+        /// Cached name for the '_fieldFADEGenericArray' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldGodotGenericArray = "_fieldGodotGenericArray";
+        public new static readonly global::FADE.StringName @_fieldFADEGenericArray = "_fieldFADEGenericArray";
         /// <summary>
         /// Cached name for the '_notIgnoredField' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_notIgnoredField = "_notIgnoredField";
+        public new static readonly global::FADE.StringName @_notIgnoredField = "_notIgnoredField";
         /// <summary>
         /// Cached name for the '_fieldEmptyInt64Array' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_fieldEmptyInt64Array = "_fieldEmptyInt64Array";
+        public new static readonly global::FADE.StringName @_fieldEmptyInt64Array = "_fieldEmptyInt64Array";
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotPropertyTrampolines(global::Godot.Bridge.PropertyTrampolineCollector collector)
+        public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
             static godot_variant trampoline_get__fieldBoolean(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldBoolean;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<bool>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<bool>(ret);
             }
             static void trampoline_set__fieldBoolean(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldBoolean = global::Godot.NativeInterop.VariantUtils.ConvertTo<bool>(value);
+                ((global::ExportedFields)godotObject).@_fieldBoolean = global::FADE.NativeInterop.VariantUtils.ConvertTo<bool>(value);
             }
             static godot_variant trampoline_get__fieldChar(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldChar;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<char>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<char>(ret);
             }
             static void trampoline_set__fieldChar(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldChar = global::Godot.NativeInterop.VariantUtils.ConvertTo<char>(value);
+                ((global::ExportedFields)godotObject).@_fieldChar = global::FADE.NativeInterop.VariantUtils.ConvertTo<char>(value);
             }
             static godot_variant trampoline_get__fieldSByte(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldSByte;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<sbyte>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<sbyte>(ret);
             }
             static void trampoline_set__fieldSByte(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldSByte = global::Godot.NativeInterop.VariantUtils.ConvertTo<sbyte>(value);
+                ((global::ExportedFields)godotObject).@_fieldSByte = global::FADE.NativeInterop.VariantUtils.ConvertTo<sbyte>(value);
             }
             static godot_variant trampoline_get__fieldInt16(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldInt16;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<short>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<short>(ret);
             }
             static void trampoline_set__fieldInt16(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldInt16 = global::Godot.NativeInterop.VariantUtils.ConvertTo<short>(value);
+                ((global::ExportedFields)godotObject).@_fieldInt16 = global::FADE.NativeInterop.VariantUtils.ConvertTo<short>(value);
             }
             static godot_variant trampoline_get__fieldInt32(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldInt32;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<int>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<int>(ret);
             }
             static void trampoline_set__fieldInt32(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldInt32 = global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(value);
+                ((global::ExportedFields)godotObject).@_fieldInt32 = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
             }
             static godot_variant trampoline_get__fieldInt64(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldInt64;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<long>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<long>(ret);
             }
             static void trampoline_set__fieldInt64(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldInt64 = global::Godot.NativeInterop.VariantUtils.ConvertTo<long>(value);
+                ((global::ExportedFields)godotObject).@_fieldInt64 = global::FADE.NativeInterop.VariantUtils.ConvertTo<long>(value);
             }
             static godot_variant trampoline_get__fieldByte(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldByte;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<byte>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<byte>(ret);
             }
             static void trampoline_set__fieldByte(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldByte = global::Godot.NativeInterop.VariantUtils.ConvertTo<byte>(value);
+                ((global::ExportedFields)godotObject).@_fieldByte = global::FADE.NativeInterop.VariantUtils.ConvertTo<byte>(value);
             }
             static godot_variant trampoline_get__fieldUInt16(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldUInt16;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<ushort>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<ushort>(ret);
             }
             static void trampoline_set__fieldUInt16(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldUInt16 = global::Godot.NativeInterop.VariantUtils.ConvertTo<ushort>(value);
+                ((global::ExportedFields)godotObject).@_fieldUInt16 = global::FADE.NativeInterop.VariantUtils.ConvertTo<ushort>(value);
             }
             static godot_variant trampoline_get__fieldUInt32(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldUInt32;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<uint>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<uint>(ret);
             }
             static void trampoline_set__fieldUInt32(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldUInt32 = global::Godot.NativeInterop.VariantUtils.ConvertTo<uint>(value);
+                ((global::ExportedFields)godotObject).@_fieldUInt32 = global::FADE.NativeInterop.VariantUtils.ConvertTo<uint>(value);
             }
             static godot_variant trampoline_get__fieldUInt64(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldUInt64;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<ulong>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<ulong>(ret);
             }
             static void trampoline_set__fieldUInt64(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldUInt64 = global::Godot.NativeInterop.VariantUtils.ConvertTo<ulong>(value);
+                ((global::ExportedFields)godotObject).@_fieldUInt64 = global::FADE.NativeInterop.VariantUtils.ConvertTo<ulong>(value);
             }
             static godot_variant trampoline_get__fieldSingle(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldSingle;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<float>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
             static void trampoline_set__fieldSingle(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldSingle = global::Godot.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedFields)godotObject).@_fieldSingle = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
             static godot_variant trampoline_get__fieldDouble(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldDouble;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<double>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<double>(ret);
             }
             static void trampoline_set__fieldDouble(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldDouble = global::Godot.NativeInterop.VariantUtils.ConvertTo<double>(value);
+                ((global::ExportedFields)godotObject).@_fieldDouble = global::FADE.NativeInterop.VariantUtils.ConvertTo<double>(value);
             }
             static godot_variant trampoline_get__fieldString(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldString;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string>(ret);
             }
             static void trampoline_set__fieldString(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldString = global::Godot.NativeInterop.VariantUtils.ConvertTo<string>(value);
+                ((global::ExportedFields)godotObject).@_fieldString = global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(value);
             }
             static godot_variant trampoline_get__fieldStaticImport(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldStaticImport;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<float>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<float>(ret);
             }
             static void trampoline_set__fieldStaticImport(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldStaticImport = global::Godot.NativeInterop.VariantUtils.ConvertTo<float>(value);
+                ((global::ExportedFields)godotObject).@_fieldStaticImport = global::FADE.NativeInterop.VariantUtils.ConvertTo<float>(value);
             }
             static godot_variant trampoline_get__fieldVector2(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector2;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector2>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector2>(ret);
             }
             static void trampoline_set__fieldVector2(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector2 = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector2>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector2 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2>(value);
             }
             static godot_variant trampoline_get__fieldVector2I(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector2I;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector2I>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector2I>(ret);
             }
             static void trampoline_set__fieldVector2I(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector2I = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector2I>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector2I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2I>(value);
             }
             static godot_variant trampoline_get__fieldRect2(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldRect2;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Rect2>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rect2>(ret);
             }
             static void trampoline_set__fieldRect2(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldRect2 = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Rect2>(value);
+                ((global::ExportedFields)godotObject).@_fieldRect2 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rect2>(value);
             }
             static godot_variant trampoline_get__fieldRect2I(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldRect2I;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Rect2I>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rect2I>(ret);
             }
             static void trampoline_set__fieldRect2I(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldRect2I = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Rect2I>(value);
+                ((global::ExportedFields)godotObject).@_fieldRect2I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rect2I>(value);
             }
             static godot_variant trampoline_get__fieldTransform2D(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldTransform2D;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Transform2D>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Transform2D>(ret);
             }
             static void trampoline_set__fieldTransform2D(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldTransform2D = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Transform2D>(value);
+                ((global::ExportedFields)godotObject).@_fieldTransform2D = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Transform2D>(value);
             }
             static godot_variant trampoline_get__fieldVector3(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector3;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector3>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector3>(ret);
             }
             static void trampoline_set__fieldVector3(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector3 = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector3>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector3 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3>(value);
             }
             static godot_variant trampoline_get__fieldVector3I(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector3I;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector3I>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector3I>(ret);
             }
             static void trampoline_set__fieldVector3I(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector3I = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector3I>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector3I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3I>(value);
             }
             static godot_variant trampoline_get__fieldBasis(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldBasis;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Basis>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Basis>(ret);
             }
             static void trampoline_set__fieldBasis(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldBasis = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Basis>(value);
+                ((global::ExportedFields)godotObject).@_fieldBasis = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Basis>(value);
             }
             static godot_variant trampoline_get__fieldQuaternion(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldQuaternion;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Quaternion>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Quaternion>(ret);
             }
             static void trampoline_set__fieldQuaternion(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldQuaternion = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Quaternion>(value);
+                ((global::ExportedFields)godotObject).@_fieldQuaternion = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Quaternion>(value);
             }
             static godot_variant trampoline_get__fieldTransform3D(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldTransform3D;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Transform3D>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Transform3D>(ret);
             }
             static void trampoline_set__fieldTransform3D(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldTransform3D = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Transform3D>(value);
+                ((global::ExportedFields)godotObject).@_fieldTransform3D = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Transform3D>(value);
             }
             static godot_variant trampoline_get__fieldVector4(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector4;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector4>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector4>(ret);
             }
             static void trampoline_set__fieldVector4(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector4 = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector4>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector4 = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector4>(value);
             }
             static godot_variant trampoline_get__fieldVector4I(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector4I;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector4I>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector4I>(ret);
             }
             static void trampoline_set__fieldVector4I(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector4I = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector4I>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector4I = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector4I>(value);
             }
             static godot_variant trampoline_get__fieldProjection(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldProjection;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Projection>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Projection>(ret);
             }
             static void trampoline_set__fieldProjection(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldProjection = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Projection>(value);
+                ((global::ExportedFields)godotObject).@_fieldProjection = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Projection>(value);
             }
             static godot_variant trampoline_get__fieldAabb(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldAabb;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Aabb>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Aabb>(ret);
             }
             static void trampoline_set__fieldAabb(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldAabb = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Aabb>(value);
+                ((global::ExportedFields)godotObject).@_fieldAabb = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Aabb>(value);
             }
             static godot_variant trampoline_get__fieldColor(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldColor;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Color>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Color>(ret);
             }
             static void trampoline_set__fieldColor(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldColor = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Color>(value);
+                ((global::ExportedFields)godotObject).@_fieldColor = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Color>(value);
             }
             static godot_variant trampoline_get__fieldPlane(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldPlane;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Plane>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Plane>(ret);
             }
             static void trampoline_set__fieldPlane(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldPlane = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Plane>(value);
+                ((global::ExportedFields)godotObject).@_fieldPlane = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Plane>(value);
             }
             static godot_variant trampoline_get__fieldCallable(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldCallable;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static void trampoline_set__fieldCallable(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldCallable = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Callable>(value);
+                ((global::ExportedFields)godotObject).@_fieldCallable = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Callable>(value);
             }
             static godot_variant trampoline_get__fieldSignal(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldSignal;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Signal>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Signal>(ret);
             }
             static void trampoline_set__fieldSignal(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldSignal = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Signal>(value);
+                ((global::ExportedFields)godotObject).@_fieldSignal = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Signal>(value);
             }
             static godot_variant trampoline_get__fieldEnum(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldEnum;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::ExportedFields.MyEnum>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::ExportedFields.MyEnum>(ret);
             }
             static void trampoline_set__fieldEnum(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldEnum = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::ExportedFields.MyEnum>(value);
+                ((global::ExportedFields)godotObject).@_fieldEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::ExportedFields.MyEnum>(value);
             }
             static godot_variant trampoline_get__fieldFlagsEnum(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldFlagsEnum;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::ExportedFields.MyFlagsEnum>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::ExportedFields.MyFlagsEnum>(ret);
             }
             static void trampoline_set__fieldFlagsEnum(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldFlagsEnum = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::ExportedFields.MyFlagsEnum>(value);
+                ((global::ExportedFields)godotObject).@_fieldFlagsEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::ExportedFields.MyFlagsEnum>(value);
             }
             static godot_variant trampoline_get__fieldByteArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldByteArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<byte[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<byte[]>(ret);
             }
             static void trampoline_set__fieldByteArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldByteArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<byte[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldByteArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<byte[]>(value);
             }
             static godot_variant trampoline_get__fieldInt32Array(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldInt32Array;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
             }
             static void trampoline_set__fieldInt32Array(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldInt32Array = global::Godot.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldInt32Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
             }
             static godot_variant trampoline_get__fieldInt64Array(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldInt64Array;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<long[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<long[]>(ret);
             }
             static void trampoline_set__fieldInt64Array(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldInt64Array = global::Godot.NativeInterop.VariantUtils.ConvertTo<long[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldInt64Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<long[]>(value);
             }
             static godot_variant trampoline_get__fieldSingleArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldSingleArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<float[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<float[]>(ret);
             }
             static void trampoline_set__fieldSingleArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldSingleArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<float[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldSingleArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<float[]>(value);
             }
             static godot_variant trampoline_get__fieldDoubleArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldDoubleArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<double[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<double[]>(ret);
             }
             static void trampoline_set__fieldDoubleArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldDoubleArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<double[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldDoubleArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<double[]>(value);
             }
             static godot_variant trampoline_get__fieldStringArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldStringArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string[]>(ret);
             }
             static void trampoline_set__fieldStringArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldStringArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldStringArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
             }
             static godot_variant trampoline_get__fieldStringArrayEnum(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldStringArrayEnum;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<string[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<string[]>(ret);
             }
             static void trampoline_set__fieldStringArrayEnum(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldStringArrayEnum = global::Godot.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldStringArrayEnum = global::FADE.NativeInterop.VariantUtils.ConvertTo<string[]>(value);
             }
             static godot_variant trampoline_get__fieldVector2Array(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector2Array;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector2[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector2[]>(ret);
             }
             static void trampoline_set__fieldVector2Array(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector2Array = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector2[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector2Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector2[]>(value);
             }
             static godot_variant trampoline_get__fieldVector3Array(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVector3Array;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Vector3[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Vector3[]>(ret);
             }
             static void trampoline_set__fieldVector3Array(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVector3Array = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Vector3[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldVector3Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Vector3[]>(value);
             }
             static godot_variant trampoline_get__fieldColorArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldColorArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Color[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Color[]>(ret);
             }
             static void trampoline_set__fieldColorArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldColorArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Color[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldColorArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Color[]>(value);
             }
-            static godot_variant trampoline_get__fieldGodotObjectOrDerivedArray(object godotObject)
+            static godot_variant trampoline_get__fieldFADEObjectOrDerivedArray(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotObjectOrDerivedArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFromSystemArrayOfGodotObject(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEObjectOrDerivedArray;
+                return global::FADE.NativeInterop.VariantUtils.CreateFromSystemArrayOfFADEObject(ret);
             }
-            static void trampoline_set__fieldGodotObjectOrDerivedArray(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEObjectOrDerivedArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotObjectOrDerivedArray = global::Godot.NativeInterop.VariantUtils.ConvertToSystemArrayOfGodotObject<global::Godot.GodotObject>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEObjectOrDerivedArray = global::FADE.NativeInterop.VariantUtils.ConvertToSystemArrayOfFADEObject<global::FADE.FADEObject>(value);
             }
             static godot_variant trampoline_get__fieldStringNameArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldStringNameArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.StringName[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.StringName[]>(ret);
             }
             static void trampoline_set__fieldStringNameArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldStringNameArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.StringName[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldStringNameArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName[]>(value);
             }
             static godot_variant trampoline_get__fieldNodePathArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldNodePathArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.NodePath[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.NodePath[]>(ret);
             }
             static void trampoline_set__fieldNodePathArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldNodePathArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.NodePath[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldNodePathArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath[]>(value);
             }
             static godot_variant trampoline_get__fieldRidArray(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldRidArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Rid[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rid[]>(ret);
             }
             static void trampoline_set__fieldRidArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldRidArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Rid[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldRidArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rid[]>(value);
             }
             static godot_variant trampoline_get__fieldEmptyInt32Array(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldEmptyInt32Array;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
             }
             static void trampoline_set__fieldEmptyInt32Array(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldEmptyInt32Array = global::Godot.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldEmptyInt32Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
             }
             static godot_variant trampoline_get__fieldArrayFromList(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldArrayFromList;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<int[]>(ret);
             }
             static void trampoline_set__fieldArrayFromList(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldArrayFromList = global::Godot.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldArrayFromList = global::FADE.NativeInterop.VariantUtils.ConvertTo<int[]>(value);
             }
             static godot_variant trampoline_get__fieldVariant(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldVariant;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Variant>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Variant>(ret);
             }
             static void trampoline_set__fieldVariant(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldVariant = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Variant>(value);
+                ((global::ExportedFields)godotObject).@_fieldVariant = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Variant>(value);
             }
-            static godot_variant trampoline_get__fieldGodotObjectOrDerived(object godotObject)
+            static godot_variant trampoline_get__fieldFADEObjectOrDerived(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotObjectOrDerived;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.GodotObject>(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEObjectOrDerived;
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.FADEObject>(ret);
             }
-            static void trampoline_set__fieldGodotObjectOrDerived(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEObjectOrDerived(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotObjectOrDerived = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.GodotObject>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEObjectOrDerived = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.FADEObject>(value);
             }
-            static godot_variant trampoline_get__fieldGodotResourceTexture(object godotObject)
+            static godot_variant trampoline_get__fieldFADEResourceTexture(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotResourceTexture;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Texture>(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEResourceTexture;
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Texture>(ret);
             }
-            static void trampoline_set__fieldGodotResourceTexture(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEResourceTexture(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotResourceTexture = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Texture>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEResourceTexture = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Texture>(value);
             }
-            static godot_variant trampoline_get__fieldGodotResourceTextureWithInitializer(object godotObject)
+            static godot_variant trampoline_get__fieldFADEResourceTextureWithInitializer(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotResourceTextureWithInitializer;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Texture>(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEResourceTextureWithInitializer;
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Texture>(ret);
             }
-            static void trampoline_set__fieldGodotResourceTextureWithInitializer(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEResourceTextureWithInitializer(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotResourceTextureWithInitializer = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Texture>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEResourceTextureWithInitializer = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Texture>(value);
             }
             static godot_variant trampoline_get__fieldStringName(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldStringName;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.StringName>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.StringName>(ret);
             }
             static void trampoline_set__fieldStringName(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldStringName = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.StringName>(value);
+                ((global::ExportedFields)godotObject).@_fieldStringName = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.StringName>(value);
             }
             static godot_variant trampoline_get__fieldNodePath(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldNodePath;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.NodePath>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.NodePath>(ret);
             }
             static void trampoline_set__fieldNodePath(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldNodePath = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.NodePath>(value);
+                ((global::ExportedFields)godotObject).@_fieldNodePath = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.NodePath>(value);
             }
             static godot_variant trampoline_get__fieldRid(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldRid;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Rid>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Rid>(ret);
             }
             static void trampoline_set__fieldRid(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldRid = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Rid>(value);
+                ((global::ExportedFields)godotObject).@_fieldRid = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Rid>(value);
             }
-            static godot_variant trampoline_get__fieldGodotDictionary(object godotObject)
+            static godot_variant trampoline_get__fieldFADEDictionary(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotDictionary;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Collections.Dictionary>(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEDictionary;
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Collections.Dictionary>(ret);
             }
-            static void trampoline_set__fieldGodotDictionary(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEDictionary(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotDictionary = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Collections.Dictionary>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEDictionary = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Collections.Dictionary>(value);
             }
-            static godot_variant trampoline_get__fieldGodotArray(object godotObject)
+            static godot_variant trampoline_get__fieldFADEArray(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Collections.Array>(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEArray;
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Collections.Array>(ret);
             }
-            static void trampoline_set__fieldGodotArray(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotArray = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Collections.Array>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEArray = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Collections.Array>(value);
             }
-            static godot_variant trampoline_get__fieldGodotGenericDictionary(object godotObject)
+            static godot_variant trampoline_get__fieldFADEGenericDictionary(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotGenericDictionary;
-                return global::Godot.NativeInterop.VariantUtils.CreateFromDictionary(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEGenericDictionary;
+                return global::FADE.NativeInterop.VariantUtils.CreateFromDictionary(ret);
             }
-            static void trampoline_set__fieldGodotGenericDictionary(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEGenericDictionary(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotGenericDictionary = global::Godot.NativeInterop.VariantUtils.ConvertToDictionary<string, bool>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEGenericDictionary = global::FADE.NativeInterop.VariantUtils.ConvertToDictionary<string, bool>(value);
             }
-            static godot_variant trampoline_get__fieldGodotGenericArray(object godotObject)
+            static godot_variant trampoline_get__fieldFADEGenericArray(object godotObject)
             {
-                var ret = ((global::ExportedFields)godotObject).@_fieldGodotGenericArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFromArray(ret);
+                var ret = ((global::ExportedFields)godotObject).@_fieldFADEGenericArray;
+                return global::FADE.NativeInterop.VariantUtils.CreateFromArray(ret);
             }
-            static void trampoline_set__fieldGodotGenericArray(object godotObject, in godot_variant value)
+            static void trampoline_set__fieldFADEGenericArray(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldGodotGenericArray = global::Godot.NativeInterop.VariantUtils.ConvertToArray<int>(value);
+                ((global::ExportedFields)godotObject).@_fieldFADEGenericArray = global::FADE.NativeInterop.VariantUtils.ConvertToArray<int>(value);
             }
             static godot_variant trampoline_get__notIgnoredField(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_notIgnoredField;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<int>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<int>(ret);
             }
             static void trampoline_set__notIgnoredField(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_notIgnoredField = global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(value);
+                ((global::ExportedFields)godotObject).@_notIgnoredField = global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(value);
             }
             static godot_variant trampoline_get__fieldEmptyInt64Array(object godotObject)
             {
                 var ret = ((global::ExportedFields)godotObject).@_fieldEmptyInt64Array;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<long[]>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<long[]>(ret);
             }
             static void trampoline_set__fieldEmptyInt64Array(object godotObject, in godot_variant value)
             {
-                ((global::ExportedFields)godotObject).@_fieldEmptyInt64Array = global::Godot.NativeInterop.VariantUtils.ConvertTo<long[]>(value);
+                ((global::ExportedFields)godotObject).@_fieldEmptyInt64Array = global::FADE.NativeInterop.VariantUtils.ConvertTo<long[]>(value);
             }
             var aux_delegate_get__fieldBoolean = trampoline_get__fieldBoolean;
             var aux_delegate_set__fieldBoolean = trampoline_set__fieldBoolean;
@@ -964,9 +964,9 @@ partial class ExportedFields
             var aux_delegate_get__fieldColorArray = trampoline_get__fieldColorArray;
             var aux_delegate_set__fieldColorArray = trampoline_set__fieldColorArray;
             collector.TryAdd(PropertyName.@_fieldColorArray, new(aux_delegate_get__fieldColorArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldColorArray.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotObjectOrDerivedArray = trampoline_get__fieldGodotObjectOrDerivedArray;
-            var aux_delegate_set__fieldGodotObjectOrDerivedArray = trampoline_set__fieldGodotObjectOrDerivedArray;
-            collector.TryAdd(PropertyName.@_fieldGodotObjectOrDerivedArray, new(aux_delegate_get__fieldGodotObjectOrDerivedArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotObjectOrDerivedArray.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEObjectOrDerivedArray = trampoline_get__fieldFADEObjectOrDerivedArray;
+            var aux_delegate_set__fieldFADEObjectOrDerivedArray = trampoline_set__fieldFADEObjectOrDerivedArray;
+            collector.TryAdd(PropertyName.@_fieldFADEObjectOrDerivedArray, new(aux_delegate_get__fieldFADEObjectOrDerivedArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEObjectOrDerivedArray.Method.MethodHandle.GetFunctionPointer()));
             var aux_delegate_get__fieldStringNameArray = trampoline_get__fieldStringNameArray;
             var aux_delegate_set__fieldStringNameArray = trampoline_set__fieldStringNameArray;
             collector.TryAdd(PropertyName.@_fieldStringNameArray, new(aux_delegate_get__fieldStringNameArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldStringNameArray.Method.MethodHandle.GetFunctionPointer()));
@@ -985,15 +985,15 @@ partial class ExportedFields
             var aux_delegate_get__fieldVariant = trampoline_get__fieldVariant;
             var aux_delegate_set__fieldVariant = trampoline_set__fieldVariant;
             collector.TryAdd(PropertyName.@_fieldVariant, new(aux_delegate_get__fieldVariant.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldVariant.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotObjectOrDerived = trampoline_get__fieldGodotObjectOrDerived;
-            var aux_delegate_set__fieldGodotObjectOrDerived = trampoline_set__fieldGodotObjectOrDerived;
-            collector.TryAdd(PropertyName.@_fieldGodotObjectOrDerived, new(aux_delegate_get__fieldGodotObjectOrDerived.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotObjectOrDerived.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotResourceTexture = trampoline_get__fieldGodotResourceTexture;
-            var aux_delegate_set__fieldGodotResourceTexture = trampoline_set__fieldGodotResourceTexture;
-            collector.TryAdd(PropertyName.@_fieldGodotResourceTexture, new(aux_delegate_get__fieldGodotResourceTexture.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotResourceTexture.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotResourceTextureWithInitializer = trampoline_get__fieldGodotResourceTextureWithInitializer;
-            var aux_delegate_set__fieldGodotResourceTextureWithInitializer = trampoline_set__fieldGodotResourceTextureWithInitializer;
-            collector.TryAdd(PropertyName.@_fieldGodotResourceTextureWithInitializer, new(aux_delegate_get__fieldGodotResourceTextureWithInitializer.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotResourceTextureWithInitializer.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEObjectOrDerived = trampoline_get__fieldFADEObjectOrDerived;
+            var aux_delegate_set__fieldFADEObjectOrDerived = trampoline_set__fieldFADEObjectOrDerived;
+            collector.TryAdd(PropertyName.@_fieldFADEObjectOrDerived, new(aux_delegate_get__fieldFADEObjectOrDerived.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEObjectOrDerived.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEResourceTexture = trampoline_get__fieldFADEResourceTexture;
+            var aux_delegate_set__fieldFADEResourceTexture = trampoline_set__fieldFADEResourceTexture;
+            collector.TryAdd(PropertyName.@_fieldFADEResourceTexture, new(aux_delegate_get__fieldFADEResourceTexture.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEResourceTexture.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEResourceTextureWithInitializer = trampoline_get__fieldFADEResourceTextureWithInitializer;
+            var aux_delegate_set__fieldFADEResourceTextureWithInitializer = trampoline_set__fieldFADEResourceTextureWithInitializer;
+            collector.TryAdd(PropertyName.@_fieldFADEResourceTextureWithInitializer, new(aux_delegate_get__fieldFADEResourceTextureWithInitializer.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEResourceTextureWithInitializer.Method.MethodHandle.GetFunctionPointer()));
             var aux_delegate_get__fieldStringName = trampoline_get__fieldStringName;
             var aux_delegate_set__fieldStringName = trampoline_set__fieldStringName;
             collector.TryAdd(PropertyName.@_fieldStringName, new(aux_delegate_get__fieldStringName.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldStringName.Method.MethodHandle.GetFunctionPointer()));
@@ -1003,18 +1003,18 @@ partial class ExportedFields
             var aux_delegate_get__fieldRid = trampoline_get__fieldRid;
             var aux_delegate_set__fieldRid = trampoline_set__fieldRid;
             collector.TryAdd(PropertyName.@_fieldRid, new(aux_delegate_get__fieldRid.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldRid.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotDictionary = trampoline_get__fieldGodotDictionary;
-            var aux_delegate_set__fieldGodotDictionary = trampoline_set__fieldGodotDictionary;
-            collector.TryAdd(PropertyName.@_fieldGodotDictionary, new(aux_delegate_get__fieldGodotDictionary.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotDictionary.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotArray = trampoline_get__fieldGodotArray;
-            var aux_delegate_set__fieldGodotArray = trampoline_set__fieldGodotArray;
-            collector.TryAdd(PropertyName.@_fieldGodotArray, new(aux_delegate_get__fieldGodotArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotArray.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotGenericDictionary = trampoline_get__fieldGodotGenericDictionary;
-            var aux_delegate_set__fieldGodotGenericDictionary = trampoline_set__fieldGodotGenericDictionary;
-            collector.TryAdd(PropertyName.@_fieldGodotGenericDictionary, new(aux_delegate_get__fieldGodotGenericDictionary.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotGenericDictionary.Method.MethodHandle.GetFunctionPointer()));
-            var aux_delegate_get__fieldGodotGenericArray = trampoline_get__fieldGodotGenericArray;
-            var aux_delegate_set__fieldGodotGenericArray = trampoline_set__fieldGodotGenericArray;
-            collector.TryAdd(PropertyName.@_fieldGodotGenericArray, new(aux_delegate_get__fieldGodotGenericArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldGodotGenericArray.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEDictionary = trampoline_get__fieldFADEDictionary;
+            var aux_delegate_set__fieldFADEDictionary = trampoline_set__fieldFADEDictionary;
+            collector.TryAdd(PropertyName.@_fieldFADEDictionary, new(aux_delegate_get__fieldFADEDictionary.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEDictionary.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEArray = trampoline_get__fieldFADEArray;
+            var aux_delegate_set__fieldFADEArray = trampoline_set__fieldFADEArray;
+            collector.TryAdd(PropertyName.@_fieldFADEArray, new(aux_delegate_get__fieldFADEArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEArray.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEGenericDictionary = trampoline_get__fieldFADEGenericDictionary;
+            var aux_delegate_set__fieldFADEGenericDictionary = trampoline_set__fieldFADEGenericDictionary;
+            collector.TryAdd(PropertyName.@_fieldFADEGenericDictionary, new(aux_delegate_get__fieldFADEGenericDictionary.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEGenericDictionary.Method.MethodHandle.GetFunctionPointer()));
+            var aux_delegate_get__fieldFADEGenericArray = trampoline_get__fieldFADEGenericArray;
+            var aux_delegate_set__fieldFADEGenericArray = trampoline_set__fieldFADEGenericArray;
+            collector.TryAdd(PropertyName.@_fieldFADEGenericArray, new(aux_delegate_get__fieldFADEGenericArray.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__fieldFADEGenericArray.Method.MethodHandle.GetFunctionPointer()));
             var aux_delegate_get__notIgnoredField = trampoline_get__notIgnoredField;
             var aux_delegate_set__notIgnoredField = trampoline_set__notIgnoredField;
             collector.TryAdd(PropertyName.@_notIgnoredField, new(aux_delegate_get__notIgnoredField.Method.MethodHandle.GetFunctionPointer()), new(aux_delegate_set__notIgnoredField.Method.MethodHandle.GetFunctionPointer()));
@@ -1025,76 +1025,76 @@ partial class ExportedFields
     }
     /// <summary>
     /// Get the property information for all the properties declared in this class.
-    /// This method is used by Godot to register the available properties in the editor.
+    /// This method is used by FADE to register the available properties in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo> GetGodotPropertyList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo> GetFADEPropertyList()
     {
-        var properties = new global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>();
-        properties.Add(new(type: (global::Godot.Variant.Type)1, name: PropertyName.@_fieldBoolean, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldChar, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldSByte, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldInt16, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldInt32, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldInt64, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldByte, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldUInt16, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldUInt32, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldUInt64, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)3, name: PropertyName.@_fieldSingle, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)3, name: PropertyName.@_fieldDouble, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)4, name: PropertyName.@_fieldString, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)3, name: PropertyName.@_fieldStaticImport, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)5, name: PropertyName.@_fieldVector2, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)6, name: PropertyName.@_fieldVector2I, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)7, name: PropertyName.@_fieldRect2, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)8, name: PropertyName.@_fieldRect2I, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)11, name: PropertyName.@_fieldTransform2D, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)9, name: PropertyName.@_fieldVector3, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)10, name: PropertyName.@_fieldVector3I, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)17, name: PropertyName.@_fieldBasis, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)15, name: PropertyName.@_fieldQuaternion, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)18, name: PropertyName.@_fieldTransform3D, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)12, name: PropertyName.@_fieldVector4, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)13, name: PropertyName.@_fieldVector4I, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)19, name: PropertyName.@_fieldProjection, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)16, name: PropertyName.@_fieldAabb, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)20, name: PropertyName.@_fieldColor, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)14, name: PropertyName.@_fieldPlane, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)25, name: PropertyName.@_fieldCallable, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)26, name: PropertyName.@_fieldSignal, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldEnum, hint: (global::Godot.PropertyHint)2, hintString: "A,B,C", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_fieldFlagsEnum, hint: (global::Godot.PropertyHint)6, hintString: "A:0,B:1,C:2", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)29, name: PropertyName.@_fieldByteArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)30, name: PropertyName.@_fieldInt32Array, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)31, name: PropertyName.@_fieldInt64Array, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)32, name: PropertyName.@_fieldSingleArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)33, name: PropertyName.@_fieldDoubleArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)34, name: PropertyName.@_fieldStringArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)34, name: PropertyName.@_fieldStringArrayEnum, hint: (global::Godot.PropertyHint)23, hintString: "4/2:A,B,C", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)35, name: PropertyName.@_fieldVector2Array, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)36, name: PropertyName.@_fieldVector3Array, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)37, name: PropertyName.@_fieldColorArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@_fieldGodotObjectOrDerivedArray, hint: (global::Godot.PropertyHint)23, hintString: "24/0:", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@_fieldStringNameArray, hint: (global::Godot.PropertyHint)23, hintString: "21/0:", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@_fieldNodePathArray, hint: (global::Godot.PropertyHint)23, hintString: "22/0:", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@_fieldRidArray, hint: (global::Godot.PropertyHint)23, hintString: "23/0:", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)30, name: PropertyName.@_fieldEmptyInt32Array, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)30, name: PropertyName.@_fieldArrayFromList, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)0, name: PropertyName.@_fieldVariant, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)135174, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)24, name: PropertyName.@_fieldGodotObjectOrDerived, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true, className: new global::Godot.StringName("Object")));
-        properties.Add(new(type: (global::Godot.Variant.Type)24, name: PropertyName.@_fieldGodotResourceTexture, hint: (global::Godot.PropertyHint)17, hintString: "Texture", usage: (global::Godot.PropertyUsageFlags)4102, exported: true, className: new global::Godot.StringName("Texture")));
-        properties.Add(new(type: (global::Godot.Variant.Type)24, name: PropertyName.@_fieldGodotResourceTextureWithInitializer, hint: (global::Godot.PropertyHint)17, hintString: "Texture", usage: (global::Godot.PropertyUsageFlags)4102, exported: true, className: new global::Godot.StringName("Texture")));
-        properties.Add(new(type: (global::Godot.Variant.Type)21, name: PropertyName.@_fieldStringName, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)22, name: PropertyName.@_fieldNodePath, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)23, name: PropertyName.@_fieldRid, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)27, name: PropertyName.@_fieldGodotDictionary, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@_fieldGodotArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)27, name: PropertyName.@_fieldGodotGenericDictionary, hint: (global::Godot.PropertyHint)23, hintString: "4/0:;1/0:", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@_fieldGodotGenericArray, hint: (global::Godot.PropertyHint)23, hintString: "2/0:", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)2, name: PropertyName.@_notIgnoredField, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)31, name: PropertyName.@_fieldEmptyInt64Array, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
+        var properties = new global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo>();
+        properties.Add(new(type: (global::FADE.Variant.Type)1, name: PropertyName.@_fieldBoolean, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldChar, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldSByte, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldInt16, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldInt32, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldInt64, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldByte, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldUInt16, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldUInt32, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldUInt64, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)3, name: PropertyName.@_fieldSingle, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)3, name: PropertyName.@_fieldDouble, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)4, name: PropertyName.@_fieldString, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)3, name: PropertyName.@_fieldStaticImport, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)5, name: PropertyName.@_fieldVector2, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)6, name: PropertyName.@_fieldVector2I, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)7, name: PropertyName.@_fieldRect2, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)8, name: PropertyName.@_fieldRect2I, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)11, name: PropertyName.@_fieldTransform2D, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)9, name: PropertyName.@_fieldVector3, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)10, name: PropertyName.@_fieldVector3I, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)17, name: PropertyName.@_fieldBasis, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)15, name: PropertyName.@_fieldQuaternion, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)18, name: PropertyName.@_fieldTransform3D, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)12, name: PropertyName.@_fieldVector4, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)13, name: PropertyName.@_fieldVector4I, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)19, name: PropertyName.@_fieldProjection, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)16, name: PropertyName.@_fieldAabb, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)20, name: PropertyName.@_fieldColor, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)14, name: PropertyName.@_fieldPlane, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)25, name: PropertyName.@_fieldCallable, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)26, name: PropertyName.@_fieldSignal, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldEnum, hint: (global::FADE.PropertyHint)2, hintString: "A,B,C", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_fieldFlagsEnum, hint: (global::FADE.PropertyHint)6, hintString: "A:0,B:1,C:2", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)29, name: PropertyName.@_fieldByteArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)30, name: PropertyName.@_fieldInt32Array, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)31, name: PropertyName.@_fieldInt64Array, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)32, name: PropertyName.@_fieldSingleArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)33, name: PropertyName.@_fieldDoubleArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)34, name: PropertyName.@_fieldStringArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)34, name: PropertyName.@_fieldStringArrayEnum, hint: (global::FADE.PropertyHint)23, hintString: "4/2:A,B,C", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)35, name: PropertyName.@_fieldVector2Array, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)36, name: PropertyName.@_fieldVector3Array, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)37, name: PropertyName.@_fieldColorArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@_fieldFADEObjectOrDerivedArray, hint: (global::FADE.PropertyHint)23, hintString: "24/0:", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@_fieldStringNameArray, hint: (global::FADE.PropertyHint)23, hintString: "21/0:", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@_fieldNodePathArray, hint: (global::FADE.PropertyHint)23, hintString: "22/0:", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@_fieldRidArray, hint: (global::FADE.PropertyHint)23, hintString: "23/0:", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)30, name: PropertyName.@_fieldEmptyInt32Array, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)30, name: PropertyName.@_fieldArrayFromList, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)0, name: PropertyName.@_fieldVariant, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)135174, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)24, name: PropertyName.@_fieldFADEObjectOrDerived, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true, className: new global::FADE.StringName("Object")));
+        properties.Add(new(type: (global::FADE.Variant.Type)24, name: PropertyName.@_fieldFADEResourceTexture, hint: (global::FADE.PropertyHint)17, hintString: "Texture", usage: (global::FADE.PropertyUsageFlags)4102, exported: true, className: new global::FADE.StringName("Texture")));
+        properties.Add(new(type: (global::FADE.Variant.Type)24, name: PropertyName.@_fieldFADEResourceTextureWithInitializer, hint: (global::FADE.PropertyHint)17, hintString: "Texture", usage: (global::FADE.PropertyUsageFlags)4102, exported: true, className: new global::FADE.StringName("Texture")));
+        properties.Add(new(type: (global::FADE.Variant.Type)21, name: PropertyName.@_fieldStringName, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)22, name: PropertyName.@_fieldNodePath, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)23, name: PropertyName.@_fieldRid, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)27, name: PropertyName.@_fieldFADEDictionary, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@_fieldFADEArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)27, name: PropertyName.@_fieldFADEGenericDictionary, hint: (global::FADE.PropertyHint)23, hintString: "4/0:;1/0:", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@_fieldFADEGenericArray, hint: (global::FADE.PropertyHint)23, hintString: "2/0:", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)2, name: PropertyName.@_notIgnoredField, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::FADE.Variant.Type)31, name: PropertyName.@_fieldEmptyInt64Array, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
         return properties;
     }
 #pragma warning restore CS0109

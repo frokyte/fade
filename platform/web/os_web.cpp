@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -79,8 +79,8 @@ void OS_Web::fs_sync_callback() {
 }
 
 bool OS_Web::main_loop_iterate() {
-	GodotProfileFrameMark;
-	GodotProfileZone("OS_Web::main_loop_iterate");
+	FADEProfileFrameMark;
+	FADEProfileZone("OS_Web::main_loop_iterate");
 	if (is_userfs_persistent() && idb_needs_sync && !idb_is_syncing) {
 		idb_is_syncing = true;
 		idb_needs_sync = false;

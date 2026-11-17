@@ -4,12 +4,12 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using Godot;
-using Godot.NativeInterop;
-using Godot.SourceGenerators.Internal;
-using GodotTools.IdeMessaging.Requests;
+using FADE;
+using FADE.NativeInterop;
+using FADE.SourceGenerators.Internal;
+using FADETools.IdeMessaging.Requests;
 
-namespace GodotTools.Internals
+namespace FADETools.Internals
 {
     [GenerateUnmanagedCallbacks(typeof(InternalUnmanagedCallbacks))]
     internal static partial class Internal
@@ -27,7 +27,7 @@ namespace GodotTools.Internals
             }
         }
 
-        public static string SimplifyGodotPath(this string path) => Godot.StringExtensions.SimplifyPath(path);
+        public static string SimplifyFADEPath(this string path) => FADE.StringExtensions.SimplifyPath(path);
 
         public static bool IsMacOSAppBundleInstalled(string bundleId)
         {
@@ -42,11 +42,11 @@ namespace GodotTools.Internals
             return godot_icall_Internal_LipOCreateFile(outputPathIn, filesIn);
         }
 
-        public static bool GodotIs32Bits() => godot_icall_Internal_GodotIs32Bits();
+        public static bool FADEIs32Bits() => godot_icall_Internal_FADEIs32Bits();
 
-        public static bool GodotIsRealTDouble() => godot_icall_Internal_GodotIsRealTDouble();
+        public static bool FADEIsRealTDouble() => godot_icall_Internal_FADEIsRealTDouble();
 
-        public static void GodotMainIteration() => godot_icall_Internal_GodotMainIteration();
+        public static void FADEMainIteration() => godot_icall_Internal_FADEMainIteration();
 
         public static bool IsAssembliesReloadingNeeded() => godot_icall_Internal_IsAssembliesReloadingNeeded();
 
@@ -105,15 +105,15 @@ namespace GodotTools.Internals
          * in the array defined at the bottom of 'editor/editor_internal_calls.cpp'.
          */
 
-        public static partial void godot_icall_GodotSharpDirs_ResMetadataDir(out godot_string r_dest);
+        public static partial void godot_icall_FADESharpDirs_ResMetadataDir(out godot_string r_dest);
 
-        public static partial void godot_icall_GodotSharpDirs_MonoUserDir(out godot_string r_dest);
+        public static partial void godot_icall_FADESharpDirs_MonoUserDir(out godot_string r_dest);
 
-        public static partial void godot_icall_GodotSharpDirs_BuildLogsDirs(out godot_string r_dest);
+        public static partial void godot_icall_FADESharpDirs_BuildLogsDirs(out godot_string r_dest);
 
-        public static partial void godot_icall_GodotSharpDirs_DataEditorToolsDir(out godot_string r_dest);
+        public static partial void godot_icall_FADESharpDirs_DataEditorToolsDir(out godot_string r_dest);
 
-        public static partial void godot_icall_GodotSharpDirs_CSharpProjectName(out godot_string r_dest);
+        public static partial void godot_icall_FADESharpDirs_CSharpProjectName(out godot_string r_dest);
 
         public static partial void godot_icall_EditorProgress_Create(in godot_string task, in godot_string label,
             int amount, bool canCancel);
@@ -130,11 +130,11 @@ namespace GodotTools.Internals
 
         private static partial bool godot_icall_Internal_LipOCreateFile(in godot_string outputPath, in godot_packed_string_array files);
 
-        private static partial bool godot_icall_Internal_GodotIs32Bits();
+        private static partial bool godot_icall_Internal_FADEIs32Bits();
 
-        private static partial bool godot_icall_Internal_GodotIsRealTDouble();
+        private static partial bool godot_icall_Internal_FADEIsRealTDouble();
 
-        private static partial void godot_icall_Internal_GodotMainIteration();
+        private static partial void godot_icall_Internal_FADEMainIteration();
 
         private static partial bool godot_icall_Internal_IsAssembliesReloadingNeeded();
 

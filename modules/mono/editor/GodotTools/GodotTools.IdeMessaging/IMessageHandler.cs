@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace GodotTools.IdeMessaging
+namespace FADETools.IdeMessaging
 {
     public interface IMessageHandler
     {

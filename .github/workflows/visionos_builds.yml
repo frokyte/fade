@@ -23,7 +23,7 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Restore Godot build cache
+      - name: Restore FADE build cache
         uses: ./.github/actions/godot-cache-restore
         continue-on-error: true
 
@@ -37,7 +37,7 @@ jobs:
           platform: visionos
           target: template_release
 
-      - name: Save Godot build cache
+      - name: Save FADE build cache
         uses: ./.github/actions/godot-cache-save
         continue-on-error: true
 

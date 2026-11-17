@@ -1,4 +1,4 @@
-using Godot;
+using FADE;
 
 public partial class ScriptBoilerplate : Node
 {

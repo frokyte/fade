@@ -210,7 +210,7 @@ Files extracted from upstream source:
 - `dr_mp3.h`
 - `LICENSE`
 
-`dr_bridge.h` is a Godot file and should be preserved on updates.
+`dr_bridge.h` is a FADE file and should be preserved on updates.
 
 
 ## embree
@@ -251,7 +251,7 @@ Files extracted from upstream source:
 - The `include/enet/` folder (except `unix.h` and `win32.h`)
 - `LICENSE` file
 - Added 3 files `enet_godot.cpp`, `enet/enet_godot.h`, and `enet/enet_godot_ext.h`,
-  providing ENet socket implementation using Godot classes, allowing IPv6 and DTLS.
+  providing ENet socket implementation using FADE classes, allowing IPv6 and DTLS.
 
 Patches:
 
@@ -466,7 +466,7 @@ Files extracted from upstream source:
 
 - The `src/to_chars.cpp` file renamed to `grisu2.h` and slightly modified.
 
-`LICENSE` and `README.md` are Godot files and should be preserved on updates.
+`LICENSE` and `README.md` are FADE files and should be preserved on updates.
 
 Patches:
 
@@ -717,7 +717,7 @@ File extracted from upstream release tarball:
 - Relevant headers and library files via the script in `thirdparty/mbedtls/extract_mbedtls_sources.py`
 - `LICENSE` (edited to keep only the Apache 2.0 variant)
 - Added 3 headers `godot_mbedtls_config.h`, `godot_psa_config.h` and `threading_alt.h` in `thirdparty/mbedtls/godot` for build configuration
-- Added `thirdparty/mbedtls/godot/godot_mbedtls_platform.cpp` to implement some mbedTLS platform functions using Godot-native APIs
+- Added `thirdparty/mbedtls/godot/godot_mbedtls_platform.cpp` to implement some mbedTLS platform functions using FADE-native APIs
 
 Patches:
 
@@ -752,7 +752,7 @@ Files extracted from upstream source:
 - `Foundation/`, `Metal/`, `MetalFX/` and `QuartzCore/` folders
 - `LICENSE.txt`
 
-`metal_cpp.cpp` is a Godot file and should be preserved on updates.
+`metal_cpp.cpp` is a FADE file and should be preserved on updates.
 
 Patches:
 
@@ -795,7 +795,7 @@ Files extracted from upstream source:
 - Remove the following test or sample files:
   `listdevices.c,minihttptestserver.c,miniupnpcmodule.c,upnpc.c,upnperrors.*,test*`
 - `LICENSE`
-- `src/miniupnpcstrings.h` was created manually for Godot (it is usually generated
+- `src/miniupnpcstrings.h` was created manually for FADE (it is usually generated
   by CMake). Bump the version number for miniupnpc in that file when upgrading.
 
 Patches:
@@ -824,7 +824,7 @@ Patches:
 
 ## misc
 
-Collection of single-file libraries used in Godot components.
+Collection of single-file libraries used in FADE components.
 
 - `bcdec.h`
   * Upstream: https://github.com/iOrange/bcdec
@@ -881,7 +881,7 @@ Collection of single-file libraries used in Godot components.
   * Version: git (bc39cd76ac3d541e618606bcc6e1e5ba5e5e6aa3, 2014)
   * License: Apache 2.0
   * Modifications: `pcg32_random_r` from the minimal C implementation, `pcg32_srandom_r`
-    and `pcg32_boundedrand_r` from `pcg_basic.c`, Godot-specific header guard and includes.
+    and `pcg32_boundedrand_r` from `pcg_basic.c`, FADE-specific header guard and includes.
 - `polypartition.{cpp,h}`
   * Upstream: https://github.com/ivanfratric/polypartition
   * Version: git (7bdffb428b2b19ad1c43aa44c714dcc104177e84, 2021)
@@ -951,7 +951,7 @@ Files extracted from upstream source:
 - `offsetAllocator.cpp`, `offsetAllocator.hpp`
 - `LICENSE`
 
-`apply-patches.sh` is a Godot file to apply the patches below, and should be
+`apply-patches.sh` is a FADE file to apply the patches below, and should be
 preserved on updates.
 
 Patches:
@@ -1058,10 +1058,10 @@ Files extracted from upstream source:
 - All `.cpp` and `.h` files in the `src/` folder except for `Export.h` and `RVO.h`
 - `LICENSE`
 
-Important: Nearly all files have Godot-made changes and renames
+Important: Nearly all files have FADE-made changes and renames
 to make the 2D and 3D rvo libraries compatible with each other
 and solve conflicts and also enrich the feature set originally
-proposed by these libraries and better integrate them with Godot.
+proposed by these libraries and better integrate them with FADE.
 
 
 ## sdl
@@ -1268,7 +1268,7 @@ SDK release: https://github.com/KhronosGroup/Vulkan-Utility-Libraries/blob/main/
 
 `vk_mem_alloc.h` is taken from https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
 Version: 3.3.0 (1d8f600fd424278486eade7ed3e877c99f0846b1, 2025)
-`vk_mem_alloc.cpp` is a Godot file and should be preserved on updates.
+`vk_mem_alloc.cpp` is a FADE file and should be preserved on updates.
 
 Patches:
 
@@ -1364,7 +1364,7 @@ The following files are extracted from thirdparty sources:
 Files extracted from upstream source:
 
 - Run `cmake .` to generate `config.h` and `wslayver.h`
-  Contents might need tweaking for Godot, review diff
+  Contents might need tweaking for FADE, review diff
 - All `.c` and `.h` files from `lib/`
 - `lib/includes/wslay/wslay.h` as `wslay/wslay.h`
 - `COPYING`

@@ -1,7 +1,7 @@
-# Hebrew translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Hebrew translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Daniel <lorddaniel09@gmail.com>, 2018.
 # Ben Golan <golanben4@gmail.com>, 2017.
 # Luc Stepniewski <lior@gradstein.info>, 2017.
@@ -38,7 +38,7 @@
 # Idan <idan062@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-10-04 04:52+0000\n"
@@ -3918,8 +3918,8 @@ msgstr "מעקב תמידי אחר מחסניות קריאות"
 msgid "Always Track Local Variables"
 msgstr "מעקב תמידי אחר משתנים מקומיים"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "רמז לשינוי שם ב־Godot 4"
+msgid "Renamed in FADE 4 Hint"
+msgstr "רמז לשינוי שם ב־FADE 4"
 
 msgid "Unassigned Variable"
 msgstr "משתנה ללא השמה"
@@ -4317,11 +4317,11 @@ msgstr "אור"
 msgid "Visible"
 msgstr "גלוי"
 
-msgid "glTF to Godot Expression"
-msgstr "ביטוי מ־glTF ל־Godot"
+msgid "glTF to FADE Expression"
+msgstr "ביטוי מ־glTF ל־FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "ביטוי מ־Godot ל־glTF"
+msgid "FADE to glTF Expression"
+msgstr "ביטוי מ־FADE ל־glTF"
 
 msgid "Node Paths"
 msgstr "נתיבי מפרקים"
@@ -4341,8 +4341,8 @@ msgstr "מפרקי חיבור"
 msgid "Roots"
 msgstr "שורשים"
 
-msgid "Godot Bone Node"
-msgstr "מפרק עצם של Godot"
+msgid "FADE Bone Node"
+msgstr "מפרק עצם של FADE"
 
 msgid "Skin Root"
 msgstr "שורש העור"
@@ -4353,8 +4353,8 @@ msgstr "מפרקי חיבור מקוריים"
 msgid "Non Joints"
 msgstr "לא מפרקי חיבור"
 
-msgid "Godot Skin"
-msgstr "עור של Godot"
+msgid "FADE Skin"
+msgstr "עור של FADE"
 
 msgid "Src Image"
 msgstr "תמונת מקור"
@@ -5391,8 +5391,8 @@ msgstr "מארח Wi-Fi לניפוי שגיאות מרוחק"
 msgid "Splash Screen"
 msgstr "מסך פתיחה"
 
-msgid "Disable Godot Boot Splash"
-msgstr "השבתת מסך הפתיחה של Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "השבתת מסך הפתיחה של FADE"
 
 msgid "Background Color"
 msgstr "צבע רקע"
@@ -5946,8 +5946,8 @@ msgstr "סמל 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "גודל מאגר Emscripten"
 
-msgid "Godot Pool Size"
-msgstr "גודל מאגר Godot"
+msgid "FADE Pool Size"
+msgstr "גודל מאגר FADE"
 
 msgid "Windows"
 msgstr "Windows"

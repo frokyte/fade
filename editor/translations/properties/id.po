@@ -1,7 +1,7 @@
-# Indonesian translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Indonesian translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Abdul Aziz Muslim Alqudsy <abdul.aziz.muslim.alqudsy@gmail.com>, 2016.
 # Andevid Dynmyn <doyan4forum@gmail.com>, 2016.
 # Andinawan Asa <asaandinawan@gmail.com>, 2016.
@@ -63,7 +63,7 @@
 # Arif Budiman <arifpedia@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-05-31 22:43+0000\n"
@@ -3942,8 +3942,8 @@ msgstr "Selalu Lacak Call Stack"
 msgid "Always Track Local Variables"
 msgstr "Selalu Lacak Variabel Lokal"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Petunjuk Diganti Nama di Godot 4"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Petunjuk Diganti Nama di FADE 4"
 
 msgid "Unassigned Variable"
 msgstr "Variabel Belum Diinisialisasi"
@@ -4341,11 +4341,11 @@ msgstr "Cahaya"
 msgid "Visible"
 msgstr "Terlihat"
 
-msgid "glTF to Godot Expression"
-msgstr "Ekspresi glTF ke Godot"
+msgid "glTF to FADE Expression"
+msgstr "Ekspresi glTF ke FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "Ekspresi Godot ke glTF"
+msgid "FADE to glTF Expression"
+msgstr "Ekspresi FADE ke glTF"
 
 msgid "Node Paths"
 msgstr "Path Node"
@@ -4365,8 +4365,8 @@ msgstr "Sendi"
 msgid "Roots"
 msgstr "Root"
 
-msgid "Godot Bone Node"
-msgstr "Node Tulang Godot"
+msgid "FADE Bone Node"
+msgstr "Node Tulang FADE"
 
 msgid "Skin Root"
 msgstr "Root Skin"
@@ -4377,8 +4377,8 @@ msgstr "Sendi Asli"
 msgid "Non Joints"
 msgstr "Non Sendi"
 
-msgid "Godot Skin"
-msgstr "Skin Godot"
+msgid "FADE Skin"
+msgstr "Skin FADE"
 
 msgid "Src Image"
 msgstr "Gambar Sumber"
@@ -5415,8 +5415,8 @@ msgstr "Host Debug Jarak Jauh Wi-Fi"
 msgid "Splash Screen"
 msgstr "Layar Splash"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Nonaktifkan Splash Boot Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "Nonaktifkan Splash Boot FADE"
 
 msgid "Background Color"
 msgstr "Warna Latar belakang"
@@ -5970,8 +5970,8 @@ msgstr "Ikon 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "Ukuran Pool Emscripten"
 
-msgid "Godot Pool Size"
-msgstr "Ukuran Pool Godot"
+msgid "FADE Pool Size"
+msgstr "Ukuran Pool FADE"
 
 msgid "Windows"
 msgstr "Windows"

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -32,13 +32,13 @@
 
 #include "servers/physics_3d/direct_states/physics_direct_body_state_3d.h"
 
-class GodotBody3D;
+class FADEBody3D;
 
-class GodotPhysicsDirectBodyState3D : public PhysicsDirectBodyState3D {
-	GDCLASS(GodotPhysicsDirectBodyState3D, PhysicsDirectBodyState3D);
+class FADEPhysicsDirectBodyState3D : public PhysicsDirectBodyState3D {
+	GDCLASS(FADEPhysicsDirectBodyState3D, PhysicsDirectBodyState3D);
 
 public:
-	GodotBody3D *body = nullptr;
+	FADEBody3D *body = nullptr;
 
 	virtual Vector3 get_total_gravity() const override;
 	virtual real_t get_total_angular_damp() const override;

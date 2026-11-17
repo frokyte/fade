@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotTTS.java                                                         */
+/*  FADETTS.java                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 package org.godotengine.godot.tts;
 
-import org.godotengine.godot.GodotLib;
+import org.godotengine.godot.FADELib;
 
 import android.app.Activity;
 import android.content.Context;
@@ -48,7 +48,7 @@ import java.util.Set;
 /**
  * Wrapper for Android Text to Speech API and custom utterance query implementation.
  * <p>
- * A [GodotTTS] provides the following features:
+ * A [FADETTS] provides the following features:
  * <p>
  * <ul>
  * <li>Access to the Android Text to Speech API.
@@ -56,7 +56,7 @@ import java.util.Set;
  * </ul>
  */
 @Keep
-public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.OnInitListener {
+public class FADETTS extends UtteranceProgressListener implements TextToSpeech.OnInitListener {
 	// Note: These constants must be in sync with DisplayServerEnums::TTSUtteranceEvent enum from "servers/display/display_server.h".
 	final private static int EVENT_START = 0;
 	final private static int EVENT_END = 1;
@@ -71,21 +71,21 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	private final Context context;
 	private TextToSpeech synth;
 	private int state;
-	private LinkedList<GodotUtterance> queue;
+	private LinkedList<FADEUtterance> queue;
 	final private Object lock = new Object();
-	private GodotUtterance lastUtterance;
+	private FADEUtterance lastUtterance;
 
 	private boolean speaking;
 	private boolean paused;
 
-	public GodotTTS(Context context) {
+	public FADETTS(Context context) {
 		this.context = context;
 	}
 
 	private void updateTTS() {
 		if (!speaking && queue.size() > 0) {
 			int mode = TextToSpeech.QUEUE_FLUSH;
-			GodotUtterance message = queue.pollFirst();
+			FADEUtterance message = queue.pollFirst();
 
 			Set<Voice> voices = synth.getVoices();
 			if (voices == null) {
@@ -121,7 +121,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 		synchronized (lock) {
 			if (lastUtterance != null && Long.parseLong(utteranceId) == lastUtterance.id) {
 				lastUtterance.offset = start;
-				GodotLib.ttsCallback(EVENT_BOUNDARY, lastUtterance.id, start + lastUtterance.start);
+				FADELib.ttsCallback(EVENT_BOUNDARY, lastUtterance.id, start + lastUtterance.start);
 			}
 		}
 	}
@@ -133,7 +133,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	public void onStop(String utteranceId, boolean interrupted) {
 		synchronized (lock) {
 			if (lastUtterance != null && !paused && Long.parseLong(utteranceId) == lastUtterance.id) {
-				GodotLib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
+				FADELib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
 				speaking = false;
 				updateTTS();
 			}
@@ -147,7 +147,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	public void onStart(String utteranceId) {
 		synchronized (lock) {
 			if (lastUtterance != null && lastUtterance.start == 0 && Long.parseLong(utteranceId) == lastUtterance.id) {
-				GodotLib.ttsCallback(EVENT_START, lastUtterance.id, 0);
+				FADELib.ttsCallback(EVENT_START, lastUtterance.id, 0);
 			}
 		}
 	}
@@ -159,7 +159,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	public void onDone(String utteranceId) {
 		synchronized (lock) {
 			if (lastUtterance != null && !paused && Long.parseLong(utteranceId) == lastUtterance.id) {
-				GodotLib.ttsCallback(EVENT_END, lastUtterance.id, 0);
+				FADELib.ttsCallback(EVENT_END, lastUtterance.id, 0);
 				speaking = false;
 				updateTTS();
 			}
@@ -173,7 +173,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	public void onError(String utteranceId, int errorCode) {
 		synchronized (lock) {
 			if (lastUtterance != null && !paused && Long.parseLong(utteranceId) == lastUtterance.id) {
-				GodotLib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
+				FADELib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
 				speaking = false;
 				updateTTS();
 			}
@@ -187,7 +187,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	public void onError(String utteranceId) {
 		synchronized (lock) {
 			if (lastUtterance != null && !paused && Long.parseLong(utteranceId) == lastUtterance.id) {
-				GodotLib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
+				FADELib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
 				speaking = false;
 				updateTTS();
 			}
@@ -200,7 +200,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 	public void init() {
 		state = INIT_STATE_UNKNOWN;
 		synth = new TextToSpeech(context, this);
-		queue = new LinkedList<GodotUtterance>();
+		queue = new LinkedList<FADEUtterance>();
 
 		synth.setOnUtteranceProgressListener(this);
 	}
@@ -227,7 +227,7 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 			if (state != INIT_STATE_SUCCESS) {
 				return;
 			}
-			GodotUtterance message = new GodotUtterance(text, voice, volume, pitch, rate, utterance_id);
+			FADEUtterance message = new FADEUtterance(text, voice, volume, pitch, rate, utterance_id);
 			queue.addLast(message);
 
 			if (isPaused()) {
@@ -300,13 +300,13 @@ public class GodotTTS extends UtteranceProgressListener implements TextToSpeech.
 			if (state != INIT_STATE_SUCCESS) {
 				return;
 			}
-			for (GodotUtterance u : queue) {
-				GodotLib.ttsCallback(EVENT_CANCEL, u.id, 0);
+			for (FADEUtterance u : queue) {
+				FADELib.ttsCallback(EVENT_CANCEL, u.id, 0);
 			}
 			queue.clear();
 
 			if (lastUtterance != null) {
-				GodotLib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
+				FADELib.ttsCallback(EVENT_CANCEL, lastUtterance.id, 0);
 			}
 			lastUtterance = null;
 

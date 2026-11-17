@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -851,7 +851,7 @@ String DisplayServerWindows::_get_app_id() const {
 	static String appname;
 	if (appname.is_empty()) {
 		if (Engine::get_singleton()->is_editor_hint()) {
-			appname = "Godot.GodotEditor." + String(GODOT_VERSION_FULL_CONFIG);
+			appname = "FADE.FADEEditor." + String(GODOT_VERSION_FULL_CONFIG);
 		} else {
 			String name = GLOBAL_GET("application/config/name");
 			String version = GLOBAL_GET("application/config/version");
@@ -865,7 +865,7 @@ String DisplayServerWindows::_get_app_id() const {
 				}
 			}
 			clean_app_name = clean_app_name.substr(0, 120 - version.length()).trim_suffix(".");
-			appname = "Godot." + clean_app_name + "." + version;
+			appname = "FADE." + clean_app_name + "." + version;
 		}
 	}
 	return appname;
@@ -875,7 +875,7 @@ String DisplayServerWindows::_get_app_name() const {
 	static String appname;
 	if (appname.is_empty()) {
 		if (Engine::get_singleton()->is_editor_hint()) {
-			appname = "Godot";
+			appname = "FADE";
 		} else {
 			appname = GLOBAL_GET("application/config/name");
 		}
@@ -1855,7 +1855,7 @@ void DisplayServerWindows::screen_set_keep_on(bool p_enable) {
 	}
 
 	if (p_enable) {
-		const String reason = "Godot Engine running with display/window/energy_saving/keep_screen_on = true";
+		const String reason = "FADE Engine running with display/window/energy_saving/keep_screen_on = true";
 		Char16String reason_utf16 = reason.utf16();
 		REASON_CONTEXT context;
 		context.Version = POWER_REQUEST_CONTEXT_VERSION;
@@ -3756,7 +3756,7 @@ Error DisplayServerWindows::embed_process(DisplayServerEnums::WindowID p_window,
 		p_visible = false;
 	}
 
-	// In Godot, the window position is offset by the screen's origin coordinates.
+	// In FADE, the window position is offset by the screen's origin coordinates.
 	// We need to adjust for this when a screen is positioned in the negative space
 	// (e.g., a screen to the left of the main screen).
 	const Rect2i adjusted_rect = Rect2i(p_rect.position + _get_screens_origin(), p_rect.size);
@@ -4232,7 +4232,7 @@ Key DisplayServerWindows::keyboard_get_keycode_from_physical(Key p_keycode) cons
 	// Unlike a similar Linux/BSD check which matches full Latin-1 range,
 	// we limit these to ASCII to fix some layouts, including Arabic ones
 	if (char_code >= 32 && char_code <= 127) {
-		// Godot uses 'braces' instead of 'brackets'
+		// FADE uses 'braces' instead of 'brackets'
 		if (char_code == (unsigned int)Key::BRACKETLEFT || char_code == (unsigned int)Key::BRACKETRIGHT) {
 			char_code += 32;
 		}
@@ -4654,11 +4654,11 @@ void DisplayServerWindows::process_events() {
 	// System-reported max luminance changes when the user adjust the screen brightness of a laptop
 	// with a built-in HDR screen. Additionally, some computers may continue to report a
 	// DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709 color space for a period of time after the
-	// WM_DISPLAYCHANGE event is received by Godot which means we must poll this regularly to
+	// WM_DISPLAYCHANGE event is received by FADE which means we must poll this regularly to
 	// capture this change in HDR capabilities of the screen triggered by the Win + Alt + B shortcut.
 	// The SDR white level (reference white luminance) does not need to be polled every frame
-	// because the only way to adjust this is to leave the Godot Window and adjust the SDR/HDR
-	// Content Brightness Windows display setting. This means the user must return to the Godot
+	// because the only way to adjust this is to leave the FADE Window and adjust the SDR/HDR
+	// Content Brightness Windows display setting. This means the user must return to the FADE
 	// window, which triggers a WM_WINDOWPOSCHANGED event.
 	_legacy_update_hdr_output_for_tracked_windows(false);
 
@@ -6894,8 +6894,8 @@ LRESULT DisplayServerWindows::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 			}
 
 			// Update HDR capabilities and reference luminance when window moves to different screen.
-			// Also update when Godot has regained focus because the user may have adjusted their SDR white
-			// level while Godot was not in focus.
+			// Also update when FADE has regained focus because the user may have adjusted their SDR white
+			// level while FADE was not in focus.
 			_legacy_update_hdr_output_for_tracked_windows(true);
 
 			// Return here to prevent WM_MOVE and WM_SIZE from being sent
@@ -8116,7 +8116,7 @@ DisplayServerWindows::DisplayServerWindows(const String &p_rendering_driver, Dis
 
 	String appname;
 	if (Engine::get_singleton()->is_editor_hint()) {
-		appname = "Godot.GodotEditor." + String(GODOT_VERSION_FULL_CONFIG);
+		appname = "FADE.FADEEditor." + String(GODOT_VERSION_FULL_CONFIG);
 	} else {
 		String name = GLOBAL_GET("application/config/name");
 		String version = GLOBAL_GET("application/config/version");
@@ -8130,7 +8130,7 @@ DisplayServerWindows::DisplayServerWindows(const String &p_rendering_driver, Dis
 			}
 		}
 		clean_app_name = clean_app_name.substr(0, 120 - version.length()).trim_suffix(".");
-		appname = "Godot." + clean_app_name + "." + version;
+		appname = "FADE." + clean_app_name + "." + version;
 
 #ifndef TOOLS_ENABLED
 		// Set for exported projects only.

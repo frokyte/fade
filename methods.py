@@ -16,7 +16,7 @@ from typing import TextIO, cast
 from misc.utility.color import print_error, print_info, print_warning
 from platform_methods import detect_arch
 
-# Get the "Godot" folder name ahead of time
+# Get the "FADE" folder name ahead of time
 base_folder = Path(__file__).resolve().parent
 
 compiler_version_cache = None
@@ -260,7 +260,7 @@ def detect_modules(search_path, recursive=False):
 
     def is_engine(path):
         # Prevent recursively detecting modules in self and other
-        # Godot sources when using `custom_modules` build option.
+        # FADE sources when using `custom_modules` build option.
         version_path = os.path.join(path, "version.py")
         if os.path.exists(version_path):
             with open(version_path, "r", encoding="utf-8") as f:
@@ -474,7 +474,7 @@ def detect_visual_c_compiler_version(tools_env):
     # "x86"           Native 32 bit compiler
     # "x86_amd64"     32 bit Cross Compiler for 64 bit
 
-    # There are other architectures, but Godot does not support them currently, so this function does not detect arm/amd64_arm
+    # There are other architectures, but FADE does not support them currently, so this function does not detect arm/amd64_arm
     # and similar architectures/compilers
 
     # Set chosen compiler to "not detected"
@@ -1280,7 +1280,7 @@ def generate_vs_project(env, original_args, project_name="godot"):
                 vsconf = f"{target}|{a['platform']}"
                 break
 
-        condition = "'$(GodotConfiguration)|$(GodotPlatform)'=='" + vsconf + "'"
+        condition = "'$(FADEConfiguration)|$(FADEPlatform)'=='" + vsconf + "'"
         itemlist = {}
         for item in activeItems:
             key = os.path.dirname(item).replace("\\", "_")
@@ -1426,8 +1426,8 @@ def generate_vs_project(env, original_args, project_name="godot"):
 
                 properties += [
                     f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='editor|{proj_plat}'\">",
-                    "  <GodotConfiguration>editor</GodotConfiguration>",
-                    f"  <GodotPlatform>{proj_plat}</GodotPlatform>",
+                    "  <FADEConfiguration>editor</FADEConfiguration>",
+                    f"  <FADEPlatform>{proj_plat}</FADEPlatform>",
                     "</PropertyGroup>",
                 ]
 
@@ -1447,8 +1447,8 @@ def generate_vs_project(env, original_args, project_name="godot"):
 
                 properties += [
                     f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='{godot_target}|{proj_plat}'\">",
-                    f"  <GodotConfiguration>{godot_target}</GodotConfiguration>",
-                    f"  <GodotPlatform>{proj_plat}</GodotPlatform>",
+                    f"  <FADEConfiguration>{godot_target}</FADEConfiguration>",
+                    f"  <FADEPlatform>{proj_plat}</FADEPlatform>",
                     "</PropertyGroup>",
                 ]
 
@@ -1514,7 +1514,7 @@ def generate_copyright_header(filename: str) -> str:
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */

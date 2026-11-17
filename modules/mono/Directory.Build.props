@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <GodotSdkPackageVersionsFilePath>$(MSBuildThisFileDirectory)\SdkPackageVersions.props</GodotSdkPackageVersionsFilePath>
+    <FADESdkPackageVersionsFilePath>$(MSBuildThisFileDirectory)\SdkPackageVersions.props</FADESdkPackageVersionsFilePath>
   </PropertyGroup>
-  <Import Project="$(GodotSdkPackageVersionsFilePath)" />
+  <Import Project="$(FADESdkPackageVersionsFilePath)" />
 </Project>

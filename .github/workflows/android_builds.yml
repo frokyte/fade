@@ -54,7 +54,7 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Restore Godot build cache
+      - name: Restore FADE build cache
         uses: ./.github/actions/godot-cache-restore
         with:
           cache-name: ${{ matrix.cache-name }}
@@ -103,27 +103,27 @@ jobs:
           platform: android
           target: ${{ matrix.target }}
 
-      - name: Save Godot build cache
+      - name: Save FADE build cache
         uses: ./.github/actions/godot-cache-save
         with:
           cache-name: ${{ matrix.cache-name }}
         continue-on-error: true
 
-      - name: Generate Godot templates
+      - name: Generate FADE templates
         if: matrix.target == 'template_debug'
         run: |
           cd platform/android/java
-          ./gradlew generateGodotTemplates
+          ./gradlew generateFADETemplates
           cd ../../..
           ls -l bin/
 
-      - name: Generate Godot editor
+      - name: Generate FADE editor
         if: matrix.target == 'editor'
         run: |
           cd platform/android/java
-          ./gradlew generateGodotEditor
-          ./gradlew generateGodotHorizonOSEditor
-          ./gradlew generateGodotPicoOSEditor
+          ./gradlew generateFADEEditor
+          ./gradlew generateFADEHorizonOSEditor
+          ./gradlew generateFADEPicoOSEditor
           cd ../../..
           ls -l bin/android_editor_builds/
 

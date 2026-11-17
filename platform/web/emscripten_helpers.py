@@ -54,7 +54,7 @@ def create_template_zip(env, js, wasm, side):
     ]
     # Dynamic linking (extensions) specific.
     if env["dlink_enabled"]:
-        in_files.append(side)  # Side wasm (contains the actual Godot code).
+        in_files.append(side)  # Side wasm (contains the actual FADE code).
         out_files.append(zip_dir.File(binary_name + ".side.wasm"))
 
     service_worker = "#misc/dist/html/service-worker.js"
@@ -78,7 +78,7 @@ def create_template_zip(env, js, wasm, side):
         env["GODOT_WEB_FILESIZES"] = lambda: json.dumps({"godot.editor.wasm": wasm.get_size()})
         subst_dict = {
             "___GODOT_VERSION___": get_build_version(False),
-            "___GODOT_NAME___": "GodotEngine",
+            "___GODOT_NAME___": "FADEEngine",
             "___GODOT_CACHE___": json.dumps(cache),
             "___GODOT_OPT_CACHE___": json.dumps(opt_cache),
             "___GODOT_OFFLINE_PAGE___": "offline.html",

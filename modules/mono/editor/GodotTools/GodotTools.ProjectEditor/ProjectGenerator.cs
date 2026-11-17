@@ -4,15 +4,15 @@ using System.IO;
 using System.Text;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
-using GodotTools.Shared;
+using FADETools.Shared;
 
-namespace GodotTools.ProjectEditor
+namespace FADETools.ProjectEditor
 {
     public static class ProjectGenerator
     {
-        public static string GodotSdkAttrValue => $"Godot.NET.Sdk/{GeneratedGodotNupkgsVersions.GodotNETSdk}";
+        public static string FADESdkAttrValue => $"FADE.NET.Sdk/{GeneratedFADENupkgsVersions.FADENETSdk}";
 
-        public static string GodotMinimumRequiredTfm => "net10.0";
+        public static string FADEMinimumRequiredTfm => "net10.0";
 
         public static ProjectRootElement GenGameProject(string name)
         {
@@ -21,14 +21,14 @@ namespace GodotTools.ProjectEditor
 
             var root = ProjectRootElement.Create(NewProjectFileOptions.None);
 
-            root.Sdk = GodotSdkAttrValue;
+            root.Sdk = FADESdkAttrValue;
 
             var mainGroup = root.AddPropertyGroup();
-            mainGroup.AddProperty("TargetFramework", GodotMinimumRequiredTfm);
+            mainGroup.AddProperty("TargetFramework", FADEMinimumRequiredTfm);
 
             // Non-gradle builds require .NET 10 to match the jar libraries included in the export template.
             var net10 = mainGroup.AddProperty("TargetFramework", "net10.0");
-            net10.Condition = " '$(GodotTargetPlatform)' == 'android' ";
+            net10.Condition = " '$(FADETargetPlatform)' == 'android' ";
 
             mainGroup.AddProperty("EnableDynamicLoading", "true");
 

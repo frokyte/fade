@@ -173,7 +173,7 @@ func test_callable() -> bool:
 	var cb1 = func():
 		cb1_data['called'] = true
 		return null
-	android_runtime.createRunnableFromGodotCallable(cb1).run()
+	android_runtime.createRunnableFromFADECallable(cb1).run()
 	assert_equal(cb1_data['called'], true)
 
 	return true

@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using FADE.NativeInterop;
 
 #nullable enable
 
-namespace Godot
+namespace FADE
 {
     internal static class DisposablesTracker
     {
         [UnmanagedCallersOnly]
-        internal static void OnGodotShuttingDown()
+        internal static void OnFADEShuttingDown()
         {
             try
             {
-                OnGodotShuttingDownImpl();
+                OnFADEShuttingDownImpl();
             }
             catch (Exception e)
             {
@@ -22,7 +22,7 @@ namespace Godot
             }
         }
 
-        private static void OnGodotShuttingDownImpl()
+        private static void OnFADEShuttingDownImpl()
         {
             bool isStdoutVerbose;
 
@@ -39,13 +39,13 @@ namespace Godot
             if (isStdoutVerbose)
                 GD.Print("Unloading: Disposing tracked instances...");
 
-            // Dispose Godot Objects first, and only then dispose other disposables
-            // like StringName, NodePath, Godot.Collections.Array/Dictionary, etc.
-            // The Godot Object Dispose() method may need any of the later instances.
+            // Dispose FADE Objects first, and only then dispose other disposables
+            // like StringName, NodePath, FADE.Collections.Array/Dictionary, etc.
+            // The FADE Object Dispose() method may need any of the later instances.
 
-            foreach (WeakReference<GodotObject> item in GodotObjectInstances.Keys)
+            foreach (WeakReference<FADEObject> item in FADEObjectInstances.Keys)
             {
-                if (item.TryGetTarget(out GodotObject? self))
+                if (item.TryGetTarget(out FADEObject? self))
                     self.Dispose();
             }
 
@@ -59,16 +59,16 @@ namespace Godot
                 GD.Print("Unloading: Finished disposing tracked instances.");
         }
 
-        private static ConcurrentDictionary<WeakReference<GodotObject>, byte> GodotObjectInstances { get; } =
+        private static ConcurrentDictionary<WeakReference<FADEObject>, byte> FADEObjectInstances { get; } =
             new();
 
         private static ConcurrentDictionary<WeakReference<IDisposable>, byte> OtherInstances { get; } =
             new();
 
-        public static WeakReference<GodotObject> RegisterGodotObject(GodotObject godotObject)
+        public static WeakReference<FADEObject> RegisterFADEObject(FADEObject godotObject)
         {
-            var weakReferenceToSelf = new WeakReference<GodotObject>(godotObject);
-            GodotObjectInstances.TryAdd(weakReferenceToSelf, 0);
+            var weakReferenceToSelf = new WeakReference<FADEObject>(godotObject);
+            FADEObjectInstances.TryAdd(weakReferenceToSelf, 0);
             return weakReferenceToSelf;
         }
 
@@ -79,10 +79,10 @@ namespace Godot
             return weakReferenceToSelf;
         }
 
-        public static void UnregisterGodotObject(GodotObject godotObject, WeakReference<GodotObject> weakReferenceToSelf)
+        public static void UnregisterFADEObject(FADEObject godotObject, WeakReference<FADEObject> weakReferenceToSelf)
         {
-            if (!GodotObjectInstances.TryRemove(weakReferenceToSelf, out _))
-                throw new ArgumentException("Godot Object not registered.", nameof(weakReferenceToSelf));
+            if (!FADEObjectInstances.TryRemove(weakReferenceToSelf, out _))
+                throw new ArgumentException("FADE Object not registered.", nameof(weakReferenceToSelf));
         }
 
         public static void UnregisterDisposable(WeakReference<IDisposable> weakReference)

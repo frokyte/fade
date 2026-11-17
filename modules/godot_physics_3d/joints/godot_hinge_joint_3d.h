@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -31,7 +31,7 @@
 #pragma once
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 #include "../godot_joint_3d.h"
@@ -52,18 +52,18 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-class GodotHingeJoint3D : public GodotJoint3D {
+class FADEHingeJoint3D : public FADEJoint3D {
 	union {
 		struct {
-			GodotBody3D *A;
-			GodotBody3D *B;
+			FADEBody3D *A;
+			FADEBody3D *B;
 		};
 
-		GodotBody3D *_arr[2] = {};
+		FADEBody3D *_arr[2] = {};
 	};
 
-	GodotJacobianEntry3D m_jac[3]; //3 orthogonal linear constraints
-	GodotJacobianEntry3D m_jacAng[3]; //2 orthogonal angular constraints+ 1 for limit/motor
+	FADEJacobianEntry3D m_jac[3]; //3 orthogonal linear constraints
+	FADEJacobianEntry3D m_jacAng[3]; //2 orthogonal angular constraints+ 1 for limit/motor
 
 	Transform3D m_rbAFrame; // constraint axii. Assumes z is hinge axis.
 	Transform3D m_rbBFrame;
@@ -108,6 +108,6 @@ public:
 	void set_flag(PS3DE::HingeJointFlag p_flag, bool p_value);
 	bool get_flag(PS3DE::HingeJointFlag p_flag) const;
 
-	GodotHingeJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &frameA, const Transform3D &frameB);
-	GodotHingeJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Vector3 &pivotInA, const Vector3 &pivotInB, const Vector3 &axisInA, const Vector3 &axisInB);
+	FADEHingeJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Transform3D &frameA, const Transform3D &frameB);
+	FADEHingeJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Vector3 &pivotInA, const Vector3 &pivotInB, const Vector3 &axisInA, const Vector3 &axisInB);
 };

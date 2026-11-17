@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -650,7 +650,7 @@ bool EditorExportPlatformAndroid::_should_compress_asset(const String &p_path, c
 		".rtttl", ".imy", ".xmf", ".mp4", ".m4a",
 		".m4v", ".3gp", ".3gpp", ".3g2", ".3gpp2",
 		".amr", ".awb", ".wma", ".wmv",
-		// Godot-specific:
+		// FADE-specific:
 		".webp", // Same reasoning as .png
 		".cfb", // Don't let small config files slow-down startup
 		".scn", // Binary scenes are usually already compressed
@@ -1067,7 +1067,7 @@ void EditorExportPlatformAndroid::_fix_themes_xml(const Ref<EditorExportPreset> 
 	if (!splash_branding_image_path.is_empty()) {
 		splash_theme_attributes["android:windowSplashScreenBrandingImage"] = "@drawable/splash_branding_image";
 	}
-	splash_theme_attributes["postSplashScreenTheme"] = "@style/GodotAppMainTheme";
+	splash_theme_attributes["postSplashScreenTheme"] = "@style/FADEAppMainTheme";
 	splash_theme_attributes["android:windowIsTranslucent"] = bool_to_string(transparency_allowed);
 
 	PackedStringArray reserved_splash_keys;
@@ -1107,18 +1107,18 @@ void EditorExportPlatformAndroid::_fix_themes_xml(const Ref<EditorExportPreset> 
 	for (int i = 0; i < lines.size(); i++) {
 		String line = lines[i];
 
-		if (line.contains("<style name=\"GodotAppMainTheme\"")) {
+		if (line.contains("<style name=\"FADEAppMainTheme\"")) {
 			inside_main_theme = true;
 			new_lines.append(line);
 			continue;
 		}
-		if (line.contains("<style name=\"GodotAppSplashTheme\"")) {
+		if (line.contains("<style name=\"FADEAppSplashTheme\"")) {
 			inside_splash_theme = true;
 			new_lines.append(line);
 			continue;
 		}
 
-		// Inject GodotAppMainTheme attributes.
+		// Inject FADEAppMainTheme attributes.
 		if (inside_main_theme && line.contains("</style>")) {
 			for (const Variant &attribute : main_theme_attributes.keys()) {
 				String value = main_theme_attributes[attribute];
@@ -1130,7 +1130,7 @@ void EditorExportPlatformAndroid::_fix_themes_xml(const Ref<EditorExportPreset> 
 			continue;
 		}
 
-		// Inject GodotAppSplashTheme attributes.
+		// Inject FADEAppSplashTheme attributes.
 		if (inside_splash_theme && line.contains("</style>")) {
 			for (const Variant &attribute : splash_theme_attributes.keys()) {
 				String value = splash_theme_attributes[attribute];
@@ -2073,7 +2073,7 @@ String EditorExportPlatformAndroid::get_export_option_warning(const EditorExport
 				} else {
 					int min_sdk_int = min_sdk_str.to_int();
 					if (min_sdk_int < AndroidSDKManager::DEFAULT_MIN_SDK_VERSION) {
-						return vformat(TTR("\"Min SDK\" cannot be lower than %d, which is the version needed by the Godot library."), AndroidSDKManager::DEFAULT_MIN_SDK_VERSION);
+						return vformat(TTR("\"Min SDK\" cannot be lower than %d, which is the version needed by the FADE library."), AndroidSDKManager::DEFAULT_MIN_SDK_VERSION);
 					}
 				}
 			}
@@ -2602,7 +2602,7 @@ Error EditorExportPlatformAndroid::run(const Ref<EditorExportPreset> &p_preset, 
 		print_verbose(output);
 		if (err || rv != 0 || output.contains("Error: Activity not started")) {
 			// The implicit launch failed, let's try an explicit launch by specifying the component name before giving up.
-			const String component_name = get_package_name(p_preset, package_name) + "/com.godot.game.GodotAppLauncher";
+			const String component_name = get_package_name(p_preset, package_name) + "/com.godot.game.FADEAppLauncher";
 			print_line("Implicit launch failed... Trying explicit launch using", component_name);
 			args.erase(get_package_name(p_preset, package_name));
 			args.push_back("-n");
@@ -2699,7 +2699,7 @@ bool _validate_dotnet_tfm(const String &required_tfm, String &r_error) {
 		List<String> args;
 		args.push_back("build");
 		args.push_back(project_path);
-		args.push_back("/p:GodotTargetPlatform=android");
+		args.push_back("/p:FADETargetPlatform=android");
 		args.push_back("--getProperty:TargetFramework");
 
 		int exitcode;

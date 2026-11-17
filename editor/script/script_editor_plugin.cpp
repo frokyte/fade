@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1645,7 +1645,7 @@ void _import_text_editor_theme(const String &p_file) {
 	}
 	const String theme_name = p_file.get_file().get_basename();
 	if (EditorSettings::is_default_text_editor_theme(theme_name.to_lower())) {
-		EditorToaster::get_singleton()->popup_str(TTR("Importing theme failed. File name cannot be 'Default', 'Custom', or 'Godot 2'."), EditorToaster::SEVERITY_ERROR);
+		EditorToaster::get_singleton()->popup_str(TTR("Importing theme failed. File name cannot be 'Default', 'Custom', or 'FADE 2'."), EditorToaster::SEVERITY_ERROR);
 		return;
 	}
 
@@ -1675,14 +1675,14 @@ void _save_text_editor_theme_as(const String &p_file) {
 
 	const String theme_name = file.get_file().get_basename();
 	if (EditorSettings::is_default_text_editor_theme(theme_name.to_lower())) {
-		EditorToaster::get_singleton()->popup_str(TTR("Saving theme failed. File name cannot be 'Default', 'Custom', or 'Godot 2'."), EditorToaster::SEVERITY_ERROR);
+		EditorToaster::get_singleton()->popup_str(TTR("Saving theme failed. File name cannot be 'Default', 'Custom', or 'FADE 2'."), EditorToaster::SEVERITY_ERROR);
 		return;
 	}
 
 	const String theme_section = "color_theme";
 	const Ref<ConfigFile> cf = memnew(ConfigFile);
 
-	// Use the keys from the Godot 2 theme to know which settings to save.
+	// Use the keys from the FADE 2 theme to know which settings to save.
 	HashMap<StringName, Color> text_colors = EditorSettings::get_godot2_text_editor_theme();
 	text_colors.sort();
 	for (const KeyValue<StringName, Color> &text_color : text_colors) {
@@ -2392,12 +2392,12 @@ void DocumentEditorContainer::_update_online_doc() {
 	}
 	if (native_class_doc) {
 		String name = eh->get_class();
-		String tooltip = vformat(TTR("Open '%s' in Godot online documentation."), name);
+		String tooltip = vformat(TTR("Open '%s' in FADE online documentation."), name);
 		site_search->set_text(TTRC("Open in Online Docs"));
 		site_search->set_tooltip_text(tooltip);
 	} else {
 		site_search->set_text(TTRC("Online Docs"));
-		site_search->set_tooltip_text(TTRC("Open Godot online documentation."));
+		site_search->set_tooltip_text(TTRC("Open FADE online documentation."));
 	}
 }
 
@@ -4252,7 +4252,7 @@ DocumentEditorContainer::DocumentEditorContainer(bool p_is_main_editor, const St
 
 	disk_changed = memnew(ConfirmationDialog);
 	{
-		disk_changed->set_title(TTRC("Files have been modified outside Godot"));
+		disk_changed->set_title(TTRC("Files have been modified outside FADE"));
 
 		VBoxContainer *vbc = memnew(VBoxContainer);
 		disk_changed->add_child(vbc);

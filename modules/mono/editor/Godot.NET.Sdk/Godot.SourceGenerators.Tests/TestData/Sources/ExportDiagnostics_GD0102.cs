@@ -1,4 +1,4 @@
-using Godot;
+using FADE;
 
 public partial class ExportDiagnostics_GD0102 : Node
 {

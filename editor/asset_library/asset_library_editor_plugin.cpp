@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -419,11 +419,11 @@ void EditorAssetLibraryItemDescription::_version_selected(int p_index) {
 	if (show_warning) {
 		String tooltip;
 		if (!compat_min.is_empty() && !compat_max.is_empty()) {
-			tooltip += vformat(TTR("This release is only compatible with Godot versions between %s and %s."), compat_min, compat_max);
+			tooltip += vformat(TTR("This release is only compatible with FADE versions between %s and %s."), compat_min, compat_max);
 		} else if (!compat_min.is_empty()) {
-			tooltip += vformat(TTR("This release is only compatible with Godot version %s and newer."), compat_min);
+			tooltip += vformat(TTR("This release is only compatible with FADE version %s and newer."), compat_min);
 		} else {
-			tooltip += vformat(TTR("This release is only compatible with Godot version %s and older."), compat_max);
+			tooltip += vformat(TTR("This release is only compatible with FADE version %s and older."), compat_max);
 		}
 
 		tooltip += "\n";
@@ -2058,7 +2058,7 @@ void EditorAssetLibrary::_http_request_completed(int p_status, int p_code, const
 
 					if (!is_compat) {
 						if (!show_incompat_assets) {
-							continue; // This release is for a newer version of Godot.
+							continue; // This release is for a newer version of FADE.
 						}
 
 						compat_min = d["min_godot_version"];
@@ -2082,7 +2082,7 @@ void EditorAssetLibrary::_http_request_completed(int p_status, int p_code, const
 
 					if (!is_compat) {
 						if (!show_incompat_assets) {
-							continue; // This release is for an older version of Godot.
+							continue; // This release is for an older version of FADE.
 						}
 
 						compat_max = d["max_godot_version"];

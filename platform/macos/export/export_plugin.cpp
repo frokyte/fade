@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1057,7 +1057,7 @@ Error EditorExportPlatformMacOS::_export_liquid_glass_icon(const Ref<EditorExpor
 }
 
 /**
- * If we're running the macOS version of the Godot editor we'll:
+ * If we're running the macOS version of the FADE editor we'll:
  * - export our application bundle to a temporary folder
  * - attempt to code sign it
  * - and then wrap it up in a DMG
@@ -1958,7 +1958,7 @@ Error EditorExportPlatformMacOS::_copy_debugsymbols_recursively(Ref<DirAccess> &
 bool EditorExportPlatformMacOS::_copy_debugsymbols(Ref<DirAccess> &p_da, const String &p_path, const String &p_symbols_path, const String &p_app_name, const String &p_arch, bool p_debug, const Vector<String> &p_exec_ids, Vector<String> *r_symb_ids, Error &r_err) {
 	String sym_path = p_symbols_path.simplify_path().path_join(vformat("godot_macos_%s.%s", p_debug ? "debug" : "release", p_arch)) + ".dSYM";
 	String zip_path = p_symbols_path.simplify_path().path_join(vformat("macos_%s.%s", p_debug ? "debug" : "release", p_arch)) + ".debugsymbols.zip";
-	String zip_path_full = p_symbols_path.simplify_path().path_join(vformat("Godot_v%s-%s_debugsymbols_macos_%s.%s", GODOT_VERSION_NUMBER, GODOT_VERSION_STATUS, p_debug ? "debug" : "release", p_arch)) + ".zip";
+	String zip_path_full = p_symbols_path.simplify_path().path_join(vformat("FADE_v%s-%s_debugsymbols_macos_%s.%s", GODOT_VERSION_NUMBER, GODOT_VERSION_STATUS, p_debug ? "debug" : "release", p_arch)) + ".zip";
 
 	if (DirAccess::exists(sym_path)) {
 		print_verbose(vformat("Exporting debug symbols from %s, for architecture %s.", sym_path, p_arch));

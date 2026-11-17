@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-public partial class EventSignals : GodotObject
+public partial class EventSignals : FADEObject
 {
     [Signal]
     public delegate void MySignalEventHandler(string str, int num);

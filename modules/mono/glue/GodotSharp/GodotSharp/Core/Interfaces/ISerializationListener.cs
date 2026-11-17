@@ -1,8 +1,8 @@
-namespace Godot
+namespace FADE
 {
     /// <summary>
-    /// Allows a GodotObject to react to the serialization/deserialization
-    /// that occurs when Godot reloads assemblies.
+    /// Allows a FADEObject to react to the serialization/deserialization
+    /// that occurs when FADE reloads assemblies.
     /// </summary>
     public interface ISerializationListener
     {

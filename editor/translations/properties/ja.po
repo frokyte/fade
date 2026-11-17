@@ -1,7 +1,7 @@
-# Japanese translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Japanese translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # akirakido <achts.y@gmail.com>, 2016-2017, 2018, 2019.
 # D_first <dntk.daisei@gmail.com>, 2017, 2018.
 # Daisuke Saito <d.saito@coriginate.com>, 2017, 2018.
@@ -66,7 +66,7 @@
 # shortsun <weekenddamehuman@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-06-01 06:14+0000\n"
@@ -3285,7 +3285,7 @@ msgstr "ジョイント"
 msgid "Roots"
 msgstr "ルート"
 
-msgid "Godot Bone Node"
+msgid "FADE Bone Node"
 msgstr "ボーンノード"
 
 msgid "Skin Root"

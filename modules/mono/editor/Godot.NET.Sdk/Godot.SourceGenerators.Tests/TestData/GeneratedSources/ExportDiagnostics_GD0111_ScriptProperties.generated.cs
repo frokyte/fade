@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class ExportDiagnostics_GD0111
 {
@@ -7,95 +7,95 @@ partial class ExportDiagnostics_GD0111
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.Node.PropertyName {
+    public new class PropertyName : global::FADE.Node.PropertyName {
         /// <summary>
         /// Cached name for the 'MyButtonGet' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonGet = "MyButtonGet";
+        public new static readonly global::FADE.StringName @MyButtonGet = "MyButtonGet";
         /// <summary>
         /// Cached name for the 'MyButtonGetSet' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonGetSet = "MyButtonGetSet";
+        public new static readonly global::FADE.StringName @MyButtonGetSet = "MyButtonGetSet";
         /// <summary>
         /// Cached name for the 'MyButtonGetWithBackingField' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonGetWithBackingField = "MyButtonGetWithBackingField";
+        public new static readonly global::FADE.StringName @MyButtonGetWithBackingField = "MyButtonGetWithBackingField";
         /// <summary>
         /// Cached name for the 'MyButtonGetSetWithBackingField' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonGetSetWithBackingField = "MyButtonGetSetWithBackingField";
+        public new static readonly global::FADE.StringName @MyButtonGetSetWithBackingField = "MyButtonGetSetWithBackingField";
         /// <summary>
         /// Cached name for the 'MyButtonOkWithCallableCreationExpression' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonOkWithCallableCreationExpression = "MyButtonOkWithCallableCreationExpression";
+        public new static readonly global::FADE.StringName @MyButtonOkWithCallableCreationExpression = "MyButtonOkWithCallableCreationExpression";
         /// <summary>
         /// Cached name for the 'MyButtonOkWithImplicitCallableCreationExpression' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonOkWithImplicitCallableCreationExpression = "MyButtonOkWithImplicitCallableCreationExpression";
+        public new static readonly global::FADE.StringName @MyButtonOkWithImplicitCallableCreationExpression = "MyButtonOkWithImplicitCallableCreationExpression";
         /// <summary>
         /// Cached name for the 'MyButtonOkWithCallableFromExpression' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyButtonOkWithCallableFromExpression = "MyButtonOkWithCallableFromExpression";
+        public new static readonly global::FADE.StringName @MyButtonOkWithCallableFromExpression = "MyButtonOkWithCallableFromExpression";
         /// <summary>
         /// Cached name for the '_backingField' field.
         /// </summary>
-        public new static readonly global::Godot.StringName @_backingField = "_backingField";
+        public new static readonly global::FADE.StringName @_backingField = "_backingField";
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotPropertyTrampolines(global::Godot.Bridge.PropertyTrampolineCollector collector)
+        public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
             static godot_variant trampoline_get_MyButtonGet(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGet;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static godot_variant trampoline_get_MyButtonGetSet(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetSet;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static void trampoline_set_MyButtonGetSet(object godotObject, in godot_variant value)
             {
-                ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetSet = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Callable>(value);
+                ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetSet = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Callable>(value);
             }
             static godot_variant trampoline_get_MyButtonGetWithBackingField(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetWithBackingField;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static godot_variant trampoline_get_MyButtonGetSetWithBackingField(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetSetWithBackingField;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static void trampoline_set_MyButtonGetSetWithBackingField(object godotObject, in godot_variant value)
             {
-                ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetSetWithBackingField = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Callable>(value);
+                ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonGetSetWithBackingField = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Callable>(value);
             }
             static godot_variant trampoline_get_MyButtonOkWithCallableCreationExpression(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonOkWithCallableCreationExpression;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static godot_variant trampoline_get_MyButtonOkWithImplicitCallableCreationExpression(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonOkWithImplicitCallableCreationExpression;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static godot_variant trampoline_get_MyButtonOkWithCallableFromExpression(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@MyButtonOkWithCallableFromExpression;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static godot_variant trampoline_get__backingField(object godotObject)
             {
                 var ret = ((global::ExportDiagnostics_GD0111)godotObject).@_backingField;
-                return global::Godot.NativeInterop.VariantUtils.CreateFrom<global::Godot.Callable>(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFrom<global::FADE.Callable>(ret);
             }
             static void trampoline_set__backingField(object godotObject, in godot_variant value)
             {
-                ((global::ExportDiagnostics_GD0111)godotObject).@_backingField = global::Godot.NativeInterop.VariantUtils.ConvertTo<global::Godot.Callable>(value);
+                ((global::ExportDiagnostics_GD0111)godotObject).@_backingField = global::FADE.NativeInterop.VariantUtils.ConvertTo<global::FADE.Callable>(value);
             }
             var aux_delegate_get_MyButtonGet = trampoline_get_MyButtonGet;
             collector.TryAdd(PropertyName.@MyButtonGet, new(aux_delegate_get_MyButtonGet.Method.MethodHandle.GetFunctionPointer()), new(global::System.IntPtr.Zero));
@@ -120,17 +120,17 @@ partial class ExportDiagnostics_GD0111
     }
     /// <summary>
     /// Get the property information for all the properties declared in this class.
-    /// This method is used by Godot to register the available properties in the editor.
+    /// This method is used by FADE to register the available properties in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo> GetGodotPropertyList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo> GetFADEPropertyList()
     {
-        var properties = new global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>();
-        properties.Add(new(type: (global::Godot.Variant.Type)25, name: PropertyName.@_backingField, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4096, exported: false));
-        properties.Add(new(type: (global::Godot.Variant.Type)25, name: PropertyName.@MyButtonOkWithCallableCreationExpression, hint: (global::Godot.PropertyHint)39, hintString: "", usage: (global::Godot.PropertyUsageFlags)4, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)25, name: PropertyName.@MyButtonOkWithImplicitCallableCreationExpression, hint: (global::Godot.PropertyHint)39, hintString: "", usage: (global::Godot.PropertyUsageFlags)4, exported: true));
-        properties.Add(new(type: (global::Godot.Variant.Type)25, name: PropertyName.@MyButtonOkWithCallableFromExpression, hint: (global::Godot.PropertyHint)39, hintString: "", usage: (global::Godot.PropertyUsageFlags)4, exported: true));
+        var properties = new global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo>();
+        properties.Add(new(type: (global::FADE.Variant.Type)25, name: PropertyName.@_backingField, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4096, exported: false));
+        properties.Add(new(type: (global::FADE.Variant.Type)25, name: PropertyName.@MyButtonOkWithCallableCreationExpression, hint: (global::FADE.PropertyHint)39, hintString: "", usage: (global::FADE.PropertyUsageFlags)4, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)25, name: PropertyName.@MyButtonOkWithImplicitCallableCreationExpression, hint: (global::FADE.PropertyHint)39, hintString: "", usage: (global::FADE.PropertyUsageFlags)4, exported: true));
+        properties.Add(new(type: (global::FADE.Variant.Type)25, name: PropertyName.@MyButtonOkWithCallableFromExpression, hint: (global::FADE.PropertyHint)39, hintString: "", usage: (global::FADE.PropertyUsageFlags)4, exported: true));
         return properties;
     }
 #pragma warning restore CS0109

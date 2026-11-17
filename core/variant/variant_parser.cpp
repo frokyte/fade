@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -835,7 +835,7 @@ Error VariantParser::parse_value(Token &r_token, Variant &r_value, Stream *p_str
 			}
 
 			r_value = Basis(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
-		} else if (id == "Transform3D" || id == "Transform") { // "Transform" kept for compatibility with Godot <4.
+		} else if (id == "Transform3D" || id == "Transform") { // "Transform" kept for compatibility with FADE <4.
 			Vector<real_t> args;
 			RETURN_IF_ERROR(_parse_construct<real_t>(p_stream, args, r_line, r_err_str));
 
@@ -845,7 +845,7 @@ Error VariantParser::parse_value(Token &r_token, Variant &r_value, Stream *p_str
 			}
 
 			r_value = Transform3D(Basis(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]), Vector3(args[9], args[10], args[11]));
-		} else if (id == "Projection") { // "Transform" kept for compatibility with Godot <4.
+		} else if (id == "Projection") { // "Transform" kept for compatibility with FADE <4.
 			Vector<real_t> args;
 			RETURN_IF_ERROR(_parse_construct<real_t>(p_stream, args, r_line, r_err_str));
 

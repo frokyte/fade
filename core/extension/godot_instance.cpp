@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -37,32 +37,32 @@
 #include "main/main.h"
 #include "servers/display/display_server.h"
 
-void GodotInstance::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("start"), &GodotInstance::start);
-	ClassDB::bind_method(D_METHOD("is_started"), &GodotInstance::is_started);
-	ClassDB::bind_method(D_METHOD("iteration"), &GodotInstance::iteration);
-	ClassDB::bind_method(D_METHOD("focus_in"), &GodotInstance::focus_in);
-	ClassDB::bind_method(D_METHOD("focus_out"), &GodotInstance::focus_out);
-	ClassDB::bind_method(D_METHOD("pause"), &GodotInstance::pause);
-	ClassDB::bind_method(D_METHOD("resume"), &GodotInstance::resume);
+void FADEInstance::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("start"), &FADEInstance::start);
+	ClassDB::bind_method(D_METHOD("is_started"), &FADEInstance::is_started);
+	ClassDB::bind_method(D_METHOD("iteration"), &FADEInstance::iteration);
+	ClassDB::bind_method(D_METHOD("focus_in"), &FADEInstance::focus_in);
+	ClassDB::bind_method(D_METHOD("focus_out"), &FADEInstance::focus_out);
+	ClassDB::bind_method(D_METHOD("pause"), &FADEInstance::pause);
+	ClassDB::bind_method(D_METHOD("resume"), &FADEInstance::resume);
 }
 
-GodotInstance::GodotInstance() {
+FADEInstance::FADEInstance() {
 }
 
-GodotInstance::~GodotInstance() {
+FADEInstance::~FADEInstance() {
 }
 
-bool GodotInstance::initialize(GDExtensionInitializationFunction p_init_func) {
-	print_verbose("Godot Instance initialization");
+bool FADEInstance::initialize(GDExtensionInitializationFunction p_init_func) {
+	print_verbose("FADE Instance initialization");
 	GDExtensionManager *gdextension_manager = GDExtensionManager::get_singleton();
 	GDExtensionPtr<const GDExtensionInitializationFunction> ptr((const GDExtensionInitializationFunction *)&p_init_func);
 	GDExtensionManager::LoadStatus status = gdextension_manager->load_extension_from_function("libgodot://main", ptr);
 	return status == GDExtensionManager::LoadStatus::LOAD_STATUS_OK;
 }
 
-bool GodotInstance::start() {
-	print_verbose("GodotInstance::start()");
+bool FADEInstance::start() {
+	print_verbose("FADEInstance::start()");
 	Error err = Main::setup2();
 	if (err != OK) {
 		return false;
@@ -74,25 +74,25 @@ bool GodotInstance::start() {
 	return started;
 }
 
-bool GodotInstance::is_started() {
+bool FADEInstance::is_started() {
 	return started;
 }
 
-bool GodotInstance::iteration() {
+bool FADEInstance::iteration() {
 	DisplayServer::get_singleton()->process_events();
 	return Main::iteration();
 }
 
-void GodotInstance::stop() {
-	print_verbose("GodotInstance::stop()");
+void FADEInstance::stop() {
+	print_verbose("FADEInstance::stop()");
 	if (started) {
 		OS::get_singleton()->get_main_loop()->finalize();
 	}
 	started = false;
 }
 
-void GodotInstance::focus_out() {
-	print_verbose("GodotInstance::focus_out()");
+void FADEInstance::focus_out() {
+	print_verbose("FADEInstance::focus_out()");
 	if (started) {
 		if (OS::get_singleton()->get_main_loop()) {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_FOCUS_OUT);
@@ -100,8 +100,8 @@ void GodotInstance::focus_out() {
 	}
 }
 
-void GodotInstance::focus_in() {
-	print_verbose("GodotInstance::focus_in()");
+void FADEInstance::focus_in() {
+	print_verbose("FADEInstance::focus_in()");
 	if (started) {
 		if (OS::get_singleton()->get_main_loop()) {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_FOCUS_IN);
@@ -109,8 +109,8 @@ void GodotInstance::focus_in() {
 	}
 }
 
-void GodotInstance::pause() {
-	print_verbose("GodotInstance::pause()");
+void FADEInstance::pause() {
+	print_verbose("FADEInstance::pause()");
 	if (started) {
 		if (OS::get_singleton()->get_main_loop()) {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_PAUSED);
@@ -118,8 +118,8 @@ void GodotInstance::pause() {
 	}
 }
 
-void GodotInstance::resume() {
-	print_verbose("GodotInstance::resume()");
+void FADEInstance::resume() {
+	print_verbose("FADEInstance::resume()");
 	if (started) {
 		if (OS::get_singleton()->get_main_loop()) {
 			OS::get_singleton()->get_main_loop()->notification(MainLoop::NOTIFICATION_APPLICATION_RESUMED);

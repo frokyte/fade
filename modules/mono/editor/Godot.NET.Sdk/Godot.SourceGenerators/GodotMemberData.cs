@@ -1,11 +1,11 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
-    public readonly struct GodotMethodData
+    public readonly struct FADEMethodData
     {
-        public GodotMethodData(IMethodSymbol method, ImmutableArray<MarshalType> paramTypes,
+        public FADEMethodData(IMethodSymbol method, ImmutableArray<MarshalType> paramTypes,
             ImmutableArray<ITypeSymbol> paramTypeSymbols, (MarshalType MarshalType, ITypeSymbol TypeSymbol)? retType)
         {
             Method = method;
@@ -20,9 +20,9 @@ namespace Godot.SourceGenerators
         public (MarshalType MarshalType, ITypeSymbol TypeSymbol)? RetType { get; }
     }
 
-    public readonly struct GodotSignalDelegateData
+    public readonly struct FADESignalDelegateData
     {
-        public GodotSignalDelegateData(string name, INamedTypeSymbol delegateSymbol, GodotMethodData invokeMethodData)
+        public FADESignalDelegateData(string name, INamedTypeSymbol delegateSymbol, FADEMethodData invokeMethodData)
         {
             Name = name;
             DelegateSymbol = delegateSymbol;
@@ -31,12 +31,12 @@ namespace Godot.SourceGenerators
 
         public string Name { get; }
         public INamedTypeSymbol DelegateSymbol { get; }
-        public GodotMethodData InvokeMethodData { get; }
+        public FADEMethodData InvokeMethodData { get; }
     }
 
-    public readonly struct GodotPropertyData
+    public readonly struct FADEPropertyData
     {
-        public GodotPropertyData(IPropertySymbol propertySymbol, MarshalType type)
+        public FADEPropertyData(IPropertySymbol propertySymbol, MarshalType type)
         {
             PropertySymbol = propertySymbol;
             Type = type;
@@ -50,9 +50,9 @@ namespace Godot.SourceGenerators
         public bool IsWriteOnly => PropertySymbol.IsWriteOnly;
     }
 
-    public readonly struct GodotFieldData
+    public readonly struct FADEFieldData
     {
-        public GodotFieldData(IFieldSymbol fieldSymbol, MarshalType type)
+        public FADEFieldData(IFieldSymbol fieldSymbol, MarshalType type)
         {
             FieldSymbol = fieldSymbol;
             Type = type;
@@ -64,20 +64,20 @@ namespace Godot.SourceGenerators
         public bool IsReadOnly => FieldSymbol.IsReadOnly;
     }
 
-    public struct GodotPropertyOrFieldData
+    public struct FADEPropertyOrFieldData
     {
-        public GodotPropertyOrFieldData(ISymbol symbol, MarshalType type)
+        public FADEPropertyOrFieldData(ISymbol symbol, MarshalType type)
         {
             Symbol = symbol;
             Type = type;
         }
 
-        public GodotPropertyOrFieldData(GodotPropertyData propertyData)
+        public FADEPropertyOrFieldData(FADEPropertyData propertyData)
             : this(propertyData.PropertySymbol, propertyData.Type)
         {
         }
 
-        public GodotPropertyOrFieldData(GodotFieldData fieldData)
+        public FADEPropertyOrFieldData(FADEFieldData fieldData)
             : this(fieldData.FieldSymbol, fieldData.Type)
         {
         }

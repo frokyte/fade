@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -99,7 +99,7 @@ public:
 	void set_argument_names(const Vector<StringName> &p_names); // Set by ClassDB, can't be inferred otherwise.
 	Vector<StringName> get_argument_names() const;
 
-	virtual GodotTypeInfo::Metadata get_argument_meta(int p_arg) const = 0;
+	virtual FADETypeInfo::Metadata get_argument_meta(int p_arg) const = 0;
 #endif // DEBUG_ENABLED
 
 	void set_hint_flags(uint32_t p_hint) { hint_flags = p_hint; }
@@ -161,8 +161,8 @@ public:
 	}
 
 #ifdef DEBUG_ENABLED
-	virtual GodotTypeInfo::Metadata get_argument_meta(int) const override {
-		return GodotTypeInfo::METADATA_NONE;
+	virtual FADETypeInfo::Metadata get_argument_meta(int) const override {
+		return FADETypeInfo::METADATA_NONE;
 	}
 #endif // DEBUG_ENABLED
 

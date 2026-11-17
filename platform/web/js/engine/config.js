@@ -40,7 +40,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 */
 		canvas: null,
 		/**
-		 * The name of the WASM file without the extension. (Set by Godot Editor export process).
+		 * The name of the WASM file without the extension. (Set by FADE Editor export process).
 		 *
 		 * @export
 		 * @memberof EngineConfig
@@ -70,14 +70,14 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 */
 		locale: null,
 		/**
-		 * The canvas resize policy determines how the canvas should be resized by Godot.
+		 * The canvas resize policy determines how the canvas should be resized by FADE.
 		 *
-		 * ``0`` means Godot won't do any resizing. This is useful if you want to control the canvas size from
+		 * ``0`` means FADE won't do any resizing. This is useful if you want to control the canvas size from
 		 * JavaScript code in your template.
 		 *
-		 * ``1`` means Godot will resize the canvas on start, and when changing window size via engine functions.
+		 * ``1`` means FADE will resize the canvas on start, and when changing window size via engine functions.
 		 *
-		 * ``2`` means Godot will adapt the canvas size to match the whole browser window.
+		 * ``2`` means FADE will adapt the canvas size to match the whole browser window.
 		 *
 		 * @export
 		 * @memberof EngineConfig
@@ -172,12 +172,12 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 */
 		pid: 0,
 		/**
-		 * A callback function for handling Godot's ``OS.execute`` calls.
+		 * A callback function for handling FADE's ``OS.execute`` calls.
 		 *
 		 * This is for example used in the Web Editor template to switch between Project Manager and editor, and for running the game.
 		 *
 		 * @callback EngineConfig.onExecute
-		 * @param {string} path The path that Godot's wants executed.
+		 * @param {string} path The path that FADE's wants executed.
 		 * @param {!Array<string>} args The arguments of the "command" to execute.
 		 */
 		/**
@@ -187,7 +187,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 */
 		onExecute: null,
 		/**
-		 * A callback function for handling Godot's ``OS.kill`` calls.
+		 * A callback function for handling FADE's ``OS.kill`` calls.
 		 *
 		 * This is for example used in the Web Editor template to forcefully terminate a running game instance.
 		 *
@@ -201,12 +201,12 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 */
 		onTerminatePID: null,
 		/**
-		 * A callback function for being notified when the Godot instance quits.
+		 * A callback function for being notified when the FADE instance quits.
 		 *
 		 * **Note**: This function will not be called if the engine crashes or become unresponsive.
 		 *
 		 * @callback EngineConfig.onExit
-		 * @param {number} status_code The status code returned by Godot on exit.
+		 * @param {number} status_code The status code returned by FADE on exit.
 		 */
 		/**
 		 * @ignore
@@ -355,7 +355,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 	 * @param {function()} cleanup
 	 * @return {!Object}
 	 */
-	Config.prototype.getGodotConfig = function (cleanup) {
+	Config.prototype.getFADEConfig = function (cleanup) {
 		// Try to find a canvas
 		if (!(this.canvas instanceof HTMLCanvasElement)) {
 			const nodes = document.getElementsByTagName('canvas');
@@ -381,7 +381,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		locale = locale.replace('-', '_');
 		const onExit = this.onExit;
 
-		// Godot configuration.
+		// FADE configuration.
 		return {
 			'pid': this.pid,
 			'canvas': this.canvas,

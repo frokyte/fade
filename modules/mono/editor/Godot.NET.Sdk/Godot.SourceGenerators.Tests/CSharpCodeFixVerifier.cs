@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Testing;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Godot.SourceGenerators.Tests;
+namespace FADE.SourceGenerators.Tests;
 
 public static class CSharpCodeFixVerifier<TCodeFix, TAnalyzer>
     where TCodeFix : CodeFixProvider, new()
@@ -20,7 +20,7 @@ public static class CSharpCodeFixVerifier<TCodeFix, TAnalyzer>
             SolutionTransforms.Add((Solution solution, ProjectId projectId) =>
             {
                 Project project = solution.GetProject(projectId)!
-                    .AddMetadataReference(Constants.GodotSharpAssembly.CreateMetadataReference());
+                    .AddMetadataReference(Constants.FADESharpAssembly.CreateMetadataReference());
                 return project.Solution;
             });
         }
@@ -40,7 +40,7 @@ public static class CSharpCodeFixVerifier<TCodeFix, TAnalyzer>
 
         verifier.TestState.AnalyzerConfigFiles.Add(("/.globalconfig", $"""
         is_global = true
-        build_property.GodotProjectDir = {Constants.ExecutingAssemblyPath}
+        build_property.FADEProjectDir = {Constants.ExecutingAssemblyPath}
         """));
 
         return verifier;

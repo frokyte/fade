@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -40,10 +40,10 @@
 #include "core/templates/local_vector.h"
 #include "core/templates/vset.h"
 
-class GodotConstraint3D;
+class FADEConstraint3D;
 class PhysicsServer3DRenderingServerHandler;
 
-class GodotSoftBody3D : public GodotCollisionObject3D {
+class FADESoftBody3D : public FADECollisionObject3D {
 	RID soft_mesh;
 
 	struct Node {
@@ -102,9 +102,9 @@ class GodotSoftBody3D : public GodotCollisionObject3D {
 	real_t drag_coefficient = 0.0; // [0,1]
 	LocalVector<int> pinned_vertices;
 
-	SelfList<GodotSoftBody3D> active_list;
+	SelfList<FADESoftBody3D> active_list;
 
-	HashSet<GodotConstraint3D *> constraints;
+	HashSet<FADEConstraint3D *> constraints;
 
 	Vector<AreaCMP> areas;
 
@@ -112,19 +112,19 @@ class GodotSoftBody3D : public GodotCollisionObject3D {
 
 	uint64_t island_step = 0;
 
-	_FORCE_INLINE_ Vector3 _compute_area_windforce(const GodotArea3D *p_area, const Face *p_face);
+	_FORCE_INLINE_ Vector3 _compute_area_windforce(const FADEArea3D *p_area, const Face *p_face);
 
 public:
-	GodotSoftBody3D();
+	FADESoftBody3D();
 
 	const AABB &get_bounds() const { return bounds; }
 
 	void set_state(PS3DE::BodyState p_state, const Variant &p_variant);
 	Variant get_state(PS3DE::BodyState p_state) const;
 
-	_FORCE_INLINE_ void add_constraint(GodotConstraint3D *p_constraint) { constraints.insert(p_constraint); }
-	_FORCE_INLINE_ void remove_constraint(GodotConstraint3D *p_constraint) { constraints.erase(p_constraint); }
-	_FORCE_INLINE_ const HashSet<GodotConstraint3D *> &get_constraints() const { return constraints; }
+	_FORCE_INLINE_ void add_constraint(FADEConstraint3D *p_constraint) { constraints.insert(p_constraint); }
+	_FORCE_INLINE_ void remove_constraint(FADEConstraint3D *p_constraint) { constraints.erase(p_constraint); }
+	_FORCE_INLINE_ const HashSet<FADEConstraint3D *> &get_constraints() const { return constraints; }
 	_FORCE_INLINE_ void clear_constraints() { constraints.clear(); }
 
 	_FORCE_INLINE_ void add_exception(const RID &p_exception) { exceptions.insert(p_exception); }
@@ -135,7 +135,7 @@ public:
 	_FORCE_INLINE_ uint64_t get_island_step() const { return island_step; }
 	_FORCE_INLINE_ void set_island_step(uint64_t p_step) { island_step = p_step; }
 
-	_FORCE_INLINE_ void add_area(GodotArea3D *p_area) {
+	_FORCE_INLINE_ void add_area(FADEArea3D *p_area) {
 		int index = areas.find(AreaCMP(p_area));
 		if (index > -1) {
 			areas.write[index].refCount += 1;
@@ -144,7 +144,7 @@ public:
 		}
 	}
 
-	_FORCE_INLINE_ void remove_area(GodotArea3D *p_area) {
+	_FORCE_INLINE_ void remove_area(FADEArea3D *p_area) {
 		int index = areas.find(AreaCMP(p_area));
 		if (index > -1) {
 			areas.write[index].refCount -= 1;
@@ -154,7 +154,7 @@ public:
 		}
 	}
 
-	virtual void set_space(GodotSpace3D *p_space) override;
+	virtual void set_space(FADESpace3D *p_space) override;
 
 	void set_mesh(RID p_mesh);
 
@@ -236,7 +236,7 @@ private:
 
 	void add_velocity(const Vector3 &p_velocity);
 
-	void apply_forces(const LocalVector<GodotArea3D *> &p_wind_areas);
+	void apply_forces(const LocalVector<FADEArea3D *> &p_wind_areas);
 
 	bool create_from_trimesh(const Vector<int> &p_indices, const Vector<Vector3> &p_vertices);
 	void generate_bending_constraints(int p_distance);
@@ -255,11 +255,11 @@ private:
 	void destroy();
 };
 
-class GodotSoftBodyShape3D : public GodotShape3D {
-	GodotSoftBody3D *soft_body = nullptr;
+class FADESoftBodyShape3D : public FADEShape3D {
+	FADESoftBody3D *soft_body = nullptr;
 
 public:
-	GodotSoftBody3D *get_soft_body() const { return soft_body; }
+	FADESoftBody3D *get_soft_body() const { return soft_body; }
 
 	virtual PS3DE::ShapeType get_type() const override { return PS3DE::SHAPE_SOFT_BODY; }
 	virtual void project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const override { r_min = r_max = 0.0; }
@@ -276,6 +276,6 @@ public:
 
 	void update_bounds();
 
-	GodotSoftBodyShape3D(GodotSoftBody3D *p_soft_body);
-	~GodotSoftBodyShape3D() {}
+	FADESoftBodyShape3D(FADESoftBody3D *p_soft_body);
+	~FADESoftBodyShape3D() {}
 };

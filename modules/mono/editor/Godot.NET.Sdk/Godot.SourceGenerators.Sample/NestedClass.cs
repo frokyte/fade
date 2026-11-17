@@ -1,12 +1,12 @@
 using System;
 
-namespace Godot.SourceGenerators.Sample;
+namespace FADE.SourceGenerators.Sample;
 
-public partial class NestedClass : GodotObject
+public partial class NestedClass : FADEObject
 {
-    public partial class NestedClass2 : GodotObject
+    public partial class NestedClass2 : FADEObject
     {
-        public partial class NestedClass3 : GodotObject
+        public partial class NestedClass3 : FADEObject
         {
             [Signal]
             public delegate void MySignalEventHandler(string str, int num);

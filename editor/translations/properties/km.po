@@ -1,13 +1,13 @@
-# Khmer (Central) translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Khmer (Central) translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 #
 # Withuse <withuse@gmail.com>, 2021.
 # SeyhaLite <sok123230@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "PO-Revision-Date: 2026-09-25 13:24+0000\n"
 "Last-Translator: SeyhaLite <sok123230@gmail.com>\n"
@@ -3881,8 +3881,8 @@ msgstr "Always Track Call Stacks"
 msgid "Always Track Local Variables"
 msgstr "Always Track Local Variables"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Renamed in Godot 4 Hint"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Renamed in FADE 4 Hint"
 
 msgid "Unassigned Variable"
 msgstr "Unassigned Variable"
@@ -4280,11 +4280,11 @@ msgstr "Light"
 msgid "Visible"
 msgstr "Visible"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF to Godot Expression"
+msgid "glTF to FADE Expression"
+msgstr "glTF to FADE Expression"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot to glTF Expression"
+msgid "FADE to glTF Expression"
+msgstr "FADE to glTF Expression"
 
 msgid "Node Paths"
 msgstr "Node Paths"
@@ -4304,8 +4304,8 @@ msgstr "Joints"
 msgid "Roots"
 msgstr "Roots"
 
-msgid "Godot Bone Node"
-msgstr "Godot Bone Node"
+msgid "FADE Bone Node"
+msgstr "FADE Bone Node"
 
 msgid "Skin Root"
 msgstr "Skin Root"
@@ -4316,8 +4316,8 @@ msgstr "Joints Original"
 msgid "Non Joints"
 msgstr "Non Joints"
 
-msgid "Godot Skin"
-msgstr "Godot Skin"
+msgid "FADE Skin"
+msgstr "FADE Skin"
 
 msgid "Src Image"
 msgstr "Src Image"
@@ -5222,8 +5222,8 @@ msgstr "Wi-Fi Remote Debug Host"
 msgid "Splash Screen"
 msgstr "Splash Screen"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Disable Godot Boot Splash"
+msgid "Disable FADE Boot Splash"
+msgstr "Disable FADE Boot Splash"
 
 msgid "Background Color"
 msgstr "Background Color"
@@ -5777,8 +5777,8 @@ msgstr "Icon 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "Emscripten Pool Size"
 
-msgid "Godot Pool Size"
-msgstr "ទំហំ Pool របស់ Godot"
+msgid "FADE Pool Size"
+msgstr "ទំហំ Pool របស់ FADE"
 
 msgid "Windows"
 msgstr "Windows"

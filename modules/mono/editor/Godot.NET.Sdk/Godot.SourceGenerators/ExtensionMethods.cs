@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
     internal static class ExtensionMethods
     {
@@ -16,19 +16,19 @@ namespace Godot.SourceGenerators
         ) => context.AnalyzerConfigOptions.GlobalOptions
             .TryGetValue("build_property." + property, out value);
 
-        public static bool AreGodotSourceGeneratorsDisabled(this GeneratorExecutionContext context)
-            => context.TryGetGlobalAnalyzerProperty("GodotSourceGenerators", out string? toggle) &&
+        public static bool AreFADESourceGeneratorsDisabled(this GeneratorExecutionContext context)
+            => context.TryGetGlobalAnalyzerProperty("FADESourceGenerators", out string? toggle) &&
                toggle != null &&
                toggle.Equals("disabled", StringComparison.OrdinalIgnoreCase);
 
-        public static bool IsGodotToolsProject(this GeneratorExecutionContext context)
-            => context.TryGetGlobalAnalyzerProperty("IsGodotToolsProject", out string? toggle) &&
+        public static bool IsFADEToolsProject(this GeneratorExecutionContext context)
+            => context.TryGetGlobalAnalyzerProperty("IsFADEToolsProject", out string? toggle) &&
                toggle != null &&
                toggle.Equals("true", StringComparison.OrdinalIgnoreCase);
 
-        public static bool IsGodotSourceGeneratorDisabled(this GeneratorExecutionContext context, string generatorName) =>
-            AreGodotSourceGeneratorsDisabled(context) ||
-            (context.TryGetGlobalAnalyzerProperty("GodotDisabledSourceGenerators", out string? disabledGenerators) &&
+        public static bool IsFADESourceGeneratorDisabled(this GeneratorExecutionContext context, string generatorName) =>
+            AreFADESourceGeneratorsDisabled(context) ||
+            (context.TryGetGlobalAnalyzerProperty("FADEDisabledSourceGenerators", out string? disabledGenerators) &&
             disabledGenerators != null &&
             disabledGenerators.Split(';').Contains(generatorName));
 
@@ -51,21 +51,21 @@ namespace Godot.SourceGenerators
         public static string? GetPropertyInfoClassName(this INamedTypeSymbol memberSymbol)
         {
             if (memberSymbol.GetAttributes()
-                .Any(a => a.AttributeClass?.IsGodotGlobalClassAttribute() ?? false))
+                .Any(a => a.AttributeClass?.IsFADEGlobalClassAttribute() ?? false))
             {
                 return memberSymbol.Name;
             }
 
-            return memberSymbol.GetGodotScriptNativeClassName();
+            return memberSymbol.GetFADEScriptNativeClassName();
         }
 
-        public static INamedTypeSymbol? GetGodotScriptNativeClass(this INamedTypeSymbol classTypeSymbol)
+        public static INamedTypeSymbol? GetFADEScriptNativeClass(this INamedTypeSymbol classTypeSymbol)
         {
             var symbol = classTypeSymbol;
 
             while (symbol != null)
             {
-                if (symbol.ContainingAssembly is { Name: "GodotSharp" or "GodotSharpEditor" })
+                if (symbol.ContainingAssembly is { Name: "FADESharp" or "FADESharpEditor" })
                     return symbol;
 
                 symbol = symbol.BaseType;
@@ -74,15 +74,15 @@ namespace Godot.SourceGenerators
             return null;
         }
 
-        public static string? GetGodotScriptNativeClassName(this INamedTypeSymbol classTypeSymbol)
+        public static string? GetFADEScriptNativeClassName(this INamedTypeSymbol classTypeSymbol)
         {
-            var nativeType = classTypeSymbol.GetGodotScriptNativeClass();
+            var nativeType = classTypeSymbol.GetFADEScriptNativeClass();
 
             if (nativeType == null)
                 return null;
 
             var godotClassNameAttr = nativeType.GetAttributes()
-                .FirstOrDefault(a => a.AttributeClass?.IsGodotClassNameAttribute() ?? false);
+                .FirstOrDefault(a => a.AttributeClass?.IsFADEClassNameAttribute() ?? false);
 
             string? godotClassName = null;
 
@@ -92,7 +92,7 @@ namespace Godot.SourceGenerators
             return godotClassName ?? nativeType.Name;
         }
 
-        private static bool TryGetGodotScriptClass(
+        private static bool TryGetFADEScriptClass(
             this ClassDeclarationSyntax cds, Compilation compilation,
             out INamedTypeSymbol? symbol
         )
@@ -102,7 +102,7 @@ namespace Godot.SourceGenerators
             var classTypeSymbol = sm.GetDeclaredSymbol(cds);
 
             if (classTypeSymbol?.BaseType == null
-                || !classTypeSymbol.BaseType.InheritsFrom("GodotSharp", GodotClasses.GodotObject))
+                || !classTypeSymbol.BaseType.InheritsFrom("FADESharp", FADEClasses.FADEObject))
             {
                 symbol = null;
                 return false;
@@ -112,14 +112,14 @@ namespace Godot.SourceGenerators
             return true;
         }
 
-        public static IEnumerable<(ClassDeclarationSyntax cds, INamedTypeSymbol symbol)> SelectGodotScriptClasses(
+        public static IEnumerable<(ClassDeclarationSyntax cds, INamedTypeSymbol symbol)> SelectFADEScriptClasses(
             this IEnumerable<ClassDeclarationSyntax> source,
             Compilation compilation
         )
         {
             foreach (var cds in source)
             {
-                if (cds.TryGetGodotScriptClass(compilation, out var symbol))
+                if (cds.TryGetFADEScriptClass(compilation, out var symbol))
                     yield return (cds, symbol!);
             }
         }
@@ -286,34 +286,34 @@ namespace Godot.SourceGenerators
                 .Replace("<", "(Of ")
                 .Replace(">", ")");
 
-        public static bool IsGodotExportAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.ExportAttr;
+        public static bool IsFADEExportAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.ExportAttr;
 
-        public static bool IsGodotSignalAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.SignalAttr;
+        public static bool IsFADESignalAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.SignalAttr;
 
-        public static bool IsGodotMustBeVariantAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.MustBeVariantAttr;
+        public static bool IsFADEMustBeVariantAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.MustBeVariantAttr;
 
-        public static bool IsGodotClassNameAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.GodotClassNameAttr;
+        public static bool IsFADEClassNameAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.FADEClassNameAttr;
 
-        public static bool IsGodotGlobalClassAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.GlobalClassAttr;
+        public static bool IsFADEGlobalClassAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.GlobalClassAttr;
 
-        public static bool IsGodotExportToolButtonAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.ExportToolButtonAttr;
+        public static bool IsFADEExportToolButtonAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.ExportToolButtonAttr;
 
-        public static bool IsGodotToolAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.ToolAttr;
+        public static bool IsFADEToolAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.ToolAttr;
 
         public static bool IsSystemFlagsAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.SystemFlagsAttr;
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.SystemFlagsAttr;
 
-        public static bool IsGodotIgnoreMemberAttribute(this INamedTypeSymbol symbol)
-            => symbol.FullQualifiedNameOmitGlobal() == GodotClasses.IgnoreMemberAttr;
+        public static bool IsFADEIgnoreMemberAttribute(this INamedTypeSymbol symbol)
+            => symbol.FullQualifiedNameOmitGlobal() == FADEClasses.IgnoreMemberAttr;
 
-        public static GodotMethodData? HasGodotCompatibleSignature(
+        public static FADEMethodData? HasFADECompatibleSignature(
             this IMethodSymbol method,
             MarshalUtils.TypeCache typeCache
         )
@@ -343,26 +343,26 @@ namespace Godot.SourceGenerators
             if (parameters.Length > paramTypes.Length)
                 return null; // Ignore incompatible method
 
-            return new GodotMethodData(method, paramTypes,
+            return new FADEMethodData(method, paramTypes,
                 parameters.Select(p => p.Type).ToImmutableArray(),
                 retType != null ? (retType.Value, retSymbol) : null);
         }
 
-        public static IEnumerable<GodotMethodData> WhereHasGodotCompatibleSignature(
+        public static IEnumerable<FADEMethodData> WhereHasFADECompatibleSignature(
             this IEnumerable<IMethodSymbol> methods,
             MarshalUtils.TypeCache typeCache
         )
         {
             foreach (var method in methods)
             {
-                var methodData = HasGodotCompatibleSignature(method, typeCache);
+                var methodData = HasFADECompatibleSignature(method, typeCache);
 
                 if (methodData != null)
                     yield return methodData.Value;
             }
         }
 
-        public static IEnumerable<GodotPropertyData> WhereIsGodotCompatibleType(
+        public static IEnumerable<FADEPropertyData> WhereIsFADECompatibleType(
             this IEnumerable<IPropertySymbol> properties,
             MarshalUtils.TypeCache typeCache
         )
@@ -374,24 +374,24 @@ namespace Godot.SourceGenerators
                 if (marshalType == null)
                     continue;
 
-                yield return new GodotPropertyData(property, marshalType.Value);
+                yield return new FADEPropertyData(property, marshalType.Value);
             }
         }
 
-        public static IEnumerable<GodotFieldData> WhereIsGodotCompatibleType(
+        public static IEnumerable<FADEFieldData> WhereIsFADECompatibleType(
             this IEnumerable<IFieldSymbol> fields,
             MarshalUtils.TypeCache typeCache
         )
         {
             foreach (var field in fields)
             {
-                // TODO: We should still restore read-only fields after reloading assembly. Two possible ways: reflection or turn RestoreGodotObjectData into a constructor overload.
+                // TODO: We should still restore read-only fields after reloading assembly. Two possible ways: reflection or turn RestoreFADEObjectData into a constructor overload.
                 var marshalType = MarshalUtils.ConvertManagedTypeToMarshalType(field.Type, typeCache);
 
                 if (marshalType == null)
                     continue;
 
-                yield return new GodotFieldData(field, marshalType.Value);
+                yield return new FADEFieldData(field, marshalType.Value);
             }
         }
 
@@ -418,10 +418,10 @@ namespace Godot.SourceGenerators
             return symbol.SetMethod ?? symbol.OverriddenProperty?.SetMethodOrBaseSetMethod();
         }
 
-        public static INamedTypeSymbol? GetClosestBaseTypeDeclaringGodotInternalMethod(
+        public static INamedTypeSymbol? GetClosestBaseTypeDeclaringFADEInternalMethod(
             this INamedTypeSymbol classTypeSymbol, string godotInternalMethod)
         {
-            var nativeClassTypeSymbol = classTypeSymbol.GetGodotScriptNativeClass();
+            var nativeClassTypeSymbol = classTypeSymbol.GetFADEScriptNativeClass();
 
             var top = classTypeSymbol;
 
@@ -440,8 +440,8 @@ namespace Godot.SourceGenerators
                 top.IsExtern && (
                     // not accessible from a derived class in this project OR...
                     !IsExternSymbolAccessibleFromDerivedClass(top) ||
-                    // doesn't contain a GodotInternal type THAT IS...
-                    !top.GetTypeMembers("GodotInternal").Any(t =>
+                    // doesn't contain a FADEInternal type THAT IS...
+                    !top.GetTypeMembers("FADEInternal").Any(t =>
                         // accessible from a derived class in this project AND...
                         IsExternSymbolAccessibleFromDerivedClass(t)
                         // has the method we're looking for.

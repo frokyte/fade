@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -29,7 +29,7 @@
 /**************************************************************************/
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted to FADE from the Bullet library.
 */
 
 /*
@@ -49,7 +49,7 @@ subject to the following restrictions:
 
 /*
 2007-09-09
-GodotGeneric6DOFJoint3D Refactored by Francisco Le?n
+FADEGeneric6DOFJoint3D Refactored by Francisco Le?n
 email: projectileman@yahoo.com
 http://gimpact.sf.net
 */
@@ -58,9 +58,9 @@ http://gimpact.sf.net
 
 #define GENERIC_D6_DISABLE_WARMSTARTING 1
 
-//////////////////////////// GodotG6DOFRotationalLimitMotor3D ////////////////////////////////////
+//////////////////////////// FADEG6DOFRotationalLimitMotor3D ////////////////////////////////////
 
-int GodotG6DOFRotationalLimitMotor3D::testLimitValue(real_t test_value) {
+int FADEG6DOFRotationalLimitMotor3D::testLimitValue(real_t test_value) {
 	if (m_loLimit > m_hiLimit) {
 		m_currentLimit = 0; //Free from violation
 		return 0;
@@ -80,9 +80,9 @@ int GodotG6DOFRotationalLimitMotor3D::testLimitValue(real_t test_value) {
 	return 0;
 }
 
-real_t GodotG6DOFRotationalLimitMotor3D::solveAngularLimits(
+real_t FADEG6DOFRotationalLimitMotor3D::solveAngularLimits(
 		real_t timeStep, Vector3 &axis, real_t jacDiagABInv,
-		GodotBody3D *body0, GodotBody3D *body1, bool p_body0_dynamic, bool p_body1_dynamic) {
+		FADEBody3D *body0, FADEBody3D *body1, bool p_body0_dynamic, bool p_body1_dynamic) {
 	if (!needApplyTorques()) {
 		return 0.0f;
 	}
@@ -148,13 +148,13 @@ real_t GodotG6DOFRotationalLimitMotor3D::solveAngularLimits(
 	return clippedMotorImpulse;
 }
 
-//////////////////////////// GodotG6DOFTranslationalLimitMotor3D ////////////////////////////////////
+//////////////////////////// FADEG6DOFTranslationalLimitMotor3D ////////////////////////////////////
 
-real_t GodotG6DOFTranslationalLimitMotor3D::solveLinearAxis(
+real_t FADEG6DOFTranslationalLimitMotor3D::solveLinearAxis(
 		real_t timeStep,
 		real_t jacDiagABInv,
-		GodotBody3D *body1, const Vector3 &pointInA,
-		GodotBody3D *body2, const Vector3 &pointInB,
+		FADEBody3D *body1, const Vector3 &pointInA,
+		FADEBody3D *body2, const Vector3 &pointInB,
 		bool p_body1_dynamic, bool p_body2_dynamic,
 		int limit_index,
 		const Vector3 &axis_normal_on_a,
@@ -216,10 +216,10 @@ real_t GodotG6DOFTranslationalLimitMotor3D::solveLinearAxis(
 	return normalImpulse;
 }
 
-//////////////////////////// GodotGeneric6DOFJoint3D ////////////////////////////////////
+//////////////////////////// FADEGeneric6DOFJoint3D ////////////////////////////////////
 
-GodotGeneric6DOFJoint3D::GodotGeneric6DOFJoint3D(GodotBody3D *rbA, GodotBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB, bool useLinearReferenceFrameA) :
-		GodotJoint3D(_arr, 2),
+FADEGeneric6DOFJoint3D::FADEGeneric6DOFJoint3D(FADEBody3D *rbA, FADEBody3D *rbB, const Transform3D &frameInA, const Transform3D &frameInB, bool useLinearReferenceFrameA) :
+		FADEJoint3D(_arr, 2),
 		m_frameInA(frameInA),
 		m_frameInB(frameInB),
 		m_useLinearReferenceFrameA(useLinearReferenceFrameA) {
@@ -229,7 +229,7 @@ GodotGeneric6DOFJoint3D::GodotGeneric6DOFJoint3D(GodotBody3D *rbA, GodotBody3D *
 	B->add_constraint(this, 1);
 }
 
-void GodotGeneric6DOFJoint3D::calculateAngleInfo() {
+void FADEGeneric6DOFJoint3D::calculateAngleInfo() {
 	Basis relative_frame = m_calculatedTransformB.basis.inverse() * m_calculatedTransformA.basis;
 
 	m_calculatedAxisAngleDiff = relative_frame.get_euler(EulerOrder::XYZ);
@@ -269,19 +269,19 @@ void GodotGeneric6DOFJoint3D::calculateAngleInfo() {
 	*/
 }
 
-void GodotGeneric6DOFJoint3D::calculateTransforms() {
+void FADEGeneric6DOFJoint3D::calculateTransforms() {
 	m_calculatedTransformA = A->get_transform() * m_frameInA;
 	m_calculatedTransformB = B->get_transform() * m_frameInB;
 
 	calculateAngleInfo();
 }
 
-void GodotGeneric6DOFJoint3D::buildLinearJacobian(
-		GodotJacobianEntry3D &jacLinear, const Vector3 &normalWorld,
+void FADEGeneric6DOFJoint3D::buildLinearJacobian(
+		FADEJacobianEntry3D &jacLinear, const Vector3 &normalWorld,
 		const Vector3 &pivotAInW, const Vector3 &pivotBInW) {
 	memnew_placement(
 			&jacLinear,
-			GodotJacobianEntry3D(
+			FADEJacobianEntry3D(
 					A->get_principal_inertia_axes().transposed(),
 					B->get_principal_inertia_axes().transposed(),
 					pivotAInW - A->get_transform().origin - A->get_center_of_mass(),
@@ -293,11 +293,11 @@ void GodotGeneric6DOFJoint3D::buildLinearJacobian(
 					B->get_inv_mass()));
 }
 
-void GodotGeneric6DOFJoint3D::buildAngularJacobian(
-		GodotJacobianEntry3D &jacAngular, const Vector3 &jointAxisW) {
+void FADEGeneric6DOFJoint3D::buildAngularJacobian(
+		FADEJacobianEntry3D &jacAngular, const Vector3 &jointAxisW) {
 	memnew_placement(
 			&jacAngular,
-			GodotJacobianEntry3D(
+			FADEJacobianEntry3D(
 					jointAxisW,
 					A->get_principal_inertia_axes().transposed(),
 					B->get_principal_inertia_axes().transposed(),
@@ -305,7 +305,7 @@ void GodotGeneric6DOFJoint3D::buildAngularJacobian(
 					B->get_inv_inertia()));
 }
 
-bool GodotGeneric6DOFJoint3D::testAngularLimitMotor(int axis_index) {
+bool FADEGeneric6DOFJoint3D::testAngularLimitMotor(int axis_index) {
 	real_t angle = m_calculatedAxisAngleDiff[axis_index];
 
 	//test limits
@@ -313,7 +313,7 @@ bool GodotGeneric6DOFJoint3D::testAngularLimitMotor(int axis_index) {
 	return m_angularLimits[axis_index].needApplyTorques();
 }
 
-bool GodotGeneric6DOFJoint3D::setup(real_t p_timestep) {
+bool FADEGeneric6DOFJoint3D::setup(real_t p_timestep) {
 	dynamic_A = (A->get_mode() > PS3DE::BODY_MODE_KINEMATIC);
 	dynamic_B = (B->get_mode() > PS3DE::BODY_MODE_KINEMATIC);
 
@@ -369,7 +369,7 @@ bool GodotGeneric6DOFJoint3D::setup(real_t p_timestep) {
 	return true;
 }
 
-void GodotGeneric6DOFJoint3D::solve(real_t p_timestep) {
+void FADEGeneric6DOFJoint3D::solve(real_t p_timestep) {
 	m_timeStep = p_timestep;
 
 	//calculateTransforms();
@@ -418,19 +418,19 @@ void GodotGeneric6DOFJoint3D::solve(real_t p_timestep) {
 	}
 }
 
-void GodotGeneric6DOFJoint3D::updateRHS(real_t timeStep) {
+void FADEGeneric6DOFJoint3D::updateRHS(real_t timeStep) {
 	(void)timeStep;
 }
 
-Vector3 GodotGeneric6DOFJoint3D::getAxis(int axis_index) const {
+Vector3 FADEGeneric6DOFJoint3D::getAxis(int axis_index) const {
 	return m_calculatedAxis[axis_index];
 }
 
-real_t GodotGeneric6DOFJoint3D::getAngle(int axis_index) const {
+real_t FADEGeneric6DOFJoint3D::getAngle(int axis_index) const {
 	return m_calculatedAxisAngleDiff[axis_index];
 }
 
-void GodotGeneric6DOFJoint3D::calcAnchorPos() {
+void FADEGeneric6DOFJoint3D::calcAnchorPos() {
 	real_t imA = A->get_inv_mass();
 	real_t imB = B->get_inv_mass();
 	real_t weight;
@@ -444,7 +444,7 @@ void GodotGeneric6DOFJoint3D::calcAnchorPos() {
 	m_AnchorPos = pA * weight + pB * (real_t(1.0) - weight);
 }
 
-void GodotGeneric6DOFJoint3D::set_param(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisParam p_param, real_t p_value) {
+void FADEGeneric6DOFJoint3D::set_param(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisParam p_param, real_t p_value) {
 	ERR_FAIL_INDEX(p_axis, 3);
 	switch (p_param) {
 		case PS3DE::G6DOF_JOINT_LINEAR_LOWER_LIMIT: {
@@ -503,28 +503,28 @@ void GodotGeneric6DOFJoint3D::set_param(Vector3::Axis p_axis, PS3DE::G6DOFJointA
 
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_SPRING_STIFFNESS: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_SPRING_DAMPING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_ANGULAR_SPRING_DAMPING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_DRIVE_FORCE_LIMIT: {
 			m_linearDriveForceLimit[p_axis] = p_value;
@@ -537,7 +537,7 @@ void GodotGeneric6DOFJoint3D::set_param(Vector3::Axis p_axis, PS3DE::G6DOFJointA
 	}
 }
 
-real_t GodotGeneric6DOFJoint3D::get_param(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisParam p_param) const {
+real_t FADEGeneric6DOFJoint3D::get_param(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisParam p_param) const {
 	ERR_FAIL_INDEX_V(p_axis, 3, 0);
 	switch (p_param) {
 		case PS3DE::G6DOF_JOINT_LINEAR_LOWER_LIMIT: {
@@ -596,28 +596,28 @@ real_t GodotGeneric6DOFJoint3D::get_param(Vector3::Axis p_axis, PS3DE::G6DOFJoin
 
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_SPRING_STIFFNESS: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_SPRING_DAMPING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_ANGULAR_SPRING_DAMPING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_LINEAR_DRIVE_FORCE_LIMIT: {
 			return m_linearDriveForceLimit[p_axis];
@@ -631,7 +631,7 @@ real_t GodotGeneric6DOFJoint3D::get_param(Vector3::Axis p_axis, PS3DE::G6DOFJoin
 	return 0;
 }
 
-void GodotGeneric6DOFJoint3D::set_flag(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisFlag p_flag, bool p_value) {
+void FADEGeneric6DOFJoint3D::set_flag(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisFlag p_flag, bool p_value) {
 	ERR_FAIL_INDEX(p_axis, 3);
 
 	switch (p_flag) {
@@ -645,20 +645,20 @@ void GodotGeneric6DOFJoint3D::set_flag(Vector3::Axis p_axis, PS3DE::G6DOFJointAx
 			m_angularLimits[p_axis].m_enableMotor = p_value;
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_MAX:
 			break; // Can't happen, but silences warning
 	}
 }
 
-bool GodotGeneric6DOFJoint3D::get_flag(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisFlag p_flag) const {
+bool FADEGeneric6DOFJoint3D::get_flag(Vector3::Axis p_axis, PS3DE::G6DOFJointAxisFlag p_flag) const {
 	ERR_FAIL_INDEX_V(p_axis, 3, false);
 	switch (p_flag) {
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT: {
@@ -671,13 +671,13 @@ bool GodotGeneric6DOFJoint3D::get_flag(Vector3::Axis p_axis, PS3DE::G6DOFJointAx
 			return m_angularLimits[p_axis].m_enableMotor;
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING: {
-			// Not implemented in GodotPhysics3D backend
+			// Not implemented in FADEPhysics3D backend
 		} break;
 		case PS3DE::G6DOF_JOINT_FLAG_MAX:
 			break; // Can't happen, but silences warning

@@ -26,7 +26,7 @@ def get_opts():
     # Dependencies folder. Mirrors the layout used by macOS / Windows.
     deps_folder = os.getenv("LOCALAPPDATA")
     if deps_folder:
-        deps_folder = os.path.join(deps_folder, "Godot", "build_deps")
+        deps_folder = os.path.join(deps_folder, "FADE", "build_deps")
     else:
         try:
             import inspect

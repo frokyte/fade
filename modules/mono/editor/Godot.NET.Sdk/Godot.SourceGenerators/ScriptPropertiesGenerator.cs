@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
     [Generator]
     public class ScriptPropertiesGenerator : ISourceGenerator
@@ -18,7 +18,7 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptProperties"))
+            if (context.IsFADESourceGeneratorDisabled("ScriptProperties"))
                 return;
 
             INamedTypeSymbol[] godotClasses = context
@@ -26,7 +26,7 @@ namespace Godot.SourceGenerators
                 .SelectMany(tree =>
                     tree.GetRoot().DescendantNodes()
                         .OfType<ClassDeclarationSyntax>()
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectFADEScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -53,12 +53,12 @@ namespace Godot.SourceGenerators
 
                 foreach (var godotClass in godotClasses)
                 {
-                    VisitGodotScriptClass(context, typeCache, godotClass);
+                    VisitFADEScriptClass(context, typeCache, godotClass);
                 }
             }
         }
 
-        private static void VisitGodotScriptClass(
+        private static void VisitFADEScriptClass(
             GeneratorExecutionContext context,
             MarshalUtils.TypeCache typeCache,
             INamedTypeSymbol symbol
@@ -71,15 +71,15 @@ namespace Godot.SourceGenerators
             bool hasNamespace = classNs.Length != 0;
 
             bool isInnerClass = symbol.ContainingType != null;
-            bool isToolClass = symbol.GetAttributes().Any(a => a.AttributeClass?.IsGodotToolAttribute() ?? false);
+            bool isToolClass = symbol.GetAttributes().Any(a => a.AttributeClass?.IsFADEToolAttribute() ?? false);
 
             string uniqueHint = symbol.FullQualifiedNameOmitGlobal().SanitizeQualifiedNameForUniqueHint()
                                 + "_ScriptProperties.generated";
 
             var source = new StringBuilder();
 
-            source.Append("using Godot;\n");
-            source.Append("using Godot.NativeInterop;\n");
+            source.Append("using FADE;\n");
+            source.Append("using FADE.NativeInterop;\n");
             source.Append("\n");
 
             if (hasNamespace)
@@ -115,7 +115,7 @@ namespace Godot.SourceGenerators
 
             var members = symbol.GetMembers()
                 .Where(m => !m.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotIgnoreMemberAttribute() ?? false));
+                    .Any(a => a.AttributeClass?.IsFADEIgnoreMemberAttribute() ?? false));
 
             var propertySymbols = members
                 .Where(s => !s.IsStatic && s.Kind == SymbolKind.Property)
@@ -126,8 +126,8 @@ namespace Godot.SourceGenerators
                 .Where(s => !s.IsStatic && s.Kind == SymbolKind.Field && !s.IsImplicitlyDeclared)
                 .Cast<IFieldSymbol>();
 
-            var godotClassProperties = propertySymbols.WhereIsGodotCompatibleType(typeCache).ToArray();
-            var godotClassFields = fieldSymbols.WhereIsGodotCompatibleType(typeCache).ToArray();
+            var godotClassProperties = propertySymbols.WhereIsFADECompatibleType(typeCache).ToArray();
+            var godotClassFields = fieldSymbols.WhereIsFADECompatibleType(typeCache).ToArray();
 
             source.Append("#pragma warning disable CS0109 // Disable warning about redundant 'new' keyword\n");
 
@@ -152,7 +152,7 @@ namespace Godot.SourceGenerators
                     .Append("' property.\n")
                     .Append("        /// </summary>\n");
 
-                source.Append("        public new static readonly global::Godot.StringName @");
+                source.Append("        public new static readonly global::FADE.StringName @");
                 source.Append(propertyName);
                 source.Append(" = \"");
                 source.Append(propertyName);
@@ -169,7 +169,7 @@ namespace Godot.SourceGenerators
                     .Append("' field.\n")
                     .Append("        /// </summary>\n");
 
-                source.Append("        public new static readonly global::Godot.StringName @");
+                source.Append("        public new static readonly global::FADE.StringName @");
                 source.Append(fieldName);
                 source.Append(" = \"");
                 source.Append(fieldName);
@@ -179,13 +179,13 @@ namespace Godot.SourceGenerators
             source.Append("    }\n"); // end of class PropertyName
 
             source.Append("    ").Append(symbol.IsSealed ? "" : "protected ")
-                .Append("internal new static partial class GodotInternal\n    {\n");
+                .Append("internal new static partial class FADEInternal\n    {\n");
 
-            // Generate GetGodotPropertyTrampolines
+            // Generate GetFADEPropertyTrampolines
             {
-                const string CollectorType = "global::Godot.Bridge.PropertyTrampolineCollector";
+                const string CollectorType = "global::FADE.Bridge.PropertyTrampolineCollector";
 
-                source.Append("        public static void GetGodotPropertyTrampolines(")
+                source.Append("        public static void GetFADEPropertyTrampolines(")
                     .Append(CollectorType).Append(" collector)\n        {\n");
 
                 // Generate trampolines
@@ -236,19 +236,19 @@ namespace Godot.SourceGenerators
                 source.Append("        }\n");
             }
 
-            source.Append("    }\n"); // partial class GodotInternal
+            source.Append("    }\n"); // partial class FADEInternal
 
             if (godotClassProperties.Length > 0 || godotClassFields.Length > 0)
             {
-                // Generate GetGodotPropertyList
+                // Generate GetFADEPropertyList
 
                 const string DictionaryType =
-                    "global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>";
+                    "global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo>";
 
                 source.Append("    /// <summary>\n")
                     .Append("    /// Get the property information for all the properties declared in this class.\n")
                     .Append(
-                        "    /// This method is used by Godot to register the available properties in the editor.\n")
+                        "    /// This method is used by FADE to register the available properties in the editor.\n")
                     .Append("    /// Do not call this method.\n")
                     .Append("    /// </summary>\n");
 
@@ -257,7 +257,7 @@ namespace Godot.SourceGenerators
 
                 source.Append("    internal new static ")
                     .Append(DictionaryType)
-                    .Append(" GetGodotPropertyList()\n    {\n");
+                    .Append(" GetFADEPropertyList()\n    {\n");
 
                 source.Append("        var properties = new ")
                     .Append(DictionaryType)
@@ -265,9 +265,9 @@ namespace Godot.SourceGenerators
 
                 // To retain the definition order (and display categories correctly), we want to
                 //  iterate over fields and properties at the same time, sorted by line number.
-                var godotClassPropertiesAndFields = Enumerable.Empty<GodotPropertyOrFieldData>()
-                    .Concat(godotClassProperties.Select(propertyData => new GodotPropertyOrFieldData(propertyData)))
-                    .Concat(godotClassFields.Select(fieldData => new GodotPropertyOrFieldData(fieldData)))
+                var godotClassPropertiesAndFields = Enumerable.Empty<FADEPropertyOrFieldData>()
+                    .Concat(godotClassProperties.Select(propertyData => new FADEPropertyOrFieldData(propertyData)))
+                    .Concat(godotClassFields.Select(fieldData => new FADEPropertyOrFieldData(fieldData)))
                     .OrderBy(data => data.Symbol.Locations[0].Path())
                     .ThenBy(data => data.Symbol.Locations[0].StartLine());
 
@@ -420,36 +420,36 @@ namespace Godot.SourceGenerators
 
         private static void AppendGroupingPropertyInfo(StringBuilder source, PropertyInfo propertyInfo)
         {
-            source.Append("        properties.Add(new(type: (global::Godot.Variant.Type)")
+            source.Append("        properties.Add(new(type: (global::FADE.Variant.Type)")
                 .Append((int)VariantType.Nil)
                 .Append(", name: \"")
                 .Append(propertyInfo.Name)
-                .Append("\", hint: (global::Godot.PropertyHint)")
+                .Append("\", hint: (global::FADE.PropertyHint)")
                 .Append((int)PropertyHint.None)
                 .Append(", hintString: \"")
                 .Append(propertyInfo.HintString)
-                .Append("\", usage: (global::Godot.PropertyUsageFlags)")
+                .Append("\", usage: (global::FADE.PropertyUsageFlags)")
                 .Append((int)propertyInfo.Usage)
                 .Append(", exported: true));\n");
         }
 
         private static void AppendPropertyInfo(StringBuilder source, PropertyInfo propertyInfo)
         {
-            source.Append("        properties.Add(new(type: (global::Godot.Variant.Type)")
+            source.Append("        properties.Add(new(type: (global::FADE.Variant.Type)")
                 .Append((int)propertyInfo.Type)
                 .Append(", name: PropertyName.@")
                 .Append(propertyInfo.Name)
-                .Append(", hint: (global::Godot.PropertyHint)")
+                .Append(", hint: (global::FADE.PropertyHint)")
                 .Append((int)propertyInfo.Hint)
                 .Append(", hintString: \"")
                 .Append(propertyInfo.HintString)
-                .Append("\", usage: (global::Godot.PropertyUsageFlags)")
+                .Append("\", usage: (global::FADE.PropertyUsageFlags)")
                 .Append((int)propertyInfo.Usage)
                 .Append(", exported: ")
                 .Append(propertyInfo.Exported ? "true" : "false");
             if (propertyInfo.ClassName != null)
             {
-                source.Append(", className: new global::Godot.StringName(\"")
+                source.Append(", className: new global::FADE.StringName(\"")
                     .Append(propertyInfo.ClassName)
                     .Append("\")");
             }
@@ -462,9 +462,9 @@ namespace Godot.SourceGenerators
             {
                 PropertyUsageFlags? propertyUsage = attr.AttributeClass?.FullQualifiedNameOmitGlobal() switch
                 {
-                    GodotClasses.ExportCategoryAttr => PropertyUsageFlags.Category,
-                    GodotClasses.ExportGroupAttr => PropertyUsageFlags.Group,
-                    GodotClasses.ExportSubgroupAttr => PropertyUsageFlags.Subgroup,
+                    FADEClasses.ExportCategoryAttr => PropertyUsageFlags.Category,
+                    FADEClasses.ExportGroupAttr => PropertyUsageFlags.Group,
+                    FADEClasses.ExportSubgroupAttr => PropertyUsageFlags.Subgroup,
                     _ => null
                 };
 
@@ -491,10 +491,10 @@ namespace Godot.SourceGenerators
         )
         {
             var exportAttr = memberSymbol.GetAttributes()
-                .FirstOrDefault(a => a.AttributeClass?.IsGodotExportAttribute() ?? false);
+                .FirstOrDefault(a => a.AttributeClass?.IsFADEExportAttribute() ?? false);
 
             var exportToolButtonAttr = memberSymbol.GetAttributes()
-                .FirstOrDefault(a => a.AttributeClass?.IsGodotExportToolButtonAttribute() ?? false);
+                .FirstOrDefault(a => a.AttributeClass?.IsFADEExportToolButtonAttribute() ?? false);
 
             if (exportAttr != null && exportToolButtonAttr != null)
             {
@@ -603,7 +603,7 @@ namespace Godot.SourceGenerators
                             var typeSymbol = semanticModel.GetSymbolInfo(creationExpression.Type).Symbol as ITypeSymbol;
                             if (typeSymbol != null)
                             {
-                                return typeSymbol.FullQualifiedNameOmitGlobal() == GodotClasses.Callable;
+                                return typeSymbol.FullQualifiedNameOmitGlobal() == FADEClasses.Callable;
                             }
 
                             break;
@@ -614,7 +614,7 @@ namespace Godot.SourceGenerators
                             if (methodSymbol != null && methodSymbol.Name == "From")
                             {
                                 return methodSymbol.ContainingType.FullQualifiedNameOmitGlobal() ==
-                                       GodotClasses.Callable;
+                                       FADEClasses.Callable;
                             }
 
                             break;
@@ -793,7 +793,7 @@ namespace Godot.SourceGenerators
                     return true;
                 }
 
-                if (memberNamedType.InheritsFrom("GodotSharp", "Godot.Resource"))
+                if (memberNamedType.InheritsFrom("FADESharp", "FADE.Resource"))
                 {
                     hint = PropertyHint.ResourceType;
                     hintString = memberNamedType.GetPropertyInfoClassName();
@@ -801,7 +801,7 @@ namespace Godot.SourceGenerators
                     return true;
                 }
 
-                if (memberNamedType.InheritsFrom("GodotSharp", "Godot.Node"))
+                if (memberNamedType.InheritsFrom("FADESharp", "FADE.Node"))
                 {
                     hint = PropertyHint.NodeType;
                     hintString = memberNamedType.GetPropertyInfoClassName();
@@ -942,7 +942,7 @@ namespace Godot.SourceGenerators
 
                 if (keyElementMarshalType == null || valueElementMarshalType == null)
                 {
-                    // To maintain compatibility with previous versions of Godot before 4.4,
+                    // To maintain compatibility with previous versions of FADE before 4.4,
                     // we must preserve the old behavior for generic dictionaries with non-marshallable
                     // generic type arguments.
                     return false;

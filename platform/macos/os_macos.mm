@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -342,7 +342,7 @@ String OS_MacOS::get_version_alias() const {
 	} else {
 		macos_string += itos(ver.majorVersion);
 	}
-	// macOS versions older than 10.13 cannot run Godot.
+	// macOS versions older than 10.13 cannot run FADE.
 	return vformat("%s (%s)", macos_string, get_version());
 }
 
@@ -1117,8 +1117,8 @@ void OS_MacOS_NSApp::start_main() {
 				pre_wait_observer = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
 					@autoreleasepool {
 						@try {
-							GodotProfileFrameMark;
-							GodotProfileZone("macOS main loop");
+							FADEProfileFrameMark;
+							FADEProfileZone("macOS main loop");
 
 							if (ds_mac) {
 								ds_mac->_process_events(false);
@@ -1184,7 +1184,7 @@ void OS_MacOS_NSApp::cleanup() {
 OS_MacOS_NSApp::OS_MacOS_NSApp(const char *p_execpath, int p_argc, char **p_argv) :
 		OS_MacOS(p_execpath, p_argc, p_argv) {
 	// Implicitly create shared NSApplication instance.
-	[GodotApplication sharedApplication];
+	[FADEApplication sharedApplication];
 
 	// In case we are unbundled, make us a proper UI application.
 	[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
@@ -1196,7 +1196,7 @@ OS_MacOS_NSApp::OS_MacOS_NSApp(const char *p_execpath, int p_argc, char **p_argv
 	NSMenu *main_menu = [[NSMenu alloc] initWithTitle:@""];
 	[NSApp setMainMenu:main_menu];
 
-	delegate = [[GodotApplicationDelegate alloc] initWithOS:this];
+	delegate = [[FADEApplicationDelegate alloc] initWithOS:this];
 	ERR_FAIL_NULL(delegate);
 	[NSApp setDelegate:delegate];
 	[NSApp registerUserInterfaceItemSearchHandler:delegate];
@@ -1308,8 +1308,8 @@ void OS_MacOS_Embedded::run() {
 		while (true) {
 			@autoreleasepool {
 				@try {
-					GodotProfileFrameMark;
-					GodotProfileZone("macOS embedded main loop");
+					FADEProfileFrameMark;
+					FADEProfileZone("macOS embedded main loop");
 
 					ds->process_events();
 

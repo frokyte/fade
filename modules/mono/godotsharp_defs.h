@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,12 +30,12 @@
 
 #pragma once
 
-#define BINDINGS_NAMESPACE "Godot"
+#define BINDINGS_NAMESPACE "FADE"
 #define BINDINGS_NAMESPACE_COLLECTIONS BINDINGS_NAMESPACE ".Collections"
-#define API_SOLUTION_NAME "GodotSharp"
-#define CORE_API_ASSEMBLY_NAME "GodotSharp"
-#define EDITOR_API_ASSEMBLY_NAME "GodotSharpEditor"
-#define TOOLS_ASM_NAME "GodotTools"
+#define API_SOLUTION_NAME "FADESharp"
+#define CORE_API_ASSEMBLY_NAME "FADESharp"
+#define EDITOR_API_ASSEMBLY_NAME "FADESharpEditor"
+#define TOOLS_ASM_NAME "FADETools"
 
 #define BINDINGS_CLASS_NATIVECALLS "NativeCalls"
 #define BINDINGS_CLASS_NATIVECALLS_EDITOR "EditorNativeCalls"

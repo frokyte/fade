@@ -7,15 +7,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Godot.NativeInterop
+namespace FADE.NativeInterop
 {
     // NOTES:
     // ref structs cannot implement interfaces, but they still work in `using` directives if they declare Dispose()
 
-    public static class GodotBoolExtensions
+    public static class FADEBoolExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe godot_bool ToGodotBool(this bool @bool)
+        public static unsafe godot_bool ToFADEBool(this bool @bool)
         {
             return *(godot_bool*)&@bool;
         }
@@ -98,9 +98,9 @@ namespace Godot.NativeInterop
             set => argument = value;
         }
 
-        public Godot.Variant.Type Expected
+        public FADE.Variant.Type Expected
         {
-            readonly get => (Godot.Variant.Type)expected;
+            readonly get => (FADE.Variant.Type)expected;
             set => expected = (int)value;
         }
 

@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotGame.kt                                                          */
+/*  FADEGame.kt                                                          */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,19 +35,19 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
 import org.godotengine.editor.embed.GameMenuFragment
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.FADELib
 import org.godotengine.godot.editor.utils.GameMenuUtils
 import org.godotengine.godot.utils.ProcessPhoenix
 import org.godotengine.godot.xr.XRMode
 import org.godotengine.openxr.vendors.utils.*
 
 /**
- * Drives the 'run project' window of the Godot Editor.
+ * Drives the 'run project' window of the FADE Editor.
  */
-abstract class GodotGame : BaseGodotGame() {
+abstract class FADEGame : BaseFADEGame() {
 
 	companion object {
-		private val TAG = GodotGame::class.java.simpleName
+		private val TAG = FADEGame::class.java.simpleName
 	}
 
 	private val expandGameMenuButton: View? by lazy { findViewById(R.id.game_menu_expand_button) }
@@ -99,7 +99,7 @@ abstract class GodotGame : BaseGodotGame() {
 		gameMenuContainer?.isVisible = !isInPictureInPictureMode
 	}
 
-	override fun getGodotAppLayout() = R.layout.godot_game_layout
+	override fun getFADEAppLayout() = R.layout.godot_game_layout
 
 	override fun getEditorGameEmbedMode() = GameMenuUtils.GameEmbedMode.DISABLED
 
@@ -249,7 +249,7 @@ abstract class GodotGame : BaseGodotGame() {
 	override fun supportsFeature(featureTag: String): Boolean {
 		if (HYBRID_APP_PANEL_FEATURE == featureTag) {
 			// Check if openxr is enabled
-			if (!GodotLib.getGlobal("xr/openxr/enabled").toBoolean()) {
+			if (!FADELib.getGlobal("xr/openxr/enabled").toBoolean()) {
 				return false
 			}
 

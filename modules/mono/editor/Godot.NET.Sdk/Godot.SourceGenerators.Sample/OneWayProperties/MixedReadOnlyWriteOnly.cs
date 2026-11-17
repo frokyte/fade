@@ -1,6 +1,6 @@
-namespace Godot.SourceGenerators.Sample
+namespace FADE.SourceGenerators.Sample
 {
-    public partial class MixedReadonlyWriteOnly : GodotObject
+    public partial class MixedReadonlyWriteOnly : FADEObject
     {
         public readonly string ReadOnlyField = "foo";
         public string ReadOnlyAutoProperty { get; } = "foo";

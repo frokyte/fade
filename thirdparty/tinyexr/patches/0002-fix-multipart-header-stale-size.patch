@@ -1,5 +1,5 @@
 Custom fix for CVE-2026-110597 to appease distro maintainers.
-We don't actually use that code in Godot.
+We don't actually use that code in FADE.
 
 diff --git a/thirdparty/tinyexr/tinyexr.h b/thirdparty/tinyexr/tinyexr.h
 index 7a3948d107..5c96a1a149 100644

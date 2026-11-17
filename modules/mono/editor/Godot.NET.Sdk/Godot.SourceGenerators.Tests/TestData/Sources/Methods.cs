@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-public partial class Methods : GodotObject
+public partial class Methods : FADEObject
 {
     [IgnoreMember]
     private void IgnoredMethod()

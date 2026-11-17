@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -2002,7 +2002,7 @@ void Object::_bind_methods() {
 	{
 		MethodInfo mi("_notification");
 		mi.arguments.push_back(PropertyInfo(Variant::INT, "what"));
-		mi.arguments_metadata.push_back(GodotTypeInfo::Metadata::METADATA_INT_IS_INT32);
+		mi.arguments_metadata.push_back(FADETypeInfo::Metadata::METADATA_INT_IS_INT32);
 		BIND_OBJ_CORE_METHOD(mi);
 	}
 

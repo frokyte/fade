@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -62,7 +62,7 @@ TEST_CASE("[RegEx] Initialization") {
 }
 
 TEST_CASE("[RegEx] Clearing") {
-	RegEx re("Godot");
+	RegEx re("FADE");
 	REQUIRE(re.is_valid());
 	re.clear();
 	CHECK(re.is_valid() == false);
@@ -170,7 +170,7 @@ TEST_CASE("[RegEx] Substitution with empty input and/or replacement") {
 }
 
 TEST_CASE("[RegEx] Uninitialized use") {
-	const String s = "Godot";
+	const String s = "FADE";
 
 	RegEx re;
 	ERR_PRINT_OFF;
@@ -231,7 +231,7 @@ TEST_CASE("[RegEx] Number Expression") {
 }
 
 TEST_CASE("[RegEx] Invalid end position") {
-	const String s = "Godot";
+	const String s = "FADE";
 
 	RegEx re("o");
 	REQUIRE(re.is_valid());
@@ -251,13 +251,13 @@ TEST_CASE("[RegEx] Invalid end position") {
 }
 
 TEST_CASE("[RegEx] Get match string list") {
-	const String s = "Godot Engine";
+	const String s = "FADE Engine";
 
 	RegEx re("(Go)(dot)");
 	Ref<RegExMatch> match = re.search(s);
 	REQUIRE(match.is_valid());
 	PackedStringArray result;
-	result.append("Godot");
+	result.append("FADE");
 	result.append("Go");
 	result.append("dot");
 	CHECK(match->get_strings() == result);
@@ -282,7 +282,7 @@ TEST_CASE("[RegEx] Match start and end positions") {
 }
 
 TEST_CASE("[RegEx] Asterisk search all") {
-	const String s = "Godot Engine";
+	const String s = "FADE Engine";
 
 	RegEx re("o*");
 	REQUIRE(re.is_valid());
@@ -306,7 +306,7 @@ TEST_CASE("[RegEx] Asterisk search all") {
 }
 
 TEST_CASE("[RegEx] Simple lookahead") {
-	const String s = "Godot Engine";
+	const String s = "FADE Engine";
 
 	RegEx re("o(?=t)");
 	REQUIRE(re.is_valid());
@@ -340,7 +340,7 @@ TEST_CASE("[RegEx] Lookahead groups empty matches") {
 }
 
 TEST_CASE("[RegEx] Simple lookbehind") {
-	const String s = "Godot Engine";
+	const String s = "FADE Engine";
 
 	RegEx re("(?<=d)o");
 	REQUIRE(re.is_valid());

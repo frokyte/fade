@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -51,10 +51,10 @@ typedef union {
 	void *p;
 } godot_js_wrapper_ex;
 
-typedef int (*GodotJSWrapperVariant2JSCallback)(const void **p_args, int p_pos, godot_js_wrapper_ex *r_val, void **p_lock);
-typedef void (*GodotJSWrapperFreeLockCallback)(void **p_lock, int p_type);
+typedef int (*FADEJSWrapperVariant2JSCallback)(const void **p_args, int p_pos, godot_js_wrapper_ex *r_val, void **p_lock);
+typedef void (*FADEJSWrapperFreeLockCallback)(void **p_lock, int p_type);
 extern int godot_js_wrapper_interface_get(const char *p_name);
-extern int godot_js_wrapper_object_call(int p_id, const char *p_method, void **p_args, int p_argc, GodotJSWrapperVariant2JSCallback p_variant2js_callback, godot_js_wrapper_ex *p_cb_rval, void **p_lock, GodotJSWrapperFreeLockCallback p_lock_callback);
+extern int godot_js_wrapper_object_call(int p_id, const char *p_method, void **p_args, int p_argc, FADEJSWrapperVariant2JSCallback p_variant2js_callback, godot_js_wrapper_ex *p_cb_rval, void **p_lock, FADEJSWrapperFreeLockCallback p_lock_callback);
 extern int godot_js_wrapper_object_get(int p_id, godot_js_wrapper_ex *p_val, const char *p_prop);
 extern int godot_js_wrapper_object_getvar(int p_id, int p_type, godot_js_wrapper_ex *p_val);
 extern int godot_js_wrapper_object_setvar(int p_id, int p_key_type, godot_js_wrapper_ex *p_key_ex, int p_val_type, godot_js_wrapper_ex *p_val_ex);
@@ -62,7 +62,7 @@ extern void godot_js_wrapper_object_set(int p_id, const char *p_name, int p_type
 extern void godot_js_wrapper_object_unref(int p_id);
 extern int godot_js_wrapper_create_cb(void *p_ref, void (*p_callback)(void *p_ref, int p_arg_id, int p_argc));
 extern void godot_js_wrapper_object_set_cb_ret(int p_type, godot_js_wrapper_ex *p_val);
-extern int godot_js_wrapper_create_object(const char *p_method, void **p_args, int p_argc, GodotJSWrapperVariant2JSCallback p_variant2js_callback, godot_js_wrapper_ex *p_cb_rval, void **p_lock, GodotJSWrapperFreeLockCallback p_lock_callback);
+extern int godot_js_wrapper_create_object(const char *p_method, void **p_args, int p_argc, FADEJSWrapperVariant2JSCallback p_variant2js_callback, godot_js_wrapper_ex *p_cb_rval, void **p_lock, FADEJSWrapperFreeLockCallback p_lock_callback);
 extern int godot_js_wrapper_object_is_buffer(int p_id);
 extern int godot_js_wrapper_object_transfer_buffer(int p_id, void *p_byte_arr, void *p_byte_arr_write, void *(*p_callback)(void *p_ptr, void *p_ptr2, int p_len));
 };

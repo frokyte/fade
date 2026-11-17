@@ -42,7 +42,7 @@ index 8354bd5de7..d62adb9b1e 100644
 +// #include "video/SDL_pixels_c.h"
 +// #include "video/SDL_surface_c.h"
 +// #include "video/SDL_video_c.h"
-+#ifndef SDL_FILESYSTEM_DUMMY // Godot change
++#ifndef SDL_FILESYSTEM_DUMMY // FADE change
  #include "filesystem/SDL_filesystem_c.h"
 -#include "io/SDL_asyncio_c.h"
 +#endif
@@ -65,7 +65,7 @@ index 8354bd5de7..d62adb9b1e 100644
      SDL_InitEnvironment();
 -    SDL_InitTicks();
 +	SDL_InitTicks();
-+#ifndef SDL_FILESYSTEM_DUMMY // Godot change
++#ifndef SDL_FILESYSTEM_DUMMY // FADE change
      SDL_InitFilesystem();
 +#endif
  
@@ -75,7 +75,7 @@ index 8354bd5de7..d62adb9b1e 100644
  
  static void SDL_QuitMainThread(void)
  {
-+#ifndef SDL_FILESYSTEM_DUMMY // Godot change
++#ifndef SDL_FILESYSTEM_DUMMY // FADE change
      SDL_QuitFilesystem();
 +#endif
      SDL_QuitTicks();

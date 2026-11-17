@@ -1,7 +1,7 @@
-# Ukrainian translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Ukrainian translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Aleksandr <XpycT.TOP@gmail.com>, 2017.
 # Yuri Chornoivan <yurchor@ukr.net>, 2018, 2019, 2020, 2021, 2022.
 # Андрій Бандура <andriykopanytsia@gmail.com>, 2018.
@@ -44,7 +44,7 @@
 # User2068 <user603849745775@proton.me>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ukrainian (Godot Engine)\n"
+"Project-Id-Version: Ukrainian (FADE Engine)\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-08-08 09:57+0000\n"
@@ -3924,8 +3924,8 @@ msgstr "Завжди відстежувати стеки викликів"
 msgid "Always Track Local Variables"
 msgstr "Завжди відстежувати локальні змінні"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Перейменовано в Godot 4 Підказка"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Перейменовано в FADE 4 Підказка"
 
 msgid "Unassigned Variable"
 msgstr "Непризначена змінна"
@@ -4323,11 +4323,11 @@ msgstr "Світло"
 msgid "Visible"
 msgstr "Видимий"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF до виразу Godot"
+msgid "glTF to FADE Expression"
+msgstr "glTF до виразу FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "Вираз Godot до glTF"
+msgid "FADE to glTF Expression"
+msgstr "Вираз FADE до glTF"
 
 msgid "Node Paths"
 msgstr "Шляхи вузлів"
@@ -4347,7 +4347,7 @@ msgstr "Суглоби"
 msgid "Roots"
 msgstr "Корені"
 
-msgid "Godot Bone Node"
+msgid "FADE Bone Node"
 msgstr "Отримати вузол сцени"
 
 msgid "Skin Root"
@@ -4359,8 +4359,8 @@ msgstr "Початок з'єднання"
 msgid "Non Joints"
 msgstr "Без з'єднань"
 
-msgid "Godot Skin"
-msgstr "Скін Godot"
+msgid "FADE Skin"
+msgstr "Скін FADE"
 
 msgid "Src Image"
 msgstr "Початкове зображення"
@@ -5397,8 +5397,8 @@ msgstr "Хост віддаленого налагодження Wi-Fi"
 msgid "Splash Screen"
 msgstr "Заставка"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Вимкнути заставку завантаження Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "Вимкнути заставку завантаження FADE"
 
 msgid "Background Color"
 msgstr "Колір тла"
@@ -5952,8 +5952,8 @@ msgstr "Піктограма 512⨯12"
 msgid "Emscripten Pool Size"
 msgstr "Розмір пулу Емскрипти"
 
-msgid "Godot Pool Size"
-msgstr "Розмір басейну Godot"
+msgid "FADE Pool Size"
+msgstr "Розмір басейну FADE"
 
 msgid "Windows"
 msgstr "Windows"

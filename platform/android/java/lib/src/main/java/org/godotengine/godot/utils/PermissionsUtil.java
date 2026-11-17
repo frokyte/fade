@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 package org.godotengine.godot.utils;
 
-import org.godotengine.godot.Godot;
+import org.godotengine.godot.FADE;
 
 import android.Manifest;
 import android.app.Activity;
@@ -160,7 +160,7 @@ public final class PermissionsUtil {
 
 			case "CAMERA":
 				permissions.add(Manifest.permission.CAMERA);
-				if (Godot.getInstance(activity).hasFeature("horizonos")) {
+				if (FADE.getInstance(activity).hasFeature("horizonos")) {
 					// On HorizonOS, these permissions are required to get access to all the device's cameras.
 					permissions.add("horizonos.permission.AVATAR_CAMERA");
 					permissions.add("horizonos.permission.HEADSET_CAMERA");

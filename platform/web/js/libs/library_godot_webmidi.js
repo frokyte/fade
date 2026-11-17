@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,39 +28,39 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-const GodotWebMidi = {
+const FADEWebMidi = {
 
-	$GodotWebMidi__deps: ['$GodotRuntime'],
-	$GodotWebMidi: {
+	$FADEWebMidi__deps: ['$FADERuntime'],
+	$FADEWebMidi: {
 		abortControllers: [],
 		isListening: false,
 	},
 
-	godot_js_webmidi_open_midi_inputs__deps: ['$GodotWebMidi'],
+	godot_js_webmidi_open_midi_inputs__deps: ['$FADEWebMidi'],
 	godot_js_webmidi_open_midi_inputs__proxy: 'sync',
 	godot_js_webmidi_open_midi_inputs__sig: 'iiii',
 	godot_js_webmidi_open_midi_inputs: function (pSetInputNamesCb, pOnMidiMessageCb, pDataBuffer, dataBufferLen) {
-		if (GodotWebMidi.is_listening) {
+		if (FADEWebMidi.is_listening) {
 			return 0; // OK
 		}
 		if (!navigator.requestMIDIAccess) {
 			return 2; // ERR_UNAVAILABLE
 		}
-		const setInputNamesCb = GodotRuntime.get_func(pSetInputNamesCb);
-		const onMidiMessageCb = GodotRuntime.get_func(pOnMidiMessageCb);
+		const setInputNamesCb = FADERuntime.get_func(pSetInputNamesCb);
+		const onMidiMessageCb = FADERuntime.get_func(pOnMidiMessageCb);
 
-		GodotWebMidi.isListening = true;
+		FADEWebMidi.isListening = true;
 		navigator.requestMIDIAccess().then((midi) => {
 			const inputs = [...midi.inputs.values()];
 			const inputNames = inputs.map((input) => input.name);
 
-			const c_ptr = GodotRuntime.allocStringArray(inputNames);
+			const c_ptr = FADERuntime.allocStringArray(inputNames);
 			setInputNamesCb(inputNames.length, c_ptr);
-			GodotRuntime.freeStringArray(c_ptr, inputNames.length);
+			FADERuntime.freeStringArray(c_ptr, inputNames.length);
 
 			inputs.forEach((input, i) => {
 				const abortController = new AbortController();
-				GodotWebMidi.abortControllers.push(abortController);
+				FADEWebMidi.abortControllers.push(abortController);
 				input.addEventListener('midimessage', (event) => {
 					const status = event.data[0];
 					const data = event.data.slice(1);
@@ -79,16 +79,16 @@ const GodotWebMidi = {
 		return 0; // OK
 	},
 
-	godot_js_webmidi_close_midi_inputs__deps: ['$GodotWebMidi'],
+	godot_js_webmidi_close_midi_inputs__deps: ['$FADEWebMidi'],
 	godot_js_webmidi_close_midi_inputs__proxy: 'sync',
 	godot_js_webmidi_close_midi_inputs__sig: 'v',
 	godot_js_webmidi_close_midi_inputs: function () {
-		for (const abortController of GodotWebMidi.abortControllers) {
+		for (const abortController of FADEWebMidi.abortControllers) {
 			abortController.abort();
 		}
-		GodotWebMidi.abortControllers = [];
-		GodotWebMidi.isListening = false;
+		FADEWebMidi.abortControllers = [];
+		FADEWebMidi.isListening = false;
 	},
 };
 
-mergeInto(LibraryManager.library, GodotWebMidi);
+mergeInto(LibraryManager.library, FADEWebMidi);

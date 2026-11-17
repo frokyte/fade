@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -112,7 +112,7 @@ public:
 		float reference_luminance = 0;
 	};
 
-	// Messages used for exchanging information between Godot's and Wayland's thread.
+	// Messages used for exchanging information between FADE's and Wayland's thread.
 	class Message : public RefCounted {
 		GDSOFTCLASS(Message, RefCounted);
 
@@ -383,7 +383,7 @@ public:
 		WaylandThread *wayland_thread;
 	};
 
-	// "High level" Godot-side screen data.
+	// "High level" FADE-side screen data.
 	struct ScreenData {
 		// Geometry data.
 		Point2i position;
@@ -724,7 +724,7 @@ private:
 	struct wl_seat *wl_seat_current = nullptr;
 	bool has_touch = false;
 
-	// We got plenty of different pointing devices but Godot can only hover a
+	// We got plenty of different pointing devices but FADE can only hover a
 	// single window at a time. This helps track that and gives us a way to avoid
 	// invalid mouse enter/leave event combinations.
 	DisplayServerEnums::WindowID hovered_window_id = DisplayServerEnums::INVALID_WINDOW_ID;
@@ -1157,7 +1157,7 @@ private:
 		.done = _xdg_activation_token_on_done,
 	};
 
-	// Godot interfaces.
+	// FADE interfaces.
 	static constexpr struct godot_embedding_compositor_listener godot_embedding_compositor_listener = {
 		.client = _godot_embedding_compositor_on_client,
 	};

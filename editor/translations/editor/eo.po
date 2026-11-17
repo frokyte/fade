@@ -1,7 +1,7 @@
-# Esperanto translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Esperanto translation of the FADE Engine editor interface.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Scott Starkey <yekrats@gmail.com>, 2019.
 # AlexHoratio <yukithetupper@gmail.com>, 2019.
 # Teashrock <kajitsu22@gmail.com>, 2019.
@@ -31,7 +31,7 @@
 # VeryUsual <72707293+VeryUsual@users.noreply.github.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: FADE Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "PO-Revision-Date: 2026-10-18 03:51+0000\n"
 "Last-Translator: VeryUsual <72707293+VeryUsual@users.noreply.github.com>\n"
@@ -3277,11 +3277,11 @@ msgstr "Raporti cimon"
 msgid "Send Docs Feedback"
 msgstr "Sendi rimarkojn pri la dokumentaro"
 
-msgid "About Godot..."
-msgstr "Pri Godot..."
+msgid "About FADE..."
+msgstr "Pri FADE..."
 
-msgid "Support Godot Development"
-msgstr "Subteni Godot ellaboradon"
+msgid "Support FADE Development"
+msgstr "Subteni FADE ellaboradon"
 
 msgid "Open 2D Workspace"
 msgstr "Malfermi la 2D-an scen-redaktilon"
@@ -3388,8 +3388,8 @@ msgstr "Mastrumilo de eksportaj ŝablonoj"
 msgid "Select Template File"
 msgstr "Elekti ŝablonan dosieron"
 
-msgid "Godot Export Templates"
-msgstr "Eksportajn ŝablonojn de Godot"
+msgid "FADE Export Templates"
+msgstr "Eksportajn ŝablonojn de FADE"
 
 msgid "Advanced Options"
 msgstr "Specialaj opcioj"
@@ -3571,11 +3571,11 @@ msgstr "Arĝentaj Sponsoroj"
 msgid "Base path: %s"
 msgstr "Vojprefikso: %s"
 
-msgid "Godot Engine contributors"
-msgstr "Kontribuantoj de Godot Engine"
+msgid "FADE Engine contributors"
+msgstr "Kontribuantoj de FADE Engine"
 
-msgid "Thanks from the Godot community!"
-msgstr "Dankon de la komunumo de Godot!"
+msgid "Thanks from the FADE community!"
+msgstr "Dankon de la komunumo de FADE!"
 
 msgid "Authors"
 msgstr "Aŭtoroj"
@@ -3587,12 +3587,12 @@ msgid "Third-party Licenses"
 msgstr "Permesiloj de eksteraj liverantoj"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"FADE Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Godot Engine fidas al multe liberaj kaj malfermitkodaj bibliotekoj de ekstera "
+"FADE Engine fidas al multe liberaj kaj malfermitkodaj bibliotekoj de ekstera "
 "liveranto, ĉio kongruas kun la kondiĉoj de ĝia MIT-permesilo. La jenoj estas "
 "elĉerpa listo de ĉiom tiaj komponantoj de ekstera liveranto kun iliaj "
 "kopirajtaj atentigoj kaj permesilaj kondiĉoj respektive."
@@ -3948,12 +3948,12 @@ msgstr "Nomo de la projekto"
 msgid "Project Path"
 msgstr "Dosierindiko de la projekto"
 
-msgid "This project was last edited in a different Godot version: "
+msgid "This project was last edited in a different FADE version: "
 msgstr ""
-"Oni redaktis ĉi tiun projekton je la lasta fojo per alia versio de Godot: "
+"Oni redaktis ĉi tiun projekton je la lasta fojo per alia versio de FADE: "
 
 msgid "This project uses features unsupported by the current build:"
-msgstr "Ĉi tiu projekto uzas eblojn nedisponeblajn en la nuna versio de Godot:"
+msgstr "Ĉi tiu projekto uzas eblojn nedisponeblajn en la nuna versio de FADE:"
 
 msgid "Error: Project is missing on the filesystem."
 msgstr "Eraro: La projekto mankas en la dosiersistemo."
@@ -3993,12 +3993,12 @@ msgid "Are you sure to run %d projects at once?"
 msgstr "Ĉu vi vere volas ruli %d projektojn samtempe?"
 
 msgid ""
-"Warning: This project was last edited in Godot %s. Opening will change it to "
-"Godot %s.\n"
+"Warning: This project was last edited in FADE %s. Opening will change it to "
+"FADE %s.\n"
 "\n"
 msgstr ""
-"Averto: Oni redaktis ĉi tiun projekton je la lasta fojo per Godot %s. "
-"Malfermi ĝin adaptos ĝin por Godot %s.\n"
+"Averto: Oni redaktis ĉi tiun projekton je la lasta fojo per FADE %s. "
+"Malfermi ĝin adaptos ĝin por FADE %s.\n"
 "\n"
 
 msgid "Open anyway? Project will be modified."
@@ -4032,8 +4032,8 @@ msgstr "La etikedo ne devas enhavi sinsekvajn substrekojn aŭ spacetojn."
 msgid "These characters are not allowed in tags: %s."
 msgstr "Etikedoj ne devas enhavi ĉi tiujn signojn: %s"
 
-msgid "About Godot"
-msgstr "Pri Godot"
+msgid "About FADE"
+msgstr "Pri FADE"
 
 msgid "Settings"
 msgstr "Agordoj"
@@ -4141,7 +4141,7 @@ msgid "Display Scale"
 msgstr "Dimensioj de la fenestroj"
 
 msgid "Network Mode"
-msgstr "Sinkronigado kun la retejo de Godot"
+msgstr "Sinkronigado kun la retejo de FADE"
 
 msgid "Check for Updates"
 msgstr "Serĉi ĝisdatigojn"
@@ -5054,8 +5054,8 @@ msgstr "Importi fasonon"
 msgid "Save Theme As..."
 msgstr "Konservi fasonon kiel..."
 
-msgid "Open '%s' in Godot online documentation."
-msgstr "Malfermi «%s» en la enreta dokumentaro de Godot."
+msgid "Open '%s' in FADE online documentation."
+msgstr "Malfermi «%s» en la enreta dokumentaro de FADE."
 
 msgid "Open in Online Docs"
 msgstr "Malfermi la enretan dokumentaron"
@@ -5063,8 +5063,8 @@ msgstr "Malfermi la enretan dokumentaron"
 msgid "Online Docs"
 msgstr "Enreta dokumentaro"
 
-msgid "Open Godot online documentation."
-msgstr "Malfermi enretan dokumentaron de Godot."
+msgid "Open FADE online documentation."
+msgstr "Malfermi enretan dokumentaron de FADE."
 
 msgid "Find..."
 msgstr "Trovi..."
@@ -5369,8 +5369,8 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Nomo de nova profilo:"
 
-msgid "Godot Feature Profile"
-msgstr "Profilo de funkciaro de Godot"
+msgid "FADE Feature Profile"
+msgstr "Profilo de funkciaro de FADE"
 
 msgid "Import Profile(s)"
 msgstr "Enporti profilo(j)n"

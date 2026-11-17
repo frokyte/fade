@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -1407,7 +1407,7 @@ void LightStorage::reflection_probe_set_reflection_mask(RID p_probe, uint32_t p_
 }
 
 void LightStorage::reflection_probe_set_resolution(RID p_probe, int p_resolution) {
-	WARN_PRINT_ONCE("reflection_probe_set_resolution is not available in Godot 4. ReflectionProbe size is configured in the project settings with the rendering/reflections/reflection_atlas/reflection_size setting.");
+	WARN_PRINT_ONCE("reflection_probe_set_resolution is not available in FADE 4. ReflectionProbe size is configured in the project settings with the rendering/reflections/reflection_atlas/reflection_size setting.");
 }
 
 void LightStorage::reflection_probe_set_mesh_lod_threshold(RID p_probe, float p_ratio) {

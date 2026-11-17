@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -47,11 +47,11 @@
 #undef BitMap
 #undef FontVariation
 
-@class GodotWindow;
-@class GodotContentView;
-@class GodotWindowDelegate;
-@class GodotButtonView;
-@class GodotProgressView;
+@class FADEWindow;
+@class FADEContentView;
+@class FADEWindowDelegate;
+@class FADEButtonView;
+@class FADEProgressView;
 
 class InputEvent;
 class InputEventWithModifiers;
@@ -87,10 +87,10 @@ public:
 	};
 
 	struct WindowData {
-		GodotWindowDelegate *window_delegate;
-		GodotWindow *window_object;
-		GodotContentView *window_view;
-		GodotButtonView *window_button_view;
+		FADEWindowDelegate *window_delegate;
+		FADEWindow *window_object;
+		FADEContentView *window_view;
+		FADEButtonView *window_button_view;
 
 		Vector<Vector2> mpath;
 
@@ -148,7 +148,7 @@ public:
 	List<DisplayServerEnums::WindowID> popup_list;
 	uint64_t time_since_popup = 0;
 
-	GodotProgressView *dock_progress = nullptr;
+	FADEProgressView *dock_progress = nullptr;
 
 private:
 	id screen_observer = nil;

@@ -1,6 +1,6 @@
-using Godot;
+using FADE;
 
-namespace Godot.SourceGenerators.Sample
+namespace FADE.SourceGenerators.Sample
 {
     public partial class ExportedComplexStrings : Node
     {

@@ -4,10 +4,10 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Godot.SourceGenerators.Internal;
+using FADE.SourceGenerators.Internal;
 
 
-namespace Godot.NativeInterop
+namespace FADE.NativeInterop
 {
     /*
      * IMPORTANT:

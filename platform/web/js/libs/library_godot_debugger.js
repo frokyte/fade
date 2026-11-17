@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,9 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-const GodotDebugger = {
-	$GodotDebugger__deps: ['$GodotRuntime', '$IDHandler', '$GodotConfig'],
-	$GodotDebugger: {
+const FADEDebugger = {
+	$FADEDebugger__deps: ['$FADERuntime', '$IDHandler', '$FADEConfig'],
+	$FADEDebugger: {
 		debug_id: -1,
 		bind: function (id, ref, cb) {
 			const o = IDHandler.get(id);
@@ -46,11 +46,11 @@ const GodotDebugger = {
 					if (event.data === 'stop') {
 						obj.active = false;
 					} else {
-						GodotRuntime.error('Invalid message', event.data);
+						FADERuntime.error('Invalid message', event.data);
 					}
 					return;
 				} else if (!(event.data instanceof Uint8Array)) {
-					GodotRuntime.error('Invalid message', event.data);
+					FADERuntime.error('Invalid message', event.data);
 					return;
 				}
 				const buffer = event.data;
@@ -58,10 +58,10 @@ const GodotDebugger = {
 					return;
 				}
 				const len = buffer.length * buffer.BYTES_PER_ELEMENT;
-				const out = GodotRuntime.malloc(len);
+				const out = FADERuntime.malloc(len);
 				HEAPU8.set(buffer, out);
 				cb(ref, out, len);
-				GodotRuntime.free(out);
+				FADERuntime.free(out);
 			};
 			return id;
 		},
@@ -89,8 +89,8 @@ const GodotDebugger = {
 		if (!p_size) {
 			return;
 		}
-		const msg = GodotRuntime.heapSlice(HEAPU8, p_ptr, p_size);
-		GodotDebugger.post(p_id, msg);
+		const msg = FADERuntime.heapSlice(HEAPU8, p_ptr, p_size);
+		FADEDebugger.post(p_id, msg);
 	},
 
 	godot_js_debugger_bind__proxy: 'sync',
@@ -98,29 +98,29 @@ const GodotDebugger = {
 	godot_js_debugger_bind: function (p_id, p_cb, p_ref) {
 		let id = p_id;
 		if (id == -1) {
-			if (!GodotConfig.debug_port) {
+			if (!FADEConfig.debug_port) {
 				return -1;
 			}
-			if (GodotDebugger.debug_id !== -1) {
-				GodotRuntime.error('Already bound');
+			if (FADEDebugger.debug_id !== -1) {
+				FADERuntime.error('Already bound');
 				return -1;
 			}
 			id = IDHandler.add({
-				port: GodotConfig.debug_port,
+				port: FADEConfig.debug_port,
 				active: true,
 			});
-			GodotDebugger.debug_id = id;
+			FADEDebugger.debug_id = id;
 		}
-		const cb = GodotRuntime.get_func(p_cb);
-		return GodotDebugger.bind(id, p_ref, cb);
+		const cb = FADERuntime.get_func(p_cb);
+		return FADEDebugger.bind(id, p_ref, cb);
 	},
 
 	godot_js_debugger_unbind__proxy: 'sync',
 	godot_js_debugger_unbind__sig: 'vi',
 	godot_js_debugger_unbind: function (p_id) {
-		GodotDebugger.unbind(p_id);
+		FADEDebugger.unbind(p_id);
 		IDHandler.remove(p_id);
-		GodotDebugger.debug_id = -1;
+		FADEDebugger.debug_id = -1;
 	},
 
 	godot_js_debugger_active__proxy: 'sync',
@@ -135,5 +135,5 @@ const GodotDebugger = {
 
 };
 
-autoAddDeps(GodotDebugger, '$GodotDebugger');
-mergeInto(LibraryManager.library, GodotDebugger);
+autoAddDeps(FADEDebugger, '$FADEDebugger');
+mergeInto(LibraryManager.library, FADEDebugger);

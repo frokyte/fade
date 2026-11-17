@@ -1,7 +1,7 @@
-using Godot;
+using FADE;
 using System.Globalization;
 
-namespace GodotTools.Build
+namespace FADETools.Build
 {
     public class BuildProblemsFilter
     {

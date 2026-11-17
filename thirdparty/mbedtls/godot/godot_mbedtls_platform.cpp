@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -113,7 +113,7 @@ int godot_mbedtls_cond_broadcast(mbedtls_platform_condition_variable_t *p_cv) {
 int godot_mbedtls_cond_wait(mbedtls_platform_condition_variable_t *p_cv, mbedtls_platform_mutex_t *p_mutex) {
 	// XXX: This function is not currently implemented but also **not used** by mbedTLS.
 	// The library documentation states that this function is expected to be called with the mutex already locked.
-	// This feels a bit strange (and not possible without changing Godot core API).
+	// This feels a bit strange (and not possible without changing FADE core API).
 	// Use a verbose error so we can catch it if a future mbedTLS version starts using it.
 	ERR_FAIL_V(MBEDTLS_ERR_THREADING_USAGE_ERROR);
 #if 0

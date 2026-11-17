@@ -1,4 +1,4 @@
-namespace GodotTools.Build
+namespace FADETools.Build
 {
     public enum BuildResult
     {

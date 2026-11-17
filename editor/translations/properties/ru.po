@@ -1,7 +1,7 @@
-# Russian translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Russian translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Аркадий Авас <savvot@gmail.com>, 2018.
 # Artem Varaksa <aymfst@gmail.com>, 2018.
 # B10nicMachine <shumik1337@gmail.com>, 2017.
@@ -217,7 +217,7 @@
 # Alexander Dmitriev <dmitriev8925@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-08-28 22:38+0000\n"
@@ -4102,8 +4102,8 @@ msgstr "Всегда отслеживать стек вызовов"
 msgid "Always Track Local Variables"
 msgstr "Всегда отслеживать локальные переменные"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Переименовано в Godot 4 Hint"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Переименовано в FADE 4 Hint"
 
 msgid "Unassigned Variable"
 msgstr "Неназначенная Переменная"
@@ -4501,11 +4501,11 @@ msgstr "Свет"
 msgid "Visible"
 msgstr "Видимый"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF к выражению Godot"
+msgid "glTF to FADE Expression"
+msgstr "glTF к выражению FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot к выражению glTF"
+msgid "FADE to glTF Expression"
+msgstr "FADE к выражению glTF"
 
 msgid "Node Paths"
 msgstr "Пути к узлам"
@@ -4525,8 +4525,8 @@ msgstr "Суставы"
 msgid "Roots"
 msgstr "Корни"
 
-msgid "Godot Bone Node"
-msgstr "Узел кости Godot"
+msgid "FADE Bone Node"
+msgstr "Узел кости FADE"
 
 msgid "Skin Root"
 msgstr "Корень скина"
@@ -4537,8 +4537,8 @@ msgstr "Суставы (оригинал)"
 msgid "Non Joints"
 msgstr "Не суставы"
 
-msgid "Godot Skin"
-msgstr "Скин Godot"
+msgid "FADE Skin"
+msgstr "Скин FADE"
 
 msgid "Src Image"
 msgstr "Исходное изображение"
@@ -5576,8 +5576,8 @@ msgstr "Хост удалённой отладки по Wi-Fi"
 msgid "Splash Screen"
 msgstr "Экран заставки"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Отключить загрузочную заставку Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "Отключить загрузочную заставку FADE"
 
 msgid "Background Color"
 msgstr "Цвет фона"
@@ -6131,8 +6131,8 @@ msgstr "Значок 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "Размер пула памяти Emscripten"
 
-msgid "Godot Pool Size"
-msgstr "Размера пула памяти Godot"
+msgid "FADE Pool Size"
+msgstr "Размера пула памяти FADE"
 
 msgid "Windows"
 msgstr "Windows"

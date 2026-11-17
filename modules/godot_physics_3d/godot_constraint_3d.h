@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -33,11 +33,11 @@
 #include "core/templates/rid.h"
 #include "core/typedefs.h"
 
-class GodotBody3D;
-class GodotSoftBody3D;
+class FADEBody3D;
+class FADESoftBody3D;
 
-class GodotConstraint3D {
-	GodotBody3D **_body_ptr;
+class FADEConstraint3D {
+	FADEBody3D **_body_ptr;
 	int _body_count;
 	uint64_t island_step;
 	int priority;
@@ -46,7 +46,7 @@ class GodotConstraint3D {
 	RID self;
 
 protected:
-	GodotConstraint3D(GodotBody3D **p_body_ptr = nullptr, int p_body_count = 0) {
+	FADEConstraint3D(FADEBody3D **p_body_ptr = nullptr, int p_body_count = 0) {
 		_body_ptr = p_body_ptr;
 		_body_count = p_body_count;
 		island_step = 0;
@@ -61,10 +61,10 @@ public:
 	_FORCE_INLINE_ uint64_t get_island_step() const { return island_step; }
 	_FORCE_INLINE_ void set_island_step(uint64_t p_step) { island_step = p_step; }
 
-	_FORCE_INLINE_ GodotBody3D **get_body_ptr() const { return _body_ptr; }
+	_FORCE_INLINE_ FADEBody3D **get_body_ptr() const { return _body_ptr; }
 	_FORCE_INLINE_ int get_body_count() const { return _body_count; }
 
-	virtual GodotSoftBody3D *get_soft_body_ptr(int p_index) const { return nullptr; }
+	virtual FADESoftBody3D *get_soft_body_ptr(int p_index) const { return nullptr; }
 	virtual int get_soft_body_count() const { return 0; }
 
 	_FORCE_INLINE_ void set_priority(int p_priority) { priority = MAX(0, p_priority); }
@@ -77,5 +77,5 @@ public:
 	virtual bool pre_solve(real_t p_step) = 0;
 	virtual void solve(real_t p_step) = 0;
 
-	virtual ~GodotConstraint3D() {}
+	virtual ~FADEConstraint3D() {}
 };

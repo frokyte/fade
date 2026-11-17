@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -117,7 +117,7 @@ void JoltCustomInstanceOverridesShape::register_type() {
 void JoltCustomInstanceOverridesShape::CastRay(const JPH::RayCast &p_ray, const JPH::RayCastSettings &p_ray_cast_settings, const JPH::SubShapeIDCreator &p_sub_shape_id_creator, JPH::CastRayCollector &p_collector, const JPH::ShapeFilter &p_shape_filter) const {
 	JPH::RayCastSettings new_ray_cast_settings = p_ray_cast_settings;
 	if (!shape_has_back_face_collision()) {
-		// While ray-casts in Godot can be configured to hit back-faces, it's only allowed to do so if the `backface_collision` property of the shape is enabled as well.
+		// While ray-casts in FADE can be configured to hit back-faces, it's only allowed to do so if the `backface_collision` property of the shape is enabled as well.
 		new_ray_cast_settings.mBackFaceModeTriangles = JPH::EBackFaceMode::IgnoreBackFaces;
 	}
 

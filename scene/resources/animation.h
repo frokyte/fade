@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -59,7 +59,7 @@ public:
 		TYPE_ANIMATION,
 	};
 
-	// TODO: Reorder the MAKIMA next to the CUBIC in Godot 5, since the enum values are serialized and cannot be changed without breaking compat.
+	// TODO: Reorder the MAKIMA next to the CUBIC in FADE 5, since the enum values are serialized and cannot be changed without breaking compat.
 	enum InterpolationType : uint8_t {
 		INTERPOLATION_NEAREST,
 		INTERPOLATION_LINEAR,

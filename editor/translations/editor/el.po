@@ -1,7 +1,7 @@
-# Greek translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Greek translation of the FADE Engine editor interface.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # George Tsiamasiotis <gtsiam@windowslive.com>, 2017-2018, 2019, 2020, 2021.
 # Georgios Katsanakis <geo.elgeo@gmail.com>, 2019.
 # Overloaded <manoschool@yahoo.gr>, 2019.
@@ -38,7 +38,7 @@
 # MedProgAyat <hosseinmehriyari1383@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: FADE Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-07-07 03:31+0000\n"
@@ -3124,11 +3124,11 @@ msgstr "Αναφορά Σφάλματος"
 msgid "Send Docs Feedback"
 msgstr "Αποστολή Σχολίων Τεκμηρίωσης"
 
-msgid "About Godot..."
-msgstr "Σχετικά με την Godot..."
+msgid "About FADE..."
+msgstr "Σχετικά με την FADE..."
 
-msgid "Support Godot Development"
-msgstr "Υποστηρίξτε την ανάπτυξη του Godot"
+msgid "Support FADE Development"
+msgstr "Υποστηρίξτε την ανάπτυξη του FADE"
 
 msgid "Open Script Editor"
 msgstr "Άνοιγμα Επεξεργαστή Δεσμών Ενεργειών"
@@ -3316,8 +3316,8 @@ msgstr "Λήψη από:"
 msgid "Select Template File"
 msgstr "Επιλογή Αρχείου Προτύπων"
 
-msgid "Godot Export Templates"
-msgstr "Προτύπων Εξαγωγής Godot"
+msgid "FADE Export Templates"
+msgstr "Προτύπων Εξαγωγής FADE"
 
 msgid "Export templates for this platform are missing:"
 msgstr "Τα πρότυπα εξαγωγής για αυτή την πλατφόρτμα λείπουν:"
@@ -3575,8 +3575,8 @@ msgstr "Μέλη Διαμάντια"
 msgid "Titanium Members"
 msgstr "Μέλη Τιτανίου"
 
-msgid "Thank you for choosing Godot Engine!"
-msgstr "Σας ευχαριστούμε που επιλέξατε την μηχανή Godot!"
+msgid "Thank you for choosing FADE Engine!"
+msgstr "Σας ευχαριστούμε που επιλέξατε την μηχανή FADE!"
 
 msgid "Name cannot be empty."
 msgstr "Το όνομα δεν μπορεί να είναι κενό."
@@ -3590,11 +3590,11 @@ msgstr "Ήδη υπαρκτό όνομα κίνησης."
 msgid "Base path: %s"
 msgstr "Βασική διαδρομή: %s"
 
-msgid "Godot Engine contributors"
-msgstr "Συνεισφέροντες στην Godot Engine"
+msgid "FADE Engine contributors"
+msgstr "Συνεισφέροντες στην FADE Engine"
 
-msgid "Thanks from the Godot community!"
-msgstr "Ευχαριστίες από την κοινότητα της Godot!"
+msgid "Thanks from the FADE community!"
+msgstr "Ευχαριστίες από την κοινότητα της FADE!"
 
 msgid "Authors"
 msgstr "Συγγραφείς"
@@ -3606,12 +3606,12 @@ msgid "Third-party Licenses"
 msgstr "Άδειες τρίτων κατασκευαστών"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"FADE Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Η μηχανή Godot βασίζεται σε μια σειρά από δωρεάν και ανοιχτού κώδικα "
+"Η μηχανή FADE βασίζεται σε μια σειρά από δωρεάν και ανοιχτού κώδικα "
 "βιβλιοθήκες τρίτων κατασκευαστών, όλες συμβατές με τους όρους της άδειας MIT. "
 "Ακολουθεί μία εκτενής λίστα με όλα τα σχετικά συστατικά της μηχανής μαζί με "
 "όλες τις αντοίστοιχες δηλώσεις προστασίας πνευματικών δικαιωμάτων και τους "
@@ -5901,8 +5901,8 @@ msgstr "Αποθήκευση θέματος ως..."
 msgid "Online Docs"
 msgstr "Ηλεκτρονική τεκμηρίωση"
 
-msgid "Open Godot online documentation."
-msgstr "Άνοιγμα ηλεκτρονικής τεκμηρίωσης της Godot."
+msgid "Open FADE online documentation."
+msgstr "Άνοιγμα ηλεκτρονικής τεκμηρίωσης της FADE."
 
 msgid "Find..."
 msgstr "Εύρεση..."
@@ -6253,8 +6253,8 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Νέο όνομα προφίλ:"
 
-msgid "Godot Feature Profile"
-msgstr "Προφίλ Χαρακτηριστικών του Godot"
+msgid "FADE Feature Profile"
+msgstr "Προφίλ Χαρακτηριστικών του FADE"
 
 msgid "Import Profile(s)"
 msgstr "Εισαγωγή Προφίλ"
@@ -7112,11 +7112,11 @@ msgstr ""
 "«x» και «y»."
 
 msgid ""
-"Custom Godot Shader Language expression, with custom amount of input and "
+"Custom FADE Shader Language expression, with custom amount of input and "
 "output ports. This is a direct injection of code into the vertex/fragment/"
 "light function, do not use it to write the function declarations inside."
 msgstr ""
-"Προσαρμοσμένη έκφραση γλώσσας σκίασης της Godot, με προσαρμοσμένο αριθμό "
+"Προσαρμοσμένη έκφραση γλώσσας σκίασης της FADE, με προσαρμοσμένο αριθμό "
 "εισόδων και εξόδων. Αυτό είναι μία άμεση παρεμβολή κώδικα στην συνάρτηση "
 "κορυφής/τμήματος/φωτός, μην γράψετε μέσα ορισμούς συναρτήσεων."
 

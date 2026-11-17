@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotAppInstrumentedTestPlugin.kt                                     */
+/*  FADEAppInstrumentedTestPlugin.kt                                     */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -32,21 +32,21 @@ package com.godot.game.test
 
 import android.util.Log
 import android.widget.Toast
-import org.godotengine.godot.Godot
-import org.godotengine.godot.plugin.GodotPlugin
-import org.godotengine.godot.plugin.UsedByGodot
+import org.godotengine.godot.FADE
+import org.godotengine.godot.plugin.FADEPlugin
+import org.godotengine.godot.plugin.UsedByFADE
 import org.godotengine.godot.plugin.SignalInfo
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 /**
- * [GodotPlugin] used to drive instrumented tests.
+ * [FADEPlugin] used to drive instrumented tests.
  */
-class GodotAppInstrumentedTestPlugin(godot: Godot) : GodotPlugin(godot) {
+class FADEAppInstrumentedTestPlugin(godot: FADE) : FADEPlugin(godot) {
 
 	companion object {
-		private val TAG = GodotAppInstrumentedTestPlugin::class.java.simpleName
+		private val TAG = FADEAppInstrumentedTestPlugin::class.java.simpleName
 		private const val MAIN_LOOP_STARTED_LATCH_KEY = "main_loop_started_latch"
 		private const val ENGINE_TERMINATING_LATCH_KEY = "engine_terminating_latch"
 
@@ -67,41 +67,41 @@ class GodotAppInstrumentedTestPlugin(godot: Godot) : GodotPlugin(godot) {
 	private val latches = ConcurrentHashMap<String, CountDownLatch>()
 
 	init {
-		// Add a countdown latch that is triggered when `onGodotMainLoopStarted` is fired.
+		// Add a countdown latch that is triggered when `onFADEMainLoopStarted` is fired.
 		// This will be used by tests to wait until the engine is ready.
 		latches[MAIN_LOOP_STARTED_LATCH_KEY] = CountDownLatch(1)
 		// Add a countdown latch that is triggered when the engine terminates.
 		latches[ENGINE_TERMINATING_LATCH_KEY] = CountDownLatch(1)
 	}
 
-	override fun getPluginName() = "GodotAppInstrumentedTestPlugin"
+	override fun getPluginName() = "FADEAppInstrumentedTestPlugin"
 
 	override fun getPluginSignals() = SIGNALS
 
-	override fun onGodotMainLoopStarted() {
-		super.onGodotMainLoopStarted()
+	override fun onFADEMainLoopStarted() {
+		super.onFADEMainLoopStarted()
 		latches.remove(MAIN_LOOP_STARTED_LATCH_KEY)?.countDown()
 	}
 
-	override fun onGodotTerminating() {
-		super.onGodotTerminating()
+	override fun onFADETerminating() {
+		super.onFADETerminating()
 		latches.remove(ENGINE_TERMINATING_LATCH_KEY)?.countDown()
 	}
 
 	/**
-	 * Used by the instrumented test to wait until the Godot main loop is up and running.
+	 * Used by the instrumented test to wait until the FADE main loop is up and running.
 	 */
-	internal fun waitForGodotMainLoopStarted() {
-		// Wait on the CountDownLatch for `onGodotMainLoopStarted`
+	internal fun waitForFADEMainLoopStarted() {
+		// Wait on the CountDownLatch for `onFADEMainLoopStarted`
 		try {
 			latches[MAIN_LOOP_STARTED_LATCH_KEY]?.await()
 		} catch (e: InterruptedException) {
-			Log.e(TAG, "Unable to wait for Godot main loop started event.", e)
+			Log.e(TAG, "Unable to wait for FADE main loop started event.", e)
 		}
 	}
 
 	internal fun waitForEngineTermination(timeoutInMs: Long) {
-		// Wait on the CountDownLatch for `onGodotTerminating`.
+		// Wait on the CountDownLatch for `onFADETerminating`.
 		try {
 			latches[ENGINE_TERMINATING_LATCH_KEY]?.await(timeoutInMs, TimeUnit.MILLISECONDS)
 		} catch (e: InterruptedException) {
@@ -147,7 +147,7 @@ class GodotAppInstrumentedTestPlugin(godot: Godot) : GodotPlugin(godot) {
 	/**
 	 * Callback invoked from gdscript when the tests are completed.
 	 */
-	@UsedByGodot
+	@UsedByFADE
 	fun onTestsCompleted(testLabel: String, passes: Int, failures: Int) {
 		Log.d(TAG, "$testLabel tests completed")
 		val result = if (failures == 0) {
@@ -159,7 +159,7 @@ class GodotAppInstrumentedTestPlugin(godot: Godot) : GodotPlugin(godot) {
 		completeTest(testLabel, result)
 	}
 
-	@UsedByGodot
+	@UsedByFADE
 	fun onTestsFailed(testLabel: String, failureMessage: String) {
 		Log.d(TAG, "$testLabel tests failed")
 		val result: Result<Any> = Result.failure(AssertionError(failureMessage))
@@ -171,7 +171,7 @@ class GodotAppInstrumentedTestPlugin(godot: Godot) : GodotPlugin(godot) {
 		latches.remove(testKey)?.countDown()
 	}
 
-	@UsedByGodot
+	@UsedByFADE
 	fun helloWorld() {
 		runOnHostThread {
 			Toast.makeText(activity, "Toast from Android plugin", Toast.LENGTH_LONG).show()

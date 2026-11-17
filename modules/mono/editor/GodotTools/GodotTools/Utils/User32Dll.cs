@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace GodotTools.Utils
+namespace FADETools.Utils
 {
     public static class User32Dll
     {

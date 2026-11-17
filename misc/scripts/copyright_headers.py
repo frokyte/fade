@@ -11,7 +11,7 @@ header = """\
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -75,8 +75,8 @@ for f in sys.argv[1:]:
         while line.strip() == "" and line != "":  # Skip empty lines at the top
             line = fileread.readline()
 
-        if line.find("/**********") == -1:  # Godot header starts this way
-            # Maybe starting with a non-Godot comment, abort header magic
+        if line.find("/**********") == -1:  # FADE header starts this way
+            # Maybe starting with a non-FADE comment, abort header magic
             header_done = True
 
         while not header_done:  # Handle header now

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -33,9 +33,9 @@ package org.godotengine.godot.io
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import org.godotengine.godot.Godot
+import org.godotengine.godot.FADE
 import java.io.File
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.FADELib
 
 /**
  * Represents the different storage scopes.
@@ -102,7 +102,7 @@ internal enum class StorageScope {
 				return ASSETS
 			}
 
-			if (Godot.isTemplateBuild() && path.startsWith(ACCESS_RESOURCES_PREFIX)) {
+			if (FADE.isTemplateBuild() && path.startsWith(ACCESS_RESOURCES_PREFIX)) {
 				return ASSETS
 			}
 
@@ -113,7 +113,7 @@ internal enum class StorageScope {
 
 			var pathFile = File(path)
 			if (!pathFile.isAbsolute) {
-				pathFile = File(GodotLib.getProjectResourceDir(), path)
+				pathFile = File(FADELib.getProjectResourceDir(), path)
 				if (!pathFile.isAbsolute) {
 					return UNKNOWN
 				}

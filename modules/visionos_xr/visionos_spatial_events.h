@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -62,7 +62,7 @@ struct VisionOSSpatialEvent {
 	Phase phase;
 };
 
-// Godot representation of visionOS spatial events.
+// FADE representation of visionOS spatial events.
 struct VisionOSSpatialEventTracking {
 	// Ray from center of the head to
 	// the direction of the eyes, when a
@@ -77,7 +77,7 @@ struct VisionOSSpatialEventTracking {
 		bool ray_submitted = false;
 
 		// Correcting the transforms from each hand to
-		// map to the Godot and OpenXR convention:
+		// map to the FADE and OpenXR convention:
 		// https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_hand_interaction
 		Transform3D transform_correction;
 	};

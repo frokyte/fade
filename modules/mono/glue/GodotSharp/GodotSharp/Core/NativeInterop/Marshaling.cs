@@ -2,7 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Godot.Collections;
+using FADE.Collections;
 using Array = System.Array;
 
 // ReSharper disable InconsistentNaming
@@ -12,7 +12,7 @@ using Array = System.Array;
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace FADE.NativeInterop
 {
     public static class Marshaling
     {
@@ -162,21 +162,21 @@ namespace Godot.NativeInterop
                         if (type == typeof(Rid[]))
                             return Variant.Type.Array;
 
-                        if (typeof(GodotObject[]).IsAssignableFrom(type))
+                        if (typeof(FADEObject[]).IsAssignableFrom(type))
                             return Variant.Type.Array;
                     }
                     else if (type.IsGenericType)
                     {
-                        if (typeof(GodotObject).IsAssignableFrom(type))
+                        if (typeof(FADEObject).IsAssignableFrom(type))
                             return Variant.Type.Object;
 
-                        // We use `IsAssignableFrom` with our helper interfaces to detect generic Godot collections
+                        // We use `IsAssignableFrom` with our helper interfaces to detect generic FADE collections
                         // because `GetGenericTypeDefinition` is not supported in NativeAOT reflection-free mode.
 
-                        if (typeof(IGenericGodotDictionary).IsAssignableFrom(type))
+                        if (typeof(IGenericFADEDictionary).IsAssignableFrom(type))
                             return Variant.Type.Dictionary;
 
-                        if (typeof(IGenericGodotArray).IsAssignableFrom(type))
+                        if (typeof(IGenericFADEArray).IsAssignableFrom(type))
                             return Variant.Type.Array;
                     }
                     else if (type == typeof(Variant))
@@ -186,7 +186,7 @@ namespace Godot.NativeInterop
                     }
                     else
                     {
-                        if (typeof(GodotObject).IsAssignableFrom(type))
+                        if (typeof(FADEObject).IsAssignableFrom(type))
                             return Variant.Type.Object;
 
                         if (typeof(StringName) == type)
@@ -229,14 +229,14 @@ namespace Godot.NativeInterop
 
             godot_ref scriptRef = default;
 
-            if (!GodotObject.IsNativeClass(typeof(T)))
+            if (!FADEObject.IsNativeClass(typeof(T)))
             {
                 unsafe
                 {
-                    Godot.Bridge.ScriptManagerBridge.GetOrLoadOrCreateScriptForType(typeof(T), &scriptRef);
+                    FADE.Bridge.ScriptManagerBridge.GetOrLoadOrCreateScriptForType(typeof(T), &scriptRef);
                 }
 
-                // Don't call GodotObject.InternalGetClassNativeBaseName here!
+                // Don't call FADEObject.InternalGetClassNativeBaseName here!
                 // godot_dictionary_set_typed and godot_array_set_typed will call CSharpScript::get_instance_base_type
                 // when a script is passed, because this is better for performance than using reflection to find the
                 // native base type.
@@ -244,7 +244,7 @@ namespace Godot.NativeInterop
             }
             else
             {
-                StringName? nativeBaseName = GodotObject.InternalGetClassNativeBaseName(typeof(T));
+                StringName? nativeBaseName = FADEObject.InternalGetClassNativeBaseName(typeof(T));
                 className = nativeBaseName != null ? (godot_string_name)nativeBaseName.NativeValue : default;
             }
 
@@ -289,7 +289,7 @@ namespace Godot.NativeInterop
                 var gcHandle = CustomGCHandle.AllocStrong(p_managed_callable.Delegate);
 
                 IntPtr objectPtr = p_managed_callable.Target != null ?
-                    GodotObject.GetPtr(p_managed_callable.Target) :
+                    FADEObject.GetPtr(p_managed_callable.Target) :
                     IntPtr.Zero;
 
                 unsafe
@@ -367,7 +367,7 @@ namespace Godot.NativeInterop
 
         public static Signal ConvertSignalToManaged(in godot_signal p_signal)
         {
-            var owner = GodotObject.InstanceFromId(p_signal.ObjectId);
+            var owner = FADEObject.InstanceFromId(p_signal.ObjectId);
             var name = StringName.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_string_name_new_copy(p_signal.Name));
             return new Signal(owner, name);
@@ -375,8 +375,8 @@ namespace Godot.NativeInterop
 
         // Array
 
-        internal static T[] ConvertNativeGodotArrayToSystemArrayOfGodotObjectType<T>(in godot_array p_array)
-            where T : GodotObject
+        internal static T[] ConvertNativeFADEArrayToSystemArrayOfFADEObjectType<T>(in godot_array p_array)
+            where T : FADEObject
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));
@@ -385,12 +385,12 @@ namespace Godot.NativeInterop
             var ret = new T[length];
 
             for (int i = 0; i < length; i++)
-                ret[i] = (T)array[i].AsGodotObject();
+                ret[i] = (T)array[i].AsFADEObject();
 
             return ret;
         }
 
-        internal static StringName[] ConvertNativeGodotArrayToSystemArrayOfStringName(in godot_array p_array)
+        internal static StringName[] ConvertNativeFADEArrayToSystemArrayOfStringName(in godot_array p_array)
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));
@@ -404,7 +404,7 @@ namespace Godot.NativeInterop
             return ret;
         }
 
-        internal static NodePath[] ConvertNativeGodotArrayToSystemArrayOfNodePath(in godot_array p_array)
+        internal static NodePath[] ConvertNativeFADEArrayToSystemArrayOfNodePath(in godot_array p_array)
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));
@@ -418,7 +418,7 @@ namespace Godot.NativeInterop
             return ret;
         }
 
-        internal static Rid[] ConvertNativeGodotArrayToSystemArrayOfRid(in godot_array p_array)
+        internal static Rid[] ConvertNativeFADEArrayToSystemArrayOfRid(in godot_array p_array)
         {
             var array = Collections.Array.CreateTakingOwnershipOfDisposableValue(
                 NativeFuncs.godotsharp_array_new_copy(p_array));

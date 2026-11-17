@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using Godot;
-using GodotTools.Internals;
+using FADE;
+using FADETools.Internals;
 using JetBrains.Rider.PathLocator;
 
-namespace GodotTools.Ides.Rider
+namespace FADETools.Ides.Rider
 {
     public static class RiderPathManager
     {
@@ -38,7 +38,7 @@ namespace GodotTools.Ides.Rider
             if (!editorSettings.HasSetting(EditorPathSettingName))
             {
                 Globals.EditorDef(EditorPathSettingName, "");
-                editorSettings.AddPropertyInfo(new Godot.Collections.Dictionary
+                editorSettings.AddPropertyInfo(new FADE.Collections.Dictionary
                 {
                     ["type"] = (int)Variant.Type.String,
                     ["name"] = EditorPathSettingName,

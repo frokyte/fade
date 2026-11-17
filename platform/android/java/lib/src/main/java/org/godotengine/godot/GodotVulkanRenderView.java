@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotVulkanRenderView.java                                            */
+/*  FADEVulkanRenderView.java                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,8 +30,8 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.GodotLib;
-import org.godotengine.godot.input.GodotInputHandler;
+import org.godotengine.godot.FADELib;
+import org.godotengine.godot.input.FADEInputHandler;
 import org.godotengine.godot.vulkan.VkRenderer;
 import org.godotengine.godot.vulkan.VkSurfaceView;
 
@@ -55,30 +55,30 @@ import androidx.annotation.Keep;
 
 import java.io.InputStream;
 
-class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
-	private final Godot godot;
-	private final GodotInputHandler mInputHandler;
+class FADEVulkanRenderView extends VkSurfaceView implements FADERenderView {
+	private final FADE godot;
+	private final FADEInputHandler mInputHandler;
 	private final VkRenderer mRenderer;
 	private final SparseArray<PointerIcon> customPointerIcons = new SparseArray<>();
 
 	private final AccessibilityNodeProvider accessibilityNodeProvider;
 	private final long mWindowID = 0; // DisplayServerEnums::MAIN_WINDOW_ID
 
-	public GodotVulkanRenderView(Godot godot, GodotInputHandler inputHandler, boolean shouldBeTranslucent) {
+	public FADEVulkanRenderView(FADE godot, FADEInputHandler inputHandler, boolean shouldBeTranslucent) {
 		super(godot.getContext());
-		if (GodotLib.createAccessKitAdapter(mWindowID)) {
+		if (FADELib.createAccessKitAdapter(mWindowID)) {
 			accessibilityNodeProvider = new AccessibilityNodeProvider() {
 				@Override
 				public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
-					return GodotLib.createAccessibilityNodeInfo(mWindowID, getView(), virtualViewId);
+					return FADELib.createAccessibilityNodeInfo(mWindowID, getView(), virtualViewId);
 				}
 				@Override
 				public AccessibilityNodeInfo findFocus(int focusType) {
-					return GodotLib.findAccessibilityFocus(mWindowID, getView(), focusType);
+					return FADELib.findAccessibilityFocus(mWindowID, getView(), focusType);
 				}
 				@Override
 				public boolean performAction(int virtualViewId, int action, Bundle arguments) {
-					return GodotLib.performAccessibilityAction(mWindowID, getView(), virtualViewId, action, arguments);
+					return FADELib.performAccessibilityAction(mWindowID, getView(), virtualViewId, action, arguments);
 				}
 			};
 			setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
@@ -100,7 +100,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	@Override
 	public boolean onHoverEvent(MotionEvent event) {
 		boolean handled = mInputHandler.onGenericMotionEvent(event) || super.onHoverEvent(event);
-		if (accessibilityNodeProvider != null && GodotLib.onAccessibilityHoverEvent(mWindowID, this, event.getAction(), event.getX(), event.getY())) {
+		if (accessibilityNodeProvider != null && FADELib.onAccessibilityHoverEvent(mWindowID, this, event.getAction(), event.getX(), event.getY())) {
 			handled = true;
 		}
 		return handled;
@@ -117,7 +117,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	@Override
 	protected void finalize() throws Throwable {
 		try {
-			GodotLib.freeAccessKitAdapter(mWindowID);
+			FADELib.freeAccessKitAdapter(mWindowID);
 		} finally {
 			super.finalize();
 		}
@@ -141,7 +141,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	@Override
 	public void onActivityPaused() {
 		queueOnVkThread(() -> {
-			GodotLib.focusout();
+			FADELib.focusout();
 			// Pause the renderer
 			mRenderer.onVkPause();
 		});
@@ -162,7 +162,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 		queueOnVkThread(() -> {
 			// Resume the renderer
 			mRenderer.onVkResume();
-			GodotLib.focusin();
+			FADELib.focusin();
 		});
 	}
 
@@ -172,7 +172,7 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	}
 
 	@Override
-	public GodotInputHandler getInputHandler() {
+	public FADEInputHandler getInputHandler() {
 		return mInputHandler;
 	}
 

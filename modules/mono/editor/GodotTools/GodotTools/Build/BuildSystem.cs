@@ -7,13 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Godot;
-using GodotTools.BuildLogger;
-using GodotTools.Internals;
-using GodotTools.Utils;
-using Directory = GodotTools.Utils.Directory;
+using FADE;
+using FADETools.BuildLogger;
+using FADETools.Internals;
+using FADETools.Utils;
+using Directory = FADETools.Utils.Directory;
 
-namespace GodotTools.Build
+namespace FADETools.Build
 {
     public static class BuildSystem
     {
@@ -33,7 +33,7 @@ namespace GodotTools.Build
 
             string launchMessage = startInfo.GetCommandLineDisplay(new StringBuilder("Running: ")).ToString();
             stdOutHandler?.Invoke(launchMessage);
-            if (Godot.OS.IsStdOutVerbose())
+            if (FADE.OS.IsStdOutVerbose())
                 Console.WriteLine(launchMessage);
 
             startInfo.RedirectStandardOutput = true;
@@ -104,7 +104,7 @@ namespace GodotTools.Build
 
             string launchMessage = startInfo.GetCommandLineDisplay(new StringBuilder("Running: ")).ToString();
             stdOutHandler?.Invoke(launchMessage);
-            if (Godot.OS.IsStdOutVerbose())
+            if (FADE.OS.IsStdOutVerbose())
                 Console.WriteLine(launchMessage);
 
             startInfo.RedirectStandardOutput = true;
@@ -266,7 +266,7 @@ namespace GodotTools.Build
             EditorSettings editorSettings)
         {
             var verbosityLevel =
-                editorSettings.GetSetting(GodotSharpEditor.Settings.VerbosityLevel).As<VerbosityLevelId>();
+                editorSettings.GetSetting(FADESharpEditor.Settings.VerbosityLevel).As<VerbosityLevelId>();
             arguments.Add("-v");
             arguments.Add(verbosityLevel switch
             {
@@ -277,23 +277,23 @@ namespace GodotTools.Build
                 _ => "normal",
             });
 
-            if ((bool)editorSettings.GetSetting(GodotSharpEditor.Settings.NoConsoleLogging))
+            if ((bool)editorSettings.GetSetting(FADESharpEditor.Settings.NoConsoleLogging))
                 arguments.Add("-noconlog");
         }
 
         private static void AddLoggerArgument(BuildInfo buildInfo, Collection<string> arguments)
         {
-            string buildLoggerPath = Path.Combine(Internals.GodotSharpDirs.DataEditorToolsDir,
-                "GodotTools.BuildLogger.dll");
+            string buildLoggerPath = Path.Combine(Internals.FADESharpDirs.DataEditorToolsDir,
+                "FADETools.BuildLogger.dll");
 
             arguments.Add(
-                $"-l:{typeof(GodotBuildLogger).FullName},{buildLoggerPath};{buildInfo.LogsDirPath}");
+                $"-l:{typeof(FADEBuildLogger).FullName},{buildLoggerPath};{buildInfo.LogsDirPath}");
         }
 
         private static void AddBinaryLogArgument(BuildInfo buildInfo, Collection<string> arguments,
             EditorSettings editorSettings)
         {
-            if (!(bool)editorSettings.GetSetting(GodotSharpEditor.Settings.CreateBinaryLog))
+            if (!(bool)editorSettings.GetSetting(FADESharpEditor.Settings.CreateBinaryLog))
                 return;
 
             arguments.Add($"-bl:{Path.Combine(buildInfo.LogsDirPath, "msbuild.binlog")}");
@@ -330,7 +330,7 @@ namespace GodotTools.Build
 
             string launchMessage = startInfo.GetCommandLineDisplay(new StringBuilder("Packaging: ")).ToString();
             stdOutHandler?.Invoke(launchMessage);
-            if (Godot.OS.IsStdOutVerbose())
+            if (FADE.OS.IsStdOutVerbose())
                 Console.WriteLine(launchMessage);
 
             startInfo.RedirectStandardOutput = true;
@@ -374,8 +374,8 @@ namespace GodotTools.Build
         private static void BuildXCFrameworkArguments(List<string> outputPaths,
             string xcFrameworkPath, Collection<string> arguments)
         {
-            var baseDylib = $"{GodotSharpDirs.ProjectAssemblyName}.dylib";
-            var baseSym = $"{GodotSharpDirs.ProjectAssemblyName}.framework.dSYM";
+            var baseDylib = $"{FADESharpDirs.ProjectAssemblyName}.dylib";
+            var baseSym = $"{FADESharpDirs.ProjectAssemblyName}.framework.dSYM";
 
             arguments.Add("xcodebuild");
             arguments.Add("-create-xcframework");

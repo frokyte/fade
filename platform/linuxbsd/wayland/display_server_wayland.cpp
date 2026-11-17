@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -104,7 +104,7 @@ String DisplayServerWayland::_get_app_id_from_context(DisplayServerEnums::Contex
 			if (config_name.length() != 0) {
 				app_id = config_name;
 			} else {
-				app_id = "org.godotengine.Godot";
+				app_id = "org.godotengine.FADE";
 			}
 		}
 	}
@@ -850,7 +850,7 @@ DisplayServerEnums::WindowID DisplayServerWayland::create_sub_window(DisplayServ
 	// can only know once we show it.
 	wd.rect = p_rect;
 
-	wd.title = "Godot";
+	wd.title = "FADE";
 	wd.parent_id = p_transient_parent;
 	return id;
 }
@@ -2440,7 +2440,7 @@ DisplayServerWayland::DisplayServerWayland(const String &p_rendering_driver, Dis
 
 			if (prime_idx) {
 				print_line(vformat("Found discrete GPU, setting DRI_PRIME=%d to use it.", prime_idx));
-				print_line("Note: Set DRI_PRIME=0 in the environment to disable Godot from using the discrete GPU.");
+				print_line("Note: Set DRI_PRIME=0 in the environment to disable FADE from using the discrete GPU.");
 				setenv("DRI_PRIME", itos(prime_idx).utf8().ptr(), 1);
 			}
 		}
@@ -2517,7 +2517,7 @@ DisplayServerWayland::DisplayServerWayland(const String &p_rendering_driver, Dis
 	wd.flags = p_flags;
 	wd.vsync_mode = p_vsync_mode;
 	wd.rect.size = p_resolution;
-	wd.title = "Godot";
+	wd.title = "FADE";
 
 	if (!AccessibilityServer::get_singleton()->window_create(wd.id, nullptr)) {
 		if (OS::get_singleton()->is_stdout_verbose()) {

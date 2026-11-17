@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,7 +36,7 @@
 constexpr int32_t GDCoreCursorWindowMove = 39;
 
 // Expose private interface for CoreCursor.
-@interface GodotCoreCursor : NSCursor
+@interface FADECoreCursor : NSCursor
 
 @property(readonly, nonatomic) int32_t _coreCursorType;
 

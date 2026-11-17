@@ -5,7 +5,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace GodotTools.IdeMessaging.Requests
+namespace FADETools.IdeMessaging.Requests
 {
     public abstract class Request
     {

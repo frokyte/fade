@@ -7,7 +7,7 @@ const pluginReference = require('eslint-plugin-html');
 const stylistic = require('@stylistic/eslint-plugin');
 
 if (process && process.env && process.env.npm_command && !fs.existsSync('./platform/web/eslint.config.cjs')) {
-	throw Error('eslint must be run from the Godot project root folder');
+	throw Error('eslint must be run from the FADE project root folder');
 }
 
 const emscriptenGlobals = {
@@ -132,7 +132,7 @@ module.exports = [
 			globals: {
 				...globals.browser,
 				'Features': true,
-				'Godot': true,
+				'FADE': true,
 				'InternalConfig': true,
 				'Preloader': true,
 			},
@@ -151,13 +151,13 @@ module.exports = [
 			globals: {
 				...globals.browser,
 				...emscriptenGlobals,
-				'GodotConfig': true,
-				'GodotEventListeners': true,
-				'GodotFS': true,
-				'GodotOS': true,
-				'GodotAudio': true,
-				'GodotInput': true,
-				'GodotRuntime': true,
+				'FADEConfig': true,
+				'FADEEventListeners': true,
+				'FADEFS': true,
+				'FADEOS': true,
+				'FADEAudio': true,
+				'FADEInput': true,
+				'FADERuntime': true,
 				'IDHandler': true,
 				'XRWebGLLayer': true,
 			},

@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -78,14 +78,14 @@ void AndroidEditorGradleRunner::run_gradle(const String &p_project_path, const S
 void AndroidEditorGradleRunner::_android_gradle_build_connect() {
 	_android_gradle_build_output(0, TTR("> Connecting to Gradle Build Environment..."));
 
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	if (!godot_java->build_env_connect(callable_mp(this, &AndroidEditorGradleRunner::_android_gradle_build_build))) {
 		_android_gradle_build_failed(TTR("Unable to connect to Gradle Build Environment service"));
 	}
 }
 
 void AndroidEditorGradleRunner::_android_gradle_build_disconnect() {
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	godot_java->build_env_disconnect();
 }
 
@@ -105,7 +105,7 @@ void AndroidEditorGradleRunner::_android_gradle_build_output(int p_type, const S
 void AndroidEditorGradleRunner::_android_gradle_build_build() {
 	_android_gradle_build_output(0, TTR("> Starting Gradle build..."));
 
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	job_id = godot_java->build_env_execute(
 			"gradle",
 			gradle_build_args,
@@ -131,7 +131,7 @@ void AndroidEditorGradleRunner::_android_gradle_build_build_callback(int p_exit_
 void AndroidEditorGradleRunner::_android_gradle_build_copy() {
 	_android_gradle_build_output(0, TTR("> Copying Gradle artifacts..."));
 
-	GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 	job_id = godot_java->build_env_execute(
 			"gradle",
 			gradle_copy_args,
@@ -168,7 +168,7 @@ void AndroidEditorGradleRunner::_android_gradle_build_clean_project(bool p_was_s
 			output_dialog->get_ok_button()->set_disabled(false);
 		}
 
-		GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+		FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 		godot_java->build_env_clean_project(
 				project_path,
 				build_path,
@@ -196,7 +196,7 @@ void AndroidEditorGradleRunner::_android_gradle_build_failed(const String &p_msg
 
 void AndroidEditorGradleRunner::_android_gradle_build_cancel() {
 	if (job_id > 0) {
-		GodotJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
+		FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
 		godot_java->build_env_cancel(job_id);
 		_android_gradle_build_clean_project(false);
 	}

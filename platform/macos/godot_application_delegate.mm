@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -43,12 +43,12 @@
 
 #import <Carbon/Carbon.h>
 
-@interface GodotApplicationDelegate ()
+@interface FADEApplicationDelegate ()
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 - (void)accessibilityDisplayOptionsChange:(NSNotification *)notification;
 @end
 
-@implementation GodotApplicationDelegate {
+@implementation FADEApplicationDelegate {
 	bool high_contrast;
 	bool reduce_motion;
 	bool reduce_transparency;
@@ -56,7 +56,7 @@
 	OS_MacOS_NSApp *os_mac;
 }
 
-- (GodotApplicationDelegate *)initWithOS:(OS_MacOS_NSApp *)os {
+- (FADEApplicationDelegate *)initWithOS:(OS_MacOS_NSApp *)os {
 	self = [super init];
 	if (self) {
 		os_mac = os;
@@ -287,7 +287,7 @@ constexpr static NSEventModifierFlags FLAGS = NSEventModifierFlagCommand | NSEve
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item {
 	if (item) {
-		GodotMenuItem *value = [item representedObject];
+		FADEMenuItem *value = [item representedObject];
 		if (value) {
 			return value->enabled;
 		}

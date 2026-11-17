@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -84,9 +84,9 @@ class WinRTWindowData {
 
 class WinRTNotificationData : public RefCounted {
 	friend class WinRTUtils;
-	friend class GodotToastActivatedEventHandler;
-	friend class GodotToastDismissedEventHandler;
-	friend class GodotToastFailedEventHandler;
+	friend class FADEToastActivatedEventHandler;
+	friend class FADEToastDismissedEventHandler;
+	friend class FADEToastFailedEventHandler;
 
 	ComPtr<ROToastNotification> nt;
 
@@ -129,8 +129,8 @@ GODOT_CLANG_WARNING_IGNORE("-Wnon-virtual-dtor")
 /* DisplayInformation5 events                                             */
 /**************************************************************************/
 
-class GodotAdvancedColorInfoChangedEventHandler : public ROTypedEventHandler {
-	TYPED_EVENT_HANDLER_CLASS(GodotAdvancedColorInfoChangedEventHandler, ROTypedEventHandler)
+class FADEAdvancedColorInfoChangedEventHandler : public ROTypedEventHandler {
+	TYPED_EVENT_HANDLER_CLASS(FADEAdvancedColorInfoChangedEventHandler, ROTypedEventHandler)
 
 private:
 	int64_t id = 0;
@@ -142,7 +142,7 @@ public:
 		return S_OK;
 	}
 
-	GodotAdvancedColorInfoChangedEventHandler(int64_t p_id, const Callable &p_cb) {
+	FADEAdvancedColorInfoChangedEventHandler(int64_t p_id, const Callable &p_cb) {
 		id = p_id;
 		cb = p_cb;
 	}
@@ -152,8 +152,8 @@ public:
 /* ToastNotification events                                               */
 /**************************************************************************/
 
-class GodotToastActivatedEventHandler : public ROTypedEventHandler_ToastNotification_IInspectable {
-	TYPED_EVENT_HANDLER_CLASS(GodotToastActivatedEventHandler, ROTypedEventHandler_ToastNotification_IInspectable)
+class FADEToastActivatedEventHandler : public ROTypedEventHandler_ToastNotification_IInspectable {
+	TYPED_EVENT_HANDLER_CLASS(FADEToastActivatedEventHandler, ROTypedEventHandler_ToastNotification_IInspectable)
 
 private:
 	DisplayServerEnums::NotificationID nid = 0;
@@ -172,13 +172,13 @@ public:
 		return S_OK;
 	}
 
-	GodotToastActivatedEventHandler(DisplayServerEnums::NotificationID p_nid) {
+	FADEToastActivatedEventHandler(DisplayServerEnums::NotificationID p_nid) {
 		nid = p_nid;
 	}
 };
 
-class GodotToastDismissedEventHandler : public ROTypedEventHandler_ToastNotification_ToastDismissedEventArgs {
-	TYPED_EVENT_HANDLER_CLASS(GodotToastDismissedEventHandler, ROTypedEventHandler_ToastNotification_ToastDismissedEventArgs)
+class FADEToastDismissedEventHandler : public ROTypedEventHandler_ToastNotification_ToastDismissedEventArgs {
+	TYPED_EVENT_HANDLER_CLASS(FADEToastDismissedEventHandler, ROTypedEventHandler_ToastNotification_ToastDismissedEventArgs)
 
 private:
 	DisplayServerEnums::NotificationID nid = 0;
@@ -197,13 +197,13 @@ public:
 		return S_OK;
 	}
 
-	GodotToastDismissedEventHandler(DisplayServerEnums::NotificationID p_nid) {
+	FADEToastDismissedEventHandler(DisplayServerEnums::NotificationID p_nid) {
 		nid = p_nid;
 	}
 };
 
-class GodotToastFailedEventHandler : public ROTypedEventHandler_ToastNotification_ToastFailedEventArgs {
-	TYPED_EVENT_HANDLER_CLASS(GodotToastFailedEventHandler, ROTypedEventHandler_ToastNotification_ToastFailedEventArgs)
+class FADEToastFailedEventHandler : public ROTypedEventHandler_ToastNotification_ToastFailedEventArgs {
+	TYPED_EVENT_HANDLER_CLASS(FADEToastFailedEventHandler, ROTypedEventHandler_ToastNotification_ToastFailedEventArgs)
 
 private:
 	DisplayServerEnums::NotificationID nid = 0;
@@ -222,7 +222,7 @@ public:
 		return S_OK;
 	}
 
-	GodotToastFailedEventHandler(DisplayServerEnums::NotificationID p_nid) {
+	FADEToastFailedEventHandler(DisplayServerEnums::NotificationID p_nid) {
 		nid = p_nid;
 	}
 };
@@ -469,7 +469,7 @@ WinRTWindowData *WinRTUtils::create_wd(HWND p_window, const Callable &p_color_cb
 
 		ERR_FAIL_COND_V(FAILED(interop->GetForWindow(p_window, IID_PPV_ARGS(&wd->disp_info))), wd);
 
-		GodotAdvancedColorInfoChangedEventHandler *handler = new GodotAdvancedColorInfoChangedEventHandler(p_window_id, p_color_cb);
+		FADEAdvancedColorInfoChangedEventHandler *handler = new FADEAdvancedColorInfoChangedEventHandler(p_window_id, p_color_cb);
 		ERR_FAIL_COND_V(FAILED(handler->QueryInterface(IID_PPV_ARGS(&wd->handler))), wd);
 		ERR_FAIL_COND_V(FAILED(wd->disp_info->add_AdvancedColorInfoChanged(wd->handler.Get(), &wd->token)), wd);
 
@@ -588,17 +588,17 @@ DisplayServerEnums::NotificationID WinRTUtils::send_toast_notification(const Str
 	nd->cb = p_callback;
 
 	ComPtr<ROTypedEventHandler_ToastNotification_IInspectable> handler_a;
-	GodotToastActivatedEventHandler *handler_act = new GodotToastActivatedEventHandler(nid);
+	FADEToastActivatedEventHandler *handler_act = new FADEToastActivatedEventHandler(nid);
 	ERR_FAIL_COND_V(FAILED(handler_act->QueryInterface(IID_PPV_ARGS(&handler_a))), DisplayServerEnums::INVALID_NOTIFICATION_ID);
 	ERR_FAIL_COND_V(FAILED(nd->nt->add_Activated(handler_a.Get(), &nd->act_token)), DisplayServerEnums::INVALID_NOTIFICATION_ID);
 
 	ComPtr<ROTypedEventHandler_ToastNotification_ToastDismissedEventArgs> handler_d;
-	GodotToastDismissedEventHandler *handler_dis = new GodotToastDismissedEventHandler(nid);
+	FADEToastDismissedEventHandler *handler_dis = new FADEToastDismissedEventHandler(nid);
 	ERR_FAIL_COND_V(FAILED(handler_dis->QueryInterface(IID_PPV_ARGS(&handler_d))), DisplayServerEnums::INVALID_NOTIFICATION_ID);
 	ERR_FAIL_COND_V(FAILED(nd->nt->add_Dismissed(handler_d.Get(), &nd->dis_token)), DisplayServerEnums::INVALID_NOTIFICATION_ID);
 
 	ComPtr<ROTypedEventHandler_ToastNotification_ToastFailedEventArgs> handler_f;
-	GodotToastFailedEventHandler *handler_fail = new GodotToastFailedEventHandler(nid);
+	FADEToastFailedEventHandler *handler_fail = new FADEToastFailedEventHandler(nid);
 	ERR_FAIL_COND_V(FAILED(handler_fail->QueryInterface(IID_PPV_ARGS(&handler_f))), DisplayServerEnums::INVALID_NOTIFICATION_ID);
 	ERR_FAIL_COND_V(FAILED(nd->nt->add_Failed(handler_f.Get(), &nd->fail_token)), DisplayServerEnums::INVALID_NOTIFICATION_ID);
 

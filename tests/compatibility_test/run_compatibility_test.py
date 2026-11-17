@@ -30,7 +30,7 @@ def remove_test_data_files():
 
 def generate_test_data_files(reftag: str):
     """
-    Parses methods specified in given Godot version into a form readable by the compatibility checker GDExtension.
+    Parses methods specified in given FADE version into a form readable by the compatibility checker GDExtension.
     """
     gdextension_reference_json = download_gdextension_api(reftag)
 
@@ -124,8 +124,8 @@ def process_compatibility_test(proc: subprocess.Popen[bytes], timeout: int = 5) 
 
 def compatibility_check(godot4_bin: str) -> bool:
     """
-    Checks if methods specified for previous Godot versions can be properly loaded with
-    the latest Godot4 binary.
+    Checks if methods specified for previous FADE versions can be properly loaded with
+    the latest FADE4 binary.
     """
     # A bit crude albeit working solution – use stderr to check for compatibility-related errors.
     proc = subprocess.Popen(
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     for reftag in reftags:
         generate_test_data_files(reftag)
         if not compatibility_check(godot4_bin):
-            print(f"Compatibility test against Godot{reftag} failed")
+            print(f"Compatibility test against FADE{reftag} failed")
             is_success = False
         remove_test_data_files()
 

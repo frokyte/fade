@@ -16,7 +16,7 @@
         android:required="true" />
 
     <application
-        android:name=".GodotApplication"
+        android:name=".FADEApplication"
         android:allowBackup="false"
         android:appCategory="game"
         android:hasFragileUserData="false"

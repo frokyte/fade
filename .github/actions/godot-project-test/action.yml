@@ -1,9 +1,9 @@
-name: Test Godot project
-description: Run the test Godot project.
+name: Test FADE project
+description: Run the test FADE project.
 
 inputs:
   bin:
-    description: The path to the Godot executable
+    description: The path to the FADE executable
     required: true
 
 runs:

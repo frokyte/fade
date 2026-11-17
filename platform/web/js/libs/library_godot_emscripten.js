@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,17 +28,17 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-const GodotEmscripten = {
-	$GodotEmscripten__deps: ['$GodotRuntime'],
-	$GodotEmscripten: {},
+const FADEEmscripten = {
+	$FADEEmscripten__deps: ['$FADERuntime'],
+	$FADEEmscripten: {},
 
 	godot_js_emscripten_get_version__proxy: 'sync',
 	godot_js_emscripten_get_version__sig: 'p',
 	godot_js_emscripten_get_version: function () {
 		// WARNING: The caller needs to free the string pointer.
-		const emscriptenVersionPtr = GodotRuntime.allocString('{{{ EMSCRIPTEN_VERSION }}}');
+		const emscriptenVersionPtr = FADERuntime.allocString('{{{ EMSCRIPTEN_VERSION }}}');
 		return emscriptenVersionPtr;
 	},
 };
-autoAddDeps(GodotEmscripten, '$GodotEmscripten');
-addToLibrary(GodotEmscripten);
+autoAddDeps(FADEEmscripten, '$FADEEmscripten');
+addToLibrary(FADEEmscripten);

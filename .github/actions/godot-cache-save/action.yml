@@ -1,5 +1,5 @@
-name: Save Godot build cache
-description: Save Godot build cache.
+name: Save FADE build cache
+description: Save FADE build cache.
 inputs:
   cache-name:
     description: The cache base name (job name by default).

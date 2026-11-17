@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,7 +35,7 @@
 #include "core/math/geometry_3d.h"
 #include "core/templates/sort_array.h"
 
-// GodotHeightMapShape3D is based on Bullet btHeightfieldTerrainShape.
+// FADEHeightMapShape3D is based on Bullet btHeightfieldTerrainShape.
 
 /*
 Bullet Continuous Collision Detection and Physics Library
@@ -65,16 +65,16 @@ const double cylinder_edge_support_threshold = 0.999998;
 const double cylinder_edge_support_threshold_lower = Math::sqrt(1.0 - cylinder_edge_support_threshold * cylinder_edge_support_threshold);
 const double cylinder_face_support_threshold = 0.999;
 
-void GodotShape3D::configure(const AABB &p_aabb) {
+void FADEShape3D::configure(const AABB &p_aabb) {
 	aabb = p_aabb;
 	configured = true;
-	for (const KeyValue<GodotShapeOwner3D *, int> &E : owners) {
-		GodotShapeOwner3D *co = E.key;
+	for (const KeyValue<FADEShapeOwner3D *, int> &E : owners) {
+		FADEShapeOwner3D *co = E.key;
 		co->_shape_changed();
 	}
 }
 
-Vector3 GodotShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEShape3D::get_support(const Vector3 &p_normal) const {
 	Vector3 res;
 	int amnt;
 	FeatureType type;
@@ -82,8 +82,8 @@ Vector3 GodotShape3D::get_support(const Vector3 &p_normal) const {
 	return res;
 }
 
-void GodotShape3D::add_owner(GodotShapeOwner3D *p_owner) {
-	HashMap<GodotShapeOwner3D *, int>::Iterator E = owners.find(p_owner);
+void FADEShape3D::add_owner(FADEShapeOwner3D *p_owner) {
+	HashMap<FADEShapeOwner3D *, int>::Iterator E = owners.find(p_owner);
 	if (E) {
 		E->value++;
 	} else {
@@ -91,8 +91,8 @@ void GodotShape3D::add_owner(GodotShapeOwner3D *p_owner) {
 	}
 }
 
-void GodotShape3D::remove_owner(GodotShapeOwner3D *p_owner) {
-	HashMap<GodotShapeOwner3D *, int>::Iterator E = owners.find(p_owner);
+void FADEShape3D::remove_owner(FADEShapeOwner3D *p_owner) {
+	HashMap<FADEShapeOwner3D *, int>::Iterator E = owners.find(p_owner);
 	ERR_FAIL_COND(!E);
 	E->value--;
 	if (E->value == 0) {
@@ -100,33 +100,33 @@ void GodotShape3D::remove_owner(GodotShapeOwner3D *p_owner) {
 	}
 }
 
-bool GodotShape3D::is_owner(GodotShapeOwner3D *p_owner) const {
+bool FADEShape3D::is_owner(FADEShapeOwner3D *p_owner) const {
 	return owners.has(p_owner);
 }
 
-const HashMap<GodotShapeOwner3D *, int> &GodotShape3D::get_owners() const {
+const HashMap<FADEShapeOwner3D *, int> &FADEShape3D::get_owners() const {
 	return owners;
 }
 
-GodotShape3D::~GodotShape3D() {
+FADEShape3D::~FADEShape3D() {
 	ERR_FAIL_COND(owners.size());
 }
 
-Plane GodotWorldBoundaryShape3D::get_plane() const {
+Plane FADEWorldBoundaryShape3D::get_plane() const {
 	return plane;
 }
 
-void GodotWorldBoundaryShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADEWorldBoundaryShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	// gibberish, a plane is infinity
 	r_min = -1e7;
 	r_max = 1e7;
 }
 
-Vector3 GodotWorldBoundaryShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEWorldBoundaryShape3D::get_support(const Vector3 &p_normal) const {
 	return p_normal * 1e15;
 }
 
-bool GodotWorldBoundaryShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADEWorldBoundaryShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	bool inters = plane.intersects_segment(p_begin, p_end, &r_result);
 	if (inters) {
 		r_normal = plane.normal;
@@ -134,11 +134,11 @@ bool GodotWorldBoundaryShape3D::intersect_segment(const Vector3 &p_begin, const 
 	return inters;
 }
 
-bool GodotWorldBoundaryShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADEWorldBoundaryShape3D::intersect_point(const Vector3 &p_point) const {
 	return plane.distance_to(p_point) < 0;
 }
 
-Vector3 GodotWorldBoundaryShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADEWorldBoundaryShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	if (plane.is_point_over(p_point)) {
 		return plane.project(p_point);
 	} else {
@@ -146,43 +146,43 @@ Vector3 GodotWorldBoundaryShape3D::get_closest_point_to(const Vector3 &p_point) 
 	}
 }
 
-Vector3 GodotWorldBoundaryShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADEWorldBoundaryShape3D::get_moment_of_inertia(real_t p_mass) const {
 	return Vector3(); // not applicable.
 }
 
-void GodotWorldBoundaryShape3D::_setup(const Plane &p_plane) {
+void FADEWorldBoundaryShape3D::_setup(const Plane &p_plane) {
 	plane = p_plane;
 	configure(AABB(Vector3(-1e15, -1e15, -1e15), Vector3(1e15 * 2, 1e15 * 2, 1e15 * 2)));
 }
 
-void GodotWorldBoundaryShape3D::set_data(const Variant &p_data) {
+void FADEWorldBoundaryShape3D::set_data(const Variant &p_data) {
 	_setup(p_data);
 }
 
-Variant GodotWorldBoundaryShape3D::get_data() const {
+Variant FADEWorldBoundaryShape3D::get_data() const {
 	return plane;
 }
 
-GodotWorldBoundaryShape3D::GodotWorldBoundaryShape3D() {
+FADEWorldBoundaryShape3D::FADEWorldBoundaryShape3D() {
 }
 
 //
 
-real_t GodotSeparationRayShape3D::get_length() const {
+real_t FADESeparationRayShape3D::get_length() const {
 	return length;
 }
 
-bool GodotSeparationRayShape3D::get_slide_on_slope() const {
+bool FADESeparationRayShape3D::get_slide_on_slope() const {
 	return slide_on_slope;
 }
 
-void GodotSeparationRayShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADESeparationRayShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	// don't think this will be even used
 	r_min = 0;
 	r_max = 1;
 }
 
-Vector3 GodotSeparationRayShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADESeparationRayShape3D::get_support(const Vector3 &p_normal) const {
 	if (p_normal.z > 0) {
 		return Vector3(0, 0, length);
 	} else {
@@ -190,7 +190,7 @@ Vector3 GodotSeparationRayShape3D::get_support(const Vector3 &p_normal) const {
 	}
 }
 
-void GodotSeparationRayShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADESeparationRayShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	if (Math::abs(p_normal.z) < edge_support_threshold_lower) {
 		r_amount = 2;
 		r_type = FEATURE_EDGE;
@@ -207,49 +207,49 @@ void GodotSeparationRayShape3D::get_supports(const Vector3 &p_normal, int p_max,
 	}
 }
 
-bool GodotSeparationRayShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADESeparationRayShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	return false; //simply not possible
 }
 
-bool GodotSeparationRayShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADESeparationRayShape3D::intersect_point(const Vector3 &p_point) const {
 	return false; //simply not possible
 }
 
-Vector3 GodotSeparationRayShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADESeparationRayShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	return Geometry3D::get_closest_point_to_segment(p_point, Vector3(0, 0, 0), Vector3(0, 0, length));
 }
 
-Vector3 GodotSeparationRayShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADESeparationRayShape3D::get_moment_of_inertia(real_t p_mass) const {
 	return Vector3();
 }
 
-void GodotSeparationRayShape3D::_setup(real_t p_length, bool p_slide_on_slope) {
+void FADESeparationRayShape3D::_setup(real_t p_length, bool p_slide_on_slope) {
 	length = p_length;
 	slide_on_slope = p_slide_on_slope;
 	configure(AABB(Vector3(0, 0, 0), Vector3(0.1, 0.1, length)));
 }
 
-void GodotSeparationRayShape3D::set_data(const Variant &p_data) {
+void FADESeparationRayShape3D::set_data(const Variant &p_data) {
 	Dictionary d = p_data;
 	_setup(d["length"], d["slide_on_slope"]);
 }
 
-Variant GodotSeparationRayShape3D::get_data() const {
+Variant FADESeparationRayShape3D::get_data() const {
 	Dictionary d;
 	d["length"] = length;
 	d["slide_on_slope"] = slide_on_slope;
 	return d;
 }
 
-GodotSeparationRayShape3D::GodotSeparationRayShape3D() {}
+FADESeparationRayShape3D::FADESeparationRayShape3D() {}
 
 /********** SPHERE *************/
 
-real_t GodotSphereShape3D::get_radius() const {
+real_t FADESphereShape3D::get_radius() const {
 	return radius;
 }
 
-void GodotSphereShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADESphereShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	real_t d = p_normal.dot(p_transform.origin);
 
 	// figure out scale at point
@@ -260,25 +260,25 @@ void GodotSphereShape3D::project_range(const Vector3 &p_normal, const Transform3
 	r_max = d + (radius)*scale;
 }
 
-Vector3 GodotSphereShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADESphereShape3D::get_support(const Vector3 &p_normal) const {
 	return p_normal * radius;
 }
 
-void GodotSphereShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADESphereShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	*r_supports = p_normal * radius;
 	r_amount = 1;
 	r_type = FEATURE_POINT;
 }
 
-bool GodotSphereShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADESphereShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	return Geometry3D::segment_intersects_sphere(p_begin, p_end, Vector3(), radius, &r_result, &r_normal);
 }
 
-bool GodotSphereShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADESphereShape3D::intersect_point(const Vector3 &p_point) const {
 	return p_point.length() < radius;
 }
 
-Vector3 GodotSphereShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADESphereShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	Vector3 p = p_point;
 	real_t l = p.length();
 	if (l < radius) {
@@ -287,29 +287,29 @@ Vector3 GodotSphereShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	return (p / l) * radius;
 }
 
-Vector3 GodotSphereShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADESphereShape3D::get_moment_of_inertia(real_t p_mass) const {
 	real_t s = 0.4 * p_mass * radius * radius;
 	return Vector3(s, s, s);
 }
 
-void GodotSphereShape3D::_setup(real_t p_radius) {
+void FADESphereShape3D::_setup(real_t p_radius) {
 	radius = p_radius;
 	configure(AABB(Vector3(-radius, -radius, -radius), Vector3(radius * 2.0, radius * 2.0, radius * 2.0)));
 }
 
-void GodotSphereShape3D::set_data(const Variant &p_data) {
+void FADESphereShape3D::set_data(const Variant &p_data) {
 	_setup(p_data);
 }
 
-Variant GodotSphereShape3D::get_data() const {
+Variant FADESphereShape3D::get_data() const {
 	return radius;
 }
 
-GodotSphereShape3D::GodotSphereShape3D() {}
+FADESphereShape3D::FADESphereShape3D() {}
 
 /********** BOX *************/
 
-void GodotBoxShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADEBoxShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	// no matter the angle, the box is mirrored anyway
 	Vector3 local_normal = p_transform.basis.xform_inv(p_normal);
 
@@ -320,7 +320,7 @@ void GodotBoxShape3D::project_range(const Vector3 &p_normal, const Transform3D &
 	r_max = distance + length;
 }
 
-Vector3 GodotBoxShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEBoxShape3D::get_support(const Vector3 &p_normal) const {
 	Vector3 point(
 			(p_normal.x < 0) ? -half_extents.x : half_extents.x,
 			(p_normal.y < 0) ? -half_extents.y : half_extents.y,
@@ -329,7 +329,7 @@ Vector3 GodotBoxShape3D::get_support(const Vector3 &p_normal) const {
 	return point;
 }
 
-void GodotBoxShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADEBoxShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	static const int next[3] = { 1, 2, 0 };
 	static const int next2[3] = { 2, 0, 1 };
 
@@ -412,17 +412,17 @@ void GodotBoxShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *
 	r_supports[0] = point;
 }
 
-bool GodotBoxShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADEBoxShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	AABB aabb_ext(-half_extents, half_extents * 2.0);
 
 	return aabb_ext.intersects_segment(p_begin, p_end, &r_result, &r_normal);
 }
 
-bool GodotBoxShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADEBoxShape3D::intersect_point(const Vector3 &p_point) const {
 	return (Math::abs(p_point.x) < half_extents.x && Math::abs(p_point.y) < half_extents.y && Math::abs(p_point.z) < half_extents.z);
 }
 
-Vector3 GodotBoxShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADEBoxShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	int outside = 0;
 	Vector3 min_point;
 
@@ -467,7 +467,7 @@ Vector3 GodotBoxShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	return min_point;
 }
 
-Vector3 GodotBoxShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADEBoxShape3D::get_moment_of_inertia(real_t p_mass) const {
 	real_t lx = half_extents.x;
 	real_t ly = half_extents.y;
 	real_t lz = half_extents.z;
@@ -475,25 +475,25 @@ Vector3 GodotBoxShape3D::get_moment_of_inertia(real_t p_mass) const {
 	return Vector3((p_mass / 3.0) * (ly * ly + lz * lz), (p_mass / 3.0) * (lx * lx + lz * lz), (p_mass / 3.0) * (lx * lx + ly * ly));
 }
 
-void GodotBoxShape3D::_setup(const Vector3 &p_half_extents) {
+void FADEBoxShape3D::_setup(const Vector3 &p_half_extents) {
 	half_extents = p_half_extents.abs();
 
 	configure(AABB(-half_extents, half_extents * 2));
 }
 
-void GodotBoxShape3D::set_data(const Variant &p_data) {
+void FADEBoxShape3D::set_data(const Variant &p_data) {
 	_setup(p_data);
 }
 
-Variant GodotBoxShape3D::get_data() const {
+Variant FADEBoxShape3D::get_data() const {
 	return half_extents;
 }
 
-GodotBoxShape3D::GodotBoxShape3D() {}
+FADEBoxShape3D::FADEBoxShape3D() {}
 
 /********** CAPSULE *************/
 
-void GodotCapsuleShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADECapsuleShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	Vector3 n = p_transform.basis.xform_inv(p_normal).normalized();
 	real_t h = height * 0.5 - radius;
 
@@ -504,7 +504,7 @@ void GodotCapsuleShape3D::project_range(const Vector3 &p_normal, const Transform
 	r_min = p_normal.dot(p_transform.xform(-n));
 }
 
-Vector3 GodotCapsuleShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADECapsuleShape3D::get_support(const Vector3 &p_normal) const {
 	Vector3 n = p_normal;
 
 	real_t h = height * 0.5 - radius;
@@ -514,7 +514,7 @@ Vector3 GodotCapsuleShape3D::get_support(const Vector3 &p_normal) const {
 	return n;
 }
 
-void GodotCapsuleShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADECapsuleShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	Vector3 n = p_normal;
 
 	real_t d = n.y;
@@ -541,7 +541,7 @@ void GodotCapsuleShape3D::get_supports(const Vector3 &p_normal, int p_max, Vecto
 	}
 }
 
-bool GodotCapsuleShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADECapsuleShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	Vector3 norm = (p_end - p_begin).normalized();
 	real_t min_d = 1e20;
 
@@ -597,7 +597,7 @@ bool GodotCapsuleShape3D::intersect_segment(const Vector3 &p_begin, const Vector
 	return collision;
 }
 
-bool GodotCapsuleShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADECapsuleShape3D::intersect_point(const Vector3 &p_point) const {
 	if (Math::abs(p_point.y) < height * 0.5 - radius) {
 		return Vector3(p_point.x, 0, p_point.z).length() < radius;
 	} else {
@@ -607,7 +607,7 @@ bool GodotCapsuleShape3D::intersect_point(const Vector3 &p_point) const {
 	}
 }
 
-Vector3 GodotCapsuleShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADECapsuleShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	const Vector3 segment_a = Vector3(0, -height * 0.5 + radius, 0);
 	const Vector3 segment_b = Vector3(0, height * 0.5 - radius, 0);
 
@@ -620,7 +620,7 @@ Vector3 GodotCapsuleShape3D::get_closest_point_to(const Vector3 &p_point) const 
 	return p + (p_point - p).normalized() * radius;
 }
 
-Vector3 GodotCapsuleShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADECapsuleShape3D::get_moment_of_inertia(real_t p_mass) const {
 	// use bad AABB approximation
 	Vector3 extents = get_aabb().size * 0.5;
 
@@ -630,31 +630,31 @@ Vector3 GodotCapsuleShape3D::get_moment_of_inertia(real_t p_mass) const {
 			(p_mass / 3.0) * (extents.x * extents.x + extents.y * extents.y));
 }
 
-void GodotCapsuleShape3D::_setup(real_t p_height, real_t p_radius) {
+void FADECapsuleShape3D::_setup(real_t p_height, real_t p_radius) {
 	height = p_height;
 	radius = p_radius;
 	configure(AABB(Vector3(-radius, -height * 0.5, -radius), Vector3(radius * 2, height, radius * 2)));
 }
 
-void GodotCapsuleShape3D::set_data(const Variant &p_data) {
+void FADECapsuleShape3D::set_data(const Variant &p_data) {
 	Dictionary d = p_data;
 	ERR_FAIL_COND(!d.has("radius"));
 	ERR_FAIL_COND(!d.has("height"));
 	_setup(d["height"], d["radius"]);
 }
 
-Variant GodotCapsuleShape3D::get_data() const {
+Variant FADECapsuleShape3D::get_data() const {
 	Dictionary d;
 	d["radius"] = radius;
 	d["height"] = height;
 	return d;
 }
 
-GodotCapsuleShape3D::GodotCapsuleShape3D() {}
+FADECapsuleShape3D::FADECapsuleShape3D() {}
 
 /********** CYLINDER *************/
 
-void GodotCylinderShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADECylinderShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	Vector3 cylinder_axis = p_transform.basis.get_column(1).normalized();
 	real_t axis_dot = cylinder_axis.dot(p_normal);
 
@@ -676,7 +676,7 @@ void GodotCylinderShape3D::project_range(const Vector3 &p_normal, const Transfor
 	r_max = distance + length;
 }
 
-Vector3 GodotCylinderShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADECylinderShape3D::get_support(const Vector3 &p_normal) const {
 	Vector3 n = p_normal;
 	real_t h = (n.y > 0) ? height : -height;
 	real_t s = Math::sqrt(n.x * n.x + n.z * n.z);
@@ -694,7 +694,7 @@ Vector3 GodotCylinderShape3D::get_support(const Vector3 &p_normal) const {
 	return n;
 }
 
-void GodotCylinderShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADECylinderShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	real_t d = p_normal.y;
 	if (Math::abs(d) > cylinder_face_support_threshold) {
 		real_t h = (d > 0) ? height : -height;
@@ -731,18 +731,18 @@ void GodotCylinderShape3D::get_supports(const Vector3 &p_normal, int p_max, Vect
 	}
 }
 
-bool GodotCylinderShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADECylinderShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	return Geometry3D::segment_intersects_cylinder(p_begin, p_end, height, radius, &r_result, &r_normal, 1);
 }
 
-bool GodotCylinderShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADECylinderShape3D::intersect_point(const Vector3 &p_point) const {
 	if (Math::abs(p_point.y) < height * 0.5) {
 		return Vector3(p_point.x, 0, p_point.z).length() < radius;
 	}
 	return false;
 }
 
-Vector3 GodotCylinderShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADECylinderShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	if (Math::abs(p_point.y) > height * 0.5) {
 		// Project point to top disk.
 		real_t dir = p_point.y > 0.0 ? 1.0 : -1.0;
@@ -773,7 +773,7 @@ Vector3 GodotCylinderShape3D::get_closest_point_to(const Vector3 &p_point) const
 	}
 }
 
-Vector3 GodotCylinderShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADECylinderShape3D::get_moment_of_inertia(real_t p_mass) const {
 	// use bad AABB approximation
 	Vector3 extents = get_aabb().size * 0.5;
 
@@ -783,31 +783,31 @@ Vector3 GodotCylinderShape3D::get_moment_of_inertia(real_t p_mass) const {
 			(p_mass / 3.0) * (extents.x * extents.x + extents.y * extents.y));
 }
 
-void GodotCylinderShape3D::_setup(real_t p_height, real_t p_radius) {
+void FADECylinderShape3D::_setup(real_t p_height, real_t p_radius) {
 	height = p_height;
 	radius = p_radius;
 	configure(AABB(Vector3(-radius, -height * 0.5, -radius), Vector3(radius * 2.0, height, radius * 2.0)));
 }
 
-void GodotCylinderShape3D::set_data(const Variant &p_data) {
+void FADECylinderShape3D::set_data(const Variant &p_data) {
 	Dictionary d = p_data;
 	ERR_FAIL_COND(!d.has("radius"));
 	ERR_FAIL_COND(!d.has("height"));
 	_setup(d["height"], d["radius"]);
 }
 
-Variant GodotCylinderShape3D::get_data() const {
+Variant FADECylinderShape3D::get_data() const {
 	Dictionary d;
 	d["radius"] = radius;
 	d["height"] = height;
 	return d;
 }
 
-GodotCylinderShape3D::GodotCylinderShape3D() {}
+FADECylinderShape3D::FADECylinderShape3D() {}
 
 /********** CONVEX POLYGON *************/
 
-void GodotConvexPolygonShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADEConvexPolygonShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	uint32_t vertex_count = mesh.vertices.size();
 	if (vertex_count == 0) {
 		return;
@@ -836,7 +836,7 @@ void GodotConvexPolygonShape3D::project_range(const Vector3 &p_normal, const Tra
 	}
 }
 
-Vector3 GodotConvexPolygonShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEConvexPolygonShape3D::get_support(const Vector3 &p_normal) const {
 	// Skip if there are no vertices in the mesh
 	if (mesh.vertices.is_empty()) {
 		return Vector3();
@@ -891,7 +891,7 @@ Vector3 GodotConvexPolygonShape3D::get_support(const Vector3 &p_normal) const {
 	}
 }
 
-void GodotConvexPolygonShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADEConvexPolygonShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	const Geometry3D::MeshData::Face *faces = mesh.faces.ptr();
 	int fc = mesh.faces.size();
 
@@ -961,7 +961,7 @@ void GodotConvexPolygonShape3D::get_supports(const Vector3 &p_normal, int p_max,
 	r_type = FEATURE_POINT;
 }
 
-bool GodotConvexPolygonShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADEConvexPolygonShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	const Geometry3D::MeshData::Face *faces = mesh.faces.ptr();
 	int fc = mesh.faces.size();
 
@@ -999,7 +999,7 @@ bool GodotConvexPolygonShape3D::intersect_segment(const Vector3 &p_begin, const 
 	return col;
 }
 
-bool GodotConvexPolygonShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADEConvexPolygonShape3D::intersect_point(const Vector3 &p_point) const {
 	const Geometry3D::MeshData::Face *faces = mesh.faces.ptr();
 	int fc = mesh.faces.size();
 
@@ -1012,7 +1012,7 @@ bool GodotConvexPolygonShape3D::intersect_point(const Vector3 &p_point) const {
 	return true;
 }
 
-Vector3 GodotConvexPolygonShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADEConvexPolygonShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	const Geometry3D::MeshData::Face *faces = mesh.faces.ptr();
 	int fc = mesh.faces.size();
 	const Vector3 *vertices = mesh.vertices.ptr();
@@ -1068,7 +1068,7 @@ Vector3 GodotConvexPolygonShape3D::get_closest_point_to(const Vector3 &p_point) 
 	return min_point;
 }
 
-Vector3 GodotConvexPolygonShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADEConvexPolygonShape3D::get_moment_of_inertia(real_t p_mass) const {
 	// use bad AABB approximation
 	Vector3 extents = get_aabb().size * 0.5;
 
@@ -1078,7 +1078,7 @@ Vector3 GodotConvexPolygonShape3D::get_moment_of_inertia(real_t p_mass) const {
 			(p_mass / 3.0) * (extents.x * extents.x + extents.y * extents.y));
 }
 
-void GodotConvexPolygonShape3D::_setup(const Vector<Vector3> &p_vertices) {
+void FADEConvexPolygonShape3D::_setup(const Vector<Vector3> &p_vertices) {
 	Error err = ConvexHullComputer::convex_hull(p_vertices, mesh);
 	if (err != OK) {
 		ERR_PRINT("Failed to build convex hull");
@@ -1136,11 +1136,11 @@ void GodotConvexPolygonShape3D::_setup(const Vector<Vector3> &p_vertices) {
 	}
 }
 
-void GodotConvexPolygonShape3D::set_data(const Variant &p_data) {
+void FADEConvexPolygonShape3D::set_data(const Variant &p_data) {
 	_setup(p_data);
 }
 
-Variant GodotConvexPolygonShape3D::get_data() const {
+Variant FADEConvexPolygonShape3D::get_data() const {
 	Vector<Vector3> vertices;
 	vertices.resize(mesh.vertices.size());
 	for (uint32_t i = 0; i < mesh.vertices.size(); i++) {
@@ -1149,12 +1149,12 @@ Variant GodotConvexPolygonShape3D::get_data() const {
 	return vertices;
 }
 
-GodotConvexPolygonShape3D::GodotConvexPolygonShape3D() {
+FADEConvexPolygonShape3D::FADEConvexPolygonShape3D() {
 }
 
 /********** FACE POLYGON *************/
 
-void GodotFaceShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADEFaceShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	for (int i = 0; i < 3; i++) {
 		Vector3 v = p_transform.xform(vertex[i]);
 		real_t d = p_normal.dot(v);
@@ -1169,7 +1169,7 @@ void GodotFaceShape3D::project_range(const Vector3 &p_normal, const Transform3D 
 	}
 }
 
-Vector3 GodotFaceShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEFaceShape3D::get_support(const Vector3 &p_normal) const {
 	int vert_support_idx = -1;
 	real_t support_max = 0;
 
@@ -1185,7 +1185,7 @@ Vector3 GodotFaceShape3D::get_support(const Vector3 &p_normal) const {
 	return vertex[vert_support_idx];
 }
 
-void GodotFaceShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
+void FADEFaceShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 *r_supports, int &r_amount, FeatureType &r_type) const {
 	Vector3 n = p_normal;
 
 	/** TEST FACE AS SUPPORT **/
@@ -1237,7 +1237,7 @@ void GodotFaceShape3D::get_supports(const Vector3 &p_normal, int p_max, Vector3 
 	r_supports[0] = vertex[vert_support_idx];
 }
 
-bool GodotFaceShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADEFaceShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	bool c = Geometry3D::segment_intersects_triangle(p_begin, p_end, vertex[0], vertex[1], vertex[2], &r_result);
 	if (c) {
 		r_normal = Plane(vertex[0], vertex[1], vertex[2]).normal;
@@ -1253,23 +1253,23 @@ bool GodotFaceShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &
 	return c;
 }
 
-bool GodotFaceShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADEFaceShape3D::intersect_point(const Vector3 &p_point) const {
 	return false; //face is flat
 }
 
-Vector3 GodotFaceShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADEFaceShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	return Face3(vertex[0], vertex[1], vertex[2]).get_closest_point_to(p_point);
 }
 
-Vector3 GodotFaceShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADEFaceShape3D::get_moment_of_inertia(real_t p_mass) const {
 	return Vector3(); // Sorry, but i don't think anyone cares, FaceShape!
 }
 
-GodotFaceShape3D::GodotFaceShape3D() {
+FADEFaceShape3D::FADEFaceShape3D() {
 	configure(AABB());
 }
 
-Vector<Vector3> GodotConcavePolygonShape3D::get_faces() const {
+Vector<Vector3> FADEConcavePolygonShape3D::get_faces() const {
 	Vector<Vector3> rfaces;
 	rfaces.resize(faces.size() * 3);
 
@@ -1284,7 +1284,7 @@ Vector<Vector3> GodotConcavePolygonShape3D::get_faces() const {
 	return rfaces;
 }
 
-void GodotConcavePolygonShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADEConcavePolygonShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	int count = vertices.size();
 	if (count == 0) {
 		r_min = 0;
@@ -1305,7 +1305,7 @@ void GodotConcavePolygonShape3D::project_range(const Vector3 &p_normal, const Tr
 	}
 }
 
-Vector3 GodotConcavePolygonShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEConcavePolygonShape3D::get_support(const Vector3 &p_normal) const {
 	int count = vertices.size();
 	if (count == 0) {
 		return Vector3();
@@ -1330,7 +1330,7 @@ Vector3 GodotConcavePolygonShape3D::get_support(const Vector3 &p_normal) const {
 	return vptr[vert_support_idx];
 }
 
-void GodotConcavePolygonShape3D::_cull_segment(int p_idx, _SegmentCullParams *p_params) const {
+void FADEConcavePolygonShape3D::_cull_segment(int p_idx, _SegmentCullParams *p_params) const {
 	const BVH *params_bvh = &p_params->bvh[p_idx];
 
 	if (!params_bvh->aabb.intersects_segment(p_params->from, p_params->to)) {
@@ -1339,7 +1339,7 @@ void GodotConcavePolygonShape3D::_cull_segment(int p_idx, _SegmentCullParams *p_
 
 	if (params_bvh->face_index >= 0) {
 		const Face *f = &p_params->faces[params_bvh->face_index];
-		GodotFaceShape3D *face = p_params->face;
+		FADEFaceShape3D *face = p_params->face;
 		face->normal = f->normal;
 		face->vertex[0] = p_params->vertices[f->indices[0]];
 		face->vertex[1] = p_params->vertices[f->indices[1]];
@@ -1368,7 +1368,7 @@ void GodotConcavePolygonShape3D::_cull_segment(int p_idx, _SegmentCullParams *p_
 	}
 }
 
-bool GodotConcavePolygonShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADEConcavePolygonShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_result, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	if (faces.is_empty()) {
 		return false;
 	}
@@ -1378,7 +1378,7 @@ bool GodotConcavePolygonShape3D::intersect_segment(const Vector3 &p_begin, const
 	const Vector3 *vr = vertices.ptr();
 	const BVH *br = bvh.ptr();
 
-	GodotFaceShape3D face;
+	FADEFaceShape3D face;
 	face.backface_collision = backface_collision && p_hit_back_faces;
 
 	_SegmentCullParams params;
@@ -1405,15 +1405,15 @@ bool GodotConcavePolygonShape3D::intersect_segment(const Vector3 &p_begin, const
 	}
 }
 
-bool GodotConcavePolygonShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADEConcavePolygonShape3D::intersect_point(const Vector3 &p_point) const {
 	return false; //face is flat
 }
 
-Vector3 GodotConcavePolygonShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADEConcavePolygonShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	return Vector3();
 }
 
-bool GodotConcavePolygonShape3D::_cull(int p_idx, _CullParams *p_params) const {
+bool FADEConcavePolygonShape3D::_cull(int p_idx, _CullParams *p_params) const {
 	const BVH *params_bvh = &p_params->bvh[p_idx];
 
 	if (!p_params->aabb.intersects(params_bvh->aabb)) {
@@ -1422,7 +1422,7 @@ bool GodotConcavePolygonShape3D::_cull(int p_idx, _CullParams *p_params) const {
 
 	if (params_bvh->face_index >= 0) {
 		const Face *f = &p_params->faces[params_bvh->face_index];
-		GodotFaceShape3D *face = p_params->face;
+		FADEFaceShape3D *face = p_params->face;
 		face->normal = f->normal;
 		face->vertex[0] = p_params->vertices[f->indices[0]];
 		face->vertex[1] = p_params->vertices[f->indices[1]];
@@ -1447,7 +1447,7 @@ bool GodotConcavePolygonShape3D::_cull(int p_idx, _CullParams *p_params) const {
 	return false;
 }
 
-void GodotConcavePolygonShape3D::cull(const AABB &p_local_aabb, QueryCallback p_callback, void *p_userdata, bool p_invert_backface_collision) const {
+void FADEConcavePolygonShape3D::cull(const AABB &p_local_aabb, QueryCallback p_callback, void *p_userdata, bool p_invert_backface_collision) const {
 	// make matrix local to concave
 	if (faces.is_empty()) {
 		return;
@@ -1460,7 +1460,7 @@ void GodotConcavePolygonShape3D::cull(const AABB &p_local_aabb, QueryCallback p_
 	const Vector3 *vr = vertices.ptr();
 	const BVH *br = bvh.ptr();
 
-	GodotFaceShape3D face; // use this to send in the callback
+	FADEFaceShape3D face; // use this to send in the callback
 	face.backface_collision = backface_collision;
 	face.invert_backface_collision = p_invert_backface_collision;
 
@@ -1477,7 +1477,7 @@ void GodotConcavePolygonShape3D::cull(const AABB &p_local_aabb, QueryCallback p_
 	_cull(0, &params);
 }
 
-Vector3 GodotConcavePolygonShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADEConcavePolygonShape3D::get_moment_of_inertia(real_t p_mass) const {
 	// use bad AABB approximation
 	Vector3 extents = get_aabb().size * 0.5;
 
@@ -1568,7 +1568,7 @@ _Volume_BVH *_volume_build_bvh(_Volume_BVH_Element *p_elements, int p_size, int 
 	return bvh;
 }
 
-void GodotConcavePolygonShape3D::_fill_bvh(_Volume_BVH *p_bvh_tree, BVH *p_bvh_array, int &p_idx) {
+void FADEConcavePolygonShape3D::_fill_bvh(_Volume_BVH *p_bvh_tree, BVH *p_bvh_array, int &p_idx) {
 	int idx = p_idx;
 
 	p_bvh_array[idx].aabb = p_bvh_tree->aabb;
@@ -1594,7 +1594,7 @@ void GodotConcavePolygonShape3D::_fill_bvh(_Volume_BVH *p_bvh_tree, BVH *p_bvh_a
 	memdelete(p_bvh_tree);
 }
 
-void GodotConcavePolygonShape3D::_setup(const Vector<Vector3> &p_faces, bool p_backface_collision) {
+void FADEConcavePolygonShape3D::_setup(const Vector<Vector3> &p_faces, bool p_backface_collision) {
 	int src_face_count = p_faces.size();
 	if (src_face_count == 0) {
 		configure(AABB());
@@ -1654,14 +1654,14 @@ void GodotConcavePolygonShape3D::_setup(const Vector<Vector3> &p_faces, bool p_b
 	configure(_aabb); // this type of shape has no margin
 }
 
-void GodotConcavePolygonShape3D::set_data(const Variant &p_data) {
+void FADEConcavePolygonShape3D::set_data(const Variant &p_data) {
 	Dictionary d = p_data;
 	ERR_FAIL_COND(!d.has("faces"));
 
 	_setup(d["faces"], d["backface_collision"]);
 }
 
-Variant GodotConcavePolygonShape3D::get_data() const {
+Variant FADEConcavePolygonShape3D::get_data() const {
 	Dictionary d;
 	d["faces"] = get_faces();
 	d["backface_collision"] = backface_collision;
@@ -1669,29 +1669,29 @@ Variant GodotConcavePolygonShape3D::get_data() const {
 	return d;
 }
 
-GodotConcavePolygonShape3D::GodotConcavePolygonShape3D() {
+FADEConcavePolygonShape3D::FADEConcavePolygonShape3D() {
 }
 
 /* HEIGHT MAP SHAPE */
 
-Vector<real_t> GodotHeightMapShape3D::get_heights() const {
+Vector<real_t> FADEHeightMapShape3D::get_heights() const {
 	return heights;
 }
 
-int GodotHeightMapShape3D::get_width() const {
+int FADEHeightMapShape3D::get_width() const {
 	return width;
 }
 
-int GodotHeightMapShape3D::get_depth() const {
+int FADEHeightMapShape3D::get_depth() const {
 	return depth;
 }
 
-void GodotHeightMapShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
+void FADEHeightMapShape3D::project_range(const Vector3 &p_normal, const Transform3D &p_transform, real_t &r_min, real_t &r_max) const {
 	//not very useful, but not very used either
 	p_transform.xform(get_aabb()).project_range_in_plane(Plane(p_normal), r_min, r_max);
 }
 
-Vector3 GodotHeightMapShape3D::get_support(const Vector3 &p_normal) const {
+Vector3 FADEHeightMapShape3D::get_support(const Vector3 &p_normal) const {
 	//not very useful, but not very used either
 	return get_aabb().get_support(p_normal);
 }
@@ -1704,8 +1704,8 @@ struct _HeightmapSegmentCullParams {
 	Vector3 result;
 	Vector3 normal;
 
-	const GodotHeightMapShape3D *heightmap = nullptr;
-	GodotFaceShape3D *face = nullptr;
+	const FADEHeightMapShape3D *heightmap = nullptr;
+	FADEFaceShape3D *face = nullptr;
 };
 
 struct _HeightmapGridCullState {
@@ -1755,7 +1755,7 @@ _FORCE_INLINE_ bool _heightmap_cell_cull_segment(_HeightmapSegmentCullParams &p_
 }
 
 _FORCE_INLINE_ bool _heightmap_chunk_cull_segment(_HeightmapSegmentCullParams &p_params, const _HeightmapGridCullState &p_state) {
-	const GodotHeightMapShape3D::Range &chunk = p_params.heightmap->_get_bounds_chunk(p_state.x, p_state.z);
+	const FADEHeightMapShape3D::Range &chunk = p_params.heightmap->_get_bounds_chunk(p_state.x, p_state.z);
 
 	Vector3 enter_pos;
 	Vector3 exit_pos;
@@ -1774,8 +1774,8 @@ _FORCE_INLINE_ bool _heightmap_chunk_cull_segment(_HeightmapSegmentCullParams &p
 	}
 
 	// Transform positions to heightmap space.
-	enter_pos *= GodotHeightMapShape3D::BOUNDS_CHUNK_SIZE;
-	exit_pos *= GodotHeightMapShape3D::BOUNDS_CHUNK_SIZE;
+	enter_pos *= FADEHeightMapShape3D::BOUNDS_CHUNK_SIZE;
+	exit_pos *= FADEHeightMapShape3D::BOUNDS_CHUNK_SIZE;
 
 	// We did enter the flat projection of the AABB,
 	// but we have to check if we intersect it on the vertical axis.
@@ -1790,7 +1790,7 @@ _FORCE_INLINE_ bool _heightmap_chunk_cull_segment(_HeightmapSegmentCullParams &p
 }
 
 template <typename ProcessFunction>
-bool GodotHeightMapShape3D::_intersect_grid_segment(ProcessFunction &p_process, const Vector3 &p_begin, const Vector3 &p_end, int p_width, int p_depth, const Vector3 &offset, Vector3 &r_point, Vector3 &r_normal) const {
+bool FADEHeightMapShape3D::_intersect_grid_segment(ProcessFunction &p_process, const Vector3 &p_begin, const Vector3 &p_end, int p_width, int p_depth, const Vector3 &offset, Vector3 &r_point, Vector3 &r_normal) const {
 	Vector3 delta = (p_end - p_begin);
 	real_t length = delta.length();
 
@@ -1800,7 +1800,7 @@ bool GodotHeightMapShape3D::_intersect_grid_segment(ProcessFunction &p_process, 
 
 	Vector3 local_begin = p_begin + offset;
 
-	GodotFaceShape3D face;
+	FADEFaceShape3D face;
 	face.backface_collision = false;
 
 	_HeightmapSegmentCullParams params;
@@ -1930,7 +1930,7 @@ bool GodotHeightMapShape3D::_intersect_grid_segment(ProcessFunction &p_process, 
 	return false;
 }
 
-bool GodotHeightMapShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_point, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
+bool FADEHeightMapShape3D::intersect_segment(const Vector3 &p_begin, const Vector3 &p_end, Vector3 &r_point, Vector3 &r_normal, int &r_face_index, bool p_hit_back_faces) const {
 	if (heights.is_empty()) {
 		return false;
 	}
@@ -1947,7 +1947,7 @@ bool GodotHeightMapShape3D::intersect_segment(const Vector3 &p_begin, const Vect
 	if ((begin_x == end_x) && (begin_z == end_z)) {
 		// Simple case for rays that don't traverse the grid horizontally.
 		// Just perform a test on the given cell.
-		GodotFaceShape3D face;
+		FADEFaceShape3D face;
 		face.backface_collision = p_hit_back_faces;
 
 		_HeightmapSegmentCullParams params;
@@ -1991,15 +1991,15 @@ bool GodotHeightMapShape3D::intersect_segment(const Vector3 &p_begin, const Vect
 	return false;
 }
 
-bool GodotHeightMapShape3D::intersect_point(const Vector3 &p_point) const {
+bool FADEHeightMapShape3D::intersect_point(const Vector3 &p_point) const {
 	return false;
 }
 
-Vector3 GodotHeightMapShape3D::get_closest_point_to(const Vector3 &p_point) const {
+Vector3 FADEHeightMapShape3D::get_closest_point_to(const Vector3 &p_point) const {
 	return Vector3();
 }
 
-void GodotHeightMapShape3D::_get_cell(const Vector3 &p_point, int &r_x, int &r_y, int &r_z) const {
+void FADEHeightMapShape3D::_get_cell(const Vector3 &p_point, int &r_x, int &r_y, int &r_z) const {
 	const AABB &shape_aabb = get_aabb();
 
 	Vector3 pos_local = shape_aabb.position + local_origin;
@@ -2012,7 +2012,7 @@ void GodotHeightMapShape3D::_get_cell(const Vector3 &p_point, int &r_x, int &r_y
 	r_z = (clamped_point.z < 0.0) ? (clamped_point.z - 0.5) : (clamped_point.z + 0.5);
 }
 
-void GodotHeightMapShape3D::cull(const AABB &p_local_aabb, QueryCallback p_callback, void *p_userdata, bool p_invert_backface_collision) const {
+void FADEHeightMapShape3D::cull(const AABB &p_local_aabb, QueryCallback p_callback, void *p_userdata, bool p_invert_backface_collision) const {
 	if (heights.is_empty()) {
 		return;
 	}
@@ -2038,7 +2038,7 @@ void GodotHeightMapShape3D::cull(const AABB &p_local_aabb, QueryCallback p_callb
 	int start_z = MAX(0, aabb_min[2]);
 	int end_z = MIN(depth - 1, aabb_max[2]);
 
-	GodotFaceShape3D face;
+	FADEFaceShape3D face;
 	face.backface_collision = !p_invert_backface_collision;
 	face.invert_backface_collision = p_invert_backface_collision;
 
@@ -2064,7 +2064,7 @@ void GodotHeightMapShape3D::cull(const AABB &p_local_aabb, QueryCallback p_callb
 	}
 }
 
-Vector3 GodotHeightMapShape3D::get_moment_of_inertia(real_t p_mass) const {
+Vector3 FADEHeightMapShape3D::get_moment_of_inertia(real_t p_mass) const {
 	// use bad AABB approximation
 	Vector3 extents = get_aabb().size * 0.5;
 
@@ -2074,7 +2074,7 @@ Vector3 GodotHeightMapShape3D::get_moment_of_inertia(real_t p_mass) const {
 			(p_mass / 3.0) * (extents.x * extents.x + extents.y * extents.y));
 }
 
-void GodotHeightMapShape3D::_build_accelerator() {
+void FADEHeightMapShape3D::_build_accelerator() {
 	bounds_grid.clear();
 
 	bounds_grid_width = width / BOUNDS_CHUNK_SIZE;
@@ -2143,7 +2143,7 @@ void GodotHeightMapShape3D::_build_accelerator() {
 	}
 }
 
-void GodotHeightMapShape3D::_setup(const Vector<real_t> &p_heights, int p_width, int p_depth, real_t p_min_height, real_t p_max_height) {
+void FADEHeightMapShape3D::_setup(const Vector<real_t> &p_heights, int p_width, int p_depth, real_t p_min_height, real_t p_max_height) {
 	heights = p_heights;
 	width = p_width;
 	depth = p_depth;
@@ -2164,7 +2164,7 @@ void GodotHeightMapShape3D::_setup(const Vector<real_t> &p_heights, int p_width,
 	configure(aabb_new);
 }
 
-void GodotHeightMapShape3D::set_data(const Variant &p_data) {
+void FADEHeightMapShape3D::set_data(const Variant &p_data) {
 	ERR_FAIL_COND(p_data.get_type() != Variant::DICTIONARY);
 
 	Dictionary d = p_data;
@@ -2236,7 +2236,7 @@ void GodotHeightMapShape3D::set_data(const Variant &p_data) {
 	_setup(heights_buffer, width_new, depth_new, min_height, max_height);
 }
 
-Variant GodotHeightMapShape3D::get_data() const {
+Variant FADEHeightMapShape3D::get_data() const {
 	Dictionary d;
 	d["width"] = width;
 	d["depth"] = depth;
@@ -2250,5 +2250,5 @@ Variant GodotHeightMapShape3D::get_data() const {
 	return d;
 }
 
-GodotHeightMapShape3D::GodotHeightMapShape3D() {
+FADEHeightMapShape3D::FADEHeightMapShape3D() {
 }

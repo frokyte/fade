@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class AbstractGenericNode<T>
 {
@@ -7,24 +7,24 @@ partial class AbstractGenericNode<T>
     /// <summary>
     /// Cached StringNames for the properties and fields contained in this class, for fast lookup.
     /// </summary>
-    public new class PropertyName : global::Godot.Node.PropertyName {
+    public new class PropertyName : global::FADE.Node.PropertyName {
         /// <summary>
         /// Cached name for the 'MyArray' property.
         /// </summary>
-        public new static readonly global::Godot.StringName @MyArray = "MyArray";
+        public new static readonly global::FADE.StringName @MyArray = "MyArray";
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotPropertyTrampolines(global::Godot.Bridge.PropertyTrampolineCollector collector)
+        public static void GetFADEPropertyTrampolines(global::FADE.Bridge.PropertyTrampolineCollector collector)
         {
             static godot_variant trampoline_get_MyArray(object godotObject)
             {
                 var ret = ((global::AbstractGenericNode<T>)godotObject).@MyArray;
-                return global::Godot.NativeInterop.VariantUtils.CreateFromArray(ret);
+                return global::FADE.NativeInterop.VariantUtils.CreateFromArray(ret);
             }
             static void trampoline_set_MyArray(object godotObject, in godot_variant value)
             {
-                ((global::AbstractGenericNode<T>)godotObject).@MyArray = global::Godot.NativeInterop.VariantUtils.ConvertToArray<T>(value);
+                ((global::AbstractGenericNode<T>)godotObject).@MyArray = global::FADE.NativeInterop.VariantUtils.ConvertToArray<T>(value);
             }
             var aux_delegate_get_MyArray = trampoline_get_MyArray;
             var aux_delegate_set_MyArray = trampoline_set_MyArray;
@@ -33,14 +33,14 @@ partial class AbstractGenericNode<T>
     }
     /// <summary>
     /// Get the property information for all the properties declared in this class.
-    /// This method is used by Godot to register the available properties in the editor.
+    /// This method is used by FADE to register the available properties in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo> GetGodotPropertyList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo> GetFADEPropertyList()
     {
-        var properties = new global::System.Collections.Generic.List<global::Godot.Bridge.PropertyInfo>();
-        properties.Add(new(type: (global::Godot.Variant.Type)28, name: PropertyName.@MyArray, hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)4102, exported: true));
+        var properties = new global::System.Collections.Generic.List<global::FADE.Bridge.PropertyInfo>();
+        properties.Add(new(type: (global::FADE.Variant.Type)28, name: PropertyName.@MyArray, hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)4102, exported: true));
         return properties;
     }
 #pragma warning restore CS0109

@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace Godot.NativeInterop
+namespace FADE.NativeInterop
 {
-    public class GodotDllImportResolver
+    public class FADEDllImportResolver
     {
         private IntPtr _internalHandle;
 
-        public GodotDllImportResolver(IntPtr internalHandle)
+        public FADEDllImportResolver(IntPtr internalHandle)
         {
             _internalHandle = internalHandle;
         }

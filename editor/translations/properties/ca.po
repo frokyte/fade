@@ -1,7 +1,7 @@
-# Catalan translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Catalan translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # BennyBeat <bennybeat@gmail.com>, 2017, 2026.
 # Javier Ocampos <xavier.ocampos@gmail.com>, 2018.
 # Roger Blanco Ribera <roger.blancoribera@gmail.com>, 2016-2018, 2020, 2025.
@@ -25,7 +25,7 @@
 # Júlia Rosell Saldaña <contacte@juliars.cat>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-08-30 06:40+0000\n"
@@ -3904,8 +3904,8 @@ msgstr "Feu un seguiment sempre de les piles de crides"
 msgid "Always Track Local Variables"
 msgstr "Seguiu sempre les variables locals"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Reanomenat a Godot 4 Hint"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Reanomenat a FADE 4 Hint"
 
 msgid "Unassigned Variable"
 msgstr "Variable no assignada"
@@ -4303,11 +4303,11 @@ msgstr "Llum"
 msgid "Visible"
 msgstr "Visibilitat"
 
-msgid "glTF to Godot Expression"
-msgstr "glTF a l'expressió Godot"
+msgid "glTF to FADE Expression"
+msgstr "glTF a l'expressió FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "Godot a expressió glTF"
+msgid "FADE to glTF Expression"
+msgstr "FADE a expressió glTF"
 
 msgid "Node Paths"
 msgstr "Camí de node"
@@ -4327,8 +4327,8 @@ msgstr "Articulacions"
 msgid "Roots"
 msgstr "Arrels"
 
-msgid "Godot Bone Node"
-msgstr "Node d'ós Godot"
+msgid "FADE Bone Node"
+msgstr "Node d'ós FADE"
 
 msgid "Skin Root"
 msgstr "Arrel de pell"
@@ -4339,8 +4339,8 @@ msgstr "Articulacions originals"
 msgid "Non Joints"
 msgstr "No articulacions"
 
-msgid "Godot Skin"
-msgstr "Pell Godot"
+msgid "FADE Skin"
+msgstr "Pell FADE"
 
 msgid "Src Image"
 msgstr "Origen d'imatge"
@@ -5377,8 +5377,8 @@ msgstr "Amfitrió de depuració remota Wi-Fi"
 msgid "Splash Screen"
 msgstr "Pantalla de presentació"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Desactiva el la pantalla d'arrencada de Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "Desactiva el la pantalla d'arrencada de FADE"
 
 msgid "Background Color"
 msgstr "Color de fons"
@@ -5932,8 +5932,8 @@ msgstr "Icona 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "Mida de la piscina d'Emscripten"
 
-msgid "Godot Pool Size"
-msgstr "Mida de la piscina Godot"
+msgid "FADE Pool Size"
+msgstr "Mida de la piscina FADE"
 
 msgid "Windows"
 msgstr "Finestres"

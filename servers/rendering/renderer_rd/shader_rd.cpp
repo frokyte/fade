@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -174,9 +174,9 @@ void ShaderRD::setup(const char *p_vertex_code, const char *p_fragment_code, con
 	}
 
 	StringBuilder tohash;
-	tohash.append("[GodotVersionNumber]");
+	tohash.append("[FADEVersionNumber]");
 	tohash.append(GODOT_VERSION_NUMBER);
-	tohash.append("[GodotVersionHash]");
+	tohash.append("[FADEVersionHash]");
 	tohash.append(GODOT_VERSION_HASH);
 	tohash.append("[Vertex]");
 	tohash.append(p_vertex_code ? p_vertex_code : "");
@@ -211,9 +211,9 @@ void ShaderRD::setup_raytracing(const char *p_raygen_code, const char *p_any_hit
 	}
 
 	StringBuilder tohash;
-	tohash.append("[GodotVersionNumber]");
+	tohash.append("[FADEVersionNumber]");
 	tohash.append(GODOT_VERSION_NUMBER);
-	tohash.append("[GodotVersionHash]");
+	tohash.append("[FADEVersionHash]");
 	tohash.append(GODOT_VERSION_HASH);
 	tohash.append("[Raygen]");
 	tohash.append(p_raygen_code ? p_raygen_code : "");

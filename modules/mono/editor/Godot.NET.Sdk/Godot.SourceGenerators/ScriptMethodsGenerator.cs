@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
     [Generator]
     public class ScriptMethodsGenerator : ISourceGenerator
@@ -16,7 +16,7 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotSourceGeneratorDisabled("ScriptMethods"))
+            if (context.IsFADESourceGeneratorDisabled("ScriptMethods"))
                 return;
 
             INamedTypeSymbol[] godotClasses = context
@@ -24,7 +24,7 @@ namespace Godot.SourceGenerators
                 .SelectMany(tree =>
                     tree.GetRoot().DescendantNodes()
                         .OfType<ClassDeclarationSyntax>()
-                        .SelectGodotScriptClasses(context.Compilation)
+                        .SelectFADEScriptClasses(context.Compilation)
                         // Report and skip non-partial classes
                         .Where(x =>
                         {
@@ -51,17 +51,17 @@ namespace Godot.SourceGenerators
 
                 foreach (var godotClass in godotClasses)
                 {
-                    VisitGodotScriptClass(context, typeCache, godotClass);
+                    VisitFADEScriptClass(context, typeCache, godotClass);
                 }
             }
         }
 
-        private class MethodOverloadEqualityComparer : IEqualityComparer<GodotMethodData>
+        private class MethodOverloadEqualityComparer : IEqualityComparer<FADEMethodData>
         {
-            public bool Equals(GodotMethodData x, GodotMethodData y)
+            public bool Equals(FADEMethodData x, FADEMethodData y)
                 => x.ParamTypes.Length == y.ParamTypes.Length && x.Method.Name == y.Method.Name;
 
-            public int GetHashCode(GodotMethodData obj)
+            public int GetHashCode(FADEMethodData obj)
             {
                 unchecked
                 {
@@ -70,7 +70,7 @@ namespace Godot.SourceGenerators
             }
         }
 
-        private static void VisitGodotScriptClass(
+        private static void VisitFADEScriptClass(
             GeneratorExecutionContext context,
             MarshalUtils.TypeCache typeCache,
             INamedTypeSymbol symbol
@@ -89,8 +89,8 @@ namespace Godot.SourceGenerators
 
             var source = new StringBuilder();
 
-            source.Append("using Godot;\n");
-            source.Append("using Godot.NativeInterop;\n");
+            source.Append("using FADE;\n");
+            source.Append("using FADE.NativeInterop;\n");
             source.Append("\n");
 
             if (hasNamespace)
@@ -130,10 +130,10 @@ namespace Godot.SourceGenerators
                 .Where(s => s.Kind == SymbolKind.Method && !s.IsImplicitlyDeclared)
                 .Cast<IMethodSymbol>()
                 .Where(m => !m.GetAttributes()
-                    .Any(a => a.AttributeClass?.IsGodotIgnoreMemberAttribute() ?? false))
+                    .Any(a => a.AttributeClass?.IsFADEIgnoreMemberAttribute() ?? false))
                 .Where(m => m.MethodKind == MethodKind.Ordinary);
 
-            var godotClassMethods = methodSymbols.WhereHasGodotCompatibleSignature(typeCache)
+            var godotClassMethods = methodSymbols.WhereHasFADECompatibleSignature(typeCache)
                 .Distinct(new MethodOverloadEqualityComparer())
                 .ToArray();
 
@@ -162,7 +162,7 @@ namespace Godot.SourceGenerators
                     .Append("' method.\n")
                     .Append("        /// </summary>\n");
 
-                source.Append("        public new static readonly global::Godot.StringName @");
+                source.Append("        public new static readonly global::FADE.StringName @");
                 source.Append(methodName);
                 source.Append(" = \"");
                 source.Append(methodName);
@@ -171,15 +171,15 @@ namespace Godot.SourceGenerators
 
             source.Append("    }\n"); // end of class MethodName
 
-            // Generate GetGodotMethodList
+            // Generate GetFADEMethodList
 
             if (godotClassMethods.Length > 0)
             {
-                const string ListType = "global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo>";
+                const string ListType = "global::System.Collections.Generic.List<global::FADE.Bridge.MethodInfo>";
 
                 source.Append("    /// <summary>\n")
                     .Append("    /// Get the method information for all the methods declared in this class.\n")
-                    .Append("    /// This method is used by Godot to register the available methods in the editor.\n")
+                    .Append("    /// This method is used by FADE to register the available methods in the editor.\n")
                     .Append("    /// Do not call this method.\n")
                     .Append("    /// </summary>\n");
 
@@ -188,7 +188,7 @@ namespace Godot.SourceGenerators
 
                 source.Append("    internal new static ")
                     .Append(ListType)
-                    .Append(" GetGodotMethodList()\n    {\n");
+                    .Append(" GetFADEMethodList()\n    {\n");
 
                 source.Append("        var methods = new ")
                     .Append(ListType)
@@ -207,13 +207,13 @@ namespace Godot.SourceGenerators
             }
 
             source.Append("    ").Append(symbol.IsSealed ? "" : "protected ")
-                .Append("internal new static partial class GodotInternal\n    {\n");
+                .Append("internal new static partial class FADEInternal\n    {\n");
 
-            // Generate GetGodotMethodTrampolines
+            // Generate GetFADEMethodTrampolines
             {
-                const string CollectorType = "global::Godot.Bridge.MethodTrampolineCollector";
+                const string CollectorType = "global::FADE.Bridge.MethodTrampolineCollector";
 
-                source.Append("        public static void GetGodotMethodTrampolines(")
+                source.Append("        public static void GetFADEMethodTrampolines(")
                     .Append(CollectorType).Append(" collector)\n        {\n");
 
                 foreach (var method in godotClassMethods)
@@ -225,7 +225,7 @@ namespace Godot.SourceGenerators
                 source.Append("        }\n");
             }
 
-            source.Append("    }\n"); // partial class GodotInternal
+            source.Append("    }\n"); // partial class FADEInternal
 
             source.Append("#pragma warning restore CS0109\n");
 
@@ -259,7 +259,7 @@ namespace Godot.SourceGenerators
 
             AppendPropertyInfo(source, methodInfo.ReturnVal);
 
-            source.Append(", flags: (global::Godot.MethodFlags)")
+            source.Append(", flags: (global::FADE.MethodFlags)")
                 .Append((int)methodInfo.Flags)
                 .Append(", arguments: ");
 
@@ -287,21 +287,21 @@ namespace Godot.SourceGenerators
 
         private static void AppendPropertyInfo(StringBuilder source, PropertyInfo propertyInfo)
         {
-            source.Append("new(type: (global::Godot.Variant.Type)")
+            source.Append("new(type: (global::FADE.Variant.Type)")
                 .Append((int)propertyInfo.Type)
                 .Append(", name: \"")
                 .Append(propertyInfo.Name)
-                .Append("\", hint: (global::Godot.PropertyHint)")
+                .Append("\", hint: (global::FADE.PropertyHint)")
                 .Append((int)propertyInfo.Hint)
                 .Append(", hintString: \"")
                 .Append(propertyInfo.HintString)
-                .Append("\", usage: (global::Godot.PropertyUsageFlags)")
+                .Append("\", usage: (global::FADE.PropertyUsageFlags)")
                 .Append((int)propertyInfo.Usage)
                 .Append(", exported: ")
                 .Append(propertyInfo.Exported ? "true" : "false");
             if (propertyInfo.ClassName != null)
             {
-                source.Append(", className: new global::Godot.StringName(\"")
+                source.Append(", className: new global::FADE.StringName(\"")
                     .Append(propertyInfo.ClassName)
                     .Append("\")");
             }
@@ -309,7 +309,7 @@ namespace Godot.SourceGenerators
             source.Append(")");
         }
 
-        private static MethodInfo DetermineMethodInfo(GodotMethodData method)
+        private static MethodInfo DetermineMethodInfo(FADEMethodData method)
         {
             PropertyInfo returnVal;
 
@@ -375,7 +375,7 @@ namespace Godot.SourceGenerators
                 PropertyHint.None, string.Empty, propUsage, className, exported: false);
         }
 
-        private static void AppendMethodTrampoline(StringBuilder source, GodotMethodData method)
+        private static void AppendMethodTrampoline(StringBuilder source, FADEMethodData method)
         {
             string methodName = method.Method.Name;
             int parameterCount = method.ParamTypes.Length;
@@ -392,7 +392,7 @@ namespace Godot.SourceGenerators
 
             if (method.Method is { IsOverride: true, OverriddenMethod: not null } &&
                 method.Method.OverriddenMethod.ContainingType
-                    .ContainingAssembly is { Name: "GodotSharp" or "GodotSharpEditor" })
+                    .ContainingAssembly is { Name: "FADESharp" or "FADESharpEditor" })
             {
                 // Only do this for native virtual methods by checking that it is also in MethodName.
                 if (method.Method.OverriddenMethod.ContainingType.GetTypeMembers()
@@ -430,7 +430,7 @@ namespace Godot.SourceGenerators
 
         private static void GenerateMethodTrampoline(
             INamedTypeSymbol classSymbol,
-            GodotMethodData method,
+            FADEMethodData method,
             StringBuilder source
         )
         {
@@ -439,14 +439,14 @@ namespace Godot.SourceGenerators
 
             INamedTypeSymbol castClassSymbol = classSymbol;
 
-            // To match the behavior of InvokeGodotClassMethod, native virtual methods must
+            // To match the behavior of InvokeFADEClassMethod, native virtual methods must
             // be invoked on a variable of the method declaring type, not the overriding type.
             // e.g.: '((Node)obj)._EnterTree' vs '((DerivedScriptClass)obj)._EnterTree'.
             // These two will behave differently if the derived class hides the method
             // (with the 'new' keyword) instead of overriding it.
             if (method.Method is { IsOverride: true, OverriddenMethod: not null } &&
                 method.Method.OverriddenMethod.ContainingType
-                    .ContainingAssembly is { Name: "GodotSharp" or "GodotSharpEditor" })
+                    .ContainingAssembly is { Name: "FADESharp" or "FADESharpEditor" })
             {
                 // Only do this for native virtual methods by checking that it is also in MethodName.
                 // This is not only for correctness, but to also avoid issues with protected functions like Dispose(bool).

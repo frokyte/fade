@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial struct OuterClass
 {
@@ -7,15 +7,15 @@ partial class NestedClass
 {
     /// <inheritdoc/>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    protected override void SaveGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)
+    protected override void SaveFADEObjectData(global::FADE.Bridge.FADESerializationInfo info)
     {
-        base.SaveGodotObjectData(info);
+        base.SaveFADEObjectData(info);
     }
     /// <inheritdoc/>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    protected override void RestoreGodotObjectData(global::Godot.Bridge.GodotSerializationInfo info)
+    protected override void RestoreFADEObjectData(global::FADE.Bridge.FADESerializationInfo info)
     {
-        base.RestoreGodotObjectData(info);
+        base.RestoreFADEObjectData(info);
     }
 }
 }

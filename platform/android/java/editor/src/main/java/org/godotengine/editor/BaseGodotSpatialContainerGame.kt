@@ -1,12 +1,12 @@
 /*************************************************************************/
-/*  BaseGodotSpatialContainerGame.kt                                     */
+/*  BaseFADESpatialContainerGame.kt                                     */
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2022 Godot Engine contributors (cf. AUTHORS.md).   */
+/* Copyright (c) 2014-2022 FADE Engine contributors (cf. AUTHORS.md).   */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -31,22 +31,22 @@
 package org.godotengine.editor
 
 import android.util.Log
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.FADELib
 
 /**
  * Provide support for running spatial container apps / games from the editor window.
  */
-abstract class BaseGodotSpatialContainerGame : GodotXRGame() {
+abstract class BaseFADESpatialContainerGame : FADEXRGame() {
 	companion object {
-		private val TAG = BaseGodotSpatialContainerGame::class.java.simpleName
+		private val TAG = BaseFADESpatialContainerGame::class.java.simpleName
 
 		private val DEFAULT_SPATIAL_CONTAINER_BOUNDS = Triple(0.5f, 0.5f, 0.5f)
 
 		@JvmStatic
-		protected fun isSpatialContainerEnabled() = GodotLib.getGlobal("xr/openxr/extensions/spatial_container/enabled").toBoolean()
+		protected fun isSpatialContainerEnabled() = FADELib.getGlobal("xr/openxr/extensions/spatial_container/enabled").toBoolean()
 
 		internal fun getSpatialContainerBounds(): Triple<Float, Float, Float> {
-			val spatialContainerBounds = GodotLib.getGlobal("xr/openxr/extensions/spatial_container/bounds")
+			val spatialContainerBounds = FADELib.getGlobal("xr/openxr/extensions/spatial_container/bounds")
 			if (!spatialContainerBounds.isNullOrBlank()) {
 				// The returned string has the following format: (x, y, z)
 				val splitComponents = spatialContainerBounds

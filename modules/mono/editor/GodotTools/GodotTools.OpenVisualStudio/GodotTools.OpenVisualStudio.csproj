@@ -8,8 +8,8 @@
     <SelfContained>False</SelfContained>
     <RollForward>LatestMajor</RollForward>
   </PropertyGroup>
-  <PropertyGroup Condition="Exists('$(SolutionDir)/../../../../bin/GodotSharp/Api/Debug/GodotSharp.dll') And ('$(GodotPlatform)' == 'windows' Or ('$(GodotPlatform)' == '' And '$(OS)' == 'Windows_NT'))">
-    <OutputPath>$(SolutionDir)/../../../../bin/GodotSharp/Tools</OutputPath>
+  <PropertyGroup Condition="Exists('$(SolutionDir)/../../../../bin/FADESharp/Api/Debug/FADESharp.dll') And ('$(FADEPlatform)' == 'windows' Or ('$(FADEPlatform)' == '' And '$(OS)' == 'Windows_NT'))">
+    <OutputPath>$(SolutionDir)/../../../../bin/FADESharp/Tools</OutputPath>
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>False</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>

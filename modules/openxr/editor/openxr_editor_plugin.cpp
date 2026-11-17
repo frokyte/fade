@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -131,7 +131,7 @@ String OpenXRExportPlugin::get_android_manifest_element_contents(const Ref<Edito
 )n";
 
 #ifndef DISABLE_DEPRECATED
-	// This logic addresses the issue from https://github.com/GodotVR/godot_openxr_vendors/issues/429.
+	// This logic addresses the issue from https://github.com/FADEVR/godot_openxr_vendors/issues/429.
 	// The issue is caused by this plugin and the vendors plugin adding the same `uses-feature` tag to the generated
 	// manifest, causing a duplicate error at build time.
 	// In order to maintain backward compatibility, we fix the issue by disabling the addition of the `uses-feature`

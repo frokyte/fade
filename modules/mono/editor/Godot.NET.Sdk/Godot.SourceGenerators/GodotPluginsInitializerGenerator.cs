@@ -2,10 +2,10 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Godot.SourceGenerators
+namespace FADE.SourceGenerators
 {
     [Generator]
-    public class GodotPluginsInitializerGenerator : ISourceGenerator
+    public class FADEPluginsInitializerGenerator : ISourceGenerator
     {
         public void Initialize(GeneratorInitializationContext context)
         {
@@ -13,16 +13,16 @@ namespace Godot.SourceGenerators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.IsGodotToolsProject() || context.IsGodotSourceGeneratorDisabled("GodotPluginsInitializer"))
+            if (context.IsFADEToolsProject() || context.IsFADESourceGeneratorDisabled("FADEPluginsInitializer"))
                 return;
 
             string source =
                 @"using System;
 using System.Runtime.InteropServices;
-using Godot.Bridge;
-using Godot.NativeInterop;
+using FADE.Bridge;
+using FADE.NativeInterop;
 
-namespace GodotPlugins.Game
+namespace FADEPlugins.Game
 {
     internal static partial class Main
     {
@@ -36,29 +36,29 @@ namespace GodotPlugins.Game
 
                 Marshaling.Initialize();
 
-                DllImportResolver dllImportResolver = new GodotDllImportResolver(godotDllHandle).OnResolveDllImport;
+                DllImportResolver dllImportResolver = new FADEDllImportResolver(godotDllHandle).OnResolveDllImport;
 
-                var coreApiAssembly = typeof(global::Godot.GodotObject).Assembly;
+                var coreApiAssembly = typeof(global::FADE.FADEObject).Assembly;
 
                 NativeLibrary.SetDllImportResolver(coreApiAssembly, dllImportResolver);
 
                 ManagedCallbacks.Create(outManagedCallbacks);
 
-                ScriptManagerBridge.LookupScriptsInAssembly(typeof(global::GodotPlugins.Game.Main).Assembly);
+                ScriptManagerBridge.LookupScriptsInAssembly(typeof(global::FADEPlugins.Game.Main).Assembly);
 
                 return godot_bool.True;
             }
             catch (Exception e)
             {
                 global::System.Console.Error.WriteLine(e);
-                return false.ToGodotBool();
+                return false.ToFADEBool();
             }
         }
     }
 }
 ";
 
-            context.AddSource("GodotPlugins.Game.generated",
+            context.AddSource("FADEPlugins.Game.generated",
                 SourceText.From(source, Encoding.UTF8));
         }
     }

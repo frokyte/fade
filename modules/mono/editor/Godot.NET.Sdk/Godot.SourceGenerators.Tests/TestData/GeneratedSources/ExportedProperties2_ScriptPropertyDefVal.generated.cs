@@ -4,20 +4,20 @@ partial class ExportedProperties2
 #if TOOLS
     /// <summary>
     /// Get the default values for all properties declared in this class.
-    /// This method is used by Godot to determine the value that will be
+    /// This method is used by FADE to determine the value that will be
     /// used by the inspector when resetting properties.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.Dictionary<global::Godot.StringName, global::Godot.Variant> GetGodotPropertyDefaultValues()
+    internal new static global::System.Collections.Generic.Dictionary<global::FADE.StringName, global::FADE.Variant> GetFADEPropertyDefaultValues()
     {
-        var values = new global::System.Collections.Generic.Dictionary<global::Godot.StringName, global::Godot.Variant>(3);
+        var values = new global::System.Collections.Generic.Dictionary<global::FADE.StringName, global::FADE.Variant>(3);
         int __Health_default_value = default;
-        values.Add(PropertyName.@Health, global::Godot.Variant.From<int>(__Health_default_value));
-        global::Godot.Resource __SubResource_default_value = default;
-        values.Add(PropertyName.@SubResource, global::Godot.Variant.From<global::Godot.Resource>(__SubResource_default_value));
+        values.Add(PropertyName.@Health, global::FADE.Variant.From<int>(__Health_default_value));
+        global::FADE.Resource __SubResource_default_value = default;
+        values.Add(PropertyName.@SubResource, global::FADE.Variant.From<global::FADE.Resource>(__SubResource_default_value));
         string[] __Strings_default_value = default;
-        values.Add(PropertyName.@Strings, global::Godot.Variant.From<string[]>(__Strings_default_value));
+        values.Add(PropertyName.@Strings, global::FADE.Variant.From<string[]>(__Strings_default_value));
         return values;
     }
 #endif // TOOLS

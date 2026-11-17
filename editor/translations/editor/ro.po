@@ -1,7 +1,7 @@
-# Romanian translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Romanian translation of the FADE Engine editor interface.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Calin Sopterean <csopterean@gmail.com>, 2018.
 # Filip <filipanton@tutanota.com>, 2018, 2020.
 # Nitroretro <nitroretro@protonmail.com>, 2018.
@@ -50,7 +50,7 @@
 # Jonathan Quill <fulea.d.ovidiu@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: FADE Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-07-22 18:05+0000\n"
@@ -1108,7 +1108,7 @@ msgid ""
 "The file you selected is an imported scene from a 3D model such as glTF or "
 "FBX.\n"
 "\n"
-"In Godot, 3D models can be imported as either scenes or animation libraries, "
+"In FADE, 3D models can be imported as either scenes or animation libraries, "
 "which is why they show up here.\n"
 "\n"
 "If you want to use animations from this 3D model, open the Advanced Import "
@@ -1119,7 +1119,7 @@ msgstr ""
 "Fișierul selectat este o scenă importată dintr-un model 3D, cum ar fi glTF "
 "sau FBX.\n"
 "\n"
-"În Godot, modelele 3D pot fi importate fie ca scene, fie ca biblioteci de "
+"În FADE, modelele 3D pot fi importate fie ca scene, fie ca biblioteci de "
 "animații, motiv pentru care apar aici.\n"
 "\n"
 "Dacă doriți să utilizați animații din acest model 3D, deschideți caseta de "
@@ -3163,8 +3163,8 @@ msgstr "Exportă Managerul de Șabloane"
 msgid "Download from:"
 msgstr "Descărcați din:"
 
-msgid "Godot Export Templates"
-msgstr "Șabloane de export Godot"
+msgid "FADE Export Templates"
+msgstr "Șabloane de export FADE"
 
 msgid "Scripts"
 msgstr "Scripturi"
@@ -3323,11 +3323,11 @@ msgstr "Sponsori Aur"
 msgid "Silver Sponsors"
 msgstr "Sponsori de argint"
 
-msgid "Godot Engine contributors"
-msgstr "Contribuabili Motor Godot"
+msgid "FADE Engine contributors"
+msgstr "Contribuabili Motor FADE"
 
-msgid "Thanks from the Godot community!"
-msgstr "Mulțumesc din partea comunităţii Godot!"
+msgid "Thanks from the FADE community!"
+msgstr "Mulțumesc din partea comunităţii FADE!"
 
 msgid "Authors"
 msgstr "Autori"
@@ -3339,12 +3339,12 @@ msgid "Third-party Licenses"
 msgstr "Licenţe Thirdparty"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"FADE Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Motorul Godot se bazează pe un număr de biblioteci thirdparty gratis și "
+"Motorul FADE se bazează pe un număr de biblioteci thirdparty gratis și "
 "opensource, toate compatibile cu termenii licenţei MIT ai lui. Mai jos este o "
 "listă exhaustivă a tuturor acestor componente de thirdparty cu declaraţiile "
 "de autor respective şi termenii licenței."
@@ -4358,8 +4358,8 @@ msgstr "'%s' nu poate fi deschis. Fișierul ar putea fi modificat sau șters."
 msgid "Online Docs"
 msgstr "Documentație Online"
 
-msgid "Open Godot online documentation."
-msgstr "Deschideți documentația online Godot."
+msgid "Open FADE online documentation."
+msgstr "Deschideți documentația online FADE."
 
 msgid "Toggle Files Panel"
 msgstr "Afișează/Ascunde panoul Fișiere"
@@ -4552,7 +4552,7 @@ msgstr ""
 msgid "New profile name:"
 msgstr "Nume de profil nou:"
 
-msgid "Godot Feature Profile"
+msgid "FADE Feature Profile"
 msgstr "Administrează Șabloanele de Export"
 
 msgid "Import Profile(s)"

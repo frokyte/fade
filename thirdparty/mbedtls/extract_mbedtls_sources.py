@@ -14,7 +14,7 @@ default_destination = Path(__file__).resolve().parent
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Extract relevant mbedTLS sources from an upstream release into the Godot source tree"
+        description="Extract relevant mbedTLS sources from an upstream release into the FADE source tree"
     )
     parser.add_argument("sources", help="Path to the directory containing the mbedTLS sources")
     parser.add_argument(

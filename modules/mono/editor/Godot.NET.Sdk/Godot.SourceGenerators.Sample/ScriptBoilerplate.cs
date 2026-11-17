@@ -1,6 +1,6 @@
 #pragma warning disable CS0169
 
-namespace Godot.SourceGenerators.Sample
+namespace FADE.SourceGenerators.Sample
 {
     public partial class ScriptBoilerplate : Node
     {

@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotNativeBridge.kt                                                  */
+/*  FADENativeBridge.kt                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -47,53 +47,53 @@ import android.util.Rational
 import android.util.TypedValue
 import androidx.annotation.Keep
 import androidx.core.net.toUri
-import org.godotengine.godot.Godot
-import org.godotengine.godot.GodotActivity
+import org.godotengine.godot.FADE
+import org.godotengine.godot.FADEActivity
 import org.godotengine.godot.R
 import org.godotengine.godot.error.Error
 import org.godotengine.godot.feature.PictureInPictureProvider
 import org.godotengine.godot.io.FilePicker
 import org.godotengine.godot.utils.DialogUtils
-import org.godotengine.godot.utils.GodotNetUtils
+import org.godotengine.godot.utils.FADENetUtils
 import org.godotengine.godot.utils.beginBenchmarkMeasure
 import org.godotengine.godot.utils.dumpBenchmark
 import org.godotengine.godot.utils.endBenchmarkMeasure
-import org.godotengine.godot.variant.Callable as GodotCallable
+import org.godotengine.godot.variant.Callable as FADECallable
 
 /**
- * Holds and expose Godot apis to the native layer.
+ * Holds and expose FADE apis to the native layer.
  *
  * All the methods in this class are accessed by the native code (java_godot_wrapper.h) and as such are kept private to
  * not be accessible by the rest of the java/kotlin code.
  */
 @Keep
-internal class GodotNativeBridge(private val godot: Godot) {
+internal class FADENativeBridge(private val godot: FADE) {
 
 	companion object {
-		private val TAG = GodotNativeBridge::class.java.simpleName
+		private val TAG = FADENativeBridge::class.java.simpleName
 
 	}
 
 	private val vibratorService: Vibrator? by lazy { godot.context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator }
 
 	/**
-	 * Invoked on the render thread when the Godot setup is complete.
+	 * Invoked on the render thread when the FADE setup is complete.
 	 */
-	private fun onGodotSetupCompleted() {
-		godot.onGodotSetupCompleted()
+	private fun onFADESetupCompleted() {
+		godot.onFADESetupCompleted()
 	}
 
 	/**
-	 * Invoked on the render thread when the Godot main loop has started.
+	 * Invoked on the render thread when the FADE main loop has started.
 	 */
-	private fun onGodotMainLoopStarted() {
-		godot.onGodotMainLoopStarted()
+	private fun onFADEMainLoopStarted() {
+		godot.onFADEMainLoopStarted()
 	}
 
 	/**
 	 * Invoked on the render thread when the engine is about to terminate.
 	 */
-	private fun onGodotTerminating() = godot.onGodotTerminating()
+	private fun onFADETerminating() = godot.onFADETerminating()
 
 	/**
 	 * Invoked from the render thread to toggle the immersive mode.
@@ -110,7 +110,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 
 	private fun setKeepScreenOn(enabled: Boolean) = godot.setKeepScreenOn(enabled)
 
-	private fun restart() { godot.primaryHost?.onGodotRestartRequested(godot) }
+	private fun restart() { godot.primaryHost?.onFADERestartRequested(godot) }
 
 	private fun alert(message: String, title: String) {
 		godot.alert(message, title)
@@ -284,7 +284,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 	}
 
 	private fun getCACertificates(): String {
-		return GodotNetUtils.getCACertificates()
+		return FADENetUtils.getCACertificates()
 	}
 
 	private fun getActivity() = godot.getActivity()
@@ -311,8 +311,8 @@ internal class GodotNativeBridge(private val godot: Godot) {
 		godot.godotInputHandler.initInputDevices()
 	}
 
-	private fun createNewGodotInstance(args: Array<String>): Int {
-		return godot.primaryHost?.onNewGodotInstanceRequested(args) ?: -1
+	private fun createNewFADEInstance(args: Array<String>): Int {
+		return godot.primaryHost?.onNewFADEInstanceRequested(args) ?: -1
 	}
 
 	private fun nativeBeginBenchmarkMeasure(scope: String, label: String) {
@@ -356,7 +356,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 		godot.primaryHost?.onDistractionFreeModeChanged(enabled)
 	}
 
-	private fun nativeBuildEnvConnect(callback: GodotCallable): Boolean {
+	private fun nativeBuildEnvConnect(callback: FADECallable): Boolean {
 		try {
 			val buildProvider = godot.primaryHost?.buildProvider
 			val success = buildProvider?.buildEnvConnect(callback) ?: false
@@ -401,8 +401,8 @@ internal class GodotNativeBridge(private val godot: Godot) {
 		arguments: Array<String>,
 		projectPath: String,
 		buildDir: String,
-		outputCallback: GodotCallable,
-		resultCallback: GodotCallable
+		outputCallback: FADECallable,
+		resultCallback: FADECallable
 	): Int {
 		try {
 			val buildProvider = godot.primaryHost?.buildProvider
@@ -429,7 +429,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 		}
 	}
 
-	private fun nativeBuildEnvCleanProject(projectPath: String, buildDir: String, callback: GodotCallable) {
+	private fun nativeBuildEnvCleanProject(projectPath: String, buildDir: String, callback: FADECallable) {
 		try {
 			val buildProvider = godot.primaryHost?.buildProvider
 			buildProvider?.buildEnvCleanProject(projectPath, buildDir, callback)
@@ -448,7 +448,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 
 	private fun nativeIsInPiPMode(): Boolean {
 		val hostActivity = godot.getActivity()
-		if (hostActivity is GodotActivity) {
+		if (hostActivity is FADEActivity) {
 			return hostActivity.isInPictureInPictureMode
 		}
 		return false
@@ -465,7 +465,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 
 	private fun nativeSetPiPModeAspectRatio(numerator: Int, denominator: Int) {
 		val hostActivity = godot.getActivity()
-		if (hostActivity is GodotActivity) {
+		if (hostActivity is FADEActivity) {
 			godot.runOnHostThread {
 				hostActivity.updatePiPParams(aspectRatio = Rational(numerator, denominator))
 			}
@@ -474,7 +474,7 @@ internal class GodotNativeBridge(private val godot: Godot) {
 
 	private fun nativeSetAutoEnterPiPModeOnBackground(autoEnterPiPOnBackground: Boolean) {
 		val hostActivity = godot.getActivity()
-		if (hostActivity is GodotActivity) {
+		if (hostActivity is FADEActivity) {
 			godot.runOnHostThread {
 				hostActivity.updatePiPParams(enableAutoEnter = autoEnterPiPOnBackground)
 			}

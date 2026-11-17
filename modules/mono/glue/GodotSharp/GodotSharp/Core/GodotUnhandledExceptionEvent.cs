@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using Godot.NativeInterop;
+using FADE.NativeInterop;
 
-namespace Godot
+namespace FADE
 {
     public static partial class GD
     {
@@ -11,7 +11,7 @@ namespace Godot
         {
             try
             {
-                Dispatcher.InitializeDefaultGodotTaskScheduler();
+                Dispatcher.InitializeDefaultFADETaskScheduler();
 
                 if (isDebug.ToBool())
                 {

@@ -1,8 +1,8 @@
 using System;
 
-namespace Godot.SourceGenerators.Sample
+namespace FADE.SourceGenerators.Sample
 {
-    public partial class AllWriteOnly : GodotObject
+    public partial class AllWriteOnly : FADEObject
     {
         private bool _writeOnlyBackingField = false;
         public bool WriteOnlyProperty { set => _writeOnlyBackingField = value; }

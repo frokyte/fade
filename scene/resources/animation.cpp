@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -450,7 +450,7 @@ bool Animation::_set(const StringName &p_name, const Variant &p_value) {
 			return false;
 		}
 #ifndef DISABLE_DEPRECATED
-	} else if (prop_name == "loop" && p_value.operator bool()) { // Compatibility with Godot 3.x.
+	} else if (prop_name == "loop" && p_value.operator bool()) { // Compatibility with FADE 3.x.
 		loop_mode = Animation::LoopMode::LOOP_LINEAR;
 		return true;
 #endif // DISABLE_DEPRECATED
@@ -4219,7 +4219,7 @@ void Animation::_bind_methods() {
 	BIND_ENUM_CONSTANT(TYPE_AUDIO);
 	BIND_ENUM_CONSTANT(TYPE_ANIMATION);
 
-	// TODO: Reorder the MAKIMA next to the CUBIC in Godot 5, since the enum values are serialized and cannot be changed without breaking compat.
+	// TODO: Reorder the MAKIMA next to the CUBIC in FADE 5, since the enum values are serialized and cannot be changed without breaking compat.
 	BIND_ENUM_CONSTANT(INTERPOLATION_NEAREST);
 	BIND_ENUM_CONSTANT(INTERPOLATION_LINEAR);
 	BIND_ENUM_CONSTANT(INTERPOLATION_CUBIC);

@@ -1,7 +1,7 @@
-# Thai translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Thai translation of the FADE Engine editor interface.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Kaveeta Vivatchai <goodytong@gmail.com>, 2017.
 # Poommetee Ketson (Noshyaar) <poommetee@protonmail.com>, 2017-2018.
 # Thanachart Monpassorn <nunf_2539@hotmail.com>, 2020, 2021.
@@ -34,7 +34,7 @@
 # Tony Kate <tonyfreeplay@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: FADE Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-10-20 23:29+0000\n"
@@ -2102,8 +2102,8 @@ msgstr "คลาสนี้ถูกทำเครื่องหมายว
 msgid "This class is marked as experimental."
 msgstr "คลาสนี้ถูกทำเครื่องหมายว่าเป็นคลาสทดลอง"
 
-msgid "%s - Godot Engine"
-msgstr "%s - Godot Engine"
+msgid "%s - FADE Engine"
+msgstr "%s - FADE Engine"
 
 msgid "Dock Position"
 msgstr "ตำแหน่งแผง"
@@ -2857,8 +2857,8 @@ msgstr "จัดการเทมเพลตส่งออก"
 msgid "Select Template File"
 msgstr "เลือกไฟล์เทมเพลต"
 
-msgid "Godot Export Templates"
-msgstr "เทมเพลตการส่งออก Godot"
+msgid "FADE Export Templates"
+msgstr "เทมเพลตการส่งออก FADE"
 
 msgid "Export templates for this platform are missing:"
 msgstr "ไม่พบเทมเพลตส่งออกสำหรับแพลตฟอร์มนี้:"
@@ -3080,14 +3080,14 @@ msgstr "สมาชิกระดับไททาเนียม"
 msgid "Using slashes in folder names will create subfolders recursively."
 msgstr "การใช้เครื่องหมายทับในชื่อโฟลเดอร์จะสร้างโฟลเดอร์ย่อยขึ้นมาซ้ำๆ"
 
-msgid "Godot Engine contributors"
-msgstr "ผู้ช่วยพัฒนา Godot Engine"
+msgid "FADE Engine contributors"
+msgstr "ผู้ช่วยพัฒนา FADE Engine"
 
 msgid "Double-click to open in browser."
 msgstr "ดับเบิลคลิกเพื่อเปิดในเบราว์เซอร์"
 
-msgid "Thanks from the Godot community!"
-msgstr "ขอขอบคุณจากชุมชนผู้ใช้ Godot!"
+msgid "Thanks from the FADE community!"
+msgstr "ขอขอบคุณจากชุมชนผู้ใช้ FADE!"
 
 msgid "Authors"
 msgstr "ทีมงาน"
@@ -3099,12 +3099,12 @@ msgid "Third-party Licenses"
 msgstr "สัญญาอนุญาตจากบุคคลที่สาม"
 
 msgid ""
-"Godot Engine relies on a number of third-party free and open source "
+"FADE Engine relies on a number of third-party free and open source "
 "libraries, all compatible with the terms of its MIT license. The following is "
 "an exhaustive list of all such third-party components with their respective "
 "copyright statements and license terms."
 msgstr ""
-"Godot Engine อาศัยไลบรารีต่าง ๆ ที่นำมาใช้ได้อย่างเสรีและเปิดเผยโค้ดเป็นจำนวนมาก "
+"FADE Engine อาศัยไลบรารีต่าง ๆ ที่นำมาใช้ได้อย่างเสรีและเปิดเผยโค้ดเป็นจำนวนมาก "
 "ซึ่งเข้ากันได้กับสัญญาอนุญาต MIT ต่อไปนี้เป็นรายชื่อของไลบรารีทั้งหมดของบุคคลที่สาม "
 "รวมถึงข้อความลิขสิทธิ์ และข้อกำหนดการใช้งานของแต่ละไลบรารี"
 
@@ -3384,18 +3384,18 @@ msgstr ""
 "ไม่สามารถเริ่มการทำงานของโปรแกรมแก้ไข (Editor) ได้"
 
 msgid ""
-"The selected project \"%s\" does not specify its supported Godot version in "
+"The selected project \"%s\" does not specify its supported FADE version in "
 "its configuration file (\"project.godot\").\n"
 "\n"
 "Project path: %s\n"
 "\n"
-"If you proceed with opening it, it will be converted to Godot's current "
+"If you proceed with opening it, it will be converted to FADE's current "
 "configuration file format.\n"
 "\n"
 "Warning: You won't be able to open the project with previous versions of the "
 "engine anymore."
 msgstr ""
-"โปรเจกต์ที่เลือก \"%s\" ไม่ได้ระบุเวอร์ชั่น Godot ที่ซัพพอร์ตเอาไว้ในไฟล์การตั้งค่า "
+"โปรเจกต์ที่เลือก \"%s\" ไม่ได้ระบุเวอร์ชั่น FADE ที่ซัพพอร์ตเอาไว้ในไฟล์การตั้งค่า "
 "(\"project.godot\")\n"
 "\n"
 "ตำแหน่งโปรเจกต์: %s\n"
@@ -5153,7 +5153,7 @@ msgstr "บันทึกธีมเป็น"
 msgid "Online Docs"
 msgstr "คู่มือ"
 
-msgid "Open Godot online documentation."
+msgid "Open FADE online documentation."
 msgstr "เปิดคู่มือออนไลน์"
 
 msgid "Find..."
@@ -5530,8 +5530,8 @@ msgstr "สร้าง หรือนำเข้าโปรไฟล์ก�
 msgid "New profile name:"
 msgstr "ชื่อโปรไฟล์ใหม่:"
 
-msgid "Godot Feature Profile"
-msgstr "รายละเอียดคุณสมบัติ Godot"
+msgid "FADE Feature Profile"
+msgstr "รายละเอียดคุณสมบัติ FADE"
 
 msgid "Import Profile(s)"
 msgstr "นำเข้าโปรไฟล์"
@@ -6324,11 +6324,11 @@ msgid ""
 msgstr "(โหมดแฟรกเมนต์/แสง เท่านั้น) (เวกเตอร์) ผลรวมของอนุพันธ์สัมบูรณ์ใน 'x' และ 'y'"
 
 msgid ""
-"Custom Godot Shader Language expression, with custom amount of input and "
+"Custom FADE Shader Language expression, with custom amount of input and "
 "output ports. This is a direct injection of code into the vertex/fragment/"
 "light function, do not use it to write the function declarations inside."
 msgstr ""
-"นิพจน์ภาษาเชดเดอร์ Godot แบบกำหนดเอง พร้อมจำนวนพอร์ตอินพุตและเอาต์พุตที่กำหนดเอง "
+"นิพจน์ภาษาเชดเดอร์ FADE แบบกำหนดเอง พร้อมจำนวนพอร์ตอินพุตและเอาต์พุตที่กำหนดเอง "
 "จำทำการแทรกโค้ดลงในฟังก์ชันเวอร์เทก / แฟรกเมนต์ / แสง "
 "ห้ามใช้เพื่อเขียนการประกาศฟังก์ชันภายใน"
 

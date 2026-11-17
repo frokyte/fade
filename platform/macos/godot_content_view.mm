@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -41,7 +41,7 @@
 #include "core/profiling/profiling.h"
 #include "main/main.h"
 
-@implementation GodotContentLayerDelegate
+@implementation FADEContentLayerDelegate
 
 - (id)init {
 	self = [super init];
@@ -61,8 +61,8 @@
 - (void)displayLayer:(CALayer *)layer {
 	DisplayServerMacOS *ds = (DisplayServerMacOS *)DisplayServer::get_singleton();
 	if (OS::get_singleton()->get_main_loop() && ds->get_is_resizing() && need_redraw) {
-		GodotProfileFrameMark;
-		GodotProfileZone("[GodotContentLayerDelegate displayLayer]");
+		FADEProfileFrameMark;
+		FADEProfileZone("[FADEContentLayerDelegate displayLayer]");
 
 		Main::force_redraw();
 		if (!Main::is_iterating()) { // Avoid cyclic loop.
@@ -74,7 +74,7 @@
 
 @end
 
-@implementation GodotContentView
+@implementation FADEContentView
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event {
 	return YES;
@@ -140,7 +140,7 @@
 
 - (id)init {
 	self = [super init];
-	layer_delegate = [[GodotContentLayerDelegate alloc] init];
+	layer_delegate = [[FADEContentLayerDelegate alloc] init];
 	window_id = DisplayServerEnums::INVALID_WINDOW_ID;
 	tracking_area = nil;
 	ime_input_event_in_progress = false;

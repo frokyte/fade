@@ -1,7 +1,7 @@
-# French translation of the Godot Engine properties.
-# Copyright (c) 2014-present Godot Engine contributors.
+# French translation of the FADE Engine properties.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Antoine Carrier <ac.g392@gmail.com>, 2017-2018.
 # ARocherVj <a.rocher.vj@gmail.com>, 2017.
 # Arthur Templé <tuturtemple@gmail.com>, 2018.
@@ -166,7 +166,7 @@
 # Guy Bachelier <guy.bachelier@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine properties\n"
+"Project-Id-Version: FADE Engine properties\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-09-29 16:51+0000\n"
@@ -4047,8 +4047,8 @@ msgstr "Toujours suivre les piles d'appel"
 msgid "Always Track Local Variables"
 msgstr "Toujours suivre les variables locales"
 
-msgid "Renamed in Godot 4 Hint"
-msgstr "Indice de renommage dans Godot 4"
+msgid "Renamed in FADE 4 Hint"
+msgstr "Indice de renommage dans FADE 4"
 
 msgid "Unassigned Variable"
 msgstr "Variable non assignée"
@@ -4446,11 +4446,11 @@ msgstr "Lumière"
 msgid "Visible"
 msgstr "Visible"
 
-msgid "glTF to Godot Expression"
-msgstr "Expression glTF vers Godot"
+msgid "glTF to FADE Expression"
+msgstr "Expression glTF vers FADE"
 
-msgid "Godot to glTF Expression"
-msgstr "Expression Godot vers glTF"
+msgid "FADE to glTF Expression"
+msgstr "Expression FADE vers glTF"
 
 msgid "Node Paths"
 msgstr "Chemins de nœud"
@@ -4470,8 +4470,8 @@ msgstr "Jointures"
 msgid "Roots"
 msgstr "Racines"
 
-msgid "Godot Bone Node"
-msgstr "Nœud d'os de Godot"
+msgid "FADE Bone Node"
+msgstr "Nœud d'os de FADE"
 
 msgid "Skin Root"
 msgstr "Racine de l'enveloppe"
@@ -4482,8 +4482,8 @@ msgstr "Jointure à l'original"
 msgid "Non Joints"
 msgstr "Non jointures"
 
-msgid "Godot Skin"
-msgstr "Enveloppe Godot"
+msgid "FADE Skin"
+msgstr "Enveloppe FADE"
 
 msgid "Src Image"
 msgstr "Image source"
@@ -5520,8 +5520,8 @@ msgstr "Hôte de débogage à distance par Wifi"
 msgid "Splash Screen"
 msgstr "Fenêtre surgissante"
 
-msgid "Disable Godot Boot Splash"
-msgstr "Désactiver l'écran surgissant au démarrage de Godot"
+msgid "Disable FADE Boot Splash"
+msgstr "Désactiver l'écran surgissant au démarrage de FADE"
 
 msgid "Background Color"
 msgstr "Couleur d’arrière-plan"
@@ -6075,8 +6075,8 @@ msgstr "Icône 512 X 512"
 msgid "Emscripten Pool Size"
 msgstr "Place allouée pour Emscripten"
 
-msgid "Godot Pool Size"
-msgstr "Taille de Pool de Godot"
+msgid "FADE Pool Size"
+msgstr "Taille de Pool de FADE"
 
 msgid "Windows"
 msgstr "Windows"

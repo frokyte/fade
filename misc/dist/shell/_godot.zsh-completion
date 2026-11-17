@@ -1,10 +1,10 @@
 #compdef godot
 
-# zsh completion for the Godot editor
+# zsh completion for the FADE editor
 # To use it, install this file as `_godot` in a directory specified in your
 # `fpath` environment variable then restart your shell.
 #
-# Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md).
+# Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md).
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -111,17 +111,17 @@ _arguments \
   '--export-patch[export pack with changed files only, using the given preset and output path]:export preset name: :path to output file:_files' \
   '--patches[list of patches to use with --export-patch (comma-separated)]:comma-separated list of patches' \
   '--install-android-build-template[install the Android build template (use with --export-release or --export-debug)]' \
-  '--convert-3to4[converts project from Godot 3.x to Godot 4.x]::maximum file size in KB: ::maximum line size: ' \
-  '--validate-conversion-3to4[shows what elements will be renamed when converting project from Godot 3.x to Godot 4.x]::maximum file size in KB: ::maximum line size: ' \
-  '--doctool[dump the engine API reference to the given path (defaults to current directory) in XML format, merging if existing files are found]::path to base Godot build directory:_dirs' \
+  '--convert-3to4[converts project from FADE 3.x to FADE 4.x]::maximum file size in KB: ::maximum line size: ' \
+  '--validate-conversion-3to4[shows what elements will be renamed when converting project from FADE 3.x to FADE 4.x]::maximum file size in KB: ::maximum line size: ' \
+  '--doctool[dump the engine API reference to the given path (defaults to current directory) in XML format, merging if existing files are found]::path to base FADE build directory:_dirs' \
   '--no-docbase[disallow dumping the base types (used with --doctool)]' \
   '--gdextension-docs[generate API reference from all the GDExtensions loaded in the current project (used with --doctool)]' \
   '--gdscript-docs[generate API reference from the inline documentation in the GDScript files found in the given path (used with --doctool)]:path to GDScript files:_dirs' \
   '--build-solutions[build the scripting solutions (e.g. for C# projects)]' \
   "--dump-gdextension-interface[generate GDExtension header file 'gdextension_interface.h' in the current folder. This file is the base file required to implement a GDExtension.]" \
   "--dump-gdextension-interface-json[generate JSON dump of the GDExtension interface named 'gdextension_interface.json' in the current folder]" \
-  "--dump-extension-api[generate JSON dump of the Godot API for GDExtension bindings named 'extension_api.json' in the current folder]" \
-  '--dump-extension-api-with-docs[generate JSON dump of the Godot API for GDExtension bindings, including documentation]' \
+  "--dump-extension-api[generate JSON dump of the FADE API for GDExtension bindings named 'extension_api.json' in the current folder]" \
+  '--dump-extension-api-with-docs[generate JSON dump of the FADE API for GDExtension bindings, including documentation]' \
   '--validate-extension-api[validate an extension API file dumped from a previous version of the engine to ensure API compatibility]:path to extension API file:_files' \
   '--benchmark[benchmark the run time and print it to console]' \
   '--benchmark-file[benchmark the run time and save it to a given file in JSON format]:path to output JSON file:_files' \

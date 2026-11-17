@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -32,37 +32,37 @@
 
 #include "core/math/aabb.h"
 
-class GodotCollisionObject3D;
+class FADECollisionObject3D;
 
-class GodotBroadPhase3D {
+class FADEBroadPhase3D {
 public:
-	typedef GodotBroadPhase3D *(*CreateFunction)();
+	typedef FADEBroadPhase3D *(*CreateFunction)();
 
 	static inline CreateFunction create_func = nullptr;
 
 	typedef uint32_t ID;
 
-	typedef void *(*PairCallback)(GodotCollisionObject3D *A, int p_subindex_A, GodotCollisionObject3D *B, int p_subindex_B, void *p_userdata);
-	typedef void (*UnpairCallback)(GodotCollisionObject3D *A, int p_subindex_A, GodotCollisionObject3D *B, int p_subindex_B, void *p_data, void *p_userdata);
+	typedef void *(*PairCallback)(FADECollisionObject3D *A, int p_subindex_A, FADECollisionObject3D *B, int p_subindex_B, void *p_userdata);
+	typedef void (*UnpairCallback)(FADECollisionObject3D *A, int p_subindex_A, FADECollisionObject3D *B, int p_subindex_B, void *p_data, void *p_userdata);
 
 	// 0 is an invalid ID
-	virtual ID create(GodotCollisionObject3D *p_object_, int p_subindex = 0, const AABB &p_aabb = AABB(), bool p_static = false) = 0;
+	virtual ID create(FADECollisionObject3D *p_object_, int p_subindex = 0, const AABB &p_aabb = AABB(), bool p_static = false) = 0;
 	virtual void move(ID p_id, const AABB &p_aabb) = 0;
 	virtual void set_static(ID p_id, bool p_static) = 0;
 	virtual void remove(ID p_id) = 0;
 
-	virtual GodotCollisionObject3D *get_object(ID p_id) const = 0;
+	virtual FADECollisionObject3D *get_object(ID p_id) const = 0;
 	virtual bool is_static(ID p_id) const = 0;
 	virtual int get_subindex(ID p_id) const = 0;
 
-	virtual int cull_point(const Vector3 &p_point, GodotCollisionObject3D **p_results, int p_max_results, int *p_result_indices = nullptr) = 0;
-	virtual int cull_segment(const Vector3 &p_from, const Vector3 &p_to, GodotCollisionObject3D **p_results, int p_max_results, int *p_result_indices = nullptr) = 0;
-	virtual int cull_aabb(const AABB &p_aabb, GodotCollisionObject3D **p_results, int p_max_results, int *p_result_indices = nullptr) = 0;
+	virtual int cull_point(const Vector3 &p_point, FADECollisionObject3D **p_results, int p_max_results, int *p_result_indices = nullptr) = 0;
+	virtual int cull_segment(const Vector3 &p_from, const Vector3 &p_to, FADECollisionObject3D **p_results, int p_max_results, int *p_result_indices = nullptr) = 0;
+	virtual int cull_aabb(const AABB &p_aabb, FADECollisionObject3D **p_results, int p_max_results, int *p_result_indices = nullptr) = 0;
 
 	virtual void set_pair_callback(PairCallback p_pair_callback, void *p_userdata) = 0;
 	virtual void set_unpair_callback(UnpairCallback p_unpair_callback, void *p_userdata) = 0;
 
 	virtual void update() = 0;
 
-	virtual ~GodotBroadPhase3D() {}
+	virtual ~FADEBroadPhase3D() {}
 };

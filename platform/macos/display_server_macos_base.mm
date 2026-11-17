@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -439,26 +439,26 @@ void DisplayServerMacOSBase::screen_set_keep_on(bool p_enable) {
 
 	if (p_enable) {
 		String app_name_string = GLOBAL_GET("application/config/name");
-		NSString *name = [NSString stringWithUTF8String:(app_name_string.is_empty() ? "Godot Engine" : app_name_string.utf8().get_data())];
-		NSString *reason = @"Godot Engine running with display/window/energy_saving/keep_screen_on = true";
+		NSString *name = [NSString stringWithUTF8String:(app_name_string.is_empty() ? "FADE Engine" : app_name_string.utf8().get_data())];
+		NSString *reason = @"FADE Engine running with display/window/energy_saving/keep_screen_on = true";
 		IOPMAssertionCreateWithDescription(kIOPMAssertPreventUserIdleDisplaySleep, (__bridge CFStringRef)name, (__bridge CFStringRef)reason, (__bridge CFStringRef)reason, nullptr, 0, nullptr, &screen_keep_on_assertion);
 	}
 }
 
 int DisplayServerMacOSBase::accessibility_should_increase_contrast() const {
-	return [(GodotApplicationDelegate *)[[NSApplication sharedApplication] delegate] getHighContrast];
+	return [(FADEApplicationDelegate *)[[NSApplication sharedApplication] delegate] getHighContrast];
 }
 
 int DisplayServerMacOSBase::accessibility_should_reduce_animation() const {
-	return [(GodotApplicationDelegate *)[[NSApplication sharedApplication] delegate] getReduceMotion];
+	return [(FADEApplicationDelegate *)[[NSApplication sharedApplication] delegate] getReduceMotion];
 }
 
 int DisplayServerMacOSBase::accessibility_should_reduce_transparency() const {
-	return [(GodotApplicationDelegate *)[[NSApplication sharedApplication] delegate] getReduceTransparency];
+	return [(FADEApplicationDelegate *)[[NSApplication sharedApplication] delegate] getReduceTransparency];
 }
 
 int DisplayServerMacOSBase::accessibility_screen_reader_active() const {
-	return [(GodotApplicationDelegate *)[[NSApplication sharedApplication] delegate] getVoiceOver];
+	return [(FADEApplicationDelegate *)[[NSApplication sharedApplication] delegate] getVoiceOver];
 }
 
 void DisplayServerMacOSBase::update_im_text(const Point2i &p_selection, const String &p_text) {

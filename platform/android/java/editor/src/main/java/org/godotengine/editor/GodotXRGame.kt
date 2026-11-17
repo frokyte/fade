@@ -1,12 +1,12 @@
 /*************************************************************************/
-/*  GodotXRGame.kt                                                       */
+/*  FADEXRGame.kt                                                       */
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2022 Godot Engine contributors (cf. AUTHORS.md).   */
+/* Copyright (c) 2014-2022 FADE Engine contributors (cf. AUTHORS.md).   */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -31,7 +31,7 @@
 package org.godotengine.editor
 
 import androidx.annotation.CallSuper
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.FADELib
 import org.godotengine.godot.xr.XRMode
 import org.godotengine.openxr.vendors.utils.HYBRID_APP_SPATIAL_FEATURE
 import org.godotengine.openxr.vendors.utils.isHybridAppEnabled
@@ -39,7 +39,7 @@ import org.godotengine.openxr.vendors.utils.isHybridAppEnabled
 /**
  * Provide support for running XR apps / games from the editor window.
  */
-open class GodotXRGame: BaseGodotGame() {
+open class FADEXRGame: BaseFADEGame() {
 
 	override fun overrideOrientationRequest() = true
 
@@ -57,18 +57,18 @@ open class GodotXRGame: BaseGodotGame() {
 
 	override fun getEditorWindowInfo() = XR_RUN_GAME_INFO
 
-	override fun getGodotAppLayout() = R.layout.godot_xr_game_layout
+	override fun getFADEAppLayout() = R.layout.godot_xr_game_layout
 
 	override fun getProjectPermissionsToEnable(): MutableList<String> {
 		val permissionsToEnable = super.getProjectPermissionsToEnable()
 
 		val xrRuntimePermission = getXRRuntimePermissions()
-		if (xrRuntimePermission.isNotEmpty() && GodotLib.getGlobal("xr/openxr/enabled").toBoolean()) {
+		if (xrRuntimePermission.isNotEmpty() && FADELib.getGlobal("xr/openxr/enabled").toBoolean()) {
 			// We only request permissions when the `automatically_request_runtime_permissions`
 			// project setting is enabled.
 			// If the project setting is not defined, we fall-back to the default behavior which is
 			// to automatically request permissions.
-			val automaticallyRequestPermissionsSetting = GodotLib.getGlobal("xr/openxr/extensions/automatically_request_runtime_permissions")
+			val automaticallyRequestPermissionsSetting = FADELib.getGlobal("xr/openxr/extensions/automatically_request_runtime_permissions")
 			val automaticPermissionsRequestEnabled = automaticallyRequestPermissionsSetting.isNullOrEmpty() ||
 				automaticallyRequestPermissionsSetting.toBoolean()
 			if (automaticPermissionsRequestEnabled) {

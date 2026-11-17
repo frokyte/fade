@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotGestureHandler.kt                                                */
+/*  FADEGestureHandler.kt                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -35,18 +35,18 @@ import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.ScaleGestureDetector.OnScaleGestureListener
-import org.godotengine.godot.Godot
+import org.godotengine.godot.FADE
 
 /**
- * Handles regular and scale gesture input related events for the [GodotView] view.
+ * Handles regular and scale gesture input related events for the [FADEView] view.
  *
  * @See https://developer.android.com/reference/android/view/GestureDetector.SimpleOnGestureListener
  * @See https://developer.android.com/reference/android/view/ScaleGestureDetector.OnScaleGestureListener
  */
-internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) : SimpleOnGestureListener(), OnScaleGestureListener {
+internal class FADEGestureHandler(private val inputHandler: FADEInputHandler) : SimpleOnGestureListener(), OnScaleGestureListener {
 
 	companion object {
-		private val TAG = GodotGestureHandler::class.java.simpleName
+		private val TAG = FADEGestureHandler::class.java.simpleName
 	}
 
 	/**
@@ -78,7 +78,7 @@ internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) 
 	private var lastDragX: Float = 0.0f
 	private var lastDragY: Float = 0.0f
 
-	inline fun isEditorTouchpadScroll(event: MotionEvent) = Godot.isEditorBuild() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && event.classification == MotionEvent.CLASSIFICATION_TWO_FINGER_SWIPE
+	inline fun isEditorTouchpadScroll(event: MotionEvent) = FADE.isEditorBuild() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && event.classification == MotionEvent.CLASSIFICATION_TWO_FINGER_SWIPE
 
 	override fun onDown(event: MotionEvent): Boolean {
 		if (isEditorTouchpadScroll(event)) {
@@ -96,7 +96,7 @@ internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) 
 	}
 
 	override fun onLongPress(event: MotionEvent) {
-		val toolType = GodotInputHandler.getEventToolType(event)
+		val toolType = FADEInputHandler.getEventToolType(event)
 		if (toolType != MotionEvent.TOOL_TYPE_MOUSE) {
 			if (hapticFeedbackEnabled) {
 				inputHandler.performHapticFeedback()
@@ -160,7 +160,7 @@ internal class GodotGestureHandler(private val inputHandler: GodotInputHandler) 
 		}
 
 		if (pointerCaptureInProgress || dragInProgress || emulatedRightClickInProgress) {
-			if (GodotInputHandler.isMouseEvent(event)) {
+			if (FADEInputHandler.isMouseEvent(event)) {
 				// This may be an ACTION_BUTTON_RELEASE event which we don't handle,
 				// so we convert it to an ACTION_UP event.
 				inputHandler.handleMouseEvent(event, MotionEvent.ACTION_UP)

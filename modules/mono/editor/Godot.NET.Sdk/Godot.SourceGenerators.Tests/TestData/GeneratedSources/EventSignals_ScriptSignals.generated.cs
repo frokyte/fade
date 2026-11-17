@@ -1,5 +1,5 @@
-using Godot;
-using Godot.NativeInterop;
+using FADE;
+using FADE.NativeInterop;
 
 partial class EventSignals
 {
@@ -7,27 +7,27 @@ partial class EventSignals
     /// <summary>
     /// Cached StringNames for the signals contained in this class, for fast lookup.
     /// </summary>
-    public new class SignalName : global::Godot.GodotObject.SignalName {
+    public new class SignalName : global::FADE.FADEObject.SignalName {
         /// <summary>
         /// Cached name for the 'MySignal' signal.
         /// </summary>
-        public new static readonly global::Godot.StringName @MySignal = "MySignal";
+        public new static readonly global::FADE.StringName @MySignal = "MySignal";
     }
     /// <summary>
     /// Get the signal information for all the signals declared in this class.
-    /// This method is used by Godot to register the available signals in the editor.
+    /// This method is used by FADE to register the available signals in the editor.
     /// Do not call this method.
     /// </summary>
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    internal new static global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo> GetGodotSignalList()
+    internal new static global::System.Collections.Generic.List<global::FADE.Bridge.MethodInfo> GetFADESignalList()
     {
-        var signals = new global::System.Collections.Generic.List<global::Godot.Bridge.MethodInfo>(1);
-        signals.Add(new(name: SignalName.@MySignal, returnVal: new(type: (global::Godot.Variant.Type)0, name: "", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false), flags: (global::Godot.MethodFlags)1, arguments: new() { new(type: (global::Godot.Variant.Type)4, name: "str", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false), new(type: (global::Godot.Variant.Type)2, name: "num", hint: (global::Godot.PropertyHint)0, hintString: "", usage: (global::Godot.PropertyUsageFlags)6, exported: false),  }, defaultArguments: null));
+        var signals = new global::System.Collections.Generic.List<global::FADE.Bridge.MethodInfo>(1);
+        signals.Add(new(name: SignalName.@MySignal, returnVal: new(type: (global::FADE.Variant.Type)0, name: "", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false), flags: (global::FADE.MethodFlags)1, arguments: new() { new(type: (global::FADE.Variant.Type)4, name: "str", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false), new(type: (global::FADE.Variant.Type)2, name: "num", hint: (global::FADE.PropertyHint)0, hintString: "", usage: (global::FADE.PropertyUsageFlags)6, exported: false),  }, defaultArguments: null));
         return signals;
     }
-    protected internal new static partial class GodotInternal
+    protected internal new static partial class FADEInternal
     {
-        public static void GetGodotRaiseSignalTrampolines(global::Godot.Bridge.RaiseSignalTrampolineCollector collector)
+        public static void GetFADERaiseSignalTrampolines(global::FADE.Bridge.RaiseSignalTrampolineCollector collector)
         {
             static void trampoline_2_MySignal(object godotObject, NativeVariantPtrArgs args, ref godot_variant_call_error callError)
             {
@@ -35,7 +35,7 @@ partial class EventSignals
                     callError = godot_variant_call_error.CreateInvalidArgumentCountError(expected: 2, provided: args.Count);
                     return;
                 }
-                ((global::EventSignals)godotObject).backing_MySignal?.Invoke(global::Godot.NativeInterop.VariantUtils.ConvertTo<string>(args[0]), global::Godot.NativeInterop.VariantUtils.ConvertTo<int>(args[1]));
+                ((global::EventSignals)godotObject).backing_MySignal?.Invoke(global::FADE.NativeInterop.VariantUtils.ConvertTo<string>(args[0]), global::FADE.NativeInterop.VariantUtils.ConvertTo<int>(args[1]));
             }
             var aux_delegate_2_MySignal = trampoline_2_MySignal;
             collector.TryAdd(new(SignalName.@MySignal, 2), new(aux_delegate_2_MySignal.Method.MethodHandle.GetFunctionPointer()));

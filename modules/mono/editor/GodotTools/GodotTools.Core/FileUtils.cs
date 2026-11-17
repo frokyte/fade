@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace GodotTools.Core
+namespace FADETools.Core
 {
     public static class FileUtils
     {

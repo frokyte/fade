@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotLib.java                                                         */
+/*  FADELib.java                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,12 +30,12 @@
 
 package org.godotengine.godot;
 
-import org.godotengine.godot.gl.GodotRenderer;
+import org.godotengine.godot.gl.FADERenderer;
 import org.godotengine.godot.io.directory.DirectoryAccessHandler;
 import org.godotengine.godot.io.file.FileAccessHandler;
-import org.godotengine.godot.nativeapi.GodotNativeBridge;
-import org.godotengine.godot.tts.GodotTTS;
-import org.godotengine.godot.utils.GodotNetUtils;
+import org.godotengine.godot.nativeapi.FADENativeBridge;
+import org.godotengine.godot.tts.FADETTS;
+import org.godotengine.godot.utils.FADENetUtils;
 import org.godotengine.godot.variant.Callable;
 
 import android.app.Activity;
@@ -52,34 +52,34 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * Wrapper for native library
  */
-public class GodotLib {
+public class FADELib {
 	static {
 		System.loadLibrary("godot_android");
 	}
 
 	/**
-	 * Invoked on the main thread to initialize Godot native layer.
+	 * Invoked on the main thread to initialize FADE native layer.
 	 */
 	public static native boolean initialize(
-			GodotNativeBridge nativeBridge,
+			FADENativeBridge nativeBridge,
 			AssetManager assetManager,
-			GodotIO godotIO,
-			GodotNetUtils netUtils,
+			FADEIO godotIO,
+			FADENetUtils netUtils,
 			DirectoryAccessHandler directoryAccessHandler,
 			FileAccessHandler fileAccessHandler,
 			boolean useApkExpansion);
 
 	/**
-	 * Invoked on the main thread to clean up Godot native layer.
+	 * Invoked on the main thread to clean up FADE native layer.
 	 * @see androidx.fragment.app.Fragment#onDestroy()
 	 */
 	public static native void ondestroy();
 
 	/**
-	 * Invoked on the GL thread to complete setup for the Godot native layer logic.
-	 * @param p_cmdline Command line arguments used to configure Godot native layer components.
+	 * Invoked on the GL thread to complete setup for the FADE native layer logic.
+	 * @param p_cmdline Command line arguments used to configure FADE native layer components.
 	 */
-	public static native boolean setup(String[] p_cmdline, GodotTTS tts);
+	public static native boolean setup(String[] p_cmdline, FADETTS tts);
 
 	/**
 	 * Invoked on the GL thread when the underlying Android surface has changed size.
@@ -205,7 +205,7 @@ public class GodotLib {
 	public static native void focusout();
 
 	/**
-	 * Used to access Godot global properties.
+	 * Used to access FADE global properties.
 	 * @param p_key Property key
 	 * @return String value of the property
 	 */
@@ -224,7 +224,7 @@ public class GodotLib {
 	public static native String[] getRendererInfo(boolean p_vulkan_requirements_met);
 
 	/**
-	 * Used to access Godot's editor settings.
+	 * Used to access FADE's editor settings.
 	 * @param settingKey Setting key
 	 * @return String value of the setting
 	 */
@@ -255,8 +255,8 @@ public class GodotLib {
 	public static native void setEditorProjectMetadata(String section, String key, Object data);
 
 	/**
-	 * Invoke method |p_method| on the Godot object specified by |p_id|
-	 * @param p_id Id of the Godot object to invoke
+	 * Invoke method |p_method| on the FADE object specified by |p_id|
+	 * @param p_id Id of the FADE object to invoke
 	 * @param p_method Name of the method to invoke
 	 * @param p_params Parameters to use for method invocation
 	 *
@@ -268,8 +268,8 @@ public class GodotLib {
 	}
 
 	/**
-	 * Invoke method |p_method| on the Godot object specified by |p_id| during idle time.
-	 * @param p_id Id of the Godot object to invoke
+	 * Invoke method |p_method| on the FADE object specified by |p_id| during idle time.
+	 * @param p_id Id of the FADE object to invoke
 	 * @param p_method Name of the method to invoke
 	 * @param p_params Parameters to use for method invocation
 	 *
@@ -309,14 +309,14 @@ public class GodotLib {
 	public static native void setVirtualKeyboardHeight(int p_height);
 
 	/**
-	 * Invoked on the GL thread when the {@link GodotRenderer} has been resumed.
-	 * @see GodotRenderer#onActivityResumed()
+	 * Invoked on the GL thread when the {@link FADERenderer} has been resumed.
+	 * @see FADERenderer#onActivityResumed()
 	 */
 	public static native void onRendererResumed();
 
 	/**
-	 * Invoked on the GL thread when the {@link GodotRenderer} has been paused.
-	 * @see GodotRenderer#onActivityPaused()
+	 * Invoked on the GL thread when the {@link FADERenderer} has been paused.
+	 * @see FADERenderer#onActivityPaused()
 	 */
 	public static native void onRendererPaused();
 

@@ -1,39 +1,39 @@
 <Project>
-  <!-- Generate C# file with the version of all the nupkgs bundled with Godot -->
+  <!-- Generate C# file with the version of all the nupkgs bundled with FADE -->
 
-  <Target Name="SetPropertiesForGenerateGodotNupkgsVersions">
+  <Target Name="SetPropertiesForGenerateFADENupkgsVersions">
     <PropertyGroup>
-      <GeneratedGodotNupkgsVersionsFile>$(IntermediateOutputPath)GodotNupkgsVersions.g.cs</GeneratedGodotNupkgsVersionsFile>
+      <GeneratedFADENupkgsVersionsFile>$(IntermediateOutputPath)FADENupkgsVersions.g.cs</GeneratedFADENupkgsVersionsFile>
     </PropertyGroup>
   </Target>
 
-  <Target Name="GenerateGodotNupkgsVersionsFile"
-          DependsOnTargets="_GenerateGodotNupkgsVersionsFile"
+  <Target Name="GenerateFADENupkgsVersionsFile"
+          DependsOnTargets="_GenerateFADENupkgsVersionsFile"
           BeforeTargets="PrepareForBuild;CompileDesignTime;BeforeCompile;CoreCompile">
     <ItemGroup>
-      <Compile Include="$(GeneratedGodotNupkgsVersionsFile)" />
-      <FileWrites Include="$(GeneratedGodotNupkgsVersionsFile)" />
+      <Compile Include="$(GeneratedFADENupkgsVersionsFile)" />
+      <FileWrites Include="$(GeneratedFADENupkgsVersionsFile)" />
     </ItemGroup>
   </Target>
-  <Target Name="_GenerateGodotNupkgsVersionsFile"
-          DependsOnTargets="SetPropertiesForGenerateGodotNupkgsVersions"
+  <Target Name="_GenerateFADENupkgsVersionsFile"
+          DependsOnTargets="SetPropertiesForGenerateFADENupkgsVersions"
           Inputs="$(MSBuildProjectFile);$(MSBuildThisFileDirectory);$(MSBuildProjectFile)\..\..\..\SdkPackageVersions.props"
-          Outputs="$(GeneratedGodotNupkgsVersionsFile)">
+          Outputs="$(GeneratedFADENupkgsVersionsFile)">
     <PropertyGroup>
-      <GenerateGodotNupkgsVersionsCode><![CDATA[
+      <GenerateFADENupkgsVersionsCode><![CDATA[
 namespace $(RootNamespace)
 {
-    public class GeneratedGodotNupkgsVersions
+    public class GeneratedFADENupkgsVersions
     {
-        public const string GodotNETSdk = "$(PackageVersion_Godot_NET_Sdk)"%3b
-        public const string GodotSourceGenerators = "$(PackageVersion_Godot_SourceGenerators)"%3b
-        public const string GodotSharp = "$(PackageVersion_GodotSharp)"%3b
+        public const string FADENETSdk = "$(PackageVersion_FADE_NET_Sdk)"%3b
+        public const string FADESourceGenerators = "$(PackageVersion_FADE_SourceGenerators)"%3b
+        public const string FADESharp = "$(PackageVersion_FADESharp)"%3b
     }
 }
-]]></GenerateGodotNupkgsVersionsCode>
+]]></GenerateFADENupkgsVersionsCode>
     </PropertyGroup>
-    <WriteLinesToFile Lines="$(GenerateGodotNupkgsVersionsCode)"
-                      File="$(GeneratedGodotNupkgsVersionsFile)"
+    <WriteLinesToFile Lines="$(GenerateFADENupkgsVersionsCode)"
+                      File="$(GeneratedFADENupkgsVersionsFile)"
                       Overwrite="True" WriteOnlyWhenDifferent="True" />
   </Target>
 </Project>

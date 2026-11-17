@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -68,23 +68,23 @@
 extern "C" {
 #endif
 
-void godot_icall_GodotSharpDirs_ResMetadataDir(godot_string *r_dest) {
-	memnew_placement(r_dest, String(GodotSharpDirs::get_res_metadata_dir()));
+void godot_icall_FADESharpDirs_ResMetadataDir(godot_string *r_dest) {
+	memnew_placement(r_dest, String(FADESharpDirs::get_res_metadata_dir()));
 }
 
-void godot_icall_GodotSharpDirs_MonoUserDir(godot_string *r_dest) {
-	memnew_placement(r_dest, String(GodotSharpDirs::get_mono_user_dir()));
+void godot_icall_FADESharpDirs_MonoUserDir(godot_string *r_dest) {
+	memnew_placement(r_dest, String(FADESharpDirs::get_mono_user_dir()));
 }
 
-void godot_icall_GodotSharpDirs_BuildLogsDirs(godot_string *r_dest) {
-	memnew_placement(r_dest, String(GodotSharpDirs::get_build_logs_dir()));
+void godot_icall_FADESharpDirs_BuildLogsDirs(godot_string *r_dest) {
+	memnew_placement(r_dest, String(FADESharpDirs::get_build_logs_dir()));
 }
 
-void godot_icall_GodotSharpDirs_DataEditorToolsDir(godot_string *r_dest) {
-	memnew_placement(r_dest, String(GodotSharpDirs::get_data_editor_tools_dir()));
+void godot_icall_FADESharpDirs_DataEditorToolsDir(godot_string *r_dest) {
+	memnew_placement(r_dest, String(FADESharpDirs::get_data_editor_tools_dir()));
 }
 
-void godot_icall_GodotSharpDirs_CSharpProjectName(godot_string *r_dest) {
+void godot_icall_FADESharpDirs_CSharpProjectName(godot_string *r_dest) {
 	memnew_placement(r_dest, String(Path::get_csharp_project_name()));
 }
 
@@ -126,11 +126,11 @@ bool godot_icall_Internal_LipOCreateFile(const godot_string *p_output_path, cons
 	return LipO::create_file(output_path, files);
 }
 
-bool godot_icall_Internal_GodotIs32Bits() {
+bool godot_icall_Internal_FADEIs32Bits() {
 	return sizeof(void *) == 4;
 }
 
-bool godot_icall_Internal_GodotIsRealTDouble() {
+bool godot_icall_Internal_FADEIsRealTDouble() {
 #ifdef REAL_T_IS_DOUBLE
 	return (bool)true;
 #else
@@ -138,7 +138,7 @@ bool godot_icall_Internal_GodotIsRealTDouble() {
 #endif
 }
 
-void godot_icall_Internal_GodotMainIteration() {
+void godot_icall_Internal_FADEMainIteration() {
 	Main::iteration();
 }
 
@@ -152,7 +152,7 @@ bool godot_icall_Internal_IsAssembliesReloadingNeeded() {
 
 void godot_icall_Internal_ReloadAssemblies() {
 #ifdef GD_MONO_HOT_RELOAD
-	callable_mp(MonoBind::GodotSharp::get_singleton(), &MonoBind::GodotSharp::reload_assemblies).call_deferred();
+	callable_mp(MonoBind::FADESharp::get_singleton(), &MonoBind::FADESharp::reload_assemblies).call_deferred();
 #endif
 }
 
@@ -255,22 +255,22 @@ bool godot_icall_Utils_OS_UnixFileHasExecutableAccess(const godot_string *p_file
 #endif
 
 // The order in this array must match the declaration order of
-// the methods in 'GodotTools/Internals/Internal.cs'.
+// the methods in 'FADETools/Internals/Internal.cs'.
 static const void *unmanaged_callbacks[]{
-	(void *)godot_icall_GodotSharpDirs_ResMetadataDir,
-	(void *)godot_icall_GodotSharpDirs_MonoUserDir,
-	(void *)godot_icall_GodotSharpDirs_BuildLogsDirs,
-	(void *)godot_icall_GodotSharpDirs_DataEditorToolsDir,
-	(void *)godot_icall_GodotSharpDirs_CSharpProjectName,
+	(void *)godot_icall_FADESharpDirs_ResMetadataDir,
+	(void *)godot_icall_FADESharpDirs_MonoUserDir,
+	(void *)godot_icall_FADESharpDirs_BuildLogsDirs,
+	(void *)godot_icall_FADESharpDirs_DataEditorToolsDir,
+	(void *)godot_icall_FADESharpDirs_CSharpProjectName,
 	(void *)godot_icall_EditorProgress_Create,
 	(void *)godot_icall_EditorProgress_Dispose,
 	(void *)godot_icall_EditorProgress_Step,
 	(void *)godot_icall_Internal_FullExportTemplatesDir,
 	(void *)godot_icall_Internal_IsMacOSAppBundleInstalled,
 	(void *)godot_icall_Internal_LipOCreateFile,
-	(void *)godot_icall_Internal_GodotIs32Bits,
-	(void *)godot_icall_Internal_GodotIsRealTDouble,
-	(void *)godot_icall_Internal_GodotMainIteration,
+	(void *)godot_icall_Internal_FADEIs32Bits,
+	(void *)godot_icall_Internal_FADEIsRealTDouble,
+	(void *)godot_icall_Internal_FADEMainIteration,
 	(void *)godot_icall_Internal_IsAssembliesReloadingNeeded,
 	(void *)godot_icall_Internal_ReloadAssemblies,
 	(void *)godot_icall_Internal_EditorDebuggerNodeReloadScripts,

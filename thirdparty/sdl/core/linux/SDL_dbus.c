@@ -116,7 +116,7 @@ static bool LoadDBUSSyms(void)
 
 static void UnloadDBUSLibrary(void)
 {
-#ifdef SOWRAP_ENABLED // Godot build system constant
+#ifdef SOWRAP_ENABLED // FADE build system constant
     if (dbus_handle) {
         SDL_UnloadObject(dbus_handle);
         dbus_handle = NULL;
@@ -127,7 +127,7 @@ static void UnloadDBUSLibrary(void)
 static bool LoadDBUSLibrary(void)
 {
     bool result = true;
-#ifdef SOWRAP_ENABLED // Godot build system constant
+#ifdef SOWRAP_ENABLED // FADE build system constant
     if (!dbus_handle) {
         dbus_handle = SDL_LoadObject(dbus_library);
         if (!dbus_handle) {

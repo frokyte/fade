@@ -1,6 +1,6 @@
-namespace Godot.SourceGenerators.Sample
+namespace FADE.SourceGenerators.Sample
 {
-    public partial class Foo : GodotObject
+    public partial class Foo : FADEObject
     {
     }
 

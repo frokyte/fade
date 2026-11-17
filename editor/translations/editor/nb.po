@@ -1,7 +1,7 @@
-# Norwegian Bokmål translation of the Godot Engine editor interface.
-# Copyright (c) 2014-present Godot Engine contributors.
+# Norwegian Bokmål translation of the FADE Engine editor interface.
+# Copyright (c) 2014-present FADE Engine contributors.
 # Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
-# This file is distributed under the same license as the Godot source code.
+# This file is distributed under the same license as the FADE source code.
 # Allan Nordhøy <epost@anotheragency.no>, 2017-2018, 2019, 2020, 2021.
 # Anonymous <GentleSaucepan@protonmail.com>, 2017, 2021.
 # Elias <eliasnykrem@gmail.com>, 2018, 2023.
@@ -35,7 +35,7 @@
 # Plat <platinumonsteam@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Godot Engine editor interface\n"
+"Project-Id-Version: FADE Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-10-01 21:08+0000\n"
@@ -2806,8 +2806,8 @@ msgstr "Denne klassen er markert som eksperimentell."
 msgid "Matches the \"%s\" keyword."
 msgstr "passer \"%s\" nøkkelordet."
 
-msgid "%s - Godot Engine"
-msgstr "%s - Godot Engine"
+msgid "%s - FADE Engine"
+msgstr "%s - FADE Engine"
 
 msgid "Dock Position"
 msgstr "Dock-posisjon"
@@ -3358,11 +3358,11 @@ msgstr "Ta skjermbilde"
 msgid "Community"
 msgstr "Samfunn"
 
-msgid "About Godot..."
-msgstr "Om Godot..."
+msgid "About FADE..."
+msgstr "Om FADE..."
 
-msgid "Support Godot Development"
-msgstr "Støtt utviklingen av Godot"
+msgid "Support FADE Development"
+msgstr "Støtt utviklingen av FADE"
 
 msgid "Open Script Editor"
 msgstr "Åpne Skriptredigeringsverktøy"
@@ -3642,11 +3642,11 @@ msgstr "Platinasponsorer"
 msgid "Gold Sponsors"
 msgstr "Gullsponsorer"
 
-msgid "Godot Engine contributors"
-msgstr "Godot Engine sine bidragsytere"
+msgid "FADE Engine contributors"
+msgstr "FADE Engine sine bidragsytere"
 
-msgid "Thanks from the Godot community!"
-msgstr "Takk fra Godot-samfunnet!"
+msgid "Thanks from the FADE community!"
+msgstr "Takk fra FADE-samfunnet!"
 
 msgid "Authors"
 msgstr "Skapere"
@@ -3880,11 +3880,11 @@ msgstr ""
 "Starting av redigeringsverktøyet mislyktes."
 
 msgid ""
-"Warning: This project was last edited in Godot %s. Opening will change it to "
-"Godot %s.\n"
+"Warning: This project was last edited in FADE %s. Opening will change it to "
+"FADE %s.\n"
 "\n"
 msgstr ""
-"Advarsel: Dette prosjektet var sist endret i Godot %s. Å åpne prosjektet vill "
+"Advarsel: Dette prosjektet var sist endret i FADE %s. Å åpne prosjektet vill "
 "endre det til godot %s\n"
 "\n"
 
@@ -3901,8 +3901,8 @@ msgstr ""
 "Fjern alle manglende prosjekter fra listen?\n"
 "Innhold i prosjektmappene vil ikke påvirkes."
 
-msgid "About Godot"
-msgstr "Om Godot"
+msgid "About FADE"
+msgstr "Om FADE"
 
 msgid "Settings"
 msgstr "Innstillinger"
@@ -4852,11 +4852,11 @@ msgstr "Metall"
 msgid "OpenGL"
 msgstr "OpenGL"
 
-msgid "Godot Physics (2D)"
-msgstr "Godot-fysikk (2D)"
+msgid "FADE Physics (2D)"
+msgstr "FADE-fysikk (2D)"
 
-msgid "Godot Physics (3D)"
-msgstr "Godot-fysikk (3D)"
+msgid "FADE Physics (3D)"
+msgstr "FADE-fysikk (3D)"
 
 msgid "XR (AR and VR)."
 msgstr "XR (AR og VR)."

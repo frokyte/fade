@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -41,7 +41,7 @@
 __attribute__((visibility("default"))) int main(int argc, char **argv) {
 	godot_init_profiler();
 
-	// Disable AppKit state restoration (Resume). Godot windows are not restorable, but the app-level
+	// Disable AppKit state restoration (Resume). FADE windows are not restorable, but the app-level
 	// NSPersistentUIManager still runs and its first flush stalls the main thread for 10-40 ms.
 	// -1 means NO without AppKit logging "ApplePersistence=NO" to stderr. Same as WebKit:
 	// https://github.com/WebKit/WebKit/blob/442437215121a26a9bdb8a2bbd8ddba24fae1ff7/Source/WebKit/WebProcess/cocoa/WebProcessCocoa.mm#L527
@@ -128,7 +128,7 @@ __attribute__((visibility("default"))) int main(int argc, char **argv) {
 #endif
 
 	if (is_embedded) {
-		// No dock icon for the embedded process, as it is hosted in the Godot editor.
+		// No dock icon for the embedded process, as it is hosted in the FADE editor.
 		ProcessSerialNumber psn = { 0, kCurrentProcess };
 		(void)TransformProcessType(&psn, kProcessTransformToBackgroundApplication);
 	}

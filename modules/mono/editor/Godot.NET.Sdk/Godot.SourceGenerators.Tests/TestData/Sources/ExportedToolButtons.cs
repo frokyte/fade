@@ -1,8 +1,8 @@
-using Godot;
+using FADE;
 using System;
 
 [Tool]
-public partial class ExportedToolButtons : GodotObject
+public partial class ExportedToolButtons : FADEObject
 {
     [ExportToolButton("Click me!")]
     public Callable MyButton1 => Callable.From(() => { GD.Print("Clicked MyButton1!"); });

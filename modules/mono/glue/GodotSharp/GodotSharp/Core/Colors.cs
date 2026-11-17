@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Frozen;
 
-namespace Godot
+namespace FADE
 {
     /// <summary>
     /// This class contains color constants created from standardized color names.

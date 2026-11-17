@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -100,7 +100,7 @@
 // Disable deprecated
 #define MBEDTLS_DEPRECATED_REMOVED
 
-// Godot mbedTLS platform implementation
+// FADE mbedTLS platform implementation
 #define GODOT_MBEDTLS_PLATFORM
 
 #ifdef MBEDTLS_PSA_BUILTIN_GET_ENTROPY

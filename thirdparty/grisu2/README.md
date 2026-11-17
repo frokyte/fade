@@ -17,4 +17,4 @@ The `grisu2.h` file is the same as `to_chars.cpp` but with `patches/0001-godot-c
 - Simplify namespaces to just be one `grisu2` namespace.
 - Rename functions to ensure their names are unique.
 - Make `to_chars` handle both float and double types instead of just double.
-- Remove the trailing `.0` logic to match Godot's existing `String::num_scientific` behavior.
+- Remove the trailing `.0` logic to match FADE's existing `String::num_scientific` behavior.

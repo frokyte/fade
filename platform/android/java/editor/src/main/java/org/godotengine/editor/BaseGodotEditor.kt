@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  BaseGodotEditor.kt                                                    */
+/*  BaseFADEEditor.kt                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -56,15 +56,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
 import androidx.window.layout.WindowMetricsCalculator
 import org.godotengine.editor.buildprovider.GradleBuildProvider
-import org.godotengine.editor.embed.EmbeddedGodotGame
+import org.godotengine.editor.embed.EmbeddedFADEGame
 import org.godotengine.editor.embed.GameMenuFragment
 import org.godotengine.editor.utils.Utils
 import org.godotengine.editor.utils.signApk
 import org.godotengine.editor.utils.verifyApk
 import org.godotengine.godot.BuildProvider
-import org.godotengine.godot.Godot
-import org.godotengine.godot.GodotActivity
-import org.godotengine.godot.GodotLib
+import org.godotengine.godot.FADE
+import org.godotengine.godot.FADEActivity
+import org.godotengine.godot.FADELib
 import org.godotengine.godot.editor.utils.EditorUtils
 import org.godotengine.godot.editor.utils.GameMenuUtils
 import org.godotengine.godot.editor.utils.GameMenuUtils.GameEmbedMode
@@ -79,16 +79,16 @@ import kotlin.math.min
 import kotlin.text.indexOf
 
 /**
- * Base class for the Godot Android Editor activities.
+ * Base class for the FADE Android Editor activities.
  *
  * This provides the basic templates for the activities making up this application.
  * Each derived activity runs in its own process, which enable up to have several instances of
- * the Godot engine up and running at the same time.
+ * the FADE engine up and running at the same time.
  */
-abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListener {
+abstract class BaseFADEEditor : FADEActivity(), GameMenuFragment.GameMenuListener {
 
 	companion object {
-		private val TAG = BaseGodotEditor::class.java.simpleName
+		private val TAG = BaseFADEEditor::class.java.simpleName
 
 		private const val WAIT_FOR_DEBUGGER = false
 
@@ -115,17 +115,17 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		private const val RUN_INSTANCE_ARG = "--run_instance"
 
 		// Info for the various classes used by the editor.
-		internal val EDITOR_MAIN_INFO = EditorWindowInfo(GodotEditor::class.java, 777, "")
-		internal val EMBEDDED_RUN_GAME_INFO = EditorWindowInfo(EmbeddedGodotGame::class.java, 2667, ":EmbeddedGodotGame")
-		internal val XR_RUN_GAME_INFO = EditorWindowInfo(GodotXRGame::class.java, 1667, ":GodotXRGame", LaunchPolicy.ADJACENT)
+		internal val EDITOR_MAIN_INFO = EditorWindowInfo(FADEEditor::class.java, 777, "")
+		internal val EMBEDDED_RUN_GAME_INFO = EditorWindowInfo(EmbeddedFADEGame::class.java, 2667, ":EmbeddedFADEGame")
+		internal val XR_RUN_GAME_INFO = EditorWindowInfo(FADEXRGame::class.java, 1667, ":FADEXRGame", LaunchPolicy.ADJACENT)
 
-		internal val SPATIAL_CONTAINER_RUN_GAME_INFO_0 = EditorWindowInfo(GodotSpatialContainerGame0::class.java,
-			3667, ":GodotSpatialContainerGame0", LaunchPolicy.ADJACENT)
-		internal val SPATIAL_CONTAINER_RUN_GAME_INFO_1 = EditorWindowInfo(GodotSpatialContainerGame1::class.java,
-			3668, ":GodotSpatialContainerGame1", LaunchPolicy.ADJACENT)
+		internal val SPATIAL_CONTAINER_RUN_GAME_INFO_0 = EditorWindowInfo(FADESpatialContainerGame0::class.java,
+			3667, ":FADESpatialContainerGame0", LaunchPolicy.ADJACENT)
+		internal val SPATIAL_CONTAINER_RUN_GAME_INFO_1 = EditorWindowInfo(FADESpatialContainerGame1::class.java,
+			3668, ":FADESpatialContainerGame1", LaunchPolicy.ADJACENT)
 
-		internal val RUN_GAME_INFO_0 = EditorWindowInfo(GodotGame0::class.java, 667, ":GodotGame0", LaunchPolicy.AUTO)
-		internal val RUN_GAME_INFO_1 = EditorWindowInfo(GodotGame1::class.java, 668, ":GodotGame1", LaunchPolicy.AUTO)
+		internal val RUN_GAME_INFO_0 = EditorWindowInfo(FADEGame0::class.java, 667, ":FADEGame0", LaunchPolicy.AUTO)
+		internal val RUN_GAME_INFO_1 = EditorWindowInfo(FADEGame1::class.java, 668, ":FADEGame1", LaunchPolicy.AUTO)
 
 		private fun isRunGameInfo(editorWindowInfo: EditorWindowInfo): Boolean {
 			return editorWindowInfo == RUN_GAME_INFO_0 || editorWindowInfo == RUN_GAME_INFO_1
@@ -222,7 +222,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 
 			// Check if running in instrumentation.
 			return try {
-				Class.forName("org.godotengine.editor.GodotEditorTest")
+				Class.forName("org.godotengine.editor.FADEEditorTest")
 				true
 			} catch (_: ClassNotFoundException) {
 				false
@@ -263,7 +263,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 	private var activeWorkspace: String? = null
 	private var currentOrientation = Configuration.ORIENTATION_UNDEFINED
 
-	override fun getGodotAppLayout() = R.layout.godot_editor_layout
+	override fun getFADEAppLayout() = R.layout.godot_editor_layout
 
 	internal open fun getEditorWindowInfo() = EDITOR_MAIN_INFO
 
@@ -487,7 +487,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 								}
 							}
 							if (!isEditor || currentPath != dataDir.absolutePath) {
-								onNewGodotInstanceRequested(loadProjectArgs)
+								onNewFADEInstanceRequested(loadProjectArgs)
 							}
 						}
 					}
@@ -564,8 +564,8 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		}
 	}
 
-	override fun onGodotSetupCompleted() {
-		super.onGodotSetupCompleted()
+	override fun onFADESetupCompleted() {
+		super.onFADESetupCompleted()
 		val rightClickEmulationEnabled = enableRightClickEmulation()
 		val panScaleEnabled = enablePanAndScaleGestures()
 		val overrideVolumeButtonsEnabled = overrideVolumeButtons()
@@ -593,8 +593,8 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		}
 	}
 
-	override fun onGodotMainLoopStarted() {
-		super.onGodotMainLoopStarted()
+	override fun onFADEMainLoopStarted() {
+		super.onFADEMainLoopStarted()
 		runOnUiThread {
 			// Hide the loading indicator
 			editorLoadingIndicator?.visibility = View.GONE
@@ -671,7 +671,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		if (isNativeXRDevice(applicationContext)) {
 			val gameInfo = if (xrMode == XR_MODE_ON) {
 				XR_RUN_GAME_INFO
-			} else if ((xrMode == XR_MODE_DEFAULT && GodotLib.getGlobal("xr/openxr/enabled").toBoolean())) {
+			} else if ((xrMode == XR_MODE_DEFAULT && FADELib.getGlobal("xr/openxr/enabled").toBoolean())) {
 				if (getHybridAppLaunchMode() == HybridLaunchMode.PANEL) {
 					getRunGameInfoForInstance(runInstance)
 				} else {
@@ -682,7 +682,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 				getRunGameInfoForInstance(runInstance)
 			}
 
-			return if (gameInfo == XR_RUN_GAME_INFO && GodotSpatialContainerGame.isSpatialContainerEnabled()) {
+			return if (gameInfo == XR_RUN_GAME_INFO && FADESpatialContainerGame.isSpatialContainerEnabled()) {
 				getSpatialContainerRunGameInfoForInstance(runInstance)
 			} else {
 				gameInfo
@@ -719,7 +719,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		}
 	}
 
-	protected fun getNewGodotInstanceIntent(editorWindowInfo: EditorWindowInfo, args: Array<String>): Intent {
+	protected fun getNewFADEInstanceIntent(editorWindowInfo: EditorWindowInfo, args: Array<String>): Intent {
 		// If we're launching an editor window (project manager or editor) and we're in
 		// fullscreen mode, we want to remain in fullscreen mode.
 		// This doesn't apply to the play / game window since for that window fullscreen is
@@ -747,7 +747,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		return newInstance
 	}
 
-	final override fun onNewGodotInstanceRequested(args: Array<String>): Int {
+	final override fun onNewFADEInstanceRequested(args: Array<String>): Int {
 		val editorWindowInfo = retrieveEditorWindowInfo(args, fetchGameEmbedMode())
 
 		// Check if this editor window is being terminated. If it's, delay the creation of a new instance until the
@@ -755,7 +755,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		if (editorMessageDispatcher.isPendingForceQuit(editorWindowInfo)) {
 			Log.v(TAG, "Scheduling new launch after termination of ${editorWindowInfo.windowId}")
 			editorMessageDispatcher.runTaskAfterForceQuit(editorWindowInfo) {
-				onNewGodotInstanceRequested(args)
+				onNewFADEInstanceRequested(args)
 			}
 			return editorWindowInfo.windowId
 		}
@@ -769,7 +769,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 			ActivityOptions.makeScaleUpAnimation(sourceView, startX, startY, 0, 0)
 		}
 
-		val newInstance = getNewGodotInstanceIntent(editorWindowInfo, args)
+		val newInstance = getNewFADEInstanceIntent(editorWindowInfo, args)
 		newInstance.apply {
 			putExtra(EXTRA_EDITOR_HINT, godot?.isEditorHint() == true)
 			putExtra(EXTRA_PROJECT_MANAGER_HINT, godot?.isProjectManagerHint() == true)
@@ -792,16 +792,16 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		startActivity(newInstance, activityOptions?.toBundle())
 	}
 
-	override fun onGodotForceQuit(instance: Godot) {
+	override fun onFADEForceQuit(instance: FADE) {
 		if (!isRunningInInstrumentationOrUserTestHarness()) {
 			// For instrumented tests, we disable force-quitting to allow the tests to complete successfully, otherwise
 			// they fail when the process crashes.
-			super.onGodotForceQuit(instance)
+			super.onFADEForceQuit(instance)
 		}
 	}
 
-	final override fun onGodotForceQuit(godotInstanceId: Int): Boolean {
-		val editorWindowInfo = getEditorWindowInfoForInstanceId(godotInstanceId) ?: return super.onGodotForceQuit(godotInstanceId)
+	final override fun onFADEForceQuit(godotInstanceId: Int): Boolean {
+		val editorWindowInfo = getEditorWindowInfoForInstanceId(godotInstanceId) ?: return super.onFADEForceQuit(godotInstanceId)
 
 		if (editorWindowInfo.windowClassName == javaClass.name) {
 			Log.d(TAG, "Force quitting ${editorWindowInfo.windowClassName}")
@@ -821,13 +821,13 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 		for (runningProcess in runningProcesses) {
 			if (runningProcess.processName == processName) {
 				// Killing process directly
-				Log.v(TAG, "Killing Godot process ${runningProcess.processName}")
+				Log.v(TAG, "Killing FADE process ${runningProcess.processName}")
 				Process.killProcess(runningProcess.pid)
 				return true
 			}
 		}
 
-		return super.onGodotForceQuit(godotInstanceId)
+		return super.onFADEForceQuit(godotInstanceId)
 	}
 
 	// Get the screen's density scale
@@ -852,34 +852,34 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 	}
 
 	/**
-	 * The Godot Android Editor sets its own orientation via its AndroidManifest
+	 * The FADE Android Editor sets its own orientation via its AndroidManifest
 	 */
 	protected open fun overrideOrientationRequest() = isLargeScreen || godot?.isProjectManagerHint() == true || !changingOrientationAllowed
 
 	protected open fun overrideVolumeButtons() = false
 
 	/**
-	 * Enable long press gestures for the Godot Android editor.
+	 * Enable long press gestures for the FADE Android editor.
 	 */
 	protected open fun enableRightClickEmulation() =
-		java.lang.Boolean.parseBoolean(GodotLib.getEditorSetting("interface/touchscreen/enable_long_press_as_right_click"))
+		java.lang.Boolean.parseBoolean(FADELib.getEditorSetting("interface/touchscreen/enable_long_press_as_right_click"))
 
 	/**
-	 * Enable haptic feedback on long-press right-click for the Godot Android editor.
+	 * Enable haptic feedback on long-press right-click for the FADE Android editor.
 	 */
 	protected open fun enableHapticOnLongPress() =
-		java.lang.Boolean.parseBoolean(GodotLib.getEditorSetting("interface/touchscreen/haptic_on_long_press"))
+		java.lang.Boolean.parseBoolean(FADELib.getEditorSetting("interface/touchscreen/haptic_on_long_press"))
 
 	/**
-	 * Disable scroll deadzone for the Godot Android editor.
+	 * Disable scroll deadzone for the FADE Android editor.
 	 */
 	protected open fun disableScrollDeadzone() = true
 
 	/**
-	 * Enable pan and scale gestures for the Godot Android editor.
+	 * Enable pan and scale gestures for the FADE Android editor.
 	 */
 	protected open fun enablePanAndScaleGestures() =
-		java.lang.Boolean.parseBoolean(GodotLib.getEditorSetting("interface/touchscreen/enable_pan_and_scale_gestures"))
+		java.lang.Boolean.parseBoolean(FADELib.getEditorSetting("interface/touchscreen/enable_pan_and_scale_gestures"))
 
 	private fun resolveGameEmbedModeIfNeeded(embedMode: GameEmbedMode): GameEmbedMode {
 		return when (embedMode) {
@@ -909,7 +909,7 @@ abstract class BaseGodotEditor : GodotActivity(), GameMenuFragment.GameMenuListe
 				}
 
 				try {
-					when (Integer.parseInt(GodotLib.getEditorSetting("run/window_placement/android_window"))) {
+					when (Integer.parseInt(FADELib.getEditorSetting("run/window_placement/android_window"))) {
 						ANDROID_WINDOW_SAME_AS_EDITOR -> LaunchPolicy.SAME
 						ANDROID_WINDOW_SIDE_BY_SIDE_WITH_EDITOR -> LaunchPolicy.ADJACENT
 

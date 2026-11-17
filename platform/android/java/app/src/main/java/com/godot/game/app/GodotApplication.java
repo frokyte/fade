@@ -1,11 +1,11 @@
 /**************************************************************************/
-/*  GodotApplication.java                                                 */
+/*  FADEApplication.java                                                 */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -33,7 +33,7 @@ package com.godot.game.app;
 import android.app.Application;
 import android.util.Log;
 
-public class GodotApplication extends Application {
+public class FADEApplication extends Application {
 	static {
 		// .NET libraries.
 		if (BuildConfig.FLAVOR.equals("mono")) {

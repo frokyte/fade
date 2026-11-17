@@ -5,7 +5,7 @@
 /*                             GODOT ENGINE                               */
 /*                        https://godotengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -28,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-function GodotSampleDriver(audioContext, positionWorkletPath) {
+function FADESampleDriver(audioContext, positionWorkletPath) {
 	/** @type {?AudioContext} */
 	let ctx = audioContext;
 	/** @type {?Promise} */
@@ -43,7 +43,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 		BACKWARD: 'backward',
 		PINGPONG: 'pingpong',
 	};
-	const GodotChannel = Object.freeze({
+	const FADEChannel = Object.freeze({
 		CHANNEL_L: 0,
 		CHANNEL_R: 1,
 		CHANNEL_C: 2,
@@ -65,21 +65,21 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	const NUMBER_OF_WEB_CHANNELS = Object.keys(WebChannel).length;
 	const MAX_SAFE_FLOAT32_INTEGER = 16777215;
 	/**
-	 * JS pair of a Godot AudioBus.
+	 * JS pair of a FADE AudioBus.
 	 * @typedef {{
 	 *   getId: function(): number,
 	 *   getInputNode: function(): !AudioNode,
 	 *   getOutputNode: function(): !AudioNode,
-	 *   setVolumeDb: function (GodotBus?): void,
-	 *   setSend: function(GodotBus?): void,
+	 *   setVolumeDb: function (FADEBus?): void,
+	 *   setSend: function(FADEBus?): void,
 	 *   setMute: function(boolean): void,
 	 *   setSoloMute: function(boolean): void,
 	 *   clear: function(): void,
 	 * }}
 	 */
-	var GodotBus; // eslint-disable-line no-var, no-unassigned-vars
+	var FADEBus; // eslint-disable-line no-var, no-unassigned-vars
 	/**
-	 * A mixing sub-graph to control GodotPlayback volume outputs to a GodotBus.
+	 * A mixing sub-graph to control FADEPlayback volume outputs to a FADEBus.
 	 * @typedef {{
 	 *   setVolume: function(!Float32Array): void,
 	 *   getInputNode: function(): !AudioNode,
@@ -87,9 +87,9 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	 *   clear: function(): void,
 	 * }}
 	 */
-	var GodotVolumeMixer; // eslint-disable-line no-var, no-unassigned-vars
+	var FADEVolumeMixer; // eslint-disable-line no-var, no-unassigned-vars
 	/**
-	 * JS pair of a Godot AudioStream/AudioSample.
+	 * JS pair of a FADE AudioStream/AudioSample.
 	 * @typedef {{
 	 *   loopBegin: number,
 	 *   loopEnd: number,
@@ -98,9 +98,9 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	 *   getBuffer: function(): !AudioBuffer,
 	 * }}
 	 */
-	var GodotStream; // eslint-disable-line no-var, no-unassigned-vars
+	var FADEStream; // eslint-disable-line no-var, no-unassigned-vars
 	/**
-	 * JS pair of a Godot AudioStreamPlayback/AudioSamplePlayback.
+	 * JS pair of a FADE AudioStreamPlayback/AudioSamplePlayback.
 	 * @typedef {{
 	 *   stop: function(): void,
 	 *   start: function(number): void,
@@ -110,15 +110,15 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	 *   getPlaybackPosition: function(): number,
 	 * }}
 	 */
-	var GodotPlayback; // eslint-disable-line no-var, no-unassigned-vars
+	var FADEPlayback; // eslint-disable-line no-var, no-unassigned-vars
 
-	/** @type {GodotBus?} */
+	/** @type {FADEBus?} */
 	let busSolo = null;
-	/** @type {Array<GodotBus>} */
+	/** @type {Array<FADEBus>} */
 	let buses = [];
-	/** @type {Map<string, GodotStream>} */
+	/** @type {Map<string, FADEStream>} */
 	const streams = new Map();
-	/** @type {Map<string, GodotPlayback>} */
+	/** @type {Map<string, FADEPlayback>} */
 	const playbacks = new Map();
 
 	/** @type {?function(number): void}*/
@@ -140,7 +140,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	}
 
 	/**
-	 * @return {!GodotBus}
+	 * @return {!FADEBus}
 	 */
 	function createBus() {
 		/** @type {!GainNode} */ const muteNode = ctx.createGain();
@@ -162,11 +162,11 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 				gainNode.gain.value = linear;
 			}
 		};
-		/** @param {?GodotBus} val */
+		/** @param {?FADEBus} val */
 		bus.setSend = function (val) {
 			if (val == null) {
 				if (bus.getId() != 0) {
-					GodotRuntime.error(`Cannot set bus send to null when the bus not at index 0 (current index: ${bus.getId()})`);
+					FADERuntime.error(`Cannot set bus send to null when the bus not at index 0 (current index: ${bus.getId()})`);
 					return;
 				}
 				bus.getOutputNode().connect(ctx.destination);
@@ -192,7 +192,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	}
 	/**
 	 * @param {number} index
-	 * @return {?GodotBus}
+	 * @return {?FADEBus}
 	 */
 	function getBus(index) {
 		return buses[index] ?? null;
@@ -200,7 +200,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 
 	/**
 	 * @param {number} bus
-	 * @return {!GodotVolumeMixer}
+	 * @return {!FADEVolumeMixer}
 	 */
 	function createVolumeMixer(bus) {
 		/** @type {!ChannelSplitterNode} */ const splitter = ctx.createChannelSplitter(NUMBER_OF_WEB_CHANNELS);
@@ -219,15 +219,15 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 		/** @param {!Float32Array} volume */
 		node.setVolume = function (volume) {
 			if (volume.length !== MAX_VOLUME_CHANNELS) {
-				GodotRuntime.error(`Volume length isn't "${MAX_VOLUME_CHANNELS}", is ${volume.length} instead`);
+				FADERuntime.error(`Volume length isn't "${MAX_VOLUME_CHANNELS}", is ${volume.length} instead`);
 				return;
 			}
-			channels[WebChannel.CHANNEL_L].gain.value = volume[GodotChannel.CHANNEL_L] ?? 0;
-			channels[WebChannel.CHANNEL_R].gain.value = volume[GodotChannel.CHANNEL_R] ?? 0;
-			channels[WebChannel.CHANNEL_SL].gain.value = volume[GodotChannel.CHANNEL_SL] ?? 0;
-			channels[WebChannel.CHANNEL_SR].gain.value = volume[GodotChannel.CHANNEL_SR] ?? 0;
-			channels[WebChannel.CHANNEL_C].gain.value = volume[GodotChannel.CHANNEL_C] ?? 0;
-			channels[WebChannel.CHANNEL_LFE].gain.value = volume[GodotChannel.CHANNEL_LFE] ?? 0;
+			channels[WebChannel.CHANNEL_L].gain.value = volume[FADEChannel.CHANNEL_L] ?? 0;
+			channels[WebChannel.CHANNEL_R].gain.value = volume[FADEChannel.CHANNEL_R] ?? 0;
+			channels[WebChannel.CHANNEL_SL].gain.value = volume[FADEChannel.CHANNEL_SL] ?? 0;
+			channels[WebChannel.CHANNEL_SR].gain.value = volume[FADEChannel.CHANNEL_SR] ?? 0;
+			channels[WebChannel.CHANNEL_C].gain.value = volume[FADEChannel.CHANNEL_C] ?? 0;
+			channels[WebChannel.CHANNEL_LFE].gain.value = volume[FADEChannel.CHANNEL_LFE] ?? 0;
 		};
 		node.clear = function () {
 			splitter.disconnect();
@@ -246,7 +246,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	 *   loopBegin: (number|undefined),
 	 *   loopEnd: (number|undefined),
 	 * }=} options
-	 * @return {!GodotStream}
+	 * @return {!FADEStream}
 	 */
 	function createStream(streamId, sourceBuffer, options = {}) {
 		const stream = {
@@ -267,7 +267,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	}
 	/**
 	 * @param {string} id
-	 * @return {!GodotStream}
+	 * @return {!FADEStream}
 	 */
 	function getStream(id) {
 		return streams.get(id) ?? null;
@@ -279,12 +279,12 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 
 	/**
 	 * @param {string} playbackId
-	 * @return {!GodotPlayback}
+	 * @return {!FADEPlayback}
 	 */
 	function createPlayback(playbackId, streamId) {
 		/** @type {number} */ const sampleRate = ctx.sampleRate;
 		const output = /** @struct */ {
-			/** @type {!Map<number, GodotVolumeMixer|null>} */
+			/** @type {!Map<number, FADEVolumeMixer|null>} */
 			mixers: new Map(),
 			/** @type {!Float32Array} */
 			volumes: new Float32Array(0),
@@ -413,9 +413,9 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 					playbacks.delete(playbackId); // Cleanup after ourselves.
 					return;
 				}
-				const cstr = GodotRuntime.allocString(playbackId);
+				const cstr = FADERuntime.allocString(playbackId);
 				finishedCallback(cstr);
-				GodotRuntime.free(cstr);
+				FADERuntime.free(cstr);
 			};
 			if (looping) {
 				source.loop = true;
@@ -431,7 +431,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 				audioPositionWorkletPromise.then(attachWorklet).catch((err) => {
 					const newErr = new Error('Failed to create PositionWorklet.');
 					newErr.cause = err;
-					GodotRuntime.error(newErr);
+					FADERuntime.error(newErr);
 				});
 			}
 		}
@@ -490,7 +490,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	}
 	/**
 	 * @param {string} id
-	 * @return {?GodotPlayback}
+	 * @return {?FADEPlayback}
 	 */
 	function getPlayback(id) {
 		return playbacks.get(id) ?? null;
@@ -506,7 +506,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	/** @param {number} count */
 	function setBusCount(count) {
 		if (count < 1) {
-			GodotRuntime.error('Invalid bus index, driver bug');
+			FADERuntime.error('Invalid bus index, driver bug');
 			return;
 		}
 		if (count === buses.length) {
@@ -537,7 +537,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	 */
 	function moveBus(fromIndex, toIndex) {
 		if (fromIndex < 1 || toIndex < 1) {
-			GodotRuntime.error('Invalid bus index, driver bug');
+			FADERuntime.error('Invalid bus index, driver bug');
 			return;
 		}
 		const movedBus = getBus(fromIndex);
@@ -552,7 +552,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	/** @param {number} index */
 	function addBusAt(index) {
 		if (index < 1) {
-			GodotRuntime.error('Invalid bus index, driver bug');
+			FADERuntime.error('Invalid bus index, driver bug');
 			return;
 		}
 		const bus = createBus();
@@ -568,7 +568,7 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 	/** @param {number} index */
 	function removeBus(index) {
 		if (index < 1) {
-			GodotRuntime.error('Invalid bus index, driver bug');
+			FADERuntime.error('Invalid bus index, driver bug');
 			return;
 		}
 		const bus = getBus(index);
@@ -629,14 +629,14 @@ function GodotSampleDriver(audioContext, positionWorkletPath) {
 		addBusAt,
 		removeBus,
 		// So they survive pre-stripping.
-		_: { GodotBus, GodotVolumeMixer, GodotStream, GodotPlayback },
+		_: { FADEBus, FADEVolumeMixer, FADEStream, FADEPlayback },
 	};
 	return driver;
 };
 
-const _GodotAudio = {
-	$GodotAudio__deps: ['$GodotRuntime', '$GodotOS'],
-	$GodotAudio: {
+const _FADEAudio = {
+	$FADEAudio__deps: ['$FADERuntime', '$FADEOS'],
+	$FADEAudio: {
 		/** @type {AudioContext} */
 		ctx: null,
 		input: null,
@@ -644,18 +644,18 @@ const _GodotAudio = {
 		sample_driver: null,
 		interval: 0,
 
-		GodotSampleDriver,
+		FADESampleDriver,
 		init: function (mix_rate, latency, onstatechange, onlatencyupdate) {
 			const opts = {};
 			// If mix_rate is 0, let the browser choose.
 			if (mix_rate) {
-				GodotAudio.sampleRate = mix_rate;
+				FADEAudio.sampleRate = mix_rate;
 				opts['sampleRate'] = mix_rate;
 			}
 			// Do not specify, leave 'interactive' for good performance.
 			// opts['latencyHint'] = latency / 1000;
 			const ctx = new (window.AudioContext || window.webkitAudioContext)(opts);
-			GodotAudio.ctx = ctx;
+			FADEAudio.ctx = ctx;
 			ctx.onstatechange = function () {
 				let state = 0;
 				switch (ctx.state) {
@@ -675,87 +675,87 @@ const _GodotAudio = {
 			};
 			ctx.onstatechange(); // Immediately notify state.
 			// Update computed latency
-			GodotAudio.interval = setInterval(function () {
+			FADEAudio.interval = setInterval(function () {
 				let computed_latency = 0;
 				if (ctx.baseLatency) {
-					computed_latency += GodotAudio.ctx.baseLatency;
+					computed_latency += FADEAudio.ctx.baseLatency;
 				}
 				if (ctx.outputLatency) {
-					computed_latency += GodotAudio.ctx.outputLatency;
+					computed_latency += FADEAudio.ctx.outputLatency;
 				}
 				onlatencyupdate(computed_latency);
 			}, 1000);
-			GodotOS.atexit(GodotAudio.close_async);
+			FADEOS.atexit(FADEAudio.close_async);
 
 			// Initialize sample driver.
-			const path = GodotConfig.locate_file('godot.audio.position.worklet.js');
-			GodotAudio.sample_driver = GodotAudio.GodotSampleDriver(ctx, path);
+			const path = FADEConfig.locate_file('godot.audio.position.worklet.js');
+			FADEAudio.sample_driver = FADEAudio.FADESampleDriver(ctx, path);
 
 			return ctx.destination.channelCount;
 		},
 
 		create_input: function (callback) {
-			if (GodotAudio.input) {
+			if (FADEAudio.input) {
 				return 0; // Already started.
 			}
 			function gotMediaInput(stream) {
 				try {
-					GodotAudio.input = GodotAudio.ctx.createMediaStreamSource(stream);
-					callback(GodotAudio.input);
+					FADEAudio.input = FADEAudio.ctx.createMediaStreamSource(stream);
+					callback(FADEAudio.input);
 				} catch (e) {
-					GodotRuntime.error('Failed creating input.', e);
+					FADERuntime.error('Failed creating input.', e);
 				}
 			}
 			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 				navigator.mediaDevices.getUserMedia({
 					'audio': true,
 				}).then(gotMediaInput, function (e) {
-					GodotRuntime.error('Error getting user media.', e);
+					FADERuntime.error('Error getting user media.', e);
 				});
 			} else {
 				if (!navigator.getUserMedia) {
 					navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 				}
 				if (!navigator.getUserMedia) {
-					GodotRuntime.error('getUserMedia not available.');
+					FADERuntime.error('getUserMedia not available.');
 					return 1;
 				}
 				navigator.getUserMedia({
 					'audio': true,
 				}, gotMediaInput, function (e) {
-					GodotRuntime.print(e);
+					FADERuntime.print(e);
 				});
 			}
 			return 0;
 		},
 
 		close_async: function (resolve, reject) {
-			const ctx = GodotAudio.ctx;
-			GodotAudio.ctx = null;
+			const ctx = FADEAudio.ctx;
+			FADEAudio.ctx = null;
 			// Audio was not initialized.
 			if (!ctx) {
 				resolve();
 				return;
 			}
 			// Clear audio driver
-			if (GodotAudio.sample_driver) {
-				GodotAudio.sample_driver.clear();
-				GodotAudio.sample_driver = null;
+			if (FADEAudio.sample_driver) {
+				FADEAudio.sample_driver.clear();
+				FADEAudio.sample_driver = null;
 			}
 			// Remove latency callback
-			if (GodotAudio.interval) {
-				clearInterval(GodotAudio.interval);
-				GodotAudio.interval = 0;
+			if (FADEAudio.interval) {
+				clearInterval(FADEAudio.interval);
+				FADEAudio.interval = 0;
 			}
 			// Disconnect input, if it was started.
-			if (GodotAudio.input) {
-				GodotAudio.input.disconnect();
-				GodotAudio.input = null;
+			if (FADEAudio.input) {
+				FADEAudio.input.disconnect();
+				FADEAudio.input = null;
 			}
 			// Disconnect output
 			let closed = Promise.resolve();
-			if (GodotAudio.driver) {
-				closed = GodotAudio.driver.close();
+			if (FADEAudio.driver) {
+				closed = FADEAudio.driver.close();
 			}
 			closed.then(function () {
 				return ctx.close();
@@ -764,7 +764,7 @@ const _GodotAudio = {
 				resolve();
 			}).catch(function (e) {
 				ctx.onstatechange = null;
-				GodotRuntime.error('Error closing AudioContext', e);
+				FADERuntime.error('Error closing AudioContext', e);
 				resolve();
 			});
 		},
@@ -782,13 +782,13 @@ const _GodotAudio = {
 	godot_audio_has_worklet__proxy: 'sync',
 	godot_audio_has_worklet__sig: 'i',
 	godot_audio_has_worklet: function () {
-		return GodotAudio.ctx && GodotAudio.ctx.audioWorklet ? 1 : 0;
+		return FADEAudio.ctx && FADEAudio.ctx.audioWorklet ? 1 : 0;
 	},
 
 	godot_audio_has_script_processor__proxy: 'sync',
 	godot_audio_has_script_processor__sig: 'i',
 	godot_audio_has_script_processor: function () {
-		return GodotAudio.ctx && GodotAudio.ctx.createScriptProcessor ? 1 : 0;
+		return FADEAudio.ctx && FADEAudio.ctx.createScriptProcessor ? 1 : 0;
 	},
 
 	godot_audio_init__proxy: 'sync',
@@ -799,85 +799,85 @@ const _GodotAudio = {
 		p_state_change,
 		p_latency_update
 	) {
-		const statechange = GodotRuntime.get_func(p_state_change);
-		const latencyupdate = GodotRuntime.get_func(p_latency_update);
-		const mix_rate = GodotRuntime.getHeapValue(p_mix_rate, 'i32');
-		const channels = GodotAudio.init(
+		const statechange = FADERuntime.get_func(p_state_change);
+		const latencyupdate = FADERuntime.get_func(p_latency_update);
+		const mix_rate = FADERuntime.getHeapValue(p_mix_rate, 'i32');
+		const channels = FADEAudio.init(
 			mix_rate,
 			p_latency,
 			statechange,
 			latencyupdate
 		);
-		GodotRuntime.setHeapValue(p_mix_rate, GodotAudio.ctx.sampleRate, 'i32');
+		FADERuntime.setHeapValue(p_mix_rate, FADEAudio.ctx.sampleRate, 'i32');
 		return channels;
 	},
 
 	godot_audio_resume__proxy: 'sync',
 	godot_audio_resume__sig: 'v',
 	godot_audio_resume: function () {
-		if (GodotAudio.ctx && GodotAudio.ctx.state !== 'running') {
-			GodotAudio.ctx.resume();
+		if (FADEAudio.ctx && FADEAudio.ctx.state !== 'running') {
+			FADEAudio.ctx.resume();
 		}
 	},
 
 	godot_audio_input_start__proxy: 'sync',
 	godot_audio_input_start__sig: 'i',
 	godot_audio_input_start: function () {
-		return GodotAudio.create_input(function (input) {
-			input.connect(GodotAudio.driver.get_node());
+		return FADEAudio.create_input(function (input) {
+			input.connect(FADEAudio.driver.get_node());
 		});
 	},
 
 	godot_audio_input_stop__proxy: 'sync',
 	godot_audio_input_stop__sig: 'v',
 	godot_audio_input_stop: function () {
-		if (GodotAudio.input) {
-			const tracks = GodotAudio.input['mediaStream']['getTracks']();
+		if (FADEAudio.input) {
+			const tracks = FADEAudio.input['mediaStream']['getTracks']();
 			for (let i = 0; i < tracks.length; i++) {
 				tracks[i]['stop']();
 			}
-			GodotAudio.input.disconnect();
-			GodotAudio.input = null;
+			FADEAudio.input.disconnect();
+			FADEAudio.input = null;
 		}
 	},
 };
 
-autoAddDeps(_GodotAudio, '$GodotAudio');
-mergeInto(LibraryManager.library, _GodotAudio);
+autoAddDeps(_FADEAudio, '$FADEAudio');
+mergeInto(LibraryManager.library, _FADEAudio);
 
 /**
  * The audio sample driver used by AudioStreamPlayer with playback_type = Sample.
  */
-const _GodotAudioSampleDriver = {
-	$GodotAudioSampleDriver__deps: ['$GodotAudio', '$GodotRuntime'],
-	$GodotAudioSampleDriver: {},
+const _FADEAudioSampleDriver = {
+	$FADEAudioSampleDriver__deps: ['$FADEAudio', '$FADERuntime'],
+	$FADEAudioSampleDriver: {},
 
 	godot_audio_sample_stream_is_registered__proxy: 'sync',
 	godot_audio_sample_stream_is_registered__sig: 'ii',
 	godot_audio_sample_stream_is_registered: function (p_id) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return 0;
 		}
-		return GodotAudio.sample_driver.getStream(GodotRuntime.parseString(p_id)) ? 1 : 0;
+		return FADEAudio.sample_driver.getStream(FADERuntime.parseString(p_id)) ? 1 : 0;
 	},
 
 	godot_audio_sample_register_stream__proxy: 'sync',
 	godot_audio_sample_register_stream__sig: 'viiiiii',
 	godot_audio_sample_register_stream: function (p_id, p_frames, p_frames_count, p_loop_mode, p_loop_begin, p_loop_end) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
 		const BYTES_PER_FLOAT32 = 4;
-		const sid = GodotRuntime.parseString(p_id);
-		const loopMode = GodotRuntime.parseString(p_loop_mode);
+		const sid = FADERuntime.parseString(p_id);
+		const loopMode = FADERuntime.parseString(p_loop_mode);
 		const numberOfChannels = 2;
-		const sampleRate = GodotAudio.ctx.sampleRate;
+		const sampleRate = FADEAudio.ctx.sampleRate;
 
 		// AudioBuffer Cant's copy from a SharedArrayBuffer-backed view.
-		const sliceOrSub = HEAPF32.buffer instanceof ArrayBuffer ? GodotRuntime.heapSub : GodotRuntime.heapSlice;
+		const sliceOrSub = HEAPF32.buffer instanceof ArrayBuffer ? FADERuntime.heapSub : FADERuntime.heapSlice;
 		const subLeft = sliceOrSub(HEAPF32, p_frames, p_frames_count);
 		const subRight = sliceOrSub(HEAPF32, p_frames + p_frames_count * BYTES_PER_FLOAT32, p_frames_count);
-		const audioBuffer = GodotAudio.ctx.createBuffer(numberOfChannels, p_frames_count, sampleRate);
+		const audioBuffer = FADEAudio.ctx.createBuffer(numberOfChannels, p_frames_count, sampleRate);
 		audioBuffer.copyToChannel(subLeft, 0, 0);
 		audioBuffer.copyToChannel(subRight, 1, 0);
 
@@ -886,32 +886,32 @@ const _GodotAudioSampleDriver = {
 			/** @export */ loopEnd: p_loop_end,
 			/** @export */ loopMode,
 		};
-		GodotAudio.sample_driver.createStream(sid, audioBuffer, opts);
+		FADEAudio.sample_driver.createStream(sid, audioBuffer, opts);
 	},
 
 	godot_audio_sample_unregister_stream__proxy: 'sync',
 	godot_audio_sample_unregister_stream__sig: 'vi',
 	godot_audio_sample_unregister_stream: function (p_id) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.removeStream(GodotRuntime.parseString(p_id));
+		FADEAudio.sample_driver.removeStream(FADERuntime.parseString(p_id));
 	},
 
 	godot_audio_sample_start__proxy: 'sync',
 	godot_audio_sample_start__sig: 'viiiifi',
 	godot_audio_sample_start: function (p_playback, p_stream, p_bus, p_offset, p_pitch_scale, p_volume) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const sid = GodotRuntime.parseString(p_stream);
-		if (!GodotAudio.sample_driver.getStream(sid)) {
+		const sid = FADERuntime.parseString(p_stream);
+		if (!FADEAudio.sample_driver.getStream(sid)) {
 			return;
 		}
-		const pid = GodotRuntime.parseString(p_playback);
-		GodotAudio.sample_driver.removePlayback(pid);
-		const playback = GodotAudio.sample_driver.createPlayback(pid, sid);
-		const volume = GodotRuntime.heapSlice(HEAPF32, p_volume, 8); // Slice (copy) since it will be stored.
+		const pid = FADERuntime.parseString(p_playback);
+		FADEAudio.sample_driver.removePlayback(pid);
+		const playback = FADEAudio.sample_driver.createPlayback(pid, sid);
+		const volume = FADERuntime.heapSlice(HEAPF32, p_volume, 8); // Slice (copy) since it will be stored.
 		playback.setVolumes([p_bus], volume);
 		playback.setPitchScale(p_pitch_scale);
 		playback.start(p_offset);
@@ -920,19 +920,19 @@ const _GodotAudioSampleDriver = {
 	godot_audio_sample_stop__proxy: 'sync',
 	godot_audio_sample_stop__sig: 'vi',
 	godot_audio_sample_stop: function (p_id) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.removePlayback(GodotRuntime.parseString(p_id));
+		FADEAudio.sample_driver.removePlayback(FADERuntime.parseString(p_id));
 	},
 
 	godot_audio_sample_set_pause__proxy: 'sync',
 	godot_audio_sample_set_pause__sig: 'vii',
 	godot_audio_sample_set_pause: function (p_id, p_pause) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const playback = GodotAudio.sample_driver.getPlayback(GodotRuntime.parseString(p_id));
+		const playback = FADEAudio.sample_driver.getPlayback(FADERuntime.parseString(p_id));
 		if (playback) {
 			playback.pause(Boolean(p_pause));
 		}
@@ -941,29 +941,29 @@ const _GodotAudioSampleDriver = {
 	godot_audio_sample_is_active__proxy: 'sync',
 	godot_audio_sample_is_active__sig: 'ii',
 	godot_audio_sample_is_active: function (p_id) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return 0;
 		}
-		return GodotAudio.sample_driver.getPlayback(GodotRuntime.parseString(p_id)) ? 1 : 0;
+		return FADEAudio.sample_driver.getPlayback(FADERuntime.parseString(p_id)) ? 1 : 0;
 	},
 
 	godot_audio_get_sample_playback_position__proxy: 'sync',
 	godot_audio_get_sample_playback_position__sig: 'di',
 	godot_audio_get_sample_playback_position: function (p_id) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return 0;
 		}
-		const playback = GodotAudio.sample_driver.getPlayback(GodotRuntime.parseString(p_id));
+		const playback = FADEAudio.sample_driver.getPlayback(FADERuntime.parseString(p_id));
 		return playback ? playback.getPlaybackPosition() : 0;
 	},
 
 	godot_audio_sample_update_pitch_scale__proxy: 'sync',
 	godot_audio_sample_update_pitch_scale__sig: 'vii',
 	godot_audio_sample_update_pitch_scale: function (p_id, p_pitch_scale) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const playback = GodotAudio.sample_driver.getPlayback(GodotRuntime.parseString(p_id));
+		const playback = FADEAudio.sample_driver.getPlayback(FADERuntime.parseString(p_id));
 		if (playback) {
 			playback.setPitchScale(p_pitch_scale);
 		}
@@ -972,67 +972,67 @@ const _GodotAudioSampleDriver = {
 	godot_audio_sample_set_volumes_linear__proxy: 'sync',
 	godot_audio_sample_set_volumes_linear__sig: 'viiiii',
 	godot_audio_sample_set_volumes_linear: function (p_id, p_buses, p_buses_size, p_volume, p_volume_size) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const playback = GodotAudio.sample_driver.getPlayback(GodotRuntime.parseString(p_id));
+		const playback = FADEAudio.sample_driver.getPlayback(FADERuntime.parseString(p_id));
 		if (!playback) {
 			return;
 		}
-		const busesIndexes = Array.from(GodotRuntime.heapSub(HEAP32, p_buses, p_buses_size));
-		const volumes = GodotRuntime.heapSlice(HEAPF32, p_volume, p_volume_size); // Slice (copy) since it will be stored.
+		const busesIndexes = Array.from(FADERuntime.heapSub(HEAP32, p_buses, p_buses_size));
+		const volumes = FADERuntime.heapSlice(HEAPF32, p_volume, p_volume_size); // Slice (copy) since it will be stored.
 		playback.setVolumes(busesIndexes, volumes);
 	},
 
 	godot_audio_sample_bus_set_count__proxy: 'sync',
 	godot_audio_sample_bus_set_count__sig: 'vi',
 	godot_audio_sample_bus_set_count: function (p_count) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.setBusCount(p_count);
+		FADEAudio.sample_driver.setBusCount(p_count);
 	},
 
 	godot_audio_sample_bus_remove__proxy: 'sync',
 	godot_audio_sample_bus_remove__sig: 'vi',
 	godot_audio_sample_bus_remove: function (p_index) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.removeBus(p_index);
+		FADEAudio.sample_driver.removeBus(p_index);
 	},
 
 	godot_audio_sample_bus_add__proxy: 'sync',
 	godot_audio_sample_bus_add__sig: 'vi',
 	godot_audio_sample_bus_add: function (p_index) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.addBusAt(p_index);
+		FADEAudio.sample_driver.addBusAt(p_index);
 	},
 
 	godot_audio_sample_bus_move__proxy: 'sync',
 	godot_audio_sample_bus_move__sig: 'vii',
 	godot_audio_sample_bus_move: function (p_from, p_to) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.moveBus(p_from, p_to);
+		FADEAudio.sample_driver.moveBus(p_from, p_to);
 	},
 
 	godot_audio_sample_bus_set_send__proxy: 'sync',
 	godot_audio_sample_bus_set_send__sig: 'vii',
 	godot_audio_sample_bus_set_send: function (p_index, p_send_index) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const bus = GodotAudio.sample_driver.getBus(p_index);
+		const bus = FADEAudio.sample_driver.getBus(p_index);
 		if (!bus) {
 			return;
 		}
-		let target = GodotAudio.sample_driver.getBus(p_send_index);
+		let target = FADEAudio.sample_driver.getBus(p_send_index);
 		if (target == null) { // Send to master.
-			target = GodotAudio.sample_driver.getBus(0);
+			target = FADEAudio.sample_driver.getBus(0);
 		}
 		bus.setSend(target);
 	},
@@ -1040,10 +1040,10 @@ const _GodotAudioSampleDriver = {
 	godot_audio_sample_bus_set_volume_db__proxy: 'sync',
 	godot_audio_sample_bus_set_volume_db__sig: 'vii',
 	godot_audio_sample_bus_set_volume_db: function (p_bus, p_volume_db) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const bus = GodotAudio.sample_driver.getBus(p_bus);
+		const bus = FADEAudio.sample_driver.getBus(p_bus);
 		if (!bus) {
 			return;
 		}
@@ -1053,19 +1053,19 @@ const _GodotAudioSampleDriver = {
 	godot_audio_sample_bus_set_solo__proxy: 'sync',
 	godot_audio_sample_bus_set_solo__sig: 'vii',
 	godot_audio_sample_bus_set_solo: function (p_bus, p_enable) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.setBusSolo(p_bus, p_enable);
+		FADEAudio.sample_driver.setBusSolo(p_bus, p_enable);
 	},
 
 	godot_audio_sample_bus_set_mute__proxy: 'sync',
 	godot_audio_sample_bus_set_mute__sig: 'vii',
 	godot_audio_sample_bus_set_mute: function (p_bus, p_enable) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		const bus = GodotAudio.sample_driver.getBus(p_bus);
+		const bus = FADEAudio.sample_driver.getBus(p_bus);
 		if (!bus) {
 			return;
 		}
@@ -1075,33 +1075,33 @@ const _GodotAudioSampleDriver = {
 	godot_audio_sample_set_finished_callback__proxy: 'sync',
 	godot_audio_sample_set_finished_callback__sig: 'vi',
 	godot_audio_sample_set_finished_callback: function (p_callback) {
-		if (!GodotAudio.sample_driver) {
+		if (!FADEAudio.sample_driver) {
 			return;
 		}
-		GodotAudio.sample_driver.setFinishedCallback(GodotRuntime.get_func(p_callback));
+		FADEAudio.sample_driver.setFinishedCallback(FADERuntime.get_func(p_callback));
 	},
 };
 
-autoAddDeps(_GodotAudioSampleDriver, '$GodotAudioSampleDriver');
-mergeInto(LibraryManager.library, _GodotAudioSampleDriver);
+autoAddDeps(_FADEAudioSampleDriver, '$FADEAudioSampleDriver');
+mergeInto(LibraryManager.library, _FADEAudioSampleDriver);
 
 /**
  * The AudioWorklet API driver, used when threads are available.
  */
-const GodotAudioWorklet = {
-	$GodotAudioWorklet__deps: ['$GodotAudio', '$GodotConfig'],
-	$GodotAudioWorklet: {
+const FADEAudioWorklet = {
+	$FADEAudioWorklet__deps: ['$FADEAudio', '$FADEConfig'],
+	$FADEAudioWorklet: {
 		promise: null,
 		worklet: null,
 		ring_buffer: null,
 
 		create: function (channels) {
-			const path = GodotConfig.locate_file('godot.audio.worklet.js');
-			GodotAudioWorklet.promise = GodotAudio.ctx.audioWorklet
+			const path = FADEConfig.locate_file('godot.audio.worklet.js');
+			FADEAudioWorklet.promise = FADEAudio.ctx.audioWorklet
 				.addModule(path)
 				.then(function () {
-					GodotAudioWorklet.worklet = new AudioWorkletNode(
-						GodotAudio.ctx,
+					FADEAudioWorklet.worklet = new AudioWorkletNode(
+						FADEAudio.ctx,
 						'godot-processor',
 						{
 							outputChannelCount: [channels],
@@ -1109,19 +1109,19 @@ const GodotAudioWorklet = {
 					);
 					return Promise.resolve();
 				});
-			GodotAudio.driver = GodotAudioWorklet;
+			FADEAudio.driver = FADEAudioWorklet;
 		},
 
 		start: function (in_buf, out_buf, state) {
-			GodotAudioWorklet.promise.then(function () {
-				const node = GodotAudioWorklet.worklet;
-				node.connect(GodotAudio.ctx.destination);
+			FADEAudioWorklet.promise.then(function () {
+				const node = FADEAudioWorklet.worklet;
+				node.connect(FADEAudio.ctx.destination);
 				node.port.postMessage({
 					'cmd': 'start',
 					'data': [state, in_buf, out_buf],
 				});
 				node.port.onmessage = function (event) {
-					GodotRuntime.error(event.data);
+					FADERuntime.error(event.data);
 				};
 			});
 		},
@@ -1145,7 +1145,7 @@ const GodotAudioWorklet = {
 					if (pending_samples === 0) {
 						return;
 					}
-					const buffer = GodotRuntime.heapSub(HEAPF32, p_out_buf, p_out_size);
+					const buffer = FADERuntime.heapSub(HEAPF32, p_out_buf, p_out_size);
 					const size = buffer.length;
 					const tot_sent = pending_samples;
 					out_callback(wpos, pending_samples);
@@ -1166,7 +1166,7 @@ const GodotAudioWorklet = {
 					pending_samples = 0;
 				}
 				this.receive = function (recv_buf) {
-					const buffer = GodotRuntime.heapSub(HEAPF32, p_in_buf, p_in_size);
+					const buffer = FADERuntime.heapSub(HEAPF32, p_in_buf, p_in_size);
 					const from = rpos;
 					let to_write = recv_buf.length;
 					let high = 0;
@@ -1187,62 +1187,62 @@ const GodotAudioWorklet = {
 					send(port);
 				};
 			}
-			GodotAudioWorklet.ring_buffer = new RingBuffer();
-			GodotAudioWorklet.promise.then(function () {
-				const node = GodotAudioWorklet.worklet;
-				const buffer = GodotRuntime.heapSlice(HEAPF32, p_out_buf, p_out_size);
-				node.connect(GodotAudio.ctx.destination);
+			FADEAudioWorklet.ring_buffer = new RingBuffer();
+			FADEAudioWorklet.promise.then(function () {
+				const node = FADEAudioWorklet.worklet;
+				const buffer = FADERuntime.heapSlice(HEAPF32, p_out_buf, p_out_size);
+				node.connect(FADEAudio.ctx.destination);
 				node.port.postMessage({
 					'cmd': 'start_nothreads',
 					'data': [buffer, p_in_size],
 				});
 				node.port.onmessage = function (event) {
-					if (!GodotAudioWorklet.worklet) {
+					if (!FADEAudioWorklet.worklet) {
 						return;
 					}
 					if (event.data['cmd'] === 'read') {
 						const read = event.data['data'];
-						GodotAudioWorklet.ring_buffer.consumed(
+						FADEAudioWorklet.ring_buffer.consumed(
 							read,
-							GodotAudioWorklet.worklet.port
+							FADEAudioWorklet.worklet.port
 						);
 					} else if (event.data['cmd'] === 'input') {
 						const buf = event.data['data'];
 						if (buf.length > p_in_size) {
-							GodotRuntime.error('Input chunk is too big');
+							FADERuntime.error('Input chunk is too big');
 							return;
 						}
-						GodotAudioWorklet.ring_buffer.receive(buf);
+						FADEAudioWorklet.ring_buffer.receive(buf);
 					} else {
-						GodotRuntime.error(event.data);
+						FADERuntime.error(event.data);
 					}
 				};
 			});
 		},
 
 		get_node: function () {
-			return GodotAudioWorklet.worklet;
+			return FADEAudioWorklet.worklet;
 		},
 
 		close: function () {
 			return new Promise(function (resolve, reject) {
-				if (GodotAudioWorklet.promise === null) {
+				if (FADEAudioWorklet.promise === null) {
 					return;
 				}
-				const p = GodotAudioWorklet.promise;
+				const p = FADEAudioWorklet.promise;
 				p.then(function () {
-					GodotAudioWorklet.worklet.port.postMessage({
+					FADEAudioWorklet.worklet.port.postMessage({
 						'cmd': 'stop',
 						'data': null,
 					});
-					GodotAudioWorklet.worklet.disconnect();
-					GodotAudioWorklet.worklet.port.onmessage = null;
-					GodotAudioWorklet.worklet = null;
-					GodotAudioWorklet.promise = null;
+					FADEAudioWorklet.worklet.disconnect();
+					FADEAudioWorklet.worklet.port.onmessage = null;
+					FADEAudioWorklet.worklet = null;
+					FADEAudioWorklet.promise = null;
 					resolve();
 				}).catch(function (err) {
 					// Aborted?
-					GodotRuntime.error(err);
+					FADERuntime.error(err);
 				});
 			});
 		},
@@ -1252,9 +1252,9 @@ const GodotAudioWorklet = {
 	godot_audio_worklet_create__sig: 'ii',
 	godot_audio_worklet_create: function (channels) {
 		try {
-			GodotAudioWorklet.create(channels);
+			FADEAudioWorklet.create(channels);
 		} catch (e) {
-			GodotRuntime.error('Error starting AudioDriverWorklet', e);
+			FADERuntime.error('Error starting AudioDriverWorklet', e);
 			return 1;
 		}
 		return 0;
@@ -1269,10 +1269,10 @@ const GodotAudioWorklet = {
 		p_out_size,
 		p_state
 	) {
-		const out_buffer = GodotRuntime.heapSub(HEAPF32, p_out_buf, p_out_size);
-		const in_buffer = GodotRuntime.heapSub(HEAPF32, p_in_buf, p_in_size);
-		const state = GodotRuntime.heapSub(HEAP32, p_state, 4);
-		GodotAudioWorklet.start(in_buffer, out_buffer, state);
+		const out_buffer = FADERuntime.heapSub(HEAPF32, p_out_buf, p_out_size);
+		const in_buffer = FADERuntime.heapSub(HEAPF32, p_in_buf, p_in_size);
+		const state = FADERuntime.heapSub(HEAP32, p_state, 4);
+		FADEAudioWorklet.start(in_buffer, out_buffer, state);
 	},
 
 	godot_audio_worklet_start_no_threads__proxy: 'sync',
@@ -1285,9 +1285,9 @@ const GodotAudioWorklet = {
 		p_in_size,
 		p_in_callback
 	) {
-		const out_callback = GodotRuntime.get_func(p_out_callback);
-		const in_callback = GodotRuntime.get_func(p_in_callback);
-		GodotAudioWorklet.start_no_threads(
+		const out_callback = FADERuntime.get_func(p_out_callback);
+		const in_callback = FADERuntime.get_func(p_in_callback);
+		FADEAudioWorklet.start_no_threads(
 			p_out_buf,
 			p_out_size,
 			out_callback,
@@ -1319,33 +1319,33 @@ const GodotAudioWorklet = {
 	},
 };
 
-autoAddDeps(GodotAudioWorklet, '$GodotAudioWorklet');
-mergeInto(LibraryManager.library, GodotAudioWorklet);
+autoAddDeps(FADEAudioWorklet, '$FADEAudioWorklet');
+mergeInto(LibraryManager.library, FADEAudioWorklet);
 
 /*
  * The ScriptProcessorNode API, used as a fallback if AudioWorklet is not available.
  */
-const GodotAudioScript = {
-	$GodotAudioScript__deps: ['$GodotAudio'],
-	$GodotAudioScript: {
+const FADEAudioScript = {
+	$FADEAudioScript__deps: ['$FADEAudio'],
+	$FADEAudioScript: {
 		script: null,
 
 		create: function (buffer_length, channel_count) {
-			GodotAudioScript.script = GodotAudio.ctx.createScriptProcessor(
+			FADEAudioScript.script = FADEAudio.ctx.createScriptProcessor(
 				buffer_length,
 				2,
 				channel_count
 			);
-			GodotAudio.driver = GodotAudioScript;
-			return GodotAudioScript.script.bufferSize;
+			FADEAudio.driver = FADEAudioScript;
+			return FADEAudioScript.script.bufferSize;
 		},
 
 		start: function (p_in_buf, p_in_size, p_out_buf, p_out_size, onprocess) {
-			GodotAudioScript.script.onaudioprocess = function (event) {
+			FADEAudioScript.script.onaudioprocess = function (event) {
 				// Read input
-				const inb = GodotRuntime.heapSub(HEAPF32, p_in_buf, p_in_size);
+				const inb = FADERuntime.heapSub(HEAPF32, p_in_buf, p_in_size);
 				const input = event.inputBuffer;
-				if (GodotAudio.input) {
+				if (FADEAudio.input) {
 					const inlen = input.getChannelData(0).length;
 					for (let ch = 0; ch < 2; ch++) {
 						const data = input.getChannelData(ch);
@@ -1355,11 +1355,11 @@ const GodotAudioScript = {
 					}
 				}
 
-				// Let Godot process the input/output.
+				// Let FADE process the input/output.
 				onprocess();
 
 				// Write the output.
-				const outb = GodotRuntime.heapSub(HEAPF32, p_out_buf, p_out_size);
+				const outb = FADERuntime.heapSub(HEAPF32, p_out_buf, p_out_size);
 				const output = event.outputBuffer;
 				const channels = output.numberOfChannels;
 				for (let ch = 0; ch < channels; ch++) {
@@ -1370,18 +1370,18 @@ const GodotAudioScript = {
 					}
 				}
 			};
-			GodotAudioScript.script.connect(GodotAudio.ctx.destination);
+			FADEAudioScript.script.connect(FADEAudio.ctx.destination);
 		},
 
 		get_node: function () {
-			return GodotAudioScript.script;
+			return FADEAudioScript.script;
 		},
 
 		close: function () {
 			return new Promise(function (resolve, reject) {
-				GodotAudioScript.script.disconnect();
-				GodotAudioScript.script.onaudioprocess = function () {};
-				GodotAudioScript.script = null;
+				FADEAudioScript.script.disconnect();
+				FADEAudioScript.script.onaudioprocess = function () {};
+				FADEAudioScript.script = null;
 				resolve();
 			});
 		},
@@ -1390,12 +1390,12 @@ const GodotAudioScript = {
 	godot_audio_script_create__proxy: 'sync',
 	godot_audio_script_create__sig: 'iii',
 	godot_audio_script_create: function (buffer_length, channel_count) {
-		const buf_len = GodotRuntime.getHeapValue(buffer_length, 'i32');
+		const buf_len = FADERuntime.getHeapValue(buffer_length, 'i32');
 		try {
-			const out_len = GodotAudioScript.create(buf_len, channel_count);
-			GodotRuntime.setHeapValue(buffer_length, out_len, 'i32');
+			const out_len = FADEAudioScript.create(buf_len, channel_count);
+			FADERuntime.setHeapValue(buffer_length, out_len, 'i32');
 		} catch (e) {
-			GodotRuntime.error('Error starting AudioDriverScriptProcessor', e);
+			FADERuntime.error('Error starting AudioDriverScriptProcessor', e);
 			return 1;
 		}
 		return 0;
@@ -1410,8 +1410,8 @@ const GodotAudioScript = {
 		p_out_size,
 		p_cb
 	) {
-		const onprocess = GodotRuntime.get_func(p_cb);
-		GodotAudioScript.start(
+		const onprocess = FADERuntime.get_func(p_cb);
+		FADEAudioScript.start(
 			p_in_buf,
 			p_in_size,
 			p_out_buf,
@@ -1421,5 +1421,5 @@ const GodotAudioScript = {
 	},
 };
 
-autoAddDeps(GodotAudioScript, '$GodotAudioScript');
-mergeInto(LibraryManager.library, GodotAudioScript);
+autoAddDeps(FADEAudioScript, '$FADEAudioScript');
+mergeInto(LibraryManager.library, FADEAudioScript);
