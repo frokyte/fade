@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -473,10 +473,10 @@ void Main::print_help_option(const char *p_option, const char *p_description, CL
 void Main::print_help(const char *p_binary) {
 	print_header(true);
 	print_help_copyright("Free and open source software under the terms of the MIT license.");
-	print_help_copyright("(c) 2014-present Godot Engine contributors. (c) 2007-present Juan Linietsky, Ariel Manzur.");
+	print_help_copyright("(c) 2014-present FADE Engine contributors. (c) 2007-present Juan Linietsky, Ariel Manzur.");
 
 	print_help_title("Usage");
-	OS::get_singleton()->print("  %s \u001b[96m[options] [path to \"project.godot\" file]\u001b[0m\n", p_binary);
+	OS::get_singleton()->print("  %s \u001b[96m[options] [path to \"project.fade\" file]\u001b[0m\n", p_binary);
 
 #if defined(TOOLS_ENABLED)
 	print_help_title("Option legend (this build = editor)");
@@ -520,7 +520,7 @@ void Main::print_help(const char *p_binary) {
 	print_help_option("--quit-after <int>", "Quit after the given number of iterations. Set to 0 to disable.\n");
 	print_help_option("-l, --language <locale>", "Use a specific locale (<locale> being a two-letter code).\n");
 #if defined(OVERRIDE_PATH_ENABLED)
-	print_help_option("--path <directory>", "Path to a project (<directory> must contain a \"project.godot\" file).\n", CLI_OPTION_AVAILABILITY_TEMPLATE_UNSAFE);
+	print_help_option("--path <directory>", "Path to a project (<directory> must contain a \"project.fade\" file).\n", CLI_OPTION_AVAILABILITY_TEMPLATE_UNSAFE);
 	print_help_option("--scene <path>", "Path or UID of a scene in the project that should be started.\n", CLI_OPTION_AVAILABILITY_TEMPLATE_UNSAFE);
 #endif // defined(OVERRIDE_PATH_ENABLED)
 #if defined(OVERRIDE_PATH_ENABLED) || defined(ANDROID_ENABLED) || defined(WEB_ENABLED)
@@ -610,7 +610,7 @@ void Main::print_help(const char *p_binary) {
 	print_help_option("--generate-spirv-debug-info", "Generate SPIR-V debug information (Vulkan only). This allows source-level shader debugging with RenderDoc.\n");
 	print_help_option("--clear-shader-cache", "Clear the shader_cache directory at launch, so it's re-generated.\n");
 #if defined(DEBUG_ENABLED) || defined(DEV_ENABLED)
-	print_help_option("--extra-gpu-memory-tracking", "Enables additional memory tracking (see class reference for `RenderingDevice.get_driver_and_device_memory_report()` and linked methods). Currently only implemented for Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan Loader. See https://github.com/godotengine/godot/issues/95967\n", CLI_OPTION_AVAILABILITY_TEMPLATE_DEBUG);
+	print_help_option("--extra-gpu-memory-tracking", "Enables additional memory tracking (see class reference for `RenderingDevice.get_driver_and_device_memory_report()` and linked methods). Currently only implemented for Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan Loader. See https://github.com/fadeengine/fade/issues/95967\n", CLI_OPTION_AVAILABILITY_TEMPLATE_DEBUG);
 	print_help_option("--accurate-breadcrumbs", "Force barriers between breadcrumbs. Useful for narrowing down a command causing GPU resets. Currently only implemented for Vulkan.\n", CLI_OPTION_AVAILABILITY_TEMPLATE_DEBUG);
 #endif
 #ifdef DEBUG_ENABLED
@@ -658,9 +658,9 @@ void Main::print_help(const char *p_binary) {
 #ifndef DISABLE_DEPRECATED
 	// Commands are long; split the description to a second line.
 	print_help_option("--convert-3to4 ", "\n", CLI_OPTION_AVAILABILITY_HIDDEN);
-	print_help_option("  [max_file_kb] [max_line_size]", "Converts project from Godot 3.x to Godot 4.x.\n", CLI_OPTION_AVAILABILITY_EDITOR);
+	print_help_option("  [max_file_kb] [max_line_size]", "Converts project from FADE 3.x to FADE 4.x.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 	print_help_option("--validate-conversion-3to4 ", "\n", CLI_OPTION_AVAILABILITY_HIDDEN);
-	print_help_option("  [max_file_kb] [max_line_size]", "Shows what elements will be renamed when converting project from Godot 3.x to Godot 4.x.\n", CLI_OPTION_AVAILABILITY_EDITOR);
+	print_help_option("  [max_file_kb] [max_line_size]", "Shows what elements will be renamed when converting project from FADE 3.x to FADE 4.x.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 #endif // DISABLE_DEPRECATED
 	print_help_option("--doctool [path]", "Dump the engine API reference to the given <path> (defaults to current directory) in XML format, merging if existing files are found.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 	print_help_option("--no-docbase", "Disallow dumping the base types (used with --doctool).\n", CLI_OPTION_AVAILABILITY_EDITOR);
@@ -671,8 +671,8 @@ void Main::print_help(const char *p_binary) {
 	print_help_option("--build-solutions", "Build the scripting solutions (e.g. for C# projects). Implies --editor and requires a valid project to edit.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 	print_help_option("--dump-gdextension-interface", "Generate a GDExtension header file \"gdextension_interface.h\" in the current folder. This file is the base file required to implement a GDExtension.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 	print_help_option("--dump-gdextension-interface-json", "Generate a JSON dump of the GDExtension interface named \"gdextension_interface.json\" in the current folder.\n", CLI_OPTION_AVAILABILITY_EDITOR);
-	print_help_option("--dump-extension-api", "Generate a JSON dump of the Godot API for GDExtension bindings named \"extension_api.json\" in the current folder.\n", CLI_OPTION_AVAILABILITY_EDITOR);
-	print_help_option("--dump-extension-api-with-docs", "Generate JSON dump of the Godot API like the previous option, but including documentation.\n", CLI_OPTION_AVAILABILITY_EDITOR);
+	print_help_option("--dump-extension-api", "Generate a JSON dump of the FADE API for GDExtension bindings named \"extension_api.json\" in the current folder.\n", CLI_OPTION_AVAILABILITY_EDITOR);
+	print_help_option("--dump-extension-api-with-docs", "Generate JSON dump of the FADE API like the previous option, but including documentation.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 	print_help_option("--validate-extension-api <path>", "Validate an extension API file dumped (with one of the two previous options) from a previous version of the engine to ensure API compatibility.\n", CLI_OPTION_AVAILABILITY_EDITOR);
 	print_help_option("", "If incompatibilities or errors are detected, the exit code will be non-zero.\n");
 	print_help_option("--benchmark", "Benchmark the run time and print it to console.\n", CLI_OPTION_AVAILABILITY_EDITOR);
@@ -742,8 +742,8 @@ Error Main::test_setup() {
 			OS::get_singleton()->set_cwd(OS::get_singleton()->get_cwd().get_base_dir());
 			tests_exist = DirAccess::dir_exists_absolute(OS::get_singleton()->get_cwd().path_join("tests").path_join("data"));
 		}
-		ERR_FAIL_COND_V_MSG(!tests_exist, FAILED, "Test data not found, tests should be run from the Godot source repository root.");
-		WARN_PRINT("Tests should be run from the Godot source repository root, working directory was changed to " + OS::get_singleton()->get_cwd());
+		ERR_FAIL_COND_V_MSG(!tests_exist, FAILED, "Test data not found, tests should be run from the FADE source repository root.");
+		WARN_PRINT("Tests should be run from the FADE source repository root, working directory was changed to " + OS::get_singleton()->get_cwd());
 	}
 
 	// From `Main::setup2()`.
@@ -948,8 +948,8 @@ int Main::test_entrypoint(int argc, char *argv[], bool &tests_need_run) {
 			return status;
 #else
 			ERR_PRINT(
-					"`--test` was specified on the command line, but this Godot binary was compiled without support for unit tests. Aborting.\n"
-					"To be able to run unit tests, use the `tests=yes` SCons option when compiling Godot.\n");
+					"`--test` was specified on the command line, but this FADE binary was compiled without support for unit tests. Aborting.\n"
+					"To be able to run unit tests, use the `tests=yes` SCons option when compiling FADE.\n");
 			return EXIT_FAILURE;
 #endif
 		}
@@ -984,7 +984,7 @@ int Main::test_entrypoint(int argc, char *argv[], bool &tests_need_run) {
  */
 
 Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_phase) {
-	GodotProfileZone("setup");
+	FADEProfileZone("setup");
 	Thread::make_main_thread();
 	set_current_thread_safe_for_nodes(true);
 
@@ -1126,7 +1126,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 
 #ifdef MACOS_ENABLED
 		// Ignore the process serial number argument passed by macOS Gatekeeper.
-		// Otherwise, Godot would try to open a non-existent project on the first start and abort.
+		// Otherwise, FADE would try to open a non-existent project on the first start and abort.
 		if (arg.begins_with("-psn_")) {
 			I = N;
 			continue;
@@ -1489,8 +1489,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			use_debug_profiler = true;
 #else
 			ERR_PRINT(
-					"`--profiling` was specified on the command line, but this Godot binary was compiled without debug. Aborting.\n"
-					"To be able to use it, use the `target=template_debug` SCons option when compiling Godot.\n");
+					"`--profiling` was specified on the command line, but this FADE binary was compiled without debug. Aborting.\n"
+					"To be able to use it, use the `target=template_debug` SCons option when compiling FADE.\n");
 #endif
 		} else if (arg == "-l" || arg == "--language") { // language
 
@@ -1513,8 +1513,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			}
 #else
 			ERR_PRINT(
-					"`--remote-fs` was specified on the command line, but this Godot binary was compiled without debug. Aborting.\n"
-					"To be able to use it, use the `target=template_debug` SCons option when compiling Godot.\n");
+					"`--remote-fs` was specified on the command line, but this FADE binary was compiled without debug. Aborting.\n"
+					"To be able to use it, use the `target=template_debug` SCons option when compiling FADE.\n");
 #endif // DEBUG_ENABLED
 		} else if (arg == "--remote-fs-password") { // remote filesystem password
 
@@ -1528,8 +1528,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			}
 #else
 			ERR_PRINT(
-					"`--remote-fs-password` was specified on the command line, but this Godot binary was compiled without debug. Aborting.\n"
-					"To be able to use it, use the `target=template_debug` SCons option when compiling Godot.\n");
+					"`--remote-fs-password` was specified on the command line, but this FADE binary was compiled without debug. Aborting.\n"
+					"To be able to use it, use the `target=template_debug` SCons option when compiling FADE.\n");
 			goto error;
 #endif // DEBUG_ENABLED
 		} else if (arg == "--render-thread") { // render thread mode
@@ -1539,7 +1539,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 					separate_thread_render = 0;
 #ifndef DISABLE_DEPRECATED
 				} else if (N->get() == "unsafe") {
-					OS::get_singleton()->print("The --render-thread unsafe option is unsupported in Godot 4 and will be removed.\n");
+					OS::get_singleton()->print("The --render-thread unsafe option is unsupported in FADE 4 and will be removed.\n");
 					separate_thread_render = 0;
 #endif
 				} else if (N->get() == "separate") {
@@ -1670,7 +1670,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			}
 #ifndef DISABLE_DEPRECATED
 		} else if (arg == "--export") { // For users used to 3.x syntax.
-			OS::get_singleton()->print("The Godot 3 --export option was changed to more explicit --export-release / --export-debug / --export-pack options.\nSee the --help output for details.\n");
+			OS::get_singleton()->print("The FADE 3 --export option was changed to more explicit --export-release / --export-debug / --export-pack options.\nSee the --help output for details.\n");
 			goto error;
 		} else if (arg == "--convert-3to4") {
 			// Actually handling is done in start().
@@ -1745,8 +1745,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			}
 #else
 			ERR_PRINT(
-					"`--path` was specified on the command line, but this Godot binary was compiled without support for path overrides. Aborting.\n"
-					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n");
+					"`--path` was specified on the command line, but this FADE binary was compiled without support for path overrides. Aborting.\n"
+					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling FADE.\n");
 			goto error;
 #endif // defined(OVERRIDE_PATH_ENABLED)
 		} else if (arg == "--quit") { // Auto quit at the end of the first main loop iteration
@@ -1762,7 +1762,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 				OS::get_singleton()->print("Missing number of iterations, aborting.\n");
 				goto error;
 			}
-		} else if (arg.ends_with("project.godot")) {
+		} else if (arg.ends_with("project.fade")) {
 #if defined(OVERRIDE_PATH_ENABLED)
 			String path;
 			String file = arg;
@@ -1782,8 +1782,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 #endif
 #else
 			ERR_PRINT(
-					"`project.godot` path was specified on the command line, but this Godot binary was compiled without support for path overrides. Aborting.\n"
-					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n");
+					"`project.fade` path was specified on the command line, but this FADE binary was compiled without support for path overrides. Aborting.\n"
+					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling FADE.\n");
 			goto error;
 #endif // defined(OVERRIDE_PATH_ENABLED)
 #ifdef DEBUG_ENABLED
@@ -1841,8 +1841,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 				if (main_pack_fa.is_valid()) {
 					if (main_pack_fa->get_access_type() != FileAccess::ACCESS_RESOURCES) {
 						ERR_PRINT(
-								"--main-pack is attempting to load from outside of the executable, but this Godot binary was compiled without support for path overrides. Aborting.\n"
-								"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n");
+								"--main-pack is attempting to load from outside of the executable, but this FADE binary was compiled without support for path overrides. Aborting.\n"
+								"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling FADE.\n");
 						goto error;
 					}
 				} else {
@@ -1856,8 +1856,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			}
 #else
 			ERR_PRINT(
-					"`--main-pack` was specified on the command line, but this Godot binary was compiled without support for path overrides. Aborting.\n"
-					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n");
+					"`--main-pack` was specified on the command line, but this FADE binary was compiled without support for path overrides. Aborting.\n"
+					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling FADE.\n");
 			goto error;
 #endif // defined(OVERRIDE_PATH_ENABLED) || defined(WEB_ENABLED) || defined(ANDROID_ENABLED)
 
@@ -1867,8 +1867,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			OS::get_singleton()->_debug_stdout = true;
 #else
 			ERR_PRINT(
-					arg + " was specified on the command line, but this Godot binary was compiled without debug. Aborting.\n"
-						  "To be able to use it, use the `target=template_debug` SCons option when compiling Godot.\n");
+					arg + " was specified on the command line, but this FADE binary was compiled without debug. Aborting.\n"
+						  "To be able to use it, use the `target=template_debug` SCons option when compiling FADE.\n");
 			goto error;
 #endif
 #if defined(DEBUG_ENABLED)
@@ -1909,8 +1909,8 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 			}
 #else
 			ERR_PRINT(
-					"`--remote-debug` was specified on the command line, but this Godot binary was compiled without debug. Aborting.\n"
-					"To be able to use it, use the `target=template_debug` SCons option when compiling Godot.\n");
+					"`--remote-debug` was specified on the command line, but this FADE binary was compiled without debug. Aborting.\n"
+					"To be able to use it, use the `target=template_debug` SCons option when compiling FADE.\n");
 			goto error;
 #endif // DEBUG_ENABLED
 #ifdef TOOLS_ENABLED
@@ -2069,7 +2069,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 
 #ifdef DEBUG_ENABLED
 	// Network file system needs to be configured before globals, since globals are based on the
-	// 'project.godot' file which will only be available through the network if this is enabled
+	// 'project.fade' file which will only be available through the network if this is enabled
 	if (!remotefs.is_empty()) {
 		int port;
 		if (remotefs.contains_char(':')) {
@@ -2102,9 +2102,9 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 		String exec_basename = exec_path.get_file().get_basename();
 
 		if (FileAccess::exists(old_cwd.path_join(exec_basename + ".pck"))) {
-			error_msg += "\"" + exec_basename + ".pck\" was found in the current working directory. To be able to load a project from the CWD, use the `disable_path_overrides=no` SCons option when compiling Godot.\n";
-		} else if (FileAccess::exists(old_cwd.path_join("project.godot"))) {
-			error_msg += "\"project.godot\" was found in the current working directory. To be able to load a project from the CWD, use the `disable_path_overrides=no` SCons option when compiling Godot.\n";
+			error_msg += "\"" + exec_basename + ".pck\" was found in the current working directory. To be able to load a project from the CWD, use the `disable_path_overrides=no` SCons option when compiling FADE.\n";
+		} else if (FileAccess::exists(old_cwd.path_join("project.fade"))) {
+			error_msg += "\"project.fade\" was found in the current working directory. To be able to load a project from the CWD, use the `disable_path_overrides=no` SCons option when compiling FADE.\n";
 		} else {
 			error_msg += "If you've renamed the executable, the associated .pck file should also be renamed to match the executable's name (without the extension).\n";
 		}
@@ -2120,7 +2120,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 	}
 
 	if (clear_shader_cache && !project_path.is_empty()) {
-		const String cache_path = project_path.path_join(".godot").path_join("shader_cache");
+		const String cache_path = project_path.path_join(".fade").path_join("shader_cache");
 		if (DirAccess::dir_exists_absolute(cache_path)) {
 			OS::get_singleton()->move_to_trash(cache_path);
 		}
@@ -2316,7 +2316,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 	// This also prevents logs from being created for the editor instance, as feature tags
 	// are disabled while in the editor (even if they should logically apply).
 	GLOBAL_DEF("debug/file_logging/enable_file_logging.pc", true);
-	GLOBAL_DEF("debug/file_logging/log_path", "user://logs/godot.log");
+	GLOBAL_DEF("debug/file_logging/log_path", "user://logs/fade.log");
 	GLOBAL_DEF(PropertyInfo(Variant::INT, "debug/file_logging/max_log_files", PROPERTY_HINT_RANGE, "0,20,1,or_greater"), 5);
 
 	// If `--log-file` is used to override the log path, allow creating logs for the project manager or editor
@@ -2813,10 +2813,10 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 	GLOBAL_DEF_NOVAL(PropertyInfo(Variant::STRING, "display/display_server/driver.macos", PROPERTY_HINT_ENUM, "default,macos,headless"), "default");
 
 	GLOBAL_DEF_RST_NOVAL("audio/driver/driver", AudioDriverManager::get_driver(0)->get_name());
-	if (audio_driver.is_empty()) { // Specified in project.godot.
+	if (audio_driver.is_empty()) { // Specified in project.fade.
 #ifndef WEB_ENABLED
 		if (project_manager) {
-			// The project manager doesn't need to play sound (TTS audio output is not emitted by Godot, but by the system itself).
+			// The project manager doesn't need to play sound (TTS audio output is not emitted by FADE, but by the system itself).
 			// Disable audio output so it doesn't appear in the list of applications outputting sound in the OS.
 			// On macOS, this also prevents the project manager from inhibiting suspend.
 			audio_driver = "Dummy";
@@ -3127,7 +3127,7 @@ Error _parse_resource_dummy(void *p_data, VariantParser::Stream *p_stream, Ref<R
 }
 
 Error Main::setup2(bool p_show_boot_logo) {
-	GodotProfileZone("setup2");
+	FADEProfileZone("setup2");
 	OS::get_singleton()->benchmark_begin_measure("Startup", "Main::Setup2");
 
 	Thread::make_main_thread(); // Make whatever thread call this the main thread.
@@ -3579,7 +3579,7 @@ Error Main::setup2(bool p_show_boot_logo) {
 		}
 #endif
 
-		if (tablet_driver.is_empty()) { // specified in project.godot
+		if (tablet_driver.is_empty()) { // specified in project.fade
 			tablet_driver = GLOBAL_GET("input_devices/pen_tablet/driver");
 			if (tablet_driver.is_empty()) {
 				tablet_driver = DisplayServer::get_singleton()->tablet_get_driver_name(0);
@@ -3962,7 +3962,7 @@ Error Main::setup2(bool p_show_boot_logo) {
 }
 
 void Main::setup_boot_logo() {
-	GodotProfileZone("setup_boot_logo");
+	FADEProfileZone("setup_boot_logo");
 	MAIN_PRINT("Main: Load Boot Image");
 
 #if !defined(TOOLS_ENABLED) && defined(WEB_ENABLED)
@@ -4054,7 +4054,7 @@ static MainTimerSync main_timer_sync;
 // and should move on to `OS::run`, and EXIT_FAILURE otherwise for
 // an early exit with that error code.
 int Main::start() {
-	GodotProfileZone("start");
+	FADEProfileZone("start");
 	OS::get_singleton()->benchmark_begin_measure("Startup", "Main::Start");
 
 	ERR_FAIL_COND_V(!_start_success, EXIT_FAILURE);
@@ -4126,8 +4126,8 @@ int Main::start() {
 			}
 #else
 			ERR_PRINT(
-					"`--scene` was specified on the command line, but this Godot binary was compiled without support for path overrides. Aborting.\n"
-					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n");
+					"`--scene` was specified on the command line, but this FADE binary was compiled without support for path overrides. Aborting.\n"
+					"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling FADE.\n");
 			return EXIT_FAILURE;
 #endif // defined(OVERRIDE_PATH_ENABLED)
 		} else if (E->get().length() && E->get()[0] != '-' && positional_arg.is_empty() && game_path.is_empty()) {
@@ -4140,7 +4140,7 @@ int Main::start() {
 					scene_path.ends_with(".res") ||
 					scene_path.ends_with(".tres")) {
 				// Only consider the positional argument to be a scene path if it ends with
-				// a file extension associated with Godot scenes. This makes it possible
+				// a file extension associated with FADE scenes. This makes it possible
 				// for projects to parse command-line arguments for custom CLI arguments
 				// or other file extensions without trouble. This can be used to implement
 				// "drag-and-drop onto executable" logic, which can prove helpful
@@ -4149,8 +4149,8 @@ int Main::start() {
 				game_path = scene_path;
 #else
 				ERR_PRINT(
-						"Scene path was specified on the command line, but this Godot binary was compiled without support for path overrides. Aborting.\n"
-						"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n");
+						"Scene path was specified on the command line, but this FADE binary was compiled without support for path overrides. Aborting.\n"
+						"To be able to use it, use the `disable_path_overrides=no` SCons option when compiling FADE.\n");
 				return EXIT_FAILURE;
 #endif // defined(OVERRIDE_PATH_ENABLED)
 			}
@@ -4242,7 +4242,7 @@ int Main::start() {
 			// Ensure that doctool is running in the root dir, but only if
 			// user did not manually specify a path as argument.
 			if (doc_tool_implicit_cwd) {
-				ERR_FAIL_COND_V_MSG(!da->dir_exists("doc"), EXIT_FAILURE, "--doctool must be run from the Godot repository's root folder, or specify a path that points there.");
+				ERR_FAIL_COND_V_MSG(!da->dir_exists("doc"), EXIT_FAILURE, "--doctool must be run from the FADE repository's root folder, or specify a path that points there.");
 			}
 		}
 
@@ -4290,7 +4290,7 @@ int Main::start() {
 			}
 		}
 
-		// For GDExtension docs, use a path that is compatible with Godot modules.
+		// For GDExtension docs, use a path that is compatible with FADE modules.
 		String index_path = gdextension_docs ? doc_tool_path.path_join("doc_classes") : doc_tool_path.path_join("doc/classes");
 		// Create the main documentation directory if it doesn't exist
 		Ref<DirAccess> da = DirAccess::create_for_path(index_path);
@@ -4648,7 +4648,7 @@ int Main::start() {
 		if (editor) {
 			OS::get_singleton()->benchmark_begin_measure("Startup", "Editor");
 
-			sml->get_root()->set_translation_domain("godot.editor");
+			sml->get_root()->set_translation_domain("fade.editor");
 			if (editor_pseudolocalization) {
 				translation_server->get_editor_domain()->set_pseudolocalization_enabled(true);
 			}
@@ -4853,7 +4853,7 @@ int Main::start() {
 			OS::get_singleton()->benchmark_begin_measure("Startup", "Project Manager");
 			Engine::get_singleton()->set_editor_hint(true);
 
-			sml->get_root()->set_translation_domain("godot.editor");
+			sml->get_root()->set_translation_domain("fade.editor");
 			if (editor_pseudolocalization) {
 				translation_server->get_editor_domain()->set_pseudolocalization_enabled(true);
 			}
@@ -4965,8 +4965,8 @@ static uint64_t navigation_process_max = 0;
 // will terminate the program. In case of failure, the OS exit code needs
 // to be set explicitly here (defaults to EXIT_SUCCESS).
 bool Main::iteration() {
-	GodotProfileZone("Main::iteration");
-	GodotProfileZoneGroupedFirst(_profile_zone, "prepare");
+	FADEProfileZone("Main::iteration");
+	FADEProfileZoneGroupedFirst(_profile_zone, "prepare");
 	iterating++;
 
 	const uint64_t ticks = OS::get_singleton()->get_ticks_usec();
@@ -5008,14 +5008,14 @@ bool Main::iteration() {
 
 	// process all our active interfaces
 #ifndef XR_DISABLED
-	GodotProfileZoneGrouped(_profile_zone, "xr_server->_process");
+	FADEProfileZoneGrouped(_profile_zone, "xr_server->_process");
 	XRServer::get_singleton()->_process();
 #endif // XR_DISABLED
 
-	GodotProfileZoneGrouped(_profile_zone, "physics");
+	FADEProfileZoneGrouped(_profile_zone, "physics");
 	for (int iters = 0; iters < advance.physics_steps; ++iters) {
-		GodotProfileZone("Physics Step");
-		GodotProfileZoneGroupedFirst(_physics_zone, "setup");
+		FADEProfileZone("Physics Step");
+		FADEProfileZoneGroupedFirst(_physics_zone, "setup");
 		if (Input::get_singleton()->is_agile_input_event_flushing()) {
 			Input::get_singleton()->flush_buffered_events();
 		}
@@ -5028,22 +5028,22 @@ bool Main::iteration() {
 		// Prepare the fixed timestep interpolated nodes BEFORE they are updated
 		// by the physics server, otherwise the current and previous transforms
 		// may be the same, and no interpolation takes place.
-		GodotProfileZoneGrouped(_physics_zone, "main loop iteration prepare");
+		FADEProfileZoneGrouped(_physics_zone, "main loop iteration prepare");
 		OS::get_singleton()->get_main_loop()->iteration_prepare();
 
 #ifndef PHYSICS_3D_DISABLED
-		GodotProfileZoneGrouped(_physics_zone, "PhysicsServer3D::sync");
+		FADEProfileZoneGrouped(_physics_zone, "PhysicsServer3D::sync");
 		PhysicsServer3D::get_singleton()->sync();
 		PhysicsServer3D::get_singleton()->flush_queries();
 #endif // PHYSICS_3D_DISABLED
 
 #ifndef PHYSICS_2D_DISABLED
-		GodotProfileZoneGrouped(_physics_zone, "PhysicsServer2D::sync");
+		FADEProfileZoneGrouped(_physics_zone, "PhysicsServer2D::sync");
 		PhysicsServer2D::get_singleton()->sync();
 		PhysicsServer2D::get_singleton()->flush_queries();
 #endif // PHYSICS_2D_DISABLED
 
-		GodotProfileZoneGrouped(_physics_zone, "physics_process");
+		FADEProfileZoneGrouped(_physics_zone, "physics_process");
 		if (OS::get_singleton()->get_main_loop()->physics_process(physics_step * time_scale)) {
 #ifndef PHYSICS_3D_DISABLED
 			PhysicsServer3D::get_singleton()->end_sync();
@@ -5061,11 +5061,11 @@ bool Main::iteration() {
 		uint64_t navigation_begin = OS::get_singleton()->get_ticks_usec();
 
 #ifndef NAVIGATION_2D_DISABLED
-		GodotProfileZoneGrouped(_profile_zone, "NavigationServer2D::physics_process");
+		FADEProfileZoneGrouped(_profile_zone, "NavigationServer2D::physics_process");
 		NavigationServer2D::get_singleton()->physics_process(physics_step * time_scale);
 #endif // NAVIGATION_2D_DISABLED
 #ifndef NAVIGATION_3D_DISABLED
-		GodotProfileZoneGrouped(_profile_zone, "NavigationServer3D::physics_process");
+		FADEProfileZoneGrouped(_profile_zone, "NavigationServer3D::physics_process");
 		NavigationServer3D::get_singleton()->physics_process(physics_step * time_scale);
 #endif // NAVIGATION_3D_DISABLED
 
@@ -5076,20 +5076,20 @@ bool Main::iteration() {
 #endif // !defined(NAVIGATION_2D_DISABLED) || !defined(NAVIGATION_3D_DISABLED)
 
 #ifndef PHYSICS_3D_DISABLED
-		GodotProfileZoneGrouped(_profile_zone, "3D physics");
+		FADEProfileZoneGrouped(_profile_zone, "3D physics");
 		PhysicsServer3D::get_singleton()->end_sync();
 		PhysicsServer3D::get_singleton()->step(physics_step * time_scale);
 #endif // PHYSICS_3D_DISABLED
 
 #ifndef PHYSICS_2D_DISABLED
-		GodotProfileZoneGrouped(_profile_zone, "2D physics");
+		FADEProfileZoneGrouped(_profile_zone, "2D physics");
 		PhysicsServer2D::get_singleton()->end_sync();
 		PhysicsServer2D::get_singleton()->step(physics_step * time_scale);
 #endif // PHYSICS_2D_DISABLED
 
 		message_queue->flush();
 
-		GodotProfileZoneGrouped(_profile_zone, "main loop iteration end");
+		FADEProfileZoneGrouped(_profile_zone, "main loop iteration end");
 		OS::get_singleton()->get_main_loop()->iteration_end();
 
 		physics_process_ticks = MAX(physics_process_ticks, OS::get_singleton()->get_ticks_usec() - physics_begin); // keep the largest one for reference
@@ -5104,25 +5104,25 @@ bool Main::iteration() {
 
 	uint64_t process_begin = OS::get_singleton()->get_ticks_usec();
 
-	GodotProfileZoneGrouped(_profile_zone, "process");
+	FADEProfileZoneGrouped(_profile_zone, "process");
 	if (OS::get_singleton()->get_main_loop()->process(process_step * time_scale)) {
 		exit = true;
 	}
 	message_queue->flush();
 
 #ifndef NAVIGATION_2D_DISABLED
-	GodotProfileZoneGrouped(_profile_zone, "process 2D navigation");
+	FADEProfileZoneGrouped(_profile_zone, "process 2D navigation");
 	NavigationServer2D::get_singleton()->process(process_step * time_scale);
 #endif // NAVIGATION_2D_DISABLED
 #ifndef NAVIGATION_3D_DISABLED
-	GodotProfileZoneGrouped(_profile_zone, "process 3D navigation");
+	FADEProfileZoneGrouped(_profile_zone, "process 3D navigation");
 	NavigationServer3D::get_singleton()->process(process_step * time_scale);
 #endif // NAVIGATION_3D_DISABLED
 
-	GodotProfileZoneGrouped(_profile_zone, "RenderingServer::sync");
+	FADEProfileZoneGrouped(_profile_zone, "RenderingServer::sync");
 	RenderingServer::get_singleton()->sync(); //sync if still drawing from previous frames.
 
-	GodotProfileZoneGrouped(_profile_zone, "RenderingServer::draw");
+	FADEProfileZoneGrouped(_profile_zone, "RenderingServer::draw");
 #ifdef RD_ENABLED
 	const bool has_pending_resources_for_processing = RD::get_singleton() && RD::get_singleton()->has_pending_resources_for_processing();
 #else
@@ -5150,15 +5150,15 @@ bool Main::iteration() {
 	process_max = MAX(process_ticks, process_max);
 	uint64_t frame_time = OS::get_singleton()->get_ticks_usec() - ticks;
 
-	GodotProfileZoneGrouped(_profile_zone, "GDExtensionManager::frame");
+	FADEProfileZoneGrouped(_profile_zone, "GDExtensionManager::frame");
 	GDExtensionManager::get_singleton()->frame();
 
-	GodotProfileZoneGrouped(_profile_zone, "ScriptServer::frame");
+	FADEProfileZoneGrouped(_profile_zone, "ScriptServer::frame");
 	for (int i = 0; i < ScriptServer::get_language_count(); i++) {
 		ScriptServer::get_language(i)->frame();
 	}
 
-	GodotProfileZoneGrouped(_profile_zone, "AudioServer::update");
+	FADEProfileZoneGrouped(_profile_zone, "AudioServer::update");
 	AudioServer::get_singleton()->update();
 
 	if (EngineDebugger::is_active()) {
@@ -5197,7 +5197,7 @@ bool Main::iteration() {
 	iterating--;
 
 	if (movie_writer) {
-		GodotProfileZoneGrouped(_profile_zone, "movie_writer->add_frame");
+		FADEProfileZoneGrouped(_profile_zone, "movie_writer->add_frame");
 		movie_writer->add_frame();
 	}
 
@@ -5224,7 +5224,7 @@ bool Main::iteration() {
 	SceneTree *scene_tree = SceneTree::get_singleton();
 	bool wake_for_events = scene_tree && scene_tree->is_accessibility_enabled();
 
-	GodotProfileZoneGrouped(_profile_zone, "OS::add_frame_delay");
+	FADEProfileZoneGrouped(_profile_zone, "OS::add_frame_delay");
 	OS::get_singleton()->add_frame_delay(DisplayServer::get_singleton()->window_can_draw(), wake_for_events);
 
 #ifdef TOOLS_ENABLED
@@ -5266,7 +5266,7 @@ void Main::force_redraw() {
 void Main::cleanup(bool p_force) {
 	Thread::make_main_thread();
 
-	GodotProfileZone("cleanup");
+	FADEProfileZone("cleanup");
 	OS::get_singleton()->benchmark_begin_measure("Shutdown", "Main::Cleanup");
 	if (!p_force) {
 		ERR_FAIL_COND(!_start_success);

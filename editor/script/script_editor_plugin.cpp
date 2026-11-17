@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -1683,7 +1683,7 @@ void _save_text_editor_theme_as(const String &p_file) {
 	const Ref<ConfigFile> cf = memnew(ConfigFile);
 
 	// Use the keys from the FADE 2 theme to know which settings to save.
-	HashMap<StringName, Color> text_colors = EditorSettings::get_godot2_text_editor_theme();
+	HashMap<StringName, Color> text_colors = EditorSettings::get_fade2_text_editor_theme();
 	text_colors.sort();
 	for (const KeyValue<StringName, Color> &text_color : text_colors) {
 		const Color val = EditorSettings::get_singleton()->get_setting(text_color.key);

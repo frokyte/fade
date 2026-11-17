@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,7 +31,7 @@
 #include "display_server_web.h"
 
 #include "dom_keys.inc"
-#include "godot_js.h"
+#include "fade_js.h"
 #include "os_web.h"
 
 #include "core/config/project_settings.h"
@@ -66,7 +66,7 @@ DisplayServerWeb *DisplayServerWeb::get_singleton() {
 
 // Window (canvas)
 bool DisplayServerWeb::check_size_force_redraw() {
-	bool size_changed = godot_js_display_size_update() != 0;
+	bool size_changed = fade_js_display_size_update() != 0;
 	if (size_changed && rect_changed_callback.is_valid()) {
 		Size2i window_size = window_get_size();
 		Variant size = Rect2i(Point2i(), window_size); // TODO use window_get_position if implemented.
@@ -158,7 +158,7 @@ void DisplayServerWeb::_request_quit_callback() {
 
 // Keys
 
-void DisplayServerWeb::dom2godot_mod(Ref<InputEventWithModifiers> ev, int p_mod, Key p_keycode) {
+void DisplayServerWeb::dom2fade_mod(Ref<InputEventWithModifiers> ev, int p_mod, Key p_keycode) {
 	if (p_keycode != Key::SHIFT) {
 		ev->set_shift_pressed(p_mod & 1);
 	}
@@ -205,9 +205,9 @@ void DisplayServerWeb::_key_callback(const String &p_key_event_code, const Strin
 		c = unicode[0];
 	}
 
-	Key keycode = dom_code2godot_scancode(p_key_event_code.utf8().get_data(), p_key_event_key.utf8().get_data(), false);
-	Key scancode = dom_code2godot_scancode(p_key_event_code.utf8().get_data(), p_key_event_key.utf8().get_data(), true);
-	KeyLocation location = dom_code2godot_key_location(p_key_event_code.utf8().get_data());
+	Key keycode = dom_code2fade_scancode(p_key_event_code.utf8().get_data(), p_key_event_key.utf8().get_data(), false);
+	Key scancode = dom_code2fade_scancode(p_key_event_code.utf8().get_data(), p_key_event_key.utf8().get_data(), true);
+	KeyLocation location = dom_code2fade_key_location(p_key_event_code.utf8().get_data());
 
 	DisplayServerWeb::KeyEvent ke;
 
@@ -252,7 +252,7 @@ int DisplayServerWeb::_mouse_button_callback(int p_pressed, int p_button, double
 	ev->set_position(pos);
 	ev->set_global_position(pos);
 	ev->set_pressed(p_pressed);
-	dom2godot_mod(ev, p_modifiers, Key::NONE);
+	dom2fade_mod(ev, p_modifiers, Key::NONE);
 
 	switch (p_button) {
 		case DOM_BUTTON_LEFT:
@@ -341,7 +341,7 @@ void DisplayServerWeb::_mouse_move_callback(double p_x, double p_y, double p_rel
 	Point2 pos(p_x, p_y);
 	Ref<InputEventMouseMotion> ev;
 	ev.instantiate();
-	dom2godot_mod(ev, p_modifiers, Key::NONE);
+	dom2fade_mod(ev, p_modifiers, Key::NONE);
 	ev->set_button_mask(input_mask);
 
 	ev->set_position(pos);
@@ -357,7 +357,7 @@ void DisplayServerWeb::_mouse_move_callback(double p_x, double p_y, double p_rel
 }
 
 // Cursor
-const char *DisplayServerWeb::godot2dom_cursor(DisplayServerEnums::CursorShape p_shape) {
+const char *DisplayServerWeb::fade2dom_cursor(DisplayServerEnums::CursorShape p_shape) {
 	switch (p_shape) {
 		case DisplayServerEnums::CURSOR_ARROW:
 			return "default";
@@ -399,11 +399,11 @@ const char *DisplayServerWeb::godot2dom_cursor(DisplayServerEnums::CursorShape p
 }
 
 bool DisplayServerWeb::tts_is_speaking() const {
-	return godot_js_tts_is_speaking();
+	return fade_js_tts_is_speaking();
 }
 
 bool DisplayServerWeb::tts_is_paused() const {
-	return godot_js_tts_is_paused();
+	return fade_js_tts_is_paused();
 }
 
 void DisplayServerWeb::update_voices_callback(int p_size, const char **p_voice) {
@@ -437,7 +437,7 @@ void DisplayServerWeb::_update_voices_callback(const Vector<String> &p_voices) {
 }
 
 TypedArray<Dictionary> DisplayServerWeb::tts_get_voices() const {
-	godot_js_tts_get_voices(update_voices_callback);
+	fade_js_tts_get_voices(update_voices_callback);
 	return voices;
 }
 
@@ -454,15 +454,15 @@ void DisplayServerWeb::tts_speak(const String &p_text, const String &p_voice, in
 	CharString string = p_text.utf8();
 	utterance_ids[p_utterance_id] = string;
 
-	godot_js_tts_speak(string.get_data(), p_voice.utf8().get_data(), CLAMP(p_volume, 0, 100), CLAMP(p_pitch, 0.f, 2.f), CLAMP(p_rate, 0.1f, 10.f), p_utterance_id, DisplayServerWeb::js_utterance_callback);
+	fade_js_tts_speak(string.get_data(), p_voice.utf8().get_data(), CLAMP(p_volume, 0, 100), CLAMP(p_pitch, 0.f, 2.f), CLAMP(p_rate, 0.1f, 10.f), p_utterance_id, DisplayServerWeb::js_utterance_callback);
 }
 
 void DisplayServerWeb::tts_pause() {
-	godot_js_tts_pause();
+	fade_js_tts_pause();
 }
 
 void DisplayServerWeb::tts_resume() {
-	godot_js_tts_resume();
+	fade_js_tts_resume();
 }
 
 void DisplayServerWeb::tts_stop() {
@@ -470,7 +470,7 @@ void DisplayServerWeb::tts_stop() {
 		tts_post_utterance_event(DisplayServerEnums::TTS_UTTERANCE_CANCELED, E.key);
 	}
 	utterance_ids.clear();
-	godot_js_tts_stop();
+	fade_js_tts_stop();
 }
 
 void DisplayServerWeb::js_utterance_callback(int p_event, int64_t p_id, int p_pos) {
@@ -515,7 +515,7 @@ void DisplayServerWeb::cursor_set_shape(DisplayServerEnums::CursorShape p_shape)
 		return;
 	}
 	cursor_shape = p_shape;
-	godot_js_display_cursor_set_shape(godot2dom_cursor(cursor_shape));
+	fade_js_display_cursor_set_shape(fade2dom_cursor(cursor_shape));
 }
 
 DisplayServerEnums::CursorShape DisplayServerWeb::cursor_get_shape() const {
@@ -548,10 +548,10 @@ void DisplayServerWeb::cursor_set_custom_image(const Ref<Resource> &p_cursor, Di
 		png.resize(len);
 		ERR_FAIL_COND(!png_image_write_to_memory(&png_meta, png.ptrw(), &len, 0, data.ptr(), 0, nullptr));
 
-		godot_js_display_cursor_set_custom_shape(godot2dom_cursor(p_shape), png.ptr(), len, p_hotspot.x, p_hotspot.y);
+		fade_js_display_cursor_set_custom_shape(fade2dom_cursor(p_shape), png.ptr(), len, p_hotspot.x, p_hotspot.y);
 
 	} else {
-		godot_js_display_cursor_set_custom_shape(godot2dom_cursor(p_shape), nullptr, 0, 0, 0);
+		fade_js_display_cursor_set_custom_shape(fade2dom_cursor(p_shape), nullptr, 0, 0, 0);
 	}
 
 	cursor_set_shape(cursor_shape);
@@ -569,16 +569,16 @@ void DisplayServerWeb::_mouse_update_mode() {
 	}
 
 	if (wanted_mouse_mode == DisplayServerEnums::MOUSE_MODE_VISIBLE) {
-		godot_js_display_cursor_set_visible(1);
-		godot_js_display_cursor_lock_set(0);
+		fade_js_display_cursor_set_visible(1);
+		fade_js_display_cursor_lock_set(0);
 
 	} else if (wanted_mouse_mode == DisplayServerEnums::MOUSE_MODE_HIDDEN) {
-		godot_js_display_cursor_set_visible(0);
-		godot_js_display_cursor_lock_set(0);
+		fade_js_display_cursor_set_visible(0);
+		fade_js_display_cursor_lock_set(0);
 
 	} else if (wanted_mouse_mode == DisplayServerEnums::MOUSE_MODE_CAPTURED) {
-		godot_js_display_cursor_set_visible(1);
-		godot_js_display_cursor_lock_set(1);
+		fade_js_display_cursor_set_visible(1);
+		fade_js_display_cursor_lock_set(1);
 	}
 }
 
@@ -600,11 +600,11 @@ void DisplayServerWeb::mouse_set_mode(DisplayServerEnums::MouseMode p_mode) {
 }
 
 DisplayServerEnums::MouseMode DisplayServerWeb::mouse_get_mode() const {
-	if (godot_js_display_cursor_is_hidden()) {
+	if (fade_js_display_cursor_is_hidden()) {
 		return DisplayServerEnums::MOUSE_MODE_HIDDEN;
 	}
 
-	if (godot_js_display_cursor_is_locked()) {
+	if (fade_js_display_cursor_is_locked()) {
 		return DisplayServerEnums::MOUSE_MODE_CAPTURED;
 	}
 	return DisplayServerEnums::MOUSE_MODE_VISIBLE;
@@ -660,9 +660,9 @@ int DisplayServerWeb::mouse_wheel_callback(int p_delta_mode, double p_delta_x, d
 }
 
 int DisplayServerWeb::_mouse_wheel_callback(int p_delta_mode, double p_delta_x, double p_delta_y) {
-	if (!godot_js_display_canvas_is_focused() && !godot_js_is_ime_focused()) {
+	if (!fade_js_display_canvas_is_focused() && !fade_js_is_ime_focused()) {
 		if (get_singleton()->cursor_inside_canvas) {
-			godot_js_display_canvas_focus();
+			fade_js_display_canvas_focus();
 		} else {
 			return false;
 		}
@@ -786,7 +786,7 @@ void DisplayServerWeb::_touch_callback(int p_type, int p_count) {
 }
 
 bool DisplayServerWeb::is_touchscreen_available() const {
-	return godot_js_display_touchscreen_is_available() || (Input::get_singleton() && Input::get_singleton()->is_emulating_touch_from_mouse());
+	return fade_js_display_touchscreen_is_available() || (Input::get_singleton() && Input::get_singleton()->is_emulating_touch_from_mouse());
 }
 
 // Virtual Keyboard
@@ -828,11 +828,11 @@ void DisplayServerWeb::_vk_input_text_callback(const String &p_text, int p_curso
 }
 
 void DisplayServerWeb::virtual_keyboard_show(const String &p_existing_text, const Rect2 &p_screen_rect, DisplayServerEnums::VirtualKeyboardType p_type, int p_max_input_length, int p_cursor_start, int p_cursor_end) {
-	godot_js_display_vk_show(p_existing_text.utf8().get_data(), p_type, p_cursor_start, p_cursor_end);
+	fade_js_display_vk_show(p_existing_text.utf8().get_data(), p_type, p_cursor_start, p_cursor_end);
 }
 
 void DisplayServerWeb::virtual_keyboard_hide() {
-	godot_js_display_vk_hide();
+	fade_js_display_vk_hide();
 }
 
 void DisplayServerWeb::window_blur_callback() {
@@ -962,11 +962,11 @@ void DisplayServerWeb::_ime_callback(int p_type, const String &p_text) {
 
 void DisplayServerWeb::window_set_ime_active(const bool p_active, DisplayServerEnums::WindowID p_window) {
 	ime_active = p_active;
-	godot_js_set_ime_active(p_active);
+	fade_js_set_ime_active(p_active);
 }
 
 void DisplayServerWeb::window_set_ime_position(const Point2i &p_pos, DisplayServerEnums::WindowID p_window) {
-	godot_js_set_ime_position(p_pos.x, p_pos.y);
+	fade_js_set_ime_position(p_pos.x, p_pos.y);
 }
 
 Point2i DisplayServerWeb::ime_get_selection() const {
@@ -979,14 +979,14 @@ String DisplayServerWeb::ime_get_text() const {
 
 void DisplayServerWeb::process_joypads() {
 	Input *input = Input::get_singleton();
-	int32_t pads = godot_js_input_gamepad_sample_count();
+	int32_t pads = fade_js_input_gamepad_sample_count();
 	int32_t s_btns_num = 0;
 	int32_t s_axes_num = 0;
 	int32_t s_standard = 0;
 	float s_btns[16];
 	float s_axes[10];
 	for (int idx = 0; idx < pads; idx++) {
-		int err = godot_js_input_gamepad_sample_get(idx, s_btns, &s_btns_num, s_axes, &s_axes_num, &s_standard);
+		int err = fade_js_input_gamepad_sample_get(idx, s_btns, &s_btns_num, s_axes, &s_axes_num, &s_standard);
 		if (err) {
 			continue;
 		}
@@ -1035,12 +1035,12 @@ void DisplayServerWeb::_update_clipboard_callback(const String &p_text) {
 
 void DisplayServerWeb::clipboard_set(const String &p_text) {
 	clipboard = p_text;
-	int err = godot_js_display_clipboard_set(p_text.utf8().get_data());
+	int err = fade_js_display_clipboard_set(p_text.utf8().get_data());
 	ERR_FAIL_COND_MSG(err, "Clipboard API is not supported.");
 }
 
 String DisplayServerWeb::clipboard_get() const {
-	godot_js_display_clipboard_get(update_clipboard_callback);
+	fade_js_display_clipboard_get(update_clipboard_callback);
 	return clipboard;
 }
 
@@ -1063,7 +1063,7 @@ void DisplayServerWeb::_send_window_event_callback(int p_notification) {
 	if (p_notification == DisplayServerEnums::WINDOW_EVENT_MOUSE_ENTER || p_notification == DisplayServerEnums::WINDOW_EVENT_MOUSE_EXIT) {
 		ds->cursor_inside_canvas = p_notification == DisplayServerEnums::WINDOW_EVENT_MOUSE_ENTER;
 	}
-	if (godot_js_is_ime_focused() && (p_notification == DisplayServerEnums::WINDOW_EVENT_FOCUS_IN || p_notification == DisplayServerEnums::WINDOW_EVENT_FOCUS_OUT)) {
+	if (fade_js_is_ime_focused() && (p_notification == DisplayServerEnums::WINDOW_EVENT_FOCUS_IN || p_notification == DisplayServerEnums::WINDOW_EVENT_FOCUS_OUT)) {
 		return;
 	}
 	if (ds->window_event_callback.is_valid()) {
@@ -1103,9 +1103,9 @@ void DisplayServerWeb::set_icon(const Ref<Image> &p_icon) {
 		png.resize(len);
 		ERR_FAIL_COND(!png_image_write_to_memory(&png_meta, png.ptrw(), &len, 0, data.ptr(), 0, nullptr));
 
-		godot_js_display_window_icon_set(png.ptr(), len);
+		fade_js_display_window_icon_set(png.ptr(), len);
 	} else {
-		godot_js_display_window_icon_set(nullptr, 0);
+		fade_js_display_window_icon_set(nullptr, 0);
 	}
 }
 
@@ -1126,20 +1126,20 @@ DisplayServerWeb::DisplayServerWeb(const String &p_rendering_driver, DisplayServ
 	native_menu = memnew(NativeMenu); // Dummy native menu.
 
 	// Ensure the canvas ID.
-	godot_js_config_canvas_id_get(canvas_id, 256);
+	fade_js_config_canvas_id_get(canvas_id, 256);
 
 	// Handle contextmenu, webglcontextlost
-	godot_js_display_setup_canvas(p_resolution.x, p_resolution.y, (p_window_mode == DisplayServerEnums::WINDOW_MODE_FULLSCREEN || p_window_mode == DisplayServerEnums::WINDOW_MODE_EXCLUSIVE_FULLSCREEN), OS::get_singleton()->is_hidpi_allowed() ? 1 : 0);
+	fade_js_display_setup_canvas(p_resolution.x, p_resolution.y, (p_window_mode == DisplayServerEnums::WINDOW_MODE_FULLSCREEN || p_window_mode == DisplayServerEnums::WINDOW_MODE_EXCLUSIVE_FULLSCREEN), OS::get_singleton()->is_hidpi_allowed() ? 1 : 0);
 
 	// Check if it's windows.
-	swap_cancel_ok = godot_js_display_is_swap_ok_cancel() == 1;
+	swap_cancel_ok = fade_js_display_is_swap_ok_cancel() == 1;
 
 	// Expose method for requesting quit.
-	godot_js_os_request_quit_cb(request_quit_callback);
+	fade_js_os_request_quit_cb(request_quit_callback);
 
 #ifdef GLES3_ENABLED
 	bool webgl2_inited = false;
-	if (godot_js_display_has_webgl(2)) {
+	if (fade_js_display_has_webgl(2)) {
 		EmscriptenWebGLContextAttributes attributes;
 		emscripten_webgl_init_context_attributes(&attributes);
 		attributes.alpha = OS::get_singleton()->is_layered_allowed();
@@ -1167,26 +1167,26 @@ DisplayServerWeb::DisplayServerWeb(const String &p_rendering_driver, DisplayServ
 	RasterizerDummy::make_current();
 #endif
 
-	// JS Input interface (js/libs/library_godot_input.js)
-	godot_js_input_mouse_button_cb(&DisplayServerWeb::mouse_button_callback);
-	godot_js_input_mouse_move_cb(&DisplayServerWeb::mouse_move_callback);
-	godot_js_input_mouse_wheel_cb(&DisplayServerWeb::mouse_wheel_callback);
-	godot_js_input_touch_cb(&DisplayServerWeb::touch_callback, touch_event.identifier, touch_event.coords);
-	godot_js_input_key_cb(&DisplayServerWeb::key_callback, key_event.code, key_event.key);
-	godot_js_input_paste_cb(&DisplayServerWeb::update_clipboard_callback);
-	godot_js_input_drop_files_cb(&DisplayServerWeb::drop_files_js_callback);
-	godot_js_input_gamepad_cb(&DisplayServerWeb::gamepad_callback);
-	godot_js_set_ime_cb(&DisplayServerWeb::ime_callback, &DisplayServerWeb::key_callback, key_event.code, key_event.key);
+	// JS Input interface (js/libs/library_fade_input.js)
+	fade_js_input_mouse_button_cb(&DisplayServerWeb::mouse_button_callback);
+	fade_js_input_mouse_move_cb(&DisplayServerWeb::mouse_move_callback);
+	fade_js_input_mouse_wheel_cb(&DisplayServerWeb::mouse_wheel_callback);
+	fade_js_input_touch_cb(&DisplayServerWeb::touch_callback, touch_event.identifier, touch_event.coords);
+	fade_js_input_key_cb(&DisplayServerWeb::key_callback, key_event.code, key_event.key);
+	fade_js_input_paste_cb(&DisplayServerWeb::update_clipboard_callback);
+	fade_js_input_drop_files_cb(&DisplayServerWeb::drop_files_js_callback);
+	fade_js_input_gamepad_cb(&DisplayServerWeb::gamepad_callback);
+	fade_js_set_ime_cb(&DisplayServerWeb::ime_callback, &DisplayServerWeb::key_callback, key_event.code, key_event.key);
 
-	// JS Display interface (js/libs/library_godot_display.js)
-	godot_js_display_fullscreen_cb(&DisplayServerWeb::fullscreen_change_callback);
-	godot_js_display_window_blur_cb(&DisplayServerWeb::window_blur_callback);
-	godot_js_display_notification_cb(&DisplayServerWeb::send_window_event_callback,
+	// JS Display interface (js/libs/library_fade_display.js)
+	fade_js_display_fullscreen_cb(&DisplayServerWeb::fullscreen_change_callback);
+	fade_js_display_window_blur_cb(&DisplayServerWeb::window_blur_callback);
+	fade_js_display_notification_cb(&DisplayServerWeb::send_window_event_callback,
 			DisplayServerEnums::WINDOW_EVENT_MOUSE_ENTER,
 			DisplayServerEnums::WINDOW_EVENT_MOUSE_EXIT,
 			DisplayServerEnums::WINDOW_EVENT_FOCUS_IN,
 			DisplayServerEnums::WINDOW_EVENT_FOCUS_OUT);
-	godot_js_display_vk_cb(&DisplayServerWeb::vk_input_text_callback);
+	fade_js_display_vk_cb(&DisplayServerWeb::vk_input_text_callback);
 
 	Input::get_singleton()->set_event_dispatch_function(_dispatch_input_event);
 }
@@ -1231,11 +1231,11 @@ bool DisplayServerWeb::has_feature(DisplayServerEnums::Feature p_feature) const 
 		//case DisplayServerEnums::FEATURE_ORIENTATION:
 		case DisplayServerEnums::FEATURE_IME:
 			// IME does not work with experimental VK support.
-			return godot_js_display_vk_available() == 0;
+			return fade_js_display_vk_available() == 0;
 		case DisplayServerEnums::FEATURE_VIRTUAL_KEYBOARD:
-			return godot_js_display_vk_available() != 0;
+			return fade_js_display_vk_available() != 0;
 		case DisplayServerEnums::FEATURE_TEXT_TO_SPEECH:
-			return godot_js_display_tts_available() != 0;
+			return fade_js_display_tts_available() != 0;
 		default:
 			return false;
 	}
@@ -1271,7 +1271,7 @@ Size2i DisplayServerWeb::screen_get_size(int p_screen) const {
 	ERR_FAIL_INDEX_V(p_screen, screen_count, Size2i());
 
 	int size[2];
-	godot_js_display_screen_size_get(size, size + 1);
+	fade_js_display_screen_size_get(size, size + 1);
 	return Size2(size[0], size[1]);
 }
 
@@ -1281,7 +1281,7 @@ Rect2i DisplayServerWeb::screen_get_usable_rect(int p_screen) const {
 	ERR_FAIL_INDEX_V(p_screen, screen_count, Rect2i());
 
 	int size[2];
-	godot_js_display_window_size_get(size, size + 1);
+	fade_js_display_window_size_get(size, size + 1);
 	return Rect2i(0, 0, size[0], size[1]);
 }
 
@@ -1290,7 +1290,7 @@ int DisplayServerWeb::screen_get_dpi(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, 72);
 
-	return godot_js_display_screen_dpi_get();
+	return fade_js_display_screen_dpi_get();
 }
 
 float DisplayServerWeb::screen_get_scale(int p_screen) const {
@@ -1298,7 +1298,7 @@ float DisplayServerWeb::screen_get_scale(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, 1.0f);
 
-	return godot_js_display_pixel_ratio_get();
+	return fade_js_display_pixel_ratio_get();
 }
 
 float DisplayServerWeb::screen_get_refresh_rate(int p_screen) const {
@@ -1348,7 +1348,7 @@ void DisplayServerWeb::window_set_drop_files_callback(const Callable &p_callable
 }
 
 void DisplayServerWeb::window_set_title(const String &p_title, DisplayServerEnums::WindowID p_window) {
-	godot_js_display_window_title_set(p_title.utf8().get_data());
+	fade_js_display_window_title_set(p_title.utf8().get_data());
 }
 
 int DisplayServerWeb::window_get_current_screen(DisplayServerEnums::WindowID p_window) const {
@@ -1393,12 +1393,12 @@ Size2i DisplayServerWeb::window_get_min_size(DisplayServerEnums::WindowID p_wind
 }
 
 void DisplayServerWeb::window_set_size(const Size2i p_size, DisplayServerEnums::WindowID p_window) {
-	godot_js_display_desired_size_set(p_size.x, p_size.y);
+	fade_js_display_desired_size_set(p_size.x, p_size.y);
 }
 
 Size2i DisplayServerWeb::window_get_size(DisplayServerEnums::WindowID p_window) const {
 	int size[2];
-	godot_js_display_window_size_get(size, size + 1);
+	fade_js_display_window_size_get(size, size + 1);
 	return Size2i(size[0], size[1]);
 }
 
@@ -1414,13 +1414,13 @@ void DisplayServerWeb::window_set_mode(DisplayServerEnums::WindowMode p_mode, Di
 	switch (p_mode) {
 		case DisplayServerEnums::WINDOW_MODE_WINDOWED: {
 			if (window_mode == DisplayServerEnums::WINDOW_MODE_FULLSCREEN) {
-				godot_js_display_fullscreen_exit();
+				fade_js_display_fullscreen_exit();
 			}
 			window_mode = DisplayServerEnums::WINDOW_MODE_WINDOWED;
 		} break;
 		case DisplayServerEnums::WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
 		case DisplayServerEnums::WINDOW_MODE_FULLSCREEN: {
-			int result = godot_js_display_fullscreen_request();
+			int result = fade_js_display_fullscreen_request();
 			ERR_FAIL_COND_MSG(result, "The request was denied. Remember that enabling fullscreen is only possible from an input callback for the Web platform.");
 		} break;
 		case DisplayServerEnums::WINDOW_MODE_MAXIMIZED:
@@ -1477,7 +1477,7 @@ void DisplayServerWeb::process_events() {
 	Input::get_singleton()->flush_buffered_events();
 
 	if (gamepad_count > 0) {
-		if (godot_js_input_gamepad_sample() == OK) {
+		if (fade_js_input_gamepad_sample() == OK) {
 			process_joypads();
 		}
 	}
@@ -1497,7 +1497,7 @@ void DisplayServerWeb::process_keys() {
 		ev->set_unicode(ke.unicode);
 		ev->set_location(ke.location);
 		if (ke.raw) {
-			dom2godot_mod(ev, ke.mod, ke.keycode);
+			dom2fade_mod(ev, ke.mod, ke.keycode);
 		}
 
 		Input::get_singleton()->parse_input_event(ev);

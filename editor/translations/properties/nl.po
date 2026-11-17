@@ -55,7 +55,7 @@
 # naan <xlightfox@hotmail.com>, 2021.
 # Tim Visee <tim+weblate@visee.me>, 2022.
 # Ferhat Geçdoğan <ferhatgectao@gmail.com>, 2022.
-# Rémi Verschelde <remi@godotengine.org>, 2022.
+# Rémi Verschelde <remi@fadeengine.org>, 2022.
 # Wouter <mysticaldev@hotmail.com>, 2022.
 # voylin <0voylin0@gmail.com>, 2022.
 # Gert-dev <qnyasgjhapqyuhoibr@kiabws.com>, 2022.
@@ -81,12 +81,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FADE Engine properties\n"
-"Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
+"Report-Msgid-Bugs-To: https://github.com/fadeengine/fade\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-11-10 04:56+0000\n"
 "Last-Translator: Luka van der Plas "
 "<lukavdplas@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/godot-engine/godot-"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/fade-engine/fade-"
 "properties/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"

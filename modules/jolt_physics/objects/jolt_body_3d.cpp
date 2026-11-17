@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -298,7 +298,7 @@ void JoltBody3D::_update_environmental_properties() {
 	total_linear_damp = 0.0f;
 	total_angular_damp = 0.0f;
 
-	const Vector3 position = to_godot(jolt_body->GetPosition());
+	const Vector3 position = to_fade(jolt_body->GetPosition());
 
 	bool gravity_done = false;
 	bool linear_damp_done = linear_damp_mode == PS3DE::BODY_DAMP_MODE_REPLACE;
@@ -715,7 +715,7 @@ Basis JoltBody3D::get_principal_inertia_axes() const {
 		return Basis();
 	}
 
-	return to_godot(jolt_body->GetRotation() * jolt_body->GetMotionPropertiesUnchecked()->GetInertiaRotation());
+	return to_fade(jolt_body->GetRotation() * jolt_body->GetMotionPropertiesUnchecked()->GetInertiaRotation());
 }
 
 Vector3 JoltBody3D::get_inverse_inertia() const {
@@ -725,7 +725,7 @@ Vector3 JoltBody3D::get_inverse_inertia() const {
 		return Vector3();
 	}
 
-	return to_godot(jolt_body->GetMotionPropertiesUnchecked()->GetLocalSpaceInverseInertia().GetDiagonal3());
+	return to_fade(jolt_body->GetMotionPropertiesUnchecked()->GetLocalSpaceInverseInertia().GetDiagonal3());
 }
 
 Basis JoltBody3D::get_inverse_inertia_tensor() const {
@@ -735,7 +735,7 @@ Basis JoltBody3D::get_inverse_inertia_tensor() const {
 		return Basis();
 	}
 
-	return to_godot(jolt_body->GetInverseInertia()).basis;
+	return to_fade(jolt_body->GetInverseInertia()).basis;
 }
 
 void JoltBody3D::set_linear_velocity(const Vector3 &p_velocity) {
@@ -770,7 +770,7 @@ void JoltBody3D::set_axis_velocity(const Vector3 &p_axis_velocity) {
 	const Vector3 axis = p_axis_velocity.normalized();
 
 	if (!in_space()) {
-		Vector3 linear_velocity = to_godot(jolt_settings->mLinearVelocity);
+		Vector3 linear_velocity = to_fade(jolt_settings->mLinearVelocity);
 		linear_velocity -= axis * axis.dot(linear_velocity);
 		linear_velocity += p_axis_velocity;
 		jolt_settings->mLinearVelocity = to_jolt(linear_velocity);
@@ -790,9 +790,9 @@ Vector3 JoltBody3D::get_velocity_at_position(const Vector3 &p_position) const {
 	}
 
 	const JPH::MotionProperties &motion_properties = *jolt_body->GetMotionPropertiesUnchecked();
-	const Vector3 total_linear_velocity = to_godot(motion_properties.GetLinearVelocity()) + linear_surface_velocity;
-	const Vector3 total_angular_velocity = to_godot(motion_properties.GetAngularVelocity()) + angular_surface_velocity;
-	const Vector3 com_to_pos = p_position - to_godot(jolt_body->GetCenterOfMassPosition());
+	const Vector3 total_linear_velocity = to_fade(motion_properties.GetLinearVelocity()) + linear_surface_velocity;
+	const Vector3 total_angular_velocity = to_fade(motion_properties.GetAngularVelocity()) + angular_surface_velocity;
+	const Vector3 com_to_pos = p_position - to_fade(jolt_body->GetCenterOfMassPosition());
 
 	return total_linear_velocity + total_angular_velocity.cross(com_to_pos);
 }

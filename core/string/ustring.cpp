@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -3561,7 +3561,7 @@ String String::format(const Variant &p_values, const String &p_placeholder) cons
 
 		for (int i = 0; i < values_arr.size(); i++) {
 #ifndef DISABLE_DEPRECATED
-			if (values_arr[i].get_type() == Variant::ARRAY) { // Array in Array structure [["name","RobotGuy"], [0,"godot"], ["strength",9000.91]].
+			if (values_arr[i].get_type() == Variant::ARRAY) { // Array in Array structure [["name","RobotGuy"], [0,"fade"], ["strength",9000.91]].
 				Array value_arr = values_arr[i];
 
 				WARN_DEPRECATED_MSG("In String.format(), Arrays inside another Array are treated as key-value pairs. This behavior is deprecated. Consider using a Dictionary instead.");

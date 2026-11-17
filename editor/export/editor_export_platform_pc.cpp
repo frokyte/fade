@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -169,7 +169,7 @@ Error EditorExportPlatformPC::_unzip_debugsymbols(Ref<DirAccess> &p_da, const St
 		int err = UNZ_OK;
 
 		// Locate and open the file.
-		err = godot_unzip_locate_file(uzf, p_symbols_path, true);
+		err = fade_unzip_locate_file(uzf, p_symbols_path, true);
 		if (err != UNZ_OK) {
 			unzClose(uzf);
 			add_message(EXPORT_MESSAGE_WARNING, TTR("Prepare Templates"), vformat(TTR("Could not find debug symbols to export: \"%s\" \"%s\"."), p_symbols_path, p_zip_path));

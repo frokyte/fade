@@ -8,7 +8,7 @@ import subprocess
 import urllib.request
 from typing import Any
 
-PROJECT_PATH = pathlib.Path(__file__).parent.resolve().joinpath("godot")
+PROJECT_PATH = pathlib.Path(__file__).parent.resolve().joinpath("fade")
 CLASS_METHODS_FILE = PROJECT_PATH.joinpath("class_methods.txt")
 BUILTIN_METHODS_FILE = PROJECT_PATH.joinpath("builtin_methods.txt")
 UTILITY_FUNCTIONS_FILE = PROJECT_PATH.joinpath("utility_functions.txt")
@@ -16,7 +16,7 @@ UTILITY_FUNCTIONS_FILE = PROJECT_PATH.joinpath("utility_functions.txt")
 
 def download_gdextension_api(reftag: str) -> dict[str, Any]:
     with urllib.request.urlopen(
-        f"https://raw.githubusercontent.com/godotengine/godot-cpp/godot-{reftag}/gdextension/extension_api.json"
+        f"https://raw.githubusercontent.com/fadeengine/fade-cpp/fade-{reftag}/gdextension/extension_api.json"
     ) as f:
         gdextension_api_json: dict[str, Any] = json.load(f)
     return gdextension_api_json
@@ -122,14 +122,14 @@ def process_compatibility_test(proc: subprocess.Popen[bytes], timeout: int = 5) 
     return errors.decode("utf-8") if errors else None
 
 
-def compatibility_check(godot4_bin: str) -> bool:
+def compatibility_check(fade4_bin: str) -> bool:
     """
     Checks if methods specified for previous FADE versions can be properly loaded with
     the latest FADE4 binary.
     """
     # A bit crude albeit working solution – use stderr to check for compatibility-related errors.
     proc = subprocess.Popen(
-        [godot4_bin, "--headless", "-e", "--path", PROJECT_PATH],
+        [fade4_bin, "--headless", "-e", "--path", PROJECT_PATH],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -141,12 +141,12 @@ def compatibility_check(godot4_bin: str) -> bool:
 
 
 if __name__ == "__main__":
-    godot4_bin = os.environ["GODOT4_BIN"]
+    fade4_bin = os.environ["GODOT4_BIN"]
     reftags = os.environ["REFTAGS"].split(",")
     is_success = True
     for reftag in reftags:
         generate_test_data_files(reftag)
-        if not compatibility_check(godot4_bin):
+        if not compatibility_check(fade4_bin):
             print(f"Compatibility test against FADE{reftag} failed")
             is_success = False
         remove_test_data_files()

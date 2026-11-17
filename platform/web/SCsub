@@ -41,19 +41,19 @@ if env["target"] == "editor":
 
 sys_env = env.Clone()
 sys_env.AddJSLibraries([
-    "js/libs/library_godot_audio.js",
-    "js/libs/library_godot_display.js",
-    "js/libs/library_godot_emscripten.js",
-    "js/libs/library_godot_fetch.js",
-    "js/libs/library_godot_webmidi.js",
-    "js/libs/library_godot_os.js",
-    "js/libs/library_godot_runtime.js",
-    "js/libs/library_godot_input.js",
-    "js/libs/library_godot_webgl2.js",
-    "js/libs/library_godot_debugger.js",
+    "js/libs/library_fade_audio.js",
+    "js/libs/library_fade_display.js",
+    "js/libs/library_fade_emscripten.js",
+    "js/libs/library_fade_fetch.js",
+    "js/libs/library_fade_webmidi.js",
+    "js/libs/library_fade_os.js",
+    "js/libs/library_fade_runtime.js",
+    "js/libs/library_fade_input.js",
+    "js/libs/library_fade_webgl2.js",
+    "js/libs/library_fade_debugger.js",
 ])
 sys_env.AddJSExterns([
-    "js/libs/library_godot_webgl2.externs.js",
+    "js/libs/library_fade_webgl2.externs.js",
 ])
 
 sys_env.AddJSPost([
@@ -61,9 +61,9 @@ sys_env.AddJSPost([
 ])
 
 if env["javascript_eval"]:
-    sys_env.AddJSLibraries(["js/libs/library_godot_javascript_singleton.js"])
+    sys_env.AddJSLibraries(["js/libs/library_fade_javascript_singleton.js"])
 if env["target"] == "editor":
-    sys_env.AddJSLibraries(["js/libs/library_godot_editor_debugger.js"])
+    sys_env.AddJSLibraries(["js/libs/library_fade_editor_debugger.js"])
 
 for lib in sys_env["JS_LIBS"]:
     sys_env.Append(LINKFLAGS=["--js-library", lib.abspath])
@@ -87,9 +87,9 @@ if len(env["EXPORTED_RUNTIME_METHODS"]):
 sys_env.Append(LINKFLAGS=["-sMODULARIZE=1", "-sEXPORT_NAME='FADE'"])
 
 build = []
-build_targets = ["#bin/godot${PROGSUFFIX}.js", "#bin/godot${PROGSUFFIX}.wasm"]
+build_targets = ["#bin/fade${PROGSUFFIX}.js", "#bin/fade${PROGSUFFIX}.wasm"]
 if env["dlink_enabled"]:
-    # Reset libraries. The main runtime will only link emscripten libraries, not godot ones.
+    # Reset libraries. The main runtime will only link emscripten libraries, not fade ones.
     sys_env["LIBS"] = []
     # We use IDBFS. Since Emscripten 1.39.1 it needs to be linked explicitly.
     sys_env.Append(LIBS=["idbfs.js"])
@@ -109,7 +109,7 @@ if env["dlink_enabled"]:
     sys = sys_env.add_program(build_targets, ["web_runtime.cpp"])
 
     # The side library, containing all FADE code.
-    wasm = env.add_program("#bin/godot.side${PROGSUFFIX}.wasm", web_files)
+    wasm = env.add_program("#bin/fade.side${PROGSUFFIX}.wasm", web_files)
     build = sys + [wasm[0]]
 else:
     # We use IDBFS. Since Emscripten 1.39.1 it needs to be linked explicitly.
@@ -131,7 +131,7 @@ if env["target"] == "editor":
     engine += ["js/engine/iframe.js"]
 
 externs = [env.File("#platform/web/js/engine/engine.externs.js")]
-js_engine = env.CreateEngineFile("#bin/godot${PROGSUFFIX}.engine.js", engine, externs, env["threads"])
+js_engine = env.CreateEngineFile("#bin/fade${PROGSUFFIX}.engine.js", engine, externs, env["threads"])
 env.Depends(js_engine, externs)
 
 wrap_list = [
@@ -139,7 +139,7 @@ wrap_list = [
     js_engine,
 ]
 js_wrapped = env.NoCache(
-    env.Textfile("#bin/godot", [env.File(f) for f in wrap_list], TEXTFILESUFFIX="${PROGSUFFIX}.wrapped.js")
+    env.Textfile("#bin/fade", [env.File(f) for f in wrap_list], TEXTFILESUFFIX="${PROGSUFFIX}.wrapped.js")
 )
 
 # 0 - unwrapped js file (use wrapped one instead)

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -1827,9 +1827,9 @@ Error EditorExportPlatformMacOS::_unzip_debugsymbols(Ref<DirAccess> &p_da, const
 			break;
 		}
 		String file = String::utf8(fname);
-		if (file.begins_with(vformat("godot_macos_%s.%s.dSYM/", template_name, p_arch))) {
-			file = file.trim_prefix(vformat("godot_macos_%s.%s.dSYM/", template_name, p_arch));
-			file = file.replace(vformat("godot_macos_%s.%s", template_name, p_arch), p_app_name);
+		if (file.begins_with(vformat("fade_macos_%s.%s.dSYM/", template_name, p_arch))) {
+			file = file.trim_prefix(vformat("fade_macos_%s.%s.dSYM/", template_name, p_arch));
+			file = file.replace(vformat("fade_macos_%s.%s", template_name, p_arch), p_app_name);
 
 			Vector<uint8_t> data;
 			data.resize(info.uncompressed_size);
@@ -1919,7 +1919,7 @@ Error EditorExportPlatformMacOS::_copy_debugsymbols_recursively(Ref<DirAccess> &
 			if (src_da->current_is_dir()) {
 				dirs.push_back(n);
 			} else {
-				const String &rel_path = n.replace(vformat("godot_macos_%s.%s", template_name, p_arch), p_app_name);
+				const String &rel_path = n.replace(vformat("fade_macos_%s.%s", template_name, p_arch), p_app_name);
 				if (!n.is_relative_path()) {
 					src_da->list_dir_end();
 					if (err != OK) {
@@ -1956,13 +1956,13 @@ Error EditorExportPlatformMacOS::_copy_debugsymbols_recursively(Ref<DirAccess> &
 }
 
 bool EditorExportPlatformMacOS::_copy_debugsymbols(Ref<DirAccess> &p_da, const String &p_path, const String &p_symbols_path, const String &p_app_name, const String &p_arch, bool p_debug, const Vector<String> &p_exec_ids, Vector<String> *r_symb_ids, Error &r_err) {
-	String sym_path = p_symbols_path.simplify_path().path_join(vformat("godot_macos_%s.%s", p_debug ? "debug" : "release", p_arch)) + ".dSYM";
+	String sym_path = p_symbols_path.simplify_path().path_join(vformat("fade_macos_%s.%s", p_debug ? "debug" : "release", p_arch)) + ".dSYM";
 	String zip_path = p_symbols_path.simplify_path().path_join(vformat("macos_%s.%s", p_debug ? "debug" : "release", p_arch)) + ".debugsymbols.zip";
 	String zip_path_full = p_symbols_path.simplify_path().path_join(vformat("FADE_v%s-%s_debugsymbols_macos_%s.%s", GODOT_VERSION_NUMBER, GODOT_VERSION_STATUS, p_debug ? "debug" : "release", p_arch)) + ".zip";
 
 	if (DirAccess::exists(sym_path)) {
 		print_verbose(vformat("Exporting debug symbols from %s, for architecture %s.", sym_path, p_arch));
-		Vector<String> symb_debug_ids = OS::get_singleton()->get_debug_build_id(sym_path.path_join("Contents").path_join("Resources").path_join("DWARF").path_join(vformat("godot_macos_%s.%s", p_debug ? "debug" : "release", p_arch)));
+		Vector<String> symb_debug_ids = OS::get_singleton()->get_debug_build_id(sym_path.path_join("Contents").path_join("Resources").path_join("DWARF").path_join(vformat("fade_macos_%s.%s", p_debug ? "debug" : "release", p_arch)));
 		if (!symb_debug_ids.is_empty()) {
 			int id_match = 0;
 			for (const String &E : symb_debug_ids) {
@@ -2033,9 +2033,9 @@ Error EditorExportPlatformMacOS::export_project(const Ref<EditorExportPreset> &p
 	int ret = unzGoToFirstFile(src_pkg_zip);
 
 	String architecture = p_preset->get("binary_format/architecture");
-	String binary_to_use = "godot_macos_" + String(p_debug ? "debug" : "release") + "." + architecture;
-	String binary_to_use_uni = "godot_macos_" + String(p_debug ? "debug" : "release") + ".universal";
-	String binary_to_use_base = "godot_macos_" + String(p_debug ? "debug" : "release") + ".";
+	String binary_to_use = "fade_macos_" + String(p_debug ? "debug" : "release") + "." + architecture;
+	String binary_to_use_uni = "fade_macos_" + String(p_debug ? "debug" : "release") + ".universal";
+	String binary_to_use_base = "fade_macos_" + String(p_debug ? "debug" : "release") + ".";
 
 	String pkg_name;
 	if (String(get_project_setting(p_preset, "application/config/name")) != "") {
@@ -2150,7 +2150,7 @@ Error EditorExportPlatformMacOS::export_project(const Ref<EditorExportPreset> &p
 
 	const String project_name = get_project_setting(p_preset, "application/config/name");
 	const Dictionary appnames = get_project_setting(p_preset, "application/config/name_localized");
-	const StringName domain_name = "godot.project_name_localization";
+	const StringName domain_name = "fade.project_name_localization";
 	Ref<TranslationDomain> domain = TranslationServer::get_singleton()->get_or_add_domain(domain_name);
 	TranslationServer::get_singleton()->load_project_translations(domain);
 	const Vector<String> locales = domain->get_loaded_locales();
@@ -2352,7 +2352,7 @@ Error EditorExportPlatformMacOS::export_project(const Ref<EditorExportPreset> &p
 			_fix_privacy_manifest(p_preset, data);
 		}
 
-		if (file.begins_with("Contents/MacOS/godot_")) {
+		if (file.begins_with("Contents/MacOS/fade_")) {
 			if (architecture == "universal") {
 				if (!file.begins_with("Contents/MacOS/" + binary_to_use_base)) {
 					ret = unzGoToNextFile(src_pkg_zip);

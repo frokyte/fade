@@ -49,7 +49,7 @@
 			<return type="GLTFObjectModelProperty" />
 			<param index="0" name="state" type="GLTFState" />
 			<param index="1" name="node_path" type="NodePath" />
-			<param index="2" name="godot_node" type="Node" />
+			<param index="2" name="fade_node" type="Node" />
 			<param index="3" name="gltf_node_index" type="int" />
 			<description>
 				Determines a mapping between the given FADE [param node_path] and the corresponding glTF Object Model JSON pointer(s) in the generated glTF file. The details of this mapping are returned in a [GLTFObjectModelProperty] object. Additional mappings can be supplied via the [method GLTFDocumentExtension._import_object_model_property] callback method.

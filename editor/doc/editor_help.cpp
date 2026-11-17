@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -76,10 +76,10 @@
 #include "modules/mono/csharp_script.h"
 #endif
 
-#define CONTRIBUTE_URL "https://contributing.godotengine.org/en/latest/development/documentation/class_reference.html"
+#define CONTRIBUTE_URL "https://contributing.fadeengine.org/en/latest/development/documentation/class_reference.html"
 
 #ifdef MODULE_MONO_ENABLED
-// Sync with the types mentioned in https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html
+// Sync with the types mentioned in https://docs.fadeengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html
 const Vector<String> classes_with_csharp_differences = {
 	"@GlobalScope",
 	"String",

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -40,7 +40,7 @@
 #if defined(VULKAN_ENABLED)
 #import "drivers/apple_embedded/rendering_context_driver_vulkan_apple_embedded.h"
 
-#include <drivers/vulkan/godot_vulkan.h>
+#include <drivers/vulkan/fade_vulkan.h>
 #endif // VULKAN_ENABLED
 
 #if defined(METAL_ENABLED)

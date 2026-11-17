@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -34,7 +34,7 @@
  * This file contains macros for error handling.
  *
  * For an overview, see:
- * https://docs.godotengine.org/en/latest/engine_details/architecture/common_engine_methods_and_macros.html#error-macros
+ * https://docs.fadeengine.org/en/latest/engine_details/architecture/common_engine_methods_and_macros.html#error-macros
  */
 
 #include "core/typedefs.h"

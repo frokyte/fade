@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -81,7 +81,7 @@
 #include "wayland/protocol/xdg_foreign_v1.gen.h"
 
 // Custom internal protocol.
-#include "wayland/protocol/godot_embedding_compositor.gen.h"
+#include "wayland/protocol/fade_embedding_compositor.gen.h"
 
 #ifdef LIBDECOR_ENABLED
 #ifdef SOWRAP_ENABLED
@@ -281,8 +281,8 @@ public:
 		// whether it's available.
 		uint32_t wp_fifo_manager_name = 0;
 
-		struct godot_embedding_compositor *godot_embedding_compositor = nullptr;
-		uint32_t godot_embedding_compositor_name = 0;
+		struct fade_embedding_compositor *fade_embedding_compositor = nullptr;
+		uint32_t fade_embedding_compositor_name = 0;
 	};
 
 	// General Wayland-specific states. Shouldn't be accessed directly.
@@ -523,7 +523,7 @@ public:
 
 		// Used for delta calculations.
 		// NOTE: The wp_pointer_gestures protocol keeps track of the total scale of
-		// the pinch gesture, while godot instead wants its delta.
+		// the pinch gesture, while fade instead wants its delta.
 		wl_fixed_t old_pinch_scale = 0;
 
 		struct wl_surface *cursor_surface = nullptr;
@@ -639,16 +639,16 @@ public:
 	};
 
 	struct EmbeddingCompositorState {
-		LocalVector<struct godot_embedded_client *> clients;
+		LocalVector<struct fade_embedded_client *> clients;
 
 		// Only a client per PID can create a window.
-		HashMap<int, struct godot_embedded_client *> mapped_clients;
+		HashMap<int, struct fade_embedded_client *> mapped_clients;
 
 		ProcessID focused_pid = -1;
 	};
 
 	struct EmbeddedClientState {
-		struct godot_embedding_compositor *embedding_compositor = nullptr;
+		struct fade_embedding_compositor *embedding_compositor = nullptr;
 
 		uint32_t pid = 0;
 		bool window_mapped = false;
@@ -663,7 +663,7 @@ private:
 	};
 
 	// FIXME: Is this the right thing to do?
-	inline static const char *proxy_tag = "godot";
+	inline static const char *proxy_tag = "fade";
 
 	Thread events_thread;
 	ThreadData thread_data;
@@ -915,12 +915,12 @@ private:
 
 	static void _xdg_activation_token_on_done(void *data, struct xdg_activation_token_v1 *xdg_activation_token, const char *token);
 
-	static void _godot_embedding_compositor_on_client(void *data, struct godot_embedding_compositor *godot_embedding_compositor, struct godot_embedded_client *godot_embedded_client, int32_t pid);
+	static void _fade_embedding_compositor_on_client(void *data, struct fade_embedding_compositor *fade_embedding_compositor, struct fade_embedded_client *fade_embedded_client, int32_t pid);
 
-	static void _godot_embedded_client_on_disconnected(void *data, struct godot_embedded_client *godot_embedded_client);
-	static void _godot_embedded_client_on_window_embedded(void *data, struct godot_embedded_client *godot_embedded_client);
-	static void _godot_embedded_client_on_window_focus_in(void *data, struct godot_embedded_client *godot_embedded_client);
-	static void _godot_embedded_client_on_window_focus_out(void *data, struct godot_embedded_client *godot_embedded_client);
+	static void _fade_embedded_client_on_disconnected(void *data, struct fade_embedded_client *fade_embedded_client);
+	static void _fade_embedded_client_on_window_embedded(void *data, struct fade_embedded_client *fade_embedded_client);
+	static void _fade_embedded_client_on_window_focus_in(void *data, struct fade_embedded_client *fade_embedded_client);
+	static void _fade_embedded_client_on_window_focus_out(void *data, struct fade_embedded_client *fade_embedded_client);
 
 	// Core Wayland event listeners.
 	static constexpr struct wl_registry_listener wl_registry_listener = {
@@ -1158,15 +1158,15 @@ private:
 	};
 
 	// FADE interfaces.
-	static constexpr struct godot_embedding_compositor_listener godot_embedding_compositor_listener = {
-		.client = _godot_embedding_compositor_on_client,
+	static constexpr struct fade_embedding_compositor_listener fade_embedding_compositor_listener = {
+		.client = _fade_embedding_compositor_on_client,
 	};
 
-	static constexpr struct godot_embedded_client_listener godot_embedded_client_listener = {
-		.disconnected = _godot_embedded_client_on_disconnected,
-		.window_embedded = _godot_embedded_client_on_window_embedded,
-		.window_focus_in = _godot_embedded_client_on_window_focus_in,
-		.window_focus_out = _godot_embedded_client_on_window_focus_out,
+	static constexpr struct fade_embedded_client_listener fade_embedded_client_listener = {
+		.disconnected = _fade_embedded_client_on_disconnected,
+		.window_embedded = _fade_embedded_client_on_window_embedded,
+		.window_focus_in = _fade_embedded_client_on_window_focus_in,
+		.window_focus_out = _fade_embedded_client_on_window_focus_out,
 	};
 
 #ifdef LIBDECOR_ENABLED
@@ -1246,8 +1246,8 @@ public:
 	struct wl_display *get_wl_display() const;
 
 	// Core Wayland utilities for integrating with our own data structures.
-	static bool wl_proxy_is_godot(struct wl_proxy *p_proxy);
-	static void wl_proxy_tag_godot(struct wl_proxy *p_proxy);
+	static bool wl_proxy_is_fade(struct wl_proxy *p_proxy);
+	static void wl_proxy_tag_fade(struct wl_proxy *p_proxy);
 
 	static WindowState *wl_surface_get_window_state(struct wl_surface *p_surface);
 	static ScreenState *wl_output_get_screen_state(struct wl_output *p_output);
@@ -1258,7 +1258,7 @@ public:
 	static OfferState *wp_primary_selection_offer_get_offer_state(struct zwp_primary_selection_offer_v1 *p_offer);
 	static ColorManagementState *wp_color_manager_get_state(wp_color_manager_v1 *p_color_manager);
 
-	static EmbeddingCompositorState *godot_embedding_compositor_get_state(struct godot_embedding_compositor *p_compositor);
+	static EmbeddingCompositorState *fade_embedding_compositor_get_state(struct fade_embedding_compositor *p_compositor);
 
 	void seat_state_unlock_pointer(SeatState *p_ss);
 	void seat_state_lock_pointer(SeatState *p_ss, struct wl_surface *p_surface);
@@ -1393,7 +1393,7 @@ public:
 
 	bool window_wait_ready(DisplayServerEnums::WindowID p_window_id, int p_timeout_ms);
 
-	struct godot_embedding_compositor *get_embedding_compositor();
+	struct fade_embedding_compositor *get_embedding_compositor();
 
 	ProcessID embedded_compositor_get_focused_pid();
 

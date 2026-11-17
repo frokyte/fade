@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,6 +30,6 @@
 
 #pragma once
 
-#import "godot_app_delegate_ios.h"
+#import "fade_app_delegate_ios.h"
 
 #import "drivers/apple_embedded/bridging_header_apple_embedded.h"

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -705,24 +705,24 @@ Error WaylandEmbedder::Client::send_wl_drm_capabilities(uint32_t wl_drm, uint32_
 // NOTE: Had to add `p_` prefix to `pid` due to shadowing issues. We'll likely
 // have to generate static *functions* that accept a LocalObjectHandle instead
 // of doing a Client *method*.
-Error WaylandEmbedder::Client::send_godot_embedding_compositor_client(uint32_t godot_embedding_compositor, uint32_t client, uint32_t p_pid) {
-	return send_wayland_event(socket, godot_embedding_compositor, godot_embedding_compositor_interface, GODOT_EMBEDDING_COMPOSITOR_CLIENT, { wl_arg_uint(client), wl_arg_uint(p_pid) });
+Error WaylandEmbedder::Client::send_fade_embedding_compositor_client(uint32_t fade_embedding_compositor, uint32_t client, uint32_t p_pid) {
+	return send_wayland_event(socket, fade_embedding_compositor, fade_embedding_compositor_interface, GODOT_EMBEDDING_COMPOSITOR_CLIENT, { wl_arg_uint(client), wl_arg_uint(p_pid) });
 }
 
-Error WaylandEmbedder::Client::send_godot_embedded_client_disconnected(uint32_t godot_embedded_client) {
-	return send_wayland_event(socket, godot_embedded_client, godot_embedded_client_interface, GODOT_EMBEDDED_CLIENT_DISCONNECTED, {});
+Error WaylandEmbedder::Client::send_fade_embedded_client_disconnected(uint32_t fade_embedded_client) {
+	return send_wayland_event(socket, fade_embedded_client, fade_embedded_client_interface, GODOT_EMBEDDED_CLIENT_DISCONNECTED, {});
 }
 
-Error WaylandEmbedder::Client::send_godot_embedded_client_window_embedded(uint32_t godot_embedded_client) {
-	return send_wayland_event(socket, godot_embedded_client, godot_embedded_client_interface, GODOT_EMBEDDED_CLIENT_WINDOW_EMBEDDED, {});
+Error WaylandEmbedder::Client::send_fade_embedded_client_window_embedded(uint32_t fade_embedded_client) {
+	return send_wayland_event(socket, fade_embedded_client, fade_embedded_client_interface, GODOT_EMBEDDED_CLIENT_WINDOW_EMBEDDED, {});
 }
 
-Error WaylandEmbedder::Client::send_godot_embedded_client_window_focus_in(uint32_t godot_embedded_client) {
-	return send_wayland_event(socket, godot_embedded_client, godot_embedded_client_interface, GODOT_EMBEDDED_CLIENT_WINDOW_FOCUS_IN, {});
+Error WaylandEmbedder::Client::send_fade_embedded_client_window_focus_in(uint32_t fade_embedded_client) {
+	return send_wayland_event(socket, fade_embedded_client, fade_embedded_client_interface, GODOT_EMBEDDED_CLIENT_WINDOW_FOCUS_IN, {});
 }
 
-Error WaylandEmbedder::Client::send_godot_embedded_client_window_focus_out(uint32_t godot_embedded_client) {
-	return send_wayland_event(socket, godot_embedded_client, godot_embedded_client_interface, GODOT_EMBEDDED_CLIENT_WINDOW_FOCUS_OUT, {});
+Error WaylandEmbedder::Client::send_fade_embedded_client_window_focus_out(uint32_t fade_embedded_client) {
+	return send_wayland_event(socket, fade_embedded_client, fade_embedded_client_interface, GODOT_EMBEDDED_CLIENT_WINDOW_FOCUS_OUT, {});
 }
 
 void WaylandEmbedder::cleanup_socket(int p_socket) {
@@ -871,7 +871,7 @@ void WaylandEmbedder::cleanup_socket(int p_socket) {
 		ERR_FAIL_NULL(eclient_data);
 
 		if (!eclient_data->disconnected) {
-			main_client->send_godot_embedded_client_disconnected(eclient_id);
+			main_client->send_fade_embedded_client_disconnected(eclient_id);
 		}
 
 		eclient_data->disconnected = true;
@@ -1257,7 +1257,7 @@ void WaylandEmbedder::seat_name_enter_surface(uint32_t p_seat_name, uint32_t p_w
 	}
 
 	if (client->socket != main_client->socket) {
-		main_client->send_godot_embedded_client_window_focus_in(client->embedded_client_id);
+		main_client->send_fade_embedded_client_window_focus_in(client->embedded_client_id);
 	}
 }
 
@@ -1289,7 +1289,7 @@ void WaylandEmbedder::seat_name_leave_surface(uint32_t p_seat_name, uint32_t p_w
 	}
 
 	if (client != main_client) {
-		main_client->send_godot_embedded_client_window_focus_out(client->embedded_client_id);
+		main_client->send_fade_embedded_client_window_focus_out(client->embedded_client_id);
 	}
 }
 
@@ -1555,7 +1555,7 @@ WaylandEmbedder::MessageStatus WaylandEmbedder::handle_request(LocalObjectHandle
 
 			version = MIN(global_info.version, version);
 
-			if (global_info.interface == &godot_embedding_compositor_interface) {
+			if (global_info.interface == &fade_embedding_compositor_interface) {
 				if (!client->registry_globals_instances.has(global_name)) {
 					client->registry_globals_instances[global_name] = {};
 				}
@@ -1563,7 +1563,7 @@ WaylandEmbedder::MessageStatus WaylandEmbedder::handle_request(LocalObjectHandle
 				client->registry_globals_instances[global_name].insert(new_local_id);
 				++global_info.instance_counter;
 				DEBUG_LOG_WAYLAND_EMBED_VERBOSE("Bound embedded compositor interface.");
-				client->new_fake_object(new_local_id, &godot_embedding_compositor_interface, 1);
+				client->new_fake_object(new_local_id, &fade_embedding_compositor_interface, 1);
 				return MessageStatus::HANDLED;
 			}
 
@@ -1890,7 +1890,7 @@ WaylandEmbedder::MessageStatus WaylandEmbedder::handle_request(LocalObjectHandle
 				client->new_fake_object(new_local_id, &xdg_toplevel_interface, object->version, data);
 				client->embedded_window_id = new_local_id;
 
-				main_client->send_godot_embedded_client_window_embedded(client->embedded_client_id);
+				main_client->send_fade_embedded_client_window_embedded(client->embedded_client_id);
 			} else {
 				uint32_t new_global_id = client->new_object(new_local_id, &xdg_toplevel_interface, object->version, data);
 				ERR_FAIL_COND_V(new_global_id == INVALID_ID, MessageStatus::HANDLED);
@@ -1994,7 +1994,7 @@ WaylandEmbedder::MessageStatus WaylandEmbedder::handle_request(LocalObjectHandle
 		}
 	}
 
-	if (interface == &godot_embedded_client_interface) {
+	if (interface == &fade_embedded_client_interface) {
 		EmbeddedClientData *eclient_data = (EmbeddedClientData *)object->data;
 		ERR_FAIL_NULL_V(eclient_data, MessageStatus::ERROR);
 
@@ -3209,7 +3209,7 @@ Error WaylandEmbedder::init(bool debug) {
 
 	int socket_id = 0;
 	while (socket_path.is_empty()) {
-		String test_socket_path = runtime_dir_path + "/godot-wayland-" + itos(socket_id);
+		String test_socket_path = runtime_dir_path + "/fade-wayland-" + itos(socket_id);
 		String test_socket_lock_path = test_socket_path + ".lock";
 
 		print_verbose(vformat("Trying to get socket %s", test_socket_path));
@@ -3249,11 +3249,11 @@ Error WaylandEmbedder::init(bool debug) {
 	pollfds.push_back({ compositor_socket, POLLIN, 0 });
 
 	RegistryGlobalInfo control_global_info = {};
-	control_global_info.interface = &godot_embedding_compositor_interface;
-	control_global_info.version = godot_embedding_compositor_interface.version;
+	control_global_info.interface = &fade_embedding_compositor_interface;
+	control_global_info.version = fade_embedding_compositor_interface.version;
 
-	godot_embedding_compositor_name = registry_globals_counter++;
-	registry_globals[godot_embedding_compositor_name] = control_global_info;
+	fade_embedding_compositor_name = registry_globals_counter++;
+	registry_globals[fade_embedding_compositor_name] = control_global_info;
 
 	{
 		uint32_t invalid_id = INVALID_ID;
@@ -3310,18 +3310,18 @@ void WaylandEmbedder::handle_fd(int p_fd, int p_revents) {
 			main_client = &client;
 		}
 
-		if (new_fd != main_client->socket && main_client->registry_globals_instances.has(godot_embedding_compositor_name)) {
+		if (new_fd != main_client->socket && main_client->registry_globals_instances.has(fade_embedding_compositor_name)) {
 			uint32_t new_local_id = main_client->allocate_server_id();
 
 			client.embedded_client_id = new_local_id;
 
-			for (uint32_t local_id : main_client->registry_globals_instances[godot_embedding_compositor_name]) {
+			for (uint32_t local_id : main_client->registry_globals_instances[fade_embedding_compositor_name]) {
 				EmbeddedClientData *eclient_data = memnew(EmbeddedClientData);
 				eclient_data->client = &client;
 
-				main_client->new_fake_object(new_local_id, &godot_embedded_client_interface, 1, eclient_data);
+				main_client->new_fake_object(new_local_id, &fade_embedded_client_interface, 1, eclient_data);
 
-				main_client->send_godot_embedding_compositor_client(local_id, new_local_id, cred.pid);
+				main_client->send_fade_embedding_compositor_client(local_id, new_local_id, cred.pid);
 			}
 		}
 

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -118,7 +118,7 @@ JPH::ShapeRefC JoltShape3D::with_scale(const JPH::Shape *p_shape, const Vector3 
 
 	const JPH::ScaledShapeSettings shape_settings(p_shape, to_jolt(p_scale));
 	const JPH::ShapeSettings::ShapeResult shape_result = shape_settings.Create();
-	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to scale shape with {scale=%v}. It returned the following error: '%s'.", p_scale, to_godot(shape_result.GetError())));
+	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to scale shape with {scale=%v}. It returned the following error: '%s'.", p_scale, to_fade(shape_result.GetError())));
 
 	return shape_result.Get();
 }
@@ -129,7 +129,7 @@ JPH::ShapeRefC JoltShape3D::with_basis_origin(const JPH::Shape *p_shape, const B
 	const JPH::RotatedTranslatedShapeSettings shape_settings(to_jolt(p_origin), to_jolt(p_basis), p_shape);
 
 	const JPH::ShapeSettings::ShapeResult shape_result = shape_settings.Create();
-	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to offset shape with {basis=%s origin=%v}. It returned the following error: '%s'.", p_basis, p_origin, to_godot(shape_result.GetError())));
+	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to offset shape with {basis=%s origin=%v}. It returned the following error: '%s'.", p_basis, p_origin, to_fade(shape_result.GetError())));
 
 	return shape_result.Get();
 }
@@ -139,7 +139,7 @@ JPH::ShapeRefC JoltShape3D::with_center_of_mass_offset(const JPH::Shape *p_shape
 
 	const JPH::OffsetCenterOfMassShapeSettings shape_settings(to_jolt(p_offset), p_shape);
 	const JPH::ShapeSettings::ShapeResult shape_result = shape_settings.Create();
-	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to offset center of mass with {offset=%v}. It returned the following error: '%s'.", p_offset, to_godot(shape_result.GetError())));
+	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to offset center of mass with {offset=%v}. It returned the following error: '%s'.", p_offset, to_fade(shape_result.GetError())));
 
 	return shape_result.Get();
 }
@@ -147,7 +147,7 @@ JPH::ShapeRefC JoltShape3D::with_center_of_mass_offset(const JPH::Shape *p_shape
 JPH::ShapeRefC JoltShape3D::with_center_of_mass(const JPH::Shape *p_shape, const Vector3 &p_center_of_mass) {
 	ERR_FAIL_NULL_V(p_shape, nullptr);
 
-	const Vector3 center_of_mass_inner = to_godot(p_shape->GetCenterOfMass());
+	const Vector3 center_of_mass_inner = to_fade(p_shape->GetCenterOfMass());
 	const Vector3 center_of_mass_offset = p_center_of_mass - center_of_mass_inner;
 
 	if (center_of_mass_offset == Vector3()) {
@@ -166,7 +166,7 @@ JPH::ShapeRefC JoltShape3D::with_instance_overrides(const JPH::Shape *p_shape, u
 	shape_settings.shape_back_face_collision = p_shape_has_back_face_collision;
 
 	const JPH::ShapeSettings::ShapeResult shape_result = shape_settings.Create();
-	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to set instance overrides on shape. It returned the following error: '%s'.", to_godot(shape_result.GetError())));
+	ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to set instance overrides on shape. It returned the following error: '%s'.", to_fade(shape_result.GetError())));
 
 	return shape_result.Get();
 }
@@ -196,7 +196,7 @@ JPH::ShapeRefC JoltShape3D::without_custom_shapes(const JPH::Shape *p_shape) {
 			}
 
 			const JPH::ShapeSettings::ShapeResult shape_result = settings.Create();
-			ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to recreate static compound shape during filtering of custom shapes. It returned the following error: '%s'.", to_godot(shape_result.GetError())));
+			ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to recreate static compound shape during filtering of custom shapes. It returned the following error: '%s'.", to_fade(shape_result.GetError())));
 
 			return shape_result.Get();
 		}
@@ -211,7 +211,7 @@ JPH::ShapeRefC JoltShape3D::without_custom_shapes(const JPH::Shape *p_shape) {
 			}
 
 			const JPH::ShapeSettings::ShapeResult shape_result = settings.Create();
-			ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to recreate mutable compound shape during filtering of custom shapes. It returned the following error: '%s'.", to_godot(shape_result.GetError())));
+			ERR_FAIL_COND_V_MSG(shape_result.HasError(), nullptr, vformat("Failed to recreate mutable compound shape during filtering of custom shapes. It returned the following error: '%s'.", to_fade(shape_result.GetError())));
 
 			return shape_result.Get();
 		}
@@ -262,7 +262,7 @@ JPH::ShapeRefC JoltShape3D::without_custom_shapes(const JPH::Shape *p_shape) {
 }
 
 Vector3 JoltShape3D::make_scale_valid(const JPH::Shape *p_shape, const Vector3 &p_scale) {
-	return to_godot(p_shape->MakeScaleValid(to_jolt(p_scale)));
+	return to_fade(p_shape->MakeScaleValid(to_jolt(p_scale)));
 }
 
 bool JoltShape3D::is_scale_valid(const Vector3 &p_scale, const Vector3 &p_valid_scale, real_t p_tolerance) {

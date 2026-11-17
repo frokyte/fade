@@ -22,7 +22,7 @@ if is_builtin or not has_module:
     # when building without the module.
     env_crypto.Prepend(
         CPPPATH=[
-            "#thirdparty/mbedtls/godot/",
+            "#thirdparty/mbedtls/fade/",
             "#thirdparty/mbedtls/include/",
             "#thirdparty/mbedtls/tf-psa-crypto/include/",
             "#thirdparty/mbedtls/tf-psa-crypto/drivers/builtin/include/",
@@ -30,16 +30,16 @@ if is_builtin or not has_module:
     )
     env_crypto.Append(
         CPPDEFINES=[
-            ("TF_PSA_CRYPTO_CONFIG_FILE", env_crypto.EscapeDefine("godot_psa_config.h")),
-            ("MBEDTLS_CONFIG_FILE", env_crypto.EscapeDefine("godot_mbedtls_config.h")),
+            ("TF_PSA_CRYPTO_CONFIG_FILE", env_crypto.EscapeDefine("fade_psa_config.h")),
+            ("MBEDTLS_CONFIG_FILE", env_crypto.EscapeDefine("fade_mbedtls_config.h")),
         ]
     )
-    configs = ["#thirdparty/mbedtls/godot/godot_psa_config.h", "#thirdparty/mbedtls/godot/godot_mbedtls_config.h"]
+    configs = ["#thirdparty/mbedtls/fade/fade_psa_config.h", "#thirdparty/mbedtls/fade/fade_mbedtls_config.h"]
     if not has_module:
         env_crypto.Append(CPPDEFINES=["GODOT_MBEDTLS_LIGHT"])
     # Our custom mbedTLS platform functions
     platform_obj = []
-    env_crypto.add_source_files(platform_obj, ["#thirdparty/mbedtls/godot/godot_mbedtls_platform.cpp"])
+    env_crypto.add_source_files(platform_obj, ["#thirdparty/mbedtls/fade/fade_mbedtls_platform.cpp"])
     env.core_sources += platform_obj
     env.Depends(platform_obj, configs)
 

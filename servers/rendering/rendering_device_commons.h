@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -35,7 +35,7 @@
 #define STEPIFY(m_number, m_alignment) ((((m_number) + ((m_alignment) - 1)) / (m_alignment)) * (m_alignment))
 
 // This may one day be used in FADE for interoperability between C arrays, Vector and LocalVector.
-// (See https://github.com/godotengine/godot-proposals/issues/5144.)
+// (See https://github.com/fadeengine/fade-proposals/issues/5144.)
 template <typename T>
 class VectorView {
 	const T *_ptr = nullptr;

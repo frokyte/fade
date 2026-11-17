@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -2225,7 +2225,7 @@ void GLTFDocument::_parse_image_save_image(Ref<GLTFState> p_state, const Vector<
 	if (Engine::get_singleton()->is_editor_hint() && handling == GLTFState::HandleBinaryImageMode::HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES) {
 		if (p_state->extract_path.is_empty()) {
 			WARN_PRINT("glTF: Couldn't extract image because the base and extract paths are empty. It will be loaded directly instead, uncompressed.");
-		} else if (p_state->extract_path.begins_with("res://.godot/imported")) {
+		} else if (p_state->extract_path.begins_with("res://.fade/imported")) {
 			WARN_PRINT(vformat("glTF: Extract path is in the imported directory. Image index '%d' will be loaded directly, uncompressed.", p_index));
 		} else {
 			if (p_image->get_name().is_empty()) {
@@ -2237,8 +2237,8 @@ void GLTFDocument::_parse_image_save_image(Ref<GLTFState> p_state, const Vector<
 			Vector<uint8_t> img_data = p_image->get_data();
 			Dictionary generator_parameters;
 			String file_path;
-			// If resource_uri is within res:// folder but outside of .godot/imported folder, use it.
-			if (!p_resource_uri.is_empty() && !p_resource_uri.begins_with("res://.godot/imported") && !p_resource_uri.begins_with("res://..")) {
+			// If resource_uri is within res:// folder but outside of .fade/imported folder, use it.
+			if (!p_resource_uri.is_empty() && !p_resource_uri.begins_with("res://.fade/imported") && !p_resource_uri.begins_with("res://..")) {
 				file_path = p_resource_uri;
 				must_import = true;
 				must_write = !FileAccess::exists(file_path);
@@ -3479,7 +3479,7 @@ Error GLTFDocument::_create_skins(Ref<GLTFState> p_state) {
 			}
 		}
 
-		gltf_skin->godot_skin = skin;
+		gltf_skin->fade_skin = skin;
 	}
 
 	// Purge the duplicates!
@@ -3487,7 +3487,7 @@ Error GLTFDocument::_create_skins(Ref<GLTFState> p_state) {
 
 	// Create unique names now, after removing duplicates
 	for (GLTFSkinIndex skin_i = 0; skin_i < p_state->skins.size(); ++skin_i) {
-		Ref<Skin> skin = p_state->skins.write[skin_i]->godot_skin;
+		Ref<Skin> skin = p_state->skins.write[skin_i]->fade_skin;
 		if (skin->get_name().is_empty()) {
 			// Make a unique name, no gltf node represents this skin
 			skin->set_name(_gen_unique_name(p_state, "Skin"));
@@ -3524,12 +3524,12 @@ bool GLTFDocument::_skins_are_same(const Ref<Skin> &p_skin_a, const Ref<Skin> &p
 void GLTFDocument::_remove_duplicate_skins(Ref<GLTFState> p_state) {
 	for (int i = 0; i < p_state->skins.size(); ++i) {
 		for (int j = i + 1; j < p_state->skins.size(); ++j) {
-			const Ref<Skin> skin_i = p_state->skins[i]->godot_skin;
-			const Ref<Skin> skin_j = p_state->skins[j]->godot_skin;
+			const Ref<Skin> skin_i = p_state->skins[i]->fade_skin;
+			const Ref<Skin> skin_j = p_state->skins[j]->fade_skin;
 
 			if (_skins_are_same(skin_i, skin_j)) {
 				// replace it and delete the old
-				p_state->skins.write[j]->godot_skin = skin_i;
+				p_state->skins.write[j]->fade_skin = skin_i;
 			}
 		}
 	}
@@ -3826,7 +3826,7 @@ Error GLTFDocument::_serialize_animations(Ref<GLTFState> p_state) {
 				sampler["input"] = GLTFAccessor::encode_new_accessor_from_float64s(p_state, pointer_track.times);
 				sampler["interpolation"] = interpolation_to_string(pointer_track.interpolation);
 				GLTFAccessor::GLTFComponentType component_type = obj_model_prop->get_component_type(pointer_track.values);
-				// TODO: This can be made faster after this pull request is merged: https://github.com/godotengine/godot/pull/109003
+				// TODO: This can be made faster after this pull request is merged: https://github.com/fadeengine/fade/pull/109003
 				Array values_arr = GLTFTemplateConvert::to_array(pointer_track.values);
 				sampler["output"] = GLTFAccessor::encode_new_accessor_from_variants(p_state, values_arr, obj_model_prop->get_variant_type(), obj_model_prop->get_accessor_type(), component_type);
 				samplers.push_back(sampler);
@@ -4083,7 +4083,7 @@ void GLTFDocument::_parse_animation_pointer(Ref<GLTFState> p_state, const String
 	channel.interpolation = p_interp;
 	channel.times = p_times;
 	Array values_arr = _decode_accessor_as_variants(p_state, p_output_value_accessor_index, obj_model_prop->get_variant_type());
-	// TODO: This can be made faster after this pull request is merged: https://github.com/godotengine/godot/pull/109003
+	// TODO: This can be made faster after this pull request is merged: https://github.com/fadeengine/fade/pull/109003
 	GLTFTemplateConvert::set_from_array(channel.values, values_arr);
 	anim_ptr_map[p_animation_json_pointer] = channel;
 }
@@ -4119,11 +4119,11 @@ void GLTFDocument::_assign_node_names(Ref<GLTFState> p_state) {
 	}
 }
 
-BoneAttachment3D *GLTFDocument::_generate_bone_attachment(Skeleton3D *p_godot_skeleton, const Ref<GLTFNode> &p_bone_node) {
+BoneAttachment3D *GLTFDocument::_generate_bone_attachment(Skeleton3D *p_fade_skeleton, const Ref<GLTFNode> &p_bone_node) {
 	BoneAttachment3D *bone_attachment = memnew(BoneAttachment3D);
 	print_verbose("glTF: Creating bone attachment for: " + p_bone_node->get_name());
 	bone_attachment->set_name(p_bone_node->get_name());
-	p_godot_skeleton->add_child(bone_attachment, true);
+	p_fade_skeleton->add_child(bone_attachment, true);
 	bone_attachment->set_bone_name(p_bone_node->get_name());
 	return bone_attachment;
 }
@@ -4501,7 +4501,7 @@ void GLTFDocument::_convert_skeleton_to_gltf(Skeleton3D *p_skeleton3d, Ref<GLTFS
 	gltf_skeleton.instantiate();
 	// GLTFSkeleton is only used to hold internal p_state data. It will not be written to the document.
 	//
-	gltf_skeleton->godot_skeleton = skeleton;
+	gltf_skeleton->fade_skeleton = skeleton;
 	GLTFSkeletonIndex skeleton_i = p_state->skeletons.size();
 	p_state->skeleton3d_to_gltf_skeleton[skeleton->get_instance_id()] = skeleton_i;
 	p_state->skeletons.push_back(gltf_skeleton);
@@ -4528,10 +4528,10 @@ void GLTFDocument::_convert_skeleton_to_gltf(Skeleton3D *p_skeleton3d, Ref<GLTFS
 		if (skeleton->get_bone_parent(bone_i) == -1) {
 			gltf_skeleton->roots.push_back(current_node_i);
 		}
-		gltf_skeleton->godot_bone_node.insert(bone_i, current_node_i);
+		gltf_skeleton->fade_bone_node.insert(bone_i, current_node_i);
 	}
 	for (BoneId bone_i = 0; bone_i < bone_count; bone_i++) {
-		GLTFNodeIndex current_node_i = gltf_skeleton->godot_bone_node[bone_i];
+		GLTFNodeIndex current_node_i = gltf_skeleton->fade_bone_node[bone_i];
 		BoneId parent_bone_id = skeleton->get_bone_parent(bone_i);
 		if (parent_bone_id == -1) {
 			if (p_parent_node_index != -1) {
@@ -4539,7 +4539,7 @@ void GLTFDocument::_convert_skeleton_to_gltf(Skeleton3D *p_skeleton3d, Ref<GLTFS
 				p_state->nodes.write[p_parent_node_index]->children.push_back(current_node_i);
 			}
 		} else {
-			GLTFNodeIndex parent_node_i = gltf_skeleton->godot_bone_node[parent_bone_id];
+			GLTFNodeIndex parent_node_i = gltf_skeleton->fade_bone_node[parent_bone_id];
 			p_state->nodes.write[current_node_i]->parent = parent_node_i;
 			p_state->nodes.write[parent_node_i]->children.push_back(current_node_i);
 		}
@@ -4623,10 +4623,10 @@ bool GLTFDocument::_does_skinned_mesh_require_placeholder_node(Ref<GLTFState> p_
 		}
 		// Edge case: If a child's skeleton is not yet in the tree, then we must add it as a child of this node.
 		// While the Skeleton3D node isn't a glTF node, it's still a case where we need a placeholder.
-		// This is required to handle this issue: https://github.com/godotengine/godot/issues/67773
+		// This is required to handle this issue: https://github.com/fadeengine/fade/issues/67773
 		const GLTFSkeletonIndex skel_index = child->skeleton;
 		ERR_FAIL_INDEX_V(skel_index, p_state->skeletons.size(), false);
-		if (p_state->skeletons[skel_index]->godot_skeleton->get_parent() == nullptr) {
+		if (p_state->skeletons[skel_index]->fade_skeleton->get_parent() == nullptr) {
 			return true;
 		}
 	}
@@ -4657,8 +4657,8 @@ void GLTFDocument::_generate_scene_node(Ref<GLTFState> p_state, const GLTFNodeIn
 				Node3D *placeholder;
 				// We need a placeholder, but maybe the Skeleton3D *is* the placeholder?
 				const GLTFSkeletonIndex skel_index = gltf_node->skeleton;
-				if (skel_index >= 0 && skel_index < p_state->skeletons.size() && p_state->skeletons[skel_index]->godot_skeleton->get_parent() == nullptr) {
-					placeholder = p_state->skeletons[skel_index]->godot_skeleton;
+				if (skel_index >= 0 && skel_index < p_state->skeletons.size() && p_state->skeletons[skel_index]->fade_skeleton->get_parent() == nullptr) {
+					placeholder = p_state->skeletons[skel_index]->fade_skeleton;
 				} else {
 					placeholder = _generate_spatial(p_state, p_node_index);
 				}
@@ -4722,48 +4722,48 @@ void GLTFDocument::_generate_scene_node(Ref<GLTFState> p_state, const GLTFNodeIn
 void GLTFDocument::_generate_skeleton_bone_node(Ref<GLTFState> p_state, const GLTFNodeIndex p_node_index, Node3D *p_current_node, Node *p_scene_parent, Node *p_scene_root) {
 	Ref<GLTFNode> gltf_node = p_state->nodes[p_node_index];
 	// Grab the current skeleton, and ensure it's added to the tree.
-	Skeleton3D *godot_skeleton = p_state->skeletons[gltf_node->skeleton]->godot_skeleton;
-	if (godot_skeleton->get_parent() == nullptr) {
+	Skeleton3D *fade_skeleton = p_state->skeletons[gltf_node->skeleton]->fade_skeleton;
+	if (fade_skeleton->get_parent() == nullptr) {
 		if (p_scene_root) {
 			if (Object::cast_to<Skeleton3D>(p_scene_parent)) {
 				Skeleton3D *parent_skeleton = Object::cast_to<Skeleton3D>(p_scene_parent);
 				// Explicitly specifying the bone of the parent glTF node is required to
 				// handle the edge case where a skeleton is a child of another skeleton.
-				_attach_node_to_skeleton(p_state, p_node_index, godot_skeleton, parent_skeleton, p_scene_root, gltf_node->parent);
+				_attach_node_to_skeleton(p_state, p_node_index, fade_skeleton, parent_skeleton, p_scene_root, gltf_node->parent);
 			} else {
-				p_scene_parent->add_child(godot_skeleton, true);
-				godot_skeleton->set_owner(p_scene_root);
+				p_scene_parent->add_child(fade_skeleton, true);
+				fade_skeleton->set_owner(p_scene_root);
 			}
 		} else {
-			p_scene_root = godot_skeleton;
+			p_scene_root = fade_skeleton;
 		}
 	}
-	_attach_node_to_skeleton(p_state, p_node_index, p_current_node, godot_skeleton, p_scene_root);
+	_attach_node_to_skeleton(p_state, p_node_index, p_current_node, fade_skeleton, p_scene_root);
 }
 
-void GLTFDocument::_attach_node_to_skeleton(Ref<GLTFState> p_state, const GLTFNodeIndex p_node_index, Node3D *p_current_node, Skeleton3D *p_godot_skeleton, Node *p_scene_root, GLTFNodeIndex p_bone_node_index) {
-	ERR_FAIL_NULL(p_godot_skeleton->get_parent());
+void GLTFDocument::_attach_node_to_skeleton(Ref<GLTFState> p_state, const GLTFNodeIndex p_node_index, Node3D *p_current_node, Skeleton3D *p_fade_skeleton, Node *p_scene_root, GLTFNodeIndex p_bone_node_index) {
+	ERR_FAIL_NULL(p_fade_skeleton->get_parent());
 	Ref<GLTFNode> gltf_node = p_state->nodes[p_node_index];
 	if (Object::cast_to<ImporterMeshInstance3D>(p_current_node) && gltf_node->skin >= 0) {
 		// Skinned meshes should be attached directly to the skeleton without a BoneAttachment3D.
 		ERR_FAIL_COND_MSG(p_current_node->get_child_count() > 0, "Skinned mesh nodes passed to this function should not have children (a placeholder should be inserted by `_generate_scene_node`).");
-		p_godot_skeleton->add_child(p_current_node, true);
+		p_fade_skeleton->add_child(p_current_node, true);
 	} else if (p_current_node || !gltf_node->joint) {
 		// If we have a node in need of attaching, we need a BoneAttachment3D.
 		// This happens when a node in Blender has Relations -> Parent set to a bone.
 		GLTFNodeIndex attachment_node_index = likely(p_bone_node_index == -1) ? (gltf_node->joint ? p_node_index : gltf_node->parent) : p_bone_node_index;
 		ERR_FAIL_COND(!p_state->scene_nodes.has(attachment_node_index));
-		Node *attachment_godot_node = p_state->scene_nodes[attachment_node_index];
+		Node *attachment_fade_node = p_state->scene_nodes[attachment_node_index];
 		// If the parent is a Skeleton3D, we need to make a BoneAttachment3D.
-		if (Object::cast_to<Skeleton3D>(attachment_godot_node)) {
+		if (Object::cast_to<Skeleton3D>(attachment_fade_node)) {
 			Ref<GLTFNode> attachment_gltf_node = p_state->nodes[attachment_node_index];
-			BoneAttachment3D *bone_attachment = _generate_bone_attachment(p_godot_skeleton, attachment_gltf_node);
+			BoneAttachment3D *bone_attachment = _generate_bone_attachment(p_fade_skeleton, attachment_gltf_node);
 			bone_attachment->set_owner(p_scene_root);
 			bone_attachment->merge_meta_from(*p_state->nodes[attachment_node_index]);
 			p_state->scene_nodes.insert(attachment_node_index, bone_attachment);
-			attachment_godot_node = bone_attachment;
+			attachment_fade_node = bone_attachment;
 		}
-		// By this point, `attachment_godot_node` is either a BoneAttachment3D or part of a BoneAttachment3D subtree.
+		// By this point, `attachment_fade_node` is either a BoneAttachment3D or part of a BoneAttachment3D subtree.
 		// If the node is a plain non-joint, we should generate a FADE node for it.
 		if (p_current_node == nullptr) {
 			DEV_ASSERT(!gltf_node->joint);
@@ -4773,12 +4773,12 @@ void GLTFDocument::_attach_node_to_skeleton(Ref<GLTFState> p_state, const GLTFNo
 			p_current_node->set_transform(gltf_node->transform);
 		}
 		p_current_node->set_name(gltf_node->get_name());
-		attachment_godot_node->add_child(p_current_node, true);
+		attachment_fade_node->add_child(p_current_node, true);
 	} else {
 		// If this glTF is a plain joint, this glTF node only becomes a FADE bone.
 		// We refer to the skeleton itself as this glTF node's corresponding FADE node.
 		// This may be overridden later if the joint has a non-joint as a child in need of an attachment.
-		p_current_node = p_godot_skeleton;
+		p_current_node = p_fade_skeleton;
 	}
 	_set_node_tree_owner(p_current_node, p_scene_root);
 	p_current_node->merge_meta_from(*gltf_node);
@@ -4894,7 +4894,7 @@ void GLTFDocument::_generate_skeleton_bone_node_compat_4pt4(Ref<GLTFState> p_sta
 
 	Node3D *current_node = nullptr;
 
-	Skeleton3D *skeleton = p_state->skeletons[gltf_node->skeleton]->godot_skeleton;
+	Skeleton3D *skeleton = p_state->skeletons[gltf_node->skeleton]->fade_skeleton;
 	// In this case, this node is already a bone in skeleton.
 	const bool is_skinned_mesh = (gltf_node->skin >= 0 && gltf_node->mesh >= 0);
 	const bool requires_extra_node = (gltf_node->mesh >= 0 || gltf_node->camera >= 0 || gltf_node->light >= 0);
@@ -5390,9 +5390,9 @@ void GLTFDocument::_append_khr_texture_transform_ext_json_pointer(PackedStringAr
 	}
 }
 
-Ref<GLTFObjectModelProperty> GLTFDocument::export_object_model_property(Ref<GLTFState> p_state, const NodePath &p_node_path, const Node *p_godot_node, GLTFNodeIndex p_gltf_node_index) {
+Ref<GLTFObjectModelProperty> GLTFDocument::export_object_model_property(Ref<GLTFState> p_state, const NodePath &p_node_path, const Node *p_fade_node, GLTFNodeIndex p_gltf_node_index) {
 	Ref<GLTFObjectModelProperty> ret;
-	const Object *target_object = p_godot_node;
+	const Object *target_object = p_fade_node;
 	const Vector<StringName> subpath = p_node_path.get_subnames();
 	ERR_FAIL_COND_V_MSG(subpath.is_empty(), ret, "glTF: Cannot export empty property. No property was specified in the NodePath: " + String(p_node_path));
 	int target_prop_depth = 0;
@@ -5609,7 +5609,7 @@ Ref<GLTFObjectModelProperty> GLTFDocument::export_object_model_property(Ref<GLTF
 	} else {
 		// We don't have a mapping, so we need to ask GLTFDocumentExtension classes if they have a mapping.
 		for (Ref<GLTFDocumentExtension> ext : get_all_gltf_document_extensions()) {
-			ret = ext->export_object_model_property(p_state, p_node_path, p_godot_node, p_gltf_node_index, target_object, target_prop_depth);
+			ret = ext->export_object_model_property(p_state, p_node_path, p_fade_node, p_gltf_node_index, target_object, target_prop_depth);
 			if (ret.is_valid() && ret->has_json_pointers()) {
 				if (!ret->has_node_paths()) {
 					ret->set_node_paths({ p_node_path });
@@ -5669,7 +5669,7 @@ void GLTFDocument::_import_animation(Ref<GLTFState> p_state, AnimationPlayer *p_
 		}
 
 		if (gltf_node->skeleton >= 0) {
-			const Skeleton3D *sk = p_state->skeletons[gltf_node->skeleton]->godot_skeleton;
+			const Skeleton3D *sk = p_state->skeletons[gltf_node->skeleton]->fade_skeleton;
 			ERR_FAIL_NULL(sk);
 
 			const String path = String(p_animation_player->get_parent()->get_path_to(sk));
@@ -5916,12 +5916,12 @@ void GLTFDocument::_import_animation(Ref<GLTFState> p_state, AnimationPlayer *p_
 			}
 		}
 		// Begin converting the glTF animation to a FADE animation.
-		const Ref<Expression> gltf_to_godot_expr = prop->get_gltf_to_godot_expression();
-		const bool is_gltf_to_godot_expr_valid = gltf_to_godot_expr.is_valid();
+		const Ref<Expression> gltf_to_fade_expr = prop->get_gltf_to_fade_expression();
+		const bool is_gltf_to_fade_expr_valid = gltf_to_fade_expr.is_valid();
 		for (const NodePath node_path : prop->get_node_paths()) {
 			// If using an expression, determine the base instance to pass to the expression.
 			Object *base_instance = nullptr;
-			if (is_gltf_to_godot_expr_valid) {
+			if (is_gltf_to_fade_expr_valid) {
 				Ref<Resource> resource;
 				Vector<StringName> leftover_subpath;
 				base_instance = scene_root->get_node_and_resource(node_path, resource, leftover_subpath);
@@ -5932,15 +5932,15 @@ void GLTFDocument::_import_animation(Ref<GLTFState> p_state, AnimationPlayer *p_
 			// Add a track and insert all keys and values.
 			const int track_index = animation->get_track_count();
 			animation->add_track(Animation::TYPE_VALUE);
-			animation->track_set_interpolation_type(track_index, GLTFAnimation::gltf_to_godot_interpolation(channel.interpolation));
+			animation->track_set_interpolation_type(track_index, GLTFAnimation::gltf_to_fade_interpolation(channel.interpolation));
 			animation->track_set_path(track_index, node_path);
 			for (int i = 0; i < channel.times.size(); i++) {
 				const double time = channel.times[i];
 				Variant value = channel.values[i];
-				if (is_gltf_to_godot_expr_valid) {
+				if (is_gltf_to_fade_expr_valid) {
 					Array inputs;
 					inputs.append(value);
-					value = gltf_to_godot_expr->execute(inputs, base_instance);
+					value = gltf_to_fade_expr->execute(inputs, base_instance);
 				}
 				animation->track_insert_key(track_index, time, value);
 			}
@@ -5977,26 +5977,26 @@ void GLTFDocument::_convert_mesh_instances(Ref<GLTFState> p_state) {
 		node->transform = mi->get_transform();
 
 		Node *skel_node = mi->get_node_or_null(mi->get_skeleton_path());
-		Skeleton3D *godot_skeleton = Object::cast_to<Skeleton3D>(skel_node);
-		if (!godot_skeleton || godot_skeleton->get_bone_count() == 0) {
+		Skeleton3D *fade_skeleton = Object::cast_to<Skeleton3D>(skel_node);
+		if (!fade_skeleton || fade_skeleton->get_bone_count() == 0) {
 			continue;
 		}
 		// At this point in the code, we know we have a Skeleton3D with at least one bone.
 		Ref<Skin> skin = mi->get_skin();
 		Ref<GLTFSkin> gltf_skin;
 		gltf_skin.instantiate();
-		if (p_state->skeleton3d_to_gltf_skeleton.has(godot_skeleton->get_instance_id())) {
+		if (p_state->skeleton3d_to_gltf_skeleton.has(fade_skeleton->get_instance_id())) {
 			// This is a skinned mesh. If the mesh has no ARRAY_WEIGHTS or ARRAY_BONES, it will be invisible.
-			const GLTFSkeletonIndex skeleton_gltf_i = p_state->skeleton3d_to_gltf_skeleton[godot_skeleton->get_instance_id()];
+			const GLTFSkeletonIndex skeleton_gltf_i = p_state->skeleton3d_to_gltf_skeleton[fade_skeleton->get_instance_id()];
 			Ref<GLTFSkeleton> gltf_skeleton = p_state->skeletons[skeleton_gltf_i];
-			int bone_cnt = godot_skeleton->get_bone_count();
+			int bone_cnt = fade_skeleton->get_bone_count();
 			ERR_FAIL_COND(bone_cnt != gltf_skeleton->joints.size());
 
 			ObjectID gltf_skin_key;
 			if (skin.is_valid()) {
 				gltf_skin_key = skin->get_instance_id();
 			}
-			ObjectID gltf_skel_key = godot_skeleton->get_instance_id();
+			ObjectID gltf_skel_key = fade_skeleton->get_instance_id();
 			GLTFSkinIndex skin_gltf_i = -1;
 			GLTFNodeIndex root_gltf_i = -1;
 			if (!gltf_skeleton->roots.is_empty()) {
@@ -6007,17 +6007,17 @@ void GLTFDocument::_convert_mesh_instances(Ref<GLTFState> p_state) {
 			} else {
 				if (skin.is_null()) {
 					// Note that gltf_skin_key should remain null, so these can share a reference.
-					skin = godot_skeleton->create_skin_from_rest_transforms();
+					skin = fade_skeleton->create_skin_from_rest_transforms();
 				}
 				gltf_skin.instantiate();
-				gltf_skin->godot_skin = skin;
+				gltf_skin->fade_skin = skin;
 				gltf_skin->set_name(skin->get_name());
 				gltf_skin->skeleton = skeleton_gltf_i;
 				gltf_skin->skin_root = root_gltf_i;
-				//gltf_state->godot_to_gltf_node[skel_node]
+				//gltf_state->fade_to_gltf_node[skel_node]
 				HashMap<StringName, int> bone_name_to_idx;
 				for (int bone_i = 0; bone_i < bone_cnt; bone_i++) {
-					bone_name_to_idx[godot_skeleton->get_bone_name(bone_i)] = bone_i;
+					bone_name_to_idx[fade_skeleton->get_bone_name(bone_i)] = bone_i;
 				}
 				for (int bind_i = 0, cnt = skin->get_bind_count(); bind_i < cnt; bind_i++) {
 					int bone_i = skin->get_bind_bone(bind_i);
@@ -6028,15 +6028,15 @@ void GLTFDocument::_convert_mesh_instances(Ref<GLTFState> p_state) {
 					}
 					ERR_CONTINUE(bone_i < 0 || bone_i >= bone_cnt);
 					if (bind_name == StringName()) {
-						bind_name = godot_skeleton->get_bone_name(bone_i);
+						bind_name = fade_skeleton->get_bone_name(bone_i);
 					}
-					Vector3 skin_scale = godot_skeleton->get_bone_skin_scale(bone_i);
+					Vector3 skin_scale = fade_skeleton->get_bone_skin_scale(bone_i);
 					bind_pose = bind_pose.scaled(skin_scale);
 					GLTFNodeIndex skeleton_bone_i = gltf_skeleton->joints[bone_i];
 					gltf_skin->joints_original.push_back(skeleton_bone_i);
 					gltf_skin->joints.push_back(skeleton_bone_i);
 					gltf_skin->inverse_binds.push_back(bind_pose);
-					if (godot_skeleton->get_bone_parent(bone_i) == -1) {
+					if (fade_skeleton->get_bone_parent(bone_i) == -1) {
 						gltf_skin->roots.push_back(skeleton_bone_i);
 					}
 					gltf_skin->joint_i_to_bone_i[bind_i] = bone_i;
@@ -6104,7 +6104,7 @@ void GLTFDocument::_process_mesh_instances(Ref<GLTFState> p_state, Node *p_scene
 
 			const GLTFSkeletonIndex skel_i = p_state->skins.write[node->skin]->skeleton;
 			Ref<GLTFSkeleton> gltf_skeleton = p_state->skeletons.write[skel_i];
-			Skeleton3D *skeleton = gltf_skeleton->godot_skeleton;
+			Skeleton3D *skeleton = gltf_skeleton->fade_skeleton;
 			ERR_CONTINUE_MSG(skeleton == nullptr, vformat("Unable to find Skeleton for node %d skin %d", node_i, skin_i));
 
 			mi->get_parent()->remove_child(mi);
@@ -6112,15 +6112,15 @@ void GLTFDocument::_process_mesh_instances(Ref<GLTFState> p_state, Node *p_scene
 			skeleton->add_child(mi, true);
 			mi->set_owner(p_scene_root);
 
-			mi->set_skin(p_state->skins.write[skin_i]->godot_skin);
+			mi->set_skin(p_state->skins.write[skin_i]->fade_skin);
 			mi->set_skeleton_path(mi->get_path_to(skeleton));
 			mi->set_transform(Transform3D());
 		}
 	}
 }
 
-GLTFNodeIndex GLTFDocument::_node_and_or_bone_to_gltf_node_index(Ref<GLTFState> p_state, const Vector<StringName> &p_node_subpath, const Node *p_godot_node) {
-	const Skeleton3D *skeleton = Object::cast_to<Skeleton3D>(p_godot_node);
+GLTFNodeIndex GLTFDocument::_node_and_or_bone_to_gltf_node_index(Ref<GLTFState> p_state, const Vector<StringName> &p_node_subpath, const Node *p_fade_node) {
+	const Skeleton3D *skeleton = Object::cast_to<Skeleton3D>(p_fade_node);
 	if (skeleton && p_node_subpath.size() == 1) {
 		// Special case: Handle skeleton bone TRS tracks. They use the format `A/B/C/Skeleton3D:bone_name`.
 		// We have a Skeleton3D, check if it has a bone with the same name as this subpath.
@@ -6130,8 +6130,8 @@ GLTFNodeIndex GLTFDocument::_node_and_or_bone_to_gltf_node_index(Ref<GLTFState> 
 			// A bone was found! But we still need to figure out which glTF node it corresponds to.
 			for (GLTFSkeletonIndex skeleton_i = 0; skeleton_i < p_state->skeletons.size(); skeleton_i++) {
 				const Ref<GLTFSkeleton> &skeleton_gltf = p_state->skeletons[skeleton_i];
-				if (skeleton == skeleton_gltf->godot_skeleton) {
-					GLTFNodeIndex node_i = skeleton_gltf->godot_bone_node[bone_index];
+				if (skeleton == skeleton_gltf->fade_skeleton) {
+					GLTFNodeIndex node_i = skeleton_gltf->fade_bone_node[bone_index];
 					return node_i;
 				}
 			}
@@ -6140,7 +6140,7 @@ GLTFNodeIndex GLTFDocument::_node_and_or_bone_to_gltf_node_index(Ref<GLTFState> 
 	}
 	// General case: Not a skeleton bone, usually this means a normal node, or it could be the Skeleton3D itself.
 	for (const KeyValue<GLTFNodeIndex, Node *> &scene_node_i : p_state->scene_nodes) {
-		if (scene_node_i.value == p_godot_node) {
+		if (scene_node_i.value == p_fade_node) {
 			return scene_node_i.key;
 		}
 	}
@@ -6148,8 +6148,8 @@ GLTFNodeIndex GLTFDocument::_node_and_or_bone_to_gltf_node_index(Ref<GLTFState> 
 }
 
 template <typename T>
-static inline Error _try_interpolate_value_track(const Ref<Animation> &p_godot_animation, int32_t p_godot_anim_track_index, double p_time, T &r_value) {
-	Variant val = p_godot_animation->value_track_interpolate(p_godot_anim_track_index, p_time, false);
+static inline Error _try_interpolate_value_track(const Ref<Animation> &p_fade_animation, int32_t p_fade_anim_track_index, double p_time, T &r_value) {
+	Variant val = p_fade_animation->value_track_interpolate(p_fade_anim_track_index, p_time, false);
 	if (val.get_type() != GetTypeInfo<T>::VARIANT_TYPE) {
 		return ERR_INVALID_PARAMETER;
 	}
@@ -6157,13 +6157,13 @@ static inline Error _try_interpolate_value_track(const Ref<Animation> &p_godot_a
 	return OK;
 }
 
-bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAnimation::NodeTrack &p_gltf_node_track, const Ref<Animation> &p_godot_animation, int32_t p_godot_anim_track_index, Vector<double> &p_times) {
-	GLTFAnimation::Interpolation gltf_interpolation = GLTFAnimation::godot_to_gltf_interpolation(p_godot_animation, p_godot_anim_track_index);
-	const Animation::TrackType track_type = p_godot_animation->track_get_type(p_godot_anim_track_index);
-	const int32_t key_count = p_godot_animation->track_get_key_count(p_godot_anim_track_index);
-	const NodePath node_path = p_godot_animation->track_get_path(p_godot_anim_track_index);
+bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAnimation::NodeTrack &p_gltf_node_track, const Ref<Animation> &p_fade_animation, int32_t p_fade_anim_track_index, Vector<double> &p_times) {
+	GLTFAnimation::Interpolation gltf_interpolation = GLTFAnimation::fade_to_gltf_interpolation(p_fade_animation, p_fade_anim_track_index);
+	const Animation::TrackType track_type = p_fade_animation->track_get_type(p_fade_anim_track_index);
+	const int32_t key_count = p_fade_animation->track_get_key_count(p_fade_anim_track_index);
+	const NodePath node_path = p_fade_animation->track_get_path(p_fade_anim_track_index);
 	const Vector<StringName> subpath = node_path.get_subnames();
-	double anim_end = p_godot_animation->get_length();
+	double anim_end = p_fade_animation->get_length();
 	if (track_type == Animation::TYPE_SCALE_3D) {
 		if (gltf_interpolation == GLTFAnimation::INTERP_CUBIC_SPLINE) {
 			gltf_interpolation = GLTFAnimation::INTERP_LINEAR;
@@ -6175,12 +6175,12 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 			bool last = false;
 			while (true) {
 				Vector3 scale;
-				Error err = p_godot_animation->try_scale_track_interpolate(p_godot_anim_track_index, time, &scale);
+				Error err = p_fade_animation->try_scale_track_interpolate(p_fade_anim_track_index, time, &scale);
 				if (err == OK) {
 					p_gltf_node_track.scale_track.values.push_back(scale);
 					p_gltf_node_track.scale_track.times.push_back(time);
 				} else {
-					ERR_PRINT(vformat("Error interpolating animation %s scale track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+					ERR_PRINT(vformat("Error interpolating animation %s scale track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 				}
 				if (last) {
 					break;
@@ -6197,7 +6197,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 			p_gltf_node_track.scale_track.values.resize(key_count);
 			for (int32_t key_i = 0; key_i < key_count; key_i++) {
 				Vector3 scale;
-				Error err = p_godot_animation->scale_track_get_key(p_godot_anim_track_index, key_i, &scale);
+				Error err = p_fade_animation->scale_track_get_key(p_fade_anim_track_index, key_i, &scale);
 				ERR_CONTINUE(err != OK);
 				p_gltf_node_track.scale_track.values.write[key_i] = scale;
 			}
@@ -6213,12 +6213,12 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 			bool last = false;
 			while (true) {
 				Vector3 scale;
-				Error err = p_godot_animation->try_position_track_interpolate(p_godot_anim_track_index, time, &scale);
+				Error err = p_fade_animation->try_position_track_interpolate(p_fade_anim_track_index, time, &scale);
 				if (err == OK) {
 					p_gltf_node_track.position_track.values.push_back(scale);
 					p_gltf_node_track.position_track.times.push_back(time);
 				} else {
-					ERR_PRINT(vformat("Error interpolating animation %s position track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+					ERR_PRINT(vformat("Error interpolating animation %s position track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 				}
 				if (last) {
 					break;
@@ -6235,7 +6235,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 			p_gltf_node_track.position_track.interpolation = gltf_interpolation;
 			for (int32_t key_i = 0; key_i < key_count; key_i++) {
 				Vector3 position;
-				Error err = p_godot_animation->position_track_get_key(p_godot_anim_track_index, key_i, &position);
+				Error err = p_fade_animation->position_track_get_key(p_fade_anim_track_index, key_i, &position);
 				ERR_CONTINUE(err != OK);
 				p_gltf_node_track.position_track.values.write[key_i] = position;
 			}
@@ -6251,12 +6251,12 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 			bool last = false;
 			while (true) {
 				Quaternion rotation;
-				Error err = p_godot_animation->try_rotation_track_interpolate(p_godot_anim_track_index, time, &rotation);
+				Error err = p_fade_animation->try_rotation_track_interpolate(p_fade_anim_track_index, time, &rotation);
 				if (err == OK) {
 					p_gltf_node_track.rotation_track.values.push_back(rotation);
 					p_gltf_node_track.rotation_track.times.push_back(time);
 				} else {
-					ERR_PRINT(vformat("Error interpolating animation %s value rotation track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+					ERR_PRINT(vformat("Error interpolating animation %s value rotation track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 				}
 				if (last) {
 					break;
@@ -6273,7 +6273,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 			p_gltf_node_track.rotation_track.interpolation = gltf_interpolation;
 			for (int32_t key_i = 0; key_i < key_count; key_i++) {
 				Quaternion rotation;
-				Error err = p_godot_animation->rotation_track_get_key(p_godot_anim_track_index, key_i, &rotation);
+				Error err = p_fade_animation->rotation_track_get_key(p_fade_anim_track_index, key_i, &rotation);
 				ERR_CONTINUE(err != OK);
 				p_gltf_node_track.rotation_track.values.write[key_i] = rotation;
 			}
@@ -6296,12 +6296,12 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					bool last = false;
 					while (true) {
 						Vector3 position;
-						Error err = _try_interpolate_value_track(p_godot_animation, p_godot_anim_track_index, time, position);
+						Error err = _try_interpolate_value_track(p_fade_animation, p_fade_anim_track_index, time, position);
 						if (err == OK) {
 							p_gltf_node_track.position_track.values.push_back(position);
 							p_gltf_node_track.position_track.times.push_back(time);
 						} else {
-							ERR_PRINT(vformat("Error interpolating animation %s value position track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+							ERR_PRINT(vformat("Error interpolating animation %s value position track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 						}
 						if (last) {
 							break;
@@ -6314,7 +6314,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					}
 				} else {
 					for (int32_t key_i = 0; key_i < key_count; key_i++) {
-						Vector3 position = p_godot_animation->track_get_key_value(p_godot_anim_track_index, key_i);
+						Vector3 position = p_fade_animation->track_get_key_value(p_fade_anim_track_index, key_i);
 						p_gltf_node_track.position_track.values.write[key_i] = position;
 					}
 				}
@@ -6334,10 +6334,10 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 						Quaternion rotation;
 						Error err;
 						if (node_prop == "quaternion") {
-							err = _try_interpolate_value_track(p_godot_animation, p_godot_anim_track_index, time, rotation);
+							err = _try_interpolate_value_track(p_fade_animation, p_fade_anim_track_index, time, rotation);
 						} else {
 							Vector3 rotation_euler;
-							err = _try_interpolate_value_track(p_godot_animation, p_godot_anim_track_index, time, rotation_euler);
+							err = _try_interpolate_value_track(p_fade_animation, p_fade_anim_track_index, time, rotation_euler);
 							if (node_prop == "rotation_degrees") {
 								rotation_euler *= Math::TAU / 360.0;
 							}
@@ -6347,7 +6347,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 							p_gltf_node_track.rotation_track.values.push_back(rotation);
 							p_gltf_node_track.rotation_track.times.push_back(time);
 						} else {
-							ERR_PRINT(vformat("Error interpolating animation %s value rotation track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+							ERR_PRINT(vformat("Error interpolating animation %s value rotation track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 						}
 						if (last) {
 							break;
@@ -6362,9 +6362,9 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					for (int32_t key_i = 0; key_i < key_count; key_i++) {
 						Quaternion rotation_quaternion;
 						if (node_prop == "quaternion") {
-							rotation_quaternion = p_godot_animation->track_get_key_value(p_godot_anim_track_index, key_i);
+							rotation_quaternion = p_fade_animation->track_get_key_value(p_fade_anim_track_index, key_i);
 						} else {
-							Vector3 rotation_euler = p_godot_animation->track_get_key_value(p_godot_anim_track_index, key_i);
+							Vector3 rotation_euler = p_fade_animation->track_get_key_value(p_fade_anim_track_index, key_i);
 							if (node_prop == "rotation_degrees") {
 								rotation_euler *= Math::TAU / 360.0;
 							}
@@ -6388,12 +6388,12 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					bool last = false;
 					while (true) {
 						Vector3 scale;
-						Error err = _try_interpolate_value_track(p_godot_animation, p_godot_anim_track_index, time, scale);
+						Error err = _try_interpolate_value_track(p_fade_animation, p_fade_anim_track_index, time, scale);
 						if (err == OK) {
 							p_gltf_node_track.scale_track.values.push_back(scale);
 							p_gltf_node_track.scale_track.times.push_back(time);
 						} else {
-							ERR_PRINT(vformat("Error interpolating animation %s scale track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+							ERR_PRINT(vformat("Error interpolating animation %s scale track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 						}
 						if (last) {
 							break;
@@ -6406,7 +6406,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					}
 				} else {
 					for (int32_t key_i = 0; key_i < key_count; key_i++) {
-						Vector3 scale_track = p_godot_animation->track_get_key_value(p_godot_anim_track_index, key_i);
+						Vector3 scale_track = p_fade_animation->track_get_key_value(p_fade_anim_track_index, key_i);
 						p_gltf_node_track.scale_track.values.write[key_i] = scale_track;
 					}
 				}
@@ -6434,7 +6434,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					bool last = false;
 					while (true) {
 						Transform3D transform;
-						Error err = _try_interpolate_value_track(p_godot_animation, p_godot_anim_track_index, time, transform);
+						Error err = _try_interpolate_value_track(p_fade_animation, p_fade_anim_track_index, time, transform);
 						if (err == OK) {
 							Vector3 position = transform.get_origin();
 							Quaternion rotation = transform.basis.get_rotation_quaternion();
@@ -6446,7 +6446,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 							p_gltf_node_track.scale_track.values.push_back(scale);
 							p_gltf_node_track.scale_track.times.push_back(time);
 						} else {
-							ERR_PRINT(vformat("Error interpolating animation %s transform track %d at time %f", p_godot_animation->get_name(), p_godot_anim_track_index, time));
+							ERR_PRINT(vformat("Error interpolating animation %s transform track %d at time %f", p_fade_animation->get_name(), p_fade_anim_track_index, time));
 						}
 						if (last) {
 							break;
@@ -6459,7 +6459,7 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					}
 				} else {
 					for (int32_t key_i = 0; key_i < key_count; key_i++) {
-						Transform3D transform = p_godot_animation->track_get_key_value(p_godot_anim_track_index, key_i);
+						Transform3D transform = p_fade_animation->track_get_key_value(p_fade_anim_track_index, key_i);
 						p_gltf_node_track.position_track.values.write[key_i] = transform.get_origin();
 						p_gltf_node_track.rotation_track.values.write[key_i] = transform.basis.get_rotation_quaternion();
 						p_gltf_node_track.scale_track.values.write[key_i] = transform.basis.get_scale();
@@ -6491,11 +6491,11 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 						Vector3 bezier_track = p_gltf_node_track.scale_track.values[key_i];
 						if (subpath.size() == 2) {
 							if (subpath[1] == StringName("x")) {
-								bezier_track.x = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+								bezier_track.x = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 							} else if (subpath[1] == StringName("y")) {
-								bezier_track.y = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+								bezier_track.y = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 							} else if (subpath[1] == StringName("z")) {
-								bezier_track.z = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+								bezier_track.z = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 							}
 						}
 						p_gltf_node_track.scale_track.values.write[key_i] = bezier_track;
@@ -6518,11 +6518,11 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					Vector3 bezier_track = p_gltf_node_track.position_track.values[key_i];
 					if (subpath.size() == 2) {
 						if (subpath[1] == StringName("x")) {
-							bezier_track.x = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.x = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						} else if (subpath[1] == StringName("y")) {
-							bezier_track.y = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.y = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						} else if (subpath[1] == StringName("z")) {
-							bezier_track.z = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.z = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						}
 					}
 					p_gltf_node_track.position_track.values.write[key_i] = bezier_track;
@@ -6543,13 +6543,13 @@ bool GLTFDocument::_convert_animation_node_track(Ref<GLTFState> p_state, GLTFAni
 					Quaternion bezier_track = p_gltf_node_track.rotation_track.values[key_i];
 					if (subpath.size() == 2) {
 						if (subpath[1] == StringName("x")) {
-							bezier_track.x = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.x = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						} else if (subpath[1] == StringName("y")) {
-							bezier_track.y = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.y = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						} else if (subpath[1] == StringName("z")) {
-							bezier_track.z = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.z = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						} else if (subpath[1] == StringName("w")) {
-							bezier_track.w = p_godot_animation->bezier_track_interpolate(p_godot_anim_track_index, key_i / p_state->get_bake_fps());
+							bezier_track.w = p_fade_animation->bezier_track_interpolate(p_fade_anim_track_index, key_i / p_state->get_bake_fps());
 						}
 					}
 					p_gltf_node_track.rotation_track.values.write[key_i] = bezier_track;
@@ -6590,7 +6590,7 @@ void GLTFDocument::_convert_animation(Ref<GLTFState> p_state, AnimationPlayer *p
 		ERR_CONTINUE_MSG(!anim_player_parent, "glTF: Cannot get root node for animation player: " + String(root_node));
 		const Node *animated_node = anim_player_parent->get_node_or_null(track_path);
 		ERR_CONTINUE_MSG(!animated_node, "glTF: Cannot get node for animated track using path: " + String(track_path));
-		const GLTFAnimation::Interpolation gltf_interpolation = GLTFAnimation::godot_to_gltf_interpolation(animation, track_index);
+		const GLTFAnimation::Interpolation gltf_interpolation = GLTFAnimation::fade_to_gltf_interpolation(animation, track_index);
 		// First, check if it's a Blend Shape track.
 		const Vector<StringName> subnames = track_path.get_subnames();
 		Animation::TrackType track_type = animation->track_get_type(track_index);
@@ -6687,10 +6687,10 @@ void GLTFDocument::_convert_animation(Ref<GLTFState> p_state, AnimationPlayer *p
 			channel.times = times;
 			channel.values.resize(anim_key_count);
 			// If using an expression, determine the base instance to pass to the expression.
-			const Ref<Expression> godot_to_gltf_expr = obj_model_prop->get_godot_to_gltf_expression();
-			const bool is_godot_to_gltf_expr_valid = godot_to_gltf_expr.is_valid();
+			const Ref<Expression> fade_to_gltf_expr = obj_model_prop->get_fade_to_gltf_expression();
+			const bool is_fade_to_gltf_expr_valid = fade_to_gltf_expr.is_valid();
 			Object *base_instance = nullptr;
-			if (is_godot_to_gltf_expr_valid) {
+			if (is_fade_to_gltf_expr_valid) {
 				Ref<Resource> resource;
 				Vector<StringName> leftover_subpath;
 				base_instance = anim_player_parent->get_node_and_resource(track_path, resource, leftover_subpath);
@@ -6701,10 +6701,10 @@ void GLTFDocument::_convert_animation(Ref<GLTFState> p_state, AnimationPlayer *p
 			// Convert the FADE animation values into glTF animation values (still Variant).
 			for (int32_t key_i = 0; key_i < anim_key_count; key_i++) {
 				Variant value = animation->track_get_key_value(track_index, key_i);
-				if (is_godot_to_gltf_expr_valid) {
+				if (is_fade_to_gltf_expr_valid) {
 					Array inputs;
 					inputs.append(value);
-					value = godot_to_gltf_expr->execute(inputs, base_instance);
+					value = fade_to_gltf_expr->execute(inputs, base_instance);
 				}
 				channel.values.write[key_i] = value;
 			}
@@ -6957,7 +6957,7 @@ void GLTFDocument::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "visibility_mode"), "set_visibility_mode", "get_visibility_mode");
 
 	ClassDB::bind_static_method("GLTFDocument", D_METHOD("import_object_model_property", "state", "json_pointer"), &GLTFDocument::import_object_model_property);
-	ClassDB::bind_static_method("GLTFDocument", D_METHOD("export_object_model_property", "state", "node_path", "godot_node", "gltf_node_index"), &GLTFDocument::export_object_model_property);
+	ClassDB::bind_static_method("GLTFDocument", D_METHOD("export_object_model_property", "state", "node_path", "fade_node", "gltf_node_index"), &GLTFDocument::export_object_model_property);
 
 	ClassDB::bind_static_method("GLTFDocument", D_METHOD("register_gltf_document_extension", "extension", "first_priority"),
 			&GLTFDocument::register_gltf_document_extension, DEFVAL(false));
@@ -7275,13 +7275,13 @@ Node *GLTFDocument::generate_scene(Ref<GLTFState> p_state, float p_bake_fps, boo
 	// Now that we know that we have glTF nodes, we can begin generating a scene from the parsed glTF data.
 	Error err = OK;
 	p_state->set_bake_fps(p_bake_fps);
-	Node *godot_root_node = _generate_scene_node_tree(p_state);
-	ERR_FAIL_NULL_V(godot_root_node, nullptr);
-	_process_mesh_instances(p_state, godot_root_node);
+	Node *fade_root_node = _generate_scene_node_tree(p_state);
+	ERR_FAIL_NULL_V(fade_root_node, nullptr);
+	_process_mesh_instances(p_state, fade_root_node);
 	if (p_state->get_create_animations() && p_state->animations.size()) {
 		AnimationPlayer *anim_player = memnew(AnimationPlayer);
-		godot_root_node->add_child(anim_player, true);
-		anim_player->set_owner(godot_root_node);
+		fade_root_node->add_child(anim_player, true);
+		anim_player->set_owner(fade_root_node);
 		for (int i = 0; i < p_state->animations.size(); i++) {
 			_import_animation(p_state, anim_player, i, p_trimming, p_remove_immutable_tracks);
 		}
@@ -7302,18 +7302,18 @@ Node *GLTFDocument::generate_scene(Ref<GLTFState> p_state, float p_bake_fps, boo
 			ERR_CONTINUE(err != OK);
 		}
 	}
-	ImporterMeshInstance3D *root_importer_mesh = Object::cast_to<ImporterMeshInstance3D>(godot_root_node);
+	ImporterMeshInstance3D *root_importer_mesh = Object::cast_to<ImporterMeshInstance3D>(fade_root_node);
 	if (unlikely(root_importer_mesh)) {
-		godot_root_node = GLTFDocumentExtensionConvertImporterMesh::convert_importer_mesh_instance_3d(root_importer_mesh);
+		fade_root_node = GLTFDocumentExtensionConvertImporterMesh::convert_importer_mesh_instance_3d(root_importer_mesh);
 		memdelete(root_importer_mesh);
 	}
 	for (Ref<GLTFDocumentExtension> ext : document_extensions) {
 		ERR_CONTINUE(ext.is_null());
-		err = ext->import_post(p_state, godot_root_node);
+		err = ext->import_post(p_state, fade_root_node);
 		ERR_CONTINUE(err != OK);
 	}
-	ERR_FAIL_NULL_V(godot_root_node, nullptr);
-	return godot_root_node;
+	ERR_FAIL_NULL_V(fade_root_node, nullptr);
+	return fade_root_node;
 }
 
 Error GLTFDocument::append_from_scene(Node *p_node, Ref<GLTFState> p_state, uint32_t p_flags) {

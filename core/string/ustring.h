@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -173,7 +173,7 @@ public:
  * Most users should use one of the aliases below (e.g. CharString).
  *
  * Core container guidance:
- * https://docs.godotengine.org/en/latest/engine_details/architecture/core_types.html#containers
+ * https://docs.fadeengine.org/en/latest/engine_details/architecture/core_types.html#containers
  *
  * @tparam T Specifies the contained character type, which usually also denotes the encoding.
  */
@@ -275,7 +275,7 @@ using Char16String = CharStringT<char16_t>;
  * String (UTF-32 Unicode array) with copy-on-write semantics.
  *
  * Core container guidance:
- * https://docs.godotengine.org/en/latest/engine_details/architecture/core_types.html#containers
+ * https://docs.fadeengine.org/en/latest/engine_details/architecture/core_types.html#containers
  */
 class [[nodiscard]] _WARN_UNUSED_ String {
 	CowData<char32_t> _cowdata;

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -39,7 +39,7 @@
 OsLogLogger::OsLogLogger(const char *p_subsystem) {
 	const char *subsystem = p_subsystem;
 	if (!subsystem) {
-		subsystem = "org.godotengine.godot";
+		subsystem = "org.fadeengine.fade";
 		os_log_info(OS_LOG_DEFAULT, "Missing subsystem for os_log logging; using %{public}s", subsystem);
 	}
 

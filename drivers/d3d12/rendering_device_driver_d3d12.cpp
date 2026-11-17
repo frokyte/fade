@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -36,8 +36,8 @@
 #include "drivers/d3d12/d3d12_hooks.h"
 #include "drivers/d3d12/rendering_context_driver_d3d12.h"
 
-#include <drivers/d3d12/godot_d3d12ma.h>
-#include <drivers/d3d12/godot_nir.h>
+#include <drivers/d3d12/fade_d3d12ma.h>
+#include <drivers/d3d12/fade_nir.h>
 #include <dxgi1_6.h>
 
 #if !defined(_MSC_VER)

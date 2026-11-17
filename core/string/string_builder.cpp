@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -65,7 +65,7 @@ String StringBuilder::as_string() const {
 
 	int current_position = 0;
 
-	int godot_string_elem = 0;
+	int fade_string_elem = 0;
 	int c_string_elem = 0;
 
 	for (uint32_t i = 0; i < appended_strings.size(); i++) {
@@ -73,13 +73,13 @@ String StringBuilder::as_string() const {
 
 		if (str_len == -1) {
 			// FADE string
-			const String &s = strings[godot_string_elem];
+			const String &s = strings[fade_string_elem];
 
 			memcpy(buffer + current_position, s.ptr(), s.length() * sizeof(char32_t));
 
 			current_position += s.length();
 
-			godot_string_elem++;
+			fade_string_elem++;
 		} else {
 			const char *s = c_strings[c_string_elem];
 

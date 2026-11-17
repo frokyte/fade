@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -240,24 +240,24 @@ GDExtensionInterfaceFunctionPtr gdextension_get_proc_address(const char *p_name)
 }
 
 #ifndef DISABLE_DEPRECATED
-static void gdextension_get_godot_version(GDExtensionFADEVersion *r_godot_version) {
-	r_godot_version->major = GODOT_VERSION_MAJOR;
-	r_godot_version->minor = GODOT_VERSION_MINOR;
-	r_godot_version->patch = GODOT_VERSION_PATCH;
-	r_godot_version->string = GODOT_VERSION_FULL_NAME;
+static void gdextension_get_fade_version(GDExtensionFADEVersion *r_fade_version) {
+	r_fade_version->major = GODOT_VERSION_MAJOR;
+	r_fade_version->minor = GODOT_VERSION_MINOR;
+	r_fade_version->patch = GODOT_VERSION_PATCH;
+	r_fade_version->string = GODOT_VERSION_FULL_NAME;
 }
 #endif
 
-static void gdextension_get_godot_version2(GDExtensionFADEVersion2 *r_godot_version) {
-	r_godot_version->major = GODOT_VERSION_MAJOR;
-	r_godot_version->minor = GODOT_VERSION_MINOR;
-	r_godot_version->patch = GODOT_VERSION_PATCH;
-	r_godot_version->hex = GODOT_VERSION_HEX;
-	r_godot_version->status = GODOT_VERSION_STATUS;
-	r_godot_version->build = GODOT_VERSION_BUILD;
-	r_godot_version->hash = GODOT_VERSION_HASH;
-	r_godot_version->timestamp = GODOT_VERSION_TIMESTAMP;
-	r_godot_version->string = GODOT_VERSION_FULL_NAME;
+static void gdextension_get_fade_version2(GDExtensionFADEVersion2 *r_fade_version) {
+	r_fade_version->major = GODOT_VERSION_MAJOR;
+	r_fade_version->minor = GODOT_VERSION_MINOR;
+	r_fade_version->patch = GODOT_VERSION_PATCH;
+	r_fade_version->hex = GODOT_VERSION_HEX;
+	r_fade_version->status = GODOT_VERSION_STATUS;
+	r_fade_version->build = GODOT_VERSION_BUILD;
+	r_fade_version->hash = GODOT_VERSION_HASH;
+	r_fade_version->timestamp = GODOT_VERSION_TIMESTAMP;
+	r_fade_version->string = GODOT_VERSION_FULL_NAME;
 }
 
 // Memory Functions
@@ -1710,9 +1710,9 @@ static void gdextension_editor_help_load_xml_from_utf8_chars(const char *p_data)
 
 void gdextension_setup_interface() {
 #ifndef DISABLE_DEPRECATED
-	REGISTER_INTERFACE_FUNC(get_godot_version);
+	REGISTER_INTERFACE_FUNC(get_fade_version);
 #endif // DISABLE_DEPRECATED
-	REGISTER_INTERFACE_FUNC(get_godot_version2);
+	REGISTER_INTERFACE_FUNC(get_fade_version2);
 #ifndef DISABLE_DEPRECATED
 	REGISTER_INTERFACE_FUNC(mem_alloc);
 	REGISTER_INTERFACE_FUNC(mem_realloc);

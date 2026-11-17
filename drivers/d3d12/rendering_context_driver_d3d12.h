@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -34,7 +34,7 @@
 #include "servers/display/display_server_enums.h"
 #include "servers/rendering/rendering_context_driver.h"
 
-#include <drivers/d3d12/godot_d3dx12.h>
+#include <drivers/d3d12/fade_d3dx12.h>
 
 #ifdef DCOMP_ENABLED
 #include <dcomp.h>

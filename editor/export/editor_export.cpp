@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -117,7 +117,7 @@ void EditorExport::_save() {
 	}
 
 	config->save("res://export_presets.cfg");
-	credentials->save("res://.godot/export_credentials.cfg");
+	credentials->save("res://.fade/export_credentials.cfg");
 }
 
 void EditorExport::save_presets() {
@@ -279,7 +279,7 @@ void EditorExport::load_config() {
 
 	Ref<ConfigFile> credentials;
 	credentials.instantiate();
-	err = credentials->load("res://.godot/export_credentials.cfg");
+	err = credentials->load("res://.fade/export_credentials.cfg");
 	if (!(err == OK || err == ERR_FILE_NOT_FOUND)) {
 		return;
 	}

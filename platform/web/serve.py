@@ -48,8 +48,8 @@ def generate_snakeoil():
     cert = (
         x509
         .CertificateBuilder()
-        .subject_name(x509.Name([x509.NameAttribute(x509.NameOID.COMMON_NAME, "godot_web")]))
-        .issuer_name(x509.Name([x509.NameAttribute(x509.NameOID.COMMON_NAME, "godot_web")]))
+        .subject_name(x509.Name([x509.NameAttribute(x509.NameOID.COMMON_NAME, "fade_web")]))
+        .issuer_name(x509.Name([x509.NameAttribute(x509.NameOID.COMMON_NAME, "fade_web")]))
         .not_valid_before(datetime.datetime.today() - datetime.timedelta(days=1))
         .not_valid_after(datetime.datetime.today() + datetime.timedelta(days=1))
         .serial_number(x509.random_serial_number())

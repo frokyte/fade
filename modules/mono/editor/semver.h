@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -41,7 +41,7 @@
 #undef minor
 #endif
 
-namespace godotsharp {
+namespace fadesharp {
 
 struct SemVer {
 private:
@@ -100,4 +100,4 @@ public:
 	bool parse(const String &p_ver_text, SemVer &r_semver);
 };
 
-} //namespace godotsharp
+} //namespace fadesharp

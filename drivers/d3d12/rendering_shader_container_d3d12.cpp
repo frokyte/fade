@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -33,9 +33,9 @@
 #include "core/templates/sort_array.h"
 #include "drivers/d3d12/dxil_hash.h"
 
-#include <drivers/d3d12/godot_d3d12ma.h>
-#include <drivers/d3d12/godot_d3dx12.h>
-#include <drivers/d3d12/godot_nir.h>
+#include <drivers/d3d12/fade_d3d12ma.h>
+#include <drivers/d3d12/fade_d3dx12.h>
+#include <drivers/d3d12/fade_nir.h>
 #include <wrl/client.h>
 #include <zlib.h>
 
@@ -70,7 +70,7 @@ constexpr size_t ALLOC_HEADER_SIZE = sizeof(Win32Heap *) * 2;
 } //namespace
 
 extern "C" {
-void *godot_nir_malloc(size_t p_size) {
+void *fade_nir_malloc(size_t p_size) {
 	// This RAII helper is for allowing the heap to be destroyed when the thread quits.
 	struct Win32HeapHolder {
 		Win32Heap *win32_heap = nullptr;
@@ -97,13 +97,13 @@ void *godot_nir_malloc(size_t p_size) {
 	return (uint8_t *)block + ALLOC_HEADER_SIZE;
 }
 
-void *godot_nir_realloc(void *p_block, size_t p_size) {
+void *fade_nir_realloc(void *p_block, size_t p_size) {
 	uint8_t *actual_block = (uint8_t *)p_block - ALLOC_HEADER_SIZE;
 	Win32Heap *win32_heap = *(Win32Heap **)actual_block;
 	return (uint8_t *)HeapReAlloc(win32_heap->handle, 0, actual_block, p_size + ALLOC_HEADER_SIZE) + ALLOC_HEADER_SIZE;
 }
 
-void godot_nir_free(void *p_block) {
+void fade_nir_free(void *p_block) {
 	if (p_block != nullptr) {
 		uint8_t *actual_block = (uint8_t *)p_block - ALLOC_HEADER_SIZE;
 		Win32Heap *win32_heap = *(Win32Heap **)actual_block;
@@ -120,15 +120,15 @@ void godot_nir_free(void *p_block) {
 #else
 
 extern "C" {
-void *godot_nir_malloc(size_t p_size) {
+void *fade_nir_malloc(size_t p_size) {
 	return malloc(p_size);
 }
 
-void *godot_nir_realloc(void *p_block, size_t p_size) {
+void *fade_nir_realloc(void *p_block, size_t p_size) {
 	return realloc(p_block, p_size);
 }
 
-void godot_nir_free(void *p_block) {
+void fade_nir_free(void *p_block) {
 	return free(p_block);
 }
 }
@@ -453,21 +453,21 @@ bool RenderingShaderContainerD3D12::_convert_nir_to_dxil(const HashMap<int, nir_
 	// Translate NIR to DXIL.
 	for (KeyValue<int, nir_shader *> it : p_stages_nir_shaders) {
 		RenderingDeviceCommons::ShaderStage stage = (RenderingDeviceCommons::ShaderStage)(it.key);
-		FADENirCallbackUserData godot_nir_callback_user_data;
-		godot_nir_callback_user_data.container = this;
-		godot_nir_callback_user_data.stage = stage;
+		FADENirCallbackUserData fade_nir_callback_user_data;
+		fade_nir_callback_user_data.container = this;
+		fade_nir_callback_user_data.stage = stage;
 
-		FADENirCallbacks godot_nir_callbacks = {};
-		godot_nir_callbacks.data = &godot_nir_callback_user_data;
-		godot_nir_callbacks.report_resource = _nir_report_resource;
-		godot_nir_callbacks.report_sc_bit_offset_fn = _nir_report_sc_bit_offset;
-		godot_nir_callbacks.report_bitcode_bit_offset_fn = _nir_report_bitcode_bit_offset;
+		FADENirCallbacks fade_nir_callbacks = {};
+		fade_nir_callbacks.data = &fade_nir_callback_user_data;
+		fade_nir_callbacks.report_resource = _nir_report_resource;
+		fade_nir_callbacks.report_sc_bit_offset_fn = _nir_report_sc_bit_offset;
+		fade_nir_callbacks.report_bitcode_bit_offset_fn = _nir_report_bitcode_bit_offset;
 
 		nir_to_dxil_options nir_to_dxil_options = {};
 		nir_to_dxil_options.environment = DXIL_ENVIRONMENT_VULKAN;
 		nir_to_dxil_options.shader_model_max = shader_model_d3d_to_dxil(D3D_SHADER_MODEL(REQUIRED_SHADER_MODEL));
 		nir_to_dxil_options.validator_version_max = NO_DXIL_VALIDATION;
-		nir_to_dxil_options.godot_nir_callbacks = &godot_nir_callbacks;
+		nir_to_dxil_options.fade_nir_callbacks = &fade_nir_callbacks;
 
 		// For buffer device address, minimum 6.6 is required.
 		if (reflection_data.has_physical_storage_buffer_addresses) {

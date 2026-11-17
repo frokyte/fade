@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -2177,8 +2177,8 @@ void ResourceImporterScene::_compress_animations(AnimationPlayer *anim, int p_pa
 	}
 }
 
-Error ResourceImporterScene::_save_scene_as_mesh_library(const String &p_source_file, const String &p_save_path, Node *p_godot_scene, const HashMap<StringName, Variant> &p_options, int p_flags) {
-	TypedArray<Node> mesh_instances = p_godot_scene->find_children("*", "MeshInstance3D", true, false);
+Error ResourceImporterScene::_save_scene_as_mesh_library(const String &p_source_file, const String &p_save_path, Node *p_fade_scene, const HashMap<StringName, Variant> &p_options, int p_flags) {
+	TypedArray<Node> mesh_instances = p_fade_scene->find_children("*", "MeshInstance3D", true, false);
 	const int mesh_inst_count = mesh_instances.size();
 
 	struct MeshData {
@@ -2261,8 +2261,8 @@ Error ResourceImporterScene::_save_scene_as_mesh_library(const String &p_source_
 	return ResourceSaver::save(mesh_library, p_save_path + ".res", p_flags);
 }
 
-Error ResourceImporterScene::_save_scene_as_single_mesh(const String &p_source_file, const String &p_save_path, Node *p_godot_scene, const HashMap<StringName, Variant> &p_options, int p_flags) {
-	TypedArray<Node> mesh_instance_nodes = p_godot_scene->find_children("*", "MeshInstance3D", true, false);
+Error ResourceImporterScene::_save_scene_as_single_mesh(const String &p_source_file, const String &p_save_path, Node *p_fade_scene, const HashMap<StringName, Variant> &p_options, int p_flags) {
+	TypedArray<Node> mesh_instance_nodes = p_fade_scene->find_children("*", "MeshInstance3D", true, false);
 	const int mesh_inst_count = mesh_instance_nodes.size();
 	ERR_FAIL_COND_V_MSG(mesh_inst_count == 0, ERR_INVALID_DATA, "Cannot import GLTF file " + p_source_file + " as a single mesh, because it contains no meshes.");
 	const String save_file_path = p_save_path + ".res";

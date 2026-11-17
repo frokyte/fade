@@ -38,7 +38,7 @@ def create_engine_file(env, target, source, externs, threads_enabled):
 
 
 def create_template_zip(env, js, wasm, side):
-    binary_name = "godot.editor" if env.editor_build else "godot"
+    binary_name = "fade.editor" if env.editor_build else "fade"
     zip_dir = env.Dir(env.GetTemplateZipPath())
     in_files = [
         js,
@@ -62,20 +62,20 @@ def create_template_zip(env, js, wasm, side):
         # HTML
         html = "#misc/dist/html/editor.html"
         cache = [
-            "godot.editor.html",
-            "godot.editor.iframe.html",
+            "fade.editor.html",
+            "fade.editor.iframe.html",
             "offline.html",
-            "godot.editor.js",
-            "godot.editor.audio.worklet.js",
-            "godot.editor.audio.position.worklet.js",
+            "fade.editor.js",
+            "fade.editor.audio.worklet.js",
+            "fade.editor.audio.position.worklet.js",
             "logo.svg",
             "favicon.png",
             "inter-regular.woff2",
             "inter-bold.woff2",
         ]
-        opt_cache = ["godot.editor.wasm"]
+        opt_cache = ["fade.editor.wasm"]
 
-        env["GODOT_WEB_FILESIZES"] = lambda: json.dumps({"godot.editor.wasm": wasm.get_size()})
+        env["GODOT_WEB_FILESIZES"] = lambda: json.dumps({"fade.editor.wasm": wasm.get_size()})
         subst_dict = {
             "___GODOT_VERSION___": get_build_version(False),
             "___GODOT_NAME___": "FADEEngine",
@@ -87,12 +87,12 @@ def create_template_zip(env, js, wasm, side):
         }
         subst_dict_sizes = dict(subst_dict)
         subst_dict_sizes["___GODOT_EDITOR_FILESIZES___"] = "${GODOT_WEB_FILESIZES()}"
-        html = env.Substfile(target="#bin/godot${PROGSUFFIX}.html", source=html, SUBST_DICT=subst_dict_sizes)
+        html = env.Substfile(target="#bin/fade${PROGSUFFIX}.html", source=html, SUBST_DICT=subst_dict_sizes)
         env.Depends(html, wasm)
         in_files.append(html)
         out_files.append(zip_dir.File(binary_name + ".html"))
         iframe = env.Textfile(
-            target="#bin/godot${PROGSUFFIX}.iframe.html",
+            target="#bin/fade${PROGSUFFIX}.iframe.html",
             source='<!DOCTYPE html>\n<html lang="en"><head><title></title></head></html>',
         )
         in_files.append(iframe)
@@ -104,7 +104,7 @@ def create_template_zip(env, js, wasm, side):
         out_files.append(zip_dir.File("favicon.png"))
         # PWA
         service_worker = env.Substfile(
-            target="#bin/godot${PROGSUFFIX}.service.worker.js",
+            target="#bin/fade${PROGSUFFIX}.service.worker.js",
             source=service_worker,
             SUBST_DICT=subst_dict,
         )
@@ -125,12 +125,12 @@ def create_template_zip(env, js, wasm, side):
         in_files.append(service_worker)
         out_files.append(zip_dir.File(binary_name + ".service.worker.js"))
         in_files.append("#misc/dist/html/offline-export.html")
-        out_files.append(zip_dir.File("godot.offline.html"))
+        out_files.append(zip_dir.File("fade.offline.html"))
 
     zip_files = env.NoCache(env.InstallAs(out_files, in_files))
     env.NoCache(
         env.Zip(
-            "#bin/godot",
+            "#bin/fade",
             zip_files,
             ZIPROOT=zip_dir,
             ZIPSUFFIX="${PROGSUFFIX}${ZIPSUFFIX}",

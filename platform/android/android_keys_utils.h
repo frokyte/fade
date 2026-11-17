@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -38,10 +38,10 @@
 
 struct AndroidFADECodePair {
 	unsigned int android_code = 0;
-	Key godot_code = Key::NONE;
+	Key fade_code = Key::NONE;
 };
 
-static AndroidFADECodePair android_godot_code_pairs[] = {
+static AndroidFADECodePair android_fade_code_pairs[] = {
 	{ AKEYCODE_UNKNOWN, Key::UNKNOWN }, // (0) Unknown key code.
 	{ AKEYCODE_BACK, Key::BACK }, // (4) Back key.
 	{ AKEYCODE_0, Key::KEY_0 }, // (7) '0' key.
@@ -174,15 +174,15 @@ static AndroidFADECodePair android_godot_code_pairs[] = {
 	{ AKEYCODE_MAX, Key::UNKNOWN }
 };
 
-Key godot_code_from_android_code(unsigned int p_code);
+Key fade_code_from_android_code(unsigned int p_code);
 
 // Key location determination.
 struct AndroidFADELocationPair {
 	unsigned int android_code = 0;
-	KeyLocation godot_code = KeyLocation::UNSPECIFIED;
+	KeyLocation fade_code = KeyLocation::UNSPECIFIED;
 };
 
-static AndroidFADELocationPair android_godot_location_pairs[] = {
+static AndroidFADELocationPair android_fade_location_pairs[] = {
 	{ AKEYCODE_ALT_LEFT, KeyLocation::LEFT },
 	{ AKEYCODE_ALT_RIGHT, KeyLocation::RIGHT },
 	{ AKEYCODE_SHIFT_LEFT, KeyLocation::LEFT },
@@ -194,4 +194,4 @@ static AndroidFADELocationPair android_godot_location_pairs[] = {
 	{ AKEYCODE_MAX, KeyLocation::UNSPECIFIED }
 };
 
-KeyLocation godot_location_from_android_code(unsigned int p_code);
+KeyLocation fade_location_from_android_code(unsigned int p_code);

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,7 +31,7 @@
 #import "native_menu_macos.h"
 
 #import "display_server_macos.h"
-#import "godot_menu_item.h"
+#import "fade_menu_item.h"
 #import "key_mapping_macos.h"
 
 #include "core/object/callable_mp.h"

@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/issues/66675
+# https://github.com/fadeengine/fade/issues/66675
 
 func example(thing):
 	print(thing.has_method("asdf"))

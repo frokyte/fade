@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -44,7 +44,7 @@ TEST_FORCE_LINK(test_uds_server)
 
 namespace TestUDSServer {
 
-const String SOCKET_PATH = "/tmp/godot_test_uds_socket";
+const String SOCKET_PATH = "/tmp/fade_test_uds_socket";
 const uint32_t SLEEP_DURATION = 1000;
 const uint64_t MAX_WAIT_USEC = 2000000;
 
@@ -269,7 +269,7 @@ TEST_CASE("[UDSServer] Should disconnect client") {
 
 TEST_CASE("[UDSServer] Test with different socket paths") {
 	// Test with a different socket path
-	const String alt_socket_path = "/tmp/godot_test_uds_socket_alt";
+	const String alt_socket_path = "/tmp/fade_test_uds_socket_alt";
 
 	// Clean up before test
 	if (FileAccess::exists(alt_socket_path)) {

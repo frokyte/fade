@@ -3,7 +3,7 @@
         "/**************************************************************************/",
         "/*                         This file is part of:                          */",
         "/*                             GODOT ENGINE                               */",
-        "/*                        https://godotengine.org                         */",
+        "/*                        https://fadeengine.org                         */",
         "/**************************************************************************/",
         "/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */",
         "/* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */",
@@ -3518,16 +3518,16 @@
                 "",
                 "For example:",
                 "",
-                "  GDExtensionInterfaceGetFADEVersion get_godot_version = (GDExtensionInterfaceGetFADEVersion)p_get_proc_address(\"get_godot_version\");",
+                "  GDExtensionInterfaceGetFADEVersion get_fade_version = (GDExtensionInterfaceGetFADEVersion)p_get_proc_address(\"get_fade_version\");",
                 "",
                 "(Note that snippet may cause \"cast between incompatible function types\" on some compilers, you can",
                 "silence this by adding an intermediary `void*` cast.)",
                 "",
                 "You can then call it like a normal function:",
                 "",
-                "  GDExtensionFADEVersion godot_version;",
-                "  get_godot_version(&godot_version);",
-                "  printf(\"FADE v%d.%d.%d\\n\", godot_version.major, godot_version.minor, godot_version.patch);",
+                "  GDExtensionFADEVersion fade_version;",
+                "  get_fade_version(&fade_version);",
+                "  printf(\"FADE v%d.%d.%d\\n\", fade_version.major, fade_version.minor, fade_version.patch);",
                 "",
                 "All of these interface functions are described below, together with the name that's used to load it,",
                 "and the function pointer typedef that shows its signature."
@@ -3674,10 +3674,10 @@
     ],
     "interface": [
         {
-            "name": "get_godot_version",
+            "name": "get_fade_version",
             "arguments": [
                 {
-                    "name": "r_godot_version",
+                    "name": "r_fade_version",
                     "type": "GDExtensionFADEVersion*",
                     "description": [
                         "A pointer to the structure to write the version information into."
@@ -3690,14 +3690,14 @@
             "since": "4.1",
             "deprecated": {
                 "since": "4.5",
-                "replace_with": "get_godot_version2"
+                "replace_with": "get_fade_version2"
             }
         },
         {
-            "name": "get_godot_version2",
+            "name": "get_fade_version2",
             "arguments": [
                 {
-                    "name": "r_godot_version",
+                    "name": "r_fade_version",
                     "type": "GDExtensionFADEVersion2*",
                     "description": [
                         "A pointer to the structure to write the version information into."
@@ -8445,7 +8445,7 @@
             ],
             "description": [
                 "Constructs an Object of the requested class.",
-                "The passed class must be a built-in godot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object."
+                "The passed class must be a built-in fade class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object."
             ],
             "since": "4.1",
             "deprecated": {
@@ -8472,7 +8472,7 @@
             ],
             "description": [
                 "Constructs an Object of the requested class.",
-                "The passed class must be a built-in godot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.",
+                "The passed class must be a built-in fade class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.",
                 "",
                 "\"NOTIFICATION_POSTINITIALIZE\" must be sent after construction."
             ],
@@ -8501,7 +8501,7 @@
             ],
             "description": [
                 "Constructs an Object of the requested class.",
-                "The passed class must be a built-in godot class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.",
+                "The passed class must be a built-in fade class, or an already-registered extension class. In both cases, object_set_instance() should be called to fully initialize the object.",
                 "If the type is a subtype of RefCounted, it already has a refcount of 1. The caller must take ownership the refcount and is responsible for decrementing it again when the object is no longer needed.",
                 "",
                 "\"NOTIFICATION_POSTINITIALIZE\" must be sent after construction."

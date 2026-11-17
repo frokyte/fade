@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -388,7 +388,7 @@ void EditorVCSInterface::create_vcs_metadata_files(VCSMetadata p_vcs_metadata_ty
 			ERR_FAIL_MSG("Couldn't create .gitignore in project path.");
 		} else {
 			f->store_line("# FADE 4+ specific ignores");
-			f->store_line(".godot/");
+			f->store_line(".fade/");
 			f->store_line("/android/");
 		}
 		f = FileAccess::open(p_dir.path_join(".gitattributes"), FileAccess::WRITE);

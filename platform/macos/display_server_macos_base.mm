@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,7 +30,7 @@
 
 #import "display_server_macos_base.h"
 
-#import "godot_application_delegate.h"
+#import "fade_application_delegate.h"
 #import "key_mapping_macos.h"
 #import "tts_macos.h"
 

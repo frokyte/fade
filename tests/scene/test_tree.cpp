@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -109,7 +109,7 @@ TEST_CASE("[SceneTree][Tree]") {
 		memdelete(tree);
 	}
 
-	// https://github.com/godotengine/godot/issues/96205
+	// https://github.com/fadeengine/fade/issues/96205
 	SUBCASE("[Tree] Get last item after removal.") {
 		Tree *tree = memnew(Tree);
 		TreeItem *root = tree->create_item();
@@ -133,7 +133,7 @@ TEST_CASE("[SceneTree][Tree]") {
 		memdelete(tree);
 	}
 
-	// https://github.com/godotengine/godot/issues/124209
+	// https://github.com/fadeengine/fade/issues/124209
 	SUBCASE("[Tree] Create items after moving items.") {
 		Tree *tree = memnew(Tree);
 		TreeItem *root = tree->create_item();

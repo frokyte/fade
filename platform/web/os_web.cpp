@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -32,7 +32,7 @@
 
 #include "api/javascript_bridge_singleton.h"
 #include "display_server_web.h"
-#include "godot_js.h"
+#include "fade_js.h"
 #include "ip_web.h"
 #include "net_socket_web.h"
 #include "remote_debugger_peer_messageport.h"
@@ -50,7 +50,7 @@
 #include <emscripten.h>
 
 void OS_Web::alert(const String &p_alert, const String &p_title) {
-	godot_js_display_alert(p_alert.utf8().get_data());
+	fade_js_display_alert(p_alert.utf8().get_data());
 }
 
 // Lifecycle
@@ -84,7 +84,7 @@ bool OS_Web::main_loop_iterate() {
 	if (is_userfs_persistent() && idb_needs_sync && !idb_is_syncing) {
 		idb_is_syncing = true;
 		idb_needs_sync = false;
-		godot_js_os_fs_sync(&fs_sync_callback);
+		fade_js_os_fs_sync(&fs_sync_callback);
 	}
 
 	DisplayServer::get_singleton()->process_events();
@@ -121,7 +121,7 @@ Error OS_Web::create_process(const String &p_path, const List<String> &p_argumen
 		args.push_back(E);
 	}
 	String json_args = Variant(args).to_json_string();
-	int64_t id = godot_js_os_execute(p_path.utf8().get_data(), json_args.utf8().get_data());
+	int64_t id = fade_js_os_execute(p_path.utf8().get_data(), json_args.utf8().get_data());
 	ERR_FAIL_COND_V_MSG(id < 0, ERR_UNAVAILABLE, "OS::execute() or create_process() must be implemented in JavaScript via 'EngineConfig.onExecute' if required.");
 	if (r_child_id) {
 		*r_child_id = id;
@@ -130,7 +130,7 @@ Error OS_Web::create_process(const String &p_path, const List<String> &p_argumen
 }
 
 Error OS_Web::kill(const ProcessID &p_pid) {
-	int ret = godot_js_os_kill(p_pid);
+	int ret = fade_js_os_kill(p_pid);
 	ERR_FAIL_COND_V_MSG(ret, ERR_UNAVAILABLE, "OS::kill() must be implemented in JavaScript via 'EngineConfig.onTerminatePID' if required.");
 	return OK;
 }
@@ -148,7 +148,7 @@ int OS_Web::get_process_exit_code(const ProcessID &p_pid) const {
 }
 
 int OS_Web::get_processor_count() const {
-	return godot_js_os_hw_concurrency_get();
+	return fade_js_os_hw_concurrency_get();
 }
 
 String OS_Web::get_unique_id() const {
@@ -157,7 +157,7 @@ String OS_Web::get_unique_id() const {
 
 int OS_Web::get_default_thread_pool_size() const {
 #ifdef THREADS_ENABLED
-	return godot_js_os_thread_pool_size_get();
+	return fade_js_os_thread_pool_size_get();
 #else // No threads.
 	return 1;
 #endif
@@ -183,7 +183,7 @@ bool OS_Web::_check_internal_feature_support(const String &p_feature) {
 #endif
 	}
 
-	if (godot_js_os_has_feature(p_feature.utf8().get_data())) {
+	if (fade_js_os_has_feature(p_feature.utf8().get_data())) {
 		return true;
 	}
 	return false;
@@ -195,7 +195,7 @@ String OS_Web::get_executable_path() const {
 
 Error OS_Web::shell_open(const String &p_uri) {
 	// Open URI in a new tab, browser will deal with it by protocol.
-	godot_js_os_shell_open(p_uri.utf8().get_data());
+	fade_js_os_shell_open(p_uri.utf8().get_data());
 	return OK;
 }
 
@@ -210,7 +210,7 @@ void OS_Web::add_frame_delay(bool p_can_draw, bool p_wake_for_events) {
 }
 
 void OS_Web::vibrate_handheld(int p_duration_ms, float p_amplitude) {
-	godot_js_input_vibrate_handheld(p_duration_ms);
+	fade_js_input_vibrate_handheld(p_duration_ms);
 }
 
 String OS_Web::get_user_data_dir(const String &p_user_dir) const {
@@ -273,7 +273,7 @@ void OS_Web::force_fs_sync() {
 }
 
 Error OS_Web::pwa_update() {
-	return godot_js_pwa_update() ? FAILED : OK;
+	return fade_js_pwa_update() ? FAILED : OK;
 }
 
 Error OS_Web::move_to_trash(const String &p_path) {
@@ -324,13 +324,13 @@ void OS_Web::initialize_joypads() {
 }
 
 OS_Web::OS_Web() {
-	web_pid = godot_js_config_pid_get();
+	web_pid = fade_js_config_pid_get();
 
 	char locale_ptr[16];
-	godot_js_config_locale_get(locale_ptr, 16);
+	fade_js_config_locale_get(locale_ptr, 16);
 	setenv("LANG", locale_ptr, true);
 
-	godot_js_pwa_cb(&OS_Web::update_pwa_state_callback);
+	fade_js_pwa_cb(&OS_Web::update_pwa_state_callback);
 
 	if (AudioDriverWeb::is_available()) {
 		audio_drivers.push_back(memnew(AudioDriverWorklet));
@@ -340,7 +340,7 @@ OS_Web::OS_Web() {
 		AudioDriverManager::add_driver(audio_driver);
 	}
 
-	idb_available = godot_js_os_fs_is_persistent();
+	idb_available = fade_js_os_fs_is_persistent();
 
 	Vector<Logger *> loggers;
 	loggers.push_back(memnew(StdLogger));

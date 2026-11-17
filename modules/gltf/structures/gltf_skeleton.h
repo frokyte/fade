@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -51,12 +51,12 @@ private:
 	Vector<GLTFNodeIndex> roots;
 
 	// The created Skeleton3D for the scene
-	Skeleton3D *godot_skeleton = nullptr;
+	Skeleton3D *fade_skeleton = nullptr;
 
 	// Set of unique bone names for the skeleton
 	HashSet<String> unique_names;
 
-	HashMap<int32_t, GLTFNodeIndex> godot_bone_node;
+	HashMap<int32_t, GLTFNodeIndex> fade_bone_node;
 
 	Vector<BoneAttachment3D *> bone_attachments;
 
@@ -70,32 +70,32 @@ public:
 	Vector<GLTFNodeIndex> get_roots();
 	void set_roots(const Vector<GLTFNodeIndex> &p_roots);
 
-	Skeleton3D *get_godot_skeleton();
+	Skeleton3D *get_fade_skeleton();
 
-	// Skeleton *get_godot_skeleton() {
-	// 	return godot_skeleton;
+	// Skeleton *get_fade_skeleton() {
+	// 	return fade_skeleton;
 	// }
-	// void set_godot_skeleton(Skeleton p_*godot_skeleton) {
-	// 	godot_skeleton = p_godot_skeleton;
+	// void set_fade_skeleton(Skeleton p_*fade_skeleton) {
+	// 	fade_skeleton = p_fade_skeleton;
 	// }
 
 	TypedArray<String> get_unique_names();
 	void set_unique_names(const TypedArray<String> &p_unique_names);
 
-	//RBMap<int32_t, GLTFNodeIndex> get_godot_bone_node() {
-	//	return godot_bone_node;
+	//RBMap<int32_t, GLTFNodeIndex> get_fade_bone_node() {
+	//	return fade_bone_node;
 	//}
-	//void set_godot_bone_node(const RBMap<int32_t, GLTFNodeIndex> &p_godot_bone_node) {
-	//	godot_bone_node = p_godot_bone_node;
+	//void set_fade_bone_node(const RBMap<int32_t, GLTFNodeIndex> &p_fade_bone_node) {
+	//	fade_bone_node = p_fade_bone_node;
 	//}
-	Dictionary get_godot_bone_node();
-	void set_godot_bone_node(const Dictionary &p_indict);
+	Dictionary get_fade_bone_node();
+	void set_fade_bone_node(const Dictionary &p_indict);
 
-	//Dictionary get_godot_bone_node() {
-	//	return VariantConversion::to_dict(godot_bone_node);
+	//Dictionary get_fade_bone_node() {
+	//	return VariantConversion::to_dict(fade_bone_node);
 	//}
-	//void set_godot_bone_node(Dictionary p_indict) {
-	//	VariantConversion::set_from_dict(godot_bone_node, p_indict);
+	//void set_fade_bone_node(Dictionary p_indict) {
+	//	VariantConversion::set_from_dict(fade_bone_node, p_indict);
 	//}
 
 	BoneAttachment3D *get_bone_attachment(int idx);

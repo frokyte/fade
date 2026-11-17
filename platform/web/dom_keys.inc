@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,10 +31,10 @@
 #include "core/os/keyboard.h"
 
 // See https://w3c.github.io/uievents-code/#code-value-tables
-Key dom_code2godot_scancode(EM_UTF8 const p_code[32], EM_UTF8 const p_key[32], bool p_physical) {
-#define DOM2GODOT(p_str, p_godot_code) \
+Key dom_code2fade_scancode(EM_UTF8 const p_code[32], EM_UTF8 const p_key[32], bool p_physical) {
+#define DOM2GODOT(p_str, p_fade_code) \
 	if (memcmp((const void *)p_str, (void *)(p_physical ? p_code : p_key), strlen(p_str) + 1) == 0) { \
-		return Key::p_godot_code; \
+		return Key::p_fade_code; \
 	}
 
 	// Numpad section.
@@ -224,10 +224,10 @@ Key dom_code2godot_scancode(EM_UTF8 const p_code[32], EM_UTF8 const p_key[32], b
 #undef DOM2GODOT
 }
 
-KeyLocation dom_code2godot_key_location(EM_UTF8 const p_code[32]) {
-#define DOM2GODOT(m_str, m_godot_code) \
+KeyLocation dom_code2fade_key_location(EM_UTF8 const p_code[32]) {
+#define DOM2GODOT(m_str, m_fade_code) \
 	if (memcmp((const void *)m_str, (void *)p_code, strlen(m_str) + 1) == 0) { \
-		return KeyLocation::m_godot_code; \
+		return KeyLocation::m_fade_code; \
 	}
 
 	DOM2GODOT("AltLeft", LEFT);

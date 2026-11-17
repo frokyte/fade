@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,28 +36,28 @@
 #include "gdscript_language_protocol.h"
 #include "gdscript_workspace.h"
 
-LSP::Position GodotPosition::to_lsp() const {
+LSP::Position FADEPosition::to_lsp() const {
 	LSP::Position res;
 	res.line = line - 1;
 	res.character = column - 1;
 	return res;
 }
 
-GodotPosition GodotPosition::from_lsp(const LSP::Position p_pos) {
-	return GodotPosition(p_pos.line + 1, p_pos.character + 1);
+FADEPosition FADEPosition::from_lsp(const LSP::Position p_pos) {
+	return FADEPosition(p_pos.line + 1, p_pos.character + 1);
 }
 
-LSP::Range GodotRange::to_lsp() const {
+LSP::Range FADERange::to_lsp() const {
 	LSP::Range res;
 	res.start = start.to_lsp();
 	res.end = end.to_lsp();
 	return res;
 }
 
-GodotRange GodotRange::from_lsp(const LSP::Range &p_range) {
-	GodotPosition start = GodotPosition::from_lsp(p_range.start);
-	GodotPosition end = GodotPosition::from_lsp(p_range.end);
-	return GodotRange(start, end);
+FADERange FADERange::from_lsp(const LSP::Range &p_range) {
+	FADEPosition start = FADEPosition::from_lsp(p_range.start);
+	FADEPosition end = FADEPosition::from_lsp(p_range.end);
+	return FADERange(start, end);
 }
 
 void ExtendGDScriptParser::update_diagnostics() {
@@ -70,11 +70,11 @@ void ExtendGDScriptParser::update_diagnostics() {
 		diagnostic.message = error.message;
 		diagnostic.source = "gdscript";
 
-		GodotRange godot_range(
-				GodotPosition(error.start_line, error.start_column),
-				GodotPosition(error.end_line, error.end_column));
+		FADERange fade_range(
+				FADEPosition(error.start_line, error.start_column),
+				FADEPosition(error.end_line, error.end_column));
 
-		diagnostic.range = godot_range.to_lsp();
+		diagnostic.range = fade_range.to_lsp();
 		diagnostics.push_back(diagnostic);
 	}
 
@@ -86,11 +86,11 @@ void ExtendGDScriptParser::update_diagnostics() {
 		diagnostic.source = "gdscript";
 		diagnostic.code = warning.get_name();
 
-		GodotRange godot_range(
-				GodotPosition(warning.start_line, warning.start_column),
-				GodotPosition(warning.end_line, warning.end_column));
+		FADERange fade_range(
+				FADEPosition(warning.start_line, warning.start_column),
+				FADEPosition(warning.end_line, warning.end_column));
 
-		diagnostic.range = godot_range.to_lsp();
+		diagnostic.range = fade_range.to_lsp();
 		diagnostics.push_back(diagnostic);
 	}
 }
@@ -140,7 +140,7 @@ void ExtendGDScriptParser::update_document_links(const String &p_code) {
 				if (exists) {
 					LSP::DocumentLink link;
 					link.target = GDScriptLanguageProtocol::get_singleton()->get_workspace()->get_file_uri(scr_path);
-					link.range = GodotRange(GodotPosition(token.start_line, token.start_column), GodotPosition(token.end_line, token.end_column)).to_lsp();
+					link.range = FADERange(FADEPosition(token.start_line, token.start_column), FADEPosition(token.end_line, token.end_column)).to_lsp();
 					document_links.push_back(link);
 				}
 			}
@@ -149,9 +149,9 @@ void ExtendGDScriptParser::update_document_links(const String &p_code) {
 }
 
 LSP::Range ExtendGDScriptParser::range_of_node(const GDScriptParser::Node *p_node) const {
-	GodotPosition start(p_node->start_line, p_node->start_column);
-	GodotPosition end(p_node->end_line, p_node->end_column);
-	return GodotRange(start, end).to_lsp();
+	FADEPosition start(p_node->start_line, p_node->start_column);
+	FADEPosition end(p_node->end_line, p_node->end_column);
+	return FADERange(start, end).to_lsp();
 }
 
 void ExtendGDScriptParser::parse_class_symbol(const GDScriptParser::ClassNode *p_class, LSP::DocumentSymbol &r_symbol) {
@@ -325,8 +325,8 @@ void ExtendGDScriptParser::parse_class_symbol(const GDScriptParser::ClassNode *p
 				symbol.name = m.enum_value.identifier->name;
 				symbol.kind = LSP::SymbolKind::EnumMember;
 				symbol.deprecated = false;
-				symbol.range.start = GodotPosition(m.enum_value.line, m.enum_value.start_column).to_lsp();
-				symbol.range.end = GodotPosition(m.enum_value.line, m.enum_value.end_column).to_lsp();
+				symbol.range.start = FADEPosition(m.enum_value.line, m.enum_value.start_column).to_lsp();
+				symbol.range.end = FADEPosition(m.enum_value.line, m.enum_value.end_column).to_lsp();
 				symbol.selectionRange = range_of_node(m.enum_value.identifier);
 				symbol.documentation = m.enum_value.doc_data.description;
 				symbol.uri = uri;
@@ -361,8 +361,8 @@ void ExtendGDScriptParser::parse_class_symbol(const GDScriptParser::ClassNode *p
 					child.name = value.identifier->name;
 					child.kind = LSP::SymbolKind::EnumMember;
 					child.deprecated = false;
-					child.range.start = GodotPosition(value.line, value.start_column).to_lsp();
-					child.range.end = GodotPosition(value.line, value.end_column).to_lsp();
+					child.range.start = FADEPosition(value.line, value.start_column).to_lsp();
+					child.range.end = FADEPosition(value.line, value.end_column).to_lsp();
 					child.selectionRange = range_of_node(value.identifier);
 					child.documentation = value.doc_data.description;
 					child.uri = uri;
@@ -535,8 +535,8 @@ void ExtendGDScriptParser::parse_function_symbol(const GDScriptParser::FunctionN
 					break;
 				default:
 					// Fallback.
-					symbol.range.start = GodotPosition(local.start_line, local.start_column).to_lsp();
-					symbol.range.end = GodotPosition(local.end_line, local.end_column).to_lsp();
+					symbol.range.start = FADEPosition(local.start_line, local.start_column).to_lsp();
+					symbol.range.end = FADEPosition(local.end_line, local.end_column).to_lsp();
 					symbol.selectionRange = symbol.range;
 					break;
 			}

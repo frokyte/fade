@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -173,7 +173,7 @@ public:
 	LocalVector<Ref<RegEx>> enum_regexes;
 	LocalVector<Ref<RegEx>> gdscript_function_regexes;
 	LocalVector<Ref<RegEx>> project_settings_regexes;
-	LocalVector<Ref<RegEx>> project_godot_regexes;
+	LocalVector<Ref<RegEx>> project_fade_regexes;
 	LocalVector<Ref<RegEx>> input_map_regexes;
 	LocalVector<Ref<RegEx>> gdscript_properties_regexes;
 	LocalVector<Ref<RegEx>> gdscript_signals_regexes;
@@ -199,9 +199,9 @@ public:
 			for (unsigned int current_index = 0; RenamesMap3To4::project_settings_renames[current_index][0]; current_index++) {
 				project_settings_regexes.push_back(memnew(RegEx(String("\\b") + RenamesMap3To4::project_settings_renames[current_index][0] + "\\b")));
 			}
-			// Project Settings in project.godot.
-			for (unsigned int current_index = 0; RenamesMap3To4::project_godot_renames[current_index][0]; current_index++) {
-				project_godot_regexes.push_back(memnew(RegEx(String("\\b") + RenamesMap3To4::project_godot_renames[current_index][0] + "\\b")));
+			// Project Settings in project.fade.
+			for (unsigned int current_index = 0; RenamesMap3To4::project_fade_renames[current_index][0]; current_index++) {
+				project_fade_regexes.push_back(memnew(RegEx(String("\\b") + RenamesMap3To4::project_fade_renames[current_index][0] + "\\b")));
 			}
 			// Input Map.
 			for (unsigned int current_index = 0; RenamesMap3To4::input_map_renames[current_index][0]; current_index++) {
@@ -291,18 +291,18 @@ bool ProjectConverter3To4::convert() {
 	{
 		String converter_text = "; Project was converted by built-in tool to FADE 4";
 
-		ERR_FAIL_COND_V_MSG(!FileAccess::exists("project.godot"), false, "Current working directory doesn't contain a \"project.godot\" file for a FADE 3 project.");
+		ERR_FAIL_COND_V_MSG(!FileAccess::exists("project.fade"), false, "Current working directory doesn't contain a \"project.fade\" file for a FADE 3 project.");
 
 		Error err = OK;
-		String project_godot_content = FileAccess::get_file_as_string("project.godot", &err);
+		String project_fade_content = FileAccess::get_file_as_string("project.fade", &err);
 
-		ERR_FAIL_COND_V_MSG(err != OK, false, "Unable to read \"project.godot\".");
-		ERR_FAIL_COND_V_MSG(project_godot_content.contains(converter_text), false, "Project was already converted with this tool.");
+		ERR_FAIL_COND_V_MSG(err != OK, false, "Unable to read \"project.fade\".");
+		ERR_FAIL_COND_V_MSG(project_fade_content.contains(converter_text), false, "Project was already converted with this tool.");
 
-		Ref<FileAccess> file = FileAccess::open("project.godot", FileAccess::WRITE);
-		ERR_FAIL_COND_V_MSG(file.is_null(), false, "Unable to open \"project.godot\".");
+		Ref<FileAccess> file = FileAccess::open("project.fade", FileAccess::WRITE);
+		ERR_FAIL_COND_V_MSG(file.is_null(), false, "Unable to open \"project.fade\".");
 
-		file->store_string(converter_text + "\n" + project_godot_content);
+		file->store_string(converter_text + "\n" + project_fade_content);
 	}
 
 	Vector<String> collected_files = check_for_files();
@@ -407,8 +407,8 @@ bool ProjectConverter3To4::convert() {
 				rename_common(RenamesMap3To4::builtin_types_renames, reg_container.builtin_types_regexes, source_lines);
 
 				custom_rename(source_lines, "\\.shader", ".gdshader");
-			} else if (file_name.ends_with("project.godot")) {
-				rename_common(RenamesMap3To4::project_godot_renames, reg_container.project_godot_regexes, source_lines);
+			} else if (file_name.ends_with("project.fade")) {
+				rename_common(RenamesMap3To4::project_fade_renames, reg_container.project_fade_regexes, source_lines);
 				rename_common(RenamesMap3To4::builtin_types_renames, reg_container.builtin_types_regexes, source_lines);
 				rename_input_map_scancode(source_lines, reg_container);
 				rename_joypad_buttons_and_axes(source_lines, reg_container);
@@ -498,13 +498,13 @@ bool ProjectConverter3To4::validate_conversion() {
 	{
 		String conventer_text = "; Project was converted by built-in tool to FADE 4";
 
-		ERR_FAIL_COND_V_MSG(!FileAccess::exists("project.godot"), false, "Current directory doesn't contain any FADE 3 project");
+		ERR_FAIL_COND_V_MSG(!FileAccess::exists("project.fade"), false, "Current directory doesn't contain any FADE 3 project");
 
 		Error err = OK;
-		String project_godot_content = FileAccess::get_file_as_string("project.godot", &err);
+		String project_fade_content = FileAccess::get_file_as_string("project.fade", &err);
 
-		ERR_FAIL_COND_V_MSG(err != OK, false, "Failed to read content of \"project.godot\" file.");
-		ERR_FAIL_COND_V_MSG(project_godot_content.contains(conventer_text), false, "Project already was converted with this tool.");
+		ERR_FAIL_COND_V_MSG(err != OK, false, "Failed to read content of \"project.fade\" file.");
+		ERR_FAIL_COND_V_MSG(project_fade_content.contains(conventer_text), false, "Project already was converted with this tool.");
 	}
 
 	Vector<String> collected_files = check_for_files();
@@ -594,8 +594,8 @@ bool ProjectConverter3To4::validate_conversion() {
 				changed_elements.append_array(check_for_rename_common(RenamesMap3To4::builtin_types_renames, reg_container.builtin_types_regexes, lines));
 
 				changed_elements.append_array(check_for_custom_rename(lines, "\\.shader", ".gdshader"));
-			} else if (file_name.ends_with("project.godot")) {
-				changed_elements.append_array(check_for_rename_common(RenamesMap3To4::project_godot_renames, reg_container.project_godot_regexes, lines));
+			} else if (file_name.ends_with("project.fade")) {
+				changed_elements.append_array(check_for_rename_common(RenamesMap3To4::project_fade_renames, reg_container.project_fade_regexes, lines));
 				changed_elements.append_array(check_for_rename_common(RenamesMap3To4::builtin_types_renames, reg_container.builtin_types_regexes, lines));
 				changed_elements.append_array(check_for_rename_input_map_scancode(lines, reg_container));
 				changed_elements.append_array(check_for_rename_joypad_buttons_and_axes(lines, reg_container));
@@ -662,7 +662,7 @@ Vector<String> ProjectConverter3To4::check_for_files() {
 			String file_name = dir->_get_next();
 
 			while (file_name != "") {
-				if (file_name == ".git" || file_name == ".godot") {
+				if (file_name == ".git" || file_name == ".fade") {
 					file_name = dir->_get_next();
 					continue;
 				}
@@ -670,7 +670,7 @@ Vector<String> ProjectConverter3To4::check_for_files() {
 					directories_to_check.append(current_dir.path_join(file_name) + "/");
 				} else {
 					bool proper_extension = false;
-					if (file_name.ends_with(".gd") || file_name.ends_with(".shader") || file_name.ends_with(".gdshader") || file_name.ends_with(".tscn") || file_name.ends_with(".tres") || file_name.ends_with(".godot") || file_name.ends_with(".cs") || file_name.ends_with(".csproj") || file_name.ends_with(".import")) {
+					if (file_name.ends_with(".gd") || file_name.ends_with(".shader") || file_name.ends_with(".gdshader") || file_name.ends_with(".tscn") || file_name.ends_with(".tres") || file_name.ends_with(".fade") || file_name.ends_with(".cs") || file_name.ends_with(".csproj") || file_name.ends_with(".import")) {
 						proper_extension = true;
 					}
 
@@ -827,9 +827,9 @@ bool ProjectConverter3To4::test_conversion(RegExContainer &reg_container) {
 
 	valid = valid && test_conversion_gdscript_builtin("remove_and_slide(a,b,c,d,e,f)", "remove_and_slide(a,b,c,d,e,f)", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 
-	valid = valid && test_conversion_gdscript_builtin("list_dir_begin( a , b )", "list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
-	valid = valid && test_conversion_gdscript_builtin("list_dir_begin( a )", "list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
-	valid = valid && test_conversion_gdscript_builtin("list_dir_begin( )", "list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
+	valid = valid && test_conversion_gdscript_builtin("list_dir_begin( a , b )", "list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/fadeengine/fade/pull/40547", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
+	valid = valid && test_conversion_gdscript_builtin("list_dir_begin( a )", "list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/fadeengine/fade/pull/40547", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
+	valid = valid && test_conversion_gdscript_builtin("list_dir_begin( )", "list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/fadeengine/fade/pull/40547", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 
 	valid = valid && test_conversion_gdscript_builtin("sort_custom( a , b )", "sort_custom(Callable(a, b))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 
@@ -957,8 +957,8 @@ bool ProjectConverter3To4::test_conversion(RegExContainer &reg_container) {
 	valid = valid && test_conversion_gdscript_builtin("get_cell_item(a, b,c)", "get_cell_item(Vector3i(a, b, c))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 	valid = valid && test_conversion_gdscript_builtin("map_to_world(a, b,c)", "map_to_local(Vector3i(a, b, c))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 
-	valid = valid && test_conversion_gdscript_builtin("PackedStringArray(req_godot).join('.')", "'.'.join(PackedStringArray(req_godot))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
-	valid = valid && test_conversion_gdscript_builtin("=PackedStringArray(req_godot).join('.')", "='.'.join(PackedStringArray(req_godot))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
+	valid = valid && test_conversion_gdscript_builtin("PackedStringArray(req_fade).join('.')", "'.'.join(PackedStringArray(req_fade))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
+	valid = valid && test_conversion_gdscript_builtin("=PackedStringArray(req_fade).join('.')", "='.'.join(PackedStringArray(req_fade))", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 
 	valid = valid && test_conversion_gdscript_builtin("apply_force(position, impulse)", "apply_force(impulse, position)", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
 	valid = valid && test_conversion_gdscript_builtin("apply_impulse(position, impulse)", "apply_impulse(impulse, position)", &ProjectConverter3To4::rename_gdscript_functions, "custom rename", reg_container, false);
@@ -1132,7 +1132,7 @@ bool ProjectConverter3To4::test_array_names() {
 		HashSet<String> all_functions;
 
 		// List of excluded functions from builtin types and global namespace, because currently it is not possible to get list of functions from them.
-		// This will be available when https://github.com/godotengine/godot/pull/49053 or similar will be included into FADE.
+		// This will be available when https://github.com/fadeengine/fade/pull/49053 or similar will be included into FADE.
 		static const char *builtin_types_excluded_functions[] = { "dict_to_inst", "inst_to_dict", "bytes_to_var", "bytes_to_var_with_objects", "db_to_linear", "deg_to_rad", "linear_to_db", "rad_to_deg", "randf_range", "snapped", "str_to_var", "var_to_str", "var_to_bytes", "var_to_bytes_with_objects", "move_toward", "uri_encode", "uri_decode", "remove_at", "get_rotation_quaternion", "limit_length", "grow_side", "is_absolute_path", "is_valid_int", "lerp", "to_ascii_buffer", "to_utf8_buffer", "to_utf32_buffer", "to_wchar_buffer", "snapped", "remap", "rfind", nullptr };
 		for (int current_index = 0; builtin_types_excluded_functions[current_index]; current_index++) {
 			all_functions.insert(builtin_types_excluded_functions[current_index]);
@@ -1184,7 +1184,7 @@ bool ProjectConverter3To4::test_array_names() {
 	valid = valid && test_single_array(RenamesMap3To4::shaders_renames, true);
 	valid = valid && test_single_array(RenamesMap3To4::gdscript_signals_renames);
 	valid = valid && test_single_array(RenamesMap3To4::project_settings_renames);
-	valid = valid && test_single_array(RenamesMap3To4::project_godot_renames);
+	valid = valid && test_single_array(RenamesMap3To4::project_fade_renames);
 	valid = valid && test_single_array(RenamesMap3To4::input_map_renames);
 	valid = valid && test_single_array(RenamesMap3To4::builtin_types_renames);
 	valid = valid && test_single_array(RenamesMap3To4::color_renames);
@@ -1465,7 +1465,7 @@ Vector<String> ProjectConverter3To4::check_for_rename_colors(Vector<String> &lin
 }
 
 void ProjectConverter3To4::fix_tool_declaration(Vector<SourceLine> &source_lines, const RegExContainer &reg_container) {
-	// In godot4, "tool" became "@tool" and must be located at the top of the file.
+	// In fade4, "tool" became "@tool" and must be located at the top of the file.
 	for (int i = 0; i < source_lines.size(); ++i) {
 		if (source_lines[i].line == "tool") {
 			source_lines.remove_at(i);
@@ -1619,7 +1619,7 @@ void ProjectConverter3To4::process_gdscript_line(String &line, const RegExContai
 		line = reg_container.reg_image_unlock.sub(line, "false # $1.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed", true);
 	}
 
-	// PackedStringArray(req_godot).join('.') -> '.'.join(PackedStringArray(req_godot))       PoolStringArray
+	// PackedStringArray(req_fade).join('.') -> '.'.join(PackedStringArray(req_fade))       PoolStringArray
 	if (line.contains(".join")) {
 		line = reg_container.reg_join.sub(line, "$2.join($1)", true);
 	}
@@ -1904,7 +1904,7 @@ void ProjectConverter3To4::process_gdscript_line(String &line, const RegExContai
 		int start = line.find("list_dir_begin(");
 		int end = get_end_parenthesis(line.substr(start)) + 1;
 		if (end > -1) {
-			line = line.substr(0, start) + "list_dir_begin() " + line.substr(end + start) + "# TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547";
+			line = line.substr(0, start) + "list_dir_begin() " + line.substr(end + start) + "# TODOConverter3To4 fill missing arguments https://github.com/fadeengine/fade/pull/40547";
 		}
 	}
 
@@ -2072,7 +2072,7 @@ void ProjectConverter3To4::process_gdscript_line(String &line, const RegExContai
 			}
 		}
 	}
-	// -- func _init(p_x:int).(p_x):  -> func _init(p_x:int):\n\tsuper(p_x)    Object # https://github.com/godotengine/godot/issues/70542
+	// -- func _init(p_x:int).(p_x):  -> func _init(p_x:int):\n\tsuper(p_x)    Object # https://github.com/fadeengine/fade/issues/70542
 	if (line.contains(" _init(") && line.rfind_char(':') > 0) {
 		//     func _init(p_arg1).(super4, super5, super6)->void:
 		// ^--^indent            ^super_start   super_end^

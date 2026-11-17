@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,19 +30,19 @@
 
 #include "android_keys_utils.h"
 
-Key godot_code_from_android_code(unsigned int p_code) {
-	for (int i = 0; android_godot_code_pairs[i].android_code != AKEYCODE_MAX; i++) {
-		if (android_godot_code_pairs[i].android_code == p_code) {
-			return android_godot_code_pairs[i].godot_code;
+Key fade_code_from_android_code(unsigned int p_code) {
+	for (int i = 0; android_fade_code_pairs[i].android_code != AKEYCODE_MAX; i++) {
+		if (android_fade_code_pairs[i].android_code == p_code) {
+			return android_fade_code_pairs[i].fade_code;
 		}
 	}
 	return Key::UNKNOWN;
 }
 
-KeyLocation godot_location_from_android_code(unsigned int p_code) {
-	for (int i = 0; android_godot_location_pairs[i].android_code != AKEYCODE_MAX; i++) {
-		if (android_godot_location_pairs[i].android_code == p_code) {
-			return android_godot_location_pairs[i].godot_code;
+KeyLocation fade_location_from_android_code(unsigned int p_code) {
+	for (int i = 0; android_fade_location_pairs[i].android_code != AKEYCODE_MAX; i++) {
+		if (android_fade_location_pairs[i].android_code == p_code) {
+			return android_fade_location_pairs[i].fade_code;
 		}
 	}
 	return KeyLocation::UNSPECIFIED;

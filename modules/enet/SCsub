@@ -13,7 +13,7 @@ thirdparty_obj = []
 if env["builtin_enet"]:
     thirdparty_dir = "#thirdparty/enet/"
     thirdparty_sources = [
-        "enet_godot.cpp",
+        "enet_fade.cpp",
         "callbacks.c",
         "compress.c",
         "host.c",
@@ -33,7 +33,7 @@ if env["builtin_enet"]:
     env.modules_sources += thirdparty_obj
 
 
-# Godot source files
+# FADE source files
 
 module_obj = []
 

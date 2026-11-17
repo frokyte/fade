@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,7 +31,7 @@
 #pragma once
 
 #ifndef DISABLE_DEPRECATED
-#include "godot_plugin_config.h"
+#include "fade_plugin_config.h"
 #endif // DISABLE_DEPRECATED
 
 #include "gradle_export_util.h"

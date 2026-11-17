@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,8 +31,8 @@
 #pragma once
 
 #if defined(IOS_ENABLED)
-extern void godot_apple_embedded_plugins_initialize();
-extern void godot_apple_embedded_plugins_deinitialize();
+extern void fade_apple_embedded_plugins_initialize();
+extern void fade_apple_embedded_plugins_deinitialize();
 #endif
 
 void register_ios_api();

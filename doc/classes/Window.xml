@@ -9,7 +9,7 @@
 	</description>
 	<tutorials>
 		<link title="HDR output">$DOCS_URL/tutorials/rendering/hdr_output.html</link>
-		<link title="Multiple Windows demo">https://github.com/godotengine/godot-demo-projects/tree/master/misc/multiple_windows</link>
+		<link title="Multiple Windows demo">https://github.com/fadeengine/fade-demo-projects/tree/master/misc/multiple_windows</link>
 	</tutorials>
 	<methods>
 		<method name="_get_contents_minimum_size" qualifiers="virtual const">
@@ -157,7 +157,7 @@
 					# Undo changes to the alpha channel, which should not be modified.
 					linear_color.a = srgb_color.a
 					# Convert back to nonlinear sRGB encoding, which is required for Color in
-					# Godot unless stated otherwise.
+					# FADE unless stated otherwise.
 					return linear_color.linear_to_srgb()
 				[/gdscript]
 				[/codeblocks]

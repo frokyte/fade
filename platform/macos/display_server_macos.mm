@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,18 +30,18 @@
 
 #import "display_server_macos.h"
 
-#import "godot_application.h"
-#import "godot_application_delegate.h"
-#import "godot_button_view.h"
-#import "godot_content_view.h"
-#import "godot_core_cursor.h"
-#import "godot_menu_delegate.h"
-#import "godot_menu_item.h"
-#import "godot_open_save_delegate.h"
-#import "godot_progress_view.h"
-#import "godot_status_item.h"
-#import "godot_window.h"
-#import "godot_window_delegate.h"
+#import "fade_application.h"
+#import "fade_application_delegate.h"
+#import "fade_button_view.h"
+#import "fade_content_view.h"
+#import "fade_core_cursor.h"
+#import "fade_menu_delegate.h"
+#import "fade_menu_item.h"
+#import "fade_open_save_delegate.h"
+#import "fade_progress_view.h"
+#import "fade_status_item.h"
+#import "fade_window.h"
+#import "fade_window_delegate.h"
 #import "key_mapping_macos.h"
 #import "native_menu_macos.h"
 #import "os_macos.h"
@@ -3709,7 +3709,7 @@ void DisplayServerMacOS::popup_open(DisplayServerEnums::WindowID p_window) {
 
 		if (was_empty && popup_list.is_empty()) {
 			// Inform OS that popup was opened, to close other native popups.
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.beginMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.beginMenuTrackingNotification" object:@"org.fadeengine.fade.popup_window"];
 		}
 		time_since_popup = OS::get_singleton()->get_ticks_msec();
 		popup_list.push_back(p_window);
@@ -3734,7 +3734,7 @@ void DisplayServerMacOS::popup_close(DisplayServerEnums::WindowID p_window) {
 	}
 	if (!was_empty && popup_list.is_empty()) {
 		// Inform OS that all popups are closed.
-		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.fadeengine.fade.popup_window"];
 	}
 }
 
@@ -3752,7 +3752,7 @@ bool DisplayServerMacOS::mouse_process_popups(bool p_close) {
 		}
 		if (!was_empty) {
 			// Inform OS that all popups are closed.
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.fadeengine.fade.popup_window"];
 		}
 	} else {
 		uint64_t delta = OS::get_singleton()->get_ticks_msec() - time_since_popup;
@@ -3784,7 +3784,7 @@ bool DisplayServerMacOS::mouse_process_popups(bool p_close) {
 		}
 		if (!was_empty && popup_list.is_empty()) {
 			// Inform OS that all popups are closed.
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.godotengine.godot.popup_window"];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.HIToolbox.endMenuTrackingNotification" object:@"org.fadeengine.fade.popup_window"];
 		}
 	}
 	return closed;

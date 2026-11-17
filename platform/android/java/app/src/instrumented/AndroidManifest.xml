@@ -2,12 +2,12 @@
 
     <application>
         <meta-data
-            android:name="org.godotengine.plugin.v2.FADEAppInstrumentedTestPlugin"
-            android:value="com.godot.game.test.FADEAppInstrumentedTestPlugin"/>
+            android:name="org.fadeengine.plugin.v2.FADEAppInstrumentedTestPlugin"
+            android:value="com.fade.game.test.FADEAppInstrumentedTestPlugin"/>
 
         <meta-data
-            android:name="org.godotengine.plugin.v2.SignalTestPlugin"
-            android:value="com.godot.game.test.SignalTestPlugin"/>
+            android:name="org.fadeengine.plugin.v2.SignalTestPlugin"
+            android:value="com.fade.game.test.SignalTestPlugin"/>
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@ mm_file_names = list(map(lambda f: f.name, mm_files))
 env_visionos = env.Clone()
 
 # Configure Swift builder
-additional_swift_file_names = ["../../drivers/apple_embedded/godot_swiftui_view_controller.swift"]
+additional_swift_file_names = ["../../drivers/apple_embedded/fade_swiftui_view_controller.swift"]
 apple_platform = env["APPLE_PLATFORM"]
 sdk_path = env["APPLE_SDK_PATH"]
 current_path = Dir(".").abspath
@@ -43,7 +43,7 @@ if "LIBS_EXTERNAL" in env_visionos:
 env_visionos.Depends(visionos_lib, env_visionos["SWIFT_OBJC_HEADER_TARGET"])
 
 combine_command = env_visionos.Command(
-    "#bin/libgodot" + env_visionos["LIBSUFFIX"], [visionos_lib] + env_visionos["LIBS"], combine_libs_apple_embedded
+    "#bin/libfade" + env_visionos["LIBSUFFIX"], [visionos_lib] + env_visionos["LIBS"], combine_libs_apple_embedded
 )
 
 if env["generate_bundle"]:

@@ -24,21 +24,21 @@ jobs:
           submodules: recursive
 
       - name: Restore FADE build cache
-        uses: ./.github/actions/godot-cache-restore
+        uses: ./.github/actions/fade-cache-restore
         continue-on-error: true
 
       - name: Setup Python and SCons
-        uses: ./.github/actions/godot-deps
+        uses: ./.github/actions/fade-deps
 
       - name: Compilation (arm64)
-        uses: ./.github/actions/godot-build
+        uses: ./.github/actions/fade-build
         with:
           scons-flags: ${{ env.SCONS_FLAGS }}
           platform: visionos
           target: template_release
 
       - name: Save FADE build cache
-        uses: ./.github/actions/godot-cache-save
+        uses: ./.github/actions/fade-cache-save
         continue-on-error: true
 
       - name: Upload artifact

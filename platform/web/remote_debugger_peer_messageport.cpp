@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -34,10 +34,10 @@
 #include "core/io/marshalls.h"
 
 extern "C" {
-int godot_js_debugger_bind(int p_id, void (*p_callback)(void *p_ref, const uint8_t *p_buffer, size_t p_len), void *p_ref);
-void godot_js_debugger_post(int p_id, const uint8_t *p_buffer, size_t p_len);
-int godot_js_debugger_active(int p_id);
-void godot_js_debugger_unbind(int p_id);
+int fade_js_debugger_bind(int p_id, void (*p_callback)(void *p_ref, const uint8_t *p_buffer, size_t p_len), void *p_ref);
+void fade_js_debugger_post(int p_id, const uint8_t *p_buffer, size_t p_len);
+int fade_js_debugger_active(int p_id);
+void fade_js_debugger_unbind(int p_id);
 }
 
 void RemoteDebuggerPeerMessagePort::on_debug_message(void *p_ref, const uint8_t *p_buffer, size_t p_len) {
@@ -51,7 +51,7 @@ void RemoteDebuggerPeerMessagePort::on_debug_message(void *p_ref, const uint8_t 
 }
 
 Error RemoteDebuggerPeerMessagePort::connect_to_host(const String &p_uri) {
-	_js_id = godot_js_debugger_bind(-1, &on_debug_message, this);
+	_js_id = fade_js_debugger_bind(-1, &on_debug_message, this);
 	return _js_id != -1 ? OK : FAILED;
 }
 
@@ -59,7 +59,7 @@ bool RemoteDebuggerPeerMessagePort::is_peer_connected() {
 	if (_js_id == -1) {
 		return false;
 	}
-	return godot_js_debugger_active(_js_id);
+	return fade_js_debugger_active(_js_id);
 }
 
 void RemoteDebuggerPeerMessagePort::poll() {
@@ -89,7 +89,7 @@ Error RemoteDebuggerPeerMessagePort::put_message(const Array &p_arr) {
 	Error err = encode_variant(v, nullptr, size);
 	ERR_FAIL_COND_V(err != OK || size < 1 || size > out_buffer.size(), FAILED);
 	encode_variant(v, out_buffer.ptrw(), size);
-	godot_js_debugger_post(_js_id, out_buffer.ptr(), size);
+	fade_js_debugger_post(_js_id, out_buffer.ptr(), size);
 	return OK;
 }
 
@@ -97,7 +97,7 @@ void RemoteDebuggerPeerMessagePort::close() {
 	if (_js_id == -1) {
 		return;
 	}
-	godot_js_debugger_unbind(_js_id);
+	fade_js_debugger_unbind(_js_id);
 	_js_id = -1;
 }
 
@@ -109,7 +109,7 @@ RemoteDebuggerPeerMessagePort::RemoteDebuggerPeerMessagePort(int p_id) {
 	max_queued_messages = (int)GLOBAL_GET("network/limits/debugger/max_queued_messages");
 	out_buffer.resize(1 << 18);
 	if (p_id != -1) {
-		_js_id = godot_js_debugger_bind(p_id, &on_debug_message, this);
+		_js_id = fade_js_debugger_bind(p_id, &on_debug_message, this);
 		ERR_FAIL_COND(_js_id == -1);
 	}
 }

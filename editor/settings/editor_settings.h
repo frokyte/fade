@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -193,7 +193,7 @@ public:
 	Vector<String> get_recent_dirs() const;
 	void load_favorites_and_recent_dirs();
 
-	static HashMap<StringName, Color> get_godot2_text_editor_theme();
+	static HashMap<StringName, Color> get_fade2_text_editor_theme();
 	static bool is_default_text_editor_theme(const String &p_theme_name);
 	void update_text_editor_themes_list();
 

@@ -35,7 +35,7 @@
 # Julian Retzlaff <julian.retzlaff@googlemail.com>, 2018.
 # asyncial <mahlburg@posteo.de>, 2018.
 # ssantos <ssantos@web.de>, 2018.
-# Rémi Verschelde <akien@godotengine.org>, 2019.
+# Rémi Verschelde <akien@fadeengine.org>, 2019.
 # Martin <martinreininger@gmx.net>, 2019, 2021.
 # Andreas During <anduring@web.de>, 2019.
 # Arthur S. Muszynski <artism90@gmail.com>, 2019.
@@ -55,7 +55,7 @@
 # Günther Bohn <ciscouser@gmx.de>, 2020, 2021.
 # Tom Wor <mail@tomwor.com>, 2020.
 # Bjarne Hiller <bjarne.hiller@gmail.com>, 2020, 2023.
-# Dirk Federmann <weblategodot@dirkfedermann.de>, 2020.
+# Dirk Federmann <weblatefade@dirkfedermann.de>, 2020.
 # Helmut Hirtes <helmut.h@gmx.de>, 2020.
 # Michal695 <michalek.jedrzejak@gmail.com>, 2020.
 # Leon Marz <leon.marz@kabelmail.de>, 2020.
@@ -143,11 +143,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FADE Engine editor interface\n"
-"Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
+"Report-Msgid-Bugs-To: https://github.com/fadeengine/fade\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-11-05 05:32+0000\n"
 "Last-Translator: VfBFan <vfbfan@users.noreply.hosted.weblate.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/godot-engine/godot/"
+"Language-Team: German <https://hosted.weblate.org/projects/fade-engine/fade/"
 "de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -5956,8 +5956,8 @@ msgstr "Von Festplatte neu laden"
 msgid "Ignore external changes"
 msgstr "Externe Änderungen ignorieren"
 
-msgid "Project data folder (.godot) is missing. Please restart editor."
-msgstr "Das Projektdatenverzeichnis (.godot) fehlt. Bitte Editor neustarten."
+msgid "Project data folder (.fade) is missing. Please restart editor."
+msgstr "Das Projektdatenverzeichnis (.fade) fehlt. Bitte Editor neustarten."
 
 msgid "Restart"
 msgstr "Neustarten"
@@ -8684,16 +8684,16 @@ msgid "Invalid \".zip\" project file; it is not in ZIP format."
 msgstr "Ungültige „.zip“-Projektdatei; sie ist nicht im ZIP-Format."
 
 msgid ""
-"Invalid \".zip\" project file; it doesn't contain a \"project.godot\" file."
-msgstr "Ungültige „.zip“-Projektdatei, enthält keine „project.godot“-Datei."
+"Invalid \".zip\" project file; it doesn't contain a \"project.fade\" file."
+msgstr "Ungültige „.zip“-Projektdatei, enthält keine „project.fade“-Datei."
 
 msgid "Valid project found at path."
 msgstr "Gültiges Projekt im Pfad gefunden."
 
 msgid ""
-"Please choose a \"project.godot\", a directory with one, or a \".zip\" file."
+"Please choose a \"project.fade\", a directory with one, or a \".zip\" file."
 msgstr ""
-"Bitte ein „project.godot“, ein Verzeichnis damit oder eine „.zip“-Datei."
+"Bitte ein „project.fade“, ein Verzeichnis damit oder eine „.zip“-Datei."
 
 msgid "The path specified is invalid."
 msgstr "Der angegebene Pfad ist ungültig."
@@ -8809,8 +8809,8 @@ msgstr ""
 "Das Projektverzeichnis konnte nicht erstellt werden, überprüfen Sie die "
 "Berechtigungen."
 
-msgid "Couldn't create project.godot in project path."
-msgstr "project.godot konnte nicht im Projektpfad erzeugt werden."
+msgid "Couldn't create project.fade in project path."
+msgstr "project.fade konnte nicht im Projektpfad erzeugt werden."
 
 msgid "Couldn't create icon.svg in project path."
 msgstr "icon.svg konnte im Projektpfad nicht erzeugt werden."
@@ -9019,7 +9019,7 @@ msgstr ""
 
 msgid ""
 "The selected project \"%s\" does not specify its supported FADE version in "
-"its configuration file (\"project.godot\").\n"
+"its configuration file (\"project.fade\").\n"
 "\n"
 "Project path: %s\n"
 "\n"
@@ -9030,7 +9030,7 @@ msgid ""
 "engine anymore."
 msgstr ""
 "Das ausgewählte Projekt „%s“ hat in seiner Konfigurationsdatei "
-"(„project.godot“) nicht angegeben, welche FADE-Version es unterstützt.\n"
+"(„project.fade“) nicht angegeben, welche FADE-Version es unterstützt.\n"
 "\n"
 "Projektpfad: %s\n"
 "\n"
@@ -9047,7 +9047,7 @@ msgid ""
 "Project path: %s\n"
 "\n"
 "You have three options:\n"
-"- Convert only the configuration file (\"project.godot\"). Use this to open "
+"- Convert only the configuration file (\"project.fade\"). Use this to open "
 "the project without attempting to convert its scenes, resources and scripts.\n"
 "- Convert the entire project including its scenes, resources and scripts "
 "(recommended if you are upgrading).\n"
@@ -9062,7 +9062,7 @@ msgstr ""
 "Projektpfad: %s\n"
 "\n"
 "Es gibt drei Entscheidungsmöglichkeiten:\n"
-"- Lediglich die Konfigurationsdatei („project.godot“) konvertieren. Dies ist "
+"- Lediglich die Konfigurationsdatei („project.fade“) konvertieren. Dies ist "
 "hilfreich, um das Projekt lediglich zu öffnen, ohne Szenen, Ressourcen oder "
 "Skripte zu konvertieren.\n"
 "- Das gesamte Projekt inklusive Szenen, Ressourcen und Skripten konvertieren. "
@@ -9073,8 +9073,8 @@ msgstr ""
 "Achtung: Sollte eine der Konvertierungsmöglichkeiten ausgewählt werden, kann "
 "das Projekt nicht mehr mit älteren FADE-Versionen geöffnet werden."
 
-msgid "Convert project.godot Only"
-msgstr "Nur project.godot konvertieren"
+msgid "Convert project.fade Only"
+msgstr "Nur project.fade konvertieren"
 
 msgid ""
 "The selected project \"%s\" was generated by an older engine version, and "
@@ -9097,8 +9097,8 @@ msgstr ""
 "Achtung: Das Projekt kann nach der Umwandlung nicht mehr mit einer älteren "
 "Version geöffnet werden."
 
-msgid "Convert project.godot"
-msgstr "project.godot konvertieren"
+msgid "Convert project.fade"
+msgstr "project.fade konvertieren"
 
 msgid ""
 "Can't open project \"%s\" at the following path:\n"
@@ -9492,9 +9492,9 @@ msgstr "Abgespielte benutzerdefinierte Szene neu laden."
 msgid "Reload the played main scene."
 msgstr "Abgespielte Hauptszene neu laden."
 
-msgid "Failed to run the project because the project.godot file is missing."
+msgid "Failed to run the project because the project.fade file is missing."
 msgstr ""
-"Das Projekt konnte nicht ausgeführt werden, da die project.godot-Datei fehlt."
+"Das Projekt konnte nicht ausgeführt werden, da die project.fade-Datei fehlt."
 
 msgid ""
 "Movie Maker mode is enabled, but no movie file path has been specified.\n"
@@ -15881,8 +15881,8 @@ msgstr "Eingabeaktion umbenennen"
 msgid "Update Input Action Order"
 msgstr "Reihenfolge der Eingabeaktionen aktualisieren"
 
-msgid "Project Settings (project.godot)"
-msgstr "Projekteinstellungen (project.godot)"
+msgid "Project Settings (project.fade)"
+msgstr "Projekteinstellungen (project.fade)"
 
 msgid "Select a Setting or Type its Name"
 msgstr "Einstellung auswählen oder Namen eingeben"

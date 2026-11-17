@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -36,8 +36,8 @@
 
 #ifdef TOOLS_ENABLED
 static bool _create_project_solution_if_needed() {
-	CRASH_COND(CSharpLanguage::get_singleton()->get_godotsharp_editor() == nullptr);
-	return CSharpLanguage::get_singleton()->get_godotsharp_editor()->call("CreateProjectSolutionIfNeeded");
+	CRASH_COND(CSharpLanguage::get_singleton()->get_fadesharp_editor() == nullptr);
+	return CSharpLanguage::get_singleton()->get_fadesharp_editor()->call("CreateProjectSolutionIfNeeded");
 }
 #endif
 
@@ -57,7 +57,7 @@ Ref<Resource> ResourceFormatLoaderCSharpScript::load(const String &p_path, const
 
 	Ref<CSharpScript> scr;
 
-	if (GDMonoCache::godot_api_cache_updated) {
+	if (GDMonoCache::fade_api_cache_updated) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_GetOrCreateScriptBridgeForPath(&p_path, &scr);
 		ERR_FAIL_COND_V_MSG(scr.is_null(), Ref<Resource>(), "Could not create C# script '" + real_path + "'.");
 	} else {

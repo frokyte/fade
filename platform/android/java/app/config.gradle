@@ -35,7 +35,7 @@ ext.getExportPackageName = { ->
     String appId = project.hasProperty("export_package_name") ? project.property("export_package_name") : ""
     // Check if the app id is valid, otherwise use the default.
     if (appId == null || appId.isEmpty()) {
-        appId = "com.godot.game"
+        appId = "com.fade.game"
     }
     return appId
 }
@@ -219,7 +219,7 @@ ext.getExportPath = {
 ext.getExportFilename = {
     String exportFilename = project.hasProperty("export_filename") ? project.property("export_filename") : ""
     if (exportFilename == null || exportFilename.isEmpty()) {
-        exportFilename = "godot_android"
+        exportFilename = "fade_android"
     }
     return exportFilename
 }
@@ -401,7 +401,7 @@ ext.shouldUseLegacyPackaging = { ->
 
     if (getExportMinSdkVersion() <= 29) {
         // Use legacy packaging for compatibility with device running api <= 29.
-        // See https://github.com/godotengine/godot/issues/108842 for reference.
+        // See https://github.com/fadeengine/fade/issues/108842 for reference.
         return true
     }
 

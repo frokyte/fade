@@ -186,21 +186,21 @@ def run_msbuild(tools: ToolsLocation, sln: str, chdir_to: str, msbuild_args: lis
     return subprocess.call(args, env=msbuild_env, cwd=chdir_to)
 
 
-def build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision, no_deprecated, werror):
+def build_fade_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision, no_deprecated, werror):
     target_filenames = [
-        "GodotSharp.dll",
-        "GodotSharp.pdb",
-        "GodotSharp.xml",
-        "GodotSharpEditor.dll",
-        "GodotSharpEditor.pdb",
-        "GodotSharpEditor.xml",
-        "GodotPlugins.dll",
-        "GodotPlugins.pdb",
-        "GodotPlugins.runtimeconfig.json",
+        "FADESharp.dll",
+        "FADESharp.pdb",
+        "FADESharp.xml",
+        "FADESharpEditor.dll",
+        "FADESharpEditor.pdb",
+        "FADESharpEditor.xml",
+        "FADEPlugins.dll",
+        "FADEPlugins.pdb",
+        "FADEPlugins.runtimeconfig.json",
     ]
 
     for build_config in ["Debug", "Release"]:
-        editor_api_dir = os.path.join(output_dir, "GodotSharp", "Api", build_config)
+        editor_api_dir = os.path.join(output_dir, "FADESharp", "Api", build_config)
 
         targets = [os.path.join(editor_api_dir, filename) for filename in target_filenames]
 
@@ -208,22 +208,22 @@ def build_godot_api(msbuild_tool, module_dir, output_dir, push_nupkgs_local, pre
         if push_nupkgs_local:
             args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
         if precision == "double":
-            args += ["/p:GodotFloat64=true"]
+            args += ["/p:FADEFloat64=true"]
         if no_deprecated:
-            args += ["/p:GodotNoDeprecated=true"]
+            args += ["/p:FADENoDeprecated=true"]
         if werror:
             args += ["/p:TreatWarningsAsErrors=true"]
 
-        sln = os.path.join(module_dir, "glue/GodotSharp/GodotSharp.sln")
+        sln = os.path.join(module_dir, "glue/FADESharp/FADESharp.sln")
         exit_code = run_msbuild(msbuild_tool, sln=sln, chdir_to=module_dir, msbuild_args=args)
         if exit_code != 0:
             return exit_code
 
         # Copy targets
 
-        core_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "GodotSharp", "bin", build_config))
-        editor_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "GodotSharpEditor", "bin", build_config))
-        plugins_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "GodotPlugins", "bin", build_config, "net10.0"))
+        core_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "FADESharp", "bin", build_config))
+        editor_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "FADESharpEditor", "bin", build_config))
+        plugins_src_dir = os.path.abspath(os.path.join(sln, os.pardir, "FADEPlugins", "bin", build_config, "net10.0"))
 
         if not os.path.isdir(editor_api_dir):
             assert not os.path.isfile(editor_api_dir)
@@ -277,12 +277,12 @@ def generate_sdk_package_versions():
     sys.path.remove(root_path)
 
     version_status = version_info["status"]
-    godotsharp_version_str = "{major}.{minor}.{patch}".format(**version_info)
-    godot_dotnet_version_str = "{major}.{minor}.{patch}".format(**version_info)
+    fadesharp_version_str = "{major}.{minor}.{patch}".format(**version_info)
+    fade_dotnet_version_str = "{major}.{minor}.{patch}".format(**version_info)
     if version_status == "stable":
         # For stable versions, use the latest revision version available
-        # of the Godot .NET packages.
-        godot_dotnet_version_str = ".*"
+        # of the FADE .NET packages.
+        fade_dotnet_version_str = ".*"
     else:
         # Pre-releases and development builds.
 
@@ -293,23 +293,23 @@ def generate_sdk_package_versions():
         match = re.search(r"[\d]+$", version_status)
         if match:
             pos = match.start()
-            godotsharp_version_status = version_status[:pos]
-            godot_dotnet_version_status = version_status[:pos]
+            fadesharp_version_status = version_status[:pos]
+            fade_dotnet_version_status = version_status[:pos]
 
-            # "dev" pre-releases always use the "alpha" label in the Godot .NET packages.
-            if godot_dotnet_version_status == "dev":
-                godot_dotnet_version_status = "alpha"
+            # "dev" pre-releases always use the "alpha" label in the FADE .NET packages.
+            if fade_dotnet_version_status == "dev":
+                fade_dotnet_version_status = "alpha"
 
-            godotsharp_version_status += f".{version_status[pos:]}"
-            godot_dotnet_version_status += f".{version_status[pos:]}"
+            fadesharp_version_status += f".{version_status[pos:]}"
+            fade_dotnet_version_status += f".{version_status[pos:]}"
         else:
             # If the version status is not numbered, it must be a development build.
-            # Development builds always use the "dev" label in the Godot .NET packages.
-            godot_dotnet_version_status = "dev"
-            godotsharp_version_status = version_status
+            # Development builds always use the "dev" label in the FADE .NET packages.
+            fade_dotnet_version_status = "dev"
+            fadesharp_version_status = version_status
 
-        godotsharp_version_str += f"-{godotsharp_version_status}"
-        godot_dotnet_version_str += f"-{godot_dotnet_version_status}"
+        fadesharp_version_str += f"-{fadesharp_version_status}"
+        fade_dotnet_version_str += f"-{fade_dotnet_version_status}"
 
     import version
 
@@ -326,11 +326,11 @@ def generate_sdk_package_versions():
 
     props = f"""<Project>
   <PropertyGroup>
-    <PackageVersion_GodotSharp>{godotsharp_version_str}</PackageVersion_GodotSharp>
-    <PackageVersion_Godot_NET_Sdk>{godotsharp_version_str}</PackageVersion_Godot_NET_Sdk>
-    <PackageVersion_Godot_SourceGenerators>{godotsharp_version_str}</PackageVersion_Godot_SourceGenerators>
-    <PackageVersion_GodotDotNet>{godot_dotnet_version_str}</PackageVersion_GodotDotNet>
-    <_GodotVersionConstants>{";".join(version_defines)}</_GodotVersionConstants>
+    <PackageVersion_FADESharp>{fadesharp_version_str}</PackageVersion_FADESharp>
+    <PackageVersion_FADE_NET_Sdk>{fadesharp_version_str}</PackageVersion_FADE_NET_Sdk>
+    <PackageVersion_FADE_SourceGenerators>{fadesharp_version_str}</PackageVersion_FADE_SourceGenerators>
+    <PackageVersion_FADEDotNet>{fade_dotnet_version_str}</PackageVersion_FADEDotNet>
+    <_FADEVersionConstants>{";".join(version_defines)}</_FADEVersionConstants>
   </PropertyGroup>
 </Project>
 """
@@ -340,13 +340,13 @@ def generate_sdk_package_versions():
 
     # Also write the versioned docs URL to a constant for the Source Generators.
 
-    constants = """namespace Godot.SourceGenerators
+    constants = """namespace FADE.SourceGenerators
 {{
 // TODO: This is currently disabled because of https://github.com/dotnet/roslyn/issues/52904
 #pragma warning disable IDE0040 // Add accessibility modifiers.
     partial class Common
     {{
-        public const string VersionDocsUrl = "https://docs.godotengine.org/en/{docs_branch}";
+        public const string VersionDocsUrl = "https://docs.fadeengine.org/en/{docs_branch}";
     }}
 }}
 """.format(**version_info)
@@ -354,8 +354,8 @@ def generate_sdk_package_versions():
     generators_dir = os.path.join(
         dirname(script_path),
         "editor",
-        "Godot.NET.Sdk",
-        "Godot.SourceGenerators",
+        "FADE.NET.Sdk",
+        "FADE.SourceGenerators",
         "Generated",
     )
     os.makedirs(generators_dir, exist_ok=True)
@@ -364,40 +364,40 @@ def generate_sdk_package_versions():
 
 
 def build_all(
-    msbuild_tool, module_dir, output_dir, godot_platform, dev_debug, push_nupkgs_local, precision, no_deprecated, werror
+    msbuild_tool, module_dir, output_dir, fade_platform, dev_debug, push_nupkgs_local, precision, no_deprecated, werror
 ):
     # Generate SdkPackageVersions.props and VersionDocsUrl constant
     generate_sdk_package_versions()
 
-    # Godot API
-    exit_code = build_godot_api(
+    # FADE API
+    exit_code = build_fade_api(
         msbuild_tool, module_dir, output_dir, push_nupkgs_local, precision, no_deprecated, werror
     )
     if exit_code != 0:
         return exit_code
 
-    # GodotTools
-    sln = os.path.join(module_dir, "editor/GodotTools/GodotTools.sln")
+    # FADETools
+    sln = os.path.join(module_dir, "editor/FADETools/FADETools.sln")
     args = ["/restore", "/t:Build", "/p:Configuration=" + ("Debug" if dev_debug else "Release")] + (
-        ["/p:GodotPlatform=" + godot_platform] if godot_platform else []
+        ["/p:FADEPlatform=" + fade_platform] if fade_platform else []
     )
     if push_nupkgs_local:
         args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
     if precision == "double":
-        args += ["/p:GodotFloat64=true"]
+        args += ["/p:FADEFloat64=true"]
     exit_code = run_msbuild(msbuild_tool, sln=sln, chdir_to=module_dir, msbuild_args=args)
     if exit_code != 0:
         return exit_code
 
-    # Godot.NET.Sdk
+    # FADE.NET.Sdk
     args = ["/restore", "/t:Build", "/p:Configuration=Release"]
     if push_nupkgs_local:
         args += ["/p:ClearNuGetLocalCache=true", "/p:PushNuGetToLocalSource=" + push_nupkgs_local]
     if precision == "double":
-        args += ["/p:GodotFloat64=true"]
+        args += ["/p:FADEFloat64=true"]
     if no_deprecated:
-        args += ["/p:GodotNoDeprecated=true"]
-    sln = os.path.join(module_dir, "editor/Godot.NET.Sdk/Godot.NET.Sdk.sln")
+        args += ["/p:FADENoDeprecated=true"]
+    sln = os.path.join(module_dir, "editor/FADE.NET.Sdk/FADE.NET.Sdk.sln")
     exit_code = run_msbuild(msbuild_tool, sln=sln, chdir_to=module_dir, msbuild_args=args)
     if exit_code != 0:
         return exit_code
@@ -409,15 +409,15 @@ def main():
     import argparse
     import sys
 
-    parser = argparse.ArgumentParser(description="Builds all Godot .NET solutions")
-    parser.add_argument("--godot-output-dir", type=str, required=True)
+    parser = argparse.ArgumentParser(description="Builds all FADE .NET solutions")
+    parser.add_argument("--fade-output-dir", type=str, required=True)
     parser.add_argument(
         "--dev-debug",
         action="store_true",
         default=False,
-        help="Build GodotTools and Godot.NET.Sdk with 'Configuration=Debug'",
+        help="Build FADETools and FADE.NET.Sdk with 'Configuration=Debug'",
     )
-    parser.add_argument("--godot-platform", type=str, default="")
+    parser.add_argument("--fade-platform", type=str, default="")
     parser.add_argument("--mono-prefix", type=str, default="")
     parser.add_argument("--push-nupkgs-local", type=str, default="")
     parser.add_argument(
@@ -427,7 +427,7 @@ def main():
         "--no-deprecated",
         action="store_true",
         default=False,
-        help="Build GodotSharp without using deprecated features. This is required, if the engine was built with 'deprecated=no'.",
+        help="Build FADESharp without using deprecated features. This is required, if the engine was built with 'deprecated=no'.",
     )
     parser.add_argument("--werror", action="store_true", default=False, help="Treat compiler warnings as errors.")
 
@@ -436,7 +436,7 @@ def main():
     this_script_dir = os.path.dirname(os.path.realpath(__file__))
     module_dir = os.path.abspath(os.path.join(this_script_dir, os.pardir))
 
-    output_dir = os.path.abspath(args.godot_output_dir)
+    output_dir = os.path.abspath(args.fade_output_dir)
 
     push_nupkgs_local = os.path.abspath(args.push_nupkgs_local) if args.push_nupkgs_local else None
 
@@ -450,7 +450,7 @@ def main():
         msbuild_tool,
         module_dir,
         output_dir,
-        args.godot_platform,
+        args.fade_platform,
         args.dev_debug,
         push_nupkgs_local,
         args.precision,

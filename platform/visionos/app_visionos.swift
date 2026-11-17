@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -35,7 +35,7 @@ import OSLog
 // MARK: Helpers
 
 extension os.Logger {
-	static let godot = Logger(subsystem: "com.FADEFoundation.FADE", category: "SwiftUI")
+	static let fade = Logger(subsystem: "com.FADEFoundation.FADE", category: "SwiftUI")
 }
 
 // MARK: Renderer
@@ -191,7 +191,7 @@ struct ContentStageConfiguration: CompositorLayerConfiguration {
 
 		if GDTAppDelegateServiceVisionOS.isDynamicRenderQualityEnabled {
 			let maxRenderQuality = GDTAppDelegateServiceVisionOS.maxRenderQuality
-			Logger.godot.log("Enabled dynamic render quality (maxRenderQuality: \(maxRenderQuality))")
+			Logger.fade.log("Enabled dynamic render quality (maxRenderQuality: \(maxRenderQuality))")
 			configuration.maxRenderQuality = .init(maxRenderQuality)
 		}
 	}
@@ -251,7 +251,7 @@ struct CompositorServicesImmersiveSpace: Scene {
 		ImmersiveSpace(id: "ImmersiveSpace") {
 			CompositorLayer(configuration: ContentStageConfiguration()) { @MainActor layerRenderer in
 
-                Logger.godot.log("CompositorLayer init (initialImmersionStyle: \(String(describing: model.immersionStyle)))")
+                Logger.fade.log("CompositorLayer init (initialImmersionStyle: \(String(describing: model.immersionStyle)))")
 
                 model.seedFromProjectSettings()
 
@@ -265,7 +265,7 @@ struct CompositorServicesImmersiveSpace: Scene {
                     }
                 }
 
-                let signposter = OSSignposter(subsystem: "org.godotengine.godot.compositorservices", category: "loading")
+                let signposter = OSSignposter(subsystem: "org.fadeengine.fade.compositorservices", category: "loading")
                 let signpostID = signposter.makeSignpostID()
 
                 if !didSetUpRenderer {
@@ -313,7 +313,7 @@ struct SwiftUIApp: App {
 
 	init() {
 		let useCompositorServices = self.useCompositorServices
-		Logger.godot.log("visionOS app init (useCompositorServices: \(useCompositorServices))")
+		Logger.fade.log("visionOS app init (useCompositorServices: \(useCompositorServices))")
 		GDTAppDelegateServiceVisionOS.renderMode = useCompositorServices ? .compositorServices : .windowed
 	}
 

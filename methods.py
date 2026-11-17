@@ -264,7 +264,7 @@ def detect_modules(search_path, recursive=False):
         version_path = os.path.join(path, "version.py")
         if os.path.exists(version_path):
             with open(version_path, "r", encoding="utf-8") as f:
-                if 'short_name = "godot"' in f.read():
+                if 'short_name = "fade"' in f.read():
                     return True
         return False
 
@@ -710,8 +710,8 @@ def get_compiler_version(env):
         try:
             # FIXME: `-latest` works for most cases, but there are edge-cases where this would
             # benefit from a more nuanced search.
-            # https://github.com/godotengine/godot/pull/91069#issuecomment-2358956731
-            # https://github.com/godotengine/godot/pull/91069#issuecomment-2380836341
+            # https://github.com/fadeengine/fade/pull/91069#issuecomment-2358956731
+            # https://github.com/fadeengine/fade/pull/91069#issuecomment-2380836341
             args = [
                 env["VSWHERE"],
                 "-latest",
@@ -999,7 +999,7 @@ def dump(env):
 #
 # To generate AND build from the command line:
 #   scons vsproj=yes vsproj_gen_only=no
-def generate_vs_project(env, original_args, project_name="godot"):
+def generate_vs_project(env, original_args, project_name="fade"):
     # Augmented glob_recursive that also fills the dirs argument with traversed directories that have content.
     def glob_recursive_2(pattern, dirs, node="."):
         from SCons import Node
@@ -1232,7 +1232,7 @@ def generate_vs_project(env, original_args, project_name="godot"):
     others_active = []
 
     get_dependencies(
-        env.File(f"#bin/godot{env['PROGSUFFIX']}"), env, extensions, headers_active, sources_active, others_active
+        env.File(f"#bin/fade{env['PROGSUFFIX']}"), env, extensions, headers_active, sources_active, others_active
     )
 
     all_items = []
@@ -1291,7 +1291,7 @@ def generate_vs_project(env, original_args, project_name="godot"):
 
         for x in itemlist.keys():
             properties.append(f"<ActiveProjectItemList_{x}>;{';'.join(itemlist[x])};</ActiveProjectItemList_{x}>")
-        output = os.path.join("bin", f"godot{env['PROGSUFFIX']}")
+        output = os.path.join("bin", f"fade{env['PROGSUFFIX']}")
 
         # The modules_enabled.gen.h header containing the defines is only generated on build, and only for the most recently built
         # platform, which means VS can't properly render code that's inside module-specific ifdefs. This adds those defines to the
@@ -1389,7 +1389,7 @@ def generate_vs_project(env, original_args, project_name="godot"):
     section1 = []
     section2 = []
     for conf in confs:
-        godot_platform = conf["platform"]
+        fade_platform = conf["platform"]
         has_editor = "editor" in conf["targets"]
 
         # Skip any platforms that can build the editor and don't match the host platform.
@@ -1397,18 +1397,18 @@ def generate_vs_project(env, original_args, project_name="godot"):
         # When both Windows and Mac define an editor target, it's defined as platform+target+arch (windows+editor+x64 for example).
         # VS only supports two attributes, a "Configuration" and a "Platform", and we currently map our target to the Configuration
         # (i.e. editor/template_debug/template_release), and our architecture to the "Platform" (i.e. x64, arm64, etc).
-        # Those two are not enough to disambiguate multiple godot targets for different godot platforms with the same architecture,
+        # Those two are not enough to disambiguate multiple fade targets for different fade platforms with the same architecture,
         # i.e. editor|x64 would currently match both windows editor intel 64 and linux editor intel 64.
         #
         # TODO: More work is needed in order to support generating VS projects that unambiguously support all platform+target+arch variations.
         # The VS "Platform" has to be a known architecture that VS recognizes, so we can only play around with the "Configuration" part of the combo.
-        if has_editor and godot_platform != host_vs_configuration["platform"]:
+        if has_editor and fade_platform != host_vs_configuration["platform"]:
             continue
 
         for p in conf["arches"]:
             sln_plat = p["platform"]
             proj_plat = sln_plat
-            godot_arch = p["architecture"]
+            fade_arch = p["architecture"]
 
             # Redirect editor configurations for platforms that don't support the editor target to the default editor target on the
             # active host platform, so the solution has all the permutations and VS doesn't complain about missing project configurations.
@@ -1432,36 +1432,36 @@ def generate_vs_project(env, original_args, project_name="godot"):
                 ]
 
             for t in conf["targets"]:
-                godot_target = t
+                fade_target = t
 
                 # Windows x86 is a special little flower that requires a project platform == Win32 but a solution platform == x86.
-                if godot_platform == "windows" and godot_target == "editor" and godot_arch == "x86_32":
+                if fade_platform == "windows" and fade_target == "editor" and fade_arch == "x86_32":
                     sln_plat = "x86"
 
                 configurations += [
-                    f'<ProjectConfiguration Include="{godot_target}|{proj_plat}">',
-                    f"  <Configuration>{godot_target}</Configuration>",
+                    f'<ProjectConfiguration Include="{fade_target}|{proj_plat}">',
+                    f"  <Configuration>{fade_target}</Configuration>",
                     f"  <Platform>{proj_plat}</Platform>",
                     "</ProjectConfiguration>",
                 ]
 
                 properties += [
-                    f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='{godot_target}|{proj_plat}'\">",
-                    f"  <FADEConfiguration>{godot_target}</FADEConfiguration>",
+                    f"<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='{fade_target}|{proj_plat}'\">",
+                    f"  <FADEConfiguration>{fade_target}</FADEConfiguration>",
                     f"  <FADEPlatform>{proj_plat}</FADEPlatform>",
                     "</PropertyGroup>",
                 ]
 
-                p = f"{project_name}.{godot_platform}.{godot_target}.{godot_arch}.generated.props"
+                p = f"{project_name}.{fade_platform}.{fade_target}.{fade_arch}.generated.props"
                 imports += [
                     f'<Import Project="$(MSBuildProjectDirectory)\\{p}" Condition="Exists(\'$(MSBuildProjectDirectory)\\{p}\')"/>'
                 ]
 
-                section1 += [f"{godot_target}|{sln_plat} = {godot_target}|{sln_plat}"]
+                section1 += [f"{fade_target}|{sln_plat} = {fade_target}|{sln_plat}"]
 
                 section2 += [
-                    f"{{{proj_uuid}}}.{godot_target}|{sln_plat}.ActiveCfg = {godot_target}|{proj_plat}",
-                    f"{{{proj_uuid}}}.{godot_target}|{sln_plat}.Build.0 = {godot_target}|{proj_plat}",
+                    f"{{{proj_uuid}}}.{fade_target}|{sln_plat}.ActiveCfg = {fade_target}|{proj_plat}",
+                    f"{{{proj_uuid}}}.{fade_target}|{sln_plat}.Build.0 = {fade_target}|{proj_plat}",
                 ]
 
     # Add an extra import for a local user props file at the end, so users can add more overrides.
@@ -1512,7 +1512,7 @@ def generate_copyright_header(filename: str) -> str:
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */

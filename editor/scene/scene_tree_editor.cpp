@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -1249,7 +1249,7 @@ bool SceneTreeEditor::_update_filter_helper(TreeItem *p_parent, bool p_scroll_to
 
 bool SceneTreeEditor::_node_matches_class_term(const Node *p_item_node, const String &p_term) {
 	if (p_term.is_empty()) {
-		// Defend against https://github.com/godotengine/godot/issues/82473
+		// Defend against https://github.com/fadeengine/fade/issues/82473
 		return true;
 	}
 	Ref<Script> item_script = p_item_node->get_script();

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -88,7 +88,7 @@ void ExportTemplateManager::_request_mirrors() {
 	}
 
 	if (mirrors_list->get_tooltip_text().is_empty()) {
-		const String mirrors_metadata_url = vformat("https://godotengine.org/mirrorlist/%s.json", GODOT_VERSION_FULL_CONFIG);
+		const String mirrors_metadata_url = vformat("https://fadeengine.org/mirrorlist/%s.json", GODOT_VERSION_FULL_CONFIG);
 		mirrors_requester->request(mirrors_metadata_url);
 	}
 }
@@ -508,7 +508,7 @@ void ExportTemplateManager::_initialize_template_data() {
 		TemplateInfo info;
 		info.name = TTR("ICU Data");
 		info.description = TTRC("Line breaking dictionaries for TextServer, used by certain languages.");
-		info.file_list = { "icudt_godot.dat" };
+		info.file_list = { "icudt_fade.dat" };
 		template_data[TemplateID::ICU_DATA] = info;
 	}
 
@@ -2108,7 +2108,7 @@ void TemplateDownloader::_download_completed() {
 		int err = UNZ_OK;
 
 		// Locate and open the file.
-		err = godot_unzip_locate_file(uzf, file_info.name, true);
+		err = fade_unzip_locate_file(uzf, file_info.name, true);
 		if (err != UNZ_OK) {
 			unzClose(uzf);
 			_download_failed(TTR("File does not exist in ZIP archive."));

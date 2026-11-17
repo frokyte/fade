@@ -163,7 +163,7 @@ def generateBuildTasks(String flavor = "template", String edition = "standard", 
                     buildTasks += tasks.create(name: copyAARTaskName, type: Copy) {
                         dependsOn ":lib:assembleTemplate${capitalizedTarget}"
                         from('lib/build/outputs/aar')
-                        include("godot-lib.template_${targetSuffix}.aar")
+                        include("fade-lib.template_${targetSuffix}.aar")
                         into("app/libs/${target}")
                     }
                 }
@@ -177,7 +177,7 @@ def generateBuildTasks(String flavor = "template", String edition = "standard", 
                     buildTasks += tasks.create(name: copyAARToBinTaskName, type: Copy) {
                         dependsOn ":lib:assembleTemplate${capitalizedTarget}"
                         from('lib/build/outputs/aar')
-                        include("godot-lib.template_${targetSuffix}.aar")
+                        include("fade-lib.template_${targetSuffix}.aar")
                         into(binDir)
                     }
                 }
@@ -337,12 +337,12 @@ task cleanFADETemplates(type: Delete) {
     delete("$binDir/android_monoDebug.apk")
     delete("$binDir/android_monoRelease.apk")
     delete("$binDir/android_source.zip")
-    delete("$binDir/godot-lib.template_debug.aar")
-    delete("$binDir/godot-lib.template_release.aar")
+    delete("$binDir/fade-lib.template_debug.aar")
+    delete("$binDir/fade-lib.template_release.aar")
 
     // Cover deletion for the libs using the previous naming scheme
-    delete("$binDir/godot-lib.debug.aar")
-    delete("$binDir/godot-lib.release.aar")
+    delete("$binDir/fade-lib.debug.aar")
+    delete("$binDir/fade-lib.release.aar")
 
     // Delete the native debug symbols files.
     delete("$binDir/android-editor-debug-native-symbols.zip")

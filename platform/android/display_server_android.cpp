@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,8 +30,8 @@
 
 #include "display_server_android.h"
 
-#include "java_godot_io_wrapper.h"
-#include "java_godot_wrapper.h"
+#include "java_fade_io_wrapper.h"
+#include "java_fade_wrapper.h"
 #include "os_android.h"
 #include "tts_android.h"
 
@@ -74,9 +74,9 @@ bool DisplayServerAndroid::has_feature(DisplayServerEnums::Feature p_feature) co
 		} break;
 #endif
 		case DisplayServerEnums::FEATURE_PIP_MODE: {
-			FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-			ERR_FAIL_NULL_V(godot_java, false);
-			return godot_java->is_pip_mode_supported();
+			FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+			ERR_FAIL_NULL_V(fade_java, false);
+			return fade_java->is_pip_mode_supported();
 		} break;
 
 		case DisplayServerEnums::FEATURE_CURSOR_SHAPE:
@@ -112,21 +112,21 @@ String DisplayServerAndroid::get_name() const {
 }
 
 int DisplayServerAndroid::accessibility_should_increase_contrast() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, -1);
-	return godot_java->is_high_contrast_active();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, -1);
+	return fade_java->is_high_contrast_active();
 }
 
 int DisplayServerAndroid::accessibility_screen_reader_active() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, -1);
-	return godot_java->is_screen_reader_active();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, -1);
+	return fade_java->is_screen_reader_active();
 }
 
 int DisplayServerAndroid::accessibility_should_reduce_animation() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, -1);
-	return godot_java->is_animation_disabled();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, -1);
+	return fade_java->is_animation_disabled();
 }
 
 bool DisplayServerAndroid::tts_is_speaking() const {
@@ -158,17 +158,17 @@ void DisplayServerAndroid::tts_stop() {
 }
 
 bool DisplayServerAndroid::is_dark_mode_supported() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, false);
 
-	return godot_java->is_dark_mode_supported();
+	return fade_java->is_dark_mode_supported();
 }
 
 bool DisplayServerAndroid::is_dark_mode() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, false);
 
-	return godot_java->is_dark_mode();
+	return fade_java->is_dark_mode();
 }
 
 void DisplayServerAndroid::set_system_theme_change_callback(const Callable &p_callable) {
@@ -192,43 +192,43 @@ void DisplayServerAndroid::emit_hardware_keyboard_connection_changed(bool p_conn
 }
 
 void DisplayServerAndroid::clipboard_set(const String &p_text) {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL(fade_java);
 
-	if (godot_java->has_set_clipboard()) {
-		godot_java->set_clipboard(p_text);
+	if (fade_java->has_set_clipboard()) {
+		fade_java->set_clipboard(p_text);
 	} else {
 		DisplayServer::clipboard_set(p_text);
 	}
 }
 
 String DisplayServerAndroid::clipboard_get() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, String());
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, String());
 
-	if (godot_java->has_get_clipboard()) {
-		return godot_java->get_clipboard();
+	if (fade_java->has_get_clipboard()) {
+		return fade_java->get_clipboard();
 	} else {
 		return DisplayServer::clipboard_get();
 	}
 }
 
 bool DisplayServerAndroid::clipboard_has() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, false);
 
-	if (godot_java->has_has_clipboard()) {
-		return godot_java->has_clipboard();
+	if (fade_java->has_has_clipboard()) {
+		return fade_java->has_clipboard();
 	} else {
 		return DisplayServer::clipboard_has();
 	}
 }
 
 Error DisplayServerAndroid::dialog_show(String p_title, String p_description, Vector<String> p_buttons, const Callable &p_callback) {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, FAILED);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, FAILED);
 	dialog_callback = p_callback;
-	return godot_java->show_dialog(p_title, p_description, p_buttons);
+	return fade_java->show_dialog(p_title, p_description, p_buttons);
 }
 
 void DisplayServerAndroid::emit_dialog_callback(int p_button_index) {
@@ -238,10 +238,10 @@ void DisplayServerAndroid::emit_dialog_callback(int p_button_index) {
 }
 
 Error DisplayServerAndroid::dialog_input_text(String p_title, String p_description, String p_partial, const Callable &p_callback) {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, FAILED);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, FAILED);
 	input_dialog_callback = p_callback;
-	return godot_java->show_input_dialog(p_title, p_description, p_partial);
+	return fade_java->show_input_dialog(p_title, p_description, p_partial);
 }
 
 void DisplayServerAndroid::emit_input_dialog_callback(String p_text) {
@@ -252,10 +252,10 @@ void DisplayServerAndroid::emit_input_dialog_callback(String p_text) {
 
 Error DisplayServerAndroid::file_dialog_show(const String &p_title, const String &p_current_directory, const String &p_filename, bool p_show_hidden, DisplayServerEnums::FileDialogMode p_mode, const Vector<String> &p_filters, const Callable &p_callback, DisplayServerEnums::WindowID p_window_id) {
 	ERR_FAIL_COND_V(p_window_id != DisplayServerEnums::MAIN_WINDOW_ID, ERR_UNAVAILABLE);
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, FAILED);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, FAILED);
 	file_picker_callback = p_callback;
-	return godot_java->show_file_picker(p_current_directory, p_filename, p_mode, p_filters);
+	return fade_java->show_file_picker(p_current_directory, p_filename, p_mode, p_filters);
 }
 
 void DisplayServerAndroid::emit_file_picker_callback(bool p_ok, const Vector<String> &p_selected_paths) {
@@ -265,15 +265,15 @@ void DisplayServerAndroid::emit_file_picker_callback(bool p_ok, const Vector<Str
 }
 
 Color DisplayServerAndroid::get_accent_color() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, Color(0, 0, 0, 0));
-	return godot_java->get_accent_color();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, Color(0, 0, 0, 0));
+	return fade_java->get_accent_color();
 }
 
 Color DisplayServerAndroid::get_base_color() const {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, Color(0, 0, 0, 0));
-	return godot_java->get_base_color();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, Color(0, 0, 0, 0));
+	return fade_java->get_base_color();
 }
 
 TypedArray<Rect2> DisplayServerAndroid::get_display_cutouts(int p_screen) const {
@@ -281,9 +281,9 @@ TypedArray<Rect2> DisplayServerAndroid::get_display_cutouts(int p_screen) const 
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, TypedArray<Rect2>());
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, Array());
-	return godot_io_java->get_display_cutouts();
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, Array());
+	return fade_io_java->get_display_cutouts();
 }
 
 Rect2i DisplayServerAndroid::get_display_safe_area(int p_screen) const {
@@ -291,16 +291,16 @@ Rect2i DisplayServerAndroid::get_display_safe_area(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, Rect2i());
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, Rect2i());
-	return godot_io_java->get_display_safe_area();
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, Rect2i());
+	return fade_io_java->get_display_safe_area();
 }
 
 void DisplayServerAndroid::screen_set_keep_on(bool p_enable) {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL(fade_java);
 
-	godot_java->set_keep_screen_on(p_enable);
+	fade_java->set_keep_screen_on(p_enable);
 	keep_screen_on = p_enable;
 }
 
@@ -313,10 +313,10 @@ void DisplayServerAndroid::screen_set_orientation(DisplayServerEnums::ScreenOrie
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX(p_screen, screen_count);
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL(godot_io_java);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL(fade_io_java);
 
-	godot_io_java->set_screen_orientation(p_orientation);
+	fade_io_java->set_screen_orientation(p_orientation);
 }
 
 DisplayServerEnums::ScreenOrientation DisplayServerAndroid::screen_get_orientation(int p_screen) const {
@@ -324,19 +324,19 @@ DisplayServerEnums::ScreenOrientation DisplayServerAndroid::screen_get_orientati
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, DisplayServerEnums::SCREEN_LANDSCAPE);
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, DisplayServerEnums::SCREEN_LANDSCAPE);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, DisplayServerEnums::SCREEN_LANDSCAPE);
 
-	const int orientation = godot_io_java->get_screen_orientation();
+	const int orientation = fade_io_java->get_screen_orientation();
 	ERR_FAIL_INDEX_V_MSG(orientation, 7, DisplayServerEnums::SCREEN_LANDSCAPE, "Unrecognized screen orientation");
 	return (DisplayServerEnums::ScreenOrientation)orientation;
 }
 
 int DisplayServerAndroid::get_display_rotation() const {
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 0);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, 0);
 
-	return godot_io_java->get_display_rotation();
+	return fade_io_java->get_display_rotation();
 }
 
 int DisplayServerAndroid::get_screen_count() const {
@@ -377,10 +377,10 @@ int DisplayServerAndroid::screen_get_dpi(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, 160);
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 160);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, 160);
 
-	return godot_io_java->get_screen_dpi();
+	return fade_io_java->get_screen_dpi();
 }
 
 float DisplayServerAndroid::screen_get_scale(int p_screen) const {
@@ -388,10 +388,10 @@ float DisplayServerAndroid::screen_get_scale(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, 1.0f);
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 1.0f);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, 1.0f);
 
-	float screen_scale = godot_io_java->get_scaled_density();
+	float screen_scale = fade_io_java->get_scaled_density();
 
 	// Update the scale to avoid cropping.
 	Size2i screen_size = screen_get_size(p_screen);
@@ -410,13 +410,13 @@ float DisplayServerAndroid::screen_get_refresh_rate(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, SCREEN_REFRESH_RATE_FALLBACK);
 
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	if (!godot_io_java) {
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	if (!fade_io_java) {
 		ERR_PRINT("An error occurred while trying to get the screen refresh rate.");
 		return SCREEN_REFRESH_RATE_FALLBACK;
 	}
 
-	return godot_io_java->get_screen_refresh_rate(SCREEN_REFRESH_RATE_FALLBACK);
+	return fade_io_java->get_screen_refresh_rate(SCREEN_REFRESH_RATE_FALLBACK);
 }
 
 bool DisplayServerAndroid::is_touchscreen_available() const {
@@ -424,39 +424,39 @@ bool DisplayServerAndroid::is_touchscreen_available() const {
 }
 
 void DisplayServerAndroid::virtual_keyboard_show(const String &p_existing_text, const Rect2 &p_screen_rect, DisplayServerEnums::VirtualKeyboardType p_type, int p_max_length, int p_cursor_start, int p_cursor_end) {
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL(godot_io_java);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL(fade_io_java);
 
-	if (godot_io_java->has_vk()) {
-		godot_io_java->show_vk(p_existing_text, (int)p_type, p_max_length, p_cursor_start, p_cursor_end);
+	if (fade_io_java->has_vk()) {
+		fade_io_java->show_vk(p_existing_text, (int)p_type, p_max_length, p_cursor_start, p_cursor_end);
 	} else {
 		ERR_PRINT("Virtual keyboard not available");
 	}
 }
 
 void DisplayServerAndroid::virtual_keyboard_hide() {
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL(godot_io_java);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL(fade_io_java);
 
-	if (godot_io_java->has_vk()) {
-		godot_io_java->hide_vk();
+	if (fade_io_java->has_vk()) {
+		fade_io_java->hide_vk();
 	} else {
 		ERR_PRINT("Virtual keyboard not available");
 	}
 }
 
 int DisplayServerAndroid::virtual_keyboard_get_height() const {
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, 0);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, 0);
 
-	return godot_io_java->get_vk_height();
+	return fade_io_java->get_vk_height();
 }
 
 bool DisplayServerAndroid::has_hardware_keyboard() const {
-	FADEIOJavaWrapper *godot_io_java = OS_Android::get_singleton()->get_godot_io_java();
-	ERR_FAIL_NULL_V(godot_io_java, false);
+	FADEIOJavaWrapper *fade_io_java = OS_Android::get_singleton()->get_fade_io_java();
+	ERR_FAIL_NULL_V(fade_io_java, false);
 
-	return godot_io_java->has_hardware_keyboard();
+	return fade_io_java->has_hardware_keyboard();
 }
 
 void DisplayServerAndroid::window_set_window_event_callback(const Callable &p_callable, DisplayServerEnums::WindowID p_window) {
@@ -524,7 +524,7 @@ int64_t DisplayServerAndroid::window_get_native_handle(DisplayServerEnums::Handl
 	ERR_FAIL_COND_V(p_window != DisplayServerEnums::MAIN_WINDOW_ID, 0);
 	switch (p_handle_type) {
 		case DisplayServerEnums::WINDOW_HANDLE: {
-			return reinterpret_cast<int64_t>(static_cast<OS_Android *>(OS::get_singleton())->get_godot_java()->get_activity());
+			return reinterpret_cast<int64_t>(static_cast<OS_Android *>(OS::get_singleton())->get_fade_java()->get_activity());
 		}
 		case DisplayServerEnums::WINDOW_VIEW: {
 			return 0; // Not supported.
@@ -625,11 +625,11 @@ Size2i DisplayServerAndroid::window_get_size_with_decorations(DisplayServerEnums
 }
 
 void DisplayServerAndroid::window_set_mode(DisplayServerEnums::WindowMode p_mode, DisplayServerEnums::WindowID p_window) {
-	OS_Android::get_singleton()->get_godot_java()->enable_immersive_mode(p_mode == DisplayServerEnums::WINDOW_MODE_FULLSCREEN || p_mode == DisplayServerEnums::WINDOW_MODE_EXCLUSIVE_FULLSCREEN);
+	OS_Android::get_singleton()->get_fade_java()->enable_immersive_mode(p_mode == DisplayServerEnums::WINDOW_MODE_FULLSCREEN || p_mode == DisplayServerEnums::WINDOW_MODE_EXCLUSIVE_FULLSCREEN);
 }
 
 DisplayServerEnums::WindowMode DisplayServerAndroid::window_get_mode(DisplayServerEnums::WindowID p_window) const {
-	if (OS_Android::get_singleton()->get_godot_java()->is_in_immersive_mode()) {
+	if (OS_Android::get_singleton()->get_fade_java()->is_in_immersive_mode()) {
 		return DisplayServerEnums::WINDOW_MODE_FULLSCREEN;
 	} else {
 		return DisplayServerEnums::WINDOW_MODE_MAXIMIZED;
@@ -676,9 +676,9 @@ bool DisplayServerAndroid::can_any_window_draw() const {
 }
 
 void DisplayServerAndroid::window_set_color(const Color &p_color) {
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
-	godot_java->set_window_color(p_color);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL(fade_java);
+	fade_java->set_window_color(p_color);
 }
 
 void DisplayServerAndroid::process_events() {
@@ -909,7 +909,7 @@ void DisplayServerAndroid::_mouse_update_mode() {
 			? mouse_mode_override
 			: mouse_mode_base;
 
-	if (!OS_Android::get_singleton()->get_godot_java()->get_godot_view()->can_update_pointer_icon() || !OS_Android::get_singleton()->get_godot_java()->get_godot_view()->can_capture_pointer()) {
+	if (!OS_Android::get_singleton()->get_fade_java()->get_fade_view()->can_update_pointer_icon() || !OS_Android::get_singleton()->get_fade_java()->get_fade_view()->can_capture_pointer()) {
 		return;
 	}
 	if (mouse_mode == wanted_mouse_mode) {
@@ -917,15 +917,15 @@ void DisplayServerAndroid::_mouse_update_mode() {
 	}
 
 	if (wanted_mouse_mode == DisplayServerEnums::MouseMode::MOUSE_MODE_HIDDEN) {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->set_pointer_icon(CURSOR_TYPE_NULL);
+		OS_Android::get_singleton()->get_fade_java()->get_fade_view()->set_pointer_icon(CURSOR_TYPE_NULL);
 	} else {
 		cursor_set_shape(cursor_shape);
 	}
 
 	if (wanted_mouse_mode == DisplayServerEnums::MouseMode::MOUSE_MODE_CAPTURED) {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->request_pointer_capture();
+		OS_Android::get_singleton()->get_fade_java()->get_fade_view()->request_pointer_capture();
 	} else {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->release_pointer_capture();
+		OS_Android::get_singleton()->get_fade_java()->get_fade_view()->release_pointer_capture();
 	}
 
 	mouse_mode = wanted_mouse_mode;
@@ -975,7 +975,7 @@ BitField<MouseButtonMask> DisplayServerAndroid::mouse_get_button_state() const {
 }
 
 void DisplayServerAndroid::_cursor_set_shape_helper(DisplayServerEnums::CursorShape p_shape, bool force) {
-	if (!OS_Android::get_singleton()->get_godot_java()->get_godot_view()->can_update_pointer_icon()) {
+	if (!OS_Android::get_singleton()->get_fade_java()->get_fade_view()->can_update_pointer_icon()) {
 		return;
 	}
 	if (cursor_shape == p_shape && !force) {
@@ -985,7 +985,7 @@ void DisplayServerAndroid::_cursor_set_shape_helper(DisplayServerEnums::CursorSh
 	cursor_shape = p_shape;
 
 	if (mouse_mode == DisplayServerEnums::MouseMode::MOUSE_MODE_VISIBLE || mouse_mode == DisplayServerEnums::MouseMode::MOUSE_MODE_CONFINED) {
-		OS_Android::get_singleton()->get_godot_java()->get_godot_view()->set_pointer_icon(android_cursors[cursor_shape]);
+		OS_Android::get_singleton()->get_fade_java()->get_fade_view()->set_pointer_icon(android_cursors[cursor_shape]);
 	}
 }
 
@@ -1004,7 +1004,7 @@ void DisplayServerAndroid::cursor_set_custom_image(const Ref<Resource> &p_cursor
 	if (!cursor_path.is_empty()) {
 		cursor_path = ProjectSettings::get_singleton()->globalize_path(cursor_path);
 	}
-	OS_Android::get_singleton()->get_godot_java()->get_godot_view()->configure_pointer_icon(android_cursors[cursor_shape], cursor_path, p_hotspot);
+	OS_Android::get_singleton()->get_fade_java()->get_fade_view()->configure_pointer_icon(android_cursors[cursor_shape], cursor_path, p_hotspot);
 	_cursor_set_shape_helper(p_shape, true);
 }
 
@@ -1051,28 +1051,28 @@ bool DisplayServerAndroid::is_window_transparency_available() const {
 
 bool DisplayServerAndroid::is_in_pip_mode(DisplayServerEnums::WindowID p_window) {
 	ERR_FAIL_COND_V(p_window != DisplayServerEnums::MAIN_WINDOW_ID, false);
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL_V(godot_java, false);
-	return godot_java->is_in_pip_mode();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL_V(fade_java, false);
+	return fade_java->is_in_pip_mode();
 }
 
 void DisplayServerAndroid::pip_mode_enter(DisplayServerEnums::WindowID p_window) {
 	ERR_FAIL_COND(p_window != DisplayServerEnums::MAIN_WINDOW_ID);
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
-	godot_java->enter_pip_mode();
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL(fade_java);
+	fade_java->enter_pip_mode();
 }
 
 void DisplayServerAndroid::pip_mode_set_aspect_ratio(int p_numerator, int p_denominator, DisplayServerEnums::WindowID p_window) {
 	ERR_FAIL_COND(p_window != DisplayServerEnums::MAIN_WINDOW_ID);
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
-	godot_java->set_pip_mode_aspect_ratio(p_numerator, p_denominator);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL(fade_java);
+	fade_java->set_pip_mode_aspect_ratio(p_numerator, p_denominator);
 }
 
 void DisplayServerAndroid::pip_mode_set_auto_enter_on_background(bool p_auto_enter_on_background, DisplayServerEnums::WindowID p_window) {
 	ERR_FAIL_COND(p_window != DisplayServerEnums::MAIN_WINDOW_ID);
-	FADEJavaWrapper *godot_java = OS_Android::get_singleton()->get_godot_java();
-	ERR_FAIL_NULL(godot_java);
-	godot_java->set_auto_enter_pip_mode_on_background(p_auto_enter_on_background);
+	FADEJavaWrapper *fade_java = OS_Android::get_singleton()->get_fade_java();
+	ERR_FAIL_NULL(fade_java);
+	fade_java->set_auto_enter_pip_mode_on_background(p_auto_enter_on_background);
 }

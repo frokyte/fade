@@ -36,8 +36,8 @@ Comment:
  building them into the FADE binary, you may remove the corresponding
  license details from this file.
 Upstream-Name: FADE Engine
-Upstream-Contact: Rémi Verschelde <contact@godotengine.org>
-Source: https://github.com/godotengine/godot
+Upstream-Contact: Rémi Verschelde <contact@fadeengine.org>
+Source: https://github.com/fadeengine/fade
 
 Files: *
 Comment: FADE Engine
@@ -53,7 +53,7 @@ Copyright: 2011, Ole Kniemeyer, MAXON, www.maxon.net
  2007-2014, Juan Linietsky, Ariel Manzur
 License: Expat and Zlib
 
-Files: misc/dist/linux/org.godotengine.FADE.appdata.xml
+Files: misc/dist/linux/org.fadeengine.FADE.appdata.xml
 Comment: Linux AppStream Metadata File
 Copyright: 2017-2022, Rémi Verschelde
 License: CC0-1.0
@@ -71,38 +71,38 @@ Comment: Betsy
 Copyright: 2020-2022, Matias N. Goldberg
 License: Expat
 
-Files: modules/godot_physics_2d/godot_joints_2d.cpp
+Files: modules/fade_physics_2d/fade_joints_2d.cpp
 Comment: Chipmunk2D Joint Constraints
 Copyright: 2007, Scott Lembcke
 License: Expat
 
-Files: modules/godot_physics_3d/gjk_epa.cpp
- modules/godot_physics_3d/joints/godot_generic_6dof_joint_3d.cpp
- modules/godot_physics_3d/joints/godot_generic_6dof_joint_3d.h
- modules/godot_physics_3d/joints/godot_hinge_joint_3d.cpp
- modules/godot_physics_3d/joints/godot_hinge_joint_3d.h
- modules/godot_physics_3d/joints/godot_jacobian_entry_3d.h
- modules/godot_physics_3d/joints/godot_pin_joint_3d.cpp
- modules/godot_physics_3d/joints/godot_pin_joint_3d.h
- modules/godot_physics_3d/joints/godot_slider_joint_3d.cpp
- modules/godot_physics_3d/joints/godot_slider_joint_3d.h
- modules/godot_physics_3d/godot_soft_body_3d.cpp
- modules/godot_physics_3d/godot_soft_body_3d.h
- modules/godot_physics_3d/godot_shape_3d.cpp
- modules/godot_physics_3d/godot_shape_3d.h
+Files: modules/fade_physics_3d/gjk_epa.cpp
+ modules/fade_physics_3d/joints/fade_generic_6dof_joint_3d.cpp
+ modules/fade_physics_3d/joints/fade_generic_6dof_joint_3d.h
+ modules/fade_physics_3d/joints/fade_hinge_joint_3d.cpp
+ modules/fade_physics_3d/joints/fade_hinge_joint_3d.h
+ modules/fade_physics_3d/joints/fade_jacobian_entry_3d.h
+ modules/fade_physics_3d/joints/fade_pin_joint_3d.cpp
+ modules/fade_physics_3d/joints/fade_pin_joint_3d.h
+ modules/fade_physics_3d/joints/fade_slider_joint_3d.cpp
+ modules/fade_physics_3d/joints/fade_slider_joint_3d.h
+ modules/fade_physics_3d/fade_soft_body_3d.cpp
+ modules/fade_physics_3d/fade_soft_body_3d.h
+ modules/fade_physics_3d/fade_shape_3d.cpp
+ modules/fade_physics_3d/fade_shape_3d.h
 Comment: Bullet Continuous Collision Detection and Physics Library
 Copyright: 2003-2008, Erwin Coumans
  2014-present, FADE Engine contributors
  2007-2014, Juan Linietsky, Ariel Manzur
 License: Expat and Zlib
 
-Files: modules/godot_physics_3d/godot_collision_solver_3d_sat.cpp
+Files: modules/fade_physics_3d/fade_collision_solver_3d_sat.cpp
 Comment: Open Dynamics Engine
 Copyright: 2001-2003, Russell L. Smith, Alen Ladavac, Nguyen Binh
 License: BSD-3-clause
 
-Files: modules/godot_physics_3d/joints/godot_cone_twist_joint_3d.cpp
- modules/godot_physics_3d/joints/godot_cone_twist_joint_3d.h
+Files: modules/fade_physics_3d/joints/fade_cone_twist_joint_3d.cpp
+ modules/fade_physics_3d/joints/fade_cone_twist_joint_3d.h
 Comment: Bullet Continuous Collision Detection and Physics Library
 Copyright: 2007, Starbreeze Studios
  2014-present, FADE Engine contributors
@@ -128,7 +128,7 @@ Comment: The Android Open Source Project
 Copyright: 2016-2020, The Android Open Source Project
 License: Apache-2.0
 
-Files: platform/android/java/lib/src/main/java/org/godotengine/godot/utils/ProcessPhoenix.java
+Files: platform/android/java/lib/src/main/java/org/fadeengine/fade/utils/ProcessPhoenix.java
 Comment: ProcessPhoenix
 Copyright: 2015, Jake Wharton
 License: Apache-2.0

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -82,7 +82,7 @@
 #include "core/os/time.h"
 #include "editor/export/project_zip_packer.h"
 extern "C" {
-extern void godot_js_os_download_buffer(const uint8_t *p_buf, int p_buf_size, const char *p_name, const char *p_mime);
+extern void fade_js_os_download_buffer(const uint8_t *p_buf, int p_buf_size, const char *p_name, const char *p_mime);
 }
 #endif // WEB_ENABLED
 
@@ -2323,7 +2323,7 @@ void FileSystemDock::_file_option(int p_option, const Vector<String> &p_selected
 					LocalVector<uint8_t> buf;
 					buf.resize(f->get_length());
 					f->get_buffer(buf.ptr(), buf.size());
-					godot_js_os_download_buffer(buf.ptr(), buf.size(), output_name.utf8().get_data(), "application/zip");
+					fade_js_os_download_buffer(buf.ptr(), buf.size(), output_name.utf8().get_data(), "application/zip");
 				}
 
 				// Remove the temporary file since it was sent to the user's native filesystem as a download.
@@ -2334,7 +2334,7 @@ void FileSystemDock::_file_option(int p_option, const Vector<String> &p_selected
 				LocalVector<uint8_t> buf;
 				buf.resize(f->get_length());
 				f->get_buffer(buf.ptr(), buf.size());
-				godot_js_os_download_buffer(buf.ptr(), buf.size(), current_path.get_file().utf8().get_data(), "application/octet-stream");
+				fade_js_os_download_buffer(buf.ptr(), buf.size(), current_path.get_file().utf8().get_data(), "application/octet-stream");
 			}
 #endif // WEB_ENABLED
 		} break;

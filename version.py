@@ -5,5 +5,5 @@ minor = 0
 patch = 0
 status = "beta"
 module_config = ""
-website = "https://godotengine.org"
+website = "https://fadeengine.org"
 docs = "latest"

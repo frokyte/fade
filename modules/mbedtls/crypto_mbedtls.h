@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -35,9 +35,9 @@
 #include <mbedtls/ssl.h>
 
 #if MBEDTLS_VERSION_MAJOR < 4
-int godot_mbedtls_random_compat(void *p_rng, unsigned char *r_output, size_t p_output_len);
-#define GODOT_MBEDTLS_COMPAT_ARGS(x) x, godot_mbedtls_random_compat, nullptr
-#define GODOT_MBEDTLS_COMPAT_SSL_CONF mbedtls_ssl_conf_rng(&conf, godot_mbedtls_random_compat, nullptr);
+int fade_mbedtls_random_compat(void *p_rng, unsigned char *r_output, size_t p_output_len);
+#define GODOT_MBEDTLS_COMPAT_ARGS(x) x, fade_mbedtls_random_compat, nullptr
+#define GODOT_MBEDTLS_COMPAT_SSL_CONF mbedtls_ssl_conf_rng(&conf, fade_mbedtls_random_compat, nullptr);
 #else
 #define GODOT_MBEDTLS_COMPAT_ARGS(x) x
 #define GODOT_MBEDTLS_COMPAT_SSL_CONF

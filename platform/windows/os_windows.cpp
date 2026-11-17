@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -2469,7 +2469,7 @@ String OS_Windows::get_temp_path() const {
 }
 
 // Get properly capitalized engine name for system paths
-String OS_Windows::get_godot_dir_name() const {
+String OS_Windows::get_fade_dir_name() const {
 	return String(GODOT_VERSION_SHORT_NAME).capitalize();
 }
 

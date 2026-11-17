@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name="com.godot.game.FADEApp"
+            android:name="com.fade.game.FADEApp"
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:excludeFromRecents="false"
             android:exported="false"
@@ -18,9 +18,9 @@
             tools:replace="android:screenOrientation,android:excludeFromRecents,android:resizeableActivity" />
 
         <activity-alias
-            android:name="com.godot.game.FADEAppLauncher"
+            android:name="com.fade.game.FADEAppLauncher"
             android:exported="true"
-            android:targetActivity="com.godot.game.FADEApp">
+            android:targetActivity="com.fade.game.FADEApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

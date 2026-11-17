@@ -12,9 +12,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "../
 from misc.utility.color import Ansi, color_print
 
 # Swappy
-# Check for latest version: https://github.com/godotengine/godot-swappy/releases/latest
+# Check for latest version: https://github.com/fadeengine/fade-swappy/releases/latest
 swappy_tag = "from-source-2025-01-31"
-swappy_filename = "godot-swappy.zip"
+swappy_filename = "fade-swappy.zip"
 swappy_folder = "thirdparty/swappy-frame-pacing"
 swappy_archs = [
     "arm64-v8a",
@@ -30,7 +30,7 @@ if os.path.isfile(swappy_archive_destination):
 
 print(f"Downloading Swappy {swappy_tag} ...")
 urllib.request.urlretrieve(
-    f"https://github.com/godotengine/godot-swappy/releases/download/{swappy_tag}/{swappy_filename}",
+    f"https://github.com/fadeengine/fade-swappy/releases/download/{swappy_tag}/{swappy_filename}",
     swappy_archive_destination,
 )
 

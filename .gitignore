@@ -32,7 +32,7 @@
 bin
 *.gen.*
 compile_commands.json
-platform/windows/godot_res.res
+platform/windows/fade_res.res
 
 # Ninja build files
 *.ninja
@@ -221,7 +221,7 @@ xcuserdata/
 *.xcscmblueprint
 *.xccheckout
 *.xcodeproj/*
-!misc/misc/dist/apple_embedded_xcode/godot.xcodeproj/project.pbxproj
+!misc/misc/dist/apple_embedded_xcode/fade.xcodeproj/project.pbxproj
 
 # Zed
 .zed/

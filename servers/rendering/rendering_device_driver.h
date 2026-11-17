@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -365,7 +365,7 @@ public:
 		BARRIER_ACCESS_STORAGE_CLEAR_BIT = (1 << 27),
 	};
 
-	// https://github.com/godotengine/godot/pull/110360 - "MemoryBarrier" conflicts with Windows header defines
+	// https://github.com/fadeengine/fade/pull/110360 - "MemoryBarrier" conflicts with Windows header defines
 	struct MemoryAccessBarrier {
 		BitField<BarrierAccessBits> src_access = {};
 		BitField<BarrierAccessBits> dst_access = {};

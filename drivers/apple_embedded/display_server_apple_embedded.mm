@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -35,10 +35,10 @@
 #include "core/io/file_access_pack.h"
 #include "core/os/os.h"
 #import "drivers/apple_embedded/apple_embedded.h"
-#import "drivers/apple_embedded/godot_app_delegate_service_apple_embedded.h"
-#import "drivers/apple_embedded/godot_keyboard_input_view.h"
-#import "drivers/apple_embedded/godot_view_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_controller.h"
+#import "drivers/apple_embedded/fade_app_delegate_service_apple_embedded.h"
+#import "drivers/apple_embedded/fade_keyboard_input_view.h"
+#import "drivers/apple_embedded/fade_view_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_controller.h"
 #import "drivers/apple_embedded/key_mapping_apple_embedded.h"
 #import "drivers/apple_embedded/os_apple_embedded.h"
 #import "drivers/apple_embedded/tts_apple_embedded.h"
@@ -87,7 +87,7 @@ DisplayServerAppleEmbedded::DisplayServerAppleEmbedded(const String &p_rendering
 
 #if defined(VULKAN_ENABLED)
 	if (rendering_driver == "vulkan") {
-		layer = [GDTAppDelegateService.viewController.godotView initializeRenderingForDriver:@"vulkan"];
+		layer = [GDTAppDelegateService.viewController.fadeView initializeRenderingForDriver:@"vulkan"];
 		if (!layer) {
 			ERR_FAIL_MSG("Failed to create iOS Vulkan rendering layer.");
 		}
@@ -98,7 +98,7 @@ DisplayServerAppleEmbedded::DisplayServerAppleEmbedded(const String &p_rendering
 #ifdef METAL_ENABLED
 	if (rendering_driver == "metal") {
 		if (@available(iOS 14.0, *)) {
-			layer = [GDTAppDelegateService.viewController.godotView initializeRenderingForDriver:@"metal"];
+			layer = [GDTAppDelegateService.viewController.fadeView initializeRenderingForDriver:@"metal"];
 			wpd.metal.layer = (__bridge CA::MetalLayer *)layer;
 			rendering_context = memnew(RenderingContextDriverMetal);
 		} else {
@@ -163,7 +163,7 @@ DisplayServerAppleEmbedded::DisplayServerAppleEmbedded(const String &p_rendering
 
 #if defined(GLES3_ENABLED)
 	if (rendering_driver == "opengl3") {
-		CALayer *layer = [GDTAppDelegateService.viewController.godotView initializeRenderingForDriver:@"opengl3"];
+		CALayer *layer = [GDTAppDelegateService.viewController.fadeView initializeRenderingForDriver:@"opengl3"];
 
 		if (!layer) {
 			ERR_FAIL_MSG("Failed to create iOS OpenGLES rendering layer.");
@@ -181,9 +181,9 @@ DisplayServerAppleEmbedded::DisplayServerAppleEmbedded(const String &p_rendering
 
 	Input::get_singleton()->set_event_dispatch_function(_dispatch_input_events);
 
-	GDTView *godot_view = GDTAppDelegateService.viewController.godotView;
-	if (godot_view && AccessibilityServer::get_singleton()) {
-		if (!AccessibilityServer::get_singleton()->window_create(DisplayServerEnums::MAIN_WINDOW_ID, (__bridge void *)godot_view)) {
+	GDTView *fade_view = GDTAppDelegateService.viewController.fadeView;
+	if (fade_view && AccessibilityServer::get_singleton()) {
+		if (!AccessibilityServer::get_singleton()->window_create(DisplayServerEnums::MAIN_WINDOW_ID, (__bridge void *)fade_view)) {
 			if (OS::get_singleton()->is_stdout_verbose()) {
 				ERR_PRINT("Can't create an accessibility adapter for window, accessibility support disabled!");
 			}
@@ -521,7 +521,7 @@ Rect2i DisplayServerAppleEmbedded::get_display_safe_area(int p_screen) const {
 	ERR_FAIL_INDEX_V(p_screen, screen_count, Rect2i());
 
 	UIEdgeInsets insets = UIEdgeInsetsZero;
-	UIView *view = GDTAppDelegateService.viewController.godotView;
+	UIView *view = GDTAppDelegateService.viewController.fadeView;
 	if ([view respondsToSelector:@selector(safeAreaInsets)]) {
 		insets = [view safeAreaInsets];
 	}
@@ -552,7 +552,7 @@ Size2i DisplayServerAppleEmbedded::screen_get_size(int p_screen) const {
 	int screen_count = get_screen_count();
 	ERR_FAIL_INDEX_V(p_screen, screen_count, Size2i());
 
-	CALayer *layer = GDTAppDelegateService.viewController.godotView.renderingLayer;
+	CALayer *layer = GDTAppDelegateService.viewController.fadeView.renderingLayer;
 
 	if (!layer) {
 		return Size2i();
@@ -589,7 +589,7 @@ int64_t DisplayServerAppleEmbedded::window_get_native_handle(DisplayServerEnums:
 			return (int64_t)GDTAppDelegateService.viewController;
 		}
 		case DisplayServerEnums::WINDOW_VIEW: {
-			return (int64_t)GDTAppDelegateService.viewController.godotView;
+			return (int64_t)GDTAppDelegateService.viewController.fadeView;
 		}
 		default: {
 			return 0;

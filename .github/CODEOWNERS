@@ -4,522 +4,522 @@
 
 # Root
 
-/.github/                                     @godotengine/buildsystem
-/*                                            @godotengine/buildsystem
+/.github/                                     @fadeengine/buildsystem
+/*                                            @fadeengine/buildsystem
 
 # Core
 
-/core/                                        @godotengine/core
-/core/**/*.py                                 @godotengine/core @godotengine/buildsystem
-/core/**/SCsub                                @godotengine/core @godotengine/buildsystem
-/core/crypto/                                 @godotengine/network
-/core/crypto/**/SCsub                         @godotengine/network @godotengine/buildsystem
-/core/debugger/                               @godotengine/debugger
-/core/debugger/**/SCsub                       @godotengine/debugger @godotengine/buildsystem
-/core/extension/                              @godotengine/gdextension
-/core/extension/**/*.py                       @godotengine/gdextension @godotengine/buildsystem
-/core/extension/**/SCsub                      @godotengine/gdextension @godotengine/buildsystem
-/core/input/                                  @godotengine/input
-/core/input/**/*.py                           @godotengine/input @godotengine/buildsystem
-/core/input/**/SCsub                          @godotengine/input @godotengine/buildsystem
+/core/                                        @fadeengine/core
+/core/**/*.py                                 @fadeengine/core @fadeengine/buildsystem
+/core/**/SCsub                                @fadeengine/core @fadeengine/buildsystem
+/core/crypto/                                 @fadeengine/network
+/core/crypto/**/SCsub                         @fadeengine/network @fadeengine/buildsystem
+/core/debugger/                               @fadeengine/debugger
+/core/debugger/**/SCsub                       @fadeengine/debugger @fadeengine/buildsystem
+/core/extension/                              @fadeengine/gdextension
+/core/extension/**/*.py                       @fadeengine/gdextension @fadeengine/buildsystem
+/core/extension/**/SCsub                      @fadeengine/gdextension @fadeengine/buildsystem
+/core/input/                                  @fadeengine/input
+/core/input/**/*.py                           @fadeengine/input @fadeengine/buildsystem
+/core/input/**/SCsub                          @fadeengine/input @fadeengine/buildsystem
 
 # Doc
 
-/doc/                                         @godotengine/documentation
-/doc/tools/                                   @godotengine/documentation @godotengine/buildsystem
-/doc/translations/                            @godotengine/i18n
+/doc/                                         @fadeengine/documentation
+/doc/tools/                                   @fadeengine/documentation @fadeengine/buildsystem
+/doc/translations/                            @fadeengine/i18n
 
 # Drivers
 
 ## Audio
-/drivers/alsa/                                @godotengine/audio
-/drivers/alsa/**/SCsub                        @godotengine/audio @godotengine/buildsystem
-/drivers/alsamidi/                            @godotengine/audio
-/drivers/alsamidi/**/SCsub                    @godotengine/audio @godotengine/buildsystem
-/drivers/coreaudio/                           @godotengine/audio
-/drivers/coreaudio/**/SCsub                   @godotengine/audio @godotengine/buildsystem
-/drivers/coremidi/                            @godotengine/audio
-/drivers/coremidi/**/SCsub                    @godotengine/audio @godotengine/buildsystem
-/drivers/pulseaudio/                          @godotengine/audio
-/drivers/pulseaudio/**/SCsub                  @godotengine/audio @godotengine/buildsystem
-/drivers/wasapi/                              @godotengine/audio
-/drivers/wasapi/**/SCsub                      @godotengine/audio @godotengine/buildsystem
-/drivers/winmidi/                             @godotengine/audio
-/drivers/winmidi/**/SCsub                     @godotengine/audio @godotengine/buildsystem
-/drivers/xaudio2/                             @godotengine/audio
-/drivers/xaudio2/**/SCsub                     @godotengine/audio @godotengine/buildsystem
+/drivers/alsa/                                @fadeengine/audio
+/drivers/alsa/**/SCsub                        @fadeengine/audio @fadeengine/buildsystem
+/drivers/alsamidi/                            @fadeengine/audio
+/drivers/alsamidi/**/SCsub                    @fadeengine/audio @fadeengine/buildsystem
+/drivers/coreaudio/                           @fadeengine/audio
+/drivers/coreaudio/**/SCsub                   @fadeengine/audio @fadeengine/buildsystem
+/drivers/coremidi/                            @fadeengine/audio
+/drivers/coremidi/**/SCsub                    @fadeengine/audio @fadeengine/buildsystem
+/drivers/pulseaudio/                          @fadeengine/audio
+/drivers/pulseaudio/**/SCsub                  @fadeengine/audio @fadeengine/buildsystem
+/drivers/wasapi/                              @fadeengine/audio
+/drivers/wasapi/**/SCsub                      @fadeengine/audio @fadeengine/buildsystem
+/drivers/winmidi/                             @fadeengine/audio
+/drivers/winmidi/**/SCsub                     @fadeengine/audio @fadeengine/buildsystem
+/drivers/xaudio2/                             @fadeengine/audio
+/drivers/xaudio2/**/SCsub                     @fadeengine/audio @fadeengine/buildsystem
 
 ## Input
-/drivers/sdl/                                 @godotengine/input
-/drivers/sdl/**/SCsub                         @godotengine/input @godotengine/buildsystem
+/drivers/sdl/                                 @fadeengine/input
+/drivers/sdl/**/SCsub                         @fadeengine/input @fadeengine/buildsystem
 
 ## Rendering
-/drivers/d3d12/                               @godotengine/rendering
-/drivers/d3d12/**/SCsub                       @godotengine/rendering @godotengine/buildsystem
-/drivers/egl/                                 @godotengine/rendering
-/drivers/egl/**/SCsub                         @godotengine/rendering @godotengine/buildsystem
-/drivers/gl_context/                          @godotengine/rendering
-/drivers/gl_context/**/SCsub                  @godotengine/rendering @godotengine/buildsystem
-/drivers/gles3/                               @godotengine/rendering
-/drivers/gles3/**/SCsub                       @godotengine/rendering @godotengine/buildsystem
-/drivers/metal/                               @godotengine/rendering
-/drivers/metal/**/SCsub                       @godotengine/rendering @godotengine/buildsystem
-/drivers/vulkan/                              @godotengine/rendering
-/drivers/vulkan/**/SCsub                      @godotengine/rendering @godotengine/buildsystem
+/drivers/d3d12/                               @fadeengine/rendering
+/drivers/d3d12/**/SCsub                       @fadeengine/rendering @fadeengine/buildsystem
+/drivers/egl/                                 @fadeengine/rendering
+/drivers/egl/**/SCsub                         @fadeengine/rendering @fadeengine/buildsystem
+/drivers/gl_context/                          @fadeengine/rendering
+/drivers/gl_context/**/SCsub                  @fadeengine/rendering @fadeengine/buildsystem
+/drivers/gles3/                               @fadeengine/rendering
+/drivers/gles3/**/SCsub                       @fadeengine/rendering @fadeengine/buildsystem
+/drivers/metal/                               @fadeengine/rendering
+/drivers/metal/**/SCsub                       @fadeengine/rendering @fadeengine/buildsystem
+/drivers/vulkan/                              @fadeengine/rendering
+/drivers/vulkan/**/SCsub                      @fadeengine/rendering @fadeengine/buildsystem
 
 ## OS
-/drivers/apple/                               @godotengine/macos @godotengine/ios
-/drivers/apple/**/SCsub                       @godotengine/macos @godotengine/ios @godotengine/buildsystem
-/drivers/apple_embedded/                      @godotengine/ios
-/drivers/apple_embedded/**/SCsub              @godotengine/ios @godotengine/buildsystem
-/drivers/unix/                                @godotengine/linux-bsd
-/drivers/unix/**/SCsub                        @godotengine/linux-bsd @godotengine/buildsystem
-/drivers/windows/                             @godotengine/windows
-/drivers/windows/**/SCsub                     @godotengine/windows @godotengine/buildsystem
+/drivers/apple/                               @fadeengine/macos @fadeengine/ios
+/drivers/apple/**/SCsub                       @fadeengine/macos @fadeengine/ios @fadeengine/buildsystem
+/drivers/apple_embedded/                      @fadeengine/ios
+/drivers/apple_embedded/**/SCsub              @fadeengine/ios @fadeengine/buildsystem
+/drivers/unix/                                @fadeengine/linux-bsd
+/drivers/unix/**/SCsub                        @fadeengine/linux-bsd @fadeengine/buildsystem
+/drivers/windows/                             @fadeengine/windows
+/drivers/windows/**/SCsub                     @fadeengine/windows @fadeengine/buildsystem
 
 ## Misc
-/drivers/register_driver_types.*              @godotengine/buildsystem
-/drivers/SCsub                                @godotengine/buildsystem
-/drivers/accesskit/                           @godotengine/buildsystem
-/drivers/backtrace/                           @godotengine/buildsystem
-/drivers/png/                                 @godotengine/asset-pipeline
-/drivers/png/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
+/drivers/register_driver_types.*              @fadeengine/buildsystem
+/drivers/SCsub                                @fadeengine/buildsystem
+/drivers/accesskit/                           @fadeengine/buildsystem
+/drivers/backtrace/                           @fadeengine/buildsystem
+/drivers/png/                                 @fadeengine/asset-pipeline
+/drivers/png/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
 
 # Editor
 
-/editor/                                      @godotengine/editor
-/editor/**/*.py                               @godotengine/editor @godotengine/buildsystem
-/editor/**/SCsub                              @godotengine/editor @godotengine/buildsystem
-/editor/animation/                            @godotengine/editor @godotengine/animation
-/editor/animation/**/SCsub                    @godotengine/editor @godotengine/animation @godotengine/buildsystem
-/editor/audio/                                @godotengine/editor @godotengine/audio
-/editor/audio/**/SCsub                        @godotengine/editor @godotengine/audio @godotengine/buildsystem
-/editor/debugger/                             @godotengine/editor @godotengine/debugger
-/editor/debugger/**/SCsub                     @godotengine/editor @godotengine/debugger @godotengine/buildsystem
-/editor/doc/                                  @godotengine/editor @godotengine/documentation
-/editor/doc/**/SCsub                          @godotengine/editor @godotengine/documentation @godotengine/buildsystem
-/editor/gui/                                  @godotengine/editor @godotengine/gui-nodes
-/editor/gui/**/SCsub                          @godotengine/editor @godotengine/gui-nodes @godotengine/buildsystem
-/editor/import/                               @godotengine/editor @godotengine/asset-pipeline
-/editor/import/**/SCsub                       @godotengine/editor @godotengine/asset-pipeline @godotengine/buildsystem
-/editor/scene/2d/                             @godotengine/editor @godotengine/2d-nodes
-/editor/scene/2d/**/SCsub                     @godotengine/editor @godotengine/2d-nodes @godotengine/buildsystem
-/editor/scene/2d/physics/                     @godotengine/editor @godotengine/physics
-/editor/scene/2d/physics/**/SCsub             @godotengine/editor @godotengine/physics @godotengine/buildsystem
-/editor/scene/3d/                             @godotengine/editor @godotengine/3d-nodes
-/editor/scene/3d/**/SCsub                     @godotengine/editor @godotengine/3d-nodes @godotengine/buildsystem
-/editor/scene/3d/physics/                     @godotengine/editor @godotengine/physics
-/editor/scene/3d/physics/**/SCsub             @godotengine/editor @godotengine/physics @godotengine/buildsystem
-/editor/scene/gui/                            @godotengine/editor @godotengine/gui-nodes
-/editor/scene/gui/**/SCsub                    @godotengine/editor @godotengine/gui-nodes @godotengine/buildsystem
-/editor/script/                               @godotengine/editor @godotengine/script-editor
-/editor/script/**/SCsub                       @godotengine/editor @godotengine/script-editor @godotengine/buildsystem
-/editor/shader/                               @godotengine/editor @godotengine/script-editor @godotengine/shaders
-/editor/shader/**/SCsub                       @godotengine/editor @godotengine/script-editor @godotengine/shaders @godotengine/buildsystem
-/editor/themes/                               @godotengine/editor @godotengine/gui-nodes
-/editor/themes/**/*.py                        @godotengine/editor @godotengine/gui-nodes @godotengine/buildsystem
-/editor/themes/**/SCsub                       @godotengine/editor @godotengine/gui-nodes @godotengine/buildsystem
-/editor/translations/                         @godotengine/editor @godotengine/i18n
-/editor/translations/**/SCsub                 @godotengine/editor @godotengine/i18n @godotengine/buildsystem
+/editor/                                      @fadeengine/editor
+/editor/**/*.py                               @fadeengine/editor @fadeengine/buildsystem
+/editor/**/SCsub                              @fadeengine/editor @fadeengine/buildsystem
+/editor/animation/                            @fadeengine/editor @fadeengine/animation
+/editor/animation/**/SCsub                    @fadeengine/editor @fadeengine/animation @fadeengine/buildsystem
+/editor/audio/                                @fadeengine/editor @fadeengine/audio
+/editor/audio/**/SCsub                        @fadeengine/editor @fadeengine/audio @fadeengine/buildsystem
+/editor/debugger/                             @fadeengine/editor @fadeengine/debugger
+/editor/debugger/**/SCsub                     @fadeengine/editor @fadeengine/debugger @fadeengine/buildsystem
+/editor/doc/                                  @fadeengine/editor @fadeengine/documentation
+/editor/doc/**/SCsub                          @fadeengine/editor @fadeengine/documentation @fadeengine/buildsystem
+/editor/gui/                                  @fadeengine/editor @fadeengine/gui-nodes
+/editor/gui/**/SCsub                          @fadeengine/editor @fadeengine/gui-nodes @fadeengine/buildsystem
+/editor/import/                               @fadeengine/editor @fadeengine/asset-pipeline
+/editor/import/**/SCsub                       @fadeengine/editor @fadeengine/asset-pipeline @fadeengine/buildsystem
+/editor/scene/2d/                             @fadeengine/editor @fadeengine/2d-nodes
+/editor/scene/2d/**/SCsub                     @fadeengine/editor @fadeengine/2d-nodes @fadeengine/buildsystem
+/editor/scene/2d/physics/                     @fadeengine/editor @fadeengine/physics
+/editor/scene/2d/physics/**/SCsub             @fadeengine/editor @fadeengine/physics @fadeengine/buildsystem
+/editor/scene/3d/                             @fadeengine/editor @fadeengine/3d-nodes
+/editor/scene/3d/**/SCsub                     @fadeengine/editor @fadeengine/3d-nodes @fadeengine/buildsystem
+/editor/scene/3d/physics/                     @fadeengine/editor @fadeengine/physics
+/editor/scene/3d/physics/**/SCsub             @fadeengine/editor @fadeengine/physics @fadeengine/buildsystem
+/editor/scene/gui/                            @fadeengine/editor @fadeengine/gui-nodes
+/editor/scene/gui/**/SCsub                    @fadeengine/editor @fadeengine/gui-nodes @fadeengine/buildsystem
+/editor/script/                               @fadeengine/editor @fadeengine/script-editor
+/editor/script/**/SCsub                       @fadeengine/editor @fadeengine/script-editor @fadeengine/buildsystem
+/editor/shader/                               @fadeengine/editor @fadeengine/script-editor @fadeengine/shaders
+/editor/shader/**/SCsub                       @fadeengine/editor @fadeengine/script-editor @fadeengine/shaders @fadeengine/buildsystem
+/editor/themes/                               @fadeengine/editor @fadeengine/gui-nodes
+/editor/themes/**/*.py                        @fadeengine/editor @fadeengine/gui-nodes @fadeengine/buildsystem
+/editor/themes/**/SCsub                       @fadeengine/editor @fadeengine/gui-nodes @fadeengine/buildsystem
+/editor/translations/                         @fadeengine/editor @fadeengine/i18n
+/editor/translations/**/SCsub                 @fadeengine/editor @fadeengine/i18n @fadeengine/buildsystem
 
 # Main
 
-/main/                                        @godotengine/core
-/main/**/*.py                                 @godotengine/core @godotengine/buildsystem
-/main/**/SCsub                                @godotengine/core @godotengine/buildsystem
+/main/                                        @fadeengine/core
+/main/**/*.py                                 @fadeengine/core @fadeengine/buildsystem
+/main/**/SCsub                                @fadeengine/core @fadeengine/buildsystem
 
 # Misc
 
-/misc/                                        @godotengine/buildsystem
-/misc/extension_api_validation/               @godotengine/gdextension @godotengine/dotnet
+/misc/                                        @fadeengine/buildsystem
+/misc/extension_api_validation/               @fadeengine/gdextension @fadeengine/dotnet
 
 # Modules
 
 ## Audio (+ video)
-/modules/interactive_music/                   @godotengine/audio
-/modules/interactive_music/**/*.py            @godotengine/audio @godotengine/buildsystem
-/modules/interactive_music/**/SCsub           @godotengine/audio @godotengine/buildsystem
-/modules/interactive_music/doc_classes/       @godotengine/audio @godotengine/documentation
-/modules/interactive_music/editor/            @godotengine/audio @godotengine/editor
-/modules/mp3/                                 @godotengine/audio
-/modules/mp3/**/*.py                          @godotengine/audio @godotengine/buildsystem
-/modules/mp3/**/SCsub                         @godotengine/audio @godotengine/buildsystem
-/modules/mp3/doc_classes/                     @godotengine/audio @godotengine/documentation
-/modules/mp3/editor/                          @godotengine/audio @godotengine/editor
-/modules/ogg/                                 @godotengine/audio
-/modules/ogg/**/*.py                          @godotengine/audio @godotengine/buildsystem
-/modules/ogg/**/SCsub                         @godotengine/audio @godotengine/buildsystem
-/modules/ogg/doc_classes/                     @godotengine/audio @godotengine/documentation
-/modules/theora/                              @godotengine/audio
-/modules/theora/**/*.py                       @godotengine/audio @godotengine/buildsystem
-/modules/theora/**/SCsub                      @godotengine/audio @godotengine/buildsystem
-/modules/theora/doc_classes/                  @godotengine/audio @godotengine/documentation
-/modules/theora/editor/                       @godotengine/audio @godotengine/editor
-/modules/vorbis/                              @godotengine/audio
-/modules/vorbis/**/*.py                       @godotengine/audio @godotengine/buildsystem
-/modules/vorbis/**/SCsub                      @godotengine/audio @godotengine/buildsystem
-/modules/vorbis/doc_classes/                  @godotengine/audio @godotengine/documentation
-/modules/vorbis/editor/                       @godotengine/audio @godotengine/editor
+/modules/interactive_music/                   @fadeengine/audio
+/modules/interactive_music/**/*.py            @fadeengine/audio @fadeengine/buildsystem
+/modules/interactive_music/**/SCsub           @fadeengine/audio @fadeengine/buildsystem
+/modules/interactive_music/doc_classes/       @fadeengine/audio @fadeengine/documentation
+/modules/interactive_music/editor/            @fadeengine/audio @fadeengine/editor
+/modules/mp3/                                 @fadeengine/audio
+/modules/mp3/**/*.py                          @fadeengine/audio @fadeengine/buildsystem
+/modules/mp3/**/SCsub                         @fadeengine/audio @fadeengine/buildsystem
+/modules/mp3/doc_classes/                     @fadeengine/audio @fadeengine/documentation
+/modules/mp3/editor/                          @fadeengine/audio @fadeengine/editor
+/modules/ogg/                                 @fadeengine/audio
+/modules/ogg/**/*.py                          @fadeengine/audio @fadeengine/buildsystem
+/modules/ogg/**/SCsub                         @fadeengine/audio @fadeengine/buildsystem
+/modules/ogg/doc_classes/                     @fadeengine/audio @fadeengine/documentation
+/modules/theora/                              @fadeengine/audio
+/modules/theora/**/*.py                       @fadeengine/audio @fadeengine/buildsystem
+/modules/theora/**/SCsub                      @fadeengine/audio @fadeengine/buildsystem
+/modules/theora/doc_classes/                  @fadeengine/audio @fadeengine/documentation
+/modules/theora/editor/                       @fadeengine/audio @fadeengine/editor
+/modules/vorbis/                              @fadeengine/audio
+/modules/vorbis/**/*.py                       @fadeengine/audio @fadeengine/buildsystem
+/modules/vorbis/**/SCsub                      @fadeengine/audio @fadeengine/buildsystem
+/modules/vorbis/doc_classes/                  @fadeengine/audio @fadeengine/documentation
+/modules/vorbis/editor/                       @fadeengine/audio @fadeengine/editor
 
 ## Import
-/modules/astcenc/                             @godotengine/asset-pipeline
-/modules/astcenc/**/*.py                      @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/astcenc/**/SCsub                     @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/basis_universal/                     @godotengine/asset-pipeline
-/modules/basis_universal/**/*.py              @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/basis_universal/**/SCsub             @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/bcdec/                               @godotengine/asset-pipeline
-/modules/bcdec/**/*.py                        @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/bcdec/**/SCsub                       @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/betsy/                               @godotengine/asset-pipeline
-/modules/betsy/**/*.py                        @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/betsy/**/SCsub                       @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/bmp/                                 @godotengine/asset-pipeline
-/modules/bmp/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/bmp/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/cvtt/                                @godotengine/asset-pipeline
-/modules/cvtt/**/*.py                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/cvtt/**/SCsub                        @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/dds/                                 @godotengine/asset-pipeline
-/modules/dds/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/dds/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/dds/tests/                           @godotengine/asset-pipeline @godotengine/tests
-/modules/etcpak/                              @godotengine/asset-pipeline
-/modules/etcpak/**/*.py                       @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/etcpak/**/SCsub                      @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/fbx/                                 @godotengine/asset-pipeline
-/modules/fbx/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/fbx/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/fbx/doc_classes/                     @godotengine/asset-pipeline @godotengine/documentation
-/modules/fbx/editor/                          @godotengine/asset-pipeline @godotengine/editor
-/modules/gltf/                                @godotengine/asset-pipeline
-/modules/gltf/**/*.py                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/gltf/**/SCsub                        @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/gltf/doc_classes/                    @godotengine/asset-pipeline @godotengine/documentation
-/modules/gltf/editor/                         @godotengine/asset-pipeline @godotengine/editor
-/modules/gltf/tests/                          @godotengine/asset-pipeline @godotengine/tests
-/modules/hdr/                                 @godotengine/asset-pipeline
-/modules/hdr/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/hdr/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/jpg/                                 @godotengine/asset-pipeline
-/modules/jpg/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/jpg/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/ktx/                                 @godotengine/asset-pipeline
-/modules/ktx/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/ktx/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/svg/                                 @godotengine/asset-pipeline
-/modules/svg/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/svg/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/tga/                                 @godotengine/asset-pipeline
-/modules/tga/**/*.py                          @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/tga/**/SCsub                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/tinyexr/                             @godotengine/asset-pipeline
-/modules/tinyexr/**/*.py                      @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/tinyexr/**/SCsub                     @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/webp/                                @godotengine/asset-pipeline
-/modules/webp/**/*.py                         @godotengine/asset-pipeline @godotengine/buildsystem
-/modules/webp/**/SCsub                        @godotengine/asset-pipeline @godotengine/buildsystem
+/modules/astcenc/                             @fadeengine/asset-pipeline
+/modules/astcenc/**/*.py                      @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/astcenc/**/SCsub                     @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/basis_universal/                     @fadeengine/asset-pipeline
+/modules/basis_universal/**/*.py              @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/basis_universal/**/SCsub             @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/bcdec/                               @fadeengine/asset-pipeline
+/modules/bcdec/**/*.py                        @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/bcdec/**/SCsub                       @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/betsy/                               @fadeengine/asset-pipeline
+/modules/betsy/**/*.py                        @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/betsy/**/SCsub                       @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/bmp/                                 @fadeengine/asset-pipeline
+/modules/bmp/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/bmp/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/cvtt/                                @fadeengine/asset-pipeline
+/modules/cvtt/**/*.py                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/cvtt/**/SCsub                        @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/dds/                                 @fadeengine/asset-pipeline
+/modules/dds/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/dds/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/dds/tests/                           @fadeengine/asset-pipeline @fadeengine/tests
+/modules/etcpak/                              @fadeengine/asset-pipeline
+/modules/etcpak/**/*.py                       @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/etcpak/**/SCsub                      @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/fbx/                                 @fadeengine/asset-pipeline
+/modules/fbx/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/fbx/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/fbx/doc_classes/                     @fadeengine/asset-pipeline @fadeengine/documentation
+/modules/fbx/editor/                          @fadeengine/asset-pipeline @fadeengine/editor
+/modules/gltf/                                @fadeengine/asset-pipeline
+/modules/gltf/**/*.py                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/gltf/**/SCsub                        @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/gltf/doc_classes/                    @fadeengine/asset-pipeline @fadeengine/documentation
+/modules/gltf/editor/                         @fadeengine/asset-pipeline @fadeengine/editor
+/modules/gltf/tests/                          @fadeengine/asset-pipeline @fadeengine/tests
+/modules/hdr/                                 @fadeengine/asset-pipeline
+/modules/hdr/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/hdr/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/jpg/                                 @fadeengine/asset-pipeline
+/modules/jpg/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/jpg/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/ktx/                                 @fadeengine/asset-pipeline
+/modules/ktx/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/ktx/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/svg/                                 @fadeengine/asset-pipeline
+/modules/svg/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/svg/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/tga/                                 @fadeengine/asset-pipeline
+/modules/tga/**/*.py                          @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/tga/**/SCsub                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/tinyexr/                             @fadeengine/asset-pipeline
+/modules/tinyexr/**/*.py                      @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/tinyexr/**/SCsub                     @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/webp/                                @fadeengine/asset-pipeline
+/modules/webp/**/*.py                         @fadeengine/asset-pipeline @fadeengine/buildsystem
+/modules/webp/**/SCsub                        @fadeengine/asset-pipeline @fadeengine/buildsystem
 
 ## Network
-/modules/enet/                                @godotengine/network
-/modules/enet/**/*.py                         @godotengine/network @godotengine/buildsystem
-/modules/enet/**/SCsub                        @godotengine/network @godotengine/buildsystem
-/modules/enet/doc_classes/                    @godotengine/network @godotengine/documentation
-/modules/enet/tests/                          @godotengine/network @godotengine/tests
-/modules/mbedtls/                             @godotengine/network
-/modules/mbedtls/**/*.py                      @godotengine/network @godotengine/buildsystem
-/modules/mbedtls/**/SCsub                     @godotengine/network @godotengine/buildsystem
-/modules/mbedtls/tests/                       @godotengine/network @godotengine/tests
-/modules/multiplayer/                         @godotengine/network
-/modules/multiplayer/**/*.py                  @godotengine/network @godotengine/buildsystem
-/modules/multiplayer/**/SCsub                 @godotengine/network @godotengine/buildsystem
-/modules/multiplayer/doc_classes/             @godotengine/network @godotengine/documentation
-/modules/multiplayer/editor/                  @godotengine/network @godotengine/editor
-/modules/multiplayer/tests/                   @godotengine/network @godotengine/tests
-/modules/upnp/                                @godotengine/network
-/modules/upnp/**/*.py                         @godotengine/network @godotengine/buildsystem
-/modules/upnp/**/SCsub                        @godotengine/network @godotengine/buildsystem
-/modules/upnp/doc_classes/                    @godotengine/network @godotengine/documentation
-/modules/webrtc/                              @godotengine/network
-/modules/webrtc/**/*.py                       @godotengine/network @godotengine/buildsystem
-/modules/webrtc/**/SCsub                      @godotengine/network @godotengine/buildsystem
-/modules/webrtc/doc_classes/                  @godotengine/network @godotengine/documentation
-/modules/websocket/                           @godotengine/network
-/modules/websocket/**/*.py                    @godotengine/network @godotengine/buildsystem
-/modules/websocket/**/SCsub                   @godotengine/network @godotengine/buildsystem
-/modules/websocket/doc_classes/               @godotengine/network @godotengine/documentation
-/modules/websocket/editor/                    @godotengine/network @godotengine/editor
+/modules/enet/                                @fadeengine/network
+/modules/enet/**/*.py                         @fadeengine/network @fadeengine/buildsystem
+/modules/enet/**/SCsub                        @fadeengine/network @fadeengine/buildsystem
+/modules/enet/doc_classes/                    @fadeengine/network @fadeengine/documentation
+/modules/enet/tests/                          @fadeengine/network @fadeengine/tests
+/modules/mbedtls/                             @fadeengine/network
+/modules/mbedtls/**/*.py                      @fadeengine/network @fadeengine/buildsystem
+/modules/mbedtls/**/SCsub                     @fadeengine/network @fadeengine/buildsystem
+/modules/mbedtls/tests/                       @fadeengine/network @fadeengine/tests
+/modules/multiplayer/                         @fadeengine/network
+/modules/multiplayer/**/*.py                  @fadeengine/network @fadeengine/buildsystem
+/modules/multiplayer/**/SCsub                 @fadeengine/network @fadeengine/buildsystem
+/modules/multiplayer/doc_classes/             @fadeengine/network @fadeengine/documentation
+/modules/multiplayer/editor/                  @fadeengine/network @fadeengine/editor
+/modules/multiplayer/tests/                   @fadeengine/network @fadeengine/tests
+/modules/upnp/                                @fadeengine/network
+/modules/upnp/**/*.py                         @fadeengine/network @fadeengine/buildsystem
+/modules/upnp/**/SCsub                        @fadeengine/network @fadeengine/buildsystem
+/modules/upnp/doc_classes/                    @fadeengine/network @fadeengine/documentation
+/modules/webrtc/                              @fadeengine/network
+/modules/webrtc/**/*.py                       @fadeengine/network @fadeengine/buildsystem
+/modules/webrtc/**/SCsub                      @fadeengine/network @fadeengine/buildsystem
+/modules/webrtc/doc_classes/                  @fadeengine/network @fadeengine/documentation
+/modules/websocket/                           @fadeengine/network
+/modules/websocket/**/*.py                    @fadeengine/network @fadeengine/buildsystem
+/modules/websocket/**/SCsub                   @fadeengine/network @fadeengine/buildsystem
+/modules/websocket/doc_classes/               @fadeengine/network @fadeengine/documentation
+/modules/websocket/editor/                    @fadeengine/network @fadeengine/editor
 
 ## Physics
-/modules/godot_physics_2d/                    @godotengine/physics
-/modules/godot_physics_2d/**/*.py             @godotengine/physics @godotengine/buildsystem
-/modules/godot_physics_2d/**/SCsub            @godotengine/physics @godotengine/buildsystem
-/modules/godot_physics_3d/                    @godotengine/physics
-/modules/godot_physics_3d/**/*.py             @godotengine/physics @godotengine/buildsystem
-/modules/godot_physics_3d/**/SCsub            @godotengine/physics @godotengine/buildsystem
-/modules/jolt_physics/                        @godotengine/physics @godotengine/jolt-physics
-/modules/jolt_physics/**/*.py                 @godotengine/physics @godotengine/jolt-physics @godotengine/buildsystem
-/modules/jolt_physics/**/SCsub                @godotengine/physics @godotengine/jolt-physics @godotengine/buildsystem
+/modules/fade_physics_2d/                    @fadeengine/physics
+/modules/fade_physics_2d/**/*.py             @fadeengine/physics @fadeengine/buildsystem
+/modules/fade_physics_2d/**/SCsub            @fadeengine/physics @fadeengine/buildsystem
+/modules/fade_physics_3d/                    @fadeengine/physics
+/modules/fade_physics_3d/**/*.py             @fadeengine/physics @fadeengine/buildsystem
+/modules/fade_physics_3d/**/SCsub            @fadeengine/physics @fadeengine/buildsystem
+/modules/jolt_physics/                        @fadeengine/physics @fadeengine/jolt-physics
+/modules/jolt_physics/**/*.py                 @fadeengine/physics @fadeengine/jolt-physics @fadeengine/buildsystem
+/modules/jolt_physics/**/SCsub                @fadeengine/physics @fadeengine/jolt-physics @fadeengine/buildsystem
 
 ## Rendering
-/modules/glslang/                             @godotengine/rendering
-/modules/glslang/**/*.py                      @godotengine/rendering @godotengine/buildsystem
-/modules/glslang/**/SCsub                     @godotengine/rendering @godotengine/buildsystem
-/modules/lightmapper_rd/                      @godotengine/rendering
-/modules/lightmapper_rd/**/*.py               @godotengine/rendering @godotengine/buildsystem
-/modules/lightmapper_rd/**/SCsub              @godotengine/rendering @godotengine/buildsystem
-/modules/meshoptimizer/                       @godotengine/rendering
-/modules/meshoptimizer/**/*.py                @godotengine/rendering @godotengine/buildsystem
-/modules/meshoptimizer/**/SCsub               @godotengine/rendering @godotengine/buildsystem
-/modules/raycast/                             @godotengine/rendering
-/modules/raycast/**/*.py                      @godotengine/rendering @godotengine/buildsystem
-/modules/raycast/**/SCsub                     @godotengine/rendering @godotengine/buildsystem
-/modules/texture_streaming/                   @godotengine/rendering
-/modules/texture_streaming/**/*.py            @godotengine/rendering @godotengine/buildsystem
-/modules/texture_streaming/**/SCsub           @godotengine/rendering @godotengine/buildsystem
-/modules/vhacd/                               @godotengine/rendering
-/modules/vhacd/**/*.py                        @godotengine/rendering @godotengine/buildsystem
-/modules/vhacd/**/SCsub                       @godotengine/rendering @godotengine/buildsystem
-/modules/visual_shader/                       @godotengine/shaders
-/modules/visual_shader/**/*.py                @godotengine/shaders @godotengine/buildsystem
-/modules/visual_shader/**/SCsub               @godotengine/shaders @godotengine/buildsystem
-/modules/visual_shader/doc_classes/           @godotengine/shaders @godotengine/documentation
-/modules/visual_shader/editor/                @godotengine/shaders @godotengine/editor
-/modules/visual_shader/tests/                 @godotengine/shaders @godotengine/tests
-/modules/xatlas_unwrap/                       @godotengine/rendering
-/modules/xatlas_unwrap/**/*.py                @godotengine/rendering @godotengine/buildsystem
-/modules/xatlas_unwrap/**/SCsub               @godotengine/rendering @godotengine/buildsystem
+/modules/glslang/                             @fadeengine/rendering
+/modules/glslang/**/*.py                      @fadeengine/rendering @fadeengine/buildsystem
+/modules/glslang/**/SCsub                     @fadeengine/rendering @fadeengine/buildsystem
+/modules/lightmapper_rd/                      @fadeengine/rendering
+/modules/lightmapper_rd/**/*.py               @fadeengine/rendering @fadeengine/buildsystem
+/modules/lightmapper_rd/**/SCsub              @fadeengine/rendering @fadeengine/buildsystem
+/modules/meshoptimizer/                       @fadeengine/rendering
+/modules/meshoptimizer/**/*.py                @fadeengine/rendering @fadeengine/buildsystem
+/modules/meshoptimizer/**/SCsub               @fadeengine/rendering @fadeengine/buildsystem
+/modules/raycast/                             @fadeengine/rendering
+/modules/raycast/**/*.py                      @fadeengine/rendering @fadeengine/buildsystem
+/modules/raycast/**/SCsub                     @fadeengine/rendering @fadeengine/buildsystem
+/modules/texture_streaming/                   @fadeengine/rendering
+/modules/texture_streaming/**/*.py            @fadeengine/rendering @fadeengine/buildsystem
+/modules/texture_streaming/**/SCsub           @fadeengine/rendering @fadeengine/buildsystem
+/modules/vhacd/                               @fadeengine/rendering
+/modules/vhacd/**/*.py                        @fadeengine/rendering @fadeengine/buildsystem
+/modules/vhacd/**/SCsub                       @fadeengine/rendering @fadeengine/buildsystem
+/modules/visual_shader/                       @fadeengine/shaders
+/modules/visual_shader/**/*.py                @fadeengine/shaders @fadeengine/buildsystem
+/modules/visual_shader/**/SCsub               @fadeengine/shaders @fadeengine/buildsystem
+/modules/visual_shader/doc_classes/           @fadeengine/shaders @fadeengine/documentation
+/modules/visual_shader/editor/                @fadeengine/shaders @fadeengine/editor
+/modules/visual_shader/tests/                 @fadeengine/shaders @fadeengine/tests
+/modules/xatlas_unwrap/                       @fadeengine/rendering
+/modules/xatlas_unwrap/**/*.py                @fadeengine/rendering @fadeengine/buildsystem
+/modules/xatlas_unwrap/**/SCsub               @fadeengine/rendering @fadeengine/buildsystem
 
 ## Scripting
-/modules/gdscript/                            @godotengine/gdscript
-/modules/gdscript/**/*.py                     @godotengine/gdscript @godotengine/buildsystem
-/modules/gdscript/**/SCsub                    @godotengine/gdscript @godotengine/buildsystem
-/modules/gdscript/doc_classes/                @godotengine/gdscript @godotengine/documentation
-/modules/gdscript/editor/                     @godotengine/gdscript @godotengine/editor
-/modules/gdscript/editor/**/SCsub             @godotengine/gdscript @godotengine/editor @godotengine/buildsystem
-/modules/gdscript/tests/                      @godotengine/gdscript @godotengine/tests
-/modules/jsonrpc/                             @godotengine/gdscript @godotengine/network
-/modules/jsonrpc/**/*.py                      @godotengine/gdscript @godotengine/network @godotengine/buildsystem
-/modules/jsonrpc/**/SCsub                     @godotengine/gdscript @godotengine/network @godotengine/buildsystem
-/modules/jsonrpc/tests/                       @godotengine/gdscript @godotengine/network @godotengine/tests
-/modules/mono/                                @godotengine/dotnet
-/modules/mono/**/*.py                         @godotengine/dotnet @godotengine/buildsystem
-/modules/mono/**/SCsub                        @godotengine/dotnet @godotengine/buildsystem
-/modules/mono/doc_classes/                    @godotengine/dotnet @godotengine/documentation
-/modules/mono/editor/                         @godotengine/dotnet @godotengine/editor
-/modules/mono/editor/**/SCsub                 @godotengine/dotnet @godotengine/editor @godotengine/buildsystem
+/modules/gdscript/                            @fadeengine/gdscript
+/modules/gdscript/**/*.py                     @fadeengine/gdscript @fadeengine/buildsystem
+/modules/gdscript/**/SCsub                    @fadeengine/gdscript @fadeengine/buildsystem
+/modules/gdscript/doc_classes/                @fadeengine/gdscript @fadeengine/documentation
+/modules/gdscript/editor/                     @fadeengine/gdscript @fadeengine/editor
+/modules/gdscript/editor/**/SCsub             @fadeengine/gdscript @fadeengine/editor @fadeengine/buildsystem
+/modules/gdscript/tests/                      @fadeengine/gdscript @fadeengine/tests
+/modules/jsonrpc/                             @fadeengine/gdscript @fadeengine/network
+/modules/jsonrpc/**/*.py                      @fadeengine/gdscript @fadeengine/network @fadeengine/buildsystem
+/modules/jsonrpc/**/SCsub                     @fadeengine/gdscript @fadeengine/network @fadeengine/buildsystem
+/modules/jsonrpc/tests/                       @fadeengine/gdscript @fadeengine/network @fadeengine/tests
+/modules/mono/                                @fadeengine/dotnet
+/modules/mono/**/*.py                         @fadeengine/dotnet @fadeengine/buildsystem
+/modules/mono/**/SCsub                        @fadeengine/dotnet @fadeengine/buildsystem
+/modules/mono/doc_classes/                    @fadeengine/dotnet @fadeengine/documentation
+/modules/mono/editor/                         @fadeengine/dotnet @fadeengine/editor
+/modules/mono/editor/**/SCsub                 @fadeengine/dotnet @fadeengine/editor @fadeengine/buildsystem
 
 ## Text
-/modules/freetype/                            @godotengine/buildsystem
-/modules/msdfgen/                             @godotengine/buildsystem
-/modules/text_server_adv/                     @godotengine/gui-nodes
-/modules/text_server_adv/**/*.py              @godotengine/gui-nodes @godotengine/buildsystem
-/modules/text_server_adv/**/SCsub             @godotengine/gui-nodes @godotengine/buildsystem
-/modules/text_server_adv/doc_classes/         @godotengine/gui-nodes @godotengine/documentation
-/modules/text_server_fb/                      @godotengine/gui-nodes
-/modules/text_server_fb/**/*.py               @godotengine/gui-nodes @godotengine/buildsystem
-/modules/text_server_fb/**/SCsub              @godotengine/gui-nodes @godotengine/buildsystem
-/modules/text_server_fb/doc_classes/          @godotengine/gui-nodes @godotengine/documentation
+/modules/freetype/                            @fadeengine/buildsystem
+/modules/msdfgen/                             @fadeengine/buildsystem
+/modules/text_server_adv/                     @fadeengine/gui-nodes
+/modules/text_server_adv/**/*.py              @fadeengine/gui-nodes @fadeengine/buildsystem
+/modules/text_server_adv/**/SCsub             @fadeengine/gui-nodes @fadeengine/buildsystem
+/modules/text_server_adv/doc_classes/         @fadeengine/gui-nodes @fadeengine/documentation
+/modules/text_server_fb/                      @fadeengine/gui-nodes
+/modules/text_server_fb/**/*.py               @fadeengine/gui-nodes @fadeengine/buildsystem
+/modules/text_server_fb/**/SCsub              @fadeengine/gui-nodes @fadeengine/buildsystem
+/modules/text_server_fb/doc_classes/          @fadeengine/gui-nodes @fadeengine/documentation
 
 ## XR
-/modules/camera/                              @godotengine/xr
-/modules/camera/**/*.py                       @godotengine/xr @godotengine/buildsystem
-/modules/camera/**/SCsub                      @godotengine/xr @godotengine/buildsystem
-/modules/mobile_vr/                           @godotengine/xr
-/modules/mobile_vr/**/*.py                    @godotengine/xr @godotengine/buildsystem
-/modules/mobile_vr/**/SCsub                   @godotengine/xr @godotengine/buildsystem
-/modules/mobile_vr/doc_classes/               @godotengine/xr @godotengine/documentation
-/modules/openxr/                              @godotengine/xr
-/modules/openxr/**/*.py                       @godotengine/xr @godotengine/buildsystem
-/modules/openxr/**/SCsub                      @godotengine/xr @godotengine/buildsystem
-/modules/openxr/doc_classes/                  @godotengine/xr @godotengine/documentation
-/modules/openxr/editor/                       @godotengine/xr @godotengine/editor
-/modules/openxr/editor/**/SCsub               @godotengine/xr @godotengine/editor @godotengine/buildsystem
-/modules/visionos_xr/                         @godotengine/xr
-/modules/visionos_xr/**/*.py                  @godotengine/xr @godotengine/buildsystem
-/modules/visionos_xr/**/SCsub                 @godotengine/xr @godotengine/buildsystem
-/modules/visionos_xr/doc_classes/             @godotengine/xr @godotengine/documentation
-/modules/webxr/                               @godotengine/xr
-/modules/webxr/**/*.py                        @godotengine/xr @godotengine/buildsystem
-/modules/webxr/**/SCsub                       @godotengine/xr @godotengine/buildsystem
-/modules/webxr/doc_classes/                   @godotengine/xr @godotengine/documentation
+/modules/camera/                              @fadeengine/xr
+/modules/camera/**/*.py                       @fadeengine/xr @fadeengine/buildsystem
+/modules/camera/**/SCsub                      @fadeengine/xr @fadeengine/buildsystem
+/modules/mobile_vr/                           @fadeengine/xr
+/modules/mobile_vr/**/*.py                    @fadeengine/xr @fadeengine/buildsystem
+/modules/mobile_vr/**/SCsub                   @fadeengine/xr @fadeengine/buildsystem
+/modules/mobile_vr/doc_classes/               @fadeengine/xr @fadeengine/documentation
+/modules/openxr/                              @fadeengine/xr
+/modules/openxr/**/*.py                       @fadeengine/xr @fadeengine/buildsystem
+/modules/openxr/**/SCsub                      @fadeengine/xr @fadeengine/buildsystem
+/modules/openxr/doc_classes/                  @fadeengine/xr @fadeengine/documentation
+/modules/openxr/editor/                       @fadeengine/xr @fadeengine/editor
+/modules/openxr/editor/**/SCsub               @fadeengine/xr @fadeengine/editor @fadeengine/buildsystem
+/modules/visionos_xr/                         @fadeengine/xr
+/modules/visionos_xr/**/*.py                  @fadeengine/xr @fadeengine/buildsystem
+/modules/visionos_xr/**/SCsub                 @fadeengine/xr @fadeengine/buildsystem
+/modules/visionos_xr/doc_classes/             @fadeengine/xr @fadeengine/documentation
+/modules/webxr/                               @fadeengine/xr
+/modules/webxr/**/*.py                        @fadeengine/xr @fadeengine/buildsystem
+/modules/webxr/**/SCsub                       @fadeengine/xr @fadeengine/buildsystem
+/modules/webxr/doc_classes/                   @fadeengine/xr @fadeengine/documentation
 
 ## Misc
-/modules/*.py                                 @godotengine/buildsystem
-/modules/register_module_types.*              @godotengine/buildsystem
-/modules/SCsub                                @godotengine/buildsystem
-/modules/csg/                                 @godotengine/3d-nodes
-/modules/csg/**/*.py                          @godotengine/3d-nodes @godotengine/buildsystem
-/modules/csg/**/SCsub                         @godotengine/3d-nodes @godotengine/buildsystem
-/modules/csg/doc_classes/                     @godotengine/3d-nodes @godotengine/documentation
-/modules/csg/editor/                          @godotengine/3d-nodes @godotengine/editor
-/modules/csg/tests/                           @godotengine/3d-nodes @godotengine/tests
-/modules/gridmap/                             @godotengine/3d-nodes
-/modules/gridmap/**/*.py                      @godotengine/3d-nodes @godotengine/buildsystem
-/modules/gridmap/**/SCsub                     @godotengine/3d-nodes @godotengine/buildsystem
-/modules/gridmap/doc_classes/                 @godotengine/3d-nodes @godotengine/documentation
-/modules/gridmap/editor/                      @godotengine/3d-nodes @godotengine/editor
-/modules/gridmap/tests/                       @godotengine/3d-nodes @godotengine/tests
-/modules/navigation_2d/                       @godotengine/navigation
-/modules/navigation_2d/**/*.py                @godotengine/navigation @godotengine/buildsystem
-/modules/navigation_2d/**/SCsub               @godotengine/navigation @godotengine/buildsystem
-/modules/navigation_2d/editor/                @godotengine/navigation @godotengine/editor
-/modules/navigation_3d/                       @godotengine/navigation
-/modules/navigation_3d/**/*.py                @godotengine/navigation @godotengine/buildsystem
-/modules/navigation_3d/**/SCsub               @godotengine/navigation @godotengine/buildsystem
-/modules/navigation_3d/editor/                @godotengine/navigation @godotengine/editor
-/modules/noise/                               @godotengine/core
-/modules/noise/**/*.py                        @godotengine/core @godotengine/buildsystem
-/modules/noise/**/SCsub                       @godotengine/core @godotengine/buildsystem
-/modules/noise/doc_classes/                   @godotengine/core @godotengine/documentation
-/modules/noise/editor/                        @godotengine/core @godotengine/editor
-/modules/noise/tests/                         @godotengine/core @godotengine/tests
-/modules/objectdb_profiler/                   @godotengine/debugger
-/modules/objectdb_profiler/**/*.py            @godotengine/debugger @godotengine/buildsystem
-/modules/objectdb_profiler/**/SCsub           @godotengine/debugger @godotengine/buildsystem
-/modules/objectdb_profiler/editor/            @godotengine/debugger @godotengine/editor
-/modules/tilemap/                             @godotengine/2d-nodes
-/modules/tilemap/**/*.py                      @godotengine/2d-nodes @godotengine/buildsystem
-/modules/tilemap/**/SCsub                     @godotengine/2d-nodes @godotengine/buildsystem
-/modules/tilemap/doc_classes/                 @godotengine/2d-nodes @godotengine/documentation
-/modules/tilemap/editor/                      @godotengine/2d-nodes @godotengine/editor
-/modules/tilemap/editor/**/SCsub              @godotengine/2d-nodes @godotengine/editor @godotengine/buildsystem
-/modules/zip/                                 @godotengine/core
-/modules/zip/**/*.py                          @godotengine/core @godotengine/buildsystem
-/modules/zip/**/SCsub                         @godotengine/core @godotengine/buildsystem
-/modules/zip/doc_classes/                     @godotengine/core @godotengine/documentation
-/modules/zip/tests/                           @godotengine/core @godotengine/tests
+/modules/*.py                                 @fadeengine/buildsystem
+/modules/register_module_types.*              @fadeengine/buildsystem
+/modules/SCsub                                @fadeengine/buildsystem
+/modules/csg/                                 @fadeengine/3d-nodes
+/modules/csg/**/*.py                          @fadeengine/3d-nodes @fadeengine/buildsystem
+/modules/csg/**/SCsub                         @fadeengine/3d-nodes @fadeengine/buildsystem
+/modules/csg/doc_classes/                     @fadeengine/3d-nodes @fadeengine/documentation
+/modules/csg/editor/                          @fadeengine/3d-nodes @fadeengine/editor
+/modules/csg/tests/                           @fadeengine/3d-nodes @fadeengine/tests
+/modules/gridmap/                             @fadeengine/3d-nodes
+/modules/gridmap/**/*.py                      @fadeengine/3d-nodes @fadeengine/buildsystem
+/modules/gridmap/**/SCsub                     @fadeengine/3d-nodes @fadeengine/buildsystem
+/modules/gridmap/doc_classes/                 @fadeengine/3d-nodes @fadeengine/documentation
+/modules/gridmap/editor/                      @fadeengine/3d-nodes @fadeengine/editor
+/modules/gridmap/tests/                       @fadeengine/3d-nodes @fadeengine/tests
+/modules/navigation_2d/                       @fadeengine/navigation
+/modules/navigation_2d/**/*.py                @fadeengine/navigation @fadeengine/buildsystem
+/modules/navigation_2d/**/SCsub               @fadeengine/navigation @fadeengine/buildsystem
+/modules/navigation_2d/editor/                @fadeengine/navigation @fadeengine/editor
+/modules/navigation_3d/                       @fadeengine/navigation
+/modules/navigation_3d/**/*.py                @fadeengine/navigation @fadeengine/buildsystem
+/modules/navigation_3d/**/SCsub               @fadeengine/navigation @fadeengine/buildsystem
+/modules/navigation_3d/editor/                @fadeengine/navigation @fadeengine/editor
+/modules/noise/                               @fadeengine/core
+/modules/noise/**/*.py                        @fadeengine/core @fadeengine/buildsystem
+/modules/noise/**/SCsub                       @fadeengine/core @fadeengine/buildsystem
+/modules/noise/doc_classes/                   @fadeengine/core @fadeengine/documentation
+/modules/noise/editor/                        @fadeengine/core @fadeengine/editor
+/modules/noise/tests/                         @fadeengine/core @fadeengine/tests
+/modules/objectdb_profiler/                   @fadeengine/debugger
+/modules/objectdb_profiler/**/*.py            @fadeengine/debugger @fadeengine/buildsystem
+/modules/objectdb_profiler/**/SCsub           @fadeengine/debugger @fadeengine/buildsystem
+/modules/objectdb_profiler/editor/            @fadeengine/debugger @fadeengine/editor
+/modules/tilemap/                             @fadeengine/2d-nodes
+/modules/tilemap/**/*.py                      @fadeengine/2d-nodes @fadeengine/buildsystem
+/modules/tilemap/**/SCsub                     @fadeengine/2d-nodes @fadeengine/buildsystem
+/modules/tilemap/doc_classes/                 @fadeengine/2d-nodes @fadeengine/documentation
+/modules/tilemap/editor/                      @fadeengine/2d-nodes @fadeengine/editor
+/modules/tilemap/editor/**/SCsub              @fadeengine/2d-nodes @fadeengine/editor @fadeengine/buildsystem
+/modules/zip/                                 @fadeengine/core
+/modules/zip/**/*.py                          @fadeengine/core @fadeengine/buildsystem
+/modules/zip/**/SCsub                         @fadeengine/core @fadeengine/buildsystem
+/modules/zip/doc_classes/                     @fadeengine/core @fadeengine/documentation
+/modules/zip/tests/                           @fadeengine/core @fadeengine/tests
 
 # Platform
 
-/platform/*.py                                @godotengine/buildsystem
-/platform/register_platform_apis.*            @godotengine/buildsystem
-/platform/SCsub                               @godotengine/buildsystem
-/platform/android/                            @godotengine/android
-/platform/android/**/*.py                     @godotengine/android @godotengine/buildsystem
-/platform/android/**/SCsub                    @godotengine/android @godotengine/buildsystem
-/platform/android/doc_classes/                @godotengine/android @godotengine/documentation
-/platform/android/editor/                     @godotengine/android @godotengine/editor
-/platform/android/java/gradlew*               @godotengine/android @godotengine/buildsystem
-/platform/ios/                                @godotengine/ios
-/platform/ios/**/*.py                         @godotengine/ios @godotengine/buildsystem
-/platform/ios/**/SCsub                        @godotengine/ios @godotengine/buildsystem
-/platform/ios/doc_classes/                    @godotengine/ios @godotengine/documentation
-/platform/linuxbsd/                           @godotengine/linux-bsd
-/platform/linuxbsd/**/*.py                    @godotengine/linux-bsd @godotengine/buildsystem
-/platform/linuxbsd/**/SCsub                   @godotengine/linux-bsd @godotengine/buildsystem
-/platform/linuxbsd/doc_classes/               @godotengine/linux-bsd @godotengine/documentation
-/platform/macos/                              @godotengine/macos
-/platform/macos/**/*.py                       @godotengine/macos @godotengine/buildsystem
-/platform/macos/**/SCsub                      @godotengine/macos @godotengine/buildsystem
-/platform/macos/doc_classes/                  @godotengine/macos @godotengine/documentation
-/platform/macos/editor/                       @godotengine/macos @godotengine/editor
-/platform/visionos/                           @godotengine/xr
-/platform/visionos/**/*.py                    @godotengine/xr @godotengine/buildsystem
-/platform/visionos/**/SCsub                   @godotengine/xr @godotengine/buildsystem
-/platform/visionos/doc_classes/               @godotengine/xr @godotengine/documentation
-/platform/web/                                @godotengine/web
-/platform/web/**/*.py                         @godotengine/web @godotengine/buildsystem
-/platform/web/**/SCsub                        @godotengine/web @godotengine/buildsystem
-/platform/web/doc_classes/                    @godotengine/web @godotengine/documentation
-/platform/web/editor/                         @godotengine/web @godotengine/editor
-/platform/windows/                            @godotengine/windows
-/platform/windows/**/*.py                     @godotengine/windows @godotengine/buildsystem
-/platform/windows/**/SCsub                    @godotengine/windows @godotengine/buildsystem
-/platform/windows/doc_classes/                @godotengine/windows @godotengine/documentation
+/platform/*.py                                @fadeengine/buildsystem
+/platform/register_platform_apis.*            @fadeengine/buildsystem
+/platform/SCsub                               @fadeengine/buildsystem
+/platform/android/                            @fadeengine/android
+/platform/android/**/*.py                     @fadeengine/android @fadeengine/buildsystem
+/platform/android/**/SCsub                    @fadeengine/android @fadeengine/buildsystem
+/platform/android/doc_classes/                @fadeengine/android @fadeengine/documentation
+/platform/android/editor/                     @fadeengine/android @fadeengine/editor
+/platform/android/java/gradlew*               @fadeengine/android @fadeengine/buildsystem
+/platform/ios/                                @fadeengine/ios
+/platform/ios/**/*.py                         @fadeengine/ios @fadeengine/buildsystem
+/platform/ios/**/SCsub                        @fadeengine/ios @fadeengine/buildsystem
+/platform/ios/doc_classes/                    @fadeengine/ios @fadeengine/documentation
+/platform/linuxbsd/                           @fadeengine/linux-bsd
+/platform/linuxbsd/**/*.py                    @fadeengine/linux-bsd @fadeengine/buildsystem
+/platform/linuxbsd/**/SCsub                   @fadeengine/linux-bsd @fadeengine/buildsystem
+/platform/linuxbsd/doc_classes/               @fadeengine/linux-bsd @fadeengine/documentation
+/platform/macos/                              @fadeengine/macos
+/platform/macos/**/*.py                       @fadeengine/macos @fadeengine/buildsystem
+/platform/macos/**/SCsub                      @fadeengine/macos @fadeengine/buildsystem
+/platform/macos/doc_classes/                  @fadeengine/macos @fadeengine/documentation
+/platform/macos/editor/                       @fadeengine/macos @fadeengine/editor
+/platform/visionos/                           @fadeengine/xr
+/platform/visionos/**/*.py                    @fadeengine/xr @fadeengine/buildsystem
+/platform/visionos/**/SCsub                   @fadeengine/xr @fadeengine/buildsystem
+/platform/visionos/doc_classes/               @fadeengine/xr @fadeengine/documentation
+/platform/web/                                @fadeengine/web
+/platform/web/**/*.py                         @fadeengine/web @fadeengine/buildsystem
+/platform/web/**/SCsub                        @fadeengine/web @fadeengine/buildsystem
+/platform/web/doc_classes/                    @fadeengine/web @fadeengine/documentation
+/platform/web/editor/                         @fadeengine/web @fadeengine/editor
+/platform/windows/                            @fadeengine/windows
+/platform/windows/**/*.py                     @fadeengine/windows @fadeengine/buildsystem
+/platform/windows/**/SCsub                    @fadeengine/windows @fadeengine/buildsystem
+/platform/windows/doc_classes/                @fadeengine/windows @fadeengine/documentation
 
 # Scene
 
-/scene/property_*                             @godotengine/buildsystem
-/scene/register_scene_types.*                 @godotengine/buildsystem
-/scene/scene_string_names.*                   @godotengine/buildsystem
-/scene/SCsub                                  @godotengine/buildsystem
-/scene/2d/                                    @godotengine/2d-nodes
-/scene/2d/**/SCsub                            @godotengine/2d-nodes @godotengine/buildsystem
-/scene/2d/navigation/                         @godotengine/2d-nodes @godotengine/navigation
-/scene/2d/navigation/**/SCsub                 @godotengine/2d-nodes @godotengine/navigation @godotengine/buildsystem
-/scene/2d/physics/                            @godotengine/2d-nodes @godotengine/physics
-/scene/2d/physics/**/SCsub                    @godotengine/2d-nodes @godotengine/physics @godotengine/buildsystem
-/scene/3d/                                    @godotengine/3d-nodes
-/scene/3d/**/SCsub                            @godotengine/3d-nodes @godotengine/buildsystem
-/scene/3d/navigation/                         @godotengine/3d-nodes @godotengine/navigation
-/scene/3d/navigation/**/SCsub                 @godotengine/3d-nodes @godotengine/navigation @godotengine/buildsystem
-/scene/3d/physics/                            @godotengine/3d-nodes @godotengine/physics
-/scene/3d/physics/**/SCsub                    @godotengine/3d-nodes @godotengine/physics @godotengine/buildsystem
-/scene/3d/xr/                                 @godotengine/3d-nodes @godotengine/xr
-/scene/3d/xr/**/SCsub                         @godotengine/3d-nodes @godotengine/xr @godotengine/buildsystem
-/scene/animation/                             @godotengine/animation
-/scene/animation/**/SCsub                     @godotengine/animation @godotengine/buildsystem
-/scene/audio/                                 @godotengine/audio
-/scene/audio/**/SCsub                         @godotengine/audio @godotengine/buildsystem
-/scene/debugger/                              @godotengine/debugger
-/scene/debugger/**/SCsub                      @godotengine/debugger @godotengine/buildsystem
-/scene/gui/                                   @godotengine/gui-nodes
-/scene/gui/**/SCsub                           @godotengine/gui-nodes @godotengine/buildsystem
-/scene/main/                                  @godotengine/core
-/scene/main/**/SCsub                          @godotengine/core @godotengine/buildsystem
-/scene/resources/*                            @godotengine/gui-nodes
-/scene/resources/**/SCsub                     @godotengine/gui-nodes @godotengine/buildsystem
-/scene/resources/2d/                          @godotengine/2d-nodes
-/scene/resources/2d/**/SCsub                  @godotengine/2d-nodes @godotengine/buildsystem
-/scene/resources/2d/skeleton/                 @godotengine/2d-nodes @godotengine/animation
-/scene/resources/2d/skeleton/**/SCsub         @godotengine/2d-nodes @godotengine/animation @godotengine/buildsystem
-/scene/resources/3d/                          @godotengine/3d-nodes
-/scene/resources/3d/**/SCsub                  @godotengine/3d-nodes @godotengine/buildsystem
-/scene/resources/audio/                       @godotengine/audio
-/scene/resources/audio/**/SCsub               @godotengine/audio @godotengine/buildsystem
-/scene/resources/animated*                    @godotengine/animation
-/scene/resources/animation*                   @godotengine/animation
-/scene/resources/bone*                        @godotengine/animation
-/scene/resources/font*                        @godotengine/gui-nodes
-/scene/resources/physics*                     @godotengine/physics
-/scene/resources/shader*                      @godotengine/shaders
-/scene/resources/skeleton*                    @godotengine/animation
-/scene/resources/text_*                       @godotengine/gui-nodes
-/scene/theme/                                 @godotengine/gui-nodes
-/scene/theme/**/*.py                          @godotengine/gui-nodes @godotengine/buildsystem
-/scene/theme/**/SCsub                         @godotengine/gui-nodes @godotengine/buildsystem
+/scene/property_*                             @fadeengine/buildsystem
+/scene/register_scene_types.*                 @fadeengine/buildsystem
+/scene/scene_string_names.*                   @fadeengine/buildsystem
+/scene/SCsub                                  @fadeengine/buildsystem
+/scene/2d/                                    @fadeengine/2d-nodes
+/scene/2d/**/SCsub                            @fadeengine/2d-nodes @fadeengine/buildsystem
+/scene/2d/navigation/                         @fadeengine/2d-nodes @fadeengine/navigation
+/scene/2d/navigation/**/SCsub                 @fadeengine/2d-nodes @fadeengine/navigation @fadeengine/buildsystem
+/scene/2d/physics/                            @fadeengine/2d-nodes @fadeengine/physics
+/scene/2d/physics/**/SCsub                    @fadeengine/2d-nodes @fadeengine/physics @fadeengine/buildsystem
+/scene/3d/                                    @fadeengine/3d-nodes
+/scene/3d/**/SCsub                            @fadeengine/3d-nodes @fadeengine/buildsystem
+/scene/3d/navigation/                         @fadeengine/3d-nodes @fadeengine/navigation
+/scene/3d/navigation/**/SCsub                 @fadeengine/3d-nodes @fadeengine/navigation @fadeengine/buildsystem
+/scene/3d/physics/                            @fadeengine/3d-nodes @fadeengine/physics
+/scene/3d/physics/**/SCsub                    @fadeengine/3d-nodes @fadeengine/physics @fadeengine/buildsystem
+/scene/3d/xr/                                 @fadeengine/3d-nodes @fadeengine/xr
+/scene/3d/xr/**/SCsub                         @fadeengine/3d-nodes @fadeengine/xr @fadeengine/buildsystem
+/scene/animation/                             @fadeengine/animation
+/scene/animation/**/SCsub                     @fadeengine/animation @fadeengine/buildsystem
+/scene/audio/                                 @fadeengine/audio
+/scene/audio/**/SCsub                         @fadeengine/audio @fadeengine/buildsystem
+/scene/debugger/                              @fadeengine/debugger
+/scene/debugger/**/SCsub                      @fadeengine/debugger @fadeengine/buildsystem
+/scene/gui/                                   @fadeengine/gui-nodes
+/scene/gui/**/SCsub                           @fadeengine/gui-nodes @fadeengine/buildsystem
+/scene/main/                                  @fadeengine/core
+/scene/main/**/SCsub                          @fadeengine/core @fadeengine/buildsystem
+/scene/resources/*                            @fadeengine/gui-nodes
+/scene/resources/**/SCsub                     @fadeengine/gui-nodes @fadeengine/buildsystem
+/scene/resources/2d/                          @fadeengine/2d-nodes
+/scene/resources/2d/**/SCsub                  @fadeengine/2d-nodes @fadeengine/buildsystem
+/scene/resources/2d/skeleton/                 @fadeengine/2d-nodes @fadeengine/animation
+/scene/resources/2d/skeleton/**/SCsub         @fadeengine/2d-nodes @fadeengine/animation @fadeengine/buildsystem
+/scene/resources/3d/                          @fadeengine/3d-nodes
+/scene/resources/3d/**/SCsub                  @fadeengine/3d-nodes @fadeengine/buildsystem
+/scene/resources/audio/                       @fadeengine/audio
+/scene/resources/audio/**/SCsub               @fadeengine/audio @fadeengine/buildsystem
+/scene/resources/animated*                    @fadeengine/animation
+/scene/resources/animation*                   @fadeengine/animation
+/scene/resources/bone*                        @fadeengine/animation
+/scene/resources/font*                        @fadeengine/gui-nodes
+/scene/resources/physics*                     @fadeengine/physics
+/scene/resources/shader*                      @fadeengine/shaders
+/scene/resources/skeleton*                    @fadeengine/animation
+/scene/resources/text_*                       @fadeengine/gui-nodes
+/scene/theme/                                 @fadeengine/gui-nodes
+/scene/theme/**/*.py                          @fadeengine/gui-nodes @fadeengine/buildsystem
+/scene/theme/**/SCsub                         @fadeengine/gui-nodes @fadeengine/buildsystem
 
 # Servers
 
-/servers/nav_heap.*                           @godotengine/navigation
-/servers/register_server_types.*              @godotengine/buildsystem
-/servers/SCsub                                @godotengine/buildsystem
-/servers/server_wrap_*                        @godotengine/buildsystem
-/servers/audio/                               @godotengine/audio
-/servers/audio/**/SCsub                       @godotengine/audio @godotengine/buildsystem
-/servers/camera/                              @godotengine/xr
-/servers/camera/**/SCsub                      @godotengine/xr @godotengine/buildsystem
-/servers/debugger/                            @godotengine/debugger
-/servers/debugger/**/SCsub                    @godotengine/debugger @godotengine/buildsystem
-/servers/display/                             @godotengine/rendering
-/servers/display/**/SCsub                     @godotengine/rendering @godotengine/buildsystem
-/servers/movie_writer/                        @godotengine/rendering
-/servers/movie_writer/**/SCsub                @godotengine/rendering @godotengine/buildsystem
-/servers/navigation_2d/                       @godotengine/navigation
-/servers/navigation_2d/**/SCsub               @godotengine/navigation @godotengine/buildsystem
-/servers/navigation_3d/                       @godotengine/navigation
-/servers/navigation_3d/**/SCsub               @godotengine/navigation @godotengine/buildsystem
-/servers/physics_2d/                          @godotengine/physics
-/servers/physics_2d/**/SCsub                  @godotengine/physics @godotengine/buildsystem
-/servers/physics_3d/                          @godotengine/physics
-/servers/physics_3d/**/SCsub                  @godotengine/physics @godotengine/buildsystem
-/servers/rendering/                           @godotengine/rendering
-/servers/rendering/**/*.py                    @godotengine/rendering @godotengine/buildsystem
-/servers/rendering/**/SCsub                   @godotengine/rendering @godotengine/buildsystem
-/servers/text/                                @godotengine/gui-nodes
-/servers/text/**/SCsub                        @godotengine/gui-nodes @godotengine/buildsystem
-/servers/xr/                                  @godotengine/xr
-/servers/xr/**/SCsub                          @godotengine/xr @godotengine/buildsystem
+/servers/nav_heap.*                           @fadeengine/navigation
+/servers/register_server_types.*              @fadeengine/buildsystem
+/servers/SCsub                                @fadeengine/buildsystem
+/servers/server_wrap_*                        @fadeengine/buildsystem
+/servers/audio/                               @fadeengine/audio
+/servers/audio/**/SCsub                       @fadeengine/audio @fadeengine/buildsystem
+/servers/camera/                              @fadeengine/xr
+/servers/camera/**/SCsub                      @fadeengine/xr @fadeengine/buildsystem
+/servers/debugger/                            @fadeengine/debugger
+/servers/debugger/**/SCsub                    @fadeengine/debugger @fadeengine/buildsystem
+/servers/display/                             @fadeengine/rendering
+/servers/display/**/SCsub                     @fadeengine/rendering @fadeengine/buildsystem
+/servers/movie_writer/                        @fadeengine/rendering
+/servers/movie_writer/**/SCsub                @fadeengine/rendering @fadeengine/buildsystem
+/servers/navigation_2d/                       @fadeengine/navigation
+/servers/navigation_2d/**/SCsub               @fadeengine/navigation @fadeengine/buildsystem
+/servers/navigation_3d/                       @fadeengine/navigation
+/servers/navigation_3d/**/SCsub               @fadeengine/navigation @fadeengine/buildsystem
+/servers/physics_2d/                          @fadeengine/physics
+/servers/physics_2d/**/SCsub                  @fadeengine/physics @fadeengine/buildsystem
+/servers/physics_3d/                          @fadeengine/physics
+/servers/physics_3d/**/SCsub                  @fadeengine/physics @fadeengine/buildsystem
+/servers/rendering/                           @fadeengine/rendering
+/servers/rendering/**/*.py                    @fadeengine/rendering @fadeengine/buildsystem
+/servers/rendering/**/SCsub                   @fadeengine/rendering @fadeengine/buildsystem
+/servers/text/                                @fadeengine/gui-nodes
+/servers/text/**/SCsub                        @fadeengine/gui-nodes @fadeengine/buildsystem
+/servers/xr/                                  @fadeengine/xr
+/servers/xr/**/SCsub                          @fadeengine/xr @fadeengine/buildsystem
 
 # Tests
 
-/tests/                                       @godotengine/tests
-/tests/**/*.py                                @godotengine/tests @godotengine/buildsystem
-/tests/**/SConstruct                          @godotengine/tests @godotengine/buildsystem
-/tests/**/SCsub                               @godotengine/tests @godotengine/buildsystem
+/tests/                                       @fadeengine/tests
+/tests/**/*.py                                @fadeengine/tests @fadeengine/buildsystem
+/tests/**/SConstruct                          @fadeengine/tests @fadeengine/buildsystem
+/tests/**/SCsub                               @fadeengine/tests @fadeengine/buildsystem
 
 # Thirdparty
 
-/thirdparty/                                  @godotengine/buildsystem
-/thirdparty/jolt_physics/                     @godotengine/buildsystem @godotengine/jolt-physics
+/thirdparty/                                  @fadeengine/buildsystem
+/thirdparty/jolt_physics/                     @fadeengine/buildsystem @fadeengine/jolt-physics

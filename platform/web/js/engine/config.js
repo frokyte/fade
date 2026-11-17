@@ -1,11 +1,11 @@
 /**
- * An object used to configure the Engine instance based on godot export options, and to override those in custom HTML
+ * An object used to configure the Engine instance based on fade export options, and to override those in custom HTML
  * templates if needed.
  *
  * @header Engine configuration
  * @summary The Engine configuration object. This is just a typedef, create it like a regular object, e.g.:
  *
- * ``const MyConfig = { executable: 'godot', unloadAfterInit: false }``
+ * ``const MyConfig = { executable: 'fade', unloadAfterInit: false }``
  *
  * @typedef {!Object} EngineConfig
  */
@@ -154,7 +154,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 * @export
 		 * @type {number}
 		 */
-		godotPoolSize: 4,
+		fadePoolSize: 4,
 		/**
 		 * A MessagePort used to send debug messages when using protocol messageport://
 		 * @export
@@ -330,7 +330,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 				return {};
 			},
 			'locateFile': function (path) {
-				if (!path.startsWith('godot.')) {
+				if (!path.startsWith('fade.')) {
 					return path;
 				} else if (path.endsWith('.audio.worklet.js')) {
 					return `${loadPath}.audio.worklet.js`;
@@ -388,7 +388,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 			'canvasResizePolicy': this.canvasResizePolicy,
 			'locale': locale,
 			'virtualKeyboard': this.experimentalVK,
-			'godotPoolSize': this.godotPoolSize,
+			'fadePoolSize': this.fadePoolSize,
 			'focusCanvas': this.focusCanvas,
 			'debugPort': this.debugPort,
 			'onExecute': this.onExecute,

@@ -1,7 +1,7 @@
 const EngineIFrame = (function () {
 	const iframeScript = function (name) {
 		// IMPORTANT!!! This function will run in the iframe document, not in the current context.
-		const canvas = document.getElementById('godot-canvas');
+		const canvas = document.getElementById('fade-canvas');
 		let engine = null;
 		let iframe_port = null;
 		let pid = 0;
@@ -125,7 +125,7 @@ const EngineIFrame = (function () {
 		let resolve = null;
 		iframe.onload = () => {
 			const canvas = iframe.contentDocument.createElement('canvas');
-			canvas.id = 'godot-canvas';
+			canvas.id = 'fade-canvas';
 			iframe.contentDocument.body.appendChild(canvas);
 			// Add load/start script
 			const source = `const start = ${iframeScript.toString()}; start(${JSON.stringify(name)});`;

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-fade-project">
+    <comment>FADE Engine project</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="x-fade-project"/>
+    <glob pattern="project.fade"/>
+  </mime-type>
+
+  <mime-type type="application/x-fade-resource">
+    <comment>FADE Engine resource</comment>
+    <icon name="x-fade-resource"/>
+    <glob pattern="*.res"/>
+    <glob pattern="*.tres"/>
+  </mime-type>
+
+  <mime-type type="application/x-fade-scene">
+    <comment>FADE Engine scene</comment>
+    <icon name="x-fade-scene"/>
+    <glob pattern="*.scn"/>
+    <glob pattern="*.tscn"/>
+    <glob pattern="*.escn"/>
+  </mime-type>
+
+  <mime-type type="application/x-fade-shader">
+    <comment>FADE Engine shader</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="x-fade-shader"/>
+    <glob pattern="*.gdshader"/>
+  </mime-type>
+
+  <mime-type type="application/x-gdscript">
+    <comment>GDScript script</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="x-gdscript"/>
+    <glob pattern="*.gd"/>
+  </mime-type>
+</mime-info>

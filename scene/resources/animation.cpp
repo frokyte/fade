@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -3414,7 +3414,7 @@ double Animation::get_marker_time(const StringName &p_name) const {
 	return marker_times.get(p_name);
 }
 
-// TODO: This needs to be a TypedArray<StringName> see this PR for rationale https://github.com/godotengine/godot/pull/110767/
+// TODO: This needs to be a TypedArray<StringName> see this PR for rationale https://github.com/fadeengine/fade/pull/110767/
 PackedStringArray Animation::get_marker_names() const {
 	PackedStringArray names;
 	// We iterate on marker_names so the result is sorted by time.

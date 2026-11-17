@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -346,7 +346,7 @@ class ScriptInstance;
  * Base class for all OBJECT Variant types.
  *
  * For documentation, see:
- * https://docs.godotengine.org/en/latest/engine_details/architecture/object_class.html
+ * https://docs.fadeengine.org/en/latest/engine_details/architecture/object_class.html
  */
 class Object {
 public:

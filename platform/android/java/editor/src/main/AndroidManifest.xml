@@ -4,7 +4,7 @@
     android:installLocation="auto">
 
     <queries>
-        <package android:name="org.godotengine.godot_gradle_build_environment" />
+        <package android:name="org.fadeengine.fade_gradle_build_environment" />
     </queries>
 
     <supports-screens
@@ -71,7 +71,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="org.godotengine.xr.hybrid.PANEL" />
+                <category android:name="org.fadeengine.xr.hybrid.PANEL" />
             </intent-filter>
 
             <!-- Intent filter used to intercept hybrid IMMERSIVE launch for the current editor project, and route it
@@ -79,7 +79,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="org.godotengine.xr.hybrid.IMMERSIVE" />
+                <category android:name="org.fadeengine.xr.hybrid.IMMERSIVE" />
             </intent-filter>
 
             <!-- Intent filter used to intercept hybrid SPATIAL launch for the current editor project, and route it
@@ -87,7 +87,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="org.godotengine.xr.hybrid.SPATIAL" />
+                <category android:name="org.fadeengine.xr.hybrid.SPATIAL" />
             </intent-filter>
         </activity>
         <activity-alias
@@ -108,7 +108,7 @@
                 <data android:scheme="content" />
                 <data android:mimeType="*/*" />
                 <data android:host="*" />
-                <data android:pathPattern=".*\\.godot" />
+                <data android:pathPattern=".*\\.fade" />
             </intent-filter>
         </activity-alias>
         <activity
@@ -116,7 +116,7 @@
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/ic_play_window"
-            android:label="@string/godot_game_activity_name"
+            android:label="@string/fade_game_activity_name"
             android:launchMode="singleTask"
             android:process=":FADEGame0"
             android:taskAffinity=":game0"
@@ -133,7 +133,7 @@
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/ic_play_window"
-            android:label="@string/godot_game_activity_name"
+            android:label="@string/fade_game_activity_name"
             android:launchMode="singleTask"
             android:process=":FADEGame1"
             android:taskAffinity=":game1"
@@ -150,7 +150,7 @@
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:exported="false"
             android:icon="@mipmap/ic_play_window"
-            android:label="@string/godot_game_activity_name"
+            android:label="@string/fade_game_activity_name"
             android:theme="@style/FADEEmbeddedGameTheme"
             android:taskAffinity=":embed"
             android:excludeFromRecents="true"
@@ -164,7 +164,7 @@
             android:launchMode="singleTask"
             android:taskAffinity=":xr"
             android:icon="@mipmap/ic_play_window"
-            android:label="@string/godot_game_activity_name"
+            android:label="@string/fade_game_activity_name"
             android:exported="false"
             android:autoRemoveFromRecents="true"
             android:screenOrientation="landscape"
@@ -176,7 +176,7 @@
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:process=":FADESpatialContainerGame0"
             android:icon="@mipmap/ic_play_window"
-            android:label="@string/godot_game_activity_name"
+            android:label="@string/fade_game_activity_name"
             android:exported="false"
             android:autoRemoveFromRecents="true"
             android:screenOrientation="landscape"
@@ -191,7 +191,7 @@
             android:configChanges="layoutDirection|locale|orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode|fontScale|fontWeightAdjustment"
             android:process=":FADESpatialContainerGame1"
             android:icon="@mipmap/ic_play_window"
-            android:label="@string/godot_game_activity_name"
+            android:label="@string/fade_game_activity_name"
             android:exported="false"
             android:autoRemoveFromRecents="true"
             android:screenOrientation="landscape"
@@ -210,8 +210,8 @@
         manager and editor windows.
          -->
         <meta-data
-            android:name="org.godotengine.plugin.v2.FADEOpenXR"
-            android:value="org.godotengine.openxr.vendors.FADEOpenXR"
+            android:name="org.fadeengine.plugin.v2.FADEOpenXR"
+            android:value="org.fadeengine.openxr.vendors.FADEOpenXR"
             tools:node="remove" />
     </application>
 

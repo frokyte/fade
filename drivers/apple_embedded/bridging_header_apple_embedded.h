@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,7 +31,7 @@
 #pragma once
 
 // IWYU pragma: begin_exports.
-#import "drivers/apple_embedded/godot_app_delegate_service_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_apple_embedded.h"
-#import "drivers/apple_embedded/godot_view_controller.h"
+#import "drivers/apple_embedded/fade_app_delegate_service_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_apple_embedded.h"
+#import "drivers/apple_embedded/fade_view_controller.h"
 // IWYU pragma: end_exports.

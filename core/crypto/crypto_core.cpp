@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -295,7 +295,7 @@ bool CryptoCore::initialized = false;
 void CryptoCore::initialize() {
 	ERR_FAIL_COND(initialized);
 #ifdef GODOT_MBEDTLS_PLATFORM
-	godot_mbedtls_platform_init();
+	fade_mbedtls_platform_init();
 #endif
 
 	int status = psa_crypto_init();
@@ -309,6 +309,6 @@ void CryptoCore::finalize() {
 	initialized = false;
 	mbedtls_psa_crypto_free(); // Not part of PSA for reasons.
 #ifdef GODOT_MBEDTLS_PLATFORM
-	godot_mbedtls_platform_free();
+	fade_mbedtls_platform_free();
 #endif
 }

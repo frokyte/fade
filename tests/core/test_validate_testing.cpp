@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -105,7 +105,7 @@ TEST_SUITE("Validate tests") {
 		StringName string_name("has_method");
 		INFO(string_name);
 
-		NodePath node_path("godot/sprite");
+		NodePath node_path("fade/sprite");
 		INFO(node_path);
 
 		INFO(RID());

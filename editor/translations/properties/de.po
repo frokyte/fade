@@ -35,7 +35,7 @@
 # Julian Retzlaff <julian.retzlaff@googlemail.com>, 2018.
 # asyncial <mahlburg@posteo.de>, 2018.
 # ssantos <ssantos@web.de>, 2018.
-# Rémi Verschelde <akien@godotengine.org>, 2019.
+# Rémi Verschelde <akien@fadeengine.org>, 2019.
 # Martin <martinreininger@gmx.net>, 2019, 2021.
 # Andreas During <anduring@web.de>, 2019.
 # Arthur S. Muszynski <artism90@gmail.com>, 2019.
@@ -55,7 +55,7 @@
 # Günther Bohn <ciscouser@gmx.de>, 2020, 2021.
 # Tom Wor <mail@tomwor.com>, 2020.
 # Bjarne Hiller <bjarne.hiller@gmail.com>, 2020.
-# Dirk Federmann <weblategodot@dirkfedermann.de>, 2020.
+# Dirk Federmann <weblatefade@dirkfedermann.de>, 2020.
 # Helmut Hirtes <helmut.h@gmx.de>, 2020.
 # Michal695 <michalek.jedrzejak@gmail.com>, 2020.
 # Leon Marz <leon.marz@kabelmail.de>, 2020.
@@ -132,11 +132,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FADE Engine properties\n"
-"Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
+"Report-Msgid-Bugs-To: https://github.com/fadeengine/fade\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2026-11-03 16:15+0000\n"
 "Last-Translator: VfBFan <vfbfan@users.noreply.hosted.weblate.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/godot-engine/godot-"
+"Language-Team: German <https://hosted.weblate.org/projects/fade-engine/fade-"
 "properties/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"

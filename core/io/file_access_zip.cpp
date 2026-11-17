@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -40,7 +40,7 @@ struct ZipData {
 	Ref<FileAccess> f;
 };
 
-static void *godot_open(voidpf p_opaque, const char *p_fname, int p_mode) {
+static void *fade_open(voidpf p_opaque, const char *p_fname, int p_mode) {
 	if (p_mode & ZLIB_FILEFUNC_MODE_WRITE) {
 		return nullptr;
 	}
@@ -53,22 +53,22 @@ static void *godot_open(voidpf p_opaque, const char *p_fname, int p_mode) {
 	return zd;
 }
 
-static uLong godot_read(voidpf p_opaque, voidpf p_stream, void *r_buf, uLong p_size) {
+static uLong fade_read(voidpf p_opaque, voidpf p_stream, void *r_buf, uLong p_size) {
 	ZipData *zd = (ZipData *)p_stream;
 	zd->f->get_buffer((uint8_t *)r_buf, p_size);
 	return p_size;
 }
 
-static uLong godot_write(voidpf p_opaque, voidpf p_stream, const void *p_buf, uLong p_size) {
+static uLong fade_write(voidpf p_opaque, voidpf p_stream, const void *p_buf, uLong p_size) {
 	return 0;
 }
 
-static long godot_tell(voidpf p_opaque, voidpf p_stream) {
+static long fade_tell(voidpf p_opaque, voidpf p_stream) {
 	ZipData *zd = (ZipData *)p_stream;
 	return zd->f->get_position();
 }
 
-static long godot_seek(voidpf p_opaque, voidpf p_stream, uLong p_offset, int p_origin) {
+static long fade_seek(voidpf p_opaque, voidpf p_stream, uLong p_offset, int p_origin) {
 	ZipData *zd = (ZipData *)p_stream;
 
 	uint64_t pos = p_offset;
@@ -87,22 +87,22 @@ static long godot_seek(voidpf p_opaque, voidpf p_stream, uLong p_offset, int p_o
 	return 0;
 }
 
-static int godot_close(voidpf p_opaque, voidpf p_stream) {
+static int fade_close(voidpf p_opaque, voidpf p_stream) {
 	ZipData *zd = (ZipData *)p_stream;
 	memdelete(zd);
 	return 0;
 }
 
-static int godot_testerror(voidpf p_opaque, voidpf p_stream) {
+static int fade_testerror(voidpf p_opaque, voidpf p_stream) {
 	ZipData *zd = (ZipData *)p_stream;
 	return zd->f->get_error() != OK ? 1 : 0;
 }
 
-static voidpf godot_alloc(voidpf p_opaque, uInt p_items, uInt p_size) {
+static voidpf fade_alloc(voidpf p_opaque, uInt p_items, uInt p_size) {
 	return memalloc((size_t)p_items * p_size);
 }
 
-static void godot_free(voidpf p_opaque, voidpf r_address) {
+static void fade_free(voidpf p_opaque, voidpf r_address) {
 	memfree(r_address);
 }
 } // extern "C"
@@ -121,17 +121,17 @@ unzFile ZipArchive::get_file_handle(const String &p_file) const {
 	memset(&io, 0, sizeof(io));
 
 	io.opaque = nullptr;
-	io.zopen_file = godot_open;
-	io.zread_file = godot_read;
-	io.zwrite_file = godot_write;
+	io.zopen_file = fade_open;
+	io.zread_file = fade_read;
+	io.zwrite_file = fade_write;
 
-	io.ztell_file = godot_tell;
-	io.zseek_file = godot_seek;
-	io.zclose_file = godot_close;
-	io.zerror_file = godot_testerror;
+	io.ztell_file = fade_tell;
+	io.zseek_file = fade_seek;
+	io.zclose_file = fade_close;
+	io.zerror_file = fade_testerror;
 
-	io.alloc_mem = godot_alloc;
-	io.free_mem = godot_free;
+	io.alloc_mem = fade_alloc;
+	io.free_mem = fade_free;
 
 	unzFile pkg = unzOpen2(packages[file.package].filename.utf8().get_data(), &io);
 	ERR_FAIL_NULL_V_MSG(pkg, nullptr, vformat("Cannot open file '%s'.", packages[file.package].filename));
@@ -156,14 +156,14 @@ bool ZipArchive::try_open_pack(const String &p_path, bool p_replace_files, uint6
 	memset(&io, 0, sizeof(io));
 
 	io.opaque = nullptr;
-	io.zopen_file = godot_open;
-	io.zread_file = godot_read;
-	io.zwrite_file = godot_write;
+	io.zopen_file = fade_open;
+	io.zread_file = fade_read;
+	io.zwrite_file = fade_write;
 
-	io.ztell_file = godot_tell;
-	io.zseek_file = godot_seek;
-	io.zclose_file = godot_close;
-	io.zerror_file = godot_testerror;
+	io.ztell_file = fade_tell;
+	io.zseek_file = fade_seek;
+	io.zclose_file = fade_close;
+	io.zerror_file = fade_testerror;
 
 	unzFile zfile = unzOpen2(p_path.utf8().get_data(), &io);
 	ERR_FAIL_NULL_V(zfile, false);

@@ -3,7 +3,7 @@ plugins {
 }
 
 androidFusedLibrary {
-    namespace = 'com.godot.game.fuseddeps'
+    namespace = 'com.fade.game.fuseddeps'
     minSdk = versions.minSdk
 }
 

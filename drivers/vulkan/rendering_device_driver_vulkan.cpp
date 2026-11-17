@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -39,7 +39,7 @@
 #include <thirdparty/misc/smolv.h>
 
 #if defined(SWAPPY_FRAME_PACING_ENABLED)
-#include "platform/android/java_godot_wrapper.h"
+#include "platform/android/java_fade_wrapper.h"
 #include "platform/android/os_android.h"
 #include "platform/android/thread_jandroid.h"
 
@@ -918,7 +918,7 @@ Error RenderingDeviceDriverVulkan::_check_device_capabilities() {
 	const RenderingContextDriverVulkan::Functions &functions = context_driver->functions_get();
 	if (functions.GetPhysicalDeviceFeatures2 != nullptr) {
 		// We must check that the corresponding extension is present before assuming a feature as enabled.
-		// See also: https://github.com/godotengine/godot/issues/65409
+		// See also: https://github.com/fadeengine/fade/issues/65409
 
 		void *next_features = nullptr;
 		VkPhysicalDeviceVulkan12Features device_features_vk_1_2 = {};
@@ -3645,7 +3645,7 @@ bool RenderingDeviceDriverVulkan::_determine_swap_chain_format(RenderingContextD
 	}
 
 	// Some drivers may use wp-color-management even when performing SDR.
-	// https://github.com/godotengine/godot/pull/102987#discussion_r2913373482
+	// https://github.com/fadeengine/fade/pull/102987#discussion_r2913373482
 	if (context_driver->is_colorspace_externally_managed()) {
 		preferred_formats.push_back({ VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_PASS_THROUGH_EXT, COLOR_SPACE_REC709_NONLINEAR_SRGB });
 		preferred_formats.push_back({ VK_FORMAT_R8G8B8A8_UNORM, VK_COLOR_SPACE_PASS_THROUGH_EXT, COLOR_SPACE_REC709_NONLINEAR_SRGB });
@@ -3921,7 +3921,7 @@ Error RenderingDeviceDriverVulkan::swap_chain_resize(CommandQueueID p_cmd_queue,
 
 #if defined(SWAPPY_FRAME_PACING_ENABLED)
 	if (swappy_frame_pacer_enable) {
-		SwappyVk_initAndGetRefreshCycleDuration(get_jni_env(), static_cast<OS_Android *>(OS::get_singleton())->get_godot_java()->get_activity(), physical_device,
+		SwappyVk_initAndGetRefreshCycleDuration(get_jni_env(), static_cast<OS_Android *>(OS::get_singleton())->get_fade_java()->get_activity(), physical_device,
 				vk_device, swap_chain->vk_swapchain, &swap_chain->refresh_duration);
 		SwappyVk_setWindow(vk_device, swap_chain->vk_swapchain, static_cast<OS_Android *>(OS::get_singleton())->get_native_window());
 		SwappyVk_setSwapIntervalNS(vk_device, swap_chain->vk_swapchain, swap_chain->refresh_duration);

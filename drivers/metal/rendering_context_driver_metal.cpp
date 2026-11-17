@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -54,8 +54,8 @@ os_log_t LOG_DRIVER;
 os_log_t LOG_INTERVALS;
 
 __attribute__((constructor)) static void InitializeLogging(void) {
-	LOG_DRIVER = os_log_create("org.godotengine.godot.metal", OS_LOG_CATEGORY_POINTS_OF_INTEREST);
-	LOG_INTERVALS = os_log_create("org.godotengine.godot.metal", "events");
+	LOG_DRIVER = os_log_create("org.fadeengine.fade.metal", OS_LOG_CATEGORY_POINTS_OF_INTEREST);
+	LOG_INTERVALS = os_log_create("org.fadeengine.fade.metal", "events");
 }
 
 RenderingContextDriverMetal::RenderingContextDriverMetal() {

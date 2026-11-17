@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -141,7 +141,7 @@ Error ResourceFormatImporter::_get_path_and_type(const String &p_path, PathAndTy
 		return ERR_FILE_CORRUPT;
 	}
 	if (r_path_and_type.path.is_empty()) {
-		// Some importers may not write files to the .godot folder, so the path can be empty.
+		// Some importers may not write files to the .fade folder, so the path can be empty.
 		if (r_path_and_type.importer.is_empty()) {
 			return ERR_FILE_CORRUPT;
 		}
@@ -182,7 +182,7 @@ Ref<Resource> ResourceFormatImporter::load_internal(const String &p_path, Error 
 	}
 
 	if (p_silence_errors) {
-		// Note: Some importers do not create files in the .godot folder, so we need to check if the path is empty.
+		// Note: Some importers do not create files in the .fade folder, so we need to check if the path is empty.
 		if (!pat.path.is_empty() && !FileAccess::exists(pat.path)) {
 			return Ref<Resource>();
 		}

@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,8 +30,8 @@
 
 #include "csharp_script.h"
 
-#include "godotsharp_defs.h"
-#include "godotsharp_dirs.h"
+#include "fadesharp_defs.h"
+#include "fadesharp_dirs.h"
 #include "mono_gd/gd_mono_cache.h"
 #include "signal_awaiter_utils.h"
 #include "utils/macros.h"
@@ -142,8 +142,8 @@ void CSharpLanguage::finalize() {
 		return;
 	}
 
-	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::godot_api_cache_updated) {
-		GDMonoCache::managed_callbacks.DisposablesTracker_OnGodotShuttingDown();
+	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::fade_api_cache_updated) {
+		GDMonoCache::managed_callbacks.DisposablesTracker_OnFADEShuttingDown();
 	}
 
 	finalizing = true;
@@ -354,7 +354,7 @@ Vector<String> CSharpLanguage::get_string_delimiters() const {
 static String get_base_class_name(const String &p_base_class_name, const String p_class_name) {
 	String base_class = pascal_to_pascal_case(p_base_class_name);
 	if (p_class_name == base_class) {
-		base_class = "Godot." + base_class;
+		base_class = "FADE." + base_class;
 	}
 	return base_class;
 }
@@ -505,7 +505,7 @@ Vector<ScriptLanguage::StackInfo> CSharpLanguage::debug_get_current_stack_info()
 
 	Vector<StackInfo> si;
 
-	if (GDMonoCache::godot_api_cache_updated) {
+	if (GDMonoCache::fade_api_cache_updated) {
 		GDMonoCache::managed_callbacks.DebuggingUtils_GetCurrentStackInfo(&si);
 	}
 
@@ -533,7 +533,7 @@ void CSharpLanguage::pre_unsafe_unreference(Object *p_obj) {
 }
 
 void CSharpLanguage::frame() {
-	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::godot_api_cache_updated) {
+	if (gdmono && gdmono->is_runtime_initialized() && GDMonoCache::fade_api_cache_updated) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_FrameCallback();
 	}
 }
@@ -580,7 +580,7 @@ void CSharpLanguage::reload_tool_script(const Ref<Script> &p_script) {
 	CRASH_COND(!Engine::get_singleton()->is_editor_hint());
 
 #ifdef TOOLS_ENABLED
-	get_godotsharp_editor()->get_node(NodePath("HotReloadAssemblyWatcher"))->call("RestartTimer");
+	get_fadesharp_editor()->get_node(NodePath("HotReloadAssemblyWatcher"))->call("RestartTimer");
 #endif
 
 #ifdef GD_MONO_HOT_RELOAD
@@ -610,7 +610,7 @@ bool CSharpLanguage::is_assembly_reloading_needed() {
 	} else {
 		String assembly_name = Path::get_csharp_project_name();
 
-		assembly_path = GodotSharpDirs::get_res_temp_assemblies_dir()
+		assembly_path = FADESharpDirs::get_res_temp_assemblies_dir()
 								.path_join(assembly_name + ".dll");
 		assembly_path = ProjectSettings::get_singleton()->globalize_path(assembly_path);
 
@@ -912,7 +912,7 @@ void CSharpLanguage::reload_assemblies() {
 #ifdef TOOLS_ENABLED
 				if (si) {
 					// If the script instance is not null, then it must be a placeholder.
-					// Non-placeholder script instances are removed in godot_icall_Object_Disposed.
+					// Non-placeholder script instances are removed in fade_icall_Object_Disposed.
 					CRASH_COND(!si->is_placeholder());
 
 					if (replace_placeholder || scr->is_tool() || ScriptServer::is_scripting_enabled()) {
@@ -1030,11 +1030,11 @@ void CSharpLanguage::reload_assemblies() {
 
 #ifdef TOOLS_ENABLED
 Error CSharpLanguage::open_in_external_editor(const Ref<Script> &p_script, int p_line, int p_col) {
-	return (Error)(int)get_godotsharp_editor()->call("OpenInExternalEditor", p_script, p_line, p_col);
+	return (Error)(int)get_fadesharp_editor()->call("OpenInExternalEditor", p_script, p_line, p_col);
 }
 
 bool CSharpLanguage::overrides_external_editor() {
-	return get_godotsharp_editor()->call("OverridesExternalEditor");
+	return get_fadesharp_editor()->call("OverridesExternalEditor");
 }
 #endif
 
@@ -1065,24 +1065,24 @@ bool CSharpLanguage::debug_break(const String &p_error, bool p_allow_continue) {
 
 #ifdef TOOLS_ENABLED
 void CSharpLanguage::_editor_init_callback() {
-	// Load GodotTools and initialize GodotSharpEditor
+	// Load FADETools and initialize FADESharpEditor
 
 	int32_t interop_funcs_size = 0;
-	const void **interop_funcs = godotsharp::get_editor_interop_funcs(interop_funcs_size);
+	const void **interop_funcs = fadesharp::get_editor_interop_funcs(interop_funcs_size);
 
 	Object *editor_plugin_obj = GDMono::get_singleton()->get_plugin_callbacks().LoadToolsAssemblyCallback(
-			GodotSharpDirs::get_data_editor_tools_dir().path_join("GodotTools.dll").utf16().get_data(),
+			FADESharpDirs::get_data_editor_tools_dir().path_join("FADETools.dll").utf16().get_data(),
 			interop_funcs, interop_funcs_size);
 	CRASH_COND(editor_plugin_obj == nullptr);
 
-	EditorPlugin *godotsharp_editor = Object::cast_to<EditorPlugin>(editor_plugin_obj);
-	CRASH_COND(godotsharp_editor == nullptr);
+	EditorPlugin *fadesharp_editor = Object::cast_to<EditorPlugin>(editor_plugin_obj);
+	CRASH_COND(fadesharp_editor == nullptr);
 
 	// Add plugin to EditorNode and enable it
-	EditorNode::add_editor_plugin(godotsharp_editor);
-	godotsharp_editor->enable_plugin();
+	EditorNode::add_editor_plugin(fadesharp_editor);
+	fadesharp_editor->enable_plugin();
 
-	get_singleton()->godotsharp_editor = godotsharp_editor;
+	get_singleton()->fadesharp_editor = fadesharp_editor;
 }
 #endif
 
@@ -1161,7 +1161,7 @@ bool CSharpLanguage::setup_csharp_script_binding(CSharpScriptBinding &r_script_b
 #endif // DEBUG_ENABLED
 
 	GCHandleIntPtr strong_gchandle =
-			GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectBinding(
+			GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForFADEObjectBinding(
 					&type_name, p_object);
 
 	ERR_FAIL_NULL_V(strong_gchandle.value, false);
@@ -1178,7 +1178,7 @@ bool CSharpLanguage::setup_csharp_script_binding(CSharpScriptBinding &r_script_b
 		// Unsafe refcount increment. The managed instance also counts as a reference.
 		// This way if the unmanaged world has no references to our owner
 		// but the managed instance is alive, the refcount will be 1 instead of 0.
-		// See: godot_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
+		// See: fade_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
 
 		rc->reference();
 		CSharpLanguage::get_singleton()->post_unsafe_reference(rc);
@@ -1231,7 +1231,7 @@ void CSharpLanguage::_instance_binding_free_callback(void *, void *, void *p_bin
 		if (script_binding.inited) {
 			// Set the native instance field to IntPtr.Zero, if not yet garbage collected.
 			// This is done to avoid trying to dispose the native instance from Dispose(bool).
-			GDMonoCache::managed_callbacks.ScriptManagerBridge_SetGodotObjectPtr(
+			GDMonoCache::managed_callbacks.ScriptManagerBridge_SetFADEObjectPtr(
 					script_binding.gchandle.get_intptr(), nullptr);
 
 			script_binding.gchandle.release();
@@ -1371,17 +1371,17 @@ void CSharpLanguage::tie_native_managed_to_unmanaged(GCHandleIntPtr p_gchandle_i
 	MonoGCHandleData gchandle = MonoGCHandleData(p_gchandle_intptr,
 			p_ref_counted ? gdmono::GCHandleType::WEAK_HANDLE : gdmono::GCHandleType::STRONG_HANDLE);
 
-	// If it's just a wrapper Godot class and not a custom inheriting class, then attach a
+	// If it's just a wrapper FADE class and not a custom inheriting class, then attach a
 	// script binding instead. One of the advantages of this is that if a script is attached
 	// later and it's not a C# script, then the managed object won't have to be disposed.
 	// Another reason for doing this is that this instance could outlive CSharpLanguage, which would
-	// be problematic when using a script. See: https://github.com/godotengine/godot/issues/25621
+	// be problematic when using a script. See: https://github.com/fadeengine/fade/issues/25621
 
 	if (p_ref_counted) {
 		// Unsafe refcount increment. The managed instance also counts as a reference.
 		// This way if the unmanaged world has no references to our owner
 		// but the managed instance is alive, the refcount will be 1 instead of 0.
-		// See: godot_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
+		// See: fade_icall_RefCounted_Dtor(MonoObject *p_obj, Object *p_ptr)
 
 		// May not me referenced yet, so we must use init_ref() instead of reference()
 		if (rc->init_ref()) {
@@ -1551,7 +1551,7 @@ bool CSharpInstance::get(const StringName &p_name, Variant &r_ret) const {
 		return false;
 	}
 
-	for (const KeyValue<CSharpScript::SignalKey, godotsharp::RaiseSignalTrampoline> &kvp : script->raise_signal_trampolines) {
+	for (const KeyValue<CSharpScript::SignalKey, fadesharp::RaiseSignalTrampoline> &kvp : script->raise_signal_trampolines) {
 		if (kvp.key.name == p_name) {
 			r_ret = Signal(owner->get_instance_id(), p_name);
 			return true;
@@ -1717,7 +1717,7 @@ bool CSharpInstance::has_method(const StringName &p_method) const {
 		return false;
 	}
 
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::fade_api_cache_updated) {
 		return false;
 	}
 
@@ -1766,7 +1766,7 @@ Variant CSharpInstance::_callp(const StringName &p_method, const Variant **p_arg
 
 	const CSharpScript::MethodKey method_key{ p_method, p_argcount };
 
-	const godotsharp::MethodTrampoline *trampoline = script->method_trampolines.getptr(method_key);
+	const fadesharp::MethodTrampoline *trampoline = script->method_trampolines.getptr(method_key);
 	if (trampoline != nullptr) {
 		Variant ret;
 		GDMonoCache::managed_callbacks.CSharpInstanceBridge_CallViaTrampoline(
@@ -1796,7 +1796,7 @@ Variant CSharpInstance::callp(const StringName &p_method, const Variant **p_args
 void CSharpInstance::raise_event_signal(const StringName &p_event_signal_name, const Variant **p_args, int p_argcount, Callable::CallError &r_error) const {
 	bool owner_is_null = false;
 
-	const godotsharp::RaiseSignalTrampoline *trampoline = script->raise_signal_trampolines.getptr(
+	const fadesharp::RaiseSignalTrampoline *trampoline = script->raise_signal_trampolines.getptr(
 			CSharpScript::SignalKey{ p_event_signal_name, p_argcount });
 	if (trampoline) {
 		Callable::CallError call_error;
@@ -1883,7 +1883,7 @@ bool CSharpInstance::_internal_new_managed() {
 	ERR_FAIL_COND_V(script.is_null(), false);
 	ERR_FAIL_COND_V(!script->can_instantiate(), false);
 
-	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectScriptInstance(
+	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForFADEObjectScriptInstance(
 			script.ptr(), owner, nullptr, 0);
 
 	if (!ok) {
@@ -2052,7 +2052,7 @@ void CSharpInstance::notification(int p_notification, bool p_reversed) {
 			// The RefCounted wouldn't have reached 0 otherwise, since the managed side
 			// references it and Dispose() needs to be called to release it.
 			// However, this means C# RefCounted scripts can't receive NOTIFICATION_PREDELETE, but
-			// this is likely the case with GDScript as well: https://github.com/godotengine/godot/issues/6784
+			// this is likely the case with GDScript as well: https://github.com/fadeengine/fade/issues/6784
 			return;
 		}
 	} else if (p_notification == Object::NOTIFICATION_PREDELETE_CLEANUP) {
@@ -2201,7 +2201,7 @@ void CSharpScript::_update_exports_values(HashMap<StringName, Variant> &values, 
 #endif
 
 void GD_CLR_STDCALL CSharpScript::_add_property_info_list_callback(CSharpScript *p_script, const String *p_current_class_name, void *p_props, int32_t p_count) {
-	GDMonoCache::godotsharp_property_info *props = (GDMonoCache::godotsharp_property_info *)p_props;
+	GDMonoCache::fadesharp_property_info *props = (GDMonoCache::fadesharp_property_info *)p_props;
 
 #ifdef TOOLS_ENABLED
 	p_script->exported_members_cache.push_back(PropertyInfo(
@@ -2210,7 +2210,7 @@ void GD_CLR_STDCALL CSharpScript::_add_property_info_list_callback(CSharpScript 
 #endif
 
 	for (int i = 0; i < p_count; i++) {
-		const GDMonoCache::godotsharp_property_info &prop = props[i];
+		const GDMonoCache::fadesharp_property_info &prop = props[i];
 
 		StringName name = *reinterpret_cast<const StringName *>(&prop.name);
 		String hint_string = *reinterpret_cast<const String *>(&prop.hint_string);
@@ -2239,10 +2239,10 @@ void GD_CLR_STDCALL CSharpScript::_add_property_info_list_callback(CSharpScript 
 
 #ifdef TOOLS_ENABLED
 void GD_CLR_STDCALL CSharpScript::_add_property_default_values_callback(CSharpScript *p_script, void *p_def_vals, int32_t p_count) {
-	GDMonoCache::godotsharp_property_def_val_pair *def_vals = (GDMonoCache::godotsharp_property_def_val_pair *)p_def_vals;
+	GDMonoCache::fadesharp_property_def_val_pair *def_vals = (GDMonoCache::fadesharp_property_def_val_pair *)p_def_vals;
 
 	for (int i = 0; i < p_count; i++) {
-		const GDMonoCache::godotsharp_property_def_val_pair &def_val_pair = def_vals[i];
+		const GDMonoCache::fadesharp_property_def_val_pair &def_val_pair = def_vals[i];
 
 		StringName name = *reinterpret_cast<const StringName *>(&def_val_pair.name);
 		Variant value = *reinterpret_cast<const Variant *>(&def_val_pair.value);
@@ -2282,7 +2282,7 @@ bool CSharpScript::_update_exports(PlaceHolderScriptInstance *p_instance_to_upda
 		exported_members_defval_cache.clear();
 #endif
 
-		if (GDMonoCache::godot_api_cache_updated) {
+		if (GDMonoCache::fade_api_cache_updated) {
 			GDMonoCache::managed_callbacks.ScriptManagerBridge_GetPropertyInfoList(this, &_add_property_info_list_callback);
 
 #ifdef TOOLS_ENABLED
@@ -2382,7 +2382,7 @@ void CSharpScript::reload_registered_script(Ref<CSharpScript> p_script) {
 #endif
 }
 
-void GD_CLR_STDCALL CSharpScript::_try_add_method_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, godotsharp::MethodTrampoline p_trampoline, bool p_is_static) {
+void GD_CLR_STDCALL CSharpScript::_try_add_method_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, fadesharp::MethodTrampoline p_trampoline, bool p_is_static) {
 	MethodKey method_key{ *p_name, p_argc };
 	if (!p_scr->method_trampolines.has(method_key)) {
 		p_scr->method_trampolines.insert_new(method_key, p_trampoline);
@@ -2406,7 +2406,7 @@ void GD_CLR_STDCALL CSharpScript::_try_add_method_tramp(CSharpScript *p_scr, con
 	}
 }
 
-void GD_CLR_STDCALL CSharpScript::_try_add_property_tramp(CSharpScript *p_scr, const StringName *p_name, godotsharp::PropertyGetterTrampoline p_getter_trampoline, godotsharp::PropertySetterTrampoline p_setter_trampoline) {
+void GD_CLR_STDCALL CSharpScript::_try_add_property_tramp(CSharpScript *p_scr, const StringName *p_name, fadesharp::PropertyGetterTrampoline p_getter_trampoline, fadesharp::PropertySetterTrampoline p_setter_trampoline) {
 	DEV_ASSERT(p_getter_trampoline.function_pointer != nullptr || p_setter_trampoline.function_pointer != nullptr);
 
 	PropertyTrampolines *found = p_scr->property_trampolines.getptr(*p_name);
@@ -2415,7 +2415,7 @@ void GD_CLR_STDCALL CSharpScript::_try_add_property_tramp(CSharpScript *p_scr, c
 		DEV_ASSERT(found->getter.function_pointer != nullptr || found->setter.function_pointer != nullptr);
 
 		// If an entry already exists, we still replace one of the trampolines if it's null.
-		// This matches the behavior of Get/SetGodotClassPropertyValue, which will continue
+		// This matches the behavior of Get/SetFADEClassPropertyValue, which will continue
 		// looking in base classes if the property in the current class is readonly/writeonly.
 		if (p_getter_trampoline.function_pointer && !found->getter.function_pointer) {
 			found->getter = p_getter_trampoline;
@@ -2427,7 +2427,7 @@ void GD_CLR_STDCALL CSharpScript::_try_add_property_tramp(CSharpScript *p_scr, c
 	}
 }
 
-void GD_CLR_STDCALL CSharpScript::_try_add_raise_signal_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, godotsharp::RaiseSignalTrampoline p_trampoline) {
+void GD_CLR_STDCALL CSharpScript::_try_add_raise_signal_tramp(CSharpScript *p_scr, const StringName *p_name, int32_t p_argc, fadesharp::RaiseSignalTrampoline p_trampoline) {
 	SignalKey signal_key{ *p_name, p_argc };
 	if (!p_scr->raise_signal_trampolines.has(signal_key)) {
 		p_scr->raise_signal_trampolines.insert_new(signal_key, p_trampoline);
@@ -2447,7 +2447,7 @@ void CSharpScript::update_script_class_info(Ref<CSharpScript> p_script) {
 
 	TypeInfo type_info;
 
-	// TODO: Use GDExtension godot_dictionary
+	// TODO: Use GDExtension fade_dictionary
 	Array methods_array;
 	methods_array.~Array();
 	Dictionary rpc_functions_dict;
@@ -2591,7 +2591,7 @@ CSharpInstance *CSharpScript::_create_instance(const Variant **p_args, int p_arg
 
 	/* STEP 2, INITIALIZE AND CONSTRUCT */
 
-	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForGodotObjectScriptInstance(
+	bool ok = GDMonoCache::managed_callbacks.ScriptManagerBridge_CreateManagedForFADEObjectScriptInstance(
 			this, p_owner, p_args, p_argcount);
 
 	if (!ok) {
@@ -2715,7 +2715,7 @@ void CSharpScript::get_script_method_list(List<MethodInfo> *p_list) const {
 }
 
 bool CSharpScript::_has_method_mapping_to_proxy_include_base(const StringName &p_name) const {
-	for (const KeyValue<MethodKey, godotsharp::MethodTrampoline> &kvp : method_trampolines) {
+	for (const KeyValue<MethodKey, fadesharp::MethodTrampoline> &kvp : method_trampolines) {
 		if (kvp.key.name == p_name) {
 			return true;
 		}
@@ -2790,7 +2790,7 @@ bool CSharpScript::_callp_static(const CSharpScript *p_script, const StringName 
 
 	const MethodKey method_key{ p_method, p_argcount };
 
-	const godotsharp::MethodTrampoline *trampoline = p_script->static_method_trampolines.getptr(method_key);
+	const fadesharp::MethodTrampoline *trampoline = p_script->static_method_trampolines.getptr(method_key);
 	if (trampoline != nullptr) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_CallStaticWithTrampoline(
 				*trampoline, p_args, p_argcount, &r_error, &r_ret);
@@ -2885,7 +2885,7 @@ bool CSharpScript::has_script_signal(const StringName &p_signal) const {
 		return false;
 	}
 
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::fade_api_cache_updated) {
 		return false;
 	}
 
@@ -2934,7 +2934,7 @@ bool CSharpScript::inherits_script(const Ref<Script> &p_script) const {
 		return false;
 	}
 
-	if (!GDMonoCache::godot_api_cache_updated) {
+	if (!GDMonoCache::fade_api_cache_updated) {
 		return false;
 	}
 
@@ -3027,7 +3027,7 @@ CSharpScript::~CSharpScript() {
 	}
 #endif // DEBUG_ENABLED
 
-	if (GDMonoCache::godot_api_cache_updated) {
+	if (GDMonoCache::fade_api_cache_updated) {
 		GDMonoCache::managed_callbacks.ScriptManagerBridge_RemoveScriptBridge(this);
 	}
 }

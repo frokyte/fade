@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -472,7 +472,7 @@ Node *SceneState::_instantiate(GenEditState p_edit_state, LocalVector<DeferredNo
 
 					if (snames[nprops[j].name] == CoreStringName(script)) {
 						//work around to avoid old script variables from disappearing, should be the proper fix to:
-						//https://github.com/godotengine/godot/issues/2958
+						//https://github.com/fadeengine/fade/issues/2958
 
 						//store old state
 						List<Pair<StringName, Variant>> old_state;
@@ -483,7 +483,7 @@ Node *SceneState::_instantiate(GenEditState p_edit_state, LocalVector<DeferredNo
 #ifdef TOOLS_ENABLED
 						const Ref<Script> value_as_script = props[nprops[j].value];
 						// It is possible that the user changed an existing script to abstract after it was attached to a node.
-						// When this happens, the user needs to fix it. See https://github.com/godotengine/godot/issues/109171
+						// When this happens, the user needs to fix it. See https://github.com/fadeengine/fade/issues/109171
 						if (value_as_script.is_valid() && value_as_script->is_abstract()) {
 							const String global_class_name = value_as_script->get_global_name();
 							if (global_class_name.is_empty()) {

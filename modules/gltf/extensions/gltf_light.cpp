@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -69,17 +69,17 @@ void GLTFLight::_bind_methods() {
 
 void GLTFLight::set_cone_inner_attenuation_conversion_expressions(Ref<GLTFObjectModelProperty> &r_obj_model_prop) {
 	// Expression to convert glTF innerConeAngle to FADE spot_angle_attenuation.
-	Ref<Expression> gltf_to_godot_expr;
-	gltf_to_godot_expr.instantiate();
-	PackedStringArray gltf_to_godot_args = { "inner_cone_angle" };
-	gltf_to_godot_expr->parse("0.2 / (1.0 - inner_cone_angle / spot_angle) - 0.1", gltf_to_godot_args);
-	r_obj_model_prop->set_gltf_to_godot_expression(gltf_to_godot_expr);
+	Ref<Expression> gltf_to_fade_expr;
+	gltf_to_fade_expr.instantiate();
+	PackedStringArray gltf_to_fade_args = { "inner_cone_angle" };
+	gltf_to_fade_expr->parse("0.2 / (1.0 - inner_cone_angle / spot_angle) - 0.1", gltf_to_fade_args);
+	r_obj_model_prop->set_gltf_to_fade_expression(gltf_to_fade_expr);
 	// Expression to convert FADE spot_angle_attenuation to glTF innerConeAngle.
-	Ref<Expression> godot_to_gltf_expr;
-	godot_to_gltf_expr.instantiate();
-	PackedStringArray godot_to_gltf_args = { "godot_spot_angle_att" };
-	godot_to_gltf_expr->parse("spot_angle * maxf(0.0, 1.0 - (0.2 / (0.1 + godot_spot_angle_att)))", godot_to_gltf_args);
-	r_obj_model_prop->set_godot_to_gltf_expression(godot_to_gltf_expr);
+	Ref<Expression> fade_to_gltf_expr;
+	fade_to_gltf_expr.instantiate();
+	PackedStringArray fade_to_gltf_args = { "fade_spot_angle_att" };
+	fade_to_gltf_expr->parse("spot_angle * maxf(0.0, 1.0 - (0.2 / (0.1 + fade_spot_angle_att)))", fade_to_gltf_args);
+	r_obj_model_prop->set_fade_to_gltf_expression(fade_to_gltf_expr);
 }
 
 Color GLTFLight::get_color() {

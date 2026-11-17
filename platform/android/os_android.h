@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -79,8 +79,8 @@ private:
 	mutable HashSet<String> font_names;
 	mutable bool font_config_loaded = false;
 
-	FADEJavaWrapper *godot_java = nullptr;
-	FADEIOJavaWrapper *godot_io_java = nullptr;
+	FADEJavaWrapper *fade_java = nullptr;
+	FADEIOJavaWrapper *fade_io_java = nullptr;
 
 	void _load_system_font_config() const;
 	String get_system_property(const char *key) const;
@@ -106,8 +106,8 @@ public:
 	virtual void finalize() override;
 
 	static OS_Android *get_singleton();
-	FADEJavaWrapper *get_godot_java();
-	FADEIOJavaWrapper *get_godot_io_java();
+	FADEJavaWrapper *get_fade_java();
+	FADEIOJavaWrapper *get_fade_io_java();
 
 	virtual bool request_permission(const String &p_name) override;
 	virtual bool request_permissions() override;
@@ -179,7 +179,7 @@ public:
 	virtual void load_platform_gdextensions() const override;
 
 	virtual bool _check_internal_feature_support(const String &p_feature) override;
-	OS_Android(FADEJavaWrapper *p_godot_java, FADEIOJavaWrapper *p_godot_io_java, bool p_use_apk_expansion);
+	OS_Android(FADEJavaWrapper *p_fade_java, FADEIOJavaWrapper *p_fade_io_java, bool p_use_apk_expansion);
 	~OS_Android();
 
 private:

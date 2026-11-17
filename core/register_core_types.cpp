@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -41,7 +41,7 @@
 #include "core/extension/gdextension.h"
 #include "core/extension/gdextension_manager.h"
 #include "core/extension/gdextension_resource_format.h"
-#include "core/extension/godot_instance.h"
+#include "core/extension/fade_instance.h"
 #include "core/input/input.h"
 #include "core/input/input_map.h"
 #include "core/input/shortcut.h"

@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -30,7 +30,7 @@
 
 #include "register_types.h"
 
-#include "2d/godot_navigation_server_2d.h"
+#include "2d/fade_navigation_server_2d.h"
 
 #include "core/object/callable_mp.h"
 #include "servers/navigation_2d/navigation_server_2d.h"
@@ -42,14 +42,14 @@
 #include "editor/navigation_region_2d_editor_plugin.h"
 #endif
 
-static NavigationServer2D *_createGodotNavigation2DCallback() {
-	return memnew(GodotNavigationServer2D);
+static NavigationServer2D *_createFADENavigation2DCallback() {
+	return memnew(FADENavigationServer2D);
 }
 
 void initialize_navigation_2d_module(ModuleInitializationLevel p_level) {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SERVERS) {
-		NavigationServer2DManager::get_singleton()->register_server("GodotNavigation2D", callable_mp_static(_createGodotNavigation2DCallback));
-		NavigationServer2DManager::get_singleton()->set_default_server("GodotNavigation2D");
+		NavigationServer2DManager::get_singleton()->register_server("FADENavigation2D", callable_mp_static(_createFADENavigation2DCallback));
+		NavigationServer2DManager::get_singleton()->set_default_server("FADENavigation2D");
 	}
 
 #ifdef TOOLS_ENABLED

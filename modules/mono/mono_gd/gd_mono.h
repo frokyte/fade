@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -83,7 +83,7 @@ class GDMono {
 #ifdef TOOLS_ENABLED
 	uint64_t api_editor_hash = 0;
 #endif
-	void _init_godot_api_hashes();
+	void _init_fade_api_hashes();
 
 #ifdef TOOLS_ENABLED
 	gdmono::PluginCallbacks plugin_callbacks;
@@ -154,19 +154,19 @@ public:
 
 namespace MonoBind {
 
-class GodotSharp : public Object {
-	GDCLASS(GodotSharp, Object);
+class FADESharp : public Object {
+	GDCLASS(FADESharp, Object);
 
 protected:
-	static GodotSharp *singleton;
+	static FADESharp *singleton;
 
 public:
-	static GodotSharp *get_singleton() { return singleton; }
+	static FADESharp *get_singleton() { return singleton; }
 
 	void reload_assemblies();
 
-	GodotSharp();
-	~GodotSharp();
+	FADESharp();
+	~FADESharp();
 };
 
 } // namespace MonoBind

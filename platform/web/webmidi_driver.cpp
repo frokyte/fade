@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -30,7 +30,7 @@
 
 #include "webmidi_driver.h"
 
-#include "godot_midi.h"
+#include "fade_midi.h"
 
 #ifdef PROXY_TO_PTHREAD_ENABLED
 #include "core/object/callable_mp.h"
@@ -41,7 +41,7 @@ MIDIDriverWebMidi *MIDIDriverWebMidi::get_singleton() {
 }
 
 Error MIDIDriverWebMidi::open() {
-	Error error = (Error)godot_js_webmidi_open_midi_inputs(&MIDIDriverWebMidi::set_input_names_callback, &MIDIDriverWebMidi::on_midi_message, _event_buffer, MIDIDriverWebMidi::MAX_EVENT_BUFFER_LENGTH);
+	Error error = (Error)fade_js_webmidi_open_midi_inputs(&MIDIDriverWebMidi::set_input_names_callback, &MIDIDriverWebMidi::on_midi_message, _event_buffer, MIDIDriverWebMidi::MAX_EVENT_BUFFER_LENGTH);
 	if (error == ERR_UNAVAILABLE) {
 		ERR_PRINT("Web MIDI is not supported on this browser.");
 	}
@@ -50,7 +50,7 @@ Error MIDIDriverWebMidi::open() {
 
 void MIDIDriverWebMidi::close() {
 	get_singleton()->connected_input_names.clear();
-	godot_js_webmidi_close_midi_inputs();
+	fade_js_webmidi_close_midi_inputs();
 }
 
 MIDIDriverWebMidi::~MIDIDriverWebMidi() {

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -41,7 +41,7 @@ CSharpLanguage *script_language_cs = nullptr;
 Ref<ResourceFormatLoaderCSharpScript> resource_loader_cs;
 Ref<ResourceFormatSaverCSharpScript> resource_saver_cs;
 
-MonoBind::FADESharp *_godotsharp = nullptr;
+MonoBind::FADESharp *_fadesharp = nullptr;
 
 void initialize_mono_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
@@ -50,7 +50,7 @@ void initialize_mono_module(ModuleInitializationLevel p_level) {
 
 	GDREGISTER_CLASS(CSharpScript);
 
-	_godotsharp = memnew(MonoBind::FADESharp);
+	_fadesharp = memnew(MonoBind::FADESharp);
 
 	script_language_cs = memnew(CSharpLanguage);
 	script_language_cs->set_language_index(ScriptServer::get_language_count());
@@ -80,5 +80,5 @@ void uninitialize_mono_module(ModuleInitializationLevel p_level) {
 		resource_saver_cs.unref();
 	}
 
-	memdelete(_godotsharp);
+	memdelete(_fadesharp);
 }

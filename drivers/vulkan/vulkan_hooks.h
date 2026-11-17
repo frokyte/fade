@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -33,7 +33,7 @@
 #include "core/math/vector2i.h"
 #include "core/templates/local_vector.h"
 
-#include <drivers/vulkan/godot_vulkan.h>
+#include <drivers/vulkan/fade_vulkan.h>
 
 class VulkanHooks {
 private:

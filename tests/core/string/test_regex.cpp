@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -189,7 +189,7 @@ TEST_CASE("[RegEx] Empty pattern") {
 }
 
 TEST_CASE("[RegEx] Complex Grouping") {
-	const String test = "https://docs.godotengine.org/en/latest/contributing/";
+	const String test = "https://docs.fadeengine.org/en/latest/contributing/";
 
 	// Ignored protocol in grouping.
 	RegEx re("^(?:https?://)([a-zA-Z]{2,4})\\.([a-zA-Z][a-zA-Z0-9_\\-]{2,64})\\.([a-zA-Z]{2,4})");
@@ -198,10 +198,10 @@ TEST_CASE("[RegEx] Complex Grouping") {
 
 	CHECK(expr->get_group_count() == 3);
 
-	CHECK(expr->get_string(0) == "https://docs.godotengine.org");
+	CHECK(expr->get_string(0) == "https://docs.fadeengine.org");
 
 	CHECK(expr->get_string(1) == "docs");
-	CHECK(expr->get_string(2) == "godotengine");
+	CHECK(expr->get_string(2) == "fadeengine");
 	CHECK(expr->get_string(3) == "org");
 }
 

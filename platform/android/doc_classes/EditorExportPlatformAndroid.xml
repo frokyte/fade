@@ -636,7 +636,7 @@
 			System splash screen branding image file. If left empty, no branding image will be used. See [url=https://developer.android.com/develop/ui/views/launch/splash-screen#dimensions]splash-screen dimensions[/url].
 			[b]Note:[/b] Can be used to set an image to be shown at the bottom of the splash screen.
 		</member>
-		<member name="splash_screen/disable_godot_boot_splash" type="bool" setter="" getter="">
+		<member name="splash_screen/disable_fade_boot_splash" type="bool" setter="" getter="">
 			If [code]true[/code], FADE's boot splash will not be shown, and the system boot splash will remain visible for a longer time, until the mainloop starts.
 		</member>
 		<member name="splash_screen/icon" type="String" setter="" getter="">

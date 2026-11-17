@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -3253,7 +3253,7 @@ const char *get_rename_from_map(const char *map[][2], String key) {
 	return nullptr;
 }
 
-// Checks if an identifier/function name has been renamed in Godot 4, uses ProjectConverter3To4 for rename map.
+// Checks if an identifier/function name has been renamed in FADE 4, uses ProjectConverter3To4 for rename map.
 // Returns the new name if found, nullptr otherwise.
 const char *check_for_renamed_identifier(String identifier, GDScriptParser::Node::Type type) {
 	switch (type) {
@@ -3816,7 +3816,7 @@ void GDScriptAnalyzer::reduce_call(GDScriptParser::CallNode *p_call, bool p_is_a
 			String base_name = is_self && !p_call->is_super ? "self" : base_type.to_string();
 #ifdef SUGGEST_GODOT4_RENAMES
 			String rename_hint;
-			if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_godot_4_hint")) {
+			if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_fade_4_hint")) {
 				const char *renamed_function_name = check_for_renamed_identifier(p_call->function_name, p_call->type);
 				if (renamed_function_name) {
 					rename_hint = " " + vformat(R"(Did you mean to use "%s"?)", String(renamed_function_name) + "()");
@@ -3991,7 +3991,7 @@ Ref<GDScriptParserRef> GDScriptAnalyzer::ensure_cached_external_parser_for_class
 	// Delicate piece of code that intentionally doesn't use the GDScript cache or `get_depended_parser_for`.
 	// Search dependencies for the parser that owns `p_class` and make a cache entry for it.
 	// Required for how we store pointers to classes owned by other parser trees and need to call `resolve_class_member` and such on the same parser tree.
-	// Since https://github.com/godotengine/godot/pull/94871 there can technically be multiple parsers for the same script in the same parser tree.
+	// Since https://github.com/fadeengine/fade/pull/94871 there can technically be multiple parsers for the same script in the same parser tree.
 	// Even if unlikely, getting the wrong parser could lead to strange undefined behavior without errors.
 
 	if (p_class == nullptr) {
@@ -4175,7 +4175,7 @@ void GDScriptAnalyzer::reduce_identifier_from_base(GDScriptParser::IdentifierNod
 			if (!valid && base.is_hard_type()) {
 #ifdef SUGGEST_GODOT4_RENAMES
 				String rename_hint;
-				if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_godot_4_hint")) {
+				if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_fade_4_hint")) {
 					const char *renamed_identifier_name = check_for_renamed_identifier(name, p_identifier->type);
 					if (renamed_identifier_name) {
 						rename_hint = " " + vformat(R"(Did you mean to use "%s"?)", renamed_identifier_name);
@@ -4219,7 +4219,7 @@ void GDScriptAnalyzer::reduce_identifier_from_base(GDScriptParser::IdentifierNod
 					if (base.is_hard_type()) {
 #ifdef SUGGEST_GODOT4_RENAMES
 						String rename_hint;
-						if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_godot_4_hint")) {
+						if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_fade_4_hint")) {
 							const char *renamed_identifier_name = check_for_renamed_identifier(name, p_identifier->type);
 							if (renamed_identifier_name) {
 								rename_hint = " " + vformat(R"(Did you mean to use "%s"?)", renamed_identifier_name);
@@ -4745,7 +4745,7 @@ void GDScriptAnalyzer::reduce_identifier(GDScriptParser::IdentifierNode *p_ident
 	// Not found.
 #ifdef SUGGEST_GODOT4_RENAMES
 	String rename_hint;
-	if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_godot_4_hint")) {
+	if (GLOBAL_GET_CACHED(bool, "debug/gdscript/warnings/renamed_in_fade_4_hint")) {
 		const char *renamed_identifier_name = check_for_renamed_identifier(name, p_identifier->type);
 		if (renamed_identifier_name) {
 			rename_hint = " " + vformat(R"(Did you mean to use "%s"?)", renamed_identifier_name);

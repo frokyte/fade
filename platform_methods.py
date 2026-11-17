@@ -152,7 +152,7 @@ def check_accesskit_version(path, req_ver="0.23.1"):
                 f"Incompatible AccessKit version detected. Version required {req_ver}, version found {dep_version}.\n"
                 f"You can install required version by running `python3 {os.path.join('misc', 'scripts', 'install_accesskit.py')}`.\n"
                 "See the documentation for more information:\n\t"
-                "https://docs.godotengine.org/en/latest/engine_details/development/compiling/compiling_for_macos.html#compiling-with-accesskit-support"
+                "https://docs.fadeengine.org/en/latest/engine_details/development/compiling/compiling_for_macos.html#compiling-with-accesskit-support"
                 "\nAlternatively, disable this driver by compiling with `accesskit=no` explicitly."
             )
             return False
@@ -246,13 +246,13 @@ def lipo_and_copy_apple_embedded(
     # env.extra_suffix contains ".simulator" when building for simulator,
     # but it's undesired when calling lipo()
     extra_suffix = env.extra_suffix.replace(".simulator", "")
-    rel_target_bin = lipo(bin_dir + "/libgodot" + module_prefix + "." + rel_prefix, extra_suffix + ".a")
-    dbg_target_bin = lipo(bin_dir + "/libgodot" + module_prefix + "." + dbg_prefix, extra_suffix + ".a")
+    rel_target_bin = lipo(bin_dir + "/libfade" + module_prefix + "." + rel_prefix, extra_suffix + ".a")
+    dbg_target_bin = lipo(bin_dir + "/libfade" + module_prefix + "." + dbg_prefix, extra_suffix + ".a")
     rel_target_bin_sim = lipo(
-        bin_dir + "/libgodot" + module_prefix + "." + rel_prefix, ".simulator" + extra_suffix + ".a"
+        bin_dir + "/libfade" + module_prefix + "." + rel_prefix, ".simulator" + extra_suffix + ".a"
     )
     dbg_target_bin_sim = lipo(
-        bin_dir + "/libgodot" + module_prefix + "." + dbg_prefix, ".simulator" + extra_suffix + ".a"
+        bin_dir + "/libfade" + module_prefix + "." + dbg_prefix, ".simulator" + extra_suffix + ".a"
     )
     # Assemble Xcode project bundle.
     if rel_target_bin != "":
@@ -260,13 +260,13 @@ def lipo_and_copy_apple_embedded(
         shutil.copy(
             rel_target_bin,
             app_dir
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + "."
             + platform
             + ".release.xcframework/"
             + framework_dir
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + ".a",
         )
@@ -275,13 +275,13 @@ def lipo_and_copy_apple_embedded(
         shutil.copy(
             dbg_target_bin,
             app_dir
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + "."
             + platform
             + ".debug.xcframework/"
             + framework_dir
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + ".a",
         )
@@ -290,13 +290,13 @@ def lipo_and_copy_apple_embedded(
         shutil.copy(
             rel_target_bin_sim,
             app_dir
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + "."
             + platform
             + ".release.xcframework/"
             + framework_dir_sim
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + ".a",
         )
@@ -305,13 +305,13 @@ def lipo_and_copy_apple_embedded(
         shutil.copy(
             dbg_target_bin_sim,
             app_dir
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + "."
             + platform
             + ".debug.xcframework/"
             + framework_dir_sim
-            + "/libgodot"
+            + "/libfade"
             + module_prefix
             + ".a",
         )
@@ -320,7 +320,7 @@ def lipo_and_copy_apple_embedded(
 def generate_bundle_apple_embedded(platform, framework_dir, framework_dir_sim, use_mkv, target, source, env):
     # Template bundle.
     extra_suffix = env.extra_suffix.replace(".simulator", "")
-    app_prefix = "godot." + platform
+    app_prefix = "fade." + platform
     rel_prefix = platform + "." + "template_release"
     dbg_prefix = platform + "." + "template_debug"
     if env.dev_build:
@@ -347,7 +347,7 @@ def generate_bundle_apple_embedded(platform, framework_dir, framework_dir_sim, u
 
     # Remove other platform xcframeworks
     for entry in os.listdir(app_dir):
-        if (entry.startswith("libgodot.") or entry.startswith("libgodot_")) and entry.endswith(".xcframework"):
+        if (entry.startswith("libfade.") or entry.startswith("libfade_")) and entry.endswith(".xcframework"):
             parts = entry.split(".")
             if len(parts) >= 3 and parts[1] != platform:
                 full_path = os.path.join(app_dir, entry)
@@ -418,7 +418,7 @@ def setup_swift_builder(
         raise Exception("Swift compiler path is not set. Please set SWIFT_COMPILER.")
 
     bridging_header_path = current_path + "/" + bridging_header_filename
-    swift_module_name = "godot_swift_module"
+    swift_module_name = "fade_swift_module"
     # Standard `<module>-Swift.h` name plus `.gen.h` so it's covered by `*.gen.*` in `.gitignore`.
     swift_objc_header_path = current_path + "/" + swift_module_name + "-Swift.gen.h"
     env["SWIFTC"] = swiftc_path  # Swift compiler

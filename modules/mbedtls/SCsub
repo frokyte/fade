@@ -20,14 +20,14 @@ configs = []
 if env["builtin_mbedtls"]:
     env_mbed_tls.Append(
         CPPDEFINES=[
-            ("TF_PSA_CRYPTO_CONFIG_FILE", env_mbed_tls.EscapeDefine("godot_psa_config.h")),
-            ("MBEDTLS_CONFIG_FILE", env_mbed_tls.EscapeDefine("godot_mbedtls_config.h")),
+            ("TF_PSA_CRYPTO_CONFIG_FILE", env_mbed_tls.EscapeDefine("fade_psa_config.h")),
+            ("MBEDTLS_CONFIG_FILE", env_mbed_tls.EscapeDefine("fade_mbedtls_config.h")),
         ]
     )
-    configs = ["#thirdparty/mbedtls/godot/godot_psa_config.h", "#thirdparty/mbedtls/godot/godot_mbedtls_config.h"]
+    configs = ["#thirdparty/mbedtls/fade/fade_psa_config.h", "#thirdparty/mbedtls/fade/fade_mbedtls_config.h"]
     env_mbed_tls.Prepend(
         CPPPATH=[
-            "#thirdparty/mbedtls/godot/",
+            "#thirdparty/mbedtls/fade/",
             "#thirdparty/mbedtls/include/",
             "#thirdparty/mbedtls/tf-psa-crypto/include/",
             "#thirdparty/mbedtls/tf-psa-crypto/drivers/builtin/include/",

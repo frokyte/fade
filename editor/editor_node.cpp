@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -226,7 +226,7 @@
 
 #ifdef WEB_ENABLED
 extern "C" {
-extern void godot_js_os_download_buffer(const uint8_t *p_buf, int p_buf_size, const char *p_name, const char *p_mime);
+extern void fade_js_os_download_buffer(const uint8_t *p_buf, int p_buf_size, const char *p_name, const char *p_mime);
 }
 #endif // WEB_ENABLED
 
@@ -1089,9 +1089,9 @@ void EditorNode::_notification(int p_what) {
 
 			// Save the project after opening to mark it as last modified, except in headless mode.
 			// Also use this opportunity to ensure default settings are applied to new projects created from the command line
-			// using `touch project.godot`.
+			// using `touch project.fade`.
 			if (!cmdline_mode) {
-				const String project_settings_path = ProjectSettings::get_singleton()->get_resource_path().path_join("project.godot");
+				const String project_settings_path = ProjectSettings::get_singleton()->get_resource_path().path_join("project.fade");
 				// Check the file's size in bytes as an optimization. If it's under 10 bytes, the file is assumed to be empty.
 				if (FileAccess::get_size(project_settings_path) < 10) {
 					const HashMap<String, Variant> initial_settings = get_initial_settings();
@@ -1654,10 +1654,10 @@ void EditorNode::_scan_external_changes() {
 		}
 	}
 
-	String project_settings_path = ProjectSettings::get_singleton()->get_resource_path().path_join("project.godot");
+	String project_settings_path = ProjectSettings::get_singleton()->get_resource_path().path_join("project.fade");
 	if (FileAccess::get_modified_time(project_settings_path) > ProjectSettings::get_singleton()->get_last_saved_time()) {
 		TreeItem *ti = disk_changed_list->create_item(r);
-		ti->set_text(0, "project.godot");
+		ti->set_text(0, "project.fade");
 		need_reload = true;
 		disk_changed_project = true;
 	}
@@ -3821,7 +3821,7 @@ void EditorNode::_menu_option_confirm(int p_option, bool p_confirmed) {
 				LocalVector<uint8_t> buf;
 				buf.resize(f->get_length());
 				f->get_buffer(buf.ptr(), buf.size());
-				godot_js_os_download_buffer(buf.ptr(), buf.size(), output_name.utf8().get_data(), "application/zip");
+				fade_js_os_download_buffer(buf.ptr(), buf.size(), output_name.utf8().get_data(), "application/zip");
 			}
 
 			// Remove the temporary file since it was sent to the user's native filesystem as a download.
@@ -4031,23 +4031,23 @@ void EditorNode::_menu_option_confirm(int p_option, bool p_confirmed) {
 			OS::get_singleton()->shell_open(GODOT_VERSION_DOCS_URL "/");
 		} break;
 		case HELP_FORUM: {
-			OS::get_singleton()->shell_open("https://forum.godotengine.org/");
+			OS::get_singleton()->shell_open("https://forum.fadeengine.org/");
 		} break;
 		case HELP_REPORT_A_BUG: {
-			OS::get_singleton()->shell_open("https://github.com/godotengine/godot/issues");
+			OS::get_singleton()->shell_open("https://github.com/fadeengine/fade/issues");
 		} break;
 		case HELP_COPY_SYSTEM_INFO: {
 			String info = _get_system_info();
 			DisplayServer::get_singleton()->clipboard_set(info);
 		} break;
 		case HELP_SUGGEST_A_FEATURE: {
-			OS::get_singleton()->shell_open("https://github.com/godotengine/godot-proposals#readme");
+			OS::get_singleton()->shell_open("https://github.com/fadeengine/fade-proposals#readme");
 		} break;
 		case HELP_SEND_DOCS_FEEDBACK: {
-			OS::get_singleton()->shell_open("https://github.com/godotengine/godot-docs/issues");
+			OS::get_singleton()->shell_open("https://github.com/fadeengine/fade-docs/issues");
 		} break;
 		case HELP_COMMUNITY: {
-			OS::get_singleton()->shell_open("https://godotengine.org/community");
+			OS::get_singleton()->shell_open("https://fadeengine.org/community");
 		} break;
 		case HELP_ABOUT: {
 			if (!about) {
@@ -4057,7 +4057,7 @@ void EditorNode::_menu_option_confirm(int p_option, bool p_confirmed) {
 			about->popup_centered(Size2(780, 500) * EDSCALE);
 		} break;
 		case HELP_SUPPORT_GODOT_DEVELOPMENT: {
-			OS::get_singleton()->shell_open("https://fund.godotengine.org/?ref=help_menu");
+			OS::get_singleton()->shell_open("https://fund.fadeengine.org/?ref=help_menu");
 		} break;
 	}
 }
@@ -4370,16 +4370,16 @@ void EditorNode::_discard_changes(const String &p_str) {
 		} break;
 		case TOOLS_CLEAR_PROJECT_CACHE: {
 			files_to_delete_on_exit = LocalVector<String>{
-				"res://.godot/imported",
-				"res://.godot/exported",
-				"res://.godot/mono",
-				"res://.godot/extension_list.cfg",
-				"res://.godot/global_script_class_cache.cfg",
-				"res://.godot/scene_groups_cache.cfg",
-				"res://.godot/uid_cache.bin",
-				"res://.godot/editor/editor_script_doc_cache.res",
-				"res://.godot/editor/" + EditorFileSystem::CACHE_FILE_NAME,
-				"res://.godot/editor/filesystem_update4",
+				"res://.fade/imported",
+				"res://.fade/exported",
+				"res://.fade/mono",
+				"res://.fade/extension_list.cfg",
+				"res://.fade/global_script_class_cache.cfg",
+				"res://.fade/scene_groups_cache.cfg",
+				"res://.fade/uid_cache.bin",
+				"res://.fade/editor/editor_script_doc_cache.res",
+				"res://.fade/editor/" + EditorFileSystem::CACHE_FILE_NAME,
+				"res://.fade/editor/filesystem_update4",
 			};
 			_restart_editor(false);
 		} break;
@@ -6174,11 +6174,11 @@ String EditorNode::_get_system_info() const {
 	}
 	const String distribution_version = OS::get_singleton()->get_version_alias();
 
-	String godot_version = "FADE v" + String(GODOT_VERSION_FULL_CONFIG);
+	String fade_version = "FADE v" + String(GODOT_VERSION_FULL_CONFIG);
 	if (String(GODOT_VERSION_BUILD) != "official") {
 		String hash = String(GODOT_VERSION_HASH);
 		hash = hash.is_empty() ? String("unknown") : vformat("(%s)", hash.left(9));
-		godot_version += " " + hash;
+		fade_version += " " + hash;
 	}
 
 	String display_session_type;
@@ -6266,7 +6266,7 @@ String EditorNode::_get_system_info() const {
 
 	// Join info.
 	Vector<String> info;
-	info.push_back(godot_version);
+	info.push_back(fade_version);
 	String distribution_display_session_type = distribution_name;
 	if (!distribution_version.is_empty()) {
 		distribution_display_session_type += " " + distribution_version;
@@ -8516,8 +8516,8 @@ void EditorNode::notify_settings_overrides_changed() {
 }
 
 // Returns the list of project settings to add to new projects. This is used by the
-// project manager creation dialog, but also applies to empty `project.godot` files
-// to cover the command line workflow of creating projects using `touch project.godot`.
+// project manager creation dialog, but also applies to empty `project.fade` files
+// to cover the command line workflow of creating projects using `touch project.fade`.
 //
 // This is used to set better defaults for new projects without affecting existing projects.
 // Keep the list alphabetically sorted.
@@ -9574,7 +9574,7 @@ EditorNode::EditorNode() {
 
 	project_data_missing = memnew(ConfirmationDialog);
 	project_data_missing->set_flag(Window::FLAG_RESIZE_DISABLED, true);
-	project_data_missing->set_text(TTRC("Project data folder (.godot) is missing. Please restart editor."));
+	project_data_missing->set_text(TTRC("Project data folder (.fade) is missing. Please restart editor."));
 	project_data_missing->connect(SceneStringName(confirmed), callable_mp(this, &EditorNode::restart_editor).bind(false));
 	project_data_missing->set_ok_button_text(TTRC("Restart"));
 
