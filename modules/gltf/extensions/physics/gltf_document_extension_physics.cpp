@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -228,13 +228,13 @@ Ref<GLTFObjectModelProperty> GLTFDocumentExtensionPhysics::import_object_model_p
 			if (node_path.is_empty()) {
 				return ret;
 			}
-			String godot_prop_name = prop_name;
+			String fade_prop_name = prop_name;
 			if (prop_name == "size") {
 				ret->set_types(Variant::VECTOR3, GLTFObjectModelProperty::GLTF_OBJECT_MODEL_TYPE_FLOAT3);
 			} else if (prop_name == "height" || prop_name == "radius") {
 				ret->set_types(Variant::FLOAT, GLTFObjectModelProperty::GLTF_OBJECT_MODEL_TYPE_FLOAT);
 			} else if (prop_name == "radiusBottom" || prop_name == "radiusTop") {
-				godot_prop_name = "radius";
+				fade_prop_name = "radius";
 				ret->set_types(Variant::FLOAT, GLTFObjectModelProperty::GLTF_OBJECT_MODEL_TYPE_FLOAT);
 			} else {
 				// Not something we handle, return without appending a NodePath.
@@ -243,7 +243,7 @@ Ref<GLTFObjectModelProperty> GLTFDocumentExtensionPhysics::import_object_model_p
 			// Example: `A/B/C/CollisionShape3D:shape:radius`.
 			Vector<StringName> subnames;
 			subnames.append("shape");
-			subnames.append(godot_prop_name);
+			subnames.append(fade_prop_name);
 			node_path = NodePath(node_path.get_names(), subnames, false);
 			ret->append_node_path(node_path);
 		}
@@ -530,8 +530,8 @@ GLTFMeshIndex _get_or_insert_mesh_in_state(const Ref<GLTFState> &p_state, const 
 
 void GLTFDocumentExtensionPhysics::convert_scene_node(Ref<GLTFState> p_state, Ref<GLTFNode> p_gltf_node, Node *p_scene_node) {
 	if (cast_to<CollisionShape3D>(p_scene_node)) {
-		CollisionShape3D *godot_shape = Object::cast_to<CollisionShape3D>(p_scene_node);
-		Ref<GLTFPhysicsShape> gltf_shape = GLTFPhysicsShape::from_node(godot_shape);
+		CollisionShape3D *fade_shape = Object::cast_to<CollisionShape3D>(p_scene_node);
+		Ref<GLTFPhysicsShape> gltf_shape = GLTFPhysicsShape::from_node(fade_shape);
 		ERR_FAIL_COND_MSG(gltf_shape.is_null(), "glTF Physics: Could not convert CollisionShape3D to GLTFPhysicsShape. Does it have a valid Shape3D?");
 		{
 			Ref<ImporterMesh> importer_mesh = gltf_shape->get_importer_mesh();
@@ -551,8 +551,8 @@ void GLTFDocumentExtensionPhysics::convert_scene_node(Ref<GLTFState> p_state, Re
 			p_gltf_node->set_additional_data(StringName("GLTFPhysicsColliderShape"), gltf_shape);
 		}
 	} else if (cast_to<CollisionObject3D>(p_scene_node)) {
-		CollisionObject3D *godot_body = Object::cast_to<CollisionObject3D>(p_scene_node);
-		p_gltf_node->set_additional_data(StringName("GLTFPhysicsBody"), GLTFPhysicsBody::from_node(godot_body));
+		CollisionObject3D *fade_body = Object::cast_to<CollisionObject3D>(p_scene_node);
+		p_gltf_node->set_additional_data(StringName("GLTFPhysicsBody"), GLTFPhysicsBody::from_node(fade_body));
 	}
 }
 
@@ -615,7 +615,7 @@ Error GLTFDocumentExtensionPhysics::export_preserialize(Ref<GLTFState> p_state) 
 	return OK;
 }
 
-Ref<GLTFObjectModelProperty> GLTFDocumentExtensionPhysics::export_object_model_property(Ref<GLTFState> p_state, const NodePath &p_node_path, const Node *p_godot_node, GLTFNodeIndex p_gltf_node_index, const Object *p_target_object, int p_target_depth) {
+Ref<GLTFObjectModelProperty> GLTFDocumentExtensionPhysics::export_object_model_property(Ref<GLTFState> p_state, const NodePath &p_node_path, const Node *p_fade_node, GLTFNodeIndex p_gltf_node_index, const Object *p_target_object, int p_target_depth) {
 	Ref<GLTFObjectModelProperty> ret;
 	const Vector<StringName> &path_subnames = p_node_path.get_subnames();
 	if (path_subnames.is_empty()) {
@@ -654,7 +654,7 @@ Ref<GLTFObjectModelProperty> GLTFDocumentExtensionPhysics::export_object_model_p
 			return ret;
 		}
 		ret->set_json_pointers({ split_json_pointer });
-	} else if (Object::cast_to<CollisionShape3D>(p_godot_node)) {
+	} else if (Object::cast_to<CollisionShape3D>(p_fade_node)) {
 		if (path_subnames.size() != 2) {
 			return ret;
 		}

@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -101,7 +101,7 @@ public:
 	virtual TypedArray<Projection> get_camera_projections(const StringName &p_tracker_name, double p_aspect, double p_z_near, double p_z_far);
 	virtual TypedArray<Transform3D> get_camera_offsets(const StringName &p_tracker_name);
 
-	//TODO workaround as GDExtensionPtr<void> return type results in build error in godot-cpp
+	//TODO workaround as GDExtensionPtr<void> return type results in build error in fade-cpp
 	GDVIRTUAL1R(uint64_t, _set_system_properties_and_get_next_pointer, GDExtensionPtr<void>);
 	GDVIRTUAL2R(uint64_t, _set_instance_create_info_and_get_next_pointer, uint64_t, GDExtensionPtr<void>);
 	GDVIRTUAL1R(uint64_t, _set_session_create_and_get_next_pointer, GDExtensionPtr<void>);

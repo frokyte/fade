@@ -15,8 +15,8 @@ readability.
 
 Patches:
 
-- `0001-musl-standard-poll.patch` ([GH-71934](https://github.com/godotengine/godot/pull/71934))
-- `0002-freebsd-sys-endian.patch` ([GH-100047](https://github.com/godotengine/godot/pull/100047))
+- `0001-musl-standard-poll.patch` ([GH-71934](https://github.com/fadeengine/fade/pull/71934))
+- `0002-freebsd-sys-endian.patch` ([GH-100047](https://github.com/fadeengine/fade/pull/100047))
 
 
 ## dbus

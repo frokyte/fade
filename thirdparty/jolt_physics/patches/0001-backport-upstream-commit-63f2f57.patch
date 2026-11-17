@@ -9,7 +9,7 @@ index 30377deeff..10362b3225 100644
 -	#define JPH_DEFAULT_ALLOCATE_ALIGNMENT __STDCPP_DEFAULT_NEW_ALIGNMENT__
 +	#if defined(JPH_COMPILER_MINGW) && JPH_CPU_ARCH_BITS == 32
 +		// 32-bit MinGW g++ lies that __STDCPP_DEFAULT_NEW_ALIGNMENT__ is 16, but it is actually 8.
-+		// See: https://github.com/godotengine/godot/issues/121608#issuecomment-5142806330
++		// See: https://github.com/fadeengine/fade/issues/121608#issuecomment-5142806330
 +		// Note: See similar fix for the definition of JPH_INTERNAL_DEFAULT_ALLOCATE.
 +		#define JPH_DEFAULT_ALLOCATE_ALIGNMENT 8
 +	#else
@@ -25,7 +25,7 @@ index 5df9781dd5..bf98d4fe79 100644
 @@ -38,6 +38,7 @@ JPH_EXPORT void RegisterDefaultAllocator();
  // It uses the non-aligned version, which on 32 bit platforms usually returns an 8 byte aligned block.
  // We therefore default to 16 byte aligned allocations when the regular new operator is used.
- // See: https://github.com/godotengine/godot/issues/105455#issuecomment-2824311547
+ // See: https://github.com/fadeengine/fade/issues/105455#issuecomment-2824311547
 +// Note: See similar fix for the definition of JPH_DEFAULT_ALLOCATE_ALIGNMENT
  #if defined(JPH_COMPILER_MINGW) && JPH_CPU_ARCH_BITS == 32
  	#define JPH_INTERNAL_DEFAULT_ALLOCATE(size) JPH::AlignedAllocate(size, 16)

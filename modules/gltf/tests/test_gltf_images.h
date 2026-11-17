@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -105,19 +105,19 @@ TEST_CASE("[SceneTree][Node] Export GLTF with external texture and import") {
 	memdelete(loaded);
 }
 
-TEST_CASE("[SceneTree][Node][Editor] Import GLTF from .godot/imported folder with external texture") {
-	init("gltf_placed_in_dot_godot_imported", "res://.godot/imported");
+TEST_CASE("[SceneTree][Node][Editor] Import GLTF from .fade/imported folder with external texture") {
+	init("gltf_placed_in_dot_fade_imported", "res://.fade/imported");
 
 	EditorFileSystem *efs = memnew(EditorFileSystem);
 	EditorResourcePreview *erp = memnew(EditorResourcePreview);
 
 	ERR_PRINT_OFF
-	Node *loaded = gltf_import("res://.godot/imported/gltf_placed_in_dot_godot_imported.gltf");
+	Node *loaded = gltf_import("res://.fade/imported/gltf_placed_in_dot_fade_imported.gltf");
 	Ref<Texture2D> texture = _check_texture(loaded);
 	ERR_PRINT_ON
 
-	// In-editor imports of gltf and texture from .godot/imported folder should end up in res:// if extract_path is defined.
-	CHECK_MESSAGE(texture->get_path() == "res://gltf_placed_in_dot_godot_imported_material_albedo000.png", "Texture not parsed as resource.");
+	// In-editor imports of gltf and texture from .fade/imported folder should end up in res:// if extract_path is defined.
+	CHECK_MESSAGE(texture->get_path() == "res://gltf_placed_in_dot_fade_imported_material_albedo000.png", "Texture not parsed as resource.");
 
 	memdelete(loaded);
 	memdelete(erp);

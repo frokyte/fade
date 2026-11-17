@@ -587,7 +587,7 @@ static_assert(sizeof(uint64) == 8, "Invalid size of uint64");
 #ifndef JPH_DEFAULT_ALLOCATE_ALIGNMENT
 	#if defined(JPH_COMPILER_MINGW) && JPH_CPU_ARCH_BITS == 32
 		// 32-bit MinGW g++ lies that __STDCPP_DEFAULT_NEW_ALIGNMENT__ is 16, but it is actually 8.
-		// See: https://github.com/godotengine/godot/issues/121608#issuecomment-5142806330
+		// See: https://github.com/fadeengine/fade/issues/121608#issuecomment-5142806330
 		// Note: See similar fix for the definition of JPH_INTERNAL_DEFAULT_ALLOCATE.
 		#define JPH_DEFAULT_ALLOCATE_ALIGNMENT 8
 	#else

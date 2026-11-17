@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -42,160 +42,160 @@ extern "C" {
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VARIANT_SIZE];
-} godot_variant;
+} fade_variant;
 
 #define GODOT_ARRAY_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_ARRAY_SIZE];
-} godot_array;
+} fade_array;
 
 #define GODOT_DICTIONARY_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_DICTIONARY_SIZE];
-} godot_dictionary;
+} fade_dictionary;
 
 #define GODOT_STRING_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_STRING_SIZE];
-} godot_string;
+} fade_string;
 
 #define GODOT_STRING_NAME_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_STRING_NAME_SIZE];
-} godot_string_name;
+} fade_string_name;
 
 #define GODOT_PACKED_ARRAY_SIZE (2 * sizeof(void *))
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_PACKED_ARRAY_SIZE];
-} godot_packed_array;
+} fade_packed_array;
 
 #define GODOT_VECTOR2_SIZE (sizeof(real_t) * 2)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VECTOR2_SIZE];
-} godot_vector2;
+} fade_vector2;
 
 #define GODOT_VECTOR2I_SIZE (sizeof(int32_t) * 2)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VECTOR2I_SIZE];
-} godot_vector2i;
+} fade_vector2i;
 
 #define GODOT_RECT2_SIZE (sizeof(real_t) * 4)
 
-typedef struct godot_rect2 {
+typedef struct fade_rect2 {
 	uint8_t _dont_touch_that[GODOT_RECT2_SIZE];
-} godot_rect2;
+} fade_rect2;
 
 #define GODOT_RECT2I_SIZE (sizeof(int32_t) * 4)
 
-typedef struct godot_rect2i {
+typedef struct fade_rect2i {
 	uint8_t _dont_touch_that[GODOT_RECT2I_SIZE];
-} godot_rect2i;
+} fade_rect2i;
 
 #define GODOT_VECTOR3_SIZE (sizeof(real_t) * 3)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VECTOR3_SIZE];
-} godot_vector3;
+} fade_vector3;
 
 #define GODOT_VECTOR3I_SIZE (sizeof(int32_t) * 3)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VECTOR3I_SIZE];
-} godot_vector3i;
+} fade_vector3i;
 
 #define GODOT_TRANSFORM2D_SIZE (sizeof(real_t) * 6)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_TRANSFORM2D_SIZE];
-} godot_transform2d;
+} fade_transform2d;
 
 #define GODOT_VECTOR4_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VECTOR4_SIZE];
-} godot_vector4;
+} fade_vector4;
 
 #define GODOT_VECTOR4I_SIZE (sizeof(int32_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_VECTOR4I_SIZE];
-} godot_vector4i;
+} fade_vector4i;
 
 #define GODOT_PLANE_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_PLANE_SIZE];
-} godot_plane;
+} fade_plane;
 
 #define GODOT_QUATERNION_SIZE (sizeof(real_t) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_QUATERNION_SIZE];
-} godot_quaternion;
+} fade_quaternion;
 
 #define GODOT_AABB_SIZE (sizeof(real_t) * 6)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_AABB_SIZE];
-} godot_aabb;
+} fade_aabb;
 
 #define GODOT_BASIS_SIZE (sizeof(real_t) * 9)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_BASIS_SIZE];
-} godot_basis;
+} fade_basis;
 
 #define GODOT_TRANSFORM3D_SIZE (sizeof(real_t) * 12)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_TRANSFORM3D_SIZE];
-} godot_transform3d;
+} fade_transform3d;
 
 #define GODOT_PROJECTION_SIZE (sizeof(real_t) * 4 * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_PROJECTION_SIZE];
-} godot_projection;
+} fade_projection;
 
 // Colors should always use 32-bit floats, so don't use real_t here.
 #define GODOT_COLOR_SIZE (sizeof(float) * 4)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_COLOR_SIZE];
-} godot_color;
+} fade_color;
 
 #define GODOT_NODE_PATH_SIZE sizeof(void *)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_NODE_PATH_SIZE];
-} godot_node_path;
+} fade_node_path;
 
 #define GODOT_RID_SIZE sizeof(uint64_t)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_RID_SIZE];
-} godot_rid;
+} fade_rid;
 
 // Alignment hardcoded in `core/variant/callable.h`.
 #define GODOT_CALLABLE_SIZE (16)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_CALLABLE_SIZE];
-} godot_callable;
+} fade_callable;
 
 // Alignment hardcoded in `core/variant/callable.h`.
 #define GODOT_SIGNAL_SIZE (16)
 
 typedef struct {
 	uint8_t _dont_touch_that[GODOT_SIGNAL_SIZE];
-} godot_signal;
+} fade_signal;
 
 #ifdef __cplusplus
 }

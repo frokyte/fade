@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -31,7 +31,7 @@
 #include "openxr_android_extension.h"
 
 #include "../../openxr_api.h" // IWYU pragma: keep. `XR_FAILED` macro.
-#include "java_godot_wrapper.h"
+#include "java_fade_wrapper.h"
 #include "os_android.h"
 #include "thread_jandroid.h"
 
@@ -53,7 +53,7 @@ OpenXRAndroidExtension::OpenXRAndroidExtension() {
 	ERR_FAIL_NULL(env);
 
 	env->GetJavaVM(&vm);
-	activity_object = env->NewGlobalRef(static_cast<OS_Android *>(OS::get_singleton())->get_godot_java()->get_activity());
+	activity_object = env->NewGlobalRef(static_cast<OS_Android *>(OS::get_singleton())->get_fade_java()->get_activity());
 }
 
 HashMap<String, bool *> OpenXRAndroidExtension::get_requested_extensions(XrVersion p_version) {

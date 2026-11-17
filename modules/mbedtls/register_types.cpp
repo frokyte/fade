@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -40,7 +40,7 @@
 
 #include <psa/crypto.h>
 
-static bool godot_mbedtls_initialized = false;
+static bool fade_mbedtls_initialized = false;
 
 void initialize_mbedtls_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_CORE) {
@@ -55,7 +55,7 @@ void initialize_mbedtls_module(ModuleInitializationLevel p_level) {
 	}
 #endif
 
-	godot_mbedtls_initialized = true;
+	fade_mbedtls_initialized = true;
 
 	CryptoMbedTLS::initialize_crypto();
 	StreamPeerMbedTLS::initialize_tls();
@@ -68,7 +68,7 @@ void uninitialize_mbedtls_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	if (!godot_mbedtls_initialized) {
+	if (!fade_mbedtls_initialized) {
 		return;
 	}
 

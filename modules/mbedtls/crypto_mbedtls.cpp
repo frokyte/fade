@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -48,7 +48,7 @@
 #define PEM_MIN_SIZE 54
 
 #if MBEDTLS_VERSION_MAJOR < 4
-int godot_mbedtls_random_compat(void *p_rng, unsigned char *r_output, size_t p_output_len) {
+int fade_mbedtls_random_compat(void *p_rng, unsigned char *r_output, size_t p_output_len) {
 	return psa_generate_random(r_output, p_output_len);
 }
 #endif
@@ -594,7 +594,7 @@ Vector<uint8_t> CryptoMbedTLS::sign(HashingContext::HashType p_hash_type, const 
 		size_t key_size = key->get_key_size();
 		size_t out_size = 0;
 		uint8_t der[GODOT_MBEDTLS_ECDSA_DER_MAX_LEN];
-		ret = godot_mbedtls_ecdsa_raw_to_der(key_size, buf, sig_size, der, sizeof(der), &out_size);
+		ret = fade_mbedtls_ecdsa_raw_to_der(key_size, buf, sig_size, der, sizeof(der), &out_size);
 		ERR_FAIL_COND_V_MSG(ret, Vector<uint8_t>(), "Failed to convert signature to DER format: " + itos(ret));
 		out.resize(out_size);
 		memcpy(out.ptrw(), der, out_size);
@@ -625,7 +625,7 @@ bool CryptoMbedTLS::verify(HashingContext::HashType p_hash_type, const Vector<ui
 		size_t key_size = key->get_key_size();
 		size_t out_size = 0;
 		uint8_t raw_sig[PSA_SIGNATURE_MAX_SIZE];
-		int ret = godot_mbedtls_ecdsa_der_to_raw(key_size, p_signature.ptr(), p_signature.size(), raw_sig, sizeof(raw_sig), &out_size);
+		int ret = fade_mbedtls_ecdsa_der_to_raw(key_size, p_signature.ptr(), p_signature.size(), raw_sig, sizeof(raw_sig), &out_size);
 		if (ret) {
 			return false;
 		}

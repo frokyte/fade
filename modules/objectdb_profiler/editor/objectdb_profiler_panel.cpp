@@ -3,9 +3,9 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
-/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */
+/* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
 /*                                                                        */
 /* Permission is hereby granted, free of charge, to any person obtaining  */
@@ -80,7 +80,7 @@ void ObjectDBProfilerPanel::_on_debug_breaked(bool p_reallydid, bool p_can_debug
 }
 
 void ObjectDBProfilerPanel::_begin_object_snapshot() {
-	Array args = { next_request_id++, SnapshotCollector::get_godot_version_string() };
+	Array args = { next_request_id++, SnapshotCollector::get_fade_version_string() };
 	EditorDebuggerNode::get_singleton()->get_current_debugger()->send_message("snapshot:request_prepare_snapshot", args);
 }
 

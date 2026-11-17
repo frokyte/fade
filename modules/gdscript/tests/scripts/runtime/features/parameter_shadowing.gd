@@ -1,4 +1,4 @@
-# https://github.com/godotengine/godot/pull/69620
+# https://github.com/fadeengine/fade/pull/69620
 
 var a: int = 1
 

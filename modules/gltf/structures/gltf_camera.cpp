@@ -3,7 +3,7 @@
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
+/*                        https://fadeengine.org                         */
 /**************************************************************************/
 /* Copyright (c) 2014-present FADE Engine contributors (see AUTHORS.md). */
 /* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */
@@ -62,17 +62,17 @@ void GLTFCamera::_bind_methods() {
 
 void GLTFCamera::set_fov_conversion_expressions(Ref<GLTFObjectModelProperty> &r_obj_model_prop) {
 	// Expression to convert glTF yfov in radians to FADE fov in degrees.
-	Ref<Expression> gltf_to_godot_expr;
-	gltf_to_godot_expr.instantiate();
-	PackedStringArray gltf_to_godot_args = { "yfov_rad" };
-	gltf_to_godot_expr->parse("rad_to_deg(yfov_rad)", gltf_to_godot_args);
-	r_obj_model_prop->set_gltf_to_godot_expression(gltf_to_godot_expr);
+	Ref<Expression> gltf_to_fade_expr;
+	gltf_to_fade_expr.instantiate();
+	PackedStringArray gltf_to_fade_args = { "yfov_rad" };
+	gltf_to_fade_expr->parse("rad_to_deg(yfov_rad)", gltf_to_fade_args);
+	r_obj_model_prop->set_gltf_to_fade_expression(gltf_to_fade_expr);
 	// Expression to convert FADE fov in degrees to glTF yfov in radians.
-	Ref<Expression> godot_to_gltf_expr;
-	godot_to_gltf_expr.instantiate();
-	PackedStringArray godot_to_gltf_args = { "fov_deg" };
-	godot_to_gltf_expr->parse("deg_to_rad(fov_deg)", godot_to_gltf_args);
-	r_obj_model_prop->set_godot_to_gltf_expression(godot_to_gltf_expr);
+	Ref<Expression> fade_to_gltf_expr;
+	fade_to_gltf_expr.instantiate();
+	PackedStringArray fade_to_gltf_args = { "fov_deg" };
+	fade_to_gltf_expr->parse("deg_to_rad(fov_deg)", fade_to_gltf_args);
+	r_obj_model_prop->set_fade_to_gltf_expression(fade_to_gltf_expr);
 }
 
 Ref<GLTFCamera> GLTFCamera::from_node(const Camera3D *p_camera) {
